@@ -391,6 +391,25 @@
   function fmtInt(n){ return (n===null||n===undefined) ? '—' : Number(n).toLocaleString('fr-FR'); }
   function fmtDate(s){ return s ? String(s).slice(0,10) : '—'; }
 
+  // Les onglets se re-rendent en remplaçant tout content.innerHTML à chaque frappe dans un champ
+  // de recherche -- sans ça, l'input perd le focus après chaque caractère (il faut recliquer dedans
+  // à chaque lettre). On mémorise le focus/la sélection avant le re-rendu et on les restaure après.
+  function reRenderPreservingFocus(renderFn){
+    const active = document.activeElement;
+    const isSearchInput = active && active.tagName==='INPUT' && active.id && active.id.endsWith('-search');
+    const id = isSearchInput ? active.id : null;
+    const selStart = isSearchInput ? active.selectionStart : null;
+    const selEnd = isSearchInput ? active.selectionEnd : null;
+    renderFn();
+    if(id){
+      const el = document.getElementById(id);
+      if(el){
+        el.focus();
+        try { el.setSelectionRange(selStart, selEnd); } catch(e){}
+      }
+    }
+  }
+
   /* ================= STATE ================= */
   const state = {
     tab: 'accueil',
@@ -850,7 +869,8 @@
     const extraClear = content.querySelector('#dem-extra-clear');
     if(extraClear) extraClear.addEventListener('click', ()=>{ state.demExtra = null; state.demPage=1; renderDemarches(); });
     content.querySelector('#dem-search').addEventListener('input', e=>{
-      state.demQuery = e.target.value.trim().toLowerCase(); state.demPage=1; renderDemarches();
+      state.demQuery = e.target.value.trim().toLowerCase(); state.demPage=1;
+      reRenderPreservingFocus(renderDemarches);
     });
     const msWrap = content.querySelector('#filter-ministere-wrap');
     msWrap.addEventListener('toggle', ()=>{ state.msMinistereOpen = msWrap.open; });
@@ -1032,7 +1052,7 @@
     content.querySelector('#cat-search').addEventListener('input', e=>{
       const v = e.target.value.trim().toLowerCase();
       if(isDon) state.donneesQuery = v; else state.pjQuery = v;
-      renderCatalogue(kind);
+      reRenderPreservingFocus(()=>renderCatalogue(kind));
     });
     const PJ_FIELD_MAP = {
       matches: {key:'demarches_matches', label:'concernées'},
@@ -1143,7 +1163,7 @@
       chip.addEventListener('click', ()=>{ state.apiFilterStatus = chip.dataset.status; renderApiTab(); });
     });
     content.querySelector('#api-fournisseur').addEventListener('change', e=>{ state.apiFilterFournisseur = e.target.value; renderApiTab(); });
-    content.querySelector('#api-search').addEventListener('input', e=>{ state.apiQuery = e.target.value.trim().toLowerCase(); renderApiTab(); });
+    content.querySelector('#api-search').addEventListener('input', e=>{ state.apiQuery = e.target.value.trim().toLowerCase(); reRenderPreservingFocus(renderApiTab); });
     content.querySelectorAll('thead th[data-key]').forEach(th=>{
       th.addEventListener('click', ()=>{
         const k = th.dataset.key;
@@ -1337,7 +1357,8 @@
     const clearBtn = content.querySelector('#ev-filter-clear');
     if(clearBtn) clearBtn.addEventListener('click', ()=>{ state.evFilterEvenement='all'; renderEvenementTab(); });
     content.querySelector('#ev-search').addEventListener('input', e=>{
-      state.evQuery = e.target.value.trim().toLowerCase(); renderEvenementTab();
+      state.evQuery = e.target.value.trim().toLowerCase();
+      reRenderPreservingFocus(renderEvenementTab);
     });
     content.querySelectorAll('thead th[data-key]').forEach(th=>{
       th.addEventListener('click', ()=>{
@@ -1460,7 +1481,7 @@
     });
     content.querySelector('#dila-categorie').addEventListener('change', e=>{ state.dilaFilterCategorie = e.target.value; renderDilaTab(); });
     content.querySelector('#dila-evenement').addEventListener('change', e=>{ state.dilaFilterEvenement = e.target.value; renderDilaTab(); });
-    content.querySelector('#dila-search').addEventListener('input', e=>{ state.dilaQuery = e.target.value.trim().toLowerCase(); renderDilaTab(); });
+    content.querySelector('#dila-search').addEventListener('input', e=>{ state.dilaQuery = e.target.value.trim().toLowerCase(); reRenderPreservingFocus(renderDilaTab); });
     content.querySelectorAll('thead th[data-key]').forEach(th=>{
       th.addEventListener('click', ()=>{
         const k = th.dataset.key;
