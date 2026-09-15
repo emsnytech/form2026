@@ -740,7 +740,8 @@
       if(state.demFilterDept!=='all' && (d.departement||'Non renseigné')!==state.demFilterDept) return false;
       if(state.demFilterLocRedondante && !d.loc_siege_redondante) return false;
       if(state.demQuery){
-        const hay = (d.titre+' '+(d.organisme||'')).toLowerCase();
+        const descTxt = (d.dila_descriptions||[]).map(fd=>fd.titre+' '+(fd.description||'')).join(' ');
+        const hay = (d.titre+' '+(d.organisme||'')+' '+(d.cerfa_numeros||'')+' '+descTxt).toLowerCase();
         if(!hay.includes(state.demQuery)) return false;
       }
       return true;
@@ -779,7 +780,7 @@
       <div class="controls" id="dem-controls">
         <button class="chip ${state.demFilterCat==='all'?'active':''}" data-cat="all">Toutes (${DEMARCHES.length})</button>
         ${CAT_ORDER.map(k=>`<button class="chip ${state.demFilterCat===k?'active':''}" data-cat="${k}"><span class="dot" style="background:var(--cat-${k})"></span>${CATS[k].label} <span class="num">(${catCounts[k]||0})</span></button>`).join('')}
-        <input class="search" id="dem-search" type="search" placeholder="Chercher un titre ou un organisme…" value="${escapeHtml(state.demQuery)}">
+        <input class="search" id="dem-search" type="search" placeholder="Chercher un titre, un n° CERFA, un descriptif…" value="${escapeHtml(state.demQuery)}">
       </div>
       <div class="controls" id="dem-filters" style="margin-top:-6px">
         <details class="multiselect" id="filter-ministere-wrap" ${state.msMinistereOpen?'open':''}>
@@ -1389,7 +1390,7 @@
       if(state.dilaFilterCategorie!=='all' && r.categorie!==state.dilaFilterCategorie) return false;
       if(state.dilaFilterEvenement!=='all' && r.evenement!==state.dilaFilterEvenement) return false;
       if(state.dilaQuery){
-        const hay = (r.titre+' '+(r.theme||'')).toLowerCase();
+        const hay = (r.titre+' '+(r.theme||'')+' '+(r.numero_cerfa||'')+' '+(r.description||'')).toLowerCase();
         if(!hay.includes(state.dilaQuery)) return false;
       }
       return true;
@@ -1432,7 +1433,7 @@
           <option value="all">Événement de vie : tous</option>
           ${evenementsPresents.map(k=>`<option value="${k}" ${state.dilaFilterEvenement===k?'selected':''}>${escapeHtml(COMBINED_EV_LABELS[k]||k)}</option>`).join('')}
         </select>
-        <input class="search" id="dila-search" type="search" placeholder="Chercher un titre, un thème…" value="${escapeHtml(state.dilaQuery)}">
+        <input class="search" id="dila-search" type="search" placeholder="Chercher un titre, un n° CERFA, un descriptif…" value="${escapeHtml(state.dilaQuery)}">
       </div>
       <p class="count-note">${rows.length} fiche${rows.length>1?'s':''} affichée${rows.length>1?'s':''} — cliquez une ligne pour le descriptif complet</p>
       <div class="table-scroll">
