@@ -533,10 +533,11 @@
 
         <div class="cover-section">
           <h3><span class="dot" style="background:var(--tab-overview)"></span>Sources de données</h3>
-          <p>Quatre sources sont croisées ; aucune n'est prise pour argent comptant seule.</p>
+          <p>Cinq sources sont croisées ; aucune n'est prise pour argent comptant seule.</p>
           <ul class="source-list">
             <li><b>demarche.numerique.gouv.fr</b><span>Descriptif officiel des démarches (data.gouv.fr, mise à jour quotidienne) — titre, organisme, champs du formulaire, dossiers déposés, et le champ officiel <span class="mono">zones</span> pour le ministère de tutelle.</span></li>
             <li><b>DILA</b><span>8 509 fiches service-public.fr (Particuliers/Professionnels/Associations) — sert de vérité terrain indépendante pour valider la classification par public cible.</span></li>
+            <li><b>Observatoire des démarches essentielles (DINUM, édition du 14 juillet 2026)</b><span>243 démarches jugées prioritaires par l'État, notées sur un score qualité multicritère (le « Score DLNUF ») incluant un indicateur FranceConnect — sert à la fois de troisième référentiel et de validation externe indépendante des redondances de données identifiées dans ce travail (identité pivot FranceConnect/ProConnect, COMEDEC, Justif'Adresse…).</span></li>
             <li><b>api.gouv.fr</b><span>Catalogue officiel des 52 API du bouquet API Entreprise/Particulier — pour savoir quelles données/pièces sont déjà récupérables sans redemander à l'usager.</span></li>
             <li><b>FORM (2016-2017)</b><span>Référentiels hérités de l'application FileMaker d'origine (nomenclature des données, pièces justificatives) — repris et confrontés aux API disponibles aujourd'hui.</span></li>
           </ul>
@@ -555,8 +556,14 @@
           <p>Un cas particulier de redondance : quand une démarche a un champ <span class="mono">Siret</span>, l'adresse/commune/département du siège social est déjà récupérée automatiquement (API Entreprise/SIRENE). <b>791 démarches sur 4 771 avec Siret (17%)</b> redemandent pourtant explicitement cette même adresse dans un champ séparé — filtre « ⚠️ Localisation redondante » dans la liste des démarches.</p>
         </div>
 
+        <div class="cover-section">
+          <h3><span class="dot" style="background:var(--tab-toutes)"></span>Trois référentiels, une vue unifiée</h3>
+          <p>Démarches numérique, DILA et Observatoire des démarches essentielles se recoupent partiellement mais ne se recouvrent pas : chacun a son propre périmètre de collecte — le nôtre se limite à demarche.numerique.gouv.fr, la DILA couvre 8 509 fiches, l'Observatoire suit 243 démarches prioritaires hébergées sur des portails très divers (Ameli, CAF, INPI, France Travail…), rarement demarche.numerique.gouv.fr lui-même.</p>
+          <p>L'onglet <b>Toutes les démarches</b> empile les trois référentiels (4 325 lignes) <b>sans les fusionner</b> : chaque ligne garde sa source d'origine, et une colonne « Référentiels » indique, quand le rapprochement est fiable (identifiant officiel ou URL exacte partagés), dans quel(s) autre(s) référentiel(s) la même démarche est aussi connue. 141 lignes sont ainsi identifiées comme multi-référencées — un filtre dédié permet de les isoler. L'absence de doublon détecté pour une ligne ne signifie pas que la démarche n'existe pas ailleurs : le plus souvent, c'est le rapprochement automatique qui n'y parvient pas (intitulé reformulé, portail différent).</p>
+        </div>
+
         <div class="caveat-box">
-          <b>Limites connues à garder en tête :</b> le périmètre actuel exclut les démarches publiées avant 2026 ayant moins de 10 dossiers déposés, ce qui laisse passer toutes les démarches 2026 quel que soit leur volume — le taux « indéterminé » s'en trouve mécaniquement plus élevé (démarches très récentes, peu décrites). Le champ Ministère (officiel, champ <span class="mono">zones</span>) couvre 88,5% des démarches publiées ; le reste n'est pas rattaché à un ministère dans la source.
+          <b>Limites connues à garder en tête :</b> le périmètre actuel exclut les démarches publiées avant 2026 ayant moins de 10 dossiers déposés, ce qui laisse passer toutes les démarches 2026 quel que soit leur volume — le taux « indéterminé » s'en trouve mécaniquement plus élevé (démarches très récentes, peu décrites). Le champ Ministère (officiel, champ <span class="mono">zones</span>) couvre 88,5% des démarches publiées ; le reste n'est pas rattaché à un ministère dans la source. Le recoupement avec l'Observatoire des démarches essentielles reste partiel par construction : sur les 243 démarches essentielles, seule une poignée partage une URL exacte avec notre échantillon demarche.numerique.gouv.fr, la grande majorité étant hébergée sur d'autres portails ministériels.
         </div>
 
         <div class="cover-cta">
