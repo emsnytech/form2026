@@ -468,6 +468,7 @@
     essSort: {key:'nom', dir:1},
     toutesQuery: '',
     toutesFilterRef: 'all',
+    toutesMultiOnly: false,
     toutesSort: {key:'nom', dir:1},
     toutesPageSize: 50,
     toutesPage: 1,
@@ -1679,6 +1680,7 @@
   function renderToutesTab(){
     let rows = TOUTES.filter(r=>{
       if(state.toutesFilterRef!=='all' && !r.referentiels.includes(state.toutesFilterRef)) return false;
+      if(state.toutesMultiOnly && r.referentiels.length<2) return false;
       if(state.toutesQuery){
         const hay = (r.nom+' '+(r.organisme||'')).toLowerCase();
         if(!hay.includes(state.toutesQuery)) return false;
@@ -1718,6 +1720,7 @@
       <div class="controls" id="toutes-controls">
         <button class="chip ${state.toutesFilterRef==='all'?'active':''}" data-ref="all">Toutes (${fmtInt(TOUTES.length)})</button>
         ${Object.keys(REF_LABEL).map(k=>`<button class="chip ${state.toutesFilterRef===k?'active':''}" data-ref="${k}"><span class="dot" style="background:var(${REF_TAB_VAR[k]})"></span>${REF_LABEL[k]} (${fmtInt(countsByRef[k])})</button>`).join('')}
+        <button class="chip ${state.toutesMultiOnly?'active':''}" id="toutes-multi-toggle" style="border-color:var(--tab-toutes)">⚭ Multi-référencées (${fmtInt(nMulti)})</button>
         <input class="search" id="toutes-search" type="search" placeholder="Chercher un nom, un organisme…" value="${escapeHtml(state.toutesQuery)}">
       </div>
       <div class="controls" id="toutes-pager-top" style="justify-content:space-between;align-items:center">
@@ -1752,6 +1755,9 @@
     content.querySelectorAll('#toutes-controls .chip[data-ref]').forEach(chip=>{
       chip.addEventListener('click', ()=>{ state.toutesFilterRef = chip.dataset.ref; state.toutesPage=1; renderToutesTab(); });
     });
+    content.querySelector('#toutes-multi-toggle').addEventListener('click', ()=>{
+      state.toutesMultiOnly = !state.toutesMultiOnly; state.toutesPage=1; renderToutesTab();
+    });
     content.querySelector('#toutes-search').addEventListener('input', e=>{
       state.toutesQuery = e.target.value.trim().toLowerCase(); state.toutesPage=1;
       reRenderPreservingFocus(renderToutesTab);
@@ -1782,7 +1788,7 @@
 
     const tbody = content.querySelector('#toutes-tbody');
     tbody.innerHTML = pagedRows.map(r=>`
-      <tr>
+      <tr${r.referentiels.length>1?' style="box-shadow:inset 3px 0 0 var(--tab-toutes)"':''}>
         <td class="titre">${escapeHtml(r.nom)}</td>
         <td>${r.referentiels.map(k=>`<span class="badge" style="background:var(${REF_TAB_VAR[k]}-soft);color:var(${REF_TAB_VAR[k]})">${REF_LABEL[k]}</span>`).join(' ')}</td>
         <td class="num">${r.volumetrie!=null ? fmtInt(r.volumetrie) : '—'}</td>
