@@ -2234,9 +2234,16 @@
     if(!state.ficheList || !state.ficheList.length){ state.ficheList = DEMARCHES; state.ficheIndex = 0; }
     const d = state.ficheList[state.ficheIndex];
     const cat = CATS[d.categorie] || {label:d.categorie};
+    // CHAMPS_BY_DEMARCHE ne couvre que 200 démarches (échantillon initial dépouillé champ par
+    // champ) sur les 13 231 -- pour les autres, seuls les compteurs résumés (d.nb_champs, d.nb_pj,
+    // d.nb_infos_api_isable, d.nb_pj_api_isable) sont connus. hasDetail distingue les deux cas pour
+    // ne jamais afficher "aucun champ" quand la vraie situation est "détail non chargé".
+    const hasDetail = CHAMPS_BY_DEMARCHE.has(d.demarche);
     const champs = CHAMPS_BY_DEMARCHE.get(d.demarche) || [];
     const infoChamps = champs.filter(c=>c.type_champ!=='PieceJustificative');
     const pjChamps = champs.filter(c=>c.type_champ==='PieceJustificative');
+    const nInfoResume = Math.max(0, (d.nb_champs||0) - (d.nb_pj||0));
+    const nPjResume = d.nb_pj||0;
 
     content.innerHTML = `
       <div class="fiche-head">
@@ -2253,8 +2260,8 @@
 
       <div class="fiche-tabs" id="fiche-tabs">
         <button data-ft="presentation" class="${state.ficheTab==='presentation'?'active':''}">Présentation</button>
-        <button data-ft="donnees" class="${state.ficheTab==='donnees'?'active':''}">Données (${infoChamps.length})</button>
-        <button data-ft="pj" class="${state.ficheTab==='pj'?'active':''}">PJ (${pjChamps.length})</button>
+        <button data-ft="donnees" class="${state.ficheTab==='donnees'?'active':''}">Données (${nInfoResume})</button>
+        <button data-ft="pj" class="${state.ficheTab==='pj'?'active':''}">PJ (${nPjResume})</button>
       </div>
 
       <div id="fiche-body"></div>
@@ -2268,16 +2275,20 @@
     });
 
     const body = content.querySelector('#fiche-body');
-    if(state.ficheTab==='presentation') body.innerHTML = renderFichePresentation(d, infoChamps, pjChamps);
-    else if(state.ficheTab==='donnees') body.innerHTML = renderFicheChampsTable(infoChamps, 'info_api_isable');
-    else body.innerHTML = renderFicheChampsTable(pjChamps, 'pj_api_isable');
+    if(state.ficheTab==='presentation') body.innerHTML = renderFichePresentation(d, infoChamps, pjChamps, hasDetail);
+    else if(state.ficheTab==='donnees') body.innerHTML = renderFicheChampsTable(infoChamps, 'info_api_isable', hasDetail, nInfoResume, d.nb_infos_api_isable||0, 'champ');
+    else body.innerHTML = renderFicheChampsTable(pjChamps, 'pj_api_isable', hasDetail, nPjResume, d.nb_pj_api_isable||0, 'PJ');
   }
 
-  function renderFichePresentation(d, infoChamps, pjChamps){
-    const nApiInfo = infoChamps.filter(c=>c.info_api_isable).length;
-    const nApiPj = pjChamps.filter(c=>c.pj_api_isable).length;
-    const pctInfo = infoChamps.length ? Math.round(100*nApiInfo/infoChamps.length) : 0;
-    const pctPj = pjChamps.length ? Math.round(100*nApiPj/pjChamps.length) : 0;
+  function renderFichePresentation(d, infoChamps, pjChamps, hasDetail){
+    const nInfoResume = Math.max(0, (d.nb_champs||0) - (d.nb_pj||0));
+    const nPjResume = d.nb_pj||0;
+    const nApiInfo = hasDetail ? infoChamps.filter(c=>c.info_api_isable).length : (d.nb_infos_api_isable||0);
+    const nApiPj = hasDetail ? pjChamps.filter(c=>c.pj_api_isable).length : (d.nb_pj_api_isable||0);
+    const nInfo = hasDetail ? infoChamps.length : nInfoResume;
+    const nPj = hasDetail ? pjChamps.length : nPjResume;
+    const pctInfo = nInfo ? Math.round(100*nApiInfo/nInfo) : 0;
+    const pctPj = nPj ? Math.round(100*nApiPj/nPj) : 0;
 
     return `
       <div class="fiche-grid">
@@ -2300,14 +2311,14 @@
         <div class="potentiel-panel">
           <h3>Potentiel API</h3>
           <div class="pbar-row">
-            <div class="pbar-label"><span>Informations API-isables</span><span class="v">${nApiInfo} / ${infoChamps.length}</span></div>
+            <div class="pbar-label"><span>Informations API-isables</span><span class="v">${nApiInfo} / ${nInfo}</span></div>
             <div class="pbar-track"><div class="pbar-fill" style="width:${pctInfo}%"></div></div>
           </div>
           <div class="pbar-row">
-            <div class="pbar-label"><span>Pièces justificatives API-isables</span><span class="v">${nApiPj} / ${pjChamps.length}</span></div>
+            <div class="pbar-label"><span>Pièces justificatives API-isables</span><span class="v">${nApiPj} / ${nPj}</span></div>
             <div class="pbar-track"><div class="pbar-fill" style="width:${pctPj}%"></div></div>
           </div>
-          <p style="font-size:.78rem;color:var(--muted);margin-top:8px">Estimation par mots-clés (type de champ natif ou libellé), voir les onglets Données / PJ pour le détail.</p>
+          <p style="font-size:.78rem;color:var(--muted);margin-top:8px">${hasDetail ? 'Estimation par mots-clés (type de champ natif ou libellé), voir les onglets Données / PJ pour le détail.' : 'Comptage résumé (calculé pour les 13 231 démarches) — le détail champ par champ ci-dessous n\'est chargé que pour les 200 démarches de l\'échantillon initial dépouillées une à une.'}</p>
         </div>
       </div>
       ${(d.dila_descriptions && d.dila_descriptions.length) ? `
@@ -2322,8 +2333,12 @@
     `;
   }
 
-  function renderFicheChampsTable(rows, apiKey){
-    if(!rows.length) return `<p class="empty-note">Aucun champ de ce type sur cette démarche.</p>`;
+  function renderFicheChampsTable(rows, apiKey, hasDetail, nResume, nApiResume, label){
+    if(!rows.length){
+      if(hasDetail) return `<p class="empty-note">Aucun champ de ce type sur cette démarche.</p>`;
+      if(!nResume) return `<p class="empty-note">Aucun champ de ce type sur cette démarche (résumé calculé pour les 13 231 démarches).</p>`;
+      return `<p class="empty-note">Détail champ par champ non chargé pour cette démarche — seules les ${nResume} entrée${nResume>1?'s':''} de type ${label} sont dénombrées (résumé : ${nApiResume} déjà API-isable${nApiResume>1?'s':''} sur ${nResume}), sans le détail libellé par libellé. Le dépouillement complet n'est disponible que pour les 200 démarches de l'échantillon initial.</p>`;
+    }
     return `
       <div class="table-scroll champs-table">
         <table>
