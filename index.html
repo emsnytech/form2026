@@ -461,6 +461,71 @@
 
   const DEMARCHES_BY_ID = new Map(DEMARCHES.map(d=>[d.demarche, d]));
 
+  // Rapprochement fin champ<->référentiel, fidèle à match_pj_champs.py / match_donnees_champs.py
+  // (mêmes cas particuliers, mêmes frontières de mot) -- champs_api_flag (source du flag brut
+  // pj_api_isable/info_api_isable affiché sur la Fiche) est figé à un instant passé et ne reflète
+  // pas toujours les corrections apportées depuis au référentiel (ex. RIB/IBAN, "Avis d'imposition
+  // ou justificatif de domicile..." non repéré) -- ces fonctions permettent de recouper un champ
+  // "non détecté" avec le référentiel à jour pour ne pas afficher "—" à tort.
+  function normalizeRef(s){
+    if(!s) return '';
+    return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
+  }
+  const RIB_MATCH_RE = /\brib\b|\biban\b|releve d.identite bancaire|releve d.identite postal/;
+  const ETAT_CIVIL_MATCH_RE = /acte de naissance|acte de mariage|acte de deces|livret de famille|acte d.etat civil|acte de l.etat civil|\betat civil\b/;
+  const PIECE_IDENTITE_MATCH_RE = /piece d.identite|\bpasseport\b|\bcni\b|carte nationale d.identite/;
+  const DIPLOME_MATCH_RE = /\bdiplome\b|\bbaccalaureat\b|\bbac\b/;
+  const CARTE_VERTE_MATCH_RE = /carte verte.{0,40}(vehicule|voiture|auto|assurance)|(vehicule|voiture|auto).{0,40}carte verte|attestation d.assurance.{0,40}(vehicule|voiture|auto|taxi)/;
+  function bilanOk(normLib){
+    const hasContext = ['exercice','comptable','compte de resultat','commissaire aux comptes','liasse fiscale'].some(w=>normLib.includes(w));
+    const hasExclusion = ['previsionnel','formation','pedagogique','qualitatif','competences','carbone','hydrique','social','de l action'].some(w=>normLib.includes(w));
+    return hasContext && !hasExclusion;
+  }
+  function pjLabelMatches(normPj, normLib){
+    if(normPj === normalizeRef("RIB / Relevé d'identité bancaire")) return RIB_MATCH_RE.test(normLib);
+    if(normPj === normalizeRef("Acte de naissance / mariage / décès (état civil)")) return ETAT_CIVIL_MATCH_RE.test(normLib);
+    if(normPj === normalizeRef("Pièce d'identité")) return PIECE_IDENTITE_MATCH_RE.test(normLib);
+    if(normPj === normalizeRef("Diplôme (copie / attestation)")) return DIPLOME_MATCH_RE.test(normLib);
+    if(normPj === normalizeRef("Attestation d'assurance véhicule (carte verte)")) return CARTE_VERTE_MATCH_RE.test(normLib);
+    if(!normPj || normPj.length<3) return false;
+    const pattern = new RegExp('(?<![a-z0-9])'+normPj+'(?![a-z0-9])');
+    if(!pattern.test(normLib)) return false;
+    if(normPj==='bilan') return bilanOk(normLib);
+    return true;
+  }
+  const SKIP_DONNEES = new Set(['autres','autre']);
+  const EMAIL_WORDS = ['email','e mail','courriel','mail','electronique'];
+  // Nom/Prénom, Civilité, Nom de naissance, Lieu de naissance ne sont redondants (socle FranceConnect)
+  // que pour le déposant lui-même -- exclusion des mentions de tiers, comme lors du comptage initial
+  // sur l'ensemble du corpus (élargissement du 2026-09-15).
+  const IDENTITE_PIVOT_DONNEES = new Set(['nom prenom','civilite','nom de naissance','lieu de naissance'].map(s=>s));
+  const THIRD_PARTY_MARKERS = ['enfant','conjoint','mandataire','responsable','candidat','tiers','epoux','epouse','pere','mere','parent','parents','president','representant legal','beneficiaire','employeur','employe','salarie','tuteur','curateur'];
+  function donneeLabelMatches(normDonnee, normLib){
+    if(!normDonnee || normDonnee.length<3 || SKIP_DONNEES.has(normDonnee)) return false;
+    const pattern = new RegExp('(?<![a-z0-9])'+normDonnee+'(?![a-z0-9])');
+    if(!pattern.test(normLib)) return false;
+    if(normDonnee==='adresse' && EMAIL_WORDS.some(w=>normLib.includes(w))) return false;
+    if(IDENTITE_PIVOT_DONNEES.has(normDonnee) && THIRD_PARTY_MARKERS.some(w=>normLib.includes(w))) return false;
+    return true;
+  }
+  const PJREF_MATCH_ROWS = PJREF.filter(r=>r.statut==='oui'||r.statut==='partiel').map(r=>({...r, _norm: normalizeRef(r.pj)}));
+  const APITAB_MATCH_ROWS = APITAB.filter(r=>r.statut==='oui'||r.statut==='partiel'||r.statut==='open_data').map(r=>({...r, _norm: normalizeRef(r.donnee)}));
+  const SIRET_CONTEXT_PAIRS = new Set(["Données de gestion|Mandataire/Exploitant","Données d'identité|Effectifs"]);
+  function findPjOpportunite(libelle){
+    const norm = normalizeRef(libelle);
+    if(!norm) return null;
+    return PJREF_MATCH_ROWS.find(r=>pjLabelMatches(r._norm, norm)) || null;
+  }
+  function findDonneeOpportunite(libelle, demarche){
+    const norm = normalizeRef(libelle);
+    if(!norm) return null;
+    return APITAB_MATCH_ROWS.find(r=>{
+      if(!donneeLabelMatches(r._norm, norm)) return false;
+      if(SIRET_CONTEXT_PAIRS.has(r.categorie+'|'+r.nature) && !(demarche && demarche.a_siret)) return false;
+      return true;
+    }) || null;
+  }
+
   // Détail champ par champ (13 219 démarches, 527 620 champs) : trop volumineux pour être embarqué
   // dans la page (29 Mo) -- réparti en 89 fichiers "shards" de ~150 démarches, chargés à la demande
   // via fetch() quand une fiche est ouverte, mis en cache ensuite. CHAMPS_MANIFEST (~150 Ko, embarqué)
@@ -2322,15 +2387,15 @@
 
     const body = content.querySelector('#fiche-body');
     if(state.ficheTab==='presentation') body.innerHTML = renderFichePresentation(d, infoChamps, pjChamps, hasDetail);
-    else if(state.ficheTab==='donnees') body.innerHTML = renderFicheChampsTable(infoChamps, 'info_api_isable', hasDetail, nInfoResume, d.nb_infos_api_isable||0, 'champ');
-    else body.innerHTML = renderFicheChampsTable(pjChamps, 'pj_api_isable', hasDetail, nPjResume, d.nb_pj_api_isable||0, 'PJ');
+    else if(state.ficheTab==='donnees') body.innerHTML = renderFicheChampsTable(infoChamps, 'info_api_isable', hasDetail, nInfoResume, d.nb_infos_api_isable||0, 'champ', d);
+    else body.innerHTML = renderFicheChampsTable(pjChamps, 'pj_api_isable', hasDetail, nPjResume, d.nb_pj_api_isable||0, 'PJ', d);
   }
 
   function renderFichePresentation(d, infoChamps, pjChamps, hasDetail){
     const nInfoResume = Math.max(0, (d.nb_champs||0) - (d.nb_pj||0));
     const nPjResume = d.nb_pj||0;
-    const nApiInfo = hasDetail ? infoChamps.filter(c=>c.info_api_isable).length : (d.nb_infos_api_isable||0);
-    const nApiPj = hasDetail ? pjChamps.filter(c=>c.pj_api_isable).length : (d.nb_pj_api_isable||0);
+    const nApiInfo = hasDetail ? infoChamps.filter(c=>c.info_api_isable || findDonneeOpportunite(c.libelle, d)).length : (d.nb_infos_api_isable||0);
+    const nApiPj = hasDetail ? pjChamps.filter(c=>c.pj_api_isable || findPjOpportunite(c.libelle)).length : (d.nb_pj_api_isable||0);
     const nInfo = hasDetail ? infoChamps.length : nInfoResume;
     const nPj = hasDetail ? pjChamps.length : nPjResume;
     const pctInfo = nInfo ? Math.round(100*nApiInfo/nInfo) : 0;
@@ -2379,27 +2444,42 @@
     `;
   }
 
-  function renderFicheChampsTable(rows, apiKey, hasDetail, nResume, nApiResume, label){
+  function renderFicheChampsTable(rows, apiKey, hasDetail, nResume, nApiResume, label, d){
     if(!rows.length){
       if(hasDetail) return `<p class="empty-note">Aucun champ de ce type sur cette démarche.</p>`;
       if(!nResume) return `<p class="empty-note">Aucun champ de ce type sur cette démarche (résumé calculé pour les 13 231 démarches).</p>`;
       return `<p class="empty-note">⏳ Détail champ par champ en cours de chargement pour cette démarche — en attendant, ${nResume} entrée${nResume>1?'s':''} de type ${label} sont dénombrées (résumé : ${nApiResume} déjà API-isable${nApiResume>1?'s':''} sur ${nResume}), sans le détail libellé par libellé. Réessayez dans un instant.</p>`;
     }
+    const isPj = apiKey==='pj_api_isable';
     return `
       <div class="table-scroll champs-table">
         <table>
           <thead><tr><th>Type</th><th>Libellé</th><th>Obligatoire</th><th>API</th></tr></thead>
           <tbody>
-            ${rows.map(c=>`
+            ${rows.map(c=>{
+              if(c[apiKey]) return `
               <tr>
                 <td class="mono" style="font-size:.78rem">${escapeHtml(c.type_champ)}</td>
                 <td class="libelle">${escapeHtml(c.libelle||'—')}</td>
                 <td class="flagcell">${c.obligatoire? '●':'—'}</td>
-                <td class="${c[apiKey]?'ok':''}">${c[apiKey] ? '✓ disponible' : '—'}</td>
-              </tr>`).join('')}
+                <td class="ok">✓ disponible</td>
+              </tr>`;
+              const opp = isPj ? findPjOpportunite(c.libelle) : findDonneeOpportunite(c.libelle, d);
+              const apiCell = opp
+                ? `<span class="badge" style="background:var(--tab-pj-soft);color:var(--tab-pj)" title="${escapeHtml((isPj?opp.pj:opp.donnee)+' -- '+(opp.api_correspondante||'référentiel '+opp.statut))}">⚠ opportunité (${escapeHtml(opp.statut)})</span>`
+                : '—';
+              return `
+              <tr>
+                <td class="mono" style="font-size:.78rem">${escapeHtml(c.type_champ)}</td>
+                <td class="libelle">${escapeHtml(c.libelle||'—')}</td>
+                <td class="flagcell">${c.obligatoire? '●':'—'}</td>
+                <td>${apiCell}</td>
+              </tr>`;
+            }).join('')}
           </tbody>
         </table>
       </div>
+      <p style="font-size:.76rem;color:var(--muted);margin-top:8px">« ✓ disponible » = détecté par le processus d'origine (peut être partiellement obsolète, voir le référentiel Données/PJ pour les corrections récentes) · « ⚠ opportunité » = non détecté à l'origine mais le libellé correspond à une ligne du référentiel actuel — survolez pour le détail.</p>
     `;
   }
 
