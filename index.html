@@ -534,18 +534,27 @@
   const CHAMPS_SHARD_CACHE = new Map();
   const CHAMPS_SHARD_PENDING = new Set();
   function shardFileName(idx){ return 'champs_shards/champs_' + String(idx).padStart(3,'0') + '.json'; }
+  // Mémoïse le décodage tuple->objet par démarche : Vue générale appelle getChampsForDemarche pour
+  // les 13 231 démarches sur plusieurs passes par rendu (catégorie/organisme/PJ/admref + les deux
+  // scans Top 10) -- sans ce cache, chaque démarche était re-décodée (map + reconstruction d'objets)
+  // à chaque passe, un travail redondant qui ralentissait sensiblement l'onglet.
+  const CHAMPS_DECODED_CACHE = new Map();
   function getChampsForDemarche(demarcheId){
     const shardIdx = CHAMPS_MANIFEST.shard_of[demarcheId];
     if(shardIdx===undefined) return {status:'none', champs:[]};
     const shard = CHAMPS_SHARD_CACHE.get(shardIdx);
     if(shard){
-      const raw = shard[String(demarcheId)] || [];
-      const champs = raw.map(([typeIdx, libelle, obligatoire, apiCode])=>({
-        type_champ: CHAMPS_MANIFEST.types[typeIdx],
-        libelle, obligatoire: !!obligatoire,
-        pj_api_isable: apiCode===null||apiCode===undefined ? null : !!apiCode,
-        info_api_isable: apiCode===null||apiCode===undefined ? null : !!apiCode,
-      }));
+      let champs = CHAMPS_DECODED_CACHE.get(demarcheId);
+      if(!champs){
+        const raw = shard[String(demarcheId)] || [];
+        champs = raw.map(([typeIdx, libelle, obligatoire, apiCode])=>({
+          type_champ: CHAMPS_MANIFEST.types[typeIdx],
+          libelle, obligatoire: !!obligatoire,
+          pj_api_isable: apiCode===null||apiCode===undefined ? null : !!apiCode,
+          info_api_isable: apiCode===null||apiCode===undefined ? null : !!apiCode,
+        }));
+        CHAMPS_DECODED_CACHE.set(demarcheId, champs);
+      }
       return {status:'loaded', champs};
     }
     if(!CHAMPS_SHARD_PENDING.has(shardIdx)){
@@ -865,19 +874,41 @@
     const forAdm = demarchesMatchingOverviewFilter('admref');
     const finalSet = demarchesMatchingOverviewFilter(null);
 
-    function demarcheHasPj(d, val){
+    // Un seul passage sur forPj/forAdm pour construire libellé -> liste d'ids, au lieu de re-scanner
+    // tout le corpus une fois par libellé PJ distinct (des centaines) -- cette dernière approche,
+    // en O(nb_libellés × nb_démarches), était largement soutenable à 400 démarches mais devenait très
+    // lente une fois le corpus complet chargé (13 231).
+    const pjIdsByLabel = new Map();
+    const pjApi = {};
+    forPj.forEach(d=>{
       const champs = getChampsForDemarche(d.demarche).champs;
-      return champs.some(c=>c.type_champ==='PieceJustificative' && normalizePjLabel(c.libelle)===val);
-    }
-    function demarcheHasAdm(d, val){
+      const seen = new Set();
+      champs.forEach(c=>{
+        if(c.type_champ==='PieceJustificative'){
+          const k = normalizePjLabel(c.libelle);
+          if(!seen.has(k)){ seen.add(k); if(!pjIdsByLabel.has(k)) pjIdsByLabel.set(k, []); pjIdsByLabel.get(k).push(d.demarche); }
+          if(c.pj_api_isable) pjApi[k] = true;
+        }
+      });
+    });
+
+    const admIdsByLabel = new Map();
+    forAdm.forEach(d=>{
       const champs = getChampsForDemarche(d.demarche).champs;
-      return champs.some(c=>c.type_champ==='PieceJustificative' && (matchPjAdmref(c.libelle)||'Non identifié')===val);
-    }
+      const seen = new Set();
+      champs.forEach(c=>{
+        if(c.type_champ==='PieceJustificative'){
+          const k = matchPjAdmref(c.libelle) || 'Non identifié';
+          if(!seen.has(k)){ seen.add(k); if(!admIdsByLabel.has(k)) admIdsByLabel.set(k, []); admIdsByLabel.get(k).push(d.demarche); }
+        }
+      });
+    });
+
     function idsForBar(dim, val){
       if(dim==='categorie') return forCat.filter(d=>d.categorie===val).map(d=>d.demarche);
       if(dim==='organisme') return forOrg.filter(d=>(d.type_organisme||'N/A')===val).map(d=>d.demarche);
-      if(dim==='pj') return forPj.filter(d=>demarcheHasPj(d,val)).map(d=>d.demarche);
-      if(dim==='admref') return forAdm.filter(d=>demarcheHasAdm(d,val)).map(d=>d.demarche);
+      if(dim==='pj') return pjIdsByLabel.get(val) || [];
+      if(dim==='admref') return admIdsByLabel.get(val) || [];
       return [];
     }
 
@@ -886,27 +917,10 @@
     const orgKeys = new Set(forOrg.map(d=>d.type_organisme||'N/A'));
     const topOrg = Array.from(orgKeys).map(k=>[k, idsForBar('organisme',k).length]).sort((a,b)=>b[1]-a[1]).slice(0,8);
 
-    const pjApi = {};
-    const pjKeys = new Set();
-    forPj.forEach(d=>{
-      const champs = getChampsForDemarche(d.demarche).champs;
-      champs.forEach(c=>{
-        if(c.type_champ==='PieceJustificative'){
-          const k = normalizePjLabel(c.libelle);
-          pjKeys.add(k);
-          if(c.pj_api_isable) pjApi[k] = true;
-        }
-      });
-    });
-    const topPj = Array.from(pjKeys).map(k=>[k, {n:idsForBar('pj',k).length, api:!!pjApi[k]}]).sort((a,b)=>b[1].n-a[1].n).slice(0,10);
+    const topPj = Array.from(pjIdsByLabel.entries()).map(([k,ids])=>[k, {n:ids.length, api:!!pjApi[k]}]).sort((a,b)=>b[1].n-a[1].n).slice(0,10);
     const maxPj = Math.max(...topPj.map(([,v])=>v.n), 1);
 
-    const admKeys = new Set();
-    forAdm.forEach(d=>{
-      const champs = getChampsForDemarche(d.demarche).champs;
-      champs.forEach(c=>{ if(c.type_champ==='PieceJustificative') admKeys.add(matchPjAdmref(c.libelle) || 'Non identifié'); });
-    });
-    const topAdm = Array.from(admKeys).map(k=>[k, idsForBar('admref',k).length]).sort((a,b)=>b[1]-a[1]).slice(0,8);
+    const topAdm = Array.from(admIdsByLabel.entries()).map(([k,ids])=>[k, ids.length]).sort((a,b)=>b[1]-a[1]).slice(0,8);
 
     const maxCat = Math.max(...CAT_ORDER.map(k=>catCounts[k]), 1);
     const maxOrg = Math.max(...topOrg.map(([,n])=>n), 1);
