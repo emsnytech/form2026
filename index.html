@@ -354,7 +354,7 @@
   </div>
   <div class="tab-group tab-group-referentiels">
     <span class="tab-group-label">Référentiels transverses</span>
-    <button data-tab="donnees" class="inactive">Données</button>
+    <button data-tab="donnees" class="inactive">Donnée/API</button>
     <button data-tab="pj" class="inactive">Pièces jointes</button>
     <button data-tab="evenement" class="inactive">Événement de vie</button>
   </div>
@@ -590,6 +590,31 @@
     const loaded = CHAMPS_SHARD_CACHE.size, total = CHAMPS_MANIFEST.n_shards;
     if(loaded>=total) return '';
     return `<p style="font-size:.76rem;color:var(--tab-stats);margin-top:4px">⏳ Chargement des données PJ en cours (${loaded}/${total} lots reçus) — ce panneau se complète automatiquement, pas besoin de recharger la page.</p>`;
+  }
+
+  // Listes de démarches derrière les compteurs du référentiel Donnée/API, chargées à part
+  // (app_donnees_ids.json, ~1,5 Mo) plutôt qu'embarquées dans app_api_tab.json -- gardait la page
+  // sous la limite de taille de l'Artifact (16 Mo).
+  let DONNEES_IDS_LOADED = false;
+  let DONNEES_IDS_PENDING = false;
+  function ensureDonneesIds(onLoaded){
+    if(DONNEES_IDS_LOADED) return true;
+    if(!DONNEES_IDS_PENDING){
+      DONNEES_IDS_PENDING = true;
+      fetch('app_donnees_ids.json').then(r=>r.json()).then(data=>{
+        // data[i] aligns with APITAB's own load order (built from the same source file) --
+        // merged directly onto each row so r.demarches_matches works the same way whether the
+        // page is still loading or fully loaded, and regardless of the current filter/sort.
+        APITAB.forEach((r,i)=>{ if(data[i]) Object.assign(r, data[i]); });
+        DONNEES_IDS_LOADED = true;
+        DONNEES_IDS_PENDING = false;
+        if(onLoaded) onLoaded();
+      }).catch(e=>{
+        DONNEES_IDS_PENDING = false;
+        console.error('app_donnees_ids.json fetch failed', e);
+      });
+    }
+    return false;
   }
   let champsRerenderTimer = null;
   function scheduleChampsRerender(){
@@ -1396,6 +1421,7 @@
 
   /* ================= API (référentiel données ↔ API) ================= */
   function renderApiTab(){
+    ensureDonneesIds(()=>{ if(state.tab==='donnees') renderApiTab(); });
     const fournisseurs = Array.from(new Set(APITAB.map(r=>r.adm_ref || 'Non identifié'))).sort((a,b)=>a.localeCompare(b,'fr'));
     const counts = {oui:0,partiel:0,non:0};
     APITAB.forEach(r=>{ counts[r.statut]=(counts[r.statut]||0)+1; });
@@ -1425,6 +1451,7 @@
       <p style="color:var(--muted);font-size:.88rem;margin-bottom:6px;max-width:74ch">
         Pour chaque donnée du référentiel (173 lignes, issu de FORM 2016 + croisement api.gouv.fr), nombre de démarches dont un champ correspond potentiellement à cette donnée (sur les 13 231 démarches publiées), déjà repérées comme API-isables par notre détection actuelle, et opportunités restantes.
       </p>
+      ${!DONNEES_IDS_LOADED ? `<p style="font-size:.76rem;color:var(--tab-stats);margin-bottom:6px">⏳ Chargement de la liste détaillée des démarches par donnée — les compteurs s'affichent déjà, les liens cliquables arrivent dans un instant.</p>` : ''}
       <div class="panel-grid" style="margin-bottom:18px">
         <div class="panel">
           <h3><span class="dot" style="background:var(--tab-donnees)"></span>Occasions déjà repérées vs restantes (données API disponibles ou partielles)</h3>
@@ -1455,21 +1482,21 @@
             <th data-key="nb_demarches_opportunite">Opportunité</th>
           </tr></thead>
           <tbody>
-            ${rows.map(r=>`
+            ${rows.map((r,i)=>`
               <tr>
                 <td class="titre">${escapeHtml(r.donnee)}${r.restreint_au_contexte_siret?' <span title="Comptage restreint aux démarches avec un champ Siret (donnée liée au représentant légal d une entreprise)" style="cursor:help">🔒</span>':''}</td>
                 <td style="font-size:.82rem;color:var(--muted)">${escapeHtml(r.categorie)}<br>${escapeHtml(r.nature)}</td>
                 <td class="mono">${escapeHtml(r.adm_ref||'—')}</td>
                 <td><span class="badge" style="background:var(--status-${r.statut}-soft);color:var(--status-${r.statut})">${API_STATUS_LABEL[r.statut]}${r.restreint_au_deposant_fc?' †':''}</span></td>
                 <td style="font-size:.8rem">${escapeHtml(r.api_correspondante||'—')}${r.source_url?` <a href="${escapeHtml(r.source_url)}" target="_blank" rel="noopener" class="ext-link" title="${escapeHtml(r.source_url_note||'Page officielle')}">Page ↗</a>`:''}</td>
-                <td class="num">${fmtInt(r.nb_demarches_matches)}</td>
-                <td class="num">${fmtInt(r.nb_demarches_deja_detectees)}</td>
-                <td class="num" style="font-weight:600;color:${r.nb_demarches_opportunite>0 && (r.statut==='oui'||r.statut==='partiel'||r.statut==='open_data')?'var(--tab-donnees)':'var(--ink-soft)'}">${fmtInt(r.nb_demarches_opportunite)}</td>
+                <td class="num">${(r.demarches_matches||[]).length>0?`<span class="n-goto" data-row-idx="${i}" data-field="matches" title="Voir les démarches concernées">${fmtInt(r.nb_demarches_matches)}</span>`:fmtInt(r.nb_demarches_matches)}</td>
+                <td class="num">${(r.demarches_deja_detectees||[]).length>0?`<span class="n-goto" data-row-idx="${i}" data-field="deja" title="Voir les démarches déjà détectées">${fmtInt(r.nb_demarches_deja_detectees)}</span>`:fmtInt(r.nb_demarches_deja_detectees)}</td>
+                <td class="num" style="font-weight:600;color:${r.nb_demarches_opportunite>0 && (r.statut==='oui'||r.statut==='partiel'||r.statut==='open_data')?'var(--tab-donnees)':'var(--ink-soft)'}">${(r.demarches_opportunite||[]).length>0?`<span class="n-goto" data-row-idx="${i}" data-field="opp" title="Voir les démarches en opportunité">${fmtInt(r.nb_demarches_opportunite)}</span>`:fmtInt(r.nb_demarches_opportunite)}</td>
               </tr>`).join('')}
           </tbody>
         </table>
       </div>
-      <p style="font-size:.78rem;color:var(--muted);margin-top:10px">🔒 = comptage restreint aux démarches avec un champ Siret (la donnée n'a de sens que pour le représentant légal d'une entreprise — sans ce filtre, elle se confond avec les mêmes champs chez les particuliers). « Donnée ouverte (hors bouquet) » = la donnée est publique et vérifiable (open data ou API dédiée hors api.gouv.fr), mais n'est pas intégrée au bouquet API Entreprise/Particulier officiel — ex. comptes d'association (API DILA), subventions (Data.Subvention/data-asso), permis de construire (SITADEL), marchés publics (DECP). † = dispensé par FranceConnect/ProConnect, mais uniquement pour le déposant du dossier lui-même et uniquement s'il s'est authentifié via ce mécanisme — ne couvre pas les informations demandées pour un tiers. Rapprochement par mots-clés sur le libellé des champs, estimation non exhaustive.</p>
+      <p style="font-size:.78rem;color:var(--muted);margin-top:10px">🔒 = comptage restreint aux démarches avec un champ Siret (la donnée n'a de sens que pour le représentant légal d'une entreprise — sans ce filtre, elle se confond avec les mêmes champs chez les particuliers). « Donnée ouverte (hors bouquet) » = la donnée est publique et vérifiable (open data ou API dédiée hors api.gouv.fr), mais n'est pas intégrée au bouquet API Entreprise/Particulier officiel — ex. comptes d'association (API DILA), subventions (Data.Subvention/data-asso), permis de construire (SITADEL), marchés publics (DECP). † = dispensé par FranceConnect/ProConnect, mais uniquement pour le déposant du dossier lui-même et uniquement s'il s'est authentifié via ce mécanisme — ne couvre pas les informations demandées pour un tiers. Rapprochement par mots-clés sur le libellé des champs, estimation non exhaustive. Les nombres soulignés renvoient à la liste exacte des démarches concernées ; 17 lignes calculées par une méthode spécifique (type de champ natif, règle composée) restent non cliquables pour ne pas afficher une liste incomplète.</p>
     `;
 
     content.querySelectorAll('#api-controls .chip').forEach(chip=>{
@@ -1477,6 +1504,19 @@
     });
     content.querySelector('#api-fournisseur').addEventListener('change', e=>{ state.apiFilterFournisseur = e.target.value; renderApiTab(); });
     content.querySelector('#api-search').addEventListener('input', e=>{ state.apiQuery = e.target.value.trim().toLowerCase(); reRenderPreservingFocus(renderApiTab); });
+    const API_FIELD_MAP = {
+      matches: {key:'demarches_matches', label:'concernées'},
+      deja: {key:'demarches_deja_detectees', label:'déjà détectées'},
+      opp: {key:'demarches_opportunite', label:'en opportunité'}
+    };
+    content.querySelectorAll('.n-goto[data-row-idx]').forEach(el=>{
+      el.addEventListener('click', e=>{
+        e.stopPropagation();
+        const r = rows[Number(el.dataset.rowIdx)];
+        const f = API_FIELD_MAP[el.dataset.field];
+        openDemarchesByIds(`${r.donnee} — ${f.label}`, r[f.key] || []);
+      });
+    });
     content.querySelectorAll('thead th[data-key]').forEach(th=>{
       th.addEventListener('click', ()=>{
         const k = th.dataset.key;
