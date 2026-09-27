@@ -2212,6 +2212,10 @@
     oui: '--status-oui', partiel: '--status-partiel', non: '--status-non',
     non_identifie: '--tab-cerfa', non_concerne: '--status-non',
   };
+  const DESTATIS_PART_FORM = {simple:2, modere:5, complexe:20};
+  const DESTATIS_ENT_FORM = {simple:3, modere:5, complexe:30};
+  const DESTATIS_PART_PJ = {simple:1, modere:3, complexe:15};
+  const NIVEAU_SUP = {simple:'modere', modere:'complexe', complexe:'complexe'};
   const CERFA_NIVEAU_STYLE = {
     simple: {label:'Simple', color:'var(--status-oui)', soft:'var(--status-oui-soft)'},
     modere: {label:'Modéré', color:'var(--status-partiel)', soft:'var(--status-partiel-soft)'},
@@ -3146,6 +3150,38 @@
           ${d.niveau_net!==d.niveau_brut ? ` → <span class="badge" style="background:${CERFA_NIVEAU_STYLE[d.niveau_net].soft};color:${CERFA_NIVEAU_STYLE[d.niveau_net].color}">Net (préremplissage) : ${CERFA_NIVEAU_STYLE[d.niveau_net].label}</span>` : ` <span style="color:var(--muted);font-size:.8rem">(inchangé après préremplissage)</span>`}
         </span></div>
         <div class="kv"><span class="k">Typologie</span><span class="v">${escapeHtml(d.typologie||'—')} <span style="color:var(--muted);font-size:.76rem">(approximatif, repérage par libellé)</span></span></div>
+
+        <p style="font-size:.82rem;font-weight:600;margin:12px 0 4px">Hypothèses retenues pour cette démarche</p>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Côté</th><th style="text-align:right">Bas<br><span style="font-weight:400;color:var(--muted);font-size:.74rem">niveau simple</span></th><th style="text-align:right">Central<br><span style="font-weight:400;color:var(--muted);font-size:.74rem">niveau ${CERFA_NIVEAU_STYLE[d.niveau_net].label.toLowerCase()}</span></th><th style="text-align:right">Haut<br><span style="font-weight:400;color:var(--muted);font-size:.74rem">niveau ${CERFA_NIVEAU_STYLE[NIVEAU_SUP[d.niveau_net]].label.toLowerCase()}</span></th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="titre">Administration <span style="color:var(--muted);font-weight:400">(forfait/dossier, indépendant du niveau)</span></td>
+                <td class="num">6,79 €</td><td class="num">8,96 €</td><td class="num">10,70 €</td>
+              </tr>
+              <tr>
+                <td class="titre">Usagers — dématérialisation <span style="color:var(--muted);font-weight:400">(déjà en ligne, non applicable ici)</span></td>
+                <td class="num" colspan="3" style="text-align:center;color:var(--muted)">30 min/dossier (fixe, tous niveaux)</td>
+              </tr>
+              <tr>
+                <td class="titre">Usagers — préremplissage <span style="color:var(--muted);font-weight:400">(${d.for_individual ? 'si champ identité FranceConnect' : 'si champ SIRET/API Entreprise'})</span></td>
+                <td class="num">${d.for_individual ? DESTATIS_PART_FORM.simple : DESTATIS_ENT_FORM.simple} min</td>
+                <td class="num">${d.for_individual ? DESTATIS_PART_FORM[d.niveau_net] : DESTATIS_ENT_FORM[d.niveau_net]} min</td>
+                <td class="num">${d.for_individual ? DESTATIS_PART_FORM[NIVEAU_SUP[d.niveau_net]] : DESTATIS_ENT_FORM[NIVEAU_SUP[d.niveau_net]]} min</td>
+              </tr>
+              ${d.for_individual ? `<tr>
+                <td class="titre">Usagers — PJ récupérée à la source <span style="color:var(--muted);font-weight:400">(par pièce concernée)</span></td>
+                <td class="num">${DESTATIS_PART_PJ.simple} min</td>
+                <td class="num">${DESTATIS_PART_PJ[d.niveau_net]} min</td>
+                <td class="num">${DESTATIS_PART_PJ[NIVEAU_SUP[d.niveau_net]]} min</td>
+              </tr>` : ''}
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:.76rem;color:var(--muted);margin:6px 0 12px">Valorisé à ${d.for_individual?'7,28 €/h (particulier, rapport Quinet)':'44,7 €/h (entreprise/collectivité, coût horaire du travail Insee/Eurostat)'}. Temps standard Destatis 2018 / Handboek NL 2023, voir la page Méthodologie pour le détail des sources.</p>
+
+        <p style="font-size:.82rem;font-weight:600;margin:12px 0 4px">Résultat chiffré</p>
         <div class="table-scroll" style="margin-top:10px">
           <table>
             <thead><tr><th></th><th style="text-align:right">Bas</th><th style="text-align:right">Central</th><th style="text-align:right">Haut</th></tr></thead>
