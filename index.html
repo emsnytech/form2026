@@ -3157,7 +3157,7 @@
   }
 
   function renderFicheGains(d){
-    if(d.total_central==null){
+    if(d.gain_admin_central==null){
       return `<p class="empty-note">Gains non calculés pour cette démarche.</p>`;
     }
     return `
@@ -3177,10 +3177,6 @@
               <tr>
                 <td class="titre">Administration <span style="color:var(--muted);font-weight:400">(forfait/dossier, indépendant du niveau)</span></td>
                 <td class="num">6,79 €</td><td class="num">8,96 €</td><td class="num">10,70 €</td>
-              </tr>
-              <tr>
-                <td class="titre">Usagers — dématérialisation <span style="color:var(--muted);font-weight:400">(déjà en ligne, non applicable ici)</span></td>
-                <td class="num" colspan="3" style="text-align:center;color:var(--muted)">30 min/dossier (fixe, tous niveaux)</td>
               </tr>
               <tr>
                 <td class="titre">Usagers — préremplissage <span style="color:var(--muted);font-weight:400">(${d.for_individual ? 'si champ identité FranceConnect' : 'si champ SIRET/API Entreprise'})</span></td>
@@ -3211,7 +3207,7 @@
                 <td class="num">${fmtInt(d.gain_admin_haut)} €</td>
               </tr>
               <tr>
-                <td class="titre">Côté usagers <span style="color:var(--muted);font-weight:400">(démat. + préremplissage)</span></td>
+                <td class="titre">Côté usagers <span style="color:var(--muted);font-weight:400">(préremplissage uniquement — démat. déjà acquise)</span></td>
                 <td class="num">${fmtInt(d.gain_usagers_bas)} €</td>
                 <td class="num">${fmtInt(d.gain_usagers_central)} €</td>
                 <td class="num">${fmtInt(d.gain_usagers_haut)} €</td>
