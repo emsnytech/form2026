@@ -1257,7 +1257,7 @@
             <th data-key="nb_infos_api_isable">Infos API</th>
             <th data-key="nb_pj_api_isable">PJ API</th>
             <th data-key="niveau_net" title="Niveau de complexité en tenant compte du préremplissage déjà disponible">Niveau</th>
-            <th data-key="gain_usagers_central" title="Gain usagers estimé si mieux préremplie (scénario central) — fourchette bas/haut au survol">Gain usagers</th>
+            <th data-key="gain_usagers_central" title="Gain usagers estimé du potentiel de préremplissage non exploité (scénario central) — fourchette bas/haut au survol">Gain usagers</th>
             <th data-key="cerfa_lien">Modalité</th>
             <th>Accès</th>
             <th data-key="perimetre_ministeriel">Périmètre ministériel</th>
@@ -2214,6 +2214,7 @@
   };
   const DESTATIS_PART_FORM = {simple:2, modere:5, complexe:20};
   const DESTATIS_ENT_FORM = {simple:3, modere:5, complexe:30};
+  const DESTATIS_ENT_SIRET = {simple:2, modere:10, complexe:120};
   const DESTATIS_PART_PJ = {simple:1, modere:3, complexe:15};
   const NIVEAU_SUP = {simple:'modere', modere:'complexe', complexe:'complexe'};
   const CERFA_NIVEAU_STYLE = {
@@ -3160,16 +3161,20 @@
     if(d.gain_admin_central==null){
       return `<p class="empty-note">Gains non calculés pour cette démarche.</p>`;
     }
+    const nOpp = (d.nb_champs_opportunite||0) + (d.nb_pj_opportunite||0);
     return `
       <div class="potentiel-panel">
-        <h3><span class="dot" style="background:${CERFA_NIVEAU_STYLE[d.niveau_net].color}"></span>Gains estimés du préremplissage (bas / central / haut)</h3>
+        <h3><span class="dot" style="background:${CERFA_NIVEAU_STYLE[d.niveau_net].color}"></span>Gains estimés — potentiel de préremplissage non réalisé (bas / central / haut)</h3>
         <div class="kv"><span class="k">Niveau</span><span class="v">
           <span class="badge" style="background:${CERFA_NIVEAU_STYLE[d.niveau_brut].soft};color:${CERFA_NIVEAU_STYLE[d.niveau_brut].color}">Brut : ${CERFA_NIVEAU_STYLE[d.niveau_brut].label}</span>
-          ${d.niveau_net!==d.niveau_brut ? ` → <span class="badge" style="background:${CERFA_NIVEAU_STYLE[d.niveau_net].soft};color:${CERFA_NIVEAU_STYLE[d.niveau_net].color}">Net (préremplissage) : ${CERFA_NIVEAU_STYLE[d.niveau_net].label}</span>` : ` <span style="color:var(--muted);font-size:.8rem">(inchangé après préremplissage)</span>`}
+          ${d.niveau_net!==d.niveau_brut ? ` → <span class="badge" style="background:${CERFA_NIVEAU_STYLE[d.niveau_net].soft};color:${CERFA_NIVEAU_STYLE[d.niveau_net].color}">Net (préremplissage déjà acquis) : ${CERFA_NIVEAU_STYLE[d.niveau_net].label}</span>` : ` <span style="color:var(--muted);font-size:.8rem">(inchangé — aucun champ déjà prérempli détecté)</span>`}
         </span></div>
         <div class="kv"><span class="k">Typologie</span><span class="v">${escapeHtml(d.typologie||'—')} <span style="color:var(--muted);font-size:.76rem">(approximatif, repérage par libellé)</span></span></div>
+        <div class="kv"><span class="k">Opportunités détectées (onglets Données/PJ)</span><span class="v num">${d.nb_champs_opportunite||0} donnée${(d.nb_champs_opportunite||0)>1?'s':''} + ${d.nb_pj_opportunite||0} PJ ⚠️</span></div>
+        ${nOpp===0 ? `<p style="font-size:.82rem;color:var(--muted);margin-top:6px">Aucune opportunité de préremplissage non exploitée détectée pour cette démarche dans nos référentiels — le gain usager ci-dessous est donc nul. Cela ne veut pas dire que la démarche est optimale : voir les onglets Données/PJ pour le détail champ par champ, notre détection peut aussi être incomplète.</p>` : ''}
 
         <p style="font-size:.82rem;font-weight:600;margin:12px 0 4px">Hypothèses retenues pour cette démarche</p>
+        <p style="font-size:.78rem;color:var(--ink-soft);margin-bottom:8px">Le gain usager ne compte <b>que le potentiel non exploité</b> : un champ ou une PJ déjà API-isable et déjà exploité (badge « ✓ disponible ») est considéré comme un gain <b>déjà acquis</b>, pas un gain à chiffrer ici. Seules les « ⚠️ opportunités » (correspond à une API connue, mais pas encore détecté comme exploité dans cette démarche) comptent.</p>
         <div class="table-scroll">
           <table>
             <thead><tr><th>Côté</th><th style="text-align:right">Bas<br><span style="font-weight:400;color:var(--muted);font-size:.74rem">niveau simple</span></th><th style="text-align:right">Central<br><span style="font-weight:400;color:var(--muted);font-size:.74rem">niveau ${CERFA_NIVEAU_STYLE[d.niveau_net].label.toLowerCase()}</span></th><th style="text-align:right">Haut<br><span style="font-weight:400;color:var(--muted);font-size:.74rem">niveau ${CERFA_NIVEAU_STYLE[NIVEAU_SUP[d.niveau_net]].label.toLowerCase()}</span></th></tr></thead>
@@ -3179,17 +3184,17 @@
                 <td class="num">6,79 €</td><td class="num">8,96 €</td><td class="num">10,70 €</td>
               </tr>
               <tr>
-                <td class="titre">Usagers — préremplissage <span style="color:var(--muted);font-weight:400">(${d.for_individual ? 'si champ identité FranceConnect' : 'si champ SIRET/API Entreprise'})</span></td>
-                <td class="num">${d.for_individual ? DESTATIS_PART_FORM.simple : DESTATIS_ENT_FORM.simple} min</td>
-                <td class="num">${d.for_individual ? DESTATIS_PART_FORM[d.niveau_net] : DESTATIS_ENT_FORM[d.niveau_net]} min</td>
-                <td class="num">${d.for_individual ? DESTATIS_PART_FORM[NIVEAU_SUP[d.niveau_net]] : DESTATIS_ENT_FORM[NIVEAU_SUP[d.niveau_net]]} min</td>
+                <td class="titre">Usagers — ${d.for_individual ? 'formulaire identité' : 'obtention données SIRET/API Entreprise'} <span style="color:var(--muted);font-weight:400">(${d.nb_champs_opportunite>0 ? `déclenché, ${d.nb_champs_opportunite} opportunité(s)` : 'non déclenché, 0 opportunité'})</span></td>
+                <td class="num">${d.nb_champs_opportunite>0 ? (d.for_individual ? DESTATIS_PART_FORM.simple : DESTATIS_ENT_SIRET.simple) : 0} min</td>
+                <td class="num">${d.nb_champs_opportunite>0 ? (d.for_individual ? DESTATIS_PART_FORM[d.niveau_net] : DESTATIS_ENT_SIRET[d.niveau_net]) : 0} min</td>
+                <td class="num">${d.nb_champs_opportunite>0 ? (d.for_individual ? DESTATIS_PART_FORM[NIVEAU_SUP[d.niveau_net]] : DESTATIS_ENT_SIRET[NIVEAU_SUP[d.niveau_net]]) : 0} min</td>
               </tr>
               ${d.for_individual ? `<tr>
-                <td class="titre">Usagers — PJ récupérée à la source <span style="color:var(--muted);font-weight:400">(par pièce concernée)</span></td>
-                <td class="num">${DESTATIS_PART_PJ.simple} min</td>
-                <td class="num">${DESTATIS_PART_PJ[d.niveau_net]} min</td>
-                <td class="num">${DESTATIS_PART_PJ[NIVEAU_SUP[d.niveau_net]]} min</td>
-              </tr>` : ''}
+                <td class="titre">Usagers — PJ récupérée à la source <span style="color:var(--muted);font-weight:400">(${d.nb_pj_opportunite||0} pièce(s) en opportunité, comptées chacune)</span></td>
+                <td class="num">${(d.nb_pj_opportunite||0) * DESTATIS_PART_PJ.simple} min</td>
+                <td class="num">${(d.nb_pj_opportunite||0) * DESTATIS_PART_PJ[d.niveau_net]} min</td>
+                <td class="num">${(d.nb_pj_opportunite||0) * DESTATIS_PART_PJ[NIVEAU_SUP[d.niveau_net]]} min</td>
+              </tr>` : `<tr><td class="titre" colspan="4" style="color:var(--muted);font-size:.78rem">Gain "PJ récupérée" non chiffré côté entreprise — aucun taux Destatis source pour cette opération sur ce public.</td></tr>`}
             </tbody>
           </table>
         </div>
@@ -3207,7 +3212,7 @@
                 <td class="num">${fmtInt(d.gain_admin_haut)} €</td>
               </tr>
               <tr>
-                <td class="titre">Côté usagers <span style="color:var(--muted);font-weight:400">(préremplissage uniquement — démat. déjà acquise)</span></td>
+                <td class="titre">Côté usagers <span style="color:var(--muted);font-weight:400">(potentiel non réalisé uniquement)</span></td>
                 <td class="num">${fmtInt(d.gain_usagers_bas)} €</td>
                 <td class="num">${fmtInt(d.gain_usagers_central)} €</td>
                 <td class="num">${fmtInt(d.gain_usagers_haut)} €</td>
