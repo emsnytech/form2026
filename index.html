@@ -3083,6 +3083,7 @@
         <button data-ft="presentation" class="${state.ficheTab==='presentation'?'active':''}">Présentation</button>
         <button data-ft="donnees" class="${state.ficheTab==='donnees'?'active':''}">Données (${nInfoResume})</button>
         <button data-ft="pj" class="${state.ficheTab==='pj'?'active':''}">PJ (${nPjResume})</button>
+        <button data-ft="gains" class="${state.ficheTab==='gains'?'active':''}">Gains estimés</button>
       </div>
 
       <div id="fiche-body"></div>
@@ -3098,7 +3099,8 @@
     const body = content.querySelector('#fiche-body');
     if(state.ficheTab==='presentation') body.innerHTML = renderFichePresentation(d, infoChamps, pjChamps, hasDetail);
     else if(state.ficheTab==='donnees') body.innerHTML = renderFicheChampsTable(infoChamps, 'info_api_isable', hasDetail, nInfoResume, d.nb_infos_api_isable||0, 'champ', d);
-    else body.innerHTML = renderFicheChampsTable(pjChamps, 'pj_api_isable', hasDetail, nPjResume, d.nb_pj_api_isable||0, 'PJ', d);
+    else if(state.ficheTab==='pj') body.innerHTML = renderFicheChampsTable(pjChamps, 'pj_api_isable', hasDetail, nPjResume, d.nb_pj_api_isable||0, 'PJ', d);
+    else body.innerHTML = renderFicheGains(d);
   }
 
   function renderFichePresentation(d, infoChamps, pjChamps, hasDetail){
@@ -3142,9 +3144,25 @@
           <p style="font-size:.78rem;color:var(--muted);margin-top:8px">${hasDetail ? 'Estimation par mots-clés (type de champ natif ou libellé), voir les onglets Données / PJ pour le détail.' : `⏳ Comptage résumé (exact, calculé pour les ${fmtInt(DEMARCHES.length)} démarches) — le détail champ par champ se charge en arrière-plan, revenez sur cette fiche dans un instant pour le voir apparaître.`}</p>
         </div>
       </div>
-      ${d.total_central!=null ? `
-      <div class="potentiel-panel" style="margin-top:14px">
-        <h3><span class="dot" style="background:${CERFA_NIVEAU_STYLE[d.niveau_net].soft};background:${CERFA_NIVEAU_STYLE[d.niveau_net].color}"></span>Gains estimés du préremplissage (bas / central / haut)</h3>
+      ${(d.dila_descriptions && d.dila_descriptions.length) ? `
+      <div class="panel" style="margin-top:14px; border-left:3px solid var(--tab-evenement)">
+        <h3><span class="dot" style="background:var(--tab-evenement)"></span>Descriptif complété — service-public.fr (DILA)</h3>
+        ${d.dila_descriptions.map(fd=>`
+          <div style="margin-bottom:10px">
+            <div style="font-weight:600;font-size:.86rem">${escapeHtml(fd.titre)} <span class="mono" style="font-weight:400;color:var(--muted)">(${escapeHtml(fd.fiche_id)})</span></div>
+            <p style="font-size:.85rem;color:var(--ink-soft);margin-top:3px">${escapeHtml(fd.description||'—')}</p>
+          </div>`).join('')}
+      </div>` : ''}
+    `;
+  }
+
+  function renderFicheGains(d){
+    if(d.total_central==null){
+      return `<p class="empty-note">Gains non calculés pour cette démarche.</p>`;
+    }
+    return `
+      <div class="potentiel-panel">
+        <h3><span class="dot" style="background:${CERFA_NIVEAU_STYLE[d.niveau_net].color}"></span>Gains estimés du préremplissage (bas / central / haut)</h3>
         <div class="kv"><span class="k">Niveau</span><span class="v">
           <span class="badge" style="background:${CERFA_NIVEAU_STYLE[d.niveau_brut].soft};color:${CERFA_NIVEAU_STYLE[d.niveau_brut].color}">Brut : ${CERFA_NIVEAU_STYLE[d.niveau_brut].label}</span>
           ${d.niveau_net!==d.niveau_brut ? ` → <span class="badge" style="background:${CERFA_NIVEAU_STYLE[d.niveau_net].soft};color:${CERFA_NIVEAU_STYLE[d.niveau_net].color}">Net (préremplissage) : ${CERFA_NIVEAU_STYLE[d.niveau_net].label}</span>` : ` <span style="color:var(--muted);font-size:.8rem">(inchangé après préremplissage)</span>`}
@@ -3208,16 +3226,7 @@
           </table>
         </div>
         <p style="font-size:.76rem;color:var(--muted);margin-top:8px">Méthode détaillée : note_methode_gains.md. Ce gain concerne le préremplissage d'une démarche déjà numérique, pas une dématérialisation (contrairement à l'onglet CERFA papier).</p>
-      </div>` : ''}
-      ${(d.dila_descriptions && d.dila_descriptions.length) ? `
-      <div class="panel" style="margin-top:14px; border-left:3px solid var(--tab-evenement)">
-        <h3><span class="dot" style="background:var(--tab-evenement)"></span>Descriptif complété — service-public.fr (DILA)</h3>
-        ${d.dila_descriptions.map(fd=>`
-          <div style="margin-bottom:10px">
-            <div style="font-weight:600;font-size:.86rem">${escapeHtml(fd.titre)} <span class="mono" style="font-weight:400;color:var(--muted)">(${escapeHtml(fd.fiche_id)})</span></div>
-            <p style="font-size:.85rem;color:var(--ink-soft);margin-top:3px">${escapeHtml(fd.description||'—')}</p>
-          </div>`).join('')}
-      </div>` : ''}
+      </div>
     `;
   }
 
