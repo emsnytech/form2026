@@ -2206,6 +2206,12 @@
     const totalBas = avecGains.reduce((s,c)=>s+c.total_bas,0);
     const totalCentral = avecGains.reduce((s,c)=>s+c.total_central,0);
     const totalHaut = avecGains.reduce((s,c)=>s+c.total_haut,0);
+    const adminBas = avecGains.reduce((s,c)=>s+c.gain_admin_bas,0);
+    const adminCentral = avecGains.reduce((s,c)=>s+c.gain_admin_central,0);
+    const adminHaut = avecGains.reduce((s,c)=>s+c.gain_admin_haut,0);
+    const usagersBas = avecGains.reduce((s,c)=>s+c.gain_usagers_demat+c.gain_usagers_preremplissage_bas,0);
+    const usagersCentral = avecGains.reduce((s,c)=>s+c.gain_usagers_demat+c.gain_usagers_preremplissage_central,0);
+    const usagersHaut = avecGains.reduce((s,c)=>s+c.gain_usagers_demat+c.gain_usagers_preremplissage_haut,0);
 
     content.innerHTML = `
       <h2 style="font-size:1.2rem;margin-bottom:4px">Formulaires CERFA papier — que resterait-il à saisir sur démarche numérique ?</h2>
@@ -2240,10 +2246,10 @@
         </div>
         <div class="panel">
           <h3><span class="dot" style="background:var(--tab-cerfa)"></span>Total économisé estimé</h3>
-          <div class="kv"><span class="k">Scénario bas</span><span class="v num">${fmtInt(totalBas)} €</span></div>
-          <div class="kv"><span class="k">Scénario central</span><span class="v num" style="font-weight:600">${fmtInt(totalCentral)} €</span></div>
-          <div class="kv"><span class="k">Scénario haut</span><span class="v num">${fmtInt(totalHaut)} €</span></div>
-          <p style="font-size:.76rem;color:var(--muted);margin-top:8px">Sur les ${avecGains.length} CERFA dont la volumétrie est connue — gain administration + gain usagers (dématérialisation + préremplissage partiel).</p>
+          <div class="kv"><span class="k">Côté administration (bas / central / haut)</span><span class="v num">${fmtInt(adminBas)} / ${fmtInt(adminCentral)} / ${fmtInt(adminHaut)} €</span></div>
+          <div class="kv"><span class="k">Côté usagers (bas / central / haut)</span><span class="v num">${fmtInt(usagersBas)} / ${fmtInt(usagersCentral)} / ${fmtInt(usagersHaut)} €</span></div>
+          <div class="kv" style="border-top:1px solid var(--line-strong);padding-top:9px;margin-top:2px"><span class="k">Total (bas / central / haut)</span><span class="v num" style="font-weight:600">${fmtInt(totalBas)} / ${fmtInt(totalCentral)} / ${fmtInt(totalHaut)} €</span></div>
+          <p style="font-size:.76rem;color:var(--muted);margin-top:8px">Sur les ${avecGains.length} CERFA dont la volumétrie est connue. Côté usagers = dématérialisation (30 min, fixe) + préremplissage partiel (variable selon le niveau).</p>
         </div>
       </div>
       <div class="controls" id="cerfa-controls" style="margin-bottom:14px">
@@ -2372,13 +2378,33 @@
         </div>
       </div>
       <div class="potentiel-panel" style="margin-bottom:16px">
-        <h3>Total économisé estimé si dématérialisé</h3>
-        <div class="panel-grid" style="grid-template-columns:repeat(3,1fr)">
-          <div><div class="pbar-label"><span>Bas</span></div><div style="font-size:1.3rem;font-family:'IBM Plex Mono',monospace">${fmtInt(c.total_bas)} €</div></div>
-          <div><div class="pbar-label"><span>Central</span></div><div style="font-size:1.3rem;font-family:'IBM Plex Mono',monospace;font-weight:600">${fmtInt(c.total_central)} €</div></div>
-          <div><div class="pbar-label"><span>Haut</span></div><div style="font-size:1.3rem;font-family:'IBM Plex Mono',monospace">${fmtInt(c.total_haut)} €</div></div>
+        <h3>Gains estimés si dématérialisé (bas / central / haut)</h3>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th></th><th style="text-align:right">Bas</th><th style="text-align:right">Central</th><th style="text-align:right">Haut</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="titre">Côté administration</td>
+                <td class="num">${fmtInt(c.gain_admin_bas)} €</td>
+                <td class="num">${fmtInt(c.gain_admin_central)} €</td>
+                <td class="num">${fmtInt(c.gain_admin_haut)} €</td>
+              </tr>
+              <tr>
+                <td class="titre">Côté usagers <span style="color:var(--muted);font-weight:400">(démat. + préremplissage)</span></td>
+                <td class="num">${fmtInt(c.gain_usagers_demat + c.gain_usagers_preremplissage_bas)} €</td>
+                <td class="num">${fmtInt(c.gain_usagers_demat + c.gain_usagers_preremplissage_central)} €</td>
+                <td class="num">${fmtInt(c.gain_usagers_demat + c.gain_usagers_preremplissage_haut)} €</td>
+              </tr>
+              <tr style="font-weight:600">
+                <td class="titre">Total</td>
+                <td class="num">${fmtInt(c.total_bas)} €</td>
+                <td class="num">${fmtInt(c.total_central)} €</td>
+                <td class="num">${fmtInt(c.total_haut)} €</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <p style="font-size:.76rem;color:var(--muted);margin-top:10px">Gain administration + gain usagers (démat. + préremplissage partiel, hors PJ déjà API-isables — donnée manquante pour ce CERFA, estimation basse). Détail méthode : note_methode_cerfa.md.</p>
+        <p style="font-size:.76rem;color:var(--muted);margin-top:10px">Côté usagers : dématérialisation (30 min/dossier, fixe) + préremplissage partiel (variable selon le niveau ; hors PJ déjà API-isables — donnée manquante pour ce CERFA, estimation basse). Détail méthode : note_methode_cerfa.md.</p>
       </div>
       ` : `<p class="empty-note" style="margin-bottom:16px">Volumétrie DILA non renseignée pour ce CERFA — gain non calculable.</p>`}
 
