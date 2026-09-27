@@ -879,6 +879,46 @@
           <p>L'onglet <b>Toutes les démarches</b> empile les trois référentiels (4 325 lignes) <b>sans les fusionner</b> : chaque ligne garde sa source d'origine, et une colonne « Référentiels » indique, quand le rapprochement est fiable (identifiant officiel ou URL exacte partagés), dans quel(s) autre(s) référentiel(s) la même démarche est aussi connue. 141 lignes sont ainsi identifiées comme multi-référencées — un filtre dédié permet de les isoler. L'absence de doublon détecté pour une ligne ne signifie pas que la démarche n'existe pas ailleurs : le plus souvent, c'est le rapprochement automatique qui n'y parvient pas (intitulé reformulé, portail différent).</p>
         </div>
 
+        <div class="cover-section">
+          <h3><span class="dot" style="background:var(--tab-cerfa)"></span>Méthode de calcul des gains économiques</h3>
+          <p>Deux natures de gain sont estimées, à ne jamais confondre : pour une démarche <b>déjà en ligne</b> (onglet Démarche numérique), le gain vient d'un meilleur <b>préremplissage</b> ; pour un <b>CERFA papier</b> (onglet CERFA papier), le gain vient d'une <b>dématérialisation complète</b>. Chacune combine un gain côté <b>administration</b> et un gain côté <b>usagers</b>, toujours donnés en fourchette bas/central/haut — jamais le seul scénario central.</p>
+
+          <p><b>Gain administration</b> — forfait par dossier, indépendant du niveau de complexité : <b>6,79 €</b> (bas, Deloitte 2015 : coût hors ligne pondéré 7,04 € − coût en ligne 0,25 €) / <b>8,96 €</b> (central, Aston Campbell, Royaume-Uni 2008 : 9,05 − 0,092) / <b>10,70 €</b> (haut, moyenne retenue par France Stratégie). Source : France Stratégie, <i>Coûts et bénéfices de la simplification administrative</i>, 2018, tableau 12.</p>
+
+          <p><b>Gain usagers</b> — deux composantes :</p>
+          <ul class="source-list">
+            <li><b>Dématérialisation</b><span>30 minutes par dossier, même valeur à tous les niveaux (France Stratégie 2018, d'après Commission européenne 2014) — ne s'applique qu'aux CERFA papier, une démarche déjà en ligne a déjà acquis ce gain.</span></li>
+            <li><b>Préremplissage / pièces récupérées à la source</b><span>Temps standard variable selon la complexité de la démarche (simple/modéré/complexe) et le type d'opération évitée — détail ci-dessous.</span></li>
+          </ul>
+
+          <p>Ces temps standard viennent d'un détour méthodologique délibéré : plutôt que d'inventer des durées, ce travail emprunte aux Pays-Bas leurs <b>conventions</b> (pas leurs résultats). Le <i>Handboek Meting Regeldrukkosten</i> néerlandais (2023) cite lui-même comme source les lignes directrices allemandes <b>Destatis 2018</b> sur l'identification des coûts de mise en conformité (<i>Leitfaden Erfüllungsaufwand</i>) — des valeurs publiées par un office statistique national, reprises par un second gouvernement, donc doublement sourcées :</p>
+
+          <div class="table-scroll" style="margin:10px 0">
+            <table>
+              <thead><tr><th>Opération standard (Destatis 2018 / Handboek NL 2023)</th><th style="text-align:right">Simple</th><th style="text-align:right">Modéré</th><th style="text-align:right">Complexe</th><th>Levier FORM 2026 concerné</th></tr></thead>
+              <tbody>
+                <tr><td>Rassembler informations/justificatifs (citoyens)</td><td class="num">1 min</td><td class="num">3 min</td><td class="num">15 min</td><td>Pièce jointe récupérée à la source</td></tr>
+                <tr><td>Remplir un formulaire, identité (citoyens)</td><td class="num">2 min</td><td class="num">5 min</td><td class="num">20 min</td><td>Préremplissage FranceConnect</td></tr>
+                <tr><td>Obtenir les données nécessaires (entreprises)</td><td class="num">2 min</td><td class="num">10 min</td><td class="num">120 min</td><td>Champ SIRET / API Entreprise</td></tr>
+                <tr><td>Remplir un formulaire (entreprises)</td><td class="num">3 min</td><td class="num">5 min</td><td class="num">30 min</td><td>Identité représentant (ProConnect)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:.82rem;color:var(--muted);margin-top:-6px">Deux opérations de la table néerlandaise ne sont pas encore mobilisées ici faute de signal fiable dans nos données : « fournir des informations en réponse » (citoyens, 2/5/15 min — proxy possible pour un renvoi en correction évité) et « corriger des erreurs » (entreprises, 2/10/60 min — proxy possible pour la qualité de la donnée). Pistes d'extension, pas des angles morts silencieux.</p>
+
+          <p><b>Valorisation horaire</b> — le manuel néerlandais utilise ses propres taux forfaitaires (17 €/h citoyens, 47 €/h entreprises). Ce travail leur préfère des valeurs françaises, pour rester cohérent avec le reste du chiffrage : <b>7,28 €/h</b> pour les particuliers (rapport Quinet) et <b>44,7 €/h</b> pour les entreprises/collectivités (coût horaire du travail, Insee/Eurostat) — seule la <i>convention de durée</i> est empruntée aux Pays-Bas, pas leur valorisation.</p>
+
+          <p><b>Recoupement</b> — sur les données API Entreprise (environ 40% des ~500 000 dossiers mensuels DN, niveau modéré, 10 min évitées/dossier), la méthode Destatis/NL donne un gain d'environ <span class="mono">7,45 €/dossier</span> au coût horaire français — du même ordre que les <span class="mono">6,79 €</span> de France Stratégie, obtenus par une méthode entièrement différente (comparaison d'coûts hors ligne/en ligne, pas de temps standard). Deux méthodes indépendantes, deux sources, un ordre de grandeur qui se confirme.</p>
+
+          <p><b>Niveau de complexité</b> — <span class="mono">score = nb_champs_obligatoires + 3 × nb_pj</span> (le CERFA papier utilise un nombre de pièces estimé faute de comptage structuré), seuils fixés une fois par des terciles pondérés par le nombre de dossiers, jamais recalculés. Complexe forcé si 5 pièces jointes ou plus, ou présence d'un bloc répétable. Pour la démarche numérique, un second niveau (« net ») réintègre les champs déjà préremplis avant de reclasser.</p>
+
+          <p><b>Deux limites à ne jamais perdre de vue</b> :</p>
+          <ul class="source-list">
+            <li><b>Une convention, pas une mesure</b><span>Le manuel néerlandais le précise lui-même : ces durées doivent être vérifiées par des experts et remplacées si de fortes raisons indiquent qu'elles sont trop hautes ou trop basses. Elles servent à <b>estimer avant</b>, pas à <b>mesurer après</b> — la seule vraie mesure viendrait des métadonnées réelles des dossiers (durée effective, taux de correction constaté), un chantier distinct de celui-ci.</span></li>
+            <li><b>Conçues pour évaluer des textes, pas des services numériques</b><span>Les tables Destatis/NL visent l'évaluation ex ante de projets réglementaires. Les appliquer au préremplissage d'une démarche en ligne est une transposition légitime, mais qui reste une transposition — assumée, pas dissimulée.</span></li>
+          </ul>
+        </div>
+
         <div class="caveat-box">
           <b>Limites connues à garder en tête :</b> le périmètre actuel exclut les démarches publiées avant 2026 ayant moins de 10 dossiers déposés, ce qui laisse passer toutes les démarches 2026 quel que soit leur volume — le taux « indéterminé » s'en trouve mécaniquement plus élevé (démarches très récentes, peu décrites). Le champ Ministère (officiel, champ <span class="mono">zones</span>) couvre 88,5% des démarches publiées ; le reste n'est pas rattaché à un ministère dans la source. Le recoupement avec l'Observatoire des démarches essentielles reste partiel par construction : sur les 243 démarches essentielles, seule une poignée partage une URL exacte avec notre corpus demarche.numerique.gouv.fr, la grande majorité étant hébergée sur d'autres portails ministériels.
         </div>
