@@ -163,6 +163,7 @@
   }
   nav.tabs button:hover{filter:brightness(1.08)}
   #btn-simulateur-externe{background:var(--tab-simulateur);color:#fff}
+  nav.tabs button[data-tab="organismes"]{background:var(--tab-simulateur)}
   nav.tabs button[data-tab="overview"]{background:var(--tab-overview)}
   nav.tabs button[data-tab="demarches"]{background:var(--tab-demarches)}
   nav.tabs button[data-tab="donnees"]{background:var(--tab-donnees)}
@@ -425,6 +426,7 @@
   <div class="tab-group tab-group-sources">
     <span class="tab-group-label">Sources de démarches</span>
     <button id="btn-simulateur-externe" type="button">Simulateur de gains ↗</button>
+    <button data-tab="organismes" class="inactive">Gains par organisme</button>
     <button data-tab="stats" class="inactive">Statistiques</button>
     <button data-tab="overview">Vue générale</button>
     <button data-tab="demarches" class="inactive">Démarche numérique</button>
@@ -541,6 +543,7 @@
   })();
   const CERFA = JSON.parse(document.getElementById('data-cerfa').textContent);
   const STATS = JSON.parse(document.getElementById('data-stats').textContent);
+  let ORGANISMES_GAINS = null; // chargé à la demande (app_organismes_gains.json, ~6,6 Mo), voir ensureOrganismesGains()
   const REGISTRE = JSON.parse(document.getElementById('data-registre').textContent);
   const RIDA = JSON.parse(document.getElementById('data-rida').textContent);
   const CERFA_BY_DILA = new Map(), CERFA_BY_DEMNUM = new Map(), CERFA_BY_ESSENTIELLE = new Map();
@@ -859,6 +862,8 @@
     ridaFilterMode: 'all',
     ridaFilterCategorie: 'all',
     ridaSort: {key:'categorie', dir:1},
+    organismesQuery: '',
+    organismesSelected: null,
   };
 
   const content = document.getElementById('content');
@@ -890,7 +895,8 @@
   /* ================= RENDER ROUTER ================= */
   function render(){
     setActiveTabButton();
-    if(state.tab==='accueil') renderAccueil();
+    if(state.tab==='organismes') renderOrganismesTab();
+    else if(state.tab==='accueil') renderAccueil();
     else if(state.tab==='overview') renderOverview();
     else if(state.tab==='demarches') renderDemarches();
     else if(state.tab==='donnees') renderApiTab();
@@ -910,6 +916,81 @@
 
 
   /* ================= ACCUEIL / MÉTHODOLOGIE ================= */
+  /* ================= GAINS PAR ORGANISME ================= */
+  function ensureOrganismesGains(cb){
+    if(ORGANISMES_GAINS){ cb(); return; }
+    fetch('app_organismes_gains.json').then(r=>r.json()).then(data=>{ ORGANISMES_GAINS = data; cb(); })
+      .catch(e=>{ console.error('fetch app_organismes_gains.json failed', e); cb(); });
+  }
+
+  const NIVEAU_LABEL_ORG = {simple:'Simple', modere:'Modérée', complexe:'Complexe'};
+
+  function renderOrganismesTab(){
+    content.innerHTML = `
+      <div class="cover">
+        <p class="eyebrow">Gains par organisme — paramètres v7</p>
+        <h2>Gains estimés, démarche par démarche, pour votre organisme</h2>
+        <p class="lede">Organismes identifiés par leur SIRET (référentiel interne démarches-simplifiées) : 1 735 organismes couvrant 28 931 démarches sur 34 185 (84,6 % — le reste n'a pas de SIRET identifié dans ce référentiel et n'apparaît pas ici). Gain admin (valeur centrale) et gain usagers réalisé (préremplissage, 30 % / 60 % FranceConnect) — même méthode que le <a id="link-to-simu" href="#">simulateur de gains</a>.</p>
+        <div class="cover-section">
+          <label for="organismes-search" style="display:block;font-weight:600;margin-bottom:.4rem">Rechercher un organisme</label>
+          <input id="organismes-search" type="text" placeholder="Ex. DDT, mairie, académie…" value="${escapeHtml(state.organismesQuery)}" style="width:100%;max-width:480px;font:inherit;padding:.5rem .7rem;border:1px solid var(--line);border-radius:6px;background:var(--paper-raised);color:var(--ink)">
+          <div id="organismes-list" style="margin-top:1rem"></div>
+          <div id="organismes-detail" style="margin-top:1.5rem"></div>
+        </div>
+      </div>
+    `;
+    document.getElementById('link-to-simu').addEventListener('click', e=>{ e.preventDefault(); window.open('simulateur-gains-dematerialisation.html','_blank','noopener'); });
+
+    const searchInput = document.getElementById('organismes-search');
+    searchInput.addEventListener('input', ()=>{ state.organismesQuery = searchInput.value; state.organismesSelected = null; renderOrganismesList(); renderOrganismesDetail(); });
+
+    ensureOrganismesGains(()=>{
+      renderOrganismesList();
+      renderOrganismesDetail();
+    });
+  }
+
+  function renderOrganismesList(){
+    const el = document.getElementById('organismes-list');
+    if(!el) return;
+    if(!ORGANISMES_GAINS){ el.innerHTML = '<p class="small" style="color:var(--muted)">Chargement des organismes…</p>'; return; }
+    const q = normalizeForMatch(state.organismesQuery || '');
+    let noms = Object.keys(ORGANISMES_GAINS);
+    if(q.length>=2) noms = noms.filter(n=>normalizeForMatch(n).includes(q));
+    noms.sort((a,b)=>a.localeCompare(b,'fr'));
+    const shown = noms.slice(0, 60);
+    if(!q){ el.innerHTML = `<p class="small" style="color:var(--muted)">${fmtInt(Object.keys(ORGANISMES_GAINS).length)} organismes — tapez au moins 2 caractères pour rechercher.</p>`; return; }
+    if(!noms.length){ el.innerHTML = '<p class="small" style="color:var(--muted)">Aucun organisme trouvé.</p>'; return; }
+    el.innerHTML = `<div style="display:flex;flex-wrap:wrap;gap:.4rem">` +
+      shown.map(n=>`<button type="button" class="org-pick" data-org="${escapeHtml(n)}" style="font:inherit;font-size:.85rem;padding:.35rem .7rem;border-radius:16px;border:1px solid var(--line);background:${n===state.organismesSelected?'var(--tab-simulateur-soft)':'var(--paper-raised)'};color:var(--ink);cursor:pointer">${escapeHtml(n)}</button>`).join('') +
+      `</div>` + (noms.length>shown.length ? `<p class="small" style="color:var(--muted);margin-top:.5rem">${fmtInt(noms.length-shown.length)} autres résultats — affinez la recherche.</p>` : '');
+    el.querySelectorAll('.org-pick').forEach(btn=>{
+      btn.addEventListener('click', ()=>{ state.organismesSelected = btn.dataset.org; renderOrganismesList(); renderOrganismesDetail(); });
+    });
+  }
+
+  function renderOrganismesDetail(){
+    const el = document.getElementById('organismes-detail');
+    if(!el) return;
+    const org = state.organismesSelected;
+    if(!org || !ORGANISMES_GAINS || !ORGANISMES_GAINS[org]){ el.innerHTML = ''; return; }
+    const rows = ORGANISMES_GAINS[org].slice().sort((a,b)=>b.nb_dossiers-a.nb_dossiers);
+    const tot = rows.reduce((acc,d)=>{
+      acc.dossiers += d.nb_dossiers; acc.admin += d.gain_admin_central;
+      acc.pre30 += d.gain_usagers_30; acc.pre60 += d.gain_usagers_60;
+      return acc;
+    }, {dossiers:0, admin:0, pre30:0, pre60:0});
+    let html = `<h3 style="margin-bottom:.6rem">${escapeHtml(org)}</h3><div class="table-wrap"><table><thead><tr>
+      <th>Démarche</th><th>Niveau</th><th>Dossiers</th><th>Gain admin (central)</th><th>Gain usagers réalisé (30 % FC)</th><th>Gain usagers réalisé (60 % FC)</th>
+      </tr></thead><tbody>`;
+    rows.forEach(d=>{
+      html += `<tr><td>${escapeHtml(d.titre)}</td><td>${NIVEAU_LABEL_ORG[d.niveau]||d.niveau}</td><td>${fmtInt(d.nb_dossiers)}</td><td>${fmtInt(d.gain_admin_central)} €</td><td>${fmtInt(d.gain_usagers_30)} €</td><td>${fmtInt(d.gain_usagers_60)} €</td></tr>`;
+    });
+    html += `<tr style="font-weight:700;border-top:2px solid var(--line-strong)"><td>Total — ${rows.length} démarche${rows.length>1?'s':''}</td><td></td><td>${fmtInt(tot.dossiers)}</td><td>${fmtInt(tot.admin)} €</td><td>${fmtInt(tot.pre30)} €</td><td>${fmtInt(tot.pre60)} €</td></tr>`;
+    html += `</tbody></table></div>`;
+    el.innerHTML = html;
+  }
+
   function renderAccueil(){
     const nOui = PJREF.filter(r=>r.statut==='oui').length + NOMENCLATURE.filter(r=>r.statut==='oui').length;
     content.innerHTML = `
