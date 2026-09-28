@@ -1415,8 +1415,8 @@
             <th data-key="nb_pj">PJ</th>
             <th data-key="nb_infos_api_isable">Infos API</th>
             <th data-key="nb_pj_api_isable">PJ API</th>
-            <th data-key="niveau_net" title="Niveau de complexité en tenant compte du préremplissage déjà disponible">Niveau</th>
-            <th data-key="gain_usagers_central" title="Gain usagers estimé du potentiel de préremplissage non exploité (scénario central) — fourchette bas/haut au survol">Gain usagers</th>
+            <th data-key="niveau_brut_v7" title="Niveau de complexité (v7)">Niveau</th>
+            <th data-key="gain_usagers_realise_30" title="Gain usagers déjà réalisé par le préremplissage, durées réelles de la plateforme (scénario 30 % FranceConnect) — comparaison au 60 % au survol">Gain usagers</th>
             <th data-key="cerfa_lien">Modalité</th>
             <th>Accès</th>
             <th data-key="perimetre_ministeriel">Périmètre ministériel</th>
@@ -1507,8 +1507,8 @@
         <td class="num">${fmtInt(d.nb_pj)}</td>
         <td class="num">${fmtInt(d.nb_infos_api_isable)}</td>
         <td class="num">${fmtInt(d.nb_pj_api_isable)}</td>
-        <td>${d.niveau_net ? `<span class="badge" style="background:${CERFA_NIVEAU_STYLE[d.niveau_net].soft};color:${CERFA_NIVEAU_STYLE[d.niveau_net].color}">${CERFA_NIVEAU_STYLE[d.niveau_net].label}</span>` : '—'}</td>
-        <td class="num" ${d.gain_usagers_central!=null ? `title="Fourchette : ${fmtInt(d.gain_usagers_bas)} € (bas) — ${fmtInt(d.gain_usagers_haut)} € (haut)"` : ''}>${d.gain_usagers_central!=null ? fmtInt(d.gain_usagers_central)+' €' : '—'}</td>
+        <td>${d.niveau_brut_v7 ? `<span class="badge" style="background:${CERFA_NIVEAU_STYLE[d.niveau_brut_v7].soft};color:${CERFA_NIVEAU_STYLE[d.niveau_brut_v7].color}">${CERFA_NIVEAU_STYLE[d.niveau_brut_v7].label}</span>` : '—'}</td>
+        <td class="num" ${d.gain_usagers_realise_30!=null ? `title="Gain usagers réalisé (préremplissage) : ${fmtInt(d.gain_usagers_realise_30)} € (30 % FranceConnect) — ${fmtInt(d.gain_usagers_realise_60)} € (60 % FranceConnect)"` : ''}>${d.gain_usagers_realise_30!=null ? fmtInt(d.gain_usagers_realise_30)+' €' : '—'}</td>
         <td>${d.cerfa_lien
           ? `<span class="badge" style="background:var(--status-open_data-soft);color:var(--status-open_data)">En ligne + CERFA</span>`
           : `<span class="badge" style="background:var(--status-oui-soft);color:var(--status-oui)">En ligne</span>`}</td>
@@ -3085,13 +3085,12 @@
     const cerfaSimplifiees = CERFA.filter(c=>c.n_champs_prerempli>0).length;
 
     // --- Bloc D : gains estimes (demarche numerique deja en ligne + CERFA papier) ---
-    const dnAvecGains = DEMARCHES.filter(d=>d.total_central!=null || d.gain_admin_central!=null);
-    const dnAdminBas = dnAvecGains.reduce((s,d)=>s+(d.gain_admin_bas||0),0);
-    const dnAdminCentral = dnAvecGains.reduce((s,d)=>s+(d.gain_admin_central||0),0);
-    const dnAdminHaut = dnAvecGains.reduce((s,d)=>s+(d.gain_admin_haut||0),0);
-    const dnUsagersBas = dnAvecGains.reduce((s,d)=>s+(d.gain_usagers_bas||0),0);
-    const dnUsagersCentral = dnAvecGains.reduce((s,d)=>s+(d.gain_usagers_central||0),0);
-    const dnUsagersHaut = dnAvecGains.reduce((s,d)=>s+(d.gain_usagers_haut||0),0);
+    const dnAvecGains = DEMARCHES.filter(d=>d.gain_admin_central_v7!=null);
+    const dnAdminBas = dnAvecGains.reduce((s,d)=>s+(d.gain_admin_bas_v7||0),0);
+    const dnAdminCentral = dnAvecGains.reduce((s,d)=>s+(d.gain_admin_central_v7||0),0);
+    const dnAdminHaut = dnAvecGains.reduce((s,d)=>s+(d.gain_admin_haut_v7||0),0);
+    const dnUsagers30 = dnAvecGains.reduce((s,d)=>s+(d.gain_usagers_realise_30||0),0);
+    const dnUsagers60 = dnAvecGains.reduce((s,d)=>s+(d.gain_usagers_realise_60||0),0);
 
     const cerfaAvecGains = CERFA.filter(c=>c.total_central!=null);
     const cerfaAdminBas = cerfaAvecGains.reduce((s,c)=>s+c.gain_admin_bas,0);
@@ -3183,21 +3182,23 @@
       </div>
 
       <div class="cover-section">
-        <h3><span class="dot" style="background:var(--tab-cerfa)"></span>Gains économiques estimés (bas / central / haut)</h3>
+        <h3><span class="dot" style="background:var(--tab-cerfa)"></span>Gains économiques estimés</h3>
         <p style="font-size:.85rem;color:var(--ink-soft);margin-bottom:10px;max-width:74ch">
           Deux calculs de nature différente, à ne pas additionner sans précaution : pour la démarche numérique
-          (déjà en ligne), le gain vient d'un <b>meilleur préremplissage</b> ; pour les CERFA papier, le gain vient
-          d'une <b>dématérialisation complète</b> (démarche pas encore en ligne). Détail méthode : note_methode_gains.md
+          (déjà en ligne), le gain vient d'un <b>meilleur préremplissage</b>, chiffré avec les durées réelles par
+          type de champ de la plateforme (pas de fourchette bas/haut propre — deux scénarios selon le taux d'adoption
+          de FranceConnect) ; pour les CERFA papier, le gain vient d'une <b>dématérialisation complète</b> (démarche
+          pas encore en ligne), avec sa propre fourchette bas/central/haut. Détail méthode : note_methode_gains_v7.md
           et note_methode_cerfa.md.
         </p>
         <div class="table-scroll">
           <table>
             <thead><tr><th></th><th>Côté</th><th style="text-align:right">Bas</th><th style="text-align:right">Central</th><th style="text-align:right">Haut</th></tr></thead>
             <tbody>
-              <tr><td class="titre" rowspan="3">Démarche numérique<br><span style="color:var(--muted);font-weight:400;font-size:.78rem">${fmtInt(dnAvecGains.length)} démarches — gain de préremplissage</span></td>
+              <tr><td class="titre" rowspan="3">Démarche numérique<br><span style="color:var(--muted);font-weight:400;font-size:.78rem">${fmtInt(dnAvecGains.length)} démarches — gain de préremplissage réalisé</span></td>
                 <td>Administration</td><td class="num">${fmtInt(dnAdminBas)} €</td><td class="num">${fmtInt(dnAdminCentral)} €</td><td class="num">${fmtInt(dnAdminHaut)} €</td></tr>
-              <tr><td>Usagers</td><td class="num">${fmtInt(dnUsagersBas)} €</td><td class="num">${fmtInt(dnUsagersCentral)} €</td><td class="num">${fmtInt(dnUsagersHaut)} €</td></tr>
-              <tr style="font-weight:600"><td>Total</td><td class="num">${fmtInt(dnAdminBas+dnUsagersBas)} €</td><td class="num">${fmtInt(dnAdminCentral+dnUsagersCentral)} €</td><td class="num">${fmtInt(dnAdminHaut+dnUsagersHaut)} €</td></tr>
+              <tr><td>Usagers <span style="color:var(--muted);font-size:.72rem">(30 % / 60 % FC)</span></td><td class="num" colspan="3" style="text-align:right">${fmtInt(dnUsagers30)} € &nbsp;/&nbsp; ${fmtInt(dnUsagers60)} €</td></tr>
+              <tr style="font-weight:600"><td>Total <span style="color:var(--muted);font-size:.72rem;font-weight:400">(30 % / 60 % FC)</span></td><td class="num">${fmtInt(dnAdminBas+dnUsagers30)} € / ${fmtInt(dnAdminBas+dnUsagers60)} €</td><td class="num">${fmtInt(dnAdminCentral+dnUsagers30)} € / ${fmtInt(dnAdminCentral+dnUsagers60)} €</td><td class="num">${fmtInt(dnAdminHaut+dnUsagers30)} € / ${fmtInt(dnAdminHaut+dnUsagers60)} €</td></tr>
               <tr><td class="titre" rowspan="3">CERFA papier<br><span style="color:var(--muted);font-weight:400;font-size:.78rem">${fmtInt(cerfaAvecGains.length)} CERFA — gain de dématérialisation</span></td>
                 <td>Administration</td><td class="num">${fmtInt(cerfaAdminBas)} €</td><td class="num">${fmtInt(cerfaAdminCentral)} €</td><td class="num">${fmtInt(cerfaAdminHaut)} €</td></tr>
               <tr><td>Usagers</td><td class="num">${fmtInt(cerfaUsagersBas)} €</td><td class="num">${fmtInt(cerfaUsagersCentral)} €</td><td class="num">${fmtInt(cerfaUsagersHaut)} €</td></tr>
@@ -3205,7 +3206,7 @@
             </tbody>
           </table>
         </div>
-        <p style="font-size:.76rem;color:var(--muted);margin-top:10px">Chiffres arrondis, à toujours lire avec leur fourchette bas/haut, jamais le seul scénario central. CERFA déjà dématérialisés ailleurs (ex. via un portail sectoriel ou une démarche numérique locale déjà identifiée) exclus de leur total quand repéré.</p>
+        <p style="font-size:.76rem;color:var(--muted);margin-top:10px">Chiffres arrondis, à toujours lire avec leur fourchette (bas/haut pour le CERFA, 30 %/60 % FranceConnect pour la démarche numérique) — jamais un seul scénario isolé. CERFA déjà dématérialisés ailleurs (ex. via un portail sectoriel ou une démarche numérique locale déjà identifiée) exclus de leur total quand repéré.</p>
       </div>
     `;
   }
@@ -3317,75 +3318,61 @@
   }
 
   function renderFicheGains(d){
-    if(d.gain_admin_central==null){
-      return `<p class="empty-note">Gains non calculés pour cette démarche.</p>`;
+    if(d.gain_admin_central_v7==null){
+      return `<p class="empty-note">Gains non calculés pour cette démarche (hors périmètre : démarche publiée avant 2018, ou données de champ manquantes).</p>`;
     }
+    const niv = d.niveau_brut_v7 || d.niveau_brut;
     const nOpp = (d.nb_champs_opportunite||0) + (d.nb_pj_opportunite||0);
+    const dureeTotaleMin = d.duree_estimee_totale_s!=null ? (d.duree_estimee_totale_s/60) : null;
+    const dureeR30 = d.duree_realise_s_30!=null ? (d.duree_realise_s_30/60) : null;
+    const dureeR60 = d.duree_realise_s_60!=null ? (d.duree_realise_s_60/60) : null;
+    const fmt1 = v => v==null ? '—' : v.toLocaleString('fr-FR',{maximumFractionDigits:1});
+    const fmtPct = v => v==null ? '—' : (v*100).toLocaleString('fr-FR',{maximumFractionDigits:1})+' %';
     return `
       <div class="potentiel-panel">
-        <h3><span class="dot" style="background:${CERFA_NIVEAU_STYLE[d.niveau_net].color}"></span>Gains estimés — potentiel de préremplissage non réalisé (bas / central / haut)</h3>
+        <h3><span class="dot" style="background:${CERFA_NIVEAU_STYLE[niv].color}"></span>Gains estimés — durées réelles de la plateforme (v7)</h3>
         <div class="kv"><span class="k">Niveau</span><span class="v">
-          <span class="badge" style="background:${CERFA_NIVEAU_STYLE[d.niveau_brut].soft};color:${CERFA_NIVEAU_STYLE[d.niveau_brut].color}">Brut : ${CERFA_NIVEAU_STYLE[d.niveau_brut].label}</span>
-          ${d.niveau_net!==d.niveau_brut ? ` → <span class="badge" style="background:${CERFA_NIVEAU_STYLE[d.niveau_net].soft};color:${CERFA_NIVEAU_STYLE[d.niveau_net].color}">Net (préremplissage déjà acquis) : ${CERFA_NIVEAU_STYLE[d.niveau_net].label}</span>` : ` <span style="color:var(--muted);font-size:.8rem">(inchangé — aucun champ déjà prérempli détecté)</span>`}
+          <span class="badge" style="background:${CERFA_NIVEAU_STYLE[niv].soft};color:${CERFA_NIVEAU_STYLE[niv].color}">${CERFA_NIVEAU_STYLE[niv].label}</span>
         </span></div>
-        <div class="kv"><span class="k">Typologie</span><span class="v">${escapeHtml(d.typologie||'—')} <span style="color:var(--muted);font-size:.76rem">(approximatif, repérage par libellé)</span></span></div>
-        <div class="kv"><span class="k">Opportunités détectées (onglets Données/PJ)</span><span class="v num">${d.nb_champs_opportunite||0} donnée${(d.nb_champs_opportunite||0)>1?'s':''} + ${d.nb_pj_opportunite||0} PJ ⚠️</span></div>
-        ${nOpp===0 ? `<p style="font-size:.82rem;color:var(--muted);margin-top:6px">Aucune opportunité de préremplissage non exploitée détectée pour cette démarche dans nos référentiels — le gain usager ci-dessous est donc nul. Cela ne veut pas dire que la démarche est optimale : voir les onglets Données/PJ pour le détail champ par champ, notre détection peut aussi être incomplète.</p>` : ''}
-
-        <p style="font-size:.82rem;font-weight:600;margin:12px 0 4px">Hypothèses retenues pour cette démarche</p>
-        <p style="font-size:.78rem;color:var(--ink-soft);margin-bottom:8px">Le gain usager ne compte <b>que le potentiel non exploité</b> : un champ ou une PJ déjà API-isable et déjà exploité (badge « ✓ disponible ») est considéré comme un gain <b>déjà acquis</b>, pas un gain à chiffrer ici. Seules les « ⚠️ opportunités » (correspond à une API connue, mais pas encore détecté comme exploité dans cette démarche) comptent.</p>
-        <div class="table-scroll">
-          <table>
-            <thead><tr><th>Côté</th><th style="text-align:right">Bas<br><span style="font-weight:400;color:var(--muted);font-size:.74rem">niveau simple</span></th><th style="text-align:right">Central<br><span style="font-weight:400;color:var(--muted);font-size:.74rem">niveau ${CERFA_NIVEAU_STYLE[d.niveau_net].label.toLowerCase()}</span></th><th style="text-align:right">Haut<br><span style="font-weight:400;color:var(--muted);font-size:.74rem">niveau ${CERFA_NIVEAU_STYLE[NIVEAU_SUP[d.niveau_net]].label.toLowerCase()}</span></th></tr></thead>
-            <tbody>
-              <tr>
-                <td class="titre">Administration <span style="color:var(--muted);font-weight:400">(forfait/dossier, indépendant du niveau)</span></td>
-                <td class="num">6,79 €</td><td class="num">8,96 €</td><td class="num">10,70 €</td>
-              </tr>
-              <tr>
-                <td class="titre">Usagers — ${d.for_individual ? 'formulaire identité' : 'obtention données SIRET/API Entreprise'} <span style="color:var(--muted);font-weight:400">(${d.nb_champs_opportunite>0 ? `déclenché, ${d.nb_champs_opportunite} opportunité(s)` : 'non déclenché, 0 opportunité'})</span></td>
-                <td class="num">${d.nb_champs_opportunite>0 ? (d.for_individual ? DESTATIS_PART_FORM.simple : DESTATIS_ENT_SIRET.simple) : 0} min</td>
-                <td class="num">${d.nb_champs_opportunite>0 ? (d.for_individual ? DESTATIS_PART_FORM[d.niveau_net] : DESTATIS_ENT_SIRET[d.niveau_net]) : 0} min</td>
-                <td class="num">${d.nb_champs_opportunite>0 ? (d.for_individual ? DESTATIS_PART_FORM[NIVEAU_SUP[d.niveau_net]] : DESTATIS_ENT_SIRET[NIVEAU_SUP[d.niveau_net]]) : 0} min</td>
-              </tr>
-              ${d.for_individual ? `<tr>
-                <td class="titre">Usagers — PJ récupérée à la source <span style="color:var(--muted);font-weight:400">(${d.nb_pj_opportunite||0} pièce(s) en opportunité, comptées chacune)</span></td>
-                <td class="num">${(d.nb_pj_opportunite||0) * DESTATIS_PART_PJ.simple} min</td>
-                <td class="num">${(d.nb_pj_opportunite||0) * DESTATIS_PART_PJ[d.niveau_net]} min</td>
-                <td class="num">${(d.nb_pj_opportunite||0) * DESTATIS_PART_PJ[NIVEAU_SUP[d.niveau_net]]} min</td>
-              </tr>` : `<tr><td class="titre" colspan="4" style="color:var(--muted);font-size:.78rem">Gain "PJ récupérée" non chiffré côté entreprise — aucun taux Destatis source pour cette opération sur ce public.</td></tr>`}
-            </tbody>
-          </table>
-        </div>
-        <p style="font-size:.76rem;color:var(--muted);margin:6px 0 12px">Valorisé à ${d.for_individual?'7,28 €/h (particulier, rapport Quinet)':'44,7 €/h (entreprise/collectivité, coût horaire du travail Insee/Eurostat)'}. Temps standard Destatis 2018 / Handboek NL 2023, voir la page Méthodologie pour le détail des sources.</p>
+        <div class="kv"><span class="k">Durée de remplissage estimée (à plat, borne haute)</span><span class="v num">${fmt1(dureeTotaleMin)} min</span></div>
+        <div class="kv"><span class="k">Déjà épargné à l'usager (préremplissage réalisé)</span><span class="v num">${fmt1(dureeR30)} min (30 % FC) · ${fmt1(dureeR60)} min (60 % FC) — soit ${fmtPct(d.ratio_realise_30)} / ${fmtPct(d.ratio_realise_60)} du total</span></div>
+        <div class="kv"><span class="k">Opportunités non mobilisées (onglets Données/PJ)</span><span class="v num">${d.nb_champs_opportunite||0} donnée${(d.nb_champs_opportunite||0)>1?'s':''} + ${d.nb_pj_opportunite||0} PJ ⚠️</span></div>
+        ${nOpp===0 && dureeR30===0 ? `<p style="font-size:.82rem;color:var(--muted);margin-top:6px">Aucun champ prérempli détecté pour cette démarche — le gain usager réalisé (hors étape identité) est donc nul. Voir les onglets Données/PJ pour le détail champ par champ.</p>` : ''}
 
         <p style="font-size:.82rem;font-weight:600;margin:12px 0 4px">Résultat chiffré</p>
-        <div class="table-scroll" style="margin-top:10px">
+        <div class="table-scroll">
           <table>
             <thead><tr><th></th><th style="text-align:right">Bas</th><th style="text-align:right">Central</th><th style="text-align:right">Haut</th></tr></thead>
             <tbody>
               <tr>
-                <td class="titre">Côté administration</td>
-                <td class="num">${fmtInt(d.gain_admin_bas)} €</td>
-                <td class="num">${fmtInt(d.gain_admin_central)} €</td>
-                <td class="num">${fmtInt(d.gain_admin_haut)} €</td>
+                <td class="titre">Côté administration <span style="color:var(--muted);font-weight:400">(forfait/dossier, France Stratégie 2018)</span></td>
+                <td class="num">${fmtInt(d.gain_admin_bas_v7)} €</td>
+                <td class="num">${fmtInt(d.gain_admin_central_v7)} €</td>
+                <td class="num">${fmtInt(d.gain_admin_haut_v7)} €</td>
               </tr>
               <tr>
-                <td class="titre">Côté usagers <span style="color:var(--muted);font-weight:400">(potentiel non réalisé uniquement)</span></td>
-                <td class="num">${fmtInt(d.gain_usagers_bas)} €</td>
-                <td class="num">${fmtInt(d.gain_usagers_central)} €</td>
-                <td class="num">${fmtInt(d.gain_usagers_haut)} €</td>
+                <td class="titre">Côté usagers — préremplissage réalisé <span style="color:var(--muted);font-weight:400">(durées DN réelles, pas de fourchette propre)</span></td>
+                <td class="num" colspan="3" style="text-align:right">${fmtInt(d.gain_usagers_realise_30)} € (30 % FC) &nbsp;·&nbsp; ${fmtInt(d.gain_usagers_realise_60)} € (60 % FC)</td>
               </tr>
               <tr style="font-weight:600">
-                <td class="titre">Total</td>
-                <td class="num">${fmtInt(d.gain_admin_bas+d.gain_usagers_bas)} €</td>
-                <td class="num">${fmtInt(d.gain_admin_central+d.gain_usagers_central)} €</td>
-                <td class="num">${fmtInt(d.gain_admin_haut+d.gain_usagers_haut)} €</td>
+                <td class="titre">Total, scénario 30 % FranceConnect</td>
+                <td class="num">${fmtInt(d.gain_admin_bas_v7+d.gain_usagers_realise_30)} €</td>
+                <td class="num">${fmtInt(d.gain_admin_central_v7+d.gain_usagers_realise_30)} €</td>
+                <td class="num">${fmtInt(d.gain_admin_haut_v7+d.gain_usagers_realise_30)} €</td>
+              </tr>
+              <tr style="font-weight:600">
+                <td class="titre">Total, scénario 60 % FranceConnect</td>
+                <td class="num">${fmtInt(d.gain_admin_bas_v7+d.gain_usagers_realise_60)} €</td>
+                <td class="num">${fmtInt(d.gain_admin_central_v7+d.gain_usagers_realise_60)} €</td>
+                <td class="num">${fmtInt(d.gain_admin_haut_v7+d.gain_usagers_realise_60)} €</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p style="font-size:.76rem;color:var(--muted);margin-top:8px">Méthode détaillée : note_methode_gains.md. Ce gain concerne le préremplissage d'une démarche déjà numérique, pas une dématérialisation (contrairement à l'onglet CERFA papier).</p>
+        <p style="font-size:.76rem;color:var(--ink-soft);margin:10px 0 4px"><b>Pour mémoire, hors total :</b></p>
+        <div class="kv"><span class="k">Potentiel non mobilisé (usagers)</span><span class="v num">${fmtInt(d.gain_usagers_potentiel_v7)} €</span></div>
+        <div class="kv"><span class="k">Dématérialisation (déjà acquise pour cette démarche, 2 à 30 min/dossier)</span><span class="v num">${fmtInt(d.gain_usagers_demat_bas_v7)} € à ${fmtInt(d.gain_usagers_demat_haut_v7)} €</span></div>
+        <p style="font-size:.76rem;color:var(--muted);margin-top:10px">Durées par type de champ issues du code source public de la plateforme (10 s/champ standard, 60 s SIRET/IBAN, 180 s pièce jointe), étape identité comprise (FranceConnect particuliers, API Entreprise personnes morales). Valorisé à ${d.for_individual?'7,28 €/h (particulier, rapport Quinet)':'44,7 €/h (entreprise/collectivité, coût horaire du travail Insee/Eurostat)'}. Méthode détaillée : note_methode_gains_v7.md.</p>
       </div>
     `;
   }
