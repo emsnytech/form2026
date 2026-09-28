@@ -1411,6 +1411,7 @@
             <th data-key="categorie">Catégorie</th>
             <th data-key="nb_dossiers" title="Nombre de dossiers déposés — même terme que l'onglet Démarches essentielles">Volumétrie</th>
             <th data-key="date_publication">Publication</th>
+            <th data-key="etat" title="Statut de la démarche sur demarche.numerique.gouv.fr">Statut</th>
             <th data-key="nb_champs">Champs</th>
             <th data-key="nb_pj">PJ</th>
             <th data-key="nb_infos_api_isable">Infos API</th>
@@ -1503,6 +1504,7 @@
         <td>${catBadge(d)}</td>
         <td class="num">${fmtInt(d.nb_dossiers)}</td>
         <td class="num mono">${fmtDate(d.date_publication)}</td>
+        <td>${d.etat ? `<span class="badge" style="background:${(ETAT_STYLE[d.etat]||{}).soft};color:${(ETAT_STYLE[d.etat]||{}).color}">${(ETAT_STYLE[d.etat]||{}).label||escapeHtml(d.etat)}</span>` : '—'}</td>
         <td class="num">${fmtInt(d.nb_champs)}</td>
         <td class="num">${fmtInt(d.nb_pj)}</td>
         <td class="num">${fmtInt(d.nb_infos_api_isable)}</td>
@@ -2380,6 +2382,11 @@
     simple: {label:'Simple', color:'var(--status-oui)', soft:'var(--status-oui-soft)'},
     modere: {label:'Modéré', color:'var(--status-partiel)', soft:'var(--status-partiel-soft)'},
     complexe: {label:'Complexe', color:'var(--mode-3)', soft:'var(--mode-3-soft)'},
+  };
+
+  const ETAT_STYLE = {
+    publiee: {label:'Publiée', color:'var(--status-oui)', soft:'var(--status-oui-soft)'},
+    close: {label:'Close', color:'var(--status-non)', soft:'var(--status-non-soft)'},
   };
 
   function cerfaReferentielBadges(c){
@@ -3277,6 +3284,7 @@
     return `
       <div class="fiche-grid">
         <div class="infoblock">
+          <div class="kv"><span class="k">Statut</span><span class="v">${d.etat ? `<span class="badge" style="background:${(ETAT_STYLE[d.etat]||{}).soft};color:${(ETAT_STYLE[d.etat]||{}).color}">${(ETAT_STYLE[d.etat]||{}).label||escapeHtml(d.etat)}</span>` : '—'}</span></div>
           <div class="kv"><span class="k">Organisme</span><span class="v">${escapeHtml(d.organisme||'—')}</span></div>
           <div class="kv"><span class="k">Type d'organisme</span><span class="v">${escapeHtml(d.type_organisme||'—')}</span></div>
           <div class="kv"><span class="k">Ministère</span><span class="v">${escapeHtml(d.ministere||'Non identifié')}</span></div>
