@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulateur des gains de la dématérialisation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1c2539; --muted:#5a6479; --paper:#f4f6f9; --surface:#ffffff; --line:#d7dce5;
+  --admin:#2b59c3; --admin-soft:#dfe7f8; --usager:#1d7a58; --usager-soft:#dcefe7; --warn:#8a5a00;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e6eaf2; --muted:#a3adc2; --paper:#121722; --surface:#1a2130; --line:#2f394d;
+    --admin:#7fa2f0; --admin-soft:#23304d; --usager:#5cc39a; --usager-soft:#1c3a30; --warn:#e0b25a;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#e6eaf2; --muted:#a3adc2; --paper:#121722; --surface:#1a2130; --line:#2f394d;
+  --admin:#7fa2f0; --admin-soft:#23304d; --usager:#5cc39a; --usager-soft:#1c3a30; --warn:#e0b25a;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:2.2rem 1.25rem 3rem}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,"Times New Roman",serif;font-weight:700;line-height:1.2;margin:0}
+h1{font-size:clamp(1.7rem,3.6vw,2.5rem);max-width:30ch}
+.lede{color:var(--muted);max-width:68ch;margin:.8rem 0 0}
+.topnav{margin:0 0 1.2rem;font-size:.95rem}
+.topnav a,footer a{color:var(--admin)}
+.version{font-size:.88rem;color:var(--muted);margin:.6rem 0 0}
+h2{font-size:1.35rem;margin-bottom:.9rem}
+h3{font-size:1.05rem;font-family:"Source Sans 3",sans-serif;font-weight:700}
+.grid{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:1.5rem;margin-top:2rem;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.3rem}
+label{display:block;font-weight:600;margin:1rem 0 .3rem}
+label:first-of-type{margin-top:0}
+.hint{display:block;font-weight:400;color:var(--muted);font-size:.88rem}
+input[type=number]{width:100%;font:inherit;padding:.55rem .7rem;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink)}
+input[type=range]{width:100%;accent-color:var(--usager)}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--admin);outline-offset:2px}
+select{width:100%;font:inherit;padding:.55rem .7rem;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink)}
+.mix{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.mix input{text-align:right}
+.mix span{display:block;font-size:.85rem;color:var(--muted)}
+.radios{display:flex;gap:1rem;flex-wrap:wrap}
+.radios label{display:flex;gap:.35rem;align-items:center;font-weight:400;margin:0}
+.warn{color:var(--warn);font-size:.88rem;margin:.4rem 0 0;min-height:1.2em}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:560px){.cols{grid-template-columns:1fr}}
+.col{border-radius:10px;padding:1.1rem 1.2rem;border:1px solid var(--line);background:var(--surface)}
+.col.admin{border-top:5px solid var(--admin)}
+.col.usager{border-top:5px solid var(--usager)}
+.col h3{margin-bottom:.2rem}
+.col .who{color:var(--muted);font-size:.9rem;margin:0 0 .8rem}
+.range{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(1.5rem,3vw,2.05rem);font-weight:700;line-height:1.15}
+.col.admin .range{color:var(--admin)} .col.usager .range{color:var(--usager)}
+.sub{font-size:.92rem;color:var(--muted);margin:.25rem 0 0}
+dl{margin:.9rem 0 0;display:grid;grid-template-columns:1fr auto;gap:.35rem .8rem;font-size:.95rem}
+dt{color:var(--muted)} dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+
+.bars{margin-top:1.2rem}
+.bar{display:grid;grid-template-columns:9.5rem 1fr;align-items:center;gap:.7rem;margin:.55rem 0;font-size:.9rem}
+.track{position:relative;height:14px;background:var(--paper);border-radius:7px;border:1px solid var(--line)}
+.fill{position:absolute;top:-1px;bottom:-1px;border-radius:7px}
+.fill.a{background:var(--admin)} .fill.u{background:var(--usager)}
+.scale{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-left:10.2rem}
+
+.total{margin-top:1rem;padding:1rem 1.2rem;border-radius:10px;background:var(--surface);border:1px solid var(--line);display:flex;flex-wrap:wrap;gap:.4rem 2rem;align-items:baseline}
+.total strong{font-family:"Source Serif 4",Georgia,serif;font-size:1.5rem}
+.extras{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+@media (max-width:560px){.extras{grid-template-columns:1fr}}
+.extras .panel p{margin:.3rem 0 0}
+.big{font-weight:700;font-size:1.15rem;font-variant-numeric:tabular-nums}
+
+section{margin-top:2.6rem}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.93rem;font-variant-numeric:tabular-nums}
+th,td{padding:.6rem .8rem;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}
+thead th{font-weight:700;background:var(--paper)}
+tbody tr:last-child td{border-bottom:0}
+td.a{color:var(--admin)} td.u{color:var(--usager)}
+.notes{max-width:78ch;color:var(--ink)}
+.notes li{margin:.45rem 0}
+.notes p{margin:.6rem 0}
+.small{font-size:.88rem;color:var(--muted)}
+footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted);max-width:78ch}
+@media (prefers-reduced-motion:no-preference){.fill{transition:left .25s ease,width .25s ease}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="topnav"><a href="https://emsnytech.github.io/form2026/">Retour à FORM 2026, cartographie des démarches</a></p>
+    <h1>Moins de charge pour l'usager, moins de coûts pour l'État : estimez vos gains</h1>
+    <p class="lede">Indiquez ce que votre organisme prévoit de mettre en ligne sur une plateforme mutualisée de dématérialisation. Le simulateur donne une fourchette de gains pour l'administration et pour les usagers, calculée avec les paramètres publics d'une évaluation portant sur 18,2 millions de dossiers déposés depuis 2018.</p>
+    <p class="version">Paramètres version 7, septembre 2026</p>
+  </header>
+
+  <div class="grid">
+    <form class="panel" id="f" onsubmit="return false" aria-label="Paramètres de simulation">
+      <label for="demarches">Démarches à créer dans l'année</label>
+      <input id="demarches" type="number" min="0" step="1" value="10" inputmode="numeric">
+
+      <label for="dossiers">Dossiers attendus par an<span class="hint">Toutes démarches confondues</span></label>
+      <input id="dossiers" type="number" min="0" step="100" value="10000" inputmode="numeric">
+
+      <label for="agents">Agents qui instruisent les dossiers</label>
+      <input id="agents" type="number" min="0" step="1" value="20" inputmode="numeric">
+
+      <label for="pp">Part des dossiers déposés par des particuliers : <span id="ppv">66</span> %<span class="hint">Le reste : entreprises, associations, collectivités. Moyenne de la plateforme : 66 %</span></label>
+      <input id="pp" type="range" min="0" max="100" step="1" value="66">
+
+      <label>Complexité de vos démarches, en % des dossiers<span class="hint">Moyenne de la plateforme : 34 / 30 / 36</span></label>
+      <div class="mix">
+        <div><span>Simple</span><input id="ms" type="number" min="0" max="100" value="34" aria-label="Part simple"></div>
+        <div><span>Modérée</span><input id="mm" type="number" min="0" max="100" value="30" aria-label="Part modérée"></div>
+        <div><span>Complexe</span><input id="mc" type="number" min="0" max="100" value="36" aria-label="Part complexe"></div>
+      </div>
+      <p class="warn" id="mixwarn" role="status"></p>
+
+      <label>Usagers passant par FranceConnect</label>
+      <div class="radios">
+        <label><input type="radio" name="fc" value="30" checked> 30 %</label>
+        <label><input type="radio" name="fc" value="60"> 60 %</label>
+      </div>
+    </form>
+
+    <div aria-live="polite">
+      <div class="cols">
+        <div class="col admin">
+          <h3>Pour l'administration</h3>
+          <p class="who">Coûts de traitement évités, par an</p>
+          <div class="range" id="adminRange">–</div>
+          <p class="sub" id="adminAgent">–</p>
+          <dl>
+            <dt>Valeur centrale</dt><dd id="adminCentral">–</dd>
+            <dt>Équivalent en heures de travail</dt><dd id="adminHours">–</dd>
+          </dl>
+        </div>
+        <div class="col usager">
+          <h3>Pour les usagers</h3>
+          <p class="who">Temps et coûts épargnés, par an</p>
+          <div class="range" id="usagerRange">–</div>
+          <p class="sub" id="usagerHoursTxt">–</p>
+          <dl>
+            <dt>Dématérialisation (2 à 30 min par dossier)</dt><dd id="uDemat">–</dd>
+            <dt>Préremplissage déjà réalisé</dt><dd id="uPre">–</dd>
+          </dl>
+        </div>
+      </div>
+
+      <div class="bars" aria-hidden="true">
+        <div class="bar"><span>Administration</span><div class="track"><div class="fill a" id="barA"></div></div></div>
+        <div class="bar"><span>Usagers</span><div class="track"><div class="fill u" id="barU"></div></div></div>
+        <div class="scale"><span>0</span><span id="scaleMax">–</span></div>
+      </div>
+
+      <div class="total">
+        <span>Total annuel, administration et usagers</span>
+        <strong id="totalRange">–</strong>
+      </div>
+
+      <div class="extras">
+        <div class="panel">
+          <h3>Coût de création évité</h3>
+          <p class="big" id="creation">–</p>
+          <p class="small">Gain ponctuel, à ne pas additionner aux gains annuels. De l'achat d'un seul outil à un formulaire acheté par démarche, au prix constaté de 7 000 € sur une solution commerciale.</p>
+        </div>
+        <div class="panel">
+          <h3>Potentiel encore à gagner</h3>
+          <p class="big" id="potentiel">–</p>
+          <p class="small">Gain supplémentaire pour les usagers si les données disponibles à la source remplaçaient les champs et pièces encore saisis. Non compris dans le total.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section aria-labelledby="h-niveaux">
+    <h2 id="h-niveaux">Vos gains selon la complexité des démarches</h2>
+    <p class="small">Même volume de dossiers et même répartition entre particuliers et personnes morales, en supposant que toutes vos démarches relèvent d'un seul niveau.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Niveau</th><th>Exemple de durée estimée</th><th>Administration</th><th>Usagers</th><th>Total</th></tr></thead>
+        <tbody id="levelsBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-grille">
+    <h2 id="h-grille">Grille de référence pour 100 000 dossiers</h2>
+    <p class="small">Gains annuels pour 100 000 dossiers déposés, par niveau de complexité et type de demandeur. Chacun peut la proportionner à ses propres volumes.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Niveau</th><th>Demandeur</th><th>Administration</th><th>Usagers : dématérialisation</th><th>Usagers : préremplissage réalisé</th><th>Potentiel non mobilisé</th></tr></thead>
+        <tbody id="gridBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-hyp" class="notes">
+    <h2 id="h-hyp">Hypothèses et sources</h2>
+    <p>Tous les paramètres sont publics. Les fourchettes sont larges parce que certaines grandeurs ne sont pas encore mesurées : c'est un résultat en soi.</p>
+    <ul>
+      <li><strong>Administration :</strong> de 6,79 € à 10,70 € par dossier dématérialisé (valeur centrale 8,96 €). France Stratégie, <em>Les bénéfices d'une meilleure autonomie numérique</em>, 2018, tableau 12, d'après des études australienne (Deloitte, 2015), britannique (Aston Campbell, 2008) et canadienne. Ces coûts ne sont pas mesurés en France et n'ont pas été réactualisés.</li>
+      <li><strong>Usagers, dématérialisation :</strong> de 2 minutes (envoi évité, tables de temps standard de Destatis, reprises aux Pays-Bas) à 30 minutes (France Stratégie 2018) par dossier. Aucune valeur centrale : le gain dépend de ce que l'usager aurait fait sans la démarche en ligne.</li>
+      <li><strong>Usagers, préremplissage :</strong> durées de remplissage par type de champ tirées du code source public de la plateforme (10 s par champ standard, 60 s pour un SIRET ou un IBAN, 180 s pour une pièce jointe), étape d'identité comprise (FranceConnect pour les particuliers, API Entreprise pour les personnes morales).</li>
+      <li><strong>Valeur du temps :</strong> 7,28 €/h pour un particulier (rapport Quinet), 44,70 €/h pour une personne morale (coût horaire du travail en France, 2025, Insee et Eurostat). La même valeur de 44,70 €/h sert à convertir le gain administration en heures de travail, à titre indicatif.</li>
+      <li><strong>Complexité :</strong> niveaux calculés à partir du nombre de champs obligatoires, de blocs répétables et de pièces justificatives de chaque démarche publiée (descriptif open data), en terciles pondérés par les dossiers.</li>
+      <li><strong>Coût de création :</strong> 7 000 € par formulaire, prix constaté pour la mise en ligne d'un formulaire sur une solution commerciale. Les marchés publics de création de téléservices observés vont de 31 000 € à 800 000 €.</li>
+    </ul>
+    <p>Ce que le simulateur ne mesure pas : le temps passé à rechercher les pièces justificatives, les erreurs évitées, les échanges de courriels supprimés, le coût d'exploitation de la plateforme (0,37 € par dossier en 2025). Dans les données publiques de la plateforme, les démarches demandant cinq pièces justificatives ou plus regroupent les trois quarts des dossiers déposés avec retard.</p>
+  </section>
+
+  <footer>
+    <p>Estimation indicative, fondée sur des conventions publiques et non sur une mesure propre à votre organisme. Paramètres version 7, septembre 2026.</p>
+    <p>Pour vérifier ou contester les hypothèses : la note « Moins de charge pour l'usager, moins de coûts pour l'État : ce que la numérisation de 18 millions de dossiers nous apprend » et les calculs et résultats par démarche en open data (publication à venir), et <a href="https://emsnytech.github.io/form2026/">FORM 2026</a>, la cartographie des démarches et des données demandées.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  // Paramètres par dossier (€), issus de l'évaluation v7 (cumul 2018, 18,2 M dossiers)
+  var ADMIN = {bas:6.79, central:8.96, haut:10.70};
+  var DEMAT = {pp:{bas:0.2427, haut:3.64}, pm:{bas:1.49, haut:22.35}};
+  var PRE = { // préremplissage réalisé, €/dossier ; particuliers selon part FranceConnect
+    simple:{pp:{30:0.0409,60:0.0651}, pm:0.6886},
+    modere:{pp:{30:0.0692,60:0.0935}, pm:1.1219},
+    complexe:{pp:{30:0.1085,60:0.1328}, pm:1.2029}
+  };
+  var POT = {simple:{pp:0.0940,pm:0.0763}, modere:{pp:0.1550,pm:0.2748}, complexe:{pp:0.3937,pm:0.4735}};
+  var RATE = {pp:7.28, pm:44.70};
+  var CREATION = 7000;
+  var LEVELS = [["simple","Simple","environ 5 min"],["modere","Modérée","environ 15 min"],["complexe","Complexe","environ 37 min"]];
+
+  var $ = function(id){return document.getElementById(id)};
+  var eur = function(v){
+    if(!isFinite(v)) return "–";
+    if(Math.abs(v)>=1e6) return (v/1e6).toLocaleString("fr-FR",{maximumFractionDigits:1})+" M€";
+    if(Math.abs(v)>=1e4) return Math.round(v/1e3).toLocaleString("fr-FR")+" k€";
+    return Math.round(v).toLocaleString("fr-FR")+" €";
+  };
+  var num = function(v){return Math.round(v).toLocaleString("fr-FR")};
+  var rng = function(a,b){return eur(a)+" à "+eur(b)};
+  var val = function(id){var v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0};
+
+  function compute(D, pp, mix, fc){
+    var pm = 1-pp, r = {};
+    r.adminBas = D*ADMIN.bas; r.adminCentral = D*ADMIN.central; r.adminHaut = D*ADMIN.haut;
+    r.dematBas = D*(pp*DEMAT.pp.bas + pm*DEMAT.pm.bas);
+    r.dematHaut = D*(pp*DEMAT.pp.haut + pm*DEMAT.pm.haut);
+    var pre=0, pot=0, preH=0;
+    for(var k in mix){
+      var n = D*mix[k];
+      var pP = n*pp*PRE[k].pp[fc], pM = n*pm*PRE[k].pm;
+      pre += pP+pM; preH += pP/RATE.pp + pM/RATE.pm;
+      pot += n*(pp*POT[k].pp + pm*POT[k].pm);
+    }
+    r.pre = pre; r.preHours = preH; r.pot = pot;
+    r.uBas = r.dematBas + pre; r.uHaut = r.dematHaut + pre;
+    r.uHoursBas = D*2/60 + preH; r.uHoursHaut = D*30/60 + preH;
+    r.totBas = r.adminBas + r.uBas; r.totHaut = r.adminHaut + r.uHaut;
+    return r;
+  }
+
+  function update(){
+    var N = val("demarches"), D = val("dossiers"), A = val("agents");
+    var pp = val("pp")/100; $("ppv").textContent = Math.round(pp*100);
+    var ms=val("ms"), mm=val("mm"), mc=val("mc"), s=ms+mm+mc;
+    var fc = document.querySelector('input[name="fc"]:checked').value;
+    if(s===0){ $("mixwarn").textContent="Indiquez au moins un niveau de complexité."; ms=34;mm=30;mc=36;s=100; }
+    else if(Math.abs(s-100)>0.5){ $("mixwarn").textContent="Total de "+num(s)+" % : les parts sont ramenées à 100 %."; }
+    else { $("mixwarn").textContent=""; }
+    var mix = {simple:ms/s, modere:mm/s, complexe:mc/s};
+    var r = compute(D, pp, mix, fc);
+
+    $("adminRange").textContent = rng(r.adminBas, r.adminHaut);
+    $("adminCentral").textContent = eur(r.adminCentral);
+    $("adminHours").textContent = num(r.adminBas/RATE.pm)+" à "+num(r.adminHaut/RATE.pm)+" h";
+    $("adminAgent").textContent = A>0 ? "Soit "+rng(r.adminBas/A, r.adminHaut/A)+" par agent instructeur" : "Indiquez le nombre d'agents pour obtenir un gain par agent";
+    $("usagerRange").textContent = rng(r.uBas, r.uHaut);
+    $("usagerHoursTxt").textContent = "Soit "+num(r.uHoursBas)+" à "+num(r.uHoursHaut)+" heures rendues aux usagers";
+    $("uDemat").textContent = rng(r.dematBas, r.dematHaut);
+    $("uPre").textContent = eur(r.pre);
+    $("totalRange").textContent = rng(r.totBas, r.totHaut);
+    $("creation").textContent = N>0 ? (N>1 ? rng(CREATION, CREATION*N) : eur(CREATION)) : "Indiquez un nombre de démarches";
+    $("potentiel").textContent = eur(r.pot)+" par an";
+
+    var max = Math.max(r.adminHaut, r.uHaut) || 1;
+    var place = function(el,a,b){ el.style.left=(a/max*100)+"%"; el.style.width=Math.max((b-a)/max*100,0.8)+"%"; };
+    place($("barA"), r.adminBas, r.adminHaut); place($("barU"), r.uBas, r.uHaut);
+    $("scaleMax").textContent = eur(max);
+
+    var rows = "";
+    LEVELS.forEach(function(L){
+      var m = {simple:0,modere:0,complexe:0}; m[L[0]]=1;
+      var x = compute(D, pp, m, fc);
+      rows += "<tr><td>"+L[1]+"</td><td>"+L[2]+"</td><td class='a'>"+rng(x.adminBas,x.adminHaut)+"</td><td class='u'>"+rng(x.uBas,x.uHaut)+"</td><td>"+rng(x.totBas,x.totHaut)+"</td></tr>";
+    });
+    $("levelsBody").innerHTML = rows;
+
+    var g = "", B = 100000;
+    LEVELS.forEach(function(L){
+      [["pp","Particuliers"],["pm","Personnes morales"]].forEach(function(t){
+        var pre = t[0]==="pp" ? PRE[L[0]].pp[fc] : PRE[L[0]].pm;
+        g += "<tr><td>"+L[1]+"</td><td>"+t[1]+"</td><td class='a'>"+rng(B*ADMIN.bas,B*ADMIN.haut)+"</td><td class='u'>"+rng(B*DEMAT[t[0]].bas,B*DEMAT[t[0]].haut)+"</td><td class='u'>"+eur(B*pre)+"</td><td>"+eur(B*POT[L[0]][t[0]])+"</td></tr>";
+      });
+    });
+    $("gridBody").innerHTML = g;
+  }
+  $("f").addEventListener("input", update);
+  update();
+})();
+</script>
+</body>
+</html>
