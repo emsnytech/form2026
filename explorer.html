@@ -1,5 +1,5 @@
 <title>FORM 2026 — Explorer</title>
-<meta name="description" content="Cartographie des démarches administratives par public cible et potentiel API — adaptation 2026 de l'application FORM (FileMaker, 2016)." />
+<meta name="description" content="Cartographie des démarches administratives par public cible et potentiel API — adaptation 2026 de l'application FORM (FileMaker, 2015)." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -453,7 +453,7 @@
 <main><div class="wrap" id="content"><p style="padding:60px 0;text-align:center;color:var(--muted)">⏳ Chargement des démarches (~24 Mo, 4 fichiers)…</p></div></main>
 
 <footer class="app">
-  <span>Adaptation 2026 de <span class="mono">FORM</span> (FileMaker, 2016-2017, programme Dites-le-nous une fois) — même logique : démarches, données, pièces justificatives, potentiel API.</span>
+  <span>Adaptation 2026 de <span class="mono">FORM</span> (FileMaker, 2015, programme Dites-le-nous une fois) — même logique : démarches, données, pièces justificatives, potentiel API.</span>
   <span>Source démarches : demarche.numerique.gouv.fr · corpus complet, démarches publiées ou closes avec plus de 10 dossiers (34 397 démarches)</span>
 </footer>
 
@@ -1006,7 +1006,7 @@
       <div class="cover">
         <p class="eyebrow">Page de garde — méthodologie</p>
         <h2>Cartographier les démarches administratives pour repérer ce que l'État sait déjà</h2>
-        <p class="lede">FORM 2026 est une adaptation de <b>FORM</b>, l'application FileMaker développée en 2016-2017 dans le cadre du programme <i>Dites-le-nous une fois</i> (SGMAP). Même logique — démarches, données, pièces justificatives, potentiel d'API — appliquée aux démarches en ligne d'aujourd'hui.</p>
+        <p class="lede">FORM 2026 est une adaptation de <b>FORM</b>, l'application FileMaker développée en 2015 dans le cadre du programme <i>Dites-le-nous une fois</i> (SGMAP). Même logique — démarches, données, pièces justificatives, potentiel d'API — appliquée aux démarches en ligne d'aujourd'hui.</p>
 
         <div class="cover-stats">
           <div class="stat-tile"><div class="v">${fmtInt(DEMARCHES.length)}</div><div class="l">démarches démarche numérique chargées (corpus complet)</div></div>
@@ -1023,7 +1023,7 @@
             <li><b>DILA</b><span>8 509 fiches service-public.fr (Particuliers/Professionnels/Associations) — sert de vérité terrain indépendante pour valider la classification par public cible.</span></li>
             <li><b>Observatoire des démarches essentielles (DINUM, édition du 14 juillet 2026)</b><span>243 démarches jugées prioritaires par l'État, notées sur un score qualité multicritère (le « Score DLNUF ») incluant un indicateur FranceConnect — sert à la fois de troisième référentiel et de validation externe indépendante des redondances de données identifiées dans ce travail (identité pivot FranceConnect/ProConnect, COMEDEC, Justif'Adresse…).</span></li>
             <li><b>api.gouv.fr</b><span>Catalogue officiel des 52 API du bouquet API Entreprise/Particulier — pour savoir quelles données/pièces sont déjà récupérables sans redemander à l'usager.</span></li>
-            <li><b>FORM (2016-2017)</b><span>Référentiels hérités de l'application FileMaker d'origine (nomenclature des données, pièces justificatives) — repris et confrontés aux API disponibles aujourd'hui.</span></li>
+            <li><b>FORM (2015)</b><span>Référentiels hérités de l'application FileMaker d'origine (nomenclature des données, pièces justificatives) — repris et confrontés aux API disponibles aujourd'hui.</span></li>
           </ul>
         </div>
 
@@ -1704,7 +1704,7 @@
     content.innerHTML = `
       <h2 style="font-size:1.2rem;margin-bottom:4px">Référentiel données ↔ API disponibles</h2>
       <p style="color:var(--muted);font-size:.88rem;margin-bottom:6px;max-width:74ch">
-        Pour chaque donnée du référentiel (${APITAB.length} lignes, issu de FORM 2016 + croisement api.gouv.fr), nombre de démarches dont un champ correspond potentiellement à cette donnée (sur l'ensemble du corpus démarche.numérique.gouv.fr, 43 597 démarches — publiées, closes et dépubliées confondues), déjà repérées comme API-isables par notre détection actuelle, et opportunités restantes.
+        Pour chaque donnée du référentiel (${APITAB.length} lignes, issu de FORM 2015 + croisement api.gouv.fr), nombre de démarches dont un champ correspond potentiellement à cette donnée (sur l'ensemble du corpus démarche.numérique.gouv.fr, 43 597 démarches — publiées, closes et dépubliées confondues), déjà repérées comme API-isables par notre détection actuelle, et opportunités restantes.
       </p>
       ${!DONNEES_IDS_LOADED ? `<p style="font-size:.76rem;color:var(--tab-stats);margin-bottom:6px">⏳ Chargement de la liste détaillée des démarches par donnée — les compteurs s'affichent déjà, les liens cliquables arrivent dans un instant.</p>` : ''}
       <div class="panel-grid" style="margin-bottom:18px">
