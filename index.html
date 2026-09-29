@@ -163,6 +163,7 @@
   }
   nav.tabs button:hover{filter:brightness(1.08)}
   #btn-simulateur-externe{background:var(--tab-simulateur);color:#fff}
+  #btn-cadrage-externe{background:var(--tab-simulateur);color:#fff}
   nav.tabs button[data-tab="organismes"]{background:var(--tab-simulateur)}
   nav.tabs button[data-tab="overview"]{background:var(--tab-overview)}
   nav.tabs button[data-tab="demarches"]{background:var(--tab-demarches)}
@@ -426,6 +427,7 @@
   <div class="tab-group tab-group-sources">
     <span class="tab-group-label">Sources de démarches</span>
     <button id="btn-simulateur-externe" type="button">Simulateur de gains ↗</button>
+    <button id="btn-cadrage-externe" type="button">Cadrer une démarche ↗</button>
     <button data-tab="organismes" class="inactive">Gains par organisme</button>
     <button data-tab="stats" class="inactive">Statistiques</button>
     <button data-tab="overview">Vue générale</button>
@@ -884,6 +886,9 @@
   document.getElementById('btn-methodo').addEventListener('click', goHome);
   document.getElementById('btn-simulateur-externe').addEventListener('click', ()=>{
     window.open('simulateur-gains-dematerialisation.html', '_blank', 'noopener');
+  });
+  document.getElementById('btn-cadrage-externe').addEventListener('click', ()=>{
+    window.open('cadrage-dematerialisation.html', '_blank', 'noopener');
   });
 
   function setActiveTabButton(){
