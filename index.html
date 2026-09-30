@@ -6,30 +6,30 @@
 <title>FORM 2026 — Ne plus demander ce que l'État sait déjà</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1c2539; --muted:#5a6479; --paper:#f4f6f9; --surface:#ffffff; --line:#d7dce5;
-  --admin:#2b59c3; --admin-soft:#dfe7f8; --usager:#1d7a58; --usager-soft:#dcefe7; --accent:#8a5a00;
+  --ink:#1e2022; --muted:#5c6066; --paper:#fbf9f5; --surface:#ffffff; --line:#e2dfd7;
+  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4; --accent:#b45309; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --ink:#e6eaf2; --muted:#a3adc2; --paper:#121722; --surface:#1a2130; --line:#2f394d;
-    --admin:#7fa2f0; --admin-soft:#23304d; --usager:#5cc39a; --usager-soft:#1c3a30; --accent:#e0b25a;
+    --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+    --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
   }
 }
 :root[data-theme="dark"]{
-  --ink:#e6eaf2; --muted:#a3adc2; --paper:#121722; --surface:#1a2130; --line:#2f394d;
-  --admin:#7fa2f0; --admin-soft:#23304d; --usager:#5cc39a; --usager-soft:#1c3a30; --accent:#e0b25a;
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
 }
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
 a{color:var(--admin)}
 .wrap{max-width:1120px;margin:0 auto;padding:2.4rem 1.25rem 3rem}
 .brand{font-weight:700;letter-spacing:.02em;color:var(--muted);font-size:.95rem;margin:0}
-h1,h2{font-family:"Source Serif 4",Georgia,"Times New Roman",serif;font-weight:700;line-height:1.15;margin:0}
+h1,h2{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:800;line-height:1.15;margin:0}
 h1{font-size:clamp(2rem,4.6vw,3.1rem);max-width:22ch;margin-top:.5rem}
 h2{font-size:1.4rem;margin-bottom:1rem}
 .lede{font-size:1.12rem;color:var(--muted);max-width:62ch;margin:1rem 0 0}
@@ -37,7 +37,7 @@ h2{font-size:1.4rem;margin-bottom:1rem}
 .figures{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:2rem}
 @media (max-width:760px){.figures{grid-template-columns:repeat(2,1fr)}}
 .fig{background:var(--surface);padding:1rem 1.1rem}
-.fig b{display:block;font-family:"Source Serif 4",Georgia,serif;font-size:1.65rem;line-height:1.1}
+.fig b{display:block;font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1.65rem;line-height:1.1}
 .fig span{font-size:.9rem;color:var(--muted)}
 .fig.a b{color:var(--admin)} .fig.u b{color:var(--usager)}
 
@@ -47,7 +47,7 @@ section{margin-top:2.8rem}
 .door{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.3rem 1.2rem;text-decoration:none;color:var(--ink);border-top:6px solid var(--c,var(--admin));transition:transform .15s ease,box-shadow .15s ease}
 .door:hover,.door:focus-visible{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08);outline:none}
 .door .q{font-size:.85rem;font-weight:700;color:var(--c,var(--admin));text-transform:uppercase;letter-spacing:.05em}
-.door h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.35rem;margin:.35rem 0 .5rem;line-height:1.2}
+.door h3{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1.35rem;margin:.35rem 0 .5rem;line-height:1.2}
 .door p{margin:0;color:var(--muted);font-size:.97rem;flex:1}
 .door .go{margin-top:1rem;font-weight:700;color:var(--c,var(--admin))}
 .door .meta{margin-top:.35rem;font-size:.82rem;color:var(--muted)}
@@ -70,7 +70,7 @@ section{margin-top:2.8rem}
 .step:last-child{border-right:0}
 @media (max-width:700px){.step{border-right:0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}}
 .step .k{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
-.step h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.2rem;margin:.2rem 0 .3rem}
+.step h3{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1.2rem;margin:.2rem 0 .3rem}
 .step p{margin:0;font-size:.93rem;color:var(--muted)}
 .step.now{background:var(--paper)}
 

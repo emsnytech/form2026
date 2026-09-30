@@ -2,12 +2,13 @@
 <meta name="description" content="Cartographie des démarches administratives par public cible et potentiel API — adaptation 2026 de l'application FORM (FileMaker, 2015)." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
   :root{
-    --paper:#F7F4EC; --paper-raised:#FFFFFF; --ink:#211D17; --ink-soft:#4A443A; --muted:#857D6D;
-    --line:#E2DCC9; --line-strong:#CFC7AE;
-    --accent:#2E3A5C; --accent-soft:#DDE1EC;
+    --paper:#fbf9f5; --paper-raised:#ffffff; --surface:#ffffff; --ink:#1e2022; --ink-soft:#1e2022; --muted:#5c6066;
+    --line:#e2dfd7; --line-strong:#e2dfd7;
+    --accent:#1d4ed8; --accent-soft:#eff6ff; --admin:#1d4ed8; --admin-soft:#eff6ff;
+    --usager:#15803d; --usager-soft:#f0fdf4; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c;
 
     --tab-simulateur:#1D7A58; --tab-simulateur-soft:#DCEFE7;
     --tab-overview:#2E3A5C; --tab-overview-soft:#DDE1EC;
@@ -36,15 +37,13 @@
     --cat-agent_public:#A8432F; --cat-agent_public-soft:#F1DCD6;
     --cat-mixte:#4A6D5E; --cat-mixte-soft:#DCE7E1;
     --cat-indetermine:#7B7365; --cat-indetermine-soft:#E7E4DC;
-
-    --s-ink:#1c2539; --s-muted:#5a6479; --s-paper:#f4f6f9; --s-surface:#ffffff; --s-line:#d7dce5;
-    --s-admin:#2b59c3; --s-admin-soft:#dfe7f8; --s-usager:#1d7a58; --s-usager-soft:#dcefe7; --s-warn:#8a5a00;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --paper:#16140F; --paper-raised:#1E1B14; --ink:#EDE7D9; --ink-soft:#C9C0AC; --muted:#93897A;
-      --line:#332E22; --line-strong:#453F2D;
-      --accent:#93A3D6; --accent-soft:#262B44;
+      --paper:#18181b; --paper-raised:#27272a; --surface:#27272a; --ink:#f3f4f6; --ink-soft:#f3f4f6; --muted:#9ca3af;
+      --line:#3f3f46; --line-strong:#3f3f46;
+      --accent:#60a5fa; --accent-soft:#1e3a8a; --admin:#60a5fa; --admin-soft:#1e3a8a;
+      --usager:#4ade80; --usager-soft:#14532d; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
 
       --tab-simulateur:#5CC39A; --tab-simulateur-soft:#1C3A30;
       --tab-overview:#93A3D6; --tab-overview-soft:#262B44;
@@ -73,15 +72,13 @@
       --cat-agent_public:#E48D76; --cat-agent_public-soft:#331F1A;
       --cat-mixte:#8FC0AC; --cat-mixte-soft:#1F2E27;
       --cat-indetermine:#ADA593; --cat-indetermine-soft:#2A2820;
-
-      --s-ink:#e6eaf2; --s-muted:#a3adc2; --s-paper:#121722; --s-surface:#1a2130; --s-line:#2f394d;
-      --s-admin:#7fa2f0; --s-admin-soft:#23304d; --s-usager:#5cc39a; --s-usager-soft:#1c3a30; --s-warn:#e0b25a;
     }
   }
   :root[data-theme="dark"]{
-    --paper:#16140F; --paper-raised:#1E1B14; --ink:#EDE7D9; --ink-soft:#C9C0AC; --muted:#93897A;
-    --line:#332E22; --line-strong:#453F2D;
-    --accent:#93A3D6; --accent-soft:#262B44;
+    --paper:#18181b; --paper-raised:#27272a; --surface:#27272a; --ink:#f3f4f6; --ink-soft:#f3f4f6; --muted:#9ca3af;
+    --line:#3f3f46; --line-strong:#3f3f46;
+    --accent:#60a5fa; --accent-soft:#1e3a8a; --admin:#60a5fa; --admin-soft:#1e3a8a;
+    --usager:#4ade80; --usager-soft:#14532d; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
     --tab-simulateur:#5CC39A; --tab-simulateur-soft:#1C3A30;
     --tab-overview:#93A3D6; --tab-overview-soft:#262B44;
     --tab-demarches:#DA8FA8; --tab-demarches-soft:#3A2530;
@@ -107,18 +104,16 @@
     --cat-mixte:#8FC0AC; --cat-mixte-soft:#1F2E27;
     --cat-indetermine:#ADA593; --cat-indetermine-soft:#2A2820;
 
-    --s-ink:#e6eaf2; --s-muted:#a3adc2; --s-paper:#121722; --s-surface:#1a2130; --s-line:#2f394d;
-    --s-admin:#7fa2f0; --s-admin-soft:#23304d; --s-usager:#5cc39a; --s-usager-soft:#1c3a30; --s-warn:#e0b25a;
   }
 
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     background:var(--paper); color:var(--ink);
-    font-family:'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    font-family:'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif;
     display:flex; flex-direction:column;
   }
-  h1,h2,h3{font-family:'Spectral', Georgia, serif; text-wrap:balance; color:var(--ink); margin:0}
+  h1,h2,h3{font-family:'Source Sans 3', system-ui, -apple-system, 'Segoe UI', sans-serif; font-weight:800; text-wrap:balance; color:var(--ink); margin:0}
   .num{font-variant-numeric:tabular-nums}
   .mono{font-family:'IBM Plex Mono', ui-monospace, monospace}
 
@@ -156,7 +151,7 @@
     color:var(--muted); padding:0 4px 5px;
   }
   nav.tabs button{
-    font-family:'IBM Plex Sans',sans-serif; font-size:.86rem; font-weight:500;
+    font-family:'Source Sans 3',sans-serif; font-size:.86rem; font-weight:600;
     padding:10px 18px; border:none; cursor:pointer; color:#fff;
     border-radius:5px; margin:2px;
     transition:filter .12s;
@@ -356,65 +351,6 @@
   }
   .btn-primary:hover{filter:brightness(1.1)}
 
-  /* ===== Simulateur de gains (scopé .simu, tokens --s-*) ===== */
-  .simu{color:var(--s-ink)}
-  .simu .simu-version{font-size:.85rem;color:var(--s-muted);margin-bottom:.6rem}
-  .simu h1{font-family:"Spectral",Georgia,serif;font-weight:600;line-height:1.2;margin:0;font-size:clamp(1.5rem,3.2vw,2.1rem);max-width:32ch;color:var(--s-ink)}
-  .simu .lede{color:var(--s-muted);max-width:68ch;margin:.8rem 0 0}
-  .simu h2{font-family:"Spectral",Georgia,serif;font-weight:600;font-size:1.25rem;margin:0 0 .9rem;color:var(--s-ink)}
-  .simu h3{font-size:1.02rem;font-weight:600;margin:0;color:var(--s-ink)}
-  .simu .simu-grid{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:1.5rem;margin-top:1.6rem;align-items:start}
-  @media (max-width:860px){.simu .simu-grid{grid-template-columns:1fr}}
-  .simu .simu-panel{background:var(--s-surface);border:1px solid var(--s-line);border-radius:10px;padding:1.2rem}
-  .simu label{display:block;font-weight:600;margin:1rem 0 .3rem;color:var(--s-ink)}
-  .simu label:first-of-type{margin-top:0}
-  .simu .simu-hint{display:block;font-weight:400;color:var(--s-muted);font-size:.86rem}
-  .simu input[type=number]{width:100%;font:inherit;padding:.5rem .65rem;border:1px solid var(--s-line);border-radius:6px;background:var(--s-paper);color:var(--s-ink)}
-  .simu input[type=range]{width:100%;accent-color:var(--s-usager)}
-  .simu .simu-mix{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
-  .simu .simu-mix input{text-align:right}
-  .simu .simu-mix span{display:block;font-size:.82rem;color:var(--s-muted)}
-  .simu .simu-radios{display:flex;gap:1rem;flex-wrap:wrap}
-  .simu .simu-radios label{display:flex;gap:.35rem;align-items:center;font-weight:400;margin:0}
-  .simu .simu-warn{color:var(--s-warn);font-size:.86rem;margin:.4rem 0 0;min-height:1.2em}
-  .simu .simu-cols{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-  @media (max-width:560px){.simu .simu-cols{grid-template-columns:1fr}}
-  .simu .simu-col{border-radius:10px;padding:1.05rem 1.15rem;border:1px solid var(--s-line);background:var(--s-surface)}
-  .simu .simu-col.admin{border-top:5px solid var(--s-admin)}
-  .simu .simu-col.usager{border-top:5px solid var(--s-usager)}
-  .simu .simu-col .who{color:var(--s-muted);font-size:.88rem;margin:0 0 .7rem}
-  .simu .simu-range{font-family:"Spectral",Georgia,serif;font-size:clamp(1.4rem,2.8vw,1.9rem);font-weight:600;line-height:1.15}
-  .simu .simu-col.admin .simu-range{color:var(--s-admin)} .simu .simu-col.usager .simu-range{color:var(--s-usager)}
-  .simu .simu-sub{font-size:.9rem;color:var(--s-muted);margin:.25rem 0 0}
-  .simu dl{margin:.85rem 0 0;display:grid;grid-template-columns:1fr auto;gap:.35rem .8rem;font-size:.92rem}
-  .simu dt{color:var(--s-muted)} .simu dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-weight:600;color:var(--s-ink)}
-  .simu .simu-bars{margin-top:1.1rem}
-  .simu .simu-bar{display:grid;grid-template-columns:9.5rem 1fr;align-items:center;gap:.7rem;margin:.5rem 0;font-size:.88rem;color:var(--s-ink)}
-  .simu .simu-track{position:relative;height:14px;background:var(--s-paper);border-radius:7px;border:1px solid var(--s-line)}
-  .simu .simu-fill{position:absolute;top:-1px;bottom:-1px;border-radius:7px}
-  .simu .simu-fill.a{background:var(--s-admin)} .simu .simu-fill.u{background:var(--s-usager)}
-  .simu .simu-scale{display:flex;justify-content:space-between;font-size:.78rem;color:var(--s-muted);margin-left:10.2rem}
-  .simu .simu-total{margin-top:1rem;padding:1rem 1.2rem;border-radius:10px;background:var(--s-surface);border:1px solid var(--s-line);display:flex;flex-wrap:wrap;gap:.4rem 2rem;align-items:baseline}
-  .simu .simu-total strong{font-family:"Spectral",Georgia,serif;font-size:1.4rem;color:var(--s-ink)}
-  .simu .simu-extras{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
-  @media (max-width:560px){.simu .simu-extras{grid-template-columns:1fr}}
-  .simu .simu-extras .simu-panel p{margin:.3rem 0 0;color:var(--s-ink)}
-  .simu .simu-big{font-weight:700;font-size:1.1rem;font-variant-numeric:tabular-nums}
-  .simu .simu-small{font-size:.86rem;color:var(--s-muted)}
-  .simu section{margin-top:2.4rem}
-  .simu .simu-tablewrap{overflow-x:auto;border:1px solid var(--s-line);border-radius:10px;background:var(--s-surface)}
-  .simu table{border-collapse:collapse;width:100%;min-width:700px;font-size:.9rem;font-variant-numeric:tabular-nums}
-  .simu th,.simu td{padding:.55rem .75rem;border-bottom:1px solid var(--s-line);text-align:right;vertical-align:top;color:var(--s-ink)}
-  .simu th:first-child,.simu td:first-child,.simu th:nth-child(2),.simu td:nth-child(2){text-align:left}
-  .simu thead th{font-weight:700;background:var(--s-paper)}
-  .simu tbody tr:last-child td{border-bottom:0}
-  .simu td.a{color:var(--s-admin)} .simu td.u{color:var(--s-usager)}
-  .simu .simu-notes{max-width:78ch}
-  .simu .simu-notes li{margin:.45rem 0} .simu .simu-notes p{margin:.6rem 0}
-  .simu select{width:100%;font:inherit;padding:.55rem .7rem;border:1px solid var(--s-line);border-radius:6px;background:var(--s-paper);color:var(--s-ink)}
-  .simu .simu-org-total td{font-weight:700;border-top:2px solid var(--s-line)}
-  .simu footer.simu-foot{margin-top:2.4rem;border-top:1px solid var(--s-line);padding-top:1rem;font-size:.86rem;color:var(--s-muted);max-width:78ch}
-  @media (prefers-reduced-motion:no-preference){.simu .simu-fill{transition:left .25s ease,width .25s ease}}
 </style>
 
 <header class="app">

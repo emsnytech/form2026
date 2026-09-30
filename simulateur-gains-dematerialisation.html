@@ -6,29 +6,29 @@
 <title>Simulateur des gains de la dématérialisation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#1c2539; --muted:#5a6479; --paper:#f4f6f9; --surface:#ffffff; --line:#d7dce5;
-  --admin:#2b59c3; --admin-soft:#dfe7f8; --usager:#1d7a58; --usager-soft:#dcefe7; --warn:#8a5a00;
+  --ink:#1e2022; --muted:#5c6066; --paper:#fbf9f5; --surface:#ffffff; --line:#e2dfd7;
+  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4; --accent:#b45309; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --ink:#e6eaf2; --muted:#a3adc2; --paper:#121722; --surface:#1a2130; --line:#2f394d;
-    --admin:#7fa2f0; --admin-soft:#23304d; --usager:#5cc39a; --usager-soft:#1c3a30; --warn:#e0b25a;
+    --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+    --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
   }
 }
 :root[data-theme="dark"]{
-  --ink:#e6eaf2; --muted:#a3adc2; --paper:#121722; --surface:#1a2130; --line:#2f394d;
-  --admin:#7fa2f0; --admin-soft:#23304d; --usager:#5cc39a; --usager-soft:#1c3a30; --warn:#e0b25a;
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
 }
 *,*::before,*::after{box-sizing:inherit}
 html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
 .wrap{max-width:1120px;margin:0 auto;padding:2.2rem 1.25rem 3rem}
-h1,h2,h3{font-family:"Source Serif 4",Georgia,"Times New Roman",serif;font-weight:700;line-height:1.2;margin:0}
+h1,h2,h3{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:800;line-height:1.2;margin:0}
 h1{font-size:clamp(1.7rem,3.6vw,2.5rem);max-width:30ch}
 .lede{color:var(--muted);max-width:68ch;margin:.8rem 0 0}
 .topnav{margin:0 0 1.2rem;font-size:.95rem}
@@ -60,7 +60,7 @@ select{width:100%;font:inherit;padding:.55rem .7rem;border:1px solid var(--line)
 .col.usager{border-top:5px solid var(--usager)}
 .col h3{margin-bottom:.2rem}
 .col .who{color:var(--muted);font-size:.9rem;margin:0 0 .8rem}
-.range{font-family:"Source Serif 4",Georgia,serif;font-size:clamp(1.5rem,3vw,2.05rem);font-weight:700;line-height:1.15}
+.range{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:clamp(1.5rem,3vw,2.05rem);font-weight:700;line-height:1.15}
 .col.admin .range{color:var(--admin)} .col.usager .range{color:var(--usager)}
 .sub{font-size:.92rem;color:var(--muted);margin:.25rem 0 0}
 dl{margin:.9rem 0 0;display:grid;grid-template-columns:1fr auto;gap:.35rem .8rem;font-size:.95rem}
@@ -74,9 +74,9 @@ dt{color:var(--muted)} dd{margin:0;text-align:right;font-variant-numeric:tabular
 .scale{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);margin-left:10.2rem}
 
 .total{margin-top:1rem;padding:1rem 1.2rem;border-radius:10px;background:var(--surface);border:1px solid var(--line);display:flex;flex-wrap:wrap;gap:.4rem 2rem;align-items:baseline}
-.total strong{font-family:"Source Serif 4",Georgia,serif;font-size:1.5rem}
-.extras{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
-@media (max-width:560px){.extras{grid-template-columns:1fr}}
+.total strong{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1.5rem}
+.extras{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+@media (max-width:760px){.extras{grid-template-columns:1fr}}
 .extras .panel p{margin:.3rem 0 0}
 .big{font-weight:700;font-size:1.15rem;font-variant-numeric:tabular-nums}
 
@@ -171,6 +171,12 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
 
       <div class="extras">
         <div class="panel">
+          <h3>Mise en place de vos démarches</h3>
+          <p class="big" id="mep">–</p>
+          <p class="small" id="mepDays">–</p>
+          <p class="small">Création, paramétrage, validation, tests et formation, selon la complexité. Ces dépenses sont sensiblement les mêmes pour des formulaires PDF reçus dans une boîte fonctionnelle : les économies sont les gains annuels ci-dessus.</p>
+        </div>
+        <div class="panel">
           <h3>Coût de création évité</h3>
           <p class="big" id="creation">–</p>
           <p class="small">Gain ponctuel, à ne pas additionner aux gains annuels. De l'achat d'un seul outil à un formulaire acheté par démarche, au prix constaté de 7 000 € sur une solution commerciale.</p>
@@ -215,6 +221,7 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
       <li><strong>Usagers, préremplissage :</strong> durées de remplissage par type de champ tirées du code source public de la plateforme (10 s par champ standard, 60 s pour un SIRET ou un IBAN, 180 s pour une pièce jointe), étape d'identité comprise (FranceConnect pour les particuliers, API Entreprise pour les personnes morales).</li>
       <li><strong>Valeur du temps :</strong> 7,28 €/h pour un particulier (rapport Quinet), 44,70 €/h pour une personne morale (coût horaire du travail en France, 2025, Insee et Eurostat). La même valeur de 44,70 €/h sert à convertir le gain administration en heures de travail, à titre indicatif.</li>
       <li><strong>Complexité :</strong> niveaux calculés à partir du nombre de champs obligatoires, de blocs répétables et de pièces justificatives de chaque démarche publiée (descriptif open data), en terciles pondérés par les dossiers.</li>
+      <li><strong>Mise en place :</strong> 1, 5 ou 15 jours de travail par démarche selon sa complexité (hypothèse de l'auteur ; bas : moitié ; haut : délais médians observés de mise en service, validation comprise, soit 4,2, 9,1 et 20 jours), valorisés à 312,90 € par jour (coût horaire moyen du travail dans le secteur marchand, faute de référence publique pour la fonction publique). Ces dépenses sont sensiblement les mêmes pour un formulaire PDF reçu dans une boîte fonctionnelle.</li>
       <li><strong>Coût de création :</strong> 7 000 € par formulaire, prix constaté pour la mise en ligne d'un formulaire sur une solution commerciale. Les marchés publics de création de téléservices observés vont de 31 000 € à 800 000 €.</li>
     </ul>
     <p>Ce que le simulateur ne mesure pas : le temps passé à rechercher les pièces justificatives, les erreurs évitées, les échanges de courriels supprimés, le coût d'exploitation de la plateforme (0,37 € par dossier en 2025). Dans les données publiques de la plateforme, les démarches demandant cinq pièces justificatives ou plus regroupent les trois quarts des dossiers déposés avec retard.</p>
@@ -239,6 +246,8 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
   var POT = {simple:{pp:0.0940,pm:0.0763}, modere:{pp:0.1550,pm:0.2748}, complexe:{pp:0.3937,pm:0.4735}};
   var RATE = {pp:7.28, pm:44.70};
   var CREATION = 7000;
+  var MEP={simple:[0.5,1,4.2],modere:[2.5,5,9.1],complexe:[7.5,15,20]}, JOUR=312.90;
+
   var LEVELS = [["simple","Simple","environ 5 min"],["modere","Modérée","environ 15 min"],["complexe","Complexe","environ 37 min"]];
 
   var $ = function(id){return document.getElementById(id)};
@@ -292,6 +301,9 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
     $("uPre").textContent = eur(r.pre);
     $("totalRange").textContent = rng(r.totBas, r.totHaut);
     $("creation").textContent = N>0 ? (N>1 ? rng(CREATION, CREATION*N) : eur(CREATION)) : "Indiquez un nombre de démarches";
+    var dj=[0,1,2].map(function(i){return N*(mix.simple*MEP.simple[i]+mix.modere*MEP.modere[i]+mix.complexe*MEP.complexe[i])});
+    $("mep").textContent = N>0 ? eur(dj[1]*JOUR)+" (de "+eur(dj[0]*JOUR)+" à "+eur(dj[2]*JOUR)+")" : "Indiquez un nombre de démarches";
+    $("mepDays").textContent = N>0 ? "Soit "+Math.round(dj[1]).toLocaleString("fr-FR")+" jours de travail (de "+Math.round(dj[0]).toLocaleString("fr-FR")+" à "+Math.round(dj[2]).toLocaleString("fr-FR")+")" : "";
     $("potentiel").textContent = eur(r.pot)+" par an";
 
     var max = Math.max(r.adminHaut, r.uHaut) || 1;
