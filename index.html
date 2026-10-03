@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FORM 2026 — Ne plus demander ce que l'État sait déjà</title>
+<meta name="description" content="Estimer les gains de la dématérialisation, cadrer une nouvelle démarche, comparer les outils, explorer les données demandées.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="FORM 2026">
+<meta property="og:title" content="FORM 2026 : ne plus demander ce que l'État sait déjà">
+<meta property="og:description" content="Estimer les gains de la dématérialisation, cadrer une nouvelle démarche, comparer les outils, explorer les données demandées.">
+<meta property="og:url" content="https://emsnytech.github.io/form2026/">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -42,8 +50,9 @@ h2{font-size:1.4rem;margin-bottom:1rem}
 .fig.a b{color:var(--admin)} .fig.u b{color:var(--usager)}
 
 section{margin-top:2.8rem}
-.doors{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-@media (max-width:860px){.doors{grid-template-columns:1fr}}
+.doors{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media (max-width:1040px){.doors{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.doors{grid-template-columns:1fr}}
 .door{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.3rem 1.2rem;text-decoration:none;color:var(--ink);border-top:6px solid var(--c,var(--admin));transition:transform .15s ease,box-shadow .15s ease}
 .door:hover,.door:focus-visible{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08);outline:none}
 .door .q{font-size:.85rem;font-weight:700;color:var(--c,var(--admin));text-transform:uppercase;letter-spacing:.05em}
@@ -113,7 +122,14 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
         <span class="go">Ouvrir la grille de cadrage →</span>
         <span class="meta">10 à 15 minutes · fiche imprimable</span>
       </a>
-      <a class="door" href="#explorer" style="--c:var(--accent)">
+      <a class="door" href="comparer-cadre-fonctionnel.html" style="--c:var(--accent)">
+        <span class="q">Comparer</span>
+        <h3>Le cadre fonctionnel de votre outil</h3>
+        <p>Vérifiez, fonction par fonction, ce que couvre l'outil que vous utilisez, et ce qui reste comparable avec les chiffres publiés. Sans classer personne.</p>
+        <span class="go">Ouvrir la grille de comparaison →</span>
+        <span class="meta">5 minutes · fiche imprimable</span>
+      </a>
+      <a class="door" href="#explorer" style="--c:var(--muted)">
         <span class="q">Explorer</span>
         <h3>Les démarches et les données demandées</h3>
         <p>Parcourez les démarches publiées, les pièces justificatives et les données les plus demandées, et ce qui pourrait être obtenu à la source.</p>

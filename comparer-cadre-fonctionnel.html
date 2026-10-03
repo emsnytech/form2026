@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comparer le cadre fonctionnel de votre outil de dématérialisation</title>
+<meta name="description" content="Vérifiez, fonction par fonction, ce que couvre votre outil, et ce qui reste comparable avec les chiffres publiés. La grille ne classe pas les outils.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="FORM 2026">
+<meta property="og:title" content="Comparer le cadre fonctionnel de votre outil de dématérialisation">
+<meta property="og:description" content="Vérifiez, fonction par fonction, ce que couvre votre outil, et ce qui reste comparable avec les chiffres publiés. La grille ne classe pas les outils.">
+<meta property="og:url" content="https://emsnytech.github.io/form2026/comparer-cadre-fonctionnel.html">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1e2022; --muted:#5c6066; --paper:#fbf9f5; --surface:#ffffff; --line:#e2dfd7;
+  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4; --accent:#b45309; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+    --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--admin)}
+.wrap{max-width:1160px;margin:0 auto;padding:2.2rem 1.25rem 3rem}
+h1,h2,h3{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:800;line-height:1.2;margin:0}
+h1{font-size:clamp(1.7rem,3.6vw,2.4rem);max-width:30ch}
+h2{font-size:1.2rem}
+h3{font-size:1rem;margin:0 0 .4rem}
+.lede{color:var(--muted);max-width:72ch;margin:.8rem 0 0}
+.topnav{margin:0 0 1.2rem;font-size:.95rem}
+.small{font-size:.85rem;color:var(--muted);margin:.35rem 0 0}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:1.5rem;margin-top:1.8rem;align-items:start}
+@media (max-width:920px){.layout{grid-template-columns:1fr}}
+.encart{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:10px;padding:1.1rem 1.3rem;margin-top:1.6rem}
+.encart h2{margin-bottom:.5rem}
+.encart p{margin:.4rem 0}
+.block{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.2rem;margin-bottom:1.1rem}
+.block > p.intro{color:var(--muted);margin:.3rem 0 .8rem;font-size:.93rem}
+.fn{border-top:1px solid var(--line);padding:.85rem 0}
+.fn:first-of-type{border-top:0}
+.fn .lab{font-weight:600}
+.fn .why{font-size:.88rem;color:var(--muted);margin:.15rem 0 .5rem}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;border:1px solid currentColor;border-radius:999px;padding:0 .5rem;margin-left:.4rem;vertical-align:middle}
+.tag.comp{color:var(--muted)}
+.tag.a{color:var(--admin)} .tag.u{color:var(--usager)}
+.ans{display:flex;gap:.4rem;flex-wrap:wrap;border:0;padding:0;margin:0}
+.ans legend{position:absolute;left:-9999px}
+.ans label{cursor:pointer}
+.ans input{position:absolute;opacity:0;pointer-events:none}
+.ans span{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:.25rem .7rem;font-size:.9rem;background:var(--paper);color:var(--ink)}
+.ans input:checked + span{color:#fff;font-weight:700;border-color:transparent}
+.ans input[value="oui"]:checked + span{background:var(--usager)}
+.ans input[value="partiel"]:checked + span{background:var(--accent)}
+.ans input[value="non"]:checked + span{background:var(--bad)}
+.ans input[value="nsp"]:checked + span{background:var(--muted)}
+.ans input:focus-visible + span{outline:3px solid var(--admin);outline-offset:2px}
+@media (prefers-color-scheme: dark){.ans input:checked + span{color:#18181b}}
+
+aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + 1rem)}
+@media (max-width:920px){aside{position:static}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.2rem;margin-bottom:1rem}
+.card h3{font-size:.95rem;color:var(--muted)}
+.cov{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;text-align:center;margin-top:.3rem}
+.cov div{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:.4rem .2rem}
+.cov b{display:block;font-size:1.4rem;line-height:1.1}
+.cov span{font-size:.75rem;color:var(--muted)}
+.cov .o b{color:var(--usager)} .cov .p b{color:var(--accent)} .cov .n b{color:var(--bad)}
+table.res{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums;margin-top:.5rem}
+table.res th,table.res td{padding:.35rem .4rem;border-bottom:1px solid var(--line);text-align:right}
+table.res th:first-child,table.res td:first-child{text-align:left}
+table.res thead th{font-weight:700;color:var(--muted);font-size:.8rem}
+.alerts{margin:.4rem 0 0;padding-left:1.1rem;font-size:.9rem}
+.alerts li{margin:.35rem 0}
+.actions{display:flex;gap:.6rem;flex-wrap:wrap}
+button{font:inherit;border-radius:6px;cursor:pointer}
+.btn{background:var(--ink);color:var(--surface);border:0;padding:.5rem .9rem;font-weight:600}
+.ghost{background:transparent;border:1px solid var(--line);color:var(--muted);padding:.4rem .7rem;font-size:.9rem}
+button:focus-visible{outline:3px solid var(--admin);outline-offset:2px}
+footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted);max-width:84ch}
+.sheet{display:none}
+@media print{
+  body{background:#fff;color:#000;font-size:11pt}
+  .wrap > *:not(.sheet){display:none !important}
+  .sheet{display:block}
+  .sheet h1{font-size:18pt;max-width:none}
+  .sheet h2{font-size:13pt;margin:14pt 0 6pt}
+  .sheet table{border-collapse:collapse;width:100%;font-size:10pt}
+  .sheet th,.sheet td{border:1px solid #999;padding:4pt 6pt;text-align:left;vertical-align:top}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="topnav"><a href="index.html">Retour à FORM 2026</a> · <a href="simulateur-gains-dematerialisation.html">Estimer ses gains</a> · <a href="cadrage-dematerialisation.html">Cadrer une démarche</a> · <a href="comparer-cadre-fonctionnel.html">Comparer un outil</a></p>
+  <header>
+    <h1>Comparer le cadre fonctionnel de votre outil de dématérialisation</h1>
+    <p class="lede">Les chiffres publiés sur les gains de la dématérialisation valent pour un certain périmètre fonctionnel. Cette grille permet à chacun de vérifier, fonction par fonction, ce que couvre l'outil qu'il utilise, et de mesurer ce qui reste comparable. Elle ne classe pas les outils : elle décrit un cadre commun.</p>
+    <p class="small">Paramètres version 7, septembre 2026. Vos réponses restent dans votre navigateur.</p>
+  </header>
+
+  <div class="encart">
+    <h2>Le périmètre de référence des chiffres</h2>
+    <p>Les gains et les coûts publiés supposent un service qui propose : un formulaire en ligne structuré (champs obligatoires, contrôles de format, conditions d'affichage) ; le dépôt des pièces dans le dossier ; une identité préremplie par une identité numérique et les données d'une entreprise récupérées à partir de son SIRET ; l'enregistrement en brouillon ; le suivi de l'état du dossier et une messagerie ; un accusé de réception et des notifications automatiques ; un espace d'instruction partagé entre agents ; l'export ou l'interface vers l'outil métier ; et une mise à disposition sans licence par démarche.</p>
+    <p>Un outil qui ne couvre pas une de ces fonctions peut être excellent : simplement, la part de gain qui en dépend n'est pas comparable, et la grille la retire du calcul. Les fonctions marquées « complémentaire » ne sont pas dans le périmètre des chiffres : leur présence est une valeur en plus.</p>
+  </div>
+
+  <div class="layout">
+    <main id="blocks"></main>
+
+    <aside aria-live="polite">
+      <div class="card">
+        <h3>Couverture du périmètre de référence</h3>
+        <div class="cov">
+          <div class="o"><b id="cO">0</b><span>oui</span></div>
+          <div class="p"><b id="cP">0</b><span>partiel</span></div>
+          <div class="n"><b id="cN">0</b><span>non</span></div>
+          <div><b id="cQ">0</b><span>à vérifier</span></div>
+        </div>
+        <p class="small" id="covNote"></p>
+      </div>
+      <div class="card">
+        <h3>Gain de traitement par dossier, transposable</h3>
+        <p class="small" style="margin-top:0">Administration, valorisée à 44,70 € l'heure. Fourchette : les fonctions « à vérifier » comptent pour 0 (bas) ou pour 1 (haut).</p>
+        <table class="res"><thead><tr><th>Complexité</th><th>Référence</th><th>Votre outil</th></tr></thead><tbody id="tAdmin"></tbody></table>
+        <p class="small">Temps évité par dossier pour l'usager, par rapport à un PDF reçu dans une boîte fonctionnelle :</p>
+        <table class="res"><thead><tr><th>Complexité</th><th>Référence</th><th>Votre outil</th></tr></thead><tbody id="tUsager"></tbody></table>
+        <p class="small">Temps de traitement d'un PDF : hypothèses raisonnées de l'auteur, à caler par des mesures.</p>
+      </div>
+      <div class="card">
+        <h3>À ne pas comparer sans ajustement</h3>
+        <ul class="alerts" id="alerts"></ul>
+      </div>
+      <div class="actions">
+        <button class="btn" type="button" id="print">Imprimer la fiche de comparaison</button>
+        <button class="ghost" type="button" id="reset">Tout effacer</button>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    Périmètre établi à partir des fonctions de Démarche Numérique documentées dans son bilan 2025 et de la formation à la conception de démarches d'une autre plateforme, pour rester à un niveau de description commun. Temps évités par dossier (minutes, simple / modérée / complexe) : réception et accusé 3 / 3 / 3 ; classement des pièces 1 / 3 / 6 ; ressaisie 2 / 5 / 10 ; complétude et relances 2 / 3,5 / 5,5 ; suivi 1,5 / 1,5 / 2,5 (administration) ; remplissage assisté 3 / 5 / 10 ; envoi des pièces 2 / 4 / 8 ; relances 2 / 3 / 5 ; suivi 2 / 2 / 3 ; ressaisie d'identité 0,5 (usager). Ces temps sont des hypothèses de l'auteur, construites étape par étape, et rapprochées du gain de 6,79 € par dossier de France Stratégie (2018).
+  </footer>
+
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var esc=function(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+  var RA=44.70, RP=7.28;
+  var LV=["Simple","Modérée","Complexe"];
+  // adm / usg : minutes évitées par dossier selon la complexité [simple, modérée, complexe] ; note : impact hors minutes
+  var BLOCKS=[
+   {t:"Concevoir la démarche",i:"Ce qui détermine le temps de mise en place.",f:[
+    {id:"f1",l:"Création du formulaire par un agent, sans développement informatique",w:"Le temps de mise en place (1, 5 ou 15 jours) suppose une création directe par le service.",note:"Temps de mise en place non comparable (prestataire ou développement)."},
+    {id:"f2",l:"Types de champs adaptés : SIRET, IBAN, adresse, date, listes, référentiels",w:"Un champ typé est contrôlé à la saisie et se remplit plus vite.",usg:[3,5,10],tag:"u"},
+    {id:"f3",l:"Champs et pages conditionnels : l'usager ne voit que ce qui le concerne",w:"Réduit la durée réelle de remplissage.",note:"Durée de remplissage plus longue : gains usagers à revoir."},
+    {id:"f4",l:"Blocs de champs répétables (plusieurs enfants, plusieurs lignes de budget)",w:"Évite de multiplier les formulaires ou les pièces.",note:"Certaines démarches complexes ne sont pas transposables."},
+    {id:"f5",l:"Reprise d'une démarche existante ou d'un modèle",w:"Réduit le temps de création pour les démarches voisines.",note:"Temps de mise en place à majorer."},
+    {id:"f6",l:"Aide à la conception : suggestions sur la clarté et la simplification des champs",w:"Complémentaire : améliore la qualité du formulaire.",comp:true}
+   ]},
+   {t:"Identité et préremplissage",i:"Ce qui évite de redemander ce que l'État sait déjà.",f:[
+    {id:"f7",l:"Identité du particulier préremplie par une identité numérique (FranceConnect ou équivalent)",w:"Économise la ressaisie de l'identité et la création d'un compte.",usg:[.5,.5,.5],tag:"u",note:"Gain de préremplissage d'identité non transposable."},
+    {id:"f8",l:"Données d'une entreprise récupérées à partir du SIRET (API Entreprise ou équivalent)",w:"Économise la saisie de la dénomination, de la forme juridique, du code d'activité.",note:"Gain de préremplissage des personnes morales (environ 3,6 M€ du cumul publié) non transposable."},
+    {id:"f9",l:"Autres données obtenues à la source, ou justificatifs lus automatiquement (2D-Doc, titre d'identité)",w:"Premier pas de la trajectoire de la pièce vers la donnée.",note:"Trajectoire de la pièce à la donnée non engagée."},
+    {id:"f10",l:"Préremplissage d'un dossier depuis un système tiers (simulateur, dossier précédent, autre application)",w:"Évite de ressaisir des informations déjà calculées.",comp:true}
+   ]},
+   {t:"Dépôt et suivi par l'usager",i:"Ce que l'usager économise par rapport à un PDF envoyé par courriel.",f:[
+    {id:"f11",l:"Champs obligatoires et contrôles de format ou de complétude à la saisie",w:"Réduit les dossiers incomplets et les relances pour pièce manquante.",adm:[2,3.5,5.5],usg:[2,3,5],tag:"au"},
+    {id:"f12",l:"Dépôt des pièces justificatives directement dans le dossier",w:"Évite l'envoi par courriel, le téléchargement et le classement des pièces.",adm:[1,3,6],usg:[2,4,8],tag:"au"},
+    {id:"f13",l:"Enregistrement automatique en brouillon et reprise ultérieure",w:"Évite de perdre une saisie et de recommencer.",note:"Risque d'abandon plus élevé : gains usagers à revoir."},
+    {id:"f14",l:"Suivi de l'état du dossier en ligne, sans avoir à relancer",w:"Évite les demandes de suivi côté usager et côté agent.",adm:[1.5,1.5,2.5],usg:[2,2,3],tag:"au"},
+    {id:"f15",l:"Messagerie entre l'usager et l'instructeur, rattachée au dossier",w:"Remplace les échanges de courriels dispersés.",note:"Échanges hors dossier : traçabilité et temps de relance à revoir."},
+    {id:"f16",l:"Dépôt par un tiers (mandataire, aidant)",w:"Complémentaire : inclusion des personnes éloignées du numérique.",comp:true},
+    {id:"f17",l:"Mesure de la satisfaction sur chaque démarche",w:"Complémentaire : premier pont entre ressenti et mesure.",comp:true}
+   ]},
+   {t:"Instruction par les agents",i:"Ce que les agents économisent par rapport à une boîte fonctionnelle.",f:[
+    {id:"f18",l:"Accusé de réception et notifications automatiques",w:"Évite l'enregistrement et l'accusé manuels.",adm:[3,3,3],tag:"a"},
+    {id:"f19",l:"Espace d'instruction partagé entre agents, sans passer par une messagerie",w:"Continuité du service, dossiers accessibles à plusieurs.",note:"Continuité et traçabilité non comparables."},
+    {id:"f20",l:"Routage des dossiers vers des groupes d'instructeurs",w:"Répartit la charge sans tri manuel.",comp:true},
+    {id:"f21",l:"Traitement en masse : actions groupées sur plusieurs dossiers",w:"Complémentaire : gain sur les démarches à gros volume.",comp:true},
+    {id:"f22",l:"Gestion du délai de réponse et du silence de l'administration (accord ou rejet)",w:"Complémentaire : conformité aux délais réglementaires.",comp:true}
+   ]},
+   {t:"Interopérabilité et données",i:"Ce qui évite la ressaisie et permet de mesurer.",f:[
+    {id:"f23",l:"Export ou interface (API) vers l'outil métier, sans ressaisie des données",w:"Économise la ressaisie de chaque dossier dans l'outil métier.",adm:[2,5,10],tag:"a"},
+    {id:"f24",l:"Statistiques ou indicateurs agrégés publiables (open data)",w:"Complémentaire : condition pour établir un thermomètre commun.",comp:true},
+    {id:"f25",l:"Connexion à d'autres systèmes (archivage, agenda, prise de rendez-vous)",w:"Complémentaire.",comp:true}
+   ]},
+   {t:"Sécurité, accessibilité, accompagnement",i:"Ce qui conditionne l'usage réel et le coût.",f:[
+    {id:"f26",l:"Authentification sécurisée des agents et droits par rôle",w:"Protège les données ; évite les boîtes partagées.",note:"Risques de protection des données à évaluer séparément."},
+    {id:"f27",l:"Formulaire conforme aux exigences d'accessibilité et registre des traitements de données",w:"Conditionne la conformité du service.",note:"Coût de mise en conformité à ajouter."},
+    {id:"f28",l:"Mise à disposition sans licence par démarche ni installation",w:"Le coût de licence est supposé nul dans les chiffres.",note:"L'hypothèse de licence nulle ne s'applique pas : ajouter le coût de licence."},
+    {id:"f29",l:"Documentation, support et formation en ligne des agents",w:"Le temps de formation est inclus dans la mise en place.",note:"Temps de formation et de support à majorer."}
+   ]}
+  ];
+  var ALL=[]; BLOCKS.forEach(function(b){b.f.forEach(function(f){f.core=!f.comp;ALL.push(f)})});
+  var ans={};
+
+  function render(){
+    var h="";
+    BLOCKS.forEach(function(b,bi){
+      h+='<section class="block" aria-labelledby="b'+bi+'"><h2 id="b'+bi+'">'+esc(b.t)+'</h2><p class="intro">'+esc(b.i)+'</p>';
+      b.f.forEach(function(f){
+        var tags=(f.comp?'<span class="tag comp">complémentaire</span>':'')+((f.tag||"").indexOf("a")>=0?'<span class="tag a">administration</span>':'')+((f.tag||"").indexOf("u")>=0?'<span class="tag u">usagers</span>':'');
+        h+='<div class="fn"><div class="lab">'+esc(f.l)+tags+'</div><p class="why">'+esc(f.w)+'</p>'+
+          '<fieldset class="ans"><legend>'+esc(f.l)+'</legend>'+
+          [["oui","Oui"],["partiel","Partiellement"],["non","Non"],["nsp","Je ne sais pas"]].map(function(o){return'<label><input type="radio" name="'+f.id+'" value="'+o[0]+'"'+((ans[f.id]||"nsp")===o[0]?" checked":"")+'><span>'+o[1]+'</span></label>'}).join("")+
+          '</fieldset></div>';
+      });
+      h+='</section>';
+    });
+    $("blocks").innerHTML=h;
+  }
+  function val(id,mode){var a=ans[id]||"nsp"; if(a==="oui")return 1; if(a==="partiel")return .5; if(a==="non")return 0; return mode==="hi"?1:0;}
+  function compute(){
+    var r={o:0,p:0,n:0,q:0,adm:[[0,0],[0,0],[0,0]],usg:[[0,0],[0,0],[0,0]],admRef:[0,0,0],usgRef:[0,0,0],alerts:[],comp:{o:0,t:0}};
+    ALL.forEach(function(f){
+      var a=ans[f.id]||"nsp";
+      if(f.core){ if(a==="oui")r.o++; else if(a==="partiel")r.p++; else if(a==="non")r.n++; else r.q++;
+        for(var i=0;i<3;i++){
+          if(f.adm){r.admRef[i]+=f.adm[i]; r.adm[i][0]+=f.adm[i]*val(f.id,"lo"); r.adm[i][1]+=f.adm[i]*val(f.id,"hi");}
+          if(f.usg){r.usgRef[i]+=f.usg[i]; r.usg[i][0]+=f.usg[i]*val(f.id,"lo"); r.usg[i][1]+=f.usg[i]*val(f.id,"hi");}
+        }
+        if(a==="non"||a==="partiel"){
+          var msg=f.note||"";
+          if(f.adm||f.usg){var m=[]; if(f.adm)m.push("administration : "+f.adm.map(function(x){return fmt(x)}).join(" / ")+" min"); if(f.usg)m.push("usagers : "+f.usg.map(function(x){return fmt(x)}).join(" / ")+" min"); msg="Gain évité (simple / modérée / complexe) réduit"+(a==="partiel"?" de moitié":"")+" — "+m.join(" ; ")+"."+(f.note?" "+f.note:"");}
+          r.alerts.push({l:f.l,m:msg,a:a});
+        }
+      } else { r.comp.t++; if(a==="oui"||a==="partiel")r.comp.o++; }
+    });
+    r.core=ALL.filter(function(f){return f.core}).length;
+    return r;
+  }
+  function fmt(x){return x.toLocaleString("fr-FR",{maximumFractionDigits:1})}
+  function eur(v){return v.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" €"}
+  function rangeMin(a,b){return a===b?fmt(a):fmt(a)+" à "+fmt(b)}
+  function rangeEur(a,b,rate){var x=a*rate/60,y=b*rate/60;return a===b?eur(x):eur(x)+" à "+eur(y)}
+
+  function update(){
+    var r=compute();
+    $("cO").textContent=r.o;$("cP").textContent=r.p;$("cN").textContent=r.n;$("cQ").textContent=r.q;
+    $("covNote").textContent=r.core+" fonctions de référence"+(r.comp.t?" ; "+r.comp.o+" fonction"+(r.comp.o>1?"s":"")+" complémentaire"+(r.comp.o>1?"s":"")+" sur "+r.comp.t+" en plus, hors périmètre des chiffres":"")+".";
+    var ta="",tu="";
+    for(var i=0;i<3;i++){
+      ta+="<tr><td>"+LV[i]+"</td><td>"+fmt(r.admRef[i])+" min · "+eur(r.admRef[i]*RA/60)+"</td><td>"+rangeMin(r.adm[i][0],r.adm[i][1])+" min · "+rangeEur(r.adm[i][0],r.adm[i][1],RA)+"</td></tr>";
+      tu+="<tr><td>"+LV[i]+"</td><td>"+fmt(r.usgRef[i])+" min</td><td>"+rangeMin(r.usg[i][0],r.usg[i][1])+" min</td></tr>";
+    }
+    $("tAdmin").innerHTML=ta;$("tUsager").innerHTML=tu;
+    $("alerts").innerHTML=r.alerts.length? r.alerts.map(function(x){return"<li><b>"+esc(x.l)+"</b> ("+(x.a==="non"?"non couverte":"partielle")+") — "+esc(x.m)+"</li>"}).join("") : (r.q?"<li>Répondez aux fonctions « à vérifier » pour préciser ce qui est comparable.</li>":"<li>Le périmètre de référence est couvert : les chiffres publiés sont comparables.</li>");
+    save(); window.__r=r;
+  }
+  $("blocks").addEventListener("change",function(e){if(e.target.name){ans[e.target.name]=e.target.value;update();}});
+
+  function buildSheet(){
+    var r=compute(), rows=ALL.map(function(f){var a=ans[f.id]||"nsp";return"<tr><td>"+esc(f.l)+(f.comp?" (complémentaire)":"")+"</td><td>"+({oui:"Oui",partiel:"Partiellement",non:"Non",nsp:"À vérifier"})[a]+"</td></tr>"}).join("");
+    var al=r.alerts.map(function(x){return"<li>"+esc(x.l)+" — "+esc(x.m)+"</li>"}).join("");
+    var g=[0,1,2].map(function(i){return"<tr><td>"+LV[i]+"</td><td>"+fmt(r.admRef[i])+" min</td><td>"+rangeMin(r.adm[i][0],r.adm[i][1])+" min</td><td>"+fmt(r.usgRef[i])+" min</td><td>"+rangeMin(r.usg[i][0],r.usg[i][1])+" min</td></tr>"}).join("");
+    $("sheet").innerHTML='<h1>Fiche de comparaison du cadre fonctionnel</h1><p>Établie le '+new Date().toLocaleDateString("fr-FR")+' · paramètres version 7</p>'+
+      '<h2>Couverture</h2><p>'+r.o+' oui · '+r.p+' partiellement · '+r.n+' non · '+r.q+' à vérifier, sur '+r.core+' fonctions de référence.</p>'+
+      '<h2>Temps évité par dossier</h2><table><thead><tr><th>Complexité</th><th>Administration, référence</th><th>Administration, votre outil</th><th>Usagers, référence</th><th>Usagers, votre outil</th></tr></thead><tbody>'+g+'</tbody></table>'+
+      '<h2>À ne pas comparer sans ajustement</h2><ul>'+(al||"<li>Aucun point.</li>")+'</ul>'+
+      '<h2>Détail des fonctions</h2><table><thead><tr><th>Fonction</th><th>Réponse</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+      '<p style="font-size:9pt">Temps de traitement d\'un PDF : hypothèses de l\'auteur, à caler par des mesures. La grille ne classe pas les outils.</p>';
+  }
+  $("print").addEventListener("click",function(){buildSheet();window.print();});
+  var KEY="cadre-fonctionnel-v7";
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(ans));}catch(e){}}
+  function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||"null");if(s)ans=s;}catch(e){}}
+  $("reset").addEventListener("click",function(){try{localStorage.removeItem(KEY);}catch(e){} ans={};render();update();});
+  load(); render(); update();
+})();
+</script>
+</body>
+</html>
