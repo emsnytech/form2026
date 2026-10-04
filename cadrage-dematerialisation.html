@@ -12,6 +12,7 @@
 <meta property="og:description" content="Base juridique, pièces justificatives, champs et sélecteurs : cadrez une démarche avant de la créer.">
 <meta property="og:url" content="https://emsnytech.github.io/form2026/cadrage-dematerialisation.html">
 <meta name="twitter:card" content="summary">
+<meta name="page-version" content="2026-10-04-r3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -90,6 +91,19 @@ button{font:inherit;border-radius:6px;cursor:pointer}
 .reco b{font-weight:700}
 .src{font-size:.82rem;color:var(--muted);margin:.25rem 0 0}
 
+
+.chart{margin-bottom:1rem}
+.crow{display:grid;grid-template-columns:1fr;gap:.15rem;margin:.55rem 0;font-size:.88rem}
+.cl{font-weight:600;line-height:1.25}.cl small{font-weight:400;color:var(--muted);margin-left:.3rem}
+.ctrack{display:flex;align-items:center;gap:.5rem}
+.cstack{display:flex;height:26px;border-radius:6px;overflow:hidden;background:var(--paper);border:1px solid var(--line);min-width:2px}
+.seg{height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:700;white-space:nowrap;overflow:hidden}
+.seg.a{background:var(--admin)} .seg.d{background:var(--usager)} .seg.p{background:color-mix(in srgb,var(--usager) 55%,var(--surface));color:var(--ink)} .seg.c{background:var(--accent)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .seg{color:#18181b}}
+.cval{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cleg{display:flex;flex-wrap:wrap;gap:.3rem 1rem;margin-top:.6rem;font-size:.8rem;color:var(--muted)}
+.cleg i{display:inline-block;width:.75rem;height:.75rem;border-radius:3px;margin-right:.3rem;vertical-align:-1px}
+.cleg i.a{background:var(--admin)} .cleg i.d{background:var(--usager)} .cleg i.p{background:color-mix(in srgb,var(--usager) 55%,var(--surface))} .cleg i.c{background:var(--accent)}
 aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + 1rem)}
 @media (max-width:900px){aside{position:static}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.2rem;margin-bottom:1rem}
@@ -234,15 +248,11 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
         </dl>
         <p class="small" id="levelNote"></p>
       </div>
-      <div class="card">
-        <h3>Mise en place de la démarche</h3>
-        <div class="money" id="mCost">–</div>
-        <dl class="kv">
-          <dt>Temps de travail</dt><dd id="mDays">–</dd>
-          <dt>Délai de mise en service</dt><dd id="mDelai">–</dd>
-          <dt>Soit, la première année</dt><dd id="mPerDossier">–</dd>
-        </dl>
-        <p class="small">Création, paramétrage, validation, tests et formation des agents. Ces dépenses sont sensiblement les mêmes pour un formulaire PDF reçu dans une boîte fonctionnelle : les économies sont les gains annuels ci-dessous.</p>
+      <div class="card chart" id="chart" role="img" aria-label="Graphique : gains annuels et coût de la plateforme">
+        <h3>Gains annuels et coût de la plateforme</h3>
+        <div id="chartRows"></div>
+        <div class="cleg"><span><i class="a"></i>Administration</span><span><i class="d"></i>Dématérialisation</span><span><i class="p"></i>Informations retirées</span><span><i class="c"></i>Plateforme</span></div>
+        <p class="small">Pour chaque euro investi dans la plateforme : <b id="ratioC">–</b>. Le coût de création de la démarche est commun à tous les supports et n'est pas compté.</p>
       </div>
       <div class="card">
         <h3>Gains annuels estimés</h3>
@@ -255,7 +265,7 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
           <dt>dont informations retirées du formulaire</dt><dd id="gCadrage">–</dd>
           <dt>Heures rendues aux usagers</dt><dd id="hUsager">–</dd>
         </dl>
-        <p class="small">Fourchettes issues des paramètres publics de l'évaluation des 18,2 millions de dossiers. Coût de création évité en plus : au moins 7 000 €, une fois.</p>
+        <p class="small">Fourchettes issues des paramètres publics de l'évaluation des 18,2 millions de dossiers. Estimation indicative.</p>
       </div>
       <div class="card" id="habCard" hidden>
         <h3>Accès aux données à la source</h3>
@@ -277,8 +287,8 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
   </div>
 
   <footer>
-    Estimation indicative, fondée sur des conventions publiques : durées de remplissage par type de champ du code source de Démarche Numérique (10 s par champ, 60 s pour un champ long, 180 s par pièce jointe, blocs répétables comptés 2,5 fois) ; coût de traitement évité de 6,79 € à 10,70 € par dossier (France Stratégie, 2018) ; gain de dématérialisation pour l'usager de 2 à 30 minutes (Destatis, France Stratégie) ; valeur de l'heure de 7,28 € pour un particulier (rapport Quinet) et de 44,70 € pour une personne morale (Insee, Eurostat, 2025) ; temps de mise en place : 1, 5 ou 15 jours de travail selon le niveau (hypothèse de l'auteur ; bas : moitié ; haut : délais médians observés de mise en service, validation comprise), valorisés à 312,90 € par jour (coût horaire moyen du travail, secteur marchand) ; charge d'instruction rapportée à 1 607 heures travaillées par agent et par an. Formulaires existants : référentiel RIDA de service-public.fr, export du 28 novembre 2022. Niveaux de complexité : score = champs obligatoires + champs répétables + 3 × pièces jointes ; simple jusqu'à 20, modéré jusqu'à 43, complexe au-delà ou à partir de 8 pièces jointes. Une information conservée mais obtenue à la source compte encore pour 20 % (vérification par l'usager).
-  </footer>
+    Estimation indicative, fondée sur des conventions publiques : durées de remplissage par type de champ du code source de Démarche Numérique (10 s par champ, 60 s pour un champ long, 180 s par pièce jointe, blocs répétables comptés 2,5 fois) ; coût de traitement évité de 6,79 € à 10,70 € par dossier (France Stratégie, 2018) ; gain de dématérialisation pour l'usager de 2 à 30 minutes (Destatis, France Stratégie) ; valeur de l'heure de 7,28 € pour un particulier (rapport Quinet) et de 44,70 € pour une personne morale (Insee, Eurostat, 2025) ; coût de la plateforme : 14 M€ au plus rapportés aux 18,2 millions de dossiers déposés depuis 2018 (estimation haute) ; charge d'instruction rapportée à 1 607 heures travaillées par agent et par an. Formulaires existants : référentiel RIDA de service-public.fr, export du 28 novembre 2022. Niveaux de complexité : score = champs obligatoires + champs répétables + 3 × pièces jointes ; simple jusqu'à 20, modéré jusqu'à 43, complexe au-delà ou à partir de 8 pièces jointes. Une information conservée mais obtenue à la source compte encore pour 20 % (vérification par l'usager).
+   Version de la page : 4 octobre 2026, révision 3.</footer>
 
   <div class="sheet" id="sheet"></div>
 </div>
@@ -510,8 +520,14 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
   $("fAnalyse").addEventListener("click",analyseFields);
   $("fUse").addEventListener("click",function(){var o=FIELDREP;$("champs").value=o.filter(function(x){return x.obl}).length;$("longs").value=o.filter(function(x){return x.obl&&(x.long||/siret|iban|rna/.test(FN(x.type+" "+x.lib)))}).length;update();});
 
-  var MEP={simple:{bas:0.5,central:1,haut:4.2,delai:"environ 4 jours"},modere:{bas:2.5,central:5,haut:9.1,delai:"environ 9 jours"},complexe:{bas:7.5,central:15,haut:20,delai:"14 à 20 jours"}}, JOUR=312.90;
-  function mep(level){var m=MEP[level];return{m:m,bas:m.bas*JOUR,central:m.central*JOUR,haut:m.haut*JOUR};}
+  var PLAT = 14000000/18220327; // coût de la plateforme par dossier (14 M€ au plus ÷ 18,2 M de dossiers)
+  function drawChart(rows){
+    var tot=function(r){return r.segs.reduce(function(a,s){return a+s[2]},0)};
+    var max=Math.max.apply(null,rows.map(tot))||1, h="";
+    rows.forEach(function(r){var t=tot(r), w=t/max*100;
+      h+='<div class="crow"><div class="cl">'+r.label+'<small>'+r.sub+'</small></div><div class="ctrack"><div class="cstack" style="width:'+Math.max(w,0.8)+'%">'+r.segs.map(function(s){var sw=t>0?s[2]/t*100:0;return '<div class="seg '+s[0]+'" style="width:'+sw+'%" title="'+s[1]+' : '+eur(s[2])+'"></div>'}).join("")+'</div><span class="cval">'+eur(t)+'</span></div></div>';});
+    $("chartRows").innerHTML=h; $("chart").setAttribute("aria-label","Graphique : "+rows.map(function(r){return r.label+" "+eur(tot(r))}).join(" ; "));
+  }
 
   function todo(r){
     var t=[], sup=0, don=0, hab=0, nsp=0, proj=0;
@@ -550,11 +566,13 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
     $("duree").textContent= r.savedS>0 ? mins(r.dureeBrut)+" → "+mins(r.dureeNet) : mins(r.dureeBrut);
     $("nbpj").textContent= r.pj!==r.pjKeep ? r.pj+" → "+r.pjKeep : String(r.pj);
     $("etp").textContent= r.etp>0 ? r.etp.toLocaleString("fr-FR",{maximumFractionDigits:1})+" ETP" : "–";
-    var mp=mep(r.ln);
-    $("mCost").textContent=eur(mp.central)+" (de "+eur(mp.bas)+" à "+eur(mp.haut)+")";
-    $("mDays").textContent=mp.m.central.toLocaleString("fr-FR")+" j (de "+mp.m.bas.toLocaleString("fr-FR")+" à "+mp.m.haut.toLocaleString("fr-FR")+" j)";
-    $("mDelai").textContent=mp.m.delai;
-    $("mPerDossier").textContent= r.D>0 ? (mp.central/r.D).toLocaleString("fr-FR",{maximumFractionDigits:2})+" € par dossier" : "–";
+    var cost=r.D*PLAT, gb=r.adminBas+r.dematBas+r.cadrage, gh=r.adminHaut+r.dematHaut+r.cadrage;
+    drawChart([
+      {label:"Gains, hypothèses basses",sub:"par an",segs:[["a","Administration",r.adminBas],["d","Dématérialisation",r.dematBas],["p","Informations retirées",r.cadrage]]},
+      {label:"Gains, hypothèses hautes",sub:"par an",segs:[["a","Administration",r.adminHaut],["d","Dématérialisation",r.dematHaut],["p","Informations retirées",r.cadrage]]},
+      {label:"Coût de la plateforme",sub:"estimation haute",segs:[["c","Plateforme",cost]]}
+    ]);
+    $("ratioC").textContent= cost>0 ? (gb/cost).toLocaleString("fr-FR",{maximumFractionDigits:0})+" à "+(gh/cost).toLocaleString("fr-FR",{maximumFractionDigits:0})+" € de gains pour 1 €" : "–";
     $("gAdmin").textContent=rng(r.adminBas,r.adminHaut);
     $("gUsager").textContent=rng(r.dematBas+r.cadrage,r.dematHaut+r.cadrage);
     $("gDemat").textContent=rng(r.dematBas,r.dematHaut);
@@ -575,8 +593,8 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
     $("sheet").innerHTML='<h1>Fiche de cadrage : '+esc(nom)+'</h1><p>Établie le '+new Date().toLocaleDateString("fr-FR")+' · paramètres version 7</p>'+
       '<h2>La démarche</h2><p>'+Math.round(r.D).toLocaleString("fr-FR")+' dossiers par an · '+Math.round(r.pp*100)+' % de particuliers · délai prévu : '+(num("delai")||"non fixé")+' jours · silence : '+$("silence").options[$("silence").selectedIndex].text+'</p>'+
       (rida?'<p>Formulaire national existant : '+esc(rida[1])+' ('+esc(rida[0])+'), '+esc(rida[2]||'')+'</p>':'')+'<h2>Base juridique</h2><p>'+esc($("jtype").options[$("jtype").selectedIndex].text)+($("jart").value?' — '+esc($("jart").value):'')+($("jurl").value?' — '+esc($("jurl").value):'')+' · niveau '+(juridique().lvl||'non renseigné')+'</p>'+'<h2>Complexité</h2><p>'+LVL[r.lb]+(r.lb!==r.ln?' → '+LVL[r.ln]:'')+' · durée estimée : '+mins(r.dureeBrut)+(r.savedS>0?' → '+mins(r.dureeNet):'')+' · pièces jointes : '+r.pj+(r.pj!==r.pjKeep?' → '+r.pjKeep:'')+' · charge d\'instruction : '+(r.etp>0?r.etp.toLocaleString("fr-FR",{maximumFractionDigits:1})+' ETP':'non renseignée')+'</p>'+
-      (FIELDREP.length?'<h2>Champs du formulaire</h2><table><thead><tr><th>Champ</th><th>Constat</th></tr></thead><tbody>'+FIELDREP.filter(function(x){return x.k!=="ok"}).map(function(x){return'<tr><td>'+esc(x.lib)+'</td><td>'+esc(x.m)+'</td></tr>'}).join("")+'</tbody></table>':'')+'<h2>Mise en place</h2><p>Niveau retenu : '+LVL[r.ln]+' · temps de travail : '+MEP[r.ln].central+' j (de '+MEP[r.ln].bas+' à '+MEP[r.ln].haut+' j) · coût : '+eur(MEP[r.ln].central*JOUR)+' (de '+eur(MEP[r.ln].bas*JOUR)+' à '+eur(MEP[r.ln].haut*JOUR)+') · délai de mise en service : '+MEP[r.ln].delai+'. Dépenses comparables à celles d\'un formulaire PDF reçu dans une boîte fonctionnelle.</p>'+'<h2>Informations demandées</h2><table><thead><tr><th>Information</th><th>Nature</th><th>Justificatif de</th><th>Recommandation</th></tr></thead><tbody>'+(rows||'<tr><td colspan="4">Aucune</td></tr>')+'</tbody></table>'+
-      '<h2>Gains annuels estimés</h2><p>Administration : '+rng(r.adminBas,r.adminHaut)+' · Usagers : '+rng(r.dematBas+r.cadrage,r.dematHaut+r.cadrage)+' (dont '+eur(r.cadrage)+' grâce au cadrage) · Coût de création évité : au moins 7 000 €, une fois.</p>'+
+      (FIELDREP.length?'<h2>Champs du formulaire</h2><table><thead><tr><th>Champ</th><th>Constat</th></tr></thead><tbody>'+FIELDREP.filter(function(x){return x.k!=="ok"}).map(function(x){return'<tr><td>'+esc(x.lib)+'</td><td>'+esc(x.m)+'</td></tr>'}).join("")+'</tbody></table>':'')+'<h2>Informations demandées</h2><table><thead><tr><th>Information</th><th>Nature</th><th>Justificatif de</th><th>Recommandation</th></tr></thead><tbody>'+(rows||'<tr><td colspan="4">Aucune</td></tr>')+'</tbody></table>'+
+      '<h2>Gains annuels estimés</h2><p>Administration : '+rng(r.adminBas,r.adminHaut)+' · Usagers : '+rng(r.dematBas+r.cadrage,r.dematHaut+r.cadrage)+' (dont '+eur(r.cadrage)+' grâce au cadrage)</p><p>Le coût de création de la démarche est commun à tous les supports et n\'est pas compté.</p>'+
       '<h2>À faire avant la mise en ligne</h2><ul>'+todo(r).map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+'</ul>'+
       '<h2>Indicateurs suivis après mise en ligne</h2><ul>'+(ind.length?ind.map(function(x){return"<li>"+x+"</li>"}).join(""):"<li>Aucun</li>")+'</ul>'+
       '<p style="font-size:9pt">Estimation indicative fondée sur des conventions publiques (Démarche Numérique, France Stratégie 2018, Destatis, rapport Quinet, Insee). Voir FORM 2026.</p>';

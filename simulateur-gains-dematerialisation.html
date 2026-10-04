@@ -12,6 +12,7 @@
 <meta property="og:description" content="Estimez les gains de vos démarches en ligne, pour votre administration et pour vos usagers, avec des hypothèses publiques.">
 <meta property="og:url" content="https://emsnytech.github.io/form2026/simulateur-gains-dematerialisation.html">
 <meta name="twitter:card" content="summary">
+<meta name="page-version" content="2026-10-04-r3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -83,7 +84,29 @@ dt{color:var(--muted)} dd{margin:0;text-align:right;font-variant-numeric:tabular
 
 .total{margin-top:1rem;padding:1rem 1.2rem;border-radius:10px;background:var(--surface);border:1px solid var(--line);display:flex;flex-wrap:wrap;gap:.4rem 2rem;align-items:baseline}
 .total strong{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1.5rem}
-.extras{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+
+.chart{margin-top:1.2rem;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem}
+.chart h3{margin:0 0 .6rem}
+.crow{display:grid;grid-template-columns:9.5rem 1fr;align-items:center;gap:.7rem;margin:.55rem 0;font-size:.9rem}
+@media (max-width:620px){.crow{grid-template-columns:1fr;gap:.2rem}}
+.cl{color:var(--ink);font-weight:600;line-height:1.25}
+.cl small{display:block;font-weight:400;color:var(--muted)}
+.ctrack{display:flex;align-items:center;gap:.5rem}
+.cstack{display:flex;height:30px;border-radius:6px;overflow:hidden;background:var(--paper);border:1px solid var(--line);min-width:2px}
+.seg{height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.78rem;font-weight:700;white-space:nowrap;overflow:hidden}
+.seg.a{background:var(--admin)}
+.seg.d{background:var(--usager)}
+.seg.p{background:color-mix(in srgb,var(--usager) 55%,var(--surface));color:var(--ink)}
+.seg.c{background:var(--accent)}
+.seg.pot{background:transparent;border:2px dashed var(--usager);color:var(--usager)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .seg{color:#18181b} }
+.cval{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cleg{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-top:.7rem;font-size:.83rem;color:var(--muted)}
+.cleg i{display:inline-block;width:.8rem;height:.8rem;border-radius:3px;margin-right:.35rem;vertical-align:-1px}
+.cleg i.a{background:var(--admin)} .cleg i.d{background:var(--usager)} .cleg i.p{background:color-mix(in srgb,var(--usager) 55%,var(--surface))} .cleg i.c{background:var(--accent)} .cleg i.pot{border:2px dashed var(--usager)}
+.caxis{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin:.2rem 0 0 10.2rem}
+@media (max-width:620px){.caxis{margin-left:0}}
+.extras{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem}
 @media (max-width:760px){.extras{grid-template-columns:1fr}}
 .extras .panel p{margin:.3rem 0 0}
 .big{font-weight:700;font-size:1.15rem;font-variant-numeric:tabular-nums}
@@ -115,8 +138,6 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
 
   <div class="grid">
     <form class="panel" id="f" onsubmit="return false" aria-label="Paramètres de simulation">
-      <label for="demarches">Démarches à créer dans l'année</label>
-      <input id="demarches" type="number" min="0" step="1" value="10" inputmode="numeric">
 
       <label for="dossiers">Dossiers attendus par an<span class="hint">Toutes démarches confondues</span></label>
       <input id="dossiers" type="number" min="0" step="100" value="10000" inputmode="numeric">
@@ -166,10 +187,17 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
         </div>
       </div>
 
-      <div class="bars" aria-hidden="true">
-        <div class="bar"><span>Administration</span><div class="track"><div class="fill a" id="barA"></div></div></div>
-        <div class="bar"><span>Usagers</span><div class="track"><div class="fill u" id="barU"></div></div></div>
-        <div class="scale"><span>0</span><span id="scaleMax">–</span></div>
+      <div class="chart" id="chart" role="img" aria-label="Graphique : gains annuels et coût de la plateforme">
+        <h3>Gains annuels et coût de la plateforme</h3>
+        <div id="chartRows"></div>
+        <div class="caxis"><span>0</span><span id="axisMid">–</span><span id="axisMax">–</span></div>
+        <div class="cleg">
+          <span><i class="a"></i>Administration</span>
+          <span><i class="d"></i>Usagers : dématérialisation</span>
+          <span><i class="p"></i>Usagers : préremplissage</span>
+          <span><i class="c"></i>Coût de la plateforme</span>
+          <span><i class="pot"></i>Potentiel non compris</span>
+        </div>
       </div>
 
       <div class="total">
@@ -179,15 +207,10 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
 
       <div class="extras">
         <div class="panel">
-          <h3>Mise en place de vos démarches</h3>
-          <p class="big" id="mep">–</p>
-          <p class="small" id="mepDays">–</p>
-          <p class="small">Création, paramétrage, validation, tests et formation, selon la complexité. Ces dépenses sont sensiblement les mêmes pour des formulaires PDF reçus dans une boîte fonctionnelle : les économies sont les gains annuels ci-dessus.</p>
-        </div>
-        <div class="panel">
-          <h3>Coût de création évité</h3>
-          <p class="big" id="creation">–</p>
-          <p class="small">Gain ponctuel, à ne pas additionner aux gains annuels. De l'achat d'un seul outil à un formulaire acheté par démarche, au prix constaté de 7 000 € sur une solution commerciale.</p>
+          <h3>Pour chaque euro investi dans la plateforme</h3>
+          <p class="big" id="ratio">–</p>
+          <p class="small" id="platCost">–</p>
+          <p class="small">Le coût de création des démarches est commun à tous les supports (PDF ou plateforme) et n'est pas compté. Les gains sont des temps et des coûts valorisés, pas des économies budgétaires.</p>
         </div>
         <div class="panel">
           <h3>Potentiel encore à gagner</h3>
@@ -229,14 +252,14 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
       <li><strong>Usagers, préremplissage :</strong> durées de remplissage par type de champ tirées du code source public de la plateforme (10 s par champ standard, 60 s pour un SIRET ou un IBAN, 180 s pour une pièce jointe), étape d'identité comprise (FranceConnect pour les particuliers, API Entreprise pour les personnes morales).</li>
       <li><strong>Valeur du temps :</strong> 7,28 €/h pour un particulier (rapport Quinet), 44,70 €/h pour une personne morale (coût horaire du travail en France, 2025, Insee et Eurostat). La même valeur de 44,70 €/h sert à convertir le gain administration en heures de travail, à titre indicatif.</li>
       <li><strong>Complexité :</strong> niveaux calculés à partir du nombre de champs obligatoires, de blocs répétables et de pièces justificatives de chaque démarche publiée (descriptif open data), en terciles pondérés par les dossiers.</li>
-      <li><strong>Mise en place :</strong> 1, 5 ou 15 jours de travail par démarche selon sa complexité (hypothèse de l'auteur ; bas : moitié ; haut : délais médians observés de mise en service, validation comprise, soit 4,2, 9,1 et 20 jours), valorisés à 312,90 € par jour (coût horaire moyen du travail dans le secteur marchand, faute de référence publique pour la fonction publique). Ces dépenses sont sensiblement les mêmes pour un formulaire PDF reçu dans une boîte fonctionnelle.</li>
-      <li><strong>Coût de création :</strong> 7 000 € par formulaire, prix constaté pour la mise en ligne d'un formulaire sur une solution commerciale. Les marchés publics de création de téléservices observés vont de 31 000 € à 800 000 €.</li>
+      <li><strong>Coût de la plateforme :</strong> 14 M€ au plus (construction et exploitation, 2018-2026, estimation haute), rapportés aux 18,2 millions de dossiers déposés depuis 2018, soit environ 0,77 € par dossier. Ce coût est supporté par l'État, sans licence pour les services.</li>
+      <li><strong>Coût de création d'une démarche :</strong> non compté. Il est sensiblement le même quel que soit le support (formulaire PDF ou plateforme) : concevoir les questions, les faire valider, les tester, former les agents. Seuls le traitement des dossiers et le remplissage par l'usager sont comparés.</li>
     </ul>
-    <p>Ce que le simulateur ne mesure pas : le temps passé à rechercher les pièces justificatives, les erreurs évitées, les échanges de courriels supprimés, le coût d'exploitation de la plateforme (0,37 € par dossier en 2025). Dans les données publiques de la plateforme, les démarches demandant cinq pièces justificatives ou plus regroupent les trois quarts des dossiers déposés avec retard.</p>
+    <p>Ce que le simulateur ne mesure pas : le temps passé à rechercher les pièces justificatives, les erreurs évitées, les échanges de courriels supprimés, le temps de création des démarches (commun à tous les supports). Dans les données publiques de la plateforme, les démarches demandant cinq pièces justificatives ou plus regroupent les trois quarts des dossiers déposés avec retard.</p>
   </section>
 
   <footer>
-    <p>Estimation indicative, fondée sur des conventions publiques et non sur une mesure propre à votre organisme. Paramètres version 7, septembre 2026.</p>
+    <p>Estimation indicative, fondée sur des conventions publiques et non sur une mesure propre à votre organisme. Paramètres version 7, septembre 2026. Version de la page : 4 octobre 2026, révision 3.</p>
     <p>Pour vérifier ou contester les hypothèses : <a href="https://emsnytech.github.io/form2026/">FORM 2026</a>, la cartographie des démarches et des données demandées, qui détaille les calculs et résultats par démarche.</p>
   </footer>
 </div>
@@ -253,8 +276,7 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
   };
   var POT = {simple:{pp:0.0940,pm:0.0763}, modere:{pp:0.1550,pm:0.2748}, complexe:{pp:0.3937,pm:0.4735}};
   var RATE = {pp:7.28, pm:44.70};
-  var CREATION = 7000;
-  var MEP={simple:[0.5,1,4.2],modere:[2.5,5,9.1],complexe:[7.5,15,20]}, JOUR=312.90;
+  var PLAT = 14000000/18220327; // coût de la plateforme par dossier déposé (14 M€ au plus ÷ 18,2 M de dossiers)
 
   var LEVELS = [["simple","Simple","environ 5 min"],["modere","Modérée","environ 15 min"],["complexe","Complexe","environ 37 min"]];
 
@@ -288,8 +310,20 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
     return r;
   }
 
+  function drawChart(rows){
+    var tot=function(r){return r.segs.reduce(function(a,s){return a+s[2]},0)};
+    var max=Math.max.apply(null,rows.map(tot))||1, h="";
+    rows.forEach(function(r){
+      var t=tot(r), w=t/max*100;
+      h+='<div class="crow"><div class="cl">'+r.label+'<small>'+r.sub+'</small></div><div class="ctrack"><div class="cstack" style="width:'+Math.max(w,0.6)+'%">'+
+        r.segs.map(function(s){var sw=t>0?s[2]/t*100:0;return '<div class="seg '+s[0]+'" style="width:'+sw+'%" title="'+s[1]+' : '+eur(s[2])+'">'+(sw>16&&w>22?eur(s[2]):'')+'</div>'}).join("")+
+        '</div><span class="cval">'+eur(t)+'</span></div></div>';
+    });
+    $("chartRows").innerHTML=h; $("axisMid").textContent=eur(max/2); $("axisMax").textContent=eur(max);
+    $("chart").setAttribute("aria-label","Graphique : "+rows.map(function(r){return r.label+" "+eur(tot(r))}).join(" ; "));
+  }
   function update(){
-    var N = val("demarches"), D = val("dossiers"), A = val("agents");
+    var D = val("dossiers"), A = val("agents");
     var pp = val("pp")/100; $("ppv").textContent = Math.round(pp*100);
     var ms=val("ms"), mm=val("mm"), mc=val("mc"), s=ms+mm+mc;
     var fc = document.querySelector('input[name="fc"]:checked').value;
@@ -308,16 +342,17 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
     $("uDemat").textContent = rng(r.dematBas, r.dematHaut);
     $("uPre").textContent = eur(r.pre);
     $("totalRange").textContent = rng(r.totBas, r.totHaut);
-    $("creation").textContent = N>0 ? (N>1 ? rng(CREATION, CREATION*N) : eur(CREATION)) : "Indiquez un nombre de démarches";
-    var dj=[0,1,2].map(function(i){return N*(mix.simple*MEP.simple[i]+mix.modere*MEP.modere[i]+mix.complexe*MEP.complexe[i])});
-    $("mep").textContent = N>0 ? eur(dj[1]*JOUR)+" (de "+eur(dj[0]*JOUR)+" à "+eur(dj[2]*JOUR)+")" : "Indiquez un nombre de démarches";
-    $("mepDays").textContent = N>0 ? "Soit "+Math.round(dj[1]).toLocaleString("fr-FR")+" jours de travail (de "+Math.round(dj[0]).toLocaleString("fr-FR")+" à "+Math.round(dj[2]).toLocaleString("fr-FR")+")" : "";
     $("potentiel").textContent = eur(r.pot)+" par an";
 
-    var max = Math.max(r.adminHaut, r.uHaut) || 1;
-    var place = function(el,a,b){ el.style.left=(a/max*100)+"%"; el.style.width=Math.max((b-a)/max*100,0.8)+"%"; };
-    place($("barA"), r.adminBas, r.adminHaut); place($("barU"), r.uBas, r.uHaut);
-    $("scaleMax").textContent = eur(max);
+    var cost = D*PLAT;
+    $("platCost").textContent = D>0 ? "Coût de la plateforme pour vos dossiers : environ "+eur(cost)+" par an (estimation haute, "+(PLAT).toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" € par dossier)." : "Indiquez un nombre de dossiers.";
+    $("ratio").textContent = D>0 ? "1 € investi : "+(r.totBas/cost).toLocaleString("fr-FR",{maximumFractionDigits:0})+" à "+(r.totHaut/cost).toLocaleString("fr-FR",{maximumFractionDigits:0})+" € de gains" : "–";
+    drawChart([
+      {label:"Gains, hypothèses basses",sub:"administration et usagers",segs:[["a","Administration",r.adminBas],["d","Dématérialisation",r.dematBas],["p","Préremplissage",r.pre]]},
+      {label:"Gains, hypothèses hautes",sub:"administration et usagers",segs:[["a","Administration",r.adminHaut],["d","Dématérialisation",r.dematHaut],["p","Préremplissage",r.pre]]},
+      {label:"Coût de la plateforme",sub:"estimation haute",segs:[["c","Coût de la plateforme",cost]]},
+      {label:"Potentiel non mobilisé",sub:"hors total",segs:[["pot","Potentiel",r.pot]]}
+    ]);
 
     var rows = "";
     LEVELS.forEach(function(L){
