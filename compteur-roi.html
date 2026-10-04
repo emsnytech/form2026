@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le compteur : ce que la plateforme coûte et rapporte, minute après minute</title>
+<meta name="description" content="Estimation, minute après minute, des gains et des coûts engendrés par Démarche Numérique depuis le 1er janvier et depuis le début du mois, et du retour sur investissement. Modèle à partir des données publiques.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="FORM 2026">
+<meta property="og:title" content="Le compteur : ce que la plateforme coûte et rapporte, minute après minute">
+<meta property="og:description" content="Gains, coûts et retour sur investissement de la dématérialisation, depuis le 1er janvier et depuis le début du mois. Estimation modélisée, hypothèses publiées.">
+<meta property="og:url" content="https://emsnytech.github.io/form2026/compteur-roi.html">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1e2022; --muted:#5c6066; --paper:#fbf9f5; --surface:#ffffff; --line:#e2dfd7;
+  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4; --accent:#b45309; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+    --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--admin)}
+.wrap{max-width:1120px;margin:0 auto;padding:2rem 1.25rem 3rem}
+.topnav{margin:0 0 1.2rem;font-size:.95rem}
+h1,h2,h3{font-weight:800;line-height:1.2;margin:0}
+h1{font-size:clamp(1.7rem,3.8vw,2.5rem);max-width:28ch}
+h2{font-size:1.2rem}
+.lede{color:var(--muted);max-width:70ch;margin:.8rem 0 0}
+.clock{margin-top:1rem;display:flex;gap:.6rem 1.2rem;flex-wrap:wrap;align-items:center;font-size:.95rem;color:var(--muted)}
+.live{display:inline-flex;align-items:center;gap:.4rem;font-weight:700;color:var(--usager)}
+.live i{width:.6rem;height:.6rem;border-radius:50%;background:var(--usager);display:inline-block}
+@media (prefers-reduced-motion:no-preference){.live i{animation:pulse 1.6s ease-in-out infinite}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.notice{margin-top:1.1rem;padding:.8rem 1rem;border-radius:8px;background:var(--warn-soft);border:1px solid var(--line);border-left:5px solid var(--warn);font-size:.93rem;max-width:90ch}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.6rem}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.3rem 1.1rem}
+.panel h2{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;align-items:baseline}
+.panel h2 small{font-size:.82rem;font-weight:600;color:var(--muted)}
+.roi{margin:1rem 0 .2rem;padding:.9rem 1rem;border-radius:10px;background:var(--admin-soft);text-align:center}
+.roi .lab{font-size:.85rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.roi .val{font-size:clamp(1.9rem,4vw,2.6rem);font-weight:800;color:var(--admin);font-variant-numeric:tabular-nums;line-height:1.15}
+.roi .sub{font-size:.9rem;color:var(--muted)}
+.rows{margin:.9rem 0 0;display:grid;gap:.7rem}
+.row{display:grid;grid-template-columns:1fr;gap:.1rem;padding:.6rem 0;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row .l{font-size:.9rem;color:var(--muted)}
+.row .v{font-size:1.45rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.2}
+.row .v small{font-size:.9rem;font-weight:600;color:var(--muted)}
+.row .d{font-size:.82rem;color:var(--muted)}
+.g .v{color:var(--usager)} .c .v{color:var(--accent)} .n .v{color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.minute{margin-top:1.2rem;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.3rem}
+.minute h2{margin-bottom:.6rem}
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+@media (max-width:760px){.mgrid{grid-template-columns:repeat(2,1fr)}}
+.m b{display:block;font-size:1.35rem;font-variant-numeric:tabular-nums;line-height:1.2}
+.m span{font-size:.82rem;color:var(--muted)}
+details{margin-top:1.2rem;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.9rem 1.3rem}
+summary{cursor:pointer;font-weight:800;font-size:1.05rem}
+summary:focus-visible{outline:3px solid var(--admin);outline-offset:3px}
+details p,details li{font-size:.95rem}
+table{border-collapse:collapse;width:100%;font-size:.9rem;font-variant-numeric:tabular-nums;margin:.6rem 0}
+th,td{padding:.4rem .6rem;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+th:first-child,td:first-child{text-align:left}
+thead th{color:var(--muted);font-size:.8rem}
+.tw{overflow-x:auto}
+footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted);max-width:90ch}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="topnav"><a href="index.html">Retour à FORM 2026</a> · <a href="simulateur-gains-dematerialisation.html">Estimer ses gains</a> · <a href="cadrage-dematerialisation.html">Cadrer une démarche</a> · <a href="comparer-cadre-fonctionnel.html">Comparer un outil</a> · <a href="compteur-roi.html">Compteur</a></p>
+  <header>
+    <h1>Ce que la plateforme coûte et rapporte, minute après minute</h1>
+    <p class="lede">Gains pour l'administration et les usagers, coûts de mise en place et de fonctionnement, et retour sur investissement de Démarche Numérique, depuis le 1er janvier et depuis le début du mois.</p>
+    <div class="clock"><span class="live"><i></i> Compteur actif</span><span id="now">–</span><span id="fresh">–</span></div>
+    <div class="notice"><b>Une estimation, pas une mesure en temps réel.</b> Le compteur applique à l'activité publiée par la plateforme des gains et des coûts unitaires issus de conventions publiques, toujours en fourchette. Le mois en cours est extrapolé à partir du dernier mois publié.</div>
+  </header>
+
+  <div class="grid">
+    <section class="panel" aria-labelledby="pY">
+      <h2 id="pY"><span>Depuis le 1<sup>er</sup> janvier</span><small id="pYsub"></small></h2>
+      <div class="roi"><div class="lab">Retour sur investissement</div><div class="val" id="roiY">–</div><div class="sub" id="roiYs">–</div></div>
+      <div class="rows" id="rowsY"></div>
+    </section>
+    <section class="panel" aria-labelledby="pM">
+      <h2 id="pM"><span>Depuis le début du mois</span><small id="pMsub"></small></h2>
+      <div class="roi"><div class="lab">Retour sur investissement</div><div class="val" id="roiM">–</div><div class="sub" id="roiMs">–</div></div>
+      <div class="rows" id="rowsM"></div>
+    </section>
+  </div>
+
+  <section class="minute" aria-labelledby="pMin">
+    <h2 id="pMin">À chaque minute qui passe (rythme de <span id="baseLabel">septembre</span>)</h2>
+    <div class="mgrid">
+      <div class="m"><b id="mDepo">–</b><span>dossiers déposés</span></div>
+      <div class="m"><b id="mCrees">–</b><span>dossiers commencés</span></div>
+      <div class="m"><b id="mGain">–</b><span>de gains</span></div>
+      <div class="m"><b id="mCout">–</b><span>de coûts</span></div>
+    </div>
+    <p style="margin:.7rem 0 0;font-size:.88rem;color:var(--muted)" id="mDem">–</p>
+  </section>
+
+  <details>
+    <summary>Comment le compteur est calculé</summary>
+    <p><b>Activité.</b> Dossiers déposés et dossiers commencés : séries mensuelles publiées sur data.gouv.fr par la plateforme. Démarches publiées : estimées à partir des démarches créées, par le rapport observé en 2025 entre démarches publiées et créées (<span id="ratioPub">–</span>), faute de série publiée.</p>
+    <p><b>Gains</b> = dossiers déposés × gain par dossier (niveau de complexité moyen, 66 % de particuliers) : coût de traitement évité pour l'administration, temps évité pour l'usager (de 2 à 30 minutes) et préremplissage déjà réalisé.</p>
+    <p><b>Coûts</b> = démarches publiées × temps de mise en place d'un agent (niveau de complexité moyen, valorisé à 312,90 € par jour) + budget annuel de la plateforme (estimation haute) réparti à la minute. Ces coûts auraient été en grande partie engagés aussi avec un formulaire PDF reçu dans une boîte fonctionnelle : le retour sur investissement est donc prudent.</p>
+    <p><b>Retour sur investissement</b> = gains ÷ coûts. La fourchette va de gains bas ÷ coûts hauts à gains hauts ÷ coûts bas ; la valeur appariée associe les hypothèses basses entre elles et les hautes entre elles.</p>
+    <div class="tw"><table id="params"></table></div>
+    <p><b>Gain net.</b> Gains moins coûts, avec des hypothèses appariées : basses avec basses, hautes avec hautes. Les combinaisons extrêmes (gains bas avec coûts hauts, et l'inverse) sont indiquées à part : elles supposent que toutes les incertitudes jouent dans le même sens.</p>
+    <p><b>Coût de la plateforme par dossier déposé, mois par mois</b> (budget annuel ÷ 12 ÷ dossiers déposés du mois, estimation haute ; 0,37 € en 2025 selon le bilan 2025 de la plateforme) :</p>
+    <div class="tw"><table id="monthly"></table></div>
+    <p>Les gains sont des temps et des coûts valorisés, pas des économies budgétaires. Données : <a href="https://www.data.gouv.fr/datasets/utilisation-du-service-demarche-numerique-gouv-fr">Utilisation du service demarche.numerique.gouv.fr</a>.</p>
+  </details>
+
+  <footer>Paramètres version 7, octobre 2026. Données d'activité publiées par la plateforme sur data.gouv.fr. Le budget annuel de la plateforme (2,1 M€) est une estimation haute, retenue par prudence.</footer>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  // ---------- paramètres (surchargés par compteur-parametres.json s'il existe) ----------
+  var P={
+    base_month:"2026-09", data_updated:"2026-10-01",
+    months:{ // activité publiée (data.gouv.fr) ; proc_creees : démarches créées ; proc_publiees : renseigné si une série existe
+      "2026-01":{depo:424168,crees:680503,proc_creees:1924},"2026-02":{depo:376741,crees:722826,proc_creees:2125},
+      "2026-03":{depo:451254,crees:879201,proc_creees:2246},"2026-04":{depo:460873,crees:893413,proc_creees:2016},
+      "2026-05":{depo:393654,crees:841522,proc_creees:1967},"2026-06":{depo:435093,crees:894359,proc_creees:2242},
+      "2026-07":{depo:451607,crees:952193,proc_creees:1817},"2026-08":{depo:338815,crees:728948,proc_creees:1192},
+      "2026-09":{depo:574693,crees:1088427,proc_creees:2605}
+    },
+    ratio_pub:9083/21909,           // démarches publiées / créées, 2025 (bilan 2025 ; data.gouv.fr)
+    plateforme_annuel:2100000,      // budget 2026 : estimation haute, retenue par prudence (14 M€ − 11,9 M€)
+    jour_agent:312.90, rate_pp:7.28, rate_pm:44.70, part_pp:.66,
+    admin:{bas:6.79,haut:10.70}, demat_min:{bas:2,haut:30},
+    pre:{simple:[0.0409,0.6886],modere:[0.0692,1.1219],complexe:[0.1085,1.2029]},   // €/dossier [particulier, personne morale]
+    mix_dossiers:{simple:.34,modere:.30,complexe:.36},
+    mix_demarches:{simple:11139/34185,modere:8549/34185,complexe:14497/34185},
+    jours:{bas:{simple:.5,modere:2.5,complexe:7.5},central:{simple:1,modere:5,complexe:15},haut:{simple:4.2,modere:9.1,complexe:20}}
+  };
+  function ready(){
+    // gains par dossier déposé
+    var d=P.demat_min, pp=P.part_pp, pm=1-pp, lv=["simple","modere","complexe"];
+    var dem={bas:pp*d.bas/60*P.rate_pp+pm*d.bas/60*P.rate_pm, haut:pp*d.haut/60*P.rate_pp+pm*d.haut/60*P.rate_pm};
+    var pre=0; lv.forEach(function(k){pre+=P.mix_dossiers[k]*(pp*P.pre[k][0]+pm*P.pre[k][1])});
+    P.g={admin:P.admin,demat:dem,pre:pre,bas:P.admin.bas+dem.bas+pre,haut:P.admin.haut+dem.haut+pre};
+    // coûts par démarche publiée
+    P.c={}; ["bas","central","haut"].forEach(function(s){var j=0;lv.forEach(function(k){j+=P.mix_demarches[k]*P.jours[s][k]});P.c[s]={jours:j,eur:j*P.jour_agent};});
+    run();
+  }
+  // ---------- calendrier (heure de Paris) ----------
+  function parisNow(){
+    var f=new Intl.DateTimeFormat("fr-FR",{timeZone:"Europe/Paris",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false});
+    var o={}; f.formatToParts(new Date()).forEach(function(p){o[p.type]=p.value});
+    return {y:+o.year,m:+o.month,d:+o.day,h:(+o.hour)%24,mi:+o.minute,s:+o.second};
+  }
+  function dim(y,m){return new Date(Date.UTC(y,m,0)).getUTCDate()}
+  function key(y,m){return y+"-"+String(m).padStart(2,"0")}
+  function minutesInMonth(y,m){return dim(y,m)*1440}
+  function elapsedMonth(n){return ((n.d-1)*1440+n.h*60+n.mi+n.s/60)}
+  // ---------- calcul d'une période : somme des mois entiers + mois en cours ----------
+  function activityOfMonth(y,m){
+    var k=key(y,m), a=P.months[k];
+    if(a){return {depo:a.depo,crees:a.crees,proc:(a.proc_publiees!=null?a.proc_publiees:a.proc_creees*P.ratio_pub),actual:true};}
+    var b=P.months[P.base_month], mins=minutesInMonth.apply(null,P.base_month.split("-").map(Number)), r=minutesInMonth(y,m)/mins;
+    return {depo:b.depo*r,crees:b.crees*r,proc:(b.proc_publiees!=null?b.proc_publiees:b.proc_creees*P.ratio_pub)*r,actual:false};
+  }
+  function compute(n,fromMonth){ // depuis le début du mois fromMonth de l'année courante jusqu'à maintenant
+    var tot={depo:0,crees:0,proc:0,months:0,est:false};
+    for(var m=fromMonth;m<=n.m;m++){
+      var a=activityOfMonth(n.y,m), frac=1;
+      if(m===n.m){frac=elapsedMonth(n)/minutesInMonth(n.y,m);}
+      tot.depo+=a.depo*frac; tot.crees+=a.crees*frac; tot.proc+=a.proc*frac; tot.months+=frac;
+      if(!a.actual)tot.est=true;
+    }
+    var gb=tot.depo*P.g.bas, gh=tot.depo*P.g.haut, plat=P.plateforme_annuel/12*tot.months;
+    var cb=tot.proc*P.c.bas.eur+plat, cc=tot.proc*P.c.central.eur+plat, ch=tot.proc*P.c.haut.eur+plat;
+    return {a:tot,gb:gb,gh:gh,cb:cb,cc:cc,ch:ch,plat:plat,
+      gAdmin:[tot.depo*P.g.admin.bas,tot.depo*P.g.admin.haut],gUsag:[tot.depo*(P.g.demat.bas+P.g.pre),tot.depo*(P.g.demat.haut+P.g.pre)],
+      cMep:[tot.proc*P.c.bas.eur,tot.proc*P.c.haut.eur],
+      roiMin:ch>0?gb/ch:null,roiMax:cb>0?gh/cb:null,roiApp:(cb>0&&ch>0)?(gb/cb+gh/ch)/2:null,
+      netBB:gb-cb,netHH:gh-ch,netMin:gb-ch,netMax:gh-cb,
+      platDos:tot.depo>0?plat/tot.depo:null,fullDosBas:tot.depo>0?cb/tot.depo:null,fullDosHaut:tot.depo>0?ch/tot.depo:null};
+  }
+  var E=function(v){return Math.round(v).toLocaleString("fr-FR")+" €"};
+  var N=function(v){return Math.round(v).toLocaleString("fr-FR")};
+  var E2=function(v){return v==null?"–":v.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" €"};
+  var X=function(v){return v==null?"–":v.toLocaleString("fr-FR",{minimumFractionDigits:1,maximumFractionDigits:1})};
+  function rows(c){
+    return '<div class="row g"><span class="l">Gains cumulés (administration et usagers)</span><span class="v">'+E(c.gb)+' <small>à</small> '+E(c.gh)+'</span><span class="d">dont administration '+E(c.gAdmin[0])+' à '+E(c.gAdmin[1])+' ; usagers '+E(c.gUsag[0])+' à '+E(c.gUsag[1])+'</span></div>'+
+      '<div class="row c"><span class="l">Coûts cumulés (mise en place et plateforme)</span><span class="v">'+E(c.cb)+' <small>à</small> '+E(c.ch)+'</span><span class="d">dont mise en place des démarches '+E(c.cMep[0])+' à '+E(c.cMep[1])+' ; plateforme (estimation haute) '+E(c.plat)+'</span></div>'+
+      '<div class="row c"><span class="l">Coût moyen par dossier déposé</span><span class="v">'+E2(c.platDos)+' <small>pour la plateforme</small></span><span class="d">budget de la plateforme (estimation haute) consommé au prorata des mois, divisé par les dossiers déposés ; avec la mise en place des démarches : '+E2(c.fullDosBas)+' à '+E2(c.fullDosHaut)+' par dossier</span></div>'+
+      '<div class="row n"><span class="l">Gain net (gains moins coûts, hypothèses appariées)</span><span class="v">'+E(c.netBB)+' <small>à</small> '+E(c.netHH)+'</span><span class="d">hypothèses basses, puis hypothèses hautes pour les gains comme pour les coûts. Combinaisons extrêmes non appariées, peu probables : de '+E(c.netMin)+' à '+E(c.netMax)+'</span></div>'+
+      '<div class="two"><div class="row n"><span class="l">Dossiers déposés</span><span class="v">'+N(c.a.depo)+'</span></div><div class="row n"><span class="l">Dossiers commencés</span><span class="v">'+N(c.a.crees)+'</span></div></div>'+
+      '<div class="row n"><span class="l">Démarches publiées'+(P.months[P.base_month].proc_publiees!=null?'':' (estimation)')+'</span><span class="v">'+N(c.a.proc)+'</span></div>';
+  }
+  var MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+  function run(){
+    var n=parisNow();
+    var cy=compute(n,1), cm=compute(n,n.m);
+    $("rowsY").innerHTML=rows(cy); $("rowsM").innerHTML=rows(cm);
+    $("roiY").textContent=(cy.roiMin==null?"–":X(cy.roiMin)+" à "+X(cy.roiMax)); $("roiYs").textContent=cy.roiApp==null?"":"≈ "+X(cy.roiApp)+" à hypothèses appariées";
+    $("roiM").textContent=(cm.roiMin==null?"–":X(cm.roiMin)+" à "+X(cm.roiMax)); $("roiMs").textContent=cm.roiApp==null?"Le mois commence":"≈ "+X(cm.roiApp)+" à hypothèses appariées";
+    $("pYsub").textContent=cy.a.est?"dont le mois en cours, estimé":"";
+    $("pMsub").textContent=MOIS[n.m-1]+" "+n.y+(cm.a.est?" · extrapolé":"");
+    $("now").textContent="Il est "+String(n.h).padStart(2,"0")+" h "+String(n.mi).padStart(2,"0")+" (heure de Paris)";
+    $("fresh").textContent="Dernières données publiées : "+P.data_updated.split("-").reverse().join("/");
+    // rythme à la minute (mois de base)
+    var b=P.months[P.base_month], mins=minutesInMonth.apply(null,P.base_month.split("-").map(Number));
+    var bm=b.proc_publiees!=null?b.proc_publiees:b.proc_creees*P.ratio_pub, platMin=P.plateforme_annuel/12/mins;
+    $("baseLabel").textContent=MOIS[+P.base_month.split("-")[1]-1];
+    $("mDepo").textContent="+"+X(b.depo/mins); $("mCrees").textContent="+"+X(b.crees/mins);
+    $("mGain").textContent="+"+N(b.depo*P.g.bas/mins)+" à "+N(b.depo*P.g.haut/mins)+" €";
+    $("mCout").textContent="+"+N((bm*P.c.bas.eur)/mins+platMin)+" à "+N((bm*P.c.haut.eur)/mins+platMin)+" €";
+    $("mDem").textContent="Soit environ une démarche publiée toutes les "+N(1/(bm/mins))+" minutes (estimation).";
+    $("ratioPub").textContent=X(P.ratio_pub*100)+" %";
+    if(!window.__tbl){
+      $("params").innerHTML='<thead><tr><th>Paramètre</th><th>Bas</th><th>Central</th><th>Haut</th></tr></thead><tbody>'+
+        '<tr><td>Gain par dossier déposé (administration + usagers + préremplissage)</td><td>'+P.g.bas.toFixed(2).replace(".",",")+' €</td><td>–</td><td>'+P.g.haut.toFixed(2).replace(".",",")+' €</td></tr>'+
+        '<tr><td>Temps de mise en place par démarche, niveau moyen (jours)</td><td>'+X(P.c.bas.jours)+'</td><td>'+X(P.c.central.jours)+'</td><td>'+X(P.c.haut.jours)+'</td></tr>'+
+        '<tr><td>Coût de mise en place par démarche</td><td>'+E(P.c.bas.eur)+'</td><td>'+E(P.c.central.eur)+'</td><td>'+E(P.c.haut.eur)+'</td></tr>'+
+        '<tr><td>Budget annuel de la plateforme (estimation haute, retenue par prudence)</td><td colspan="3">'+E(P.plateforme_annuel)+'</td></tr></tbody>';
+      window.__tbl=1;
+    }
+    var mh='<thead><tr><th>Mois</th><th>Dossiers déposés</th><th>Budget du mois</th><th>Coût par dossier</th></tr></thead><tbody>';
+    for(var mm=1;mm<=n.m;mm++){var am=activityOfMonth(n.y,mm), pm_=P.plateforme_annuel/12;
+      mh+='<tr><td>'+MOIS[mm-1]+(am.actual?'':' (estimé)')+'</td><td>'+N(am.depo)+'</td><td>'+E(pm_)+'</td><td>'+E2(pm_/am.depo)+'</td></tr>';}
+    $("monthly").innerHTML=mh+'</tbody>';
+    window.__state={cy:cy,cm:cm};
+  }
+  // chargement des paramètres externes s'ils existent, sinon valeurs embarquées
+  function start(){ready();setInterval(run,1000);}
+  try{
+    fetch("compteur-parametres.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(j){
+      if(j){Object.keys(j).forEach(function(k){P[k]=j[k]});}
+      start();
+    }).catch(start);
+  }catch(e){start();}
+})();
+</script>
+</body>
+</html>

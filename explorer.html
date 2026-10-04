@@ -160,6 +160,7 @@
   #btn-simulateur-externe{background:var(--tab-simulateur);color:#fff}
   #btn-cadrage-externe{background:var(--tab-simulateur);color:#fff}
   #btn-comparer-externe{background:var(--tab-simulateur);color:#fff}
+  #btn-compteur-externe{background:var(--tab-simulateur);color:#fff}
   nav.tabs button[data-tab="organismes"]{background:var(--tab-simulateur)}
   nav.tabs button[data-tab="overview"]{background:var(--tab-overview)}
   nav.tabs button[data-tab="demarches"]{background:var(--tab-demarches)}
@@ -366,6 +367,7 @@
     <button id="btn-simulateur-externe" type="button">Simulateur de gains ↗</button>
     <button id="btn-cadrage-externe" type="button">Cadrer une démarche ↗</button>
     <button id="btn-comparer-externe" type="button">Comparer un outil ↗</button>
+    <button id="btn-compteur-externe" type="button">Compteur ↗</button>
     <button data-tab="organismes" class="inactive">Gains par organisme</button>
     <button data-tab="stats" class="inactive">Statistiques</button>
     <button data-tab="overview">Vue générale</button>
@@ -835,6 +837,9 @@
   document.getElementById('btn-comparer-externe').addEventListener('click', ()=>{
     window.open('comparer-cadre-fonctionnel.html', '_blank', 'noopener');
   });
+  document.getElementById('btn-compteur-externe').addEventListener('click', ()=>{
+    window.open('compteur-roi.html', '_blank', 'noopener');
+  });
 
   function setActiveTabButton(){
     tabbar.querySelectorAll('button').forEach(b=>{
@@ -1025,6 +1030,16 @@
           <ul class="source-list">
             <li><b>Une convention, pas une mesure</b><span>Le manuel néerlandais le précise lui-même : ces durées doivent être vérifiées par des experts et remplacées si de fortes raisons indiquent qu'elles sont trop hautes ou trop basses. Elles servent à <b>estimer avant</b>, pas à <b>mesurer après</b> — la seule vraie mesure viendrait des métadonnées réelles des dossiers (durée effective, taux de correction constaté), un chantier distinct de celui-ci.</span></li>
             <li><b>Conçues pour évaluer des textes, pas des services numériques</b><span>Les tables Destatis/NL visent l'évaluation ex ante de projets réglementaires. Les appliquer au préremplissage d'une démarche en ligne est une transposition légitime, mais qui reste une transposition — assumée, pas dissimulée.</span></li>
+          </ul>
+        </div>
+
+        <div class="cover-section">
+          <h3><span class="dot" style="background:var(--tab-simulateur)"></span>Lecture des chiffres</h3>
+          <p>Trois règles s'appliquent partout où FORM présente des coûts, des gains, un gain net ou un retour sur investissement (ici, dans les statistiques, sur la page d'accueil, et dans <a href="compteur-roi.html" target="_blank" rel="noopener">le compteur</a>) :</p>
+          <ul class="source-list">
+            <li><b>Des hypothèses appariées</b><span>Un gain net ou un retour sur investissement se calcule avec des gains et des coûts de même hypothèse — bas avec bas, haut avec haut. Les combinaisons extrêmes (gains bas avec coûts hauts, et l'inverse) ne sont jamais la valeur principale ; quand elles sont indiquées, c'est à part, avec la mention « non appariées, peu probables ».</span></li>
+            <li><b>Le budget de la plateforme, une estimation haute</b><span>Le budget annuel de la plateforme porte la mention « estimation haute » partout où il apparaît, tant que le montant 2026 n'est pas confirmé. Le coût moyen par dossier déposé se calcule en divisant ce budget, consommé au prorata des mois, par les dossiers déposés sur la même période (référence 2025 : 0,37 €, bilan 2025 de la plateforme).</span></li>
+            <li><b>Jamais de valeur seule</b><span>Un chiffre n'est jamais présenté sans sa fourchette quand le paramètre dont il dépend en a une — bas à haut, jamais seulement le scénario central.</span></li>
           </ul>
         </div>
 

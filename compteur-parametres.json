@@ -1,0 +1,154 @@
+{
+ "_commentaire": "Données d'activité publiées par la plateforme (data.gouv.fr, jeu « Utilisation du service demarche.numerique.gouv.fr »). Fichier régénéré chaque mois. proc_publiees : renseigner si une série de démarches publiées par mois existe ; sinon, le compteur estime les démarches publiées à partir de proc_creees × ratio_pub.",
+ "base_month": "2026-09",
+ "data_updated": "2026-10-04",
+ "ratio_pub": 0.414578,
+ "plateforme_annuel": 2100000,
+ "months": {
+  "2024-10": {
+   "depo": 351920,
+   "crees": 476424,
+   "proc_creees": 1595,
+   "proc_publiees": null
+  },
+  "2024-11": {
+   "depo": 259007,
+   "crees": 361535,
+   "proc_creees": 1420,
+   "proc_publiees": null
+  },
+  "2024-12": {
+   "depo": 253656,
+   "crees": 619396,
+   "proc_creees": 1284,
+   "proc_publiees": null
+  },
+  "2025-01": {
+   "depo": 333978,
+   "crees": 494932,
+   "proc_creees": 1924,
+   "proc_publiees": null
+  },
+  "2025-02": {
+   "depo": 289000,
+   "crees": 435588,
+   "proc_creees": 2070,
+   "proc_publiees": null
+  },
+  "2025-03": {
+   "depo": 357617,
+   "crees": 496794,
+   "proc_creees": 1983,
+   "proc_publiees": null
+  },
+  "2025-04": {
+   "depo": 379186,
+   "crees": 580402,
+   "proc_creees": 1746,
+   "proc_publiees": null
+  },
+  "2025-05": {
+   "depo": 318406,
+   "crees": 573365,
+   "proc_creees": 1901,
+   "proc_publiees": null
+  },
+  "2025-06": {
+   "depo": 316292,
+   "crees": 547231,
+   "proc_creees": 1651,
+   "proc_publiees": null
+  },
+  "2025-07": {
+   "depo": 324237,
+   "crees": 615785,
+   "proc_creees": 1565,
+   "proc_publiees": null
+  },
+  "2025-08": {
+   "depo": 256034,
+   "crees": 507520,
+   "proc_creees": 1043,
+   "proc_publiees": null
+  },
+  "2025-09": {
+   "depo": 454805,
+   "crees": 665008,
+   "proc_creees": 1845,
+   "proc_publiees": null
+  },
+  "2025-10": {
+   "depo": 452336,
+   "crees": 765809,
+   "proc_creees": 1922,
+   "proc_publiees": null
+  },
+  "2025-11": {
+   "depo": 348614,
+   "crees": 737687,
+   "proc_creees": 2371,
+   "proc_publiees": null
+  },
+  "2025-12": {
+   "depo": 336804,
+   "crees": 602102,
+   "proc_creees": 1888,
+   "proc_publiees": null
+  },
+  "2026-01": {
+   "depo": 424168,
+   "crees": 680503,
+   "proc_creees": 1924,
+   "proc_publiees": null
+  },
+  "2026-02": {
+   "depo": 376741,
+   "crees": 722826,
+   "proc_creees": 2125,
+   "proc_publiees": null
+  },
+  "2026-03": {
+   "depo": 451254,
+   "crees": 879201,
+   "proc_creees": 2246,
+   "proc_publiees": null
+  },
+  "2026-04": {
+   "depo": 460873,
+   "crees": 893413,
+   "proc_creees": 2016,
+   "proc_publiees": null
+  },
+  "2026-05": {
+   "depo": 393654,
+   "crees": 841522,
+   "proc_creees": 1967,
+   "proc_publiees": null
+  },
+  "2026-06": {
+   "depo": 435093,
+   "crees": 894359,
+   "proc_creees": 2242,
+   "proc_publiees": null
+  },
+  "2026-07": {
+   "depo": 451607,
+   "crees": 952193,
+   "proc_creees": 1817,
+   "proc_publiees": null
+  },
+  "2026-08": {
+   "depo": 338815,
+   "crees": 728948,
+   "proc_creees": 1192,
+   "proc_publiees": null
+  },
+  "2026-09": {
+   "depo": 574693,
+   "crees": 1088427,
+   "proc_creees": 2605,
+   "proc_publiees": null
+  }
+ },
+ "plateforme_annuel_libelle": "estimation haute, retenue par prudence (14 M€ moins 11,9 M€ d'autorisations d'engagement 2018-2025)"
+}
