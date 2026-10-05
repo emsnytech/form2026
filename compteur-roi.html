@@ -12,7 +12,7 @@
 <meta property="og:description" content="Gains, coûts et retour sur investissement de la dématérialisation, depuis le 1er janvier et depuis le début du mois. Estimation modélisée, hypothèses publiées.">
 <meta property="og:url" content="https://emsnytech.github.io/form2026/compteur-roi.html">
 <meta name="twitter:card" content="summary">
-<meta name="page-version" content="2026-10-04-r3">
+<meta name="page-version" content="2026-10-05-r5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -161,9 +161,9 @@ footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem;font-si
   <details>
     <summary>Comment le compteur est calculé</summary>
     <p><b>Activité.</b> Dossiers déposés et dossiers commencés : séries mensuelles publiées sur data.gouv.fr par la plateforme. Démarches publiées : estimées à partir des démarches créées, par le rapport observé en 2025 entre démarches publiées et créées (<span id="ratioPub">–</span>), faute de série publiée.</p>
-    <p><b>Gains</b> = dossiers déposés × gain par dossier (niveau de complexité moyen, 66 % de particuliers) : coût de traitement évité pour l'administration, temps évité pour l'usager (de 2 à 30 minutes) et préremplissage déjà réalisé.</p>
+    <p><b>Gains</b> = dossiers déposés × gain par dossier (niveau de complexité moyen, 66 % de particuliers) : coût de traitement évité pour l'administration, temps évité pour l'usager par rapport à un PDF envoyé par courriel (de 5 à 17 minutes en moyenne selon la complexité) et préremplissage déjà réalisé.</p>
     <p><b>Coût de la plateforme</b> = budget annuel de la plateforme (estimation haute) réparti à la minute. Le coût de création des démarches est commun à tous les supports (formulaire PDF ou plateforme) : il n'est pas compté dans la comparaison. À titre de borne, la ligne « mise en place des services » l'impute en totalité : démarches publiées × temps de travail d'un agent (niveau de complexité moyen, valorisé à 312,90 € par jour).</p>
-    <p><b>Gains valorisés pour 1 € de plateforme</b> = gains ÷ coût de la plateforme, de gains bas ÷ coût à gains hauts ÷ coût : un rapport sans unité, présenté comme les euros de gains valorisés pour 1 € investi dans la plateforme : le point orange représente cet euro, les points verts les euros de gains (les points clairs, l'écart entre l'hypothèse basse et l'hypothèse haute). Il dépend de l'exercice : sur l'exercice 2026, très actif, il est plus élevé que depuis 2018 (10 à 27 fois, avec les années de construction de la plateforme). En imputant aussi la mise en place, la fourchette va de gains bas ÷ coûts hauts à gains hauts ÷ coûts bas ; la valeur appariée associe les hypothèses basses entre elles et les hautes entre elles.</p>
+    <p><b>Gains valorisés pour 1 € de plateforme</b> = gains ÷ coût de la plateforme, de gains bas ÷ coût à gains hauts ÷ coût : un rapport sans unité, présenté comme les euros de gains valorisés pour 1 € investi dans la plateforme : le point orange représente cet euro, les points verts les euros de gains (les points clairs, l'écart entre l'hypothèse basse et l'hypothèse haute). Il dépend de l'exercice : sur l'exercice 2026, très actif, il est plus élevé que depuis 2018 (11 à 22 fois, avec les années de construction de la plateforme). En imputant aussi la mise en place, la fourchette va de gains bas ÷ coûts hauts à gains hauts ÷ coûts bas ; la valeur appariée associe les hypothèses basses entre elles et les hautes entre elles.</p>
     <div class="tw"><table id="params"></table></div>
     <p><b>Gain net.</b> Gains moins coût de la plateforme. Avec la mise en place imputée, il est apparié : hypothèses basses avec basses, hautes avec hautes.</p>
     <p><b>Coût de la plateforme par dossier déposé, mois par mois</b> (budget annuel ÷ 12 ÷ dossiers déposés du mois, estimation haute ; 0,37 € en 2025 selon le bilan 2025 de la plateforme) :</p>
@@ -171,7 +171,7 @@ footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem;font-si
     <p>Les gains sont des temps et des coûts valorisés, pas des économies budgétaires. Données : <a href="https://www.data.gouv.fr/datasets/utilisation-du-service-demarche-numerique-gouv-fr">Utilisation du service demarche.numerique.gouv.fr</a>.</p>
   </details>
 
-  <footer>Paramètres version 7, octobre 2026 (coût de création non compté). Données d'activité publiées par la plateforme sur data.gouv.fr. Le budget annuel de la plateforme (2,1 M€) est une estimation haute, retenue par prudence. Version de la page : 4 octobre 2026, révision 3.</footer>
+  <footer>Paramètres version 8, octobre 2026 (coût de création non compté). Données d'activité publiées par la plateforme sur data.gouv.fr. Le budget annuel de la plateforme (2,1 M€) est une estimation haute, retenue par prudence. Version de la page : 5 octobre 2026, révision 5.</footer>
 </div>
 
 <script>
@@ -190,16 +190,16 @@ footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem;font-si
     ratio_pub:9083/21909,           // démarches publiées / créées, 2025 (bilan 2025 ; data.gouv.fr)
     plateforme_annuel:2100000,      // budget 2026 : estimation haute, retenue par prudence (14 M€ − 11,9 M€)
     jour_agent:312.90, rate_pp:7.28, rate_pm:44.70, part_pp:.66,
-    admin:{bas:6.79,haut:10.70}, demat_min:{bas:2,haut:30},
+    admin:{bas:6.79,haut:10.70}, demat_min:{bas:{simple:2,modere:4,complexe:8},haut:{simple:9.5,modere:14.5,complexe:26.5}},
     pre:{simple:[0.0409,0.6886],modere:[0.0692,1.1219],complexe:[0.1085,1.2029]},   // €/dossier [particulier, personne morale]
-    mix_dossiers:{simple:0.3358,modere:0.299,complexe:0.3652},
-    mix_demarches:{simple:11135/34175,modere:8549/34175,complexe:14491/34175},
+    mix_dossiers:{simple:.34,modere:.30,complexe:.36},
+    mix_demarches:{simple:11139/34185,modere:8549/34185,complexe:14497/34185},
     jours:{bas:{simple:.5,modere:2.5,complexe:7.5},central:{simple:1,modere:5,complexe:15},haut:{simple:4.2,modere:9.1,complexe:20}}
   };
   function ready(){
     // gains par dossier déposé
-    var d=P.demat_min, pp=P.part_pp, pm=1-pp, lv=["simple","modere","complexe"];
-    var dem={bas:pp*d.bas/60*P.rate_pp+pm*d.bas/60*P.rate_pm, haut:pp*d.haut/60*P.rate_pp+pm*d.haut/60*P.rate_pm};
+    var d=P.demat_min, pp=P.part_pp, pm=1-pp, lv=["simple","modere","complexe"], rt=pp*P.rate_pp+pm*P.rate_pm;
+    var dem={bas:0,haut:0}; lv.forEach(function(q){dem.bas+=P.mix_dossiers[q]*d.bas[q]/60*rt; dem.haut+=P.mix_dossiers[q]*d.haut[q]/60*rt;});
     var pre=0; lv.forEach(function(k){pre+=P.mix_dossiers[k]*(pp*P.pre[k][0]+pm*P.pre[k][1])});
     P.g={admin:P.admin,demat:dem,pre:pre,bas:P.admin.bas+dem.bas+pre,haut:P.admin.haut+dem.haut+pre};
     // coûts par démarche publiée
@@ -280,7 +280,7 @@ footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem;font-si
     var cy=compute(n,1), cm=compute(n,n.m);
     $("rowsY").innerHTML=rows(cy); $("rowsM").innerHTML=rows(cm);
     $("roiY").textContent=(cy.plat>0?X(cy.gb/cy.plat)+" à "+X(cy.gh/cy.plat)+"\u00a0€":"–");
-    $("roiYs").innerHTML="Depuis 2018 (note) : 1 € investi, 10 à 27 € de gains.<br>En imputant aussi la mise en place des services : 1 € de coût, "+(cy.roiApp==null?"–":X(cy.roiMin)+" à "+X(cy.roiMax)+" € de gains (≈ "+X(cy.roiApp)+" appariés)");
+    $("roiYs").innerHTML="Depuis 2018 (note) : 1 € investi, 11 à 22 € de gains.<br>En imputant aussi la mise en place des services : 1 € de coût, "+(cy.roiApp==null?"–":X(cy.roiMin)+" à "+X(cy.roiMax)+" € de gains (≈ "+X(cy.roiApp)+" appariés)");
     $("roiM").textContent=(cm.plat>0?X(cm.gb/cm.plat)+" à "+X(cm.gh/cm.plat)+"\u00a0€":"–");
     $("roiMs").innerHTML=cm.roiApp==null?"Le mois commence":"En imputant aussi la mise en place des services : 1 € de coût, "+X(cm.roiMin)+" à "+X(cm.roiMax)+" € de gains (≈ "+X(cm.roiApp)+" appariés)";
     dots("dotsY",cy.plat>0?cy.gb/cy.plat:0,cy.plat>0?cy.gh/cy.plat:0); dots("dotsM",cm.plat>0?cm.gb/cm.plat:0,cm.plat>0?cm.gh/cm.plat:0);
