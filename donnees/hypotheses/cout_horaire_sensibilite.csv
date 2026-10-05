@@ -1,0 +1,5 @@
+scenario;coefficient_sur_traitement;mise_en_place_bas_MEUR;mise_en_place_centre_MEUR;mise_en_place_haut_MEUR;rapport_gains_couts_min;rapport_gains_couts_max;rapport_apparie_bas;rapport_apparie_haut;commentaire
+traitement indiciaire seul (B et A, mi-carrière, mélange par complexité);1,0;17,4;34,8;52,7;;;;;"Grilles SMI-CFDT ; point d'indice 4,92278 € ; 151,67 h par mois ; mélange 70/30, 50/50, 30/70 (B/A)"
+coefficient 1,5;1,5;26,1;52,2;79,1;1,72;7,70;4,00;3,32;Hypothèse illustrative
+coefficient 2,0;2,0;34,8;69,6;105,5;1,34;6,33;3,29;2,59;Primes d'un quart du traitement et charges de 50 %, hors contribution aux pensions (hypothèses de l'auteur)
+valorisation retenue (44,70 €/h);2,44 (équivalent);42,5;84,9;129,7;1,12;5,47;2,84;2,15;Métrique unique retenue dans la note

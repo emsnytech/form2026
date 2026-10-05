@@ -1,0 +1,6 @@
+critere,n_A,pct_A,ic95_A_bas,ic95_A_haut,n_Bp,pct_Bp,ic95_Bp_bas,ic95_Bp_haut,diff_A_moins_Bp,ic95_diff_bas,ic95_diff_haut
+Accessibilité,560,55.9,51.8,60.0,86305,70.1,69.8,70.4,-14.2,-18.4,-10.1
+Information/Explication,560,45.5,41.5,49.7,86305,34.0,33.6,34.3,11.6,7.4,15.7
+Relation,560,2.9,1.8,4.6,86305,4.0,3.9,4.1,-1.2,-2.5,0.2
+Réactivité,560,68.2,64.2,71.9,86305,32.6,32.3,32.9,35.6,31.8,39.5
+Simplicité/Complexité,560,64.3,60.2,68.1,86305,69.7,69.4,70.0,-5.4,-9.4,-1.4

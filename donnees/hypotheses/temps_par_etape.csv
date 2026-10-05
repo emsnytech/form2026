@@ -1,0 +1,16 @@
+cote;etape;simple_min;moderee_min;complexe_min;statut
+administration;Réception, enregistrement, accusé de réception (PDF + boîte fonctionnelle);3;3;3;hypothèse de l'auteur
+administration;Téléchargement et classement des pièces (PDF + boîte fonctionnelle);1;3;6;hypothèse de l'auteur
+administration;Ressaisie des données (PDF + boîte fonctionnelle);2;5;10;"hypothèse de l'auteur ; convention de Singapour pour la démarche simple"
+administration;Contrôle de complétude et relances (PDF + boîte fonctionnelle);3;5;8;hypothèse de l'auteur
+administration;Suivi et réponses aux demandes (PDF + boîte fonctionnelle);2;2;3;hypothèse de l'auteur
+administration;Total PDF + boîte fonctionnelle;11;18;30;somme
+administration;Total plateforme (contrôle de complétude et suivi);1.5;2;3;hypothèse de l'auteur
+administration;Écart évité par dossier;9.5;16;27;différence
+usager;Remplir un PDF sans aide ni contrôle de saisie;3;5;10;hypothèse de l'auteur
+usager;Numériser et joindre les pièces à un courriel;2;4;8;hypothèse de l'auteur
+usager;Répondre aux relances pour pièce manquante;2;3;5;hypothèse de l'auteur
+usager;Relancer pour connaître l'état du dossier;2;2;3;hypothèse de l'auteur
+usager;Ressaisir son identité (sans identité numérique);0.5;0.5;0.5;hypothèse de l'auteur
+usager;Haut : ensemble des étapes;9.5;14.5;26.5;somme
+usager;Bas : envoi des pièces seul;2;4;8;étape « numériser et joindre »

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Données dérivées — FORM 2026</title>
+<meta name="description" content="Tableaux, paramètres et notes de méthode produits par FORM 2026 : gains, délais de traitement, base juridique des démarches, retours d'usagers, hypothèses.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="FORM 2026">
+<meta property="og:title" content="Données dérivées — FORM 2026">
+<meta property="og:description" content="Tableaux, paramètres et notes de méthode produits par FORM 2026 : gains, délais de traitement, base juridique des démarches, retours d'usagers, hypothèses.">
+<meta property="og:url" content="https://emsnytech.github.io/form2026/donnees/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1e2022; --muted:#5c6066; --paper:#fbf9f5; --surface:#ffffff; --line:#e2dfd7;
+  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4; --accent:#b45309; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+    --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--admin)}
+.wrap{max-width:1000px;margin:0 auto;padding:2rem 1.25rem 3rem}
+.topnav{margin:0 0 1.2rem;font-size:.95rem}
+h1,h2{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:800;line-height:1.2;margin:0}
+h1{font-size:clamp(1.7rem,3.6vw,2.4rem);max-width:34ch}
+h2{font-size:1.15rem}
+.lede{color:var(--muted);max-width:72ch;margin:.8rem 0 0}
+.badges{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+.badge{display:inline-block;font-size:.82rem;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.25rem .8rem;color:var(--muted)}
+.badge a{color:inherit;text-decoration:underline}
+.grp{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.2rem 1.4rem;margin-top:1.4rem}
+.desc{color:var(--muted);font-size:.93rem;margin:.3rem 0 .9rem}
+.filelist{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.filelist li{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.55rem 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.filelist li:first-child a{font-weight:700}
+.filelist a{text-decoration:none;word-break:break-all}
+.filelist a:hover{text-decoration:underline}
+.sz{flex:0 0 auto;font-size:.85rem;color:var(--muted)}
+footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted);max-width:84ch}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="topnav"><a href="../index.html">Retour à FORM 2026</a> · <a href="../simulateur-gains-dematerialisation.html">Estimer ses gains</a> · <a href="../cadrage-dematerialisation.html">Cadrer une démarche</a> · <a href="../comparer-cadre-fonctionnel.html">Comparer un outil</a> · <a href="../compteur-roi.html">Compteur</a></p>
+  <header>
+    <h1>Données dérivées produites par FORM 2026</h1>
+    <p class="lede">Les tableaux, paramètres et notes de méthode ci-dessous sont des <b>productions de l'auteur</b>, pas des jeux de données d'origine : les sources ouvertes utilisées (data.gouv.fr) sont citées dans chaque note de méthode. Chaque sous-dossier a son propre LISEZMOI (colonnes, calcul, date, version, limites).</p>
+    <div class="badges">
+      <span class="badge"><a href="LICENCE.md">Licence : Licence Ouverte 2.0 / CC BY 4.0</a></span>
+      <span class="badge">30 fichiers</span>
+    </div>
+  </header>
+
+<section class="grp">
+  <h2>Gains de la dématérialisation</h2>
+  <p class="desc">Gains estimés par démarche (méthode v7) et paramètres documentés (version 8).</p>
+  <ul class="filelist">
+  <li><a href="gains/LISEZMOI.md">LISEZMOI</a><span class="sz">3 Ko</span></li>
+<li><a href="gains/demarches_gains_v7.csv">demarches_gains_v7.csv</a><span class="sz">11.5 Mo</span></li>
+<li><a href="gains/parametres_v8.csv">parametres_v8.csv</a><span class="sz">2 Ko</span></li>
+  </ul>
+</section>
+<section class="grp">
+  <h2>Délais de traitement</h2>
+  <p class="desc">Délais mesurés dépôt → instruction → traitement, hackathon 2024.</p>
+  <ul class="filelist">
+  <li><a href="delais/LISEZMOI.md">LISEZMOI</a><span class="sz">2 Ko</span></li>
+<li><a href="delais/delai_par_complexite.csv">delai_par_complexite.csv</a><span class="sz">395 o</span></li>
+<li><a href="delais/delai_par_type_demandeur.csv">delai_par_type_demandeur.csv</a><span class="sz">611 o</span></li>
+<li><a href="delais/delai_par_type_organisme.csv">delai_par_type_organisme.csv</a><span class="sz">511 o</span></li>
+<li><a href="delais/delai_synthese_globale.csv">delai_synthese_globale.csv</a><span class="sz">274 o</span></li>
+<li><a href="delais/note_delai_instruction.md">note_delai_instruction.md</a><span class="sz">8 Ko</span></li>
+  </ul>
+</section>
+<section class="grp">
+  <h2>Base juridique des démarches</h2>
+  <p class="desc">Qualité du cadre juridique déclaré par les démarches, sur tout le corpus et sur un échantillon vérifié à la main.</p>
+  <ul class="filelist">
+  <li><a href="base-juridique/LISEZMOI.md">LISEZMOI</a><span class="sz">3 Ko</span></li>
+<li><a href="base-juridique/juridique_echantillon.csv">juridique_echantillon.csv</a><span class="sz">103 Ko</span></li>
+<li><a href="base-juridique/juridique_niveau1.csv">juridique_niveau1.csv</a><span class="sz">10.4 Mo</span></li>
+<li><a href="base-juridique/juridique_strates_effectifs.csv">juridique_strates_effectifs.csv</a><span class="sz">1 Ko</span></li>
+<li><a href="base-juridique/note_methode_juridique.md">note_methode_juridique.md</a><span class="sz">20 Ko</span></li>
+  </ul>
+</section>
+<section class="grp">
+  <h2>Retours d'usagers sur Démarche Numérique</h2>
+  <p class="desc">Analyse des témoignages Services Publics Plus citant la plateforme.</p>
+  <ul class="filelist">
+  <li><a href="retours-usagers/LISEZMOI.md">LISEZMOI</a><span class="sz">4 Ko</span></li>
+<li><a href="retours-usagers/note_retours_usagers_complement.md">note_retours_usagers_complement.md</a><span class="sz">18 Ko</span></li>
+<li><a href="retours-usagers/sp2_A_vs_Bp_criteres.csv">sp2_A_vs_Bp_criteres.csv</a><span class="sz">484 o</span></li>
+<li><a href="retours-usagers/sp2_A_vs_Bp_par_annee.csv">sp2_A_vs_Bp_par_annee.csv</a><span class="sz">588 o</span></li>
+<li><a href="retours-usagers/sp2_blind_recode_60.csv">sp2_blind_recode_60.csv</a><span class="sz">4 Ko</span></li>
+<li><a href="retours-usagers/sp2_coding_300_resultats.csv">sp2_coding_300_resultats.csv</a><span class="sz">18 Ko</span></li>
+<li><a href="retours-usagers/sp2_coding_A560_motifs.csv">sp2_coding_A560_motifs.csv</a><span class="sz">258 o</span></li>
+<li><a href="retours-usagers/sp2_coding_A560_par_annee.csv">sp2_coding_A560_par_annee.csv</a><span class="sz">1 Ko</span></li>
+<li><a href="retours-usagers/sp2_coding_accord_criteres.csv">sp2_coding_accord_criteres.csv</a><span class="sz">218 o</span></li>
+<li><a href="retours-usagers/sp2_france_services.csv">sp2_france_services.csv</a><span class="sz">67 o</span></li>
+<li><a href="retours-usagers/sp2_robustesse_hors_typologie_dominante.csv">sp2_robustesse_hors_typologie_dominante.csv</a><span class="sz">364 o</span></li>
+<li><a href="retours-usagers/sp2_standardise_par_annee.csv">sp2_standardise_par_annee.csv</a><span class="sz">228 o</span></li>
+<li><a href="retours-usagers/sp2_suivi_services.csv">sp2_suivi_services.csv</a><span class="sz">661 o</span></li>
+  </ul>
+</section>
+<section class="grp">
+  <h2>Hypothèses et analyse de sensibilité</h2>
+  <p class="desc">Décomposition des temps évités et sensibilité du coût horaire retenu.</p>
+  <ul class="filelist">
+  <li><a href="hypotheses/LISEZMOI.md">LISEZMOI</a><span class="sz">2 Ko</span></li>
+<li><a href="hypotheses/cout_horaire_sensibilite.csv">cout_horaire_sensibilite.csv</a><span class="sz">791 o</span></li>
+<li><a href="hypotheses/temps_par_etape.csv">temps_par_etape.csv</a><span class="sz">1 Ko</span></li>
+  </ul>
+</section>
+
+  <footer>FORM 2026 · Philippe Vrignaud · Production de l'auteur à partir de données ouvertes de data.gouv.fr</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+parametre;valeur;unite;source_ou_statut
+cout_traitement_evite_par_dossier_administration;6,79 à 10,70;€ par dossier;France Stratégie 2018 (études étrangères)
+gain_traitement_evite_par_dossier_construit;7,08 / 11,92 / 20,12;€ par dossier (simple / modérée / complexe);Hypothèses de l'auteur (voir temps_par_etape.csv), valorisées à 44,70 €/h
+temps_evite_usager_demat_bas;2 / 4 / 8;minutes par dossier (simple / modérée / complexe);Hypothèses de l'auteur : envoi des pièces seul
+temps_evite_usager_demat_haut;9,5 / 14,5 / 26,5;minutes par dossier (simple / modérée / complexe);Hypothèses de l'auteur : ensemble des étapes (voir temps_par_etape.csv)
+temps_remplissage_par_champ;10 à 180;secondes;Code source public de la plateforme (commit 9b42086)
+valeur_heure_particulier;7,28;€ par heure;France Stratégie 2018, tableau 14, d'après le rapport Quinet
+valeur_heure_personne_morale;44,70;€ par heure;Insee, Eurostat (coût horaire de la main-d'œuvre, 2025)
+journee_agent;312,90;€ par jour;44,70 € x 7 h (coût horaire moyen, secteur marchand)
+temps_mise_en_place_bas;0,5 / 2,5 / 7,5;jours (simple / modérée / complexe);Hypothèses de l'auteur (moitié du central)
+temps_mise_en_place_central;1 / 5 / 15;jours (simple / modérée / complexe);Hypothèses de l'auteur
+temps_mise_en_place_haut;4,2 / 9,1 / 20;jours (simple / modérée / complexe);Délais médians observés de mise en service, validation comprise
+cout_plateforme_construction_exploitation_2018_2026;14 (au plus);M€;Bilan 2025 de la plateforme (11,9 M€ en autorisations d'engagement 2018-2025) complété d'une estimation haute pour 2026, arrondie au million supérieur
+dossiers_deposes_depuis_2018;18 220 327;dossiers;Descriptif des démarches publiées, data.gouv.fr
+demarches_publiees_ou_closes;34 185 (34 397 avec celles antérieures à 2018);démarches;Descriptif des démarches publiées, data.gouv.fr
+part_particuliers;66;%;Moyenne de la plateforme

@@ -1,0 +1,31 @@
+type_organisme,public,tranche_volume,effectif_population,effectif_echantillon
+Autres,particulier,gros,542,2
+Autres,particulier,moyen,4890,15
+Autres,particulier,petit,793,3
+Autres,personne_morale,gros,252,1
+Autres,personne_morale,moyen,1208,4
+Autres,personne_morale,petit,258,1
+Collectivités,particulier,gros,148,1
+Collectivités,particulier,moyen,1186,4
+Collectivités,particulier,petit,227,1
+Collectivités,personne_morale,gros,47,1
+Collectivités,personne_morale,moyen,1054,4
+Collectivités,personne_morale,petit,162,2
+Opérateurs,particulier,gros,88,1
+Opérateurs,particulier,moyen,748,3
+Opérateurs,particulier,petit,85,2
+Opérateurs,personne_morale,gros,52,1
+Opérateurs,personne_morale,moyen,600,3
+Opérateurs,personne_morale,petit,150,2
+Services déconcentrés,particulier,gros,1365,4
+Services déconcentrés,particulier,moyen,7561,22
+Services déconcentrés,particulier,petit,846,3
+Services déconcentrés,personne_morale,gros,492,2
+Services déconcentrés,personne_morale,moyen,5523,18
+Services déconcentrés,personne_morale,petit,1002,3
+État central,particulier,gros,387,1
+État central,particulier,moyen,2436,7
+État central,particulier,petit,430,2
+État central,personne_morale,gros,265,1
+État central,personne_morale,moyen,1313,5
+État central,personne_morale,petit,287,1
