@@ -12,7 +12,7 @@
 <meta property="og:description" content="Estimez les gains de vos démarches en ligne, pour votre administration et pour vos usagers, avec des hypothèses publiques.">
 <meta property="og:url" content="https://emsnytech.github.io/form2026/simulateur-gains-dematerialisation.html">
 <meta name="twitter:card" content="summary">
-<meta name="page-version" content="2026-10-04-r3">
+<meta name="page-version" content="2026-10-05-r5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -133,7 +133,7 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
     <p class="topnav"><a href="index.html">Retour à FORM 2026</a> · <a href="simulateur-gains-dematerialisation.html">Estimer ses gains</a> · <a href="cadrage-dematerialisation.html">Cadrer une démarche</a> · <a href="comparer-cadre-fonctionnel.html">Comparer un outil</a> · <a href="compteur-roi.html">Compteur</a></p>
     <h1>Moins de charge pour l'usager, moins de coûts pour l'État : estimez vos gains</h1>
     <p class="lede">Indiquez ce que votre organisme prévoit de mettre en ligne sur une plateforme mutualisée de dématérialisation. Le simulateur donne une fourchette de gains pour l'administration et pour les usagers, calculée avec les paramètres publics d'une évaluation portant sur 18,2 millions de dossiers déposés depuis 2018.</p>
-    <p class="version">Paramètres version 7, septembre 2026</p>
+    <p class="version">Paramètres version 8, octobre 2026</p>
   </header>
 
   <div class="grid">
@@ -181,7 +181,7 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
           <div class="range" id="usagerRange">–</div>
           <p class="sub" id="usagerHoursTxt">–</p>
           <dl>
-            <dt>Dématérialisation (2 à 30 min par dossier)</dt><dd id="uDemat">–</dd>
+            <dt>Dématérialisation (étapes évitées)</dt><dd id="uDemat">–</dd>
             <dt>Préremplissage déjà réalisé</dt><dd id="uPre">–</dd>
           </dl>
         </div>
@@ -248,9 +248,9 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
     <p>Tous les paramètres sont publics. Les fourchettes sont larges parce que certaines grandeurs ne sont pas encore mesurées : c'est un résultat en soi.</p>
     <ul>
       <li><strong>Administration :</strong> de 6,79 € à 10,70 € par dossier dématérialisé (valeur centrale 8,96 €). France Stratégie, <em>Les bénéfices d'une meilleure autonomie numérique</em>, 2018, tableau 12, d'après des études australienne (Deloitte, 2015), britannique (Aston Campbell, 2008) et canadienne. Ces coûts ne sont pas mesurés en France et n'ont pas été réactualisés.</li>
-      <li><strong>Usagers, dématérialisation :</strong> de 2 minutes (envoi évité, tables de temps standard de Destatis, reprises aux Pays-Bas) à 30 minutes (France Stratégie 2018) par dossier. Aucune valeur centrale : le gain dépend de ce que l'usager aurait fait sans la démarche en ligne.</li>
+      <li><strong>Usagers, dématérialisation :</strong> temps évité par dossier par rapport à un formulaire PDF envoyé par courriel, selon la complexité de la démarche (hypothèses de l'auteur, par étape). Bas : envoi des pièces seul, soit 2, 4 et 8 minutes pour une démarche simple, modérée ou complexe. Haut : ensemble des étapes (remplissage sans aide ni contrôle, envoi des pièces, relances pour pièce manquante, relances pour connaître l'état du dossier, ressaisie de l'identité), soit 9,5, 14,5 et 26,5 minutes. À titre de comparaison, France Stratégie (2018) retenait en moyenne 30 minutes par opération administrative, tous canaux confondus. Aucune valeur centrale.</li>
       <li><strong>Usagers, préremplissage :</strong> durées de remplissage par type de champ tirées du code source public de la plateforme (10 s par champ standard, 60 s pour un SIRET ou un IBAN, 180 s pour une pièce jointe), étape d'identité comprise (FranceConnect pour les particuliers, API Entreprise pour les personnes morales).</li>
-      <li><strong>Valeur du temps :</strong> 7,28 €/h pour un particulier (rapport Quinet), 44,70 €/h pour une personne morale (coût horaire du travail en France, 2025, Insee et Eurostat). La même valeur de 44,70 €/h sert à convertir le gain administration en heures de travail, à titre indicatif.</li>
+      <li><strong>Valeur du temps :</strong> 7,28 €/h pour un particulier (France Stratégie 2018, d'après le rapport Quinet), 44,70 €/h pour une personne morale (coût horaire du travail en France, 2025, Insee et Eurostat). La même valeur de 44,70 €/h sert à convertir le gain administration en heures de travail, à titre indicatif.</li>
       <li><strong>Complexité :</strong> niveaux calculés à partir du nombre de champs obligatoires, de blocs répétables et de pièces justificatives de chaque démarche publiée (descriptif open data), en terciles pondérés par les dossiers.</li>
       <li><strong>Coût de la plateforme :</strong> 14 M€ au plus (construction et exploitation, 2018-2026, estimation haute), rapportés aux 18,2 millions de dossiers déposés depuis 2018, soit environ 0,77 € par dossier. Ce coût est supporté par l'État, sans licence pour les services.</li>
       <li><strong>Coût de création d'une démarche :</strong> non compté. Il est sensiblement le même quel que soit le support (formulaire PDF ou plateforme) : concevoir les questions, les faire valider, les tester, former les agents. Seuls le traitement des dossiers et le remplissage par l'usager sont comparés.</li>
@@ -259,8 +259,10 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
   </section>
 
   <footer>
-    <p>Estimation indicative, fondée sur des conventions publiques et non sur une mesure propre à votre organisme. Paramètres version 7, septembre 2026. Version de la page : 4 octobre 2026, révision 3.</p>
-    <p>Pour vérifier ou contester les hypothèses : <a href="https://emsnytech.github.io/form2026/">FORM 2026</a>, la cartographie des démarches et des données demandées, qui détaille les calculs et résultats par démarche.</p>
+    <p>Estimation indicative, fondée sur des conventions publiques et non sur une mesure propre à votre organisme. Paramètres version 8, octobre 2026. Version de la page : 5 octobre 2026, révision 5.</p>
+    <p>Pour vérifier ou contester les hypothèses :
+      <a href="https://emsnytech.github.io/form2026/donnees/">les calculs et résultats par démarche en open data</a>,
+      et <a href="https://emsnytech.github.io/form2026/">FORM 2026</a>, la cartographie des démarches et des données demandées.</p>
   </footer>
 </div>
 
@@ -268,7 +270,8 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
 (function(){
   // Paramètres par dossier (€), issus de l'évaluation v7 (cumul 2018, 18,2 M dossiers)
   var ADMIN = {bas:6.79, central:8.96, haut:10.70};
-  var DEMAT = {pp:{bas:0.2427, haut:3.64}, pm:{bas:1.49, haut:22.35}};
+  // temps évité par dossier (minutes) par rapport à un PDF envoyé par courriel, selon la complexité
+  var DEMAT_MIN = {bas:{simple:2,modere:4,complexe:8}, haut:{simple:9.5,modere:14.5,complexe:26.5}};
   var PRE = { // préremplissage réalisé, €/dossier ; particuliers selon part FranceConnect
     simple:{pp:{30:0.0409,60:0.0651}, pm:0.6886},
     modere:{pp:{30:0.0692,60:0.0935}, pm:1.1219},
@@ -294,8 +297,8 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
   function compute(D, pp, mix, fc){
     var pm = 1-pp, r = {};
     r.adminBas = D*ADMIN.bas; r.adminCentral = D*ADMIN.central; r.adminHaut = D*ADMIN.haut;
-    r.dematBas = D*(pp*DEMAT.pp.bas + pm*DEMAT.pm.bas);
-    r.dematHaut = D*(pp*DEMAT.pp.haut + pm*DEMAT.pm.haut);
+    var rateM = pp*RATE.pp + pm*RATE.pm; r.dematBas = 0; r.dematHaut = 0; r.minBas = 0; r.minHaut = 0;
+    for(var k0 in mix){ r.dematBas += D*mix[k0]*DEMAT_MIN.bas[k0]/60*rateM; r.dematHaut += D*mix[k0]*DEMAT_MIN.haut[k0]/60*rateM; r.minBas += mix[k0]*DEMAT_MIN.bas[k0]; r.minHaut += mix[k0]*DEMAT_MIN.haut[k0]; }
     var pre=0, pot=0, preH=0;
     for(var k in mix){
       var n = D*mix[k];
@@ -305,7 +308,7 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
     }
     r.pre = pre; r.preHours = preH; r.pot = pot;
     r.uBas = r.dematBas + pre; r.uHaut = r.dematHaut + pre;
-    r.uHoursBas = D*2/60 + preH; r.uHoursHaut = D*30/60 + preH;
+    r.uHoursBas = D*r.minBas/60 + preH; r.uHoursHaut = D*r.minHaut/60 + preH;
     r.totBas = r.adminBas + r.uBas; r.totHaut = r.adminHaut + r.uHaut;
     return r;
   }
@@ -366,7 +369,7 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
     LEVELS.forEach(function(L){
       [["pp","Particuliers"],["pm","Personnes morales"]].forEach(function(t){
         var pre = t[0]==="pp" ? PRE[L[0]].pp[fc] : PRE[L[0]].pm;
-        g += "<tr><td>"+L[1]+"</td><td>"+t[1]+"</td><td class='a'>"+rng(B*ADMIN.bas,B*ADMIN.haut)+"</td><td class='u'>"+rng(B*DEMAT[t[0]].bas,B*DEMAT[t[0]].haut)+"</td><td class='u'>"+eur(B*pre)+"</td><td>"+eur(B*POT[L[0]][t[0]])+"</td></tr>";
+        g += "<tr><td>"+L[1]+"</td><td>"+t[1]+"</td><td class='a'>"+rng(B*ADMIN.bas,B*ADMIN.haut)+"</td><td class='u'>"+rng(B*DEMAT_MIN.bas[L[0]]/60*RATE[t[0]],B*DEMAT_MIN.haut[L[0]]/60*RATE[t[0]])+"</td><td class='u'>"+eur(B*pre)+"</td><td>"+eur(B*POT[L[0]][t[0]])+"</td></tr>";
       });
     });
     $("gridBody").innerHTML = g;

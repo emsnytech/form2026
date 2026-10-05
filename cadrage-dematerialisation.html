@@ -12,7 +12,7 @@
 <meta property="og:description" content="Base juridique, pièces justificatives, champs et sélecteurs : cadrez une démarche avant de la créer.">
 <meta property="og:url" content="https://emsnytech.github.io/form2026/cadrage-dematerialisation.html">
 <meta name="twitter:card" content="summary">
-<meta name="page-version" content="2026-10-04-r3">
+<meta name="page-version" content="2026-10-05-r5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -139,7 +139,7 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
   <header>
     <h1>Cadrer un projet de dématérialisation</h1>
     <p class="lede">Avant de mettre une démarche en ligne, quelques questions suffisent pour ne demander que le nécessaire, repérer ce que l'administration sait déjà et estimer les gains pour les usagers comme pour les agents. Le résultat se lit à droite, et s'imprime sous forme de fiche de cadrage.</p>
-    <p class="small">Paramètres version 7, septembre 2026. Vos réponses restent dans votre navigateur.</p>
+    <p class="small">Paramètres version 8, octobre 2026. Vos réponses restent dans votre navigateur.</p>
   </header>
 
   <div class="layout">
@@ -287,8 +287,8 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
   </div>
 
   <footer>
-    Estimation indicative, fondée sur des conventions publiques : durées de remplissage par type de champ du code source de Démarche Numérique (10 s par champ, 60 s pour un champ long, 180 s par pièce jointe, blocs répétables comptés 2,5 fois) ; coût de traitement évité de 6,79 € à 10,70 € par dossier (France Stratégie, 2018) ; gain de dématérialisation pour l'usager de 2 à 30 minutes (Destatis, France Stratégie) ; valeur de l'heure de 7,28 € pour un particulier (rapport Quinet) et de 44,70 € pour une personne morale (Insee, Eurostat, 2025) ; coût de la plateforme : 14 M€ au plus rapportés aux 18,2 millions de dossiers déposés depuis 2018 (estimation haute) ; charge d'instruction rapportée à 1 607 heures travaillées par agent et par an. Formulaires existants : référentiel RIDA de service-public.fr, export du 28 novembre 2022. Niveaux de complexité : score = champs obligatoires + champs répétables + 3 × pièces jointes ; simple jusqu'à 20, modéré jusqu'à 43, complexe au-delà ou à partir de 8 pièces jointes. Une information conservée mais obtenue à la source compte encore pour 20 % (vérification par l'usager).
-   Version de la page : 4 octobre 2026, révision 3.</footer>
+    Estimation indicative, fondée sur des conventions publiques : durées de remplissage par type de champ du code source de Démarche Numérique (10 s par champ, 60 s pour un champ long, 180 s par pièce jointe, blocs répétables comptés 2,5 fois) ; coût de traitement évité de 6,79 € à 10,70 € par dossier (France Stratégie, 2018) ; gain de dématérialisation pour l'usager : temps évité par rapport à un PDF envoyé par courriel, de 2 à 9,5 minutes (démarche simple), 4 à 14,5 (modérée) ou 8 à 26,5 (complexe), hypothèses de l'auteur ; valeur de l'heure de 7,28 € pour un particulier (France Stratégie 2018, d'après le rapport Quinet) et de 44,70 € pour une personne morale (Insee, Eurostat, 2025) ; coût de la plateforme : 14 M€ au plus rapportés aux 18,2 millions de dossiers déposés depuis 2018 (estimation haute) ; charge d'instruction rapportée à 1 607 heures travaillées par agent et par an. Formulaires existants : référentiel RIDA de service-public.fr, export du 28 novembre 2022. Niveaux de complexité : score = champs obligatoires + champs répétables + 3 × pièces jointes ; simple jusqu'à 20, modéré jusqu'à 43, complexe au-delà ou à partir de 8 pièces jointes. Une information conservée mais obtenue à la source compte encore pour 20 % (vérification par l'usager).
+   Version de la page : 5 octobre 2026, révision 5.</footer>
 
   <div class="sheet" id="sheet"></div>
 </div>
@@ -296,7 +296,7 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
 <script>
 (function(){
   var $=function(id){return document.getElementById(id)};
-  var ADMIN={bas:6.79,haut:10.70}, DEMAT={pp:{bas:0.2427,haut:3.64},pm:{bas:1.49,haut:22.35}}, RATE={pp:7.28,pm:44.70};
+  var ADMIN={bas:6.79,haut:10.70}, DEMAT_MIN={bas:{simple:2,modere:4,complexe:8},haut:{simple:9.5,modere:14.5,complexe:26.5}}, RATE={pp:7.28,pm:44.70};
   var DUR={court:10,long:60,pj:180,rep:2.5}, SEUILS=[20,43], PJFORCE=8, W=0.2, HEURES_AN=1607;
   var PRESETS=[
     {lib:"Pièce d'identité",nat:"piece",fam:"situation",det:"api",src:"FranceConnect ou titre d'identité lu automatiquement ; si seule l'identité est utile, FranceConnect suffit"},
@@ -412,9 +412,9 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
     var rate=pp*RATE.pp+pm*RATE.pm;
     var r={D:D,pp:pp,pj:pj,pjKeep:pjKeep,lb:level(scoreBrut,pj),ln:level(scoreNet,pjKeep),dureeBrut:dureeBrut,dureeNet:dureeNet,savedS:savedS};
     r.adminBas=D*ADMIN.bas; r.adminHaut=D*ADMIN.haut;
-    r.dematBas=D*(pp*DEMAT.pp.bas+pm*DEMAT.pm.bas); r.dematHaut=D*(pp*DEMAT.pp.haut+pm*DEMAT.pm.haut);
+    r.dematBas=D*(pp*RATE.pp+pm*RATE.pm)*DEMAT_MIN.bas[r.ln]/60; r.dematHaut=D*(pp*RATE.pp+pm*RATE.pm)*DEMAT_MIN.haut[r.ln]/60;
     r.cadrage=D*savedS/3600*rate;
-    r.hBas=D*(2/60+savedS/3600); r.hHaut=D*(30/60+savedS/3600);
+    r.hBas=D*(DEMAT_MIN.bas[r.ln]/60+savedS/3600); r.hHaut=D*(DEMAT_MIN.haut[r.ln]/60+savedS/3600);
     r.etp=D*num("instr")/60/HEURES_AN;
     return r;
   }
@@ -597,7 +597,7 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
       '<h2>Gains annuels estimés</h2><p>Administration : '+rng(r.adminBas,r.adminHaut)+' · Usagers : '+rng(r.dematBas+r.cadrage,r.dematHaut+r.cadrage)+' (dont '+eur(r.cadrage)+' grâce au cadrage)</p><p>Le coût de création de la démarche est commun à tous les supports et n\'est pas compté.</p>'+
       '<h2>À faire avant la mise en ligne</h2><ul>'+todo(r).map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+'</ul>'+
       '<h2>Indicateurs suivis après mise en ligne</h2><ul>'+(ind.length?ind.map(function(x){return"<li>"+x+"</li>"}).join(""):"<li>Aucun</li>")+'</ul>'+
-      '<p style="font-size:9pt">Estimation indicative fondée sur des conventions publiques (Démarche Numérique, France Stratégie 2018, Destatis, rapport Quinet, Insee). Voir FORM 2026.</p>';
+      '<p style="font-size:9pt">Estimation indicative fondée sur des conventions publiques (Démarche Numérique, France Stratégie 2018, Insee, Eurostat ; temps par étape : hypothèses de l\'auteur). Voir FORM 2026.</p>';
   }
   $("print").addEventListener("click",function(){buildSheet();window.print();});
 
