@@ -12,7 +12,7 @@
 <meta property="og:description" content="Base juridique, pièces justificatives, champs et sélecteurs : cadrez une démarche avant de la créer.">
 <meta property="og:url" content="https://emsnytech.github.io/form2026/cadrage-dematerialisation.html">
 <meta name="twitter:card" content="summary">
-<meta name="page-version" content="2026-10-05-r5">
+<meta name="page-version" content="2026-10-05-r6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -104,6 +104,7 @@ button{font:inherit;border-radius:6px;cursor:pointer}
 .cleg{display:flex;flex-wrap:wrap;gap:.3rem 1rem;margin-top:.6rem;font-size:.8rem;color:var(--muted)}
 .cleg i{display:inline-block;width:.75rem;height:.75rem;border-radius:3px;margin-right:.3rem;vertical-align:-1px}
 .cleg i.a{background:var(--admin)} .cleg i.d{background:var(--usager)} .cleg i.p{background:color-mix(in srgb,var(--usager) 55%,var(--surface))} .cleg i.c{background:var(--accent)}
+.act{margin:.4rem 0 0;padding-left:1.2rem}.act li{margin:.6rem 0}.act small{color:var(--muted);display:block}.act a{font-size:.88rem}
 aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + 1rem)}
 @media (max-width:900px){aside{position:static}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.2rem;margin-bottom:1rem}
@@ -140,6 +141,7 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
     <h1>Cadrer un projet de dématérialisation</h1>
     <p class="lede">Avant de mettre une démarche en ligne, quelques questions suffisent pour ne demander que le nécessaire, repérer ce que l'administration sait déjà et estimer les gains pour les usagers comme pour les agents. Le résultat se lit à droite, et s'imprime sous forme de fiche de cadrage.</p>
     <p class="small">Paramètres version 8, octobre 2026. Vos réponses restent dans votre navigateur.</p>
+    <p class="small">Vous connaissez déjà votre démarche ? <a href="agent-public.html">Le parcours en cinq étapes pour les agents publics</a>.</p>
   </header>
 
   <div class="layout">
@@ -275,6 +277,11 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
         <p class="small">À reprendre dans votre demande sur <a href="https://datapass.api.gouv.fr" target="_blank" rel="noopener">DataPass</a>, le guichet des demandes d'accès aux API de l'État.</p>
         <button class="ghost" type="button" id="habCopy">Copier le texte</button></div>
       </div>
+      <div class="card" id="actions3">
+        <h3>Trois actions pour cette démarche</h3>
+        <ol class="act" id="actions3list"></ol>
+        <p class="small">Classées par ordre de priorité à partir de vos réponses. La liste complète figure juste dessous.</p>
+      </div>
       <div class="card">
         <h3>À faire avant la mise en ligne</h3>
         <ul class="todo" id="todo"></ul>
@@ -288,7 +295,7 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
 
   <footer>
     Estimation indicative, fondée sur des conventions publiques : durées de remplissage par type de champ du code source de Démarche Numérique (10 s par champ, 60 s pour un champ long, 180 s par pièce jointe, blocs répétables comptés 2,5 fois) ; coût de traitement évité de 6,79 € à 10,70 € par dossier (France Stratégie, 2018) ; gain de dématérialisation pour l'usager : temps évité par rapport à un PDF envoyé par courriel, de 2 à 9,5 minutes (démarche simple), 4 à 14,5 (modérée) ou 8 à 26,5 (complexe), hypothèses de l'auteur ; valeur de l'heure de 7,28 € pour un particulier (France Stratégie 2018, d'après le rapport Quinet) et de 44,70 € pour une personne morale (Insee, Eurostat, 2025) ; coût de la plateforme : 14 M€ au plus rapportés aux 18,2 millions de dossiers déposés depuis 2018 (estimation haute) ; charge d'instruction rapportée à 1 607 heures travaillées par agent et par an. Formulaires existants : référentiel RIDA de service-public.fr, export du 28 novembre 2022. Niveaux de complexité : score = champs obligatoires + champs répétables + 3 × pièces jointes ; simple jusqu'à 20, modéré jusqu'à 43, complexe au-delà ou à partir de 8 pièces jointes. Une information conservée mais obtenue à la source compte encore pour 20 % (vérification par l'usager).
-   Version de la page : 5 octobre 2026, révision 5.</footer>
+   Version de la page : 5 octobre 2026, révision 6.</footer>
 
   <div class="sheet" id="sheet"></div>
 </div>
@@ -557,6 +564,24 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
     return t;
   }
 
+
+  function topActions(r){
+    var sup=[], rem=[], hab=[];
+    items.forEach(function(it){var x=target(it); if(x==="supprimer") sup.push(it); else if(x==="donnee"||x==="reponse") rem.push(it); else if(x==="habilitation") hab.push(it);});
+    var j=juridique(), h=habInfo(j), lab=function(l){return l.slice(0,3).map(function(it){return it.lib||"(sans libellé)"}).join(", ")+(l.length>3?"…":"")};
+    var weak=(j.lvl==="C"||j.lvl==="D"||!j.lvl||j.lvl==="B"), needAccess=(rem.length>0||hab.length>0);
+    var A={};
+    if(sup.length) A.sup={t:"Retirer "+sup.length+" information"+(sup.length>1?"s":"")+" non nécessaire"+(sup.length>1?"s":""),d:lab(sup)+". Chaque information retirée allège le formulaire : durée estimée de remplissage "+mins(r.dureeBrut)+" → "+mins(r.dureeNet)+"."};
+    if(weak&&needAccess) A.leg={t:"Préciser la base juridique",d:"Un texte et un article identifiés, avec un lien qui y renvoie directement : c'est la condition pour demander l'accès aux données d'autres administrations.",l:["https://www.legifrance.gouv.fr/","Légifrance"]};
+    if(rem.length){ var src=rem.map(function(it){return it.src}).filter(Boolean)[0]; A.rem={t:"Remplacer "+rem.length+" pièce"+(rem.length>1?"s":"")+" ou donnée"+(rem.length>1?"s":"")+" par un appel à la source",d:lab(rem)+(src?". Source habituelle : "+src+".":"."),l:["https://api.gouv.fr/les-api","Catalogue des API"]}; }
+    if(hab.length&&!weak) A.hab={t:"Engager la demande d'habilitation",d:hab.length+" donnée"+(hab.length>1?"s détenues":" détenue")+" par l'administration (" +lab(hab)+") : reprenez le pré-dossier ci-contre.",l:["https://datapass.api.gouv.fr","DataPass"]};
+    if(weak&&!needAccess&&(j.lvl==="C"||j.lvl==="D"||!j.lvl)) A.leg2={t:"Préciser la base juridique",d:"Un texte et un article identifiés, avec un lien qui y renvoie directement.",l:["https://www.legifrance.gouv.fr/","Légifrance"]};
+    A.mes={t:"Mesurer avant et après",d:"Chronométrez dix dossiers aujourd'hui, puis suivez trois indicateurs dès l'ouverture : délai de décision, part des dossiers renvoyés en correction, satisfaction (MonAvis).",l:["agent-public.html#mesurer","Protocole de mesure"]};
+    var order=["sup","leg","rem","hab","leg2","mes"], out=[];
+    order.forEach(function(k){ if(A[k]&&out.length<3) out.push(A[k]); });
+    return out;
+  }
+
   function update(){
     $("ppv").textContent=Math.round(num("pp"));
     var r=compute();
@@ -583,6 +608,7 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
     $("habTxt").textContent= hh.ok ? hh.acc.length+" information"+(hh.acc.length>1?"s":"")+" pourrai"+(hh.acc.length>1?"ent":"t")+" être obtenue"+(hh.acc.length>1?"s":"")+" à la source. La base juridique permet d'engager la demande." : "Des informations pourraient être obtenues à la source, mais la base juridique doit d'abord être précisée.";
     $("habBtn").disabled=!hh.ok;
     $("todo").innerHTML=todo(r).map(function(x){return"<li>"+esc(x)+"</li>"}).join("");
+    $("actions3list").innerHTML=topActions(r).map(function(a){return"<li><b>"+esc(a.t)+"</b><small>"+esc(a.d)+"</small>"+(a.l?' <a href="'+a.l[0]+'"'+(a.l[0].indexOf("http")===0?' target="_blank" rel="noopener"':"")+">"+esc(a.l[1])+"</a>":"")+"</li>"}).join("");
     save(); window.__last=r;
   }
 
@@ -590,11 +616,12 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
     var r=compute(), nom=$("nom").value||"Démarche sans nom";
     var rows=items.map(function(it){return"<tr><td>"+esc(it.lib||"(sans libellé)")+"</td><td>"+(it.nat==="piece"?"Pièce":"Champ")+"</td><td>"+(it.fam==="projet"?"Projet":"Situation")+"</td><td>"+recoText(it).replace(/<[^>]+>/g,"")+"</td></tr>"}).join("");
     var ind=[].map.call(document.querySelectorAll("#indics input:checked"),function(c){return esc(c.parentNode.textContent.trim())});
-    $("sheet").innerHTML='<h1>Fiche de cadrage : '+esc(nom)+'</h1><p>Établie le '+new Date().toLocaleDateString("fr-FR")+' · paramètres version 7</p>'+
+    $("sheet").innerHTML='<h1>Fiche de cadrage : '+esc(nom)+'</h1><p>Établie le '+new Date().toLocaleDateString("fr-FR")+' · paramètres version 8</p>'+
       '<h2>La démarche</h2><p>'+Math.round(r.D).toLocaleString("fr-FR")+' dossiers par an · '+Math.round(r.pp*100)+' % de particuliers · délai prévu : '+(num("delai")||"non fixé")+' jours · silence : '+$("silence").options[$("silence").selectedIndex].text+'</p>'+
       (rida?'<p>Formulaire national existant : '+esc(rida[1])+' ('+esc(rida[0])+'), '+esc(rida[2]||'')+'</p>':'')+'<h2>Base juridique</h2><p>'+esc($("jtype").options[$("jtype").selectedIndex].text)+($("jart").value?' — '+esc($("jart").value):'')+($("jurl").value?' — '+esc($("jurl").value):'')+' · niveau '+(juridique().lvl||'non renseigné')+'</p>'+'<h2>Complexité</h2><p>'+LVL[r.lb]+(r.lb!==r.ln?' → '+LVL[r.ln]:'')+' · durée estimée : '+mins(r.dureeBrut)+(r.savedS>0?' → '+mins(r.dureeNet):'')+' · pièces jointes : '+r.pj+(r.pj!==r.pjKeep?' → '+r.pjKeep:'')+' · charge d\'instruction : '+(r.etp>0?r.etp.toLocaleString("fr-FR",{maximumFractionDigits:1})+' ETP':'non renseignée')+'</p>'+
       (FIELDREP.length?'<h2>Champs du formulaire</h2><table><thead><tr><th>Champ</th><th>Constat</th></tr></thead><tbody>'+FIELDREP.filter(function(x){return x.k!=="ok"}).map(function(x){return'<tr><td>'+esc(x.lib)+'</td><td>'+esc(x.m)+'</td></tr>'}).join("")+'</tbody></table>':'')+'<h2>Informations demandées</h2><table><thead><tr><th>Information</th><th>Nature</th><th>Justificatif de</th><th>Recommandation</th></tr></thead><tbody>'+(rows||'<tr><td colspan="4">Aucune</td></tr>')+'</tbody></table>'+
       '<h2>Gains annuels estimés</h2><p>Administration : '+rng(r.adminBas,r.adminHaut)+' · Usagers : '+rng(r.dematBas+r.cadrage,r.dematHaut+r.cadrage)+' (dont '+eur(r.cadrage)+' grâce au cadrage)</p><p>Le coût de création de la démarche est commun à tous les supports et n\'est pas compté.</p>'+
+      '<h2>Trois actions prioritaires</h2><ol>'+topActions(r).map(function(a){return"<li><b>"+esc(a.t)+"</b> — "+esc(a.d)+"</li>"}).join("")+'</ol>'+
       '<h2>À faire avant la mise en ligne</h2><ul>'+todo(r).map(function(x){return"<li>"+esc(x)+"</li>"}).join("")+'</ul>'+
       '<h2>Indicateurs suivis après mise en ligne</h2><ul>'+(ind.length?ind.map(function(x){return"<li>"+x+"</li>"}).join(""):"<li>Aucun</li>")+'</ul>'+
       '<p style="font-size:9pt">Estimation indicative fondée sur des conventions publiques (Démarche Numérique, France Stratégie 2018, Insee, Eurostat ; temps par étape : hypothèses de l\'auteur). Voir FORM 2026.</p>';
@@ -609,7 +636,14 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
 
   document.querySelector("main").addEventListener("input",function(e){if(!e.target.closest(".item"))update();});
   document.querySelector("main").addEventListener("change",function(e){if(!e.target.closest(".item"))update();});
-  if(!load()){ addItem(PRESETS[0]); addItem(PRESETS[1]); addItem(PRESETS[8]); }
+  var QS=new URLSearchParams(location.search);
+  if(QS.has("nom")||QS.has("dossiers")||QS.has("pj")){
+    try{localStorage.removeItem(KEY);}catch(e){}
+    items=[]; uid=0;
+    [["nom","nom"],["dossiers","dossiers"],["pp","pp"],["delai","delai"],["champs","champs"],["longs","longs"],["rep","rep"]].forEach(function(k){ if(QS.has(k[0])) $(k[1]).value=QS.get(k[0]); });
+    if(QS.has("silence")){ var so=[].filter.call($("silence").options,function(o){return o.value===QS.get("silence")})[0]; if(so) $("silence").value=so.value; }
+    (QS.get("pj")||"").split(";").forEach(function(l){ l=l.trim(); if(!l) return; var pr=PRESETS.filter(function(p){return p.lib.toLowerCase()===l.toLowerCase()})[0]; addItem(pr?{lib:pr.lib,nat:pr.nat,fam:pr.fam,det:pr.det,src:pr.src}:{lib:l,nat:"piece",fam:"situation",det:"nsp",src:""}); });
+  } else if(!load()){ addItem(PRESETS[0]); addItem(PRESETS[1]); addItem(PRESETS[8]); }
   renderItems(); update();
 })();
 </script>

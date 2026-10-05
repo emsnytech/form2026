@@ -57,22 +57,22 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
 </head>
 <body>
 <div class="wrap">
-  <p class="topnav"><a href="../index.html">Retour à FORM 2026</a> · <a href="../simulateur-gains-dematerialisation.html">Estimer ses gains</a> · <a href="../cadrage-dematerialisation.html">Cadrer une démarche</a> · <a href="../comparer-cadre-fonctionnel.html">Comparer un outil</a> · <a href="../compteur-roi.html">Compteur</a></p>
+  <p class="topnav"><a href="../index.html">Retour à FORM 2026</a> · <a href="../simulateur-gains-dematerialisation.html">Estimer ses gains</a> · <a href="../cadrage-dematerialisation.html">Cadrer une démarche</a> · <a href="../comparer-cadre-fonctionnel.html">Comparer un outil</a> · <a href="../compteur-roi.html">Compteur</a> · <a href="../agent-public.html">Parcours agent public</a></p>
   <header>
     <h1>Données dérivées produites par FORM 2026</h1>
     <p class="lede">Les tableaux, paramètres et notes de méthode ci-dessous sont des <b>productions de l'auteur</b>, pas des jeux de données d'origine : les sources ouvertes utilisées (data.gouv.fr) sont citées dans chaque note de méthode. Chaque sous-dossier a son propre LISEZMOI (colonnes, calcul, date, version, limites).</p>
     <div class="badges">
       <span class="badge"><a href="LICENCE.md">Licence Ouverte 2.0</a></span>
-      <span class="badge">30 fichiers</span>
+      <span class="badge">31 fichiers</span>
     </div>
   </header>
 
 <section class="grp">
   <h2>Gains de la dématérialisation</h2>
-  <p class="desc">Gains estimés par démarche (méthode v7) et paramètres documentés (version 8).</p>
+  <p class="desc">Gains estimés par démarche (méthode v8, temps évités par étape selon la complexité) et paramètres documentés (version 8).</p>
   <ul class="filelist">
-  <li><a href="gains/LISEZMOI.md">LISEZMOI</a><span class="sz">3 Ko</span></li>
-<li><a href="gains/demarches_gains_v7.csv">demarches_gains_v7.csv</a><span class="sz">11.5 Mo</span></li>
+  <li><a href="gains/LISEZMOI_gains.md">LISEZMOI</a><span class="sz">5 Ko</span></li>
+<li><a href="gains/demarches_gains_v8.csv">demarches_gains_v8.csv</a><span class="sz">8.8 Mo</span></li>
 <li><a href="gains/parametres_v8.csv">parametres_v8.csv</a><span class="sz">2 Ko</span></li>
   </ul>
 </section>
@@ -80,7 +80,7 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
   <h2>Délais de traitement</h2>
   <p class="desc">Délais mesurés dépôt → instruction → traitement, hackathon 2024.</p>
   <ul class="filelist">
-  <li><a href="delais/LISEZMOI.md">LISEZMOI</a><span class="sz">2 Ko</span></li>
+  <li><a href="delais/LISEZMOI_delais.md">LISEZMOI</a><span class="sz">2 Ko</span></li>
 <li><a href="delais/delai_par_complexite.csv">delai_par_complexite.csv</a><span class="sz">395 o</span></li>
 <li><a href="delais/delai_par_type_demandeur.csv">delai_par_type_demandeur.csv</a><span class="sz">611 o</span></li>
 <li><a href="delais/delai_par_type_organisme.csv">delai_par_type_organisme.csv</a><span class="sz">511 o</span></li>
@@ -92,7 +92,7 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
   <h2>Base juridique des démarches</h2>
   <p class="desc">Qualité du cadre juridique déclaré par les démarches, sur tout le corpus et sur un échantillon vérifié à la main.</p>
   <ul class="filelist">
-  <li><a href="base-juridique/LISEZMOI.md">LISEZMOI</a><span class="sz">3 Ko</span></li>
+  <li><a href="base-juridique/LISEZMOI_base-juridique.md">LISEZMOI</a><span class="sz">3 Ko</span></li>
 <li><a href="base-juridique/juridique_echantillon.csv">juridique_echantillon.csv</a><span class="sz">103 Ko</span></li>
 <li><a href="base-juridique/juridique_niveau1.csv">juridique_niveau1.csv</a><span class="sz">10.4 Mo</span></li>
 <li><a href="base-juridique/juridique_strates_effectifs.csv">juridique_strates_effectifs.csv</a><span class="sz">1 Ko</span></li>
@@ -103,7 +103,7 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
   <h2>Retours d'usagers sur Démarche Numérique</h2>
   <p class="desc">Analyse des témoignages Services Publics Plus citant la plateforme.</p>
   <ul class="filelist">
-  <li><a href="retours-usagers/LISEZMOI.md">LISEZMOI</a><span class="sz">4 Ko</span></li>
+  <li><a href="retours-usagers/LISEZMOI_retours-usagers.md">LISEZMOI</a><span class="sz">4 Ko</span></li>
 <li><a href="retours-usagers/note_retours_usagers_complement.md">note_retours_usagers_complement.md</a><span class="sz">18 Ko</span></li>
 <li><a href="retours-usagers/sp2_A_vs_Bp_criteres.csv">sp2_A_vs_Bp_criteres.csv</a><span class="sz">484 o</span></li>
 <li><a href="retours-usagers/sp2_A_vs_Bp_par_annee.csv">sp2_A_vs_Bp_par_annee.csv</a><span class="sz">588 o</span></li>
@@ -120,10 +120,11 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
 </section>
 <section class="grp">
   <h2>Hypothèses et analyse de sensibilité</h2>
-  <p class="desc">Décomposition des temps évités et sensibilité du coût horaire retenu.</p>
+  <p class="desc">Décomposition des temps évités, sensibilité du coût horaire retenu et modèle de tableau pour mesurer chez soi.</p>
   <ul class="filelist">
-  <li><a href="hypotheses/LISEZMOI.md">LISEZMOI</a><span class="sz">2 Ko</span></li>
+  <li><a href="hypotheses/LISEZMOI_hypotheses.md">LISEZMOI</a><span class="sz">4 Ko</span></li>
 <li><a href="hypotheses/cout_horaire_sensibilite.csv">cout_horaire_sensibilite.csv</a><span class="sz">791 o</span></li>
+<li><a href="hypotheses/mesure_temps_modele.csv">mesure_temps_modele.csv</a><span class="sz">877 o</span></li>
 <li><a href="hypotheses/temps_par_etape.csv">temps_par_etape.csv</a><span class="sz">1 Ko</span></li>
   </ul>
 </section>

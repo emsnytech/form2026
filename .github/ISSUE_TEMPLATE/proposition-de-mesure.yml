@@ -1,0 +1,37 @@
+name: Proposition de mesure
+description: Proposer une valeur mesurée pour remplacer une hypothèse de référence (simulateur, grille de cadrage, compteur).
+title: "Proposition de mesure : "
+labels: ["proposition-mesure"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de contribuer. **Ne mentionnez aucune donnée personnelle** (nom, numéro de dossier, coordonnées) : seules des durées, des coûts et des volumes agrégés sont utiles ici.
+  - type: input
+    id: demarche
+    attributes:
+      label: Démarche ou service concerné
+      description: Nom de la démarche (et son identifiant si vous le connaissez) ou nom du service.
+    validations:
+      required: true
+  - type: textarea
+    id: mesure
+    attributes:
+      label: Ce qui a été mesuré
+      description: La ou les valeurs mesurées (temps, coût, nombre de dossiers observés, période).
+    validations:
+      required: true
+  - type: textarea
+    id: methode
+    attributes:
+      label: Méthode
+      description: Comment la mesure a été faite (chronométrage, extraction d'un système, estimation) et sur combien de dossiers.
+    validations:
+      required: true
+  - type: textarea
+    id: valeurs
+    attributes:
+      label: Valeurs proposées
+      description: Les valeurs à comparer à la référence (par exemple celles du bloc « Tester vos propres hypothèses » du simulateur), et le lien du scénario si vous en avez un.
+    validations:
+      required: true

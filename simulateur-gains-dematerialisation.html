@@ -12,7 +12,7 @@
 <meta property="og:description" content="Estimez les gains de vos démarches en ligne, pour votre administration et pour vos usagers, avec des hypothèses publiques.">
 <meta property="og:url" content="https://emsnytech.github.io/form2026/simulateur-gains-dematerialisation.html">
 <meta name="twitter:card" content="summary">
-<meta name="page-version" content="2026-10-05-r5">
+<meta name="page-version" content="2026-10-05-r6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -106,6 +106,23 @@ dt{color:var(--muted)} dd{margin:0;text-align:right;font-variant-numeric:tabular
 .cleg i.a{background:var(--admin)} .cleg i.d{background:var(--usager)} .cleg i.p{background:color-mix(in srgb,var(--usager) 55%,var(--surface))} .cleg i.c{background:var(--accent)} .cleg i.pot{border:2px dashed var(--usager)}
 .caxis{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin:.2rem 0 0 10.2rem}
 @media (max-width:620px){.caxis{margin-left:0}}
+
+.calcs{margin-top:1.2rem}
+.calcs details,.myhyp{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.7rem 1rem;margin:.5rem 0}
+.calcs summary,.myhyp summary{cursor:pointer;font-weight:700}
+.calcs summary:focus-visible,.myhyp summary:focus-visible{outline:3px solid var(--admin);outline-offset:3px}
+.calcs p,.myhyp p{font-size:.93rem;margin:.5rem 0}
+.calcs .f{background:var(--paper);border-left:4px solid var(--admin);padding:.5rem .7rem;border-radius:4px}
+.calcs table{width:100%;border-collapse:collapse;font-size:.88rem;font-variant-numeric:tabular-nums;margin:.5rem 0}
+.calcs th,.calcs td{padding:.35rem .5rem;border-bottom:1px solid var(--line);text-align:right}
+.calcs th:first-child,.calcs td:first-child{text-align:left}
+.hgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem;margin:.6rem 0}
+.hgrid label{display:block;font-size:.82rem;color:var(--muted);font-weight:600}
+.hgrid input{width:100%;font:inherit;padding:.35rem .5rem;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink)}
+.hbar{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}
+.hbar button,.hbar a{font:inherit;font-size:.9rem;padding:.4rem .8rem;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;text-decoration:none}
+.hbar a.primary{background:var(--admin);color:#fff;border-color:var(--admin)}
+#hypDelta{font-weight:600}
 .extras{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem}
 @media (max-width:760px){.extras{grid-template-columns:1fr}}
 .extras .panel p{margin:.3rem 0 0}
@@ -134,6 +151,7 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
     <h1>Moins de charge pour l'usager, moins de coûts pour l'État : estimez vos gains</h1>
     <p class="lede">Indiquez ce que votre organisme prévoit de mettre en ligne sur une plateforme mutualisée de dématérialisation. Le simulateur donne une fourchette de gains pour l'administration et pour les usagers, calculée avec les paramètres publics d'une évaluation portant sur 18,2 millions de dossiers déposés depuis 2018.</p>
     <p class="version">Paramètres version 8, octobre 2026</p>
+    <p class="small">Vous connaissez déjà votre démarche ? <a href="agent-public.html">Le parcours en cinq étapes pour les agents publics</a>.</p>
   </header>
 
   <div class="grid">
@@ -221,6 +239,41 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
     </div>
   </div>
 
+  <section class="calcs" aria-labelledby="h-calc">
+    <h2 id="h-calc">Comment ces chiffres sont calculés</h2>
+    <p class="small">Chaque ligne est recalculée avec vos réponses. Ouvrez un bloc pour voir la formule et les valeurs.</p>
+    <div id="calcBody"></div>
+  </section>
+
+  <details class="myhyp" id="myhyp">
+    <summary>Tester vos propres hypothèses</summary>
+    <p>Les valeurs ci-dessous sont celles de la référence. Modifiez-les avec ce que vous avez mesuré dans votre service : le simulateur recalcule et affiche l'écart avec la référence. Rien n'est transmis.</p>
+    <div class="hgrid">
+      <div><label for="h_adm_bas">Coût de traitement évité, bas (€ par dossier)</label><input id="h_adm_bas" type="number" step="0.01" min="0"></div>
+      <div><label for="h_adm_haut">Coût de traitement évité, haut (€ par dossier)</label><input id="h_adm_haut" type="number" step="0.01" min="0"></div>
+      <div><label for="h_rate_pp">Valeur de l'heure, particulier (€)</label><input id="h_rate_pp" type="number" step="0.01" min="0"></div>
+      <div><label for="h_rate_pm">Valeur de l'heure, personne morale (€)</label><input id="h_rate_pm" type="number" step="0.01" min="0"></div>
+      <div><label for="h_plat">Coût de la plateforme (€ par dossier)</label><input id="h_plat" type="number" step="0.01" min="0"></div>
+    </div>
+    <p><b>Temps évité par l'usager, en minutes par dossier</b> (démarche simple / modérée / complexe)</p>
+    <div class="hgrid">
+      <div><label for="h_mb_s">Bas, simple</label><input id="h_mb_s" type="number" step="0.5" min="0"></div>
+      <div><label for="h_mb_m">Bas, modérée</label><input id="h_mb_m" type="number" step="0.5" min="0"></div>
+      <div><label for="h_mb_c">Bas, complexe</label><input id="h_mb_c" type="number" step="0.5" min="0"></div>
+      <div><label for="h_mh_s">Haut, simple</label><input id="h_mh_s" type="number" step="0.5" min="0"></div>
+      <div><label for="h_mh_m">Haut, modérée</label><input id="h_mh_m" type="number" step="0.5" min="0"></div>
+      <div><label for="h_mh_c">Haut, complexe</label><input id="h_mh_c" type="number" step="0.5" min="0"></div>
+    </div>
+    <p id="hypDelta" aria-live="polite">–</p>
+    <div class="hbar">
+      <button type="button" id="hypReset">Revenir à la référence</button>
+      <button type="button" id="hypCopy">Copier le lien de ce scénario</button>
+      <a class="primary" id="hypPropose" href="#" target="_blank" rel="noopener">Proposer cette mesure</a>
+    </div>
+    <p class="small" id="hypMsg" aria-live="polite"></p>
+    <p class="small">« Proposer cette mesure » ouvre une demande sur le dépôt public de FORM, préremplie avec vos valeurs : indiquez comment vous avez mesuré, sur combien de dossiers. Une mesure documentée peut remplacer une hypothèse de la référence. Pour mesurer, voir le <a href="agent-public.html#mesurer">protocole en dix dossiers</a>.</p>
+  </details>
+
   <section aria-labelledby="h-niveaux">
     <h2 id="h-niveaux">Vos gains selon la complexité des démarches</h2>
     <p class="small">Même volume de dossiers et même répartition entre particuliers et personnes morales, en supposant que toutes vos démarches relèvent d'un seul niveau.</p>
@@ -259,7 +312,7 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
   </section>
 
   <footer>
-    <p>Estimation indicative, fondée sur des conventions publiques et non sur une mesure propre à votre organisme. Paramètres version 8, octobre 2026. Version de la page : 5 octobre 2026, révision 5.</p>
+    <p>Estimation indicative, fondée sur des conventions publiques et non sur une mesure propre à votre organisme. Paramètres version 8, octobre 2026. Version de la page : 5 octobre 2026, révision 6.</p>
     <p>Pour vérifier ou contester les hypothèses :
       <a href="https://emsnytech.github.io/form2026/donnees/">les calculs et résultats par démarche en open data</a>,
       et <a href="https://emsnytech.github.io/form2026/">FORM 2026</a>, la cartographie des démarches et des données demandées.</p>
@@ -269,17 +322,15 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
 <script>
 (function(){
   // Paramètres par dossier (€), issus de l'évaluation v7 (cumul 2018, 18,2 M dossiers)
-  var ADMIN = {bas:6.79, central:8.96, haut:10.70};
+  var REF = {ADMIN:{bas:6.79,central:8.96,haut:10.70}, DEMAT_MIN:{bas:{simple:2,modere:4,complexe:8},haut:{simple:9.5,modere:14.5,complexe:26.5}}, RATE:{pp:7.28,pm:44.70}, PLAT:14000000/18220327};
+  var P = JSON.parse(JSON.stringify(REF));
   // temps évité par dossier (minutes) par rapport à un PDF envoyé par courriel, selon la complexité
-  var DEMAT_MIN = {bas:{simple:2,modere:4,complexe:8}, haut:{simple:9.5,modere:14.5,complexe:26.5}};
   var PRE = { // préremplissage réalisé, €/dossier ; particuliers selon part FranceConnect
     simple:{pp:{30:0.0409,60:0.0651}, pm:0.6886},
     modere:{pp:{30:0.0692,60:0.0935}, pm:1.1219},
     complexe:{pp:{30:0.1085,60:0.1328}, pm:1.2029}
   };
   var POT = {simple:{pp:0.0940,pm:0.0763}, modere:{pp:0.1550,pm:0.2748}, complexe:{pp:0.3937,pm:0.4735}};
-  var RATE = {pp:7.28, pm:44.70};
-  var PLAT = 14000000/18220327; // coût de la plateforme par dossier déposé (14 M€ au plus ÷ 18,2 M de dossiers)
 
   var LEVELS = [["simple","Simple","environ 5 min"],["modere","Modérée","environ 15 min"],["complexe","Complexe","environ 37 min"]];
 
@@ -296,14 +347,14 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
 
   function compute(D, pp, mix, fc){
     var pm = 1-pp, r = {};
-    r.adminBas = D*ADMIN.bas; r.adminCentral = D*ADMIN.central; r.adminHaut = D*ADMIN.haut;
-    var rateM = pp*RATE.pp + pm*RATE.pm; r.dematBas = 0; r.dematHaut = 0; r.minBas = 0; r.minHaut = 0;
-    for(var k0 in mix){ r.dematBas += D*mix[k0]*DEMAT_MIN.bas[k0]/60*rateM; r.dematHaut += D*mix[k0]*DEMAT_MIN.haut[k0]/60*rateM; r.minBas += mix[k0]*DEMAT_MIN.bas[k0]; r.minHaut += mix[k0]*DEMAT_MIN.haut[k0]; }
+    r.adminBas = D*P.ADMIN.bas; r.adminCentral = D*P.ADMIN.central; r.adminHaut = D*P.ADMIN.haut;
+    var rateM = pp*P.RATE.pp + pm*P.RATE.pm; r.dematBas = 0; r.dematHaut = 0; r.minBas = 0; r.minHaut = 0;
+    for(var k0 in mix){ r.dematBas += D*mix[k0]*P.DEMAT_MIN.bas[k0]/60*rateM; r.dematHaut += D*mix[k0]*P.DEMAT_MIN.haut[k0]/60*rateM; r.minBas += mix[k0]*P.DEMAT_MIN.bas[k0]; r.minHaut += mix[k0]*P.DEMAT_MIN.haut[k0]; }
     var pre=0, pot=0, preH=0;
     for(var k in mix){
       var n = D*mix[k];
       var pP = n*pp*PRE[k].pp[fc], pM = n*pm*PRE[k].pm;
-      pre += pP+pM; preH += pP/RATE.pp + pM/RATE.pm;
+      pre += pP+pM; preH += pP/P.RATE.pp + pM/P.RATE.pm;
       pot += n*(pp*POT[k].pp + pm*POT[k].pm);
     }
     r.pre = pre; r.preHours = preH; r.pot = pot;
@@ -311,6 +362,69 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
     r.uHoursBas = D*r.minBas/60 + preH; r.uHoursHaut = D*r.minHaut/60 + preH;
     r.totBas = r.adminBas + r.uBas; r.totHaut = r.adminHaut + r.uHaut;
     return r;
+  }
+
+
+  // ---------- hypothèses modifiables ----------
+  var HYP = [
+    ["h_adm_bas",function(p){return p.ADMIN.bas},function(p,v){p.ADMIN.bas=v}],
+    ["h_adm_haut",function(p){return p.ADMIN.haut},function(p,v){p.ADMIN.haut=v}],
+    ["h_rate_pp",function(p){return p.RATE.pp},function(p,v){p.RATE.pp=v}],
+    ["h_rate_pm",function(p){return p.RATE.pm},function(p,v){p.RATE.pm=v}],
+    ["h_plat",function(p){return p.PLAT},function(p,v){p.PLAT=v}],
+    ["h_mb_s",function(p){return p.DEMAT_MIN.bas.simple},function(p,v){p.DEMAT_MIN.bas.simple=v}],
+    ["h_mb_m",function(p){return p.DEMAT_MIN.bas.modere},function(p,v){p.DEMAT_MIN.bas.modere=v}],
+    ["h_mb_c",function(p){return p.DEMAT_MIN.bas.complexe},function(p,v){p.DEMAT_MIN.bas.complexe=v}],
+    ["h_mh_s",function(p){return p.DEMAT_MIN.haut.simple},function(p,v){p.DEMAT_MIN.haut.simple=v}],
+    ["h_mh_m",function(p){return p.DEMAT_MIN.haut.modere},function(p,v){p.DEMAT_MIN.haut.modere=v}],
+    ["h_mh_c",function(p){return p.DEMAT_MIN.haut.complexe},function(p,v){p.DEMAT_MIN.haut.complexe=v}]
+  ];
+  var URLKEYS = {h_adm_bas:"adm_bas",h_adm_haut:"adm_haut",h_rate_pp:"rate_pp",h_rate_pm:"rate_pm",h_plat:"plat",h_mb_s:"mb_s",h_mb_m:"mb_m",h_mb_c:"mb_c",h_mh_s:"mh_s",h_mh_m:"mh_m",h_mh_c:"mh_c"};
+  var r4 = function(v){return String(Math.round(v*10000)/10000)};
+  function fillHyp(){ HYP.forEach(function(h){ var el=$(h[0]); el.value=r4(h[1](REF)); el.setAttribute("data-ref",el.value); }); }
+  function readHyp(){
+    var p = JSON.parse(JSON.stringify(REF));
+    HYP.forEach(function(h){
+      var el=$(h[0]); if(el.value===el.getAttribute("data-ref")) return;
+      var v=parseFloat(String(el.value).replace(",",".")); if(isFinite(v)&&v>=0) h[2](p,v);
+    });
+    if(p.ADMIN.bas!==REF.ADMIN.bas||p.ADMIN.haut!==REF.ADMIN.haut) p.ADMIN.central=(p.ADMIN.bas+p.ADMIN.haut)/2;
+    P=p; return p;
+  }
+  function changedHyp(){ return HYP.filter(function(h){return Math.abs(h[1](P)-h[1](REF))>1e-9}); }
+  var f2 = function(v){return v.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})};
+  var ISSUE = "https://github.com/emsnytech/form2026/issues/new";
+  function scenarioUrl(){
+    var q=new URLSearchParams(), D=val("dossiers"), A=val("agents");
+    if(D) q.set("dossiers",D); if(A) q.set("agents",A);
+    q.set("pp",$("pp").value); q.set("simple",$("ms").value); q.set("modere",$("mm").value); q.set("complexe",$("mc").value);
+    q.set("fc",document.querySelector('input[name="fc"]:checked').value);
+    HYP.forEach(function(h){ if(Math.abs(h[1](P)-h[1](REF))>1e-9) q.set(URLKEYS[h[0]], r4(h[1](P))); });
+    return location.origin+location.pathname+"?"+q.toString();
+  }
+  function setPropose(ch){
+    var lines=ch.map(function(h){var lab=document.querySelector('label[for="'+h[0]+'"]').textContent; return "- "+lab+" : "+r4(h[1](P))+" (référence : "+r4(h[1](REF))+")"});
+    var body="**Démarche ou service concerné** : \n\n**Ce que j'ai mesuré** (temps ou coût, nombre de dossiers observés, période) : \n\n**Comment** (chronométrage, extraction, estimation) : \n\n**Valeurs proposées**\n"+(lines.join("\n")||"(aucune modification de la référence)")+"\n\n**Scénario dans le simulateur** : "+scenarioUrl()+"\n\nMerci de ne mentionner aucune donnée personnelle.";
+    $("hypPropose").href=ISSUE+"?title="+encodeURIComponent("Proposition de mesure : ")+"&body="+encodeURIComponent(body);
+  }
+  function renderDelta(D,pp,mix,fc,r){
+    var ch=changedHyp(), el=$("hypDelta");
+    if(!ch.length){ el.textContent="Aucune modification : valeurs de la référence."; setPropose(ch); return; }
+    var mine=P; P=REF; var rr=compute(D,pp,mix,fc); P=mine;
+    var sg=function(a,b){var x=b?(a/b-1)*100:0; return (x>=0?"+":"−")+Math.abs(x).toLocaleString("fr-FR",{maximumFractionDigits:0})+" %"};
+    el.textContent="Avec vos hypothèses : "+rng(r.totBas,r.totHaut)+" par an. Référence : "+rng(rr.totBas,rr.totHaut)+" (écart "+sg(r.totBas,rr.totBas)+" en bas, "+sg(r.totHaut,rr.totHaut)+" en haut). "+ch.length+" paramètre"+(ch.length>1?"s":"")+" modifié"+(ch.length>1?"s":"")+".";
+    setPropose(ch);
+  }
+  function renderCalc(D,pp,mix,fc,r,cost){
+    var pm=1-pp, rateM=pp*P.RATE.pp+pm*P.RATE.pm, h="", open=[].map.call(document.querySelectorAll("#calcBody details"),function(d){return d.open});
+    h+='<details><summary>Administration : coût de traitement évité</summary><p>Pour chaque dossier déposé en ligne, l\'administration évite un coût de traitement (réception, classement des pièces, ressaisie, relances, suivi).</p><p class="f"><b>'+num(D)+' dossiers × '+f2(P.ADMIN.bas)+' € = '+eur(r.adminBas)+'</b> (hypothèse basse)<br><b>'+num(D)+' dossiers × '+f2(P.ADMIN.haut)+' € = '+eur(r.adminHaut)+'</b> (hypothèse haute)</p><p class="small">Source : France Stratégie, 2018, tableau 12, d\'après des études étrangères. C\'est un coût forfaitaire par dossier, non mesuré en France. Une construction étape par étape donne 7,08 €, 11,92 € et 20,12 € selon la complexité (dossier « hypothèses » des données publiées).</p></details>';
+    var rows="";
+    LEVELS.forEach(function(L){ var n=D*mix[L[0]]; rows+='<tr><td>'+L[1]+'</td><td>'+num(n)+'</td><td>'+P.DEMAT_MIN.bas[L[0]]+' à '+P.DEMAT_MIN.haut[L[0]]+' min</td><td>'+eur(n*P.DEMAT_MIN.bas[L[0]]/60*rateM)+'</td><td>'+eur(n*P.DEMAT_MIN.haut[L[0]]/60*rateM)+'</td></tr>'; });
+    h+='<details><summary>Usagers : dématérialisation</summary><p>Temps évité par l\'usager par rapport à un formulaire PDF envoyé par courriel : remplir sans aide ni contrôle, numériser et joindre les pièces, répondre aux relances, relancer pour connaître l\'état du dossier, ressaisir son identité. Il dépend de la complexité de la démarche.</p><p class="f">Dossiers du niveau × minutes évitées ÷ 60 × valeur moyenne de l\'heure : <b>'+Math.round(pp*100)+' % × '+f2(P.RATE.pp)+' € + '+Math.round(pm*100)+' % × '+f2(P.RATE.pm)+' € = '+f2(rateM)+' € l\'heure</b></p><table><thead><tr><th>Niveau</th><th>Dossiers</th><th>Minutes évitées</th><th>Gain bas</th><th>Gain haut</th></tr></thead><tbody>'+rows+'<tr><td><b>Total</b></td><td></td><td></td><td><b>'+eur(r.dematBas)+'</b></td><td><b>'+eur(r.dematHaut)+'</b></td></tr></tbody></table><p class="small">Bas : envoi des pièces seul. Haut : ensemble des étapes. Ce sont des hypothèses de l\'auteur, à caler par des mesures chronométrées. Valeur de l\'heure : 7,28 € (France Stratégie 2018, tableau 14, d\'après le rapport Quinet) et 44,70 € (Insee, Eurostat 2025).</p></details>';
+    h+='<details><summary>Usagers : préremplissage déjà réalisé</summary><p>Les champs préremplis (identité par FranceConnect pour les particuliers, données de l\'entreprise à partir du SIRET) évitent une saisie. Durées de remplissage tirées du code source de la plateforme : 10 s par champ, 60 s pour un champ long, 180 s par pièce jointe.</p><p class="f"><b>≈ '+num(r.preHours)+' heures de saisie évitées → '+eur(r.pre)+'</b> (aux valeurs de l\'heure ci-dessus, avec '+fc+' % de particuliers passant par FranceConnect)</p></details>';
+    h+='<details><summary>Total, coût de la plateforme et rapport</summary><p class="f">Total bas = '+eur(r.adminBas)+' + '+eur(r.dematBas)+' + '+eur(r.pre)+' = <b>'+eur(r.totBas)+'</b><br>Total haut = '+eur(r.adminHaut)+' + '+eur(r.dematHaut)+' + '+eur(r.pre)+' = <b>'+eur(r.totHaut)+'</b></p><p class="f">Coût de la plateforme = '+num(D)+' dossiers × '+f2(P.PLAT)+' € = <b>'+eur(cost)+'</b><br>Pour 1 € investi : '+(D>0?(r.totBas/cost).toLocaleString("fr-FR",{maximumFractionDigits:0})+' à '+(r.totHaut/cost).toLocaleString("fr-FR",{maximumFractionDigits:0})+' € de gains':'–')+'</p><p class="small">0,77 € par dossier = 14 M€ au plus (construction et exploitation 2018-2026, estimation haute) ÷ 18,2 millions de dossiers. Les gains sont des temps et des coûts valorisés, pas des économies budgétaires. Le coût de création des démarches, commun à tous les supports, n\'est pas compté.</p></details>';
+    $("calcBody").innerHTML=h;
+    [].forEach.call(document.querySelectorAll("#calcBody details"),function(d,i){ if(open[i]) d.open=true; });
   }
 
   function drawChart(rows){
@@ -326,6 +440,7 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
     $("chart").setAttribute("aria-label","Graphique : "+rows.map(function(r){return r.label+" "+eur(tot(r))}).join(" ; "));
   }
   function update(){
+    readHyp();
     var D = val("dossiers"), A = val("agents");
     var pp = val("pp")/100; $("ppv").textContent = Math.round(pp*100);
     var ms=val("ms"), mm=val("mm"), mc=val("mc"), s=ms+mm+mc;
@@ -338,7 +453,7 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
 
     $("adminRange").textContent = rng(r.adminBas, r.adminHaut);
     $("adminCentral").textContent = eur(r.adminCentral);
-    $("adminHours").textContent = num(r.adminBas/RATE.pm)+" à "+num(r.adminHaut/RATE.pm)+" h";
+    $("adminHours").textContent = num(r.adminBas/P.RATE.pm)+" à "+num(r.adminHaut/P.RATE.pm)+" h";
     $("adminAgent").textContent = A>0 ? "Soit "+rng(r.adminBas/A, r.adminHaut/A)+" par agent instructeur" : "Indiquez le nombre d'agents pour obtenir un gain par agent";
     $("usagerRange").textContent = rng(r.uBas, r.uHaut);
     $("usagerHoursTxt").textContent = "Soit "+num(r.uHoursBas)+" à "+num(r.uHoursHaut)+" heures rendues aux usagers";
@@ -347,8 +462,8 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
     $("totalRange").textContent = rng(r.totBas, r.totHaut);
     $("potentiel").textContent = eur(r.pot)+" par an";
 
-    var cost = D*PLAT;
-    $("platCost").textContent = D>0 ? "Coût de la plateforme pour vos dossiers : environ "+eur(cost)+" par an (estimation haute, "+(PLAT).toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" € par dossier)." : "Indiquez un nombre de dossiers.";
+    var cost = D*P.PLAT;
+    $("platCost").textContent = D>0 ? "Coût de la plateforme pour vos dossiers : environ "+eur(cost)+" par an (estimation haute, "+(P.PLAT).toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" € par dossier)." : "Indiquez un nombre de dossiers.";
     $("ratio").textContent = D>0 ? "1 € investi : "+(r.totBas/cost).toLocaleString("fr-FR",{maximumFractionDigits:0})+" à "+(r.totHaut/cost).toLocaleString("fr-FR",{maximumFractionDigits:0})+" € de gains" : "–";
     drawChart([
       {label:"Gains, hypothèses basses",sub:"administration et usagers",segs:[["a","Administration",r.adminBas],["d","Dématérialisation",r.dematBas],["p","Préremplissage",r.pre]]},
@@ -369,12 +484,31 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
     LEVELS.forEach(function(L){
       [["pp","Particuliers"],["pm","Personnes morales"]].forEach(function(t){
         var pre = t[0]==="pp" ? PRE[L[0]].pp[fc] : PRE[L[0]].pm;
-        g += "<tr><td>"+L[1]+"</td><td>"+t[1]+"</td><td class='a'>"+rng(B*ADMIN.bas,B*ADMIN.haut)+"</td><td class='u'>"+rng(B*DEMAT_MIN.bas[L[0]]/60*RATE[t[0]],B*DEMAT_MIN.haut[L[0]]/60*RATE[t[0]])+"</td><td class='u'>"+eur(B*pre)+"</td><td>"+eur(B*POT[L[0]][t[0]])+"</td></tr>";
+        g += "<tr><td>"+L[1]+"</td><td>"+t[1]+"</td><td class='a'>"+rng(B*P.ADMIN.bas,B*P.ADMIN.haut)+"</td><td class='u'>"+rng(B*P.DEMAT_MIN.bas[L[0]]/60*P.RATE[t[0]],B*P.DEMAT_MIN.haut[L[0]]/60*P.RATE[t[0]])+"</td><td class='u'>"+eur(B*pre)+"</td><td>"+eur(B*POT[L[0]][t[0]])+"</td></tr>";
       });
     });
     $("gridBody").innerHTML = g;
+    renderCalc(D, pp, mix, fc, r, cost);
+    renderDelta(D, pp, mix, fc, r);
   }
+  fillHyp();
+  (function initFromUrl(){
+    var q=new URLSearchParams(location.search);
+    var map={dossiers:"dossiers",agents:"agents",pp:"pp",simple:"ms",modere:"mm",complexe:"mc"};
+    Object.keys(map).forEach(function(k){ if(q.has(k)) $(map[k]).value=q.get(k); });
+    if(q.has("niveau")){ var n=q.get("niveau"); $("ms").value=n==="simple"?100:0; $("mm").value=n==="modere"?100:0; $("mc").value=n==="complexe"?100:0; }
+    if(q.has("fc")){ var rd=document.querySelector('input[name="fc"][value="'+q.get("fc")+'"]'); if(rd) rd.checked=true; }
+    var any=false; HYP.forEach(function(h){ var k=URLKEYS[h[0]]; if(q.has(k)){ $(h[0]).value=q.get(k); any=true; } });
+    if(any) $("myhyp").open=true;
+  })();
   $("f").addEventListener("input", update);
+  $("myhyp").addEventListener("input", update);
+  $("hypReset").addEventListener("click", function(){ fillHyp(); $("hypMsg").textContent="Hypothèses de la référence rétablies."; update(); });
+  $("hypCopy").addEventListener("click", function(){
+    var u=scenarioUrl();
+    var done=function(){ $("hypMsg").textContent="Lien copié. Il rouvre ce scénario, hypothèses comprises."; };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(u).then(done,function(){ $("hypMsg").textContent=u; }); } else { $("hypMsg").textContent=u; }
+  });
   update();
 })();
 </script>

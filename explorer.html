@@ -635,6 +635,41 @@
     return `<p style="font-size:.76rem;color:var(--tab-stats);margin-top:4px">⏳ Chargement des données PJ en cours (${loaded}/${total} lots reçus) — ce panneau se complète automatiquement, pas besoin de recharger la page.</p>`;
   }
 
+  // ---------- ponts vers le simulateur et la grille de cadrage ----------
+  function ppForTools(d){ return d.for_individual===true ? 100 : (d.for_individual===false ? 0 : 66); }
+  function simulerUrl(d){
+    const q = new URLSearchParams();
+    q.set('dossiers', d.nb_dossiers||0);
+    q.set('pp', ppForTools(d));
+    const niv = d.niveau_brut_v7 || d.niveau;
+    if(niv) q.set('niveau', niv);
+    return 'simulateur-gains-dematerialisation.html?'+q.toString();
+  }
+  function toolButtonsHtml(demarcheId){
+    return `<button type="button" class="chip btn-simuler" data-demarche="${demarcheId}">Simuler</button> <button type="button" class="chip btn-cadrer" data-demarche="${demarcheId}">Cadrer</button>`;
+  }
+  function openCadrerFor(d){
+    const q = new URLSearchParams();
+    q.set('nom', d.titre||'');
+    q.set('dossiers', d.nb_dossiers||0);
+    q.set('pp', ppForTools(d));
+    if(d.nb_champs!=null) q.set('champs', d.nb_champs);
+    const {status, champs} = getChampsForDemarche(d.demarche);
+    if(status==='loaded'){
+      const pj = champs.filter(c=>c.type_champ==='PieceJustificative').map(c=>c.libelle).filter(Boolean);
+      if(pj.length) q.set('pj', pj.join(';'));
+    }
+    window.open('cadrage-dematerialisation.html?'+q.toString(), '_blank', 'noopener');
+  }
+  function wireToolButtons(container, byId){
+    container.querySelectorAll('.btn-simuler').forEach(b=>{
+      b.addEventListener('click', e=>{ e.stopPropagation(); const d=byId(b.dataset.demarche); if(d) window.open(simulerUrl(d), '_blank', 'noopener'); });
+    });
+    container.querySelectorAll('.btn-cadrer').forEach(b=>{
+      b.addEventListener('click', e=>{ e.stopPropagation(); const d=byId(b.dataset.demarche); if(d) openCadrerFor(d); });
+    });
+  }
+
   // Listes de démarches derrière les compteurs du référentiel Donnée/API, chargées à part
   // (app_donnees_ids.json, ~1,5 Mo) plutôt qu'embarquées dans app_api_tab.json -- gardait la page
   // sous la limite de taille de l'Artifact (16 Mo).
@@ -740,7 +775,7 @@
   }
 
   /* ================= STATE ================= */
-  const VALID_TABS = ['accueil','overview','demarches','donnees','pj','evenement','dila','essentielles','toutes','cerfa','stats','registre','rida'];
+  const VALID_TABS = ['accueil','overview','demarches','organismes','donnees','pj','evenement','dila','essentielles','toutes','cerfa','stats','registre','rida'];
   const hashTab = (location.hash||'').slice(1);
   const state = {
     tab: VALID_TABS.includes(hashTab) ? hashTab : 'overview',
@@ -883,7 +918,7 @@
   function renderOrganismesTab(){
     content.innerHTML = `
       <div class="cover">
-        <p class="eyebrow">Gains par organisme — paramètres v7</p>
+        <p class="eyebrow">Gains par organisme — paramètres v8</p>
         <h2>Gains estimés, démarche par démarche, pour votre organisme</h2>
         <p class="lede">Organismes identifiés par SIRET (1 735 via le référentiel interne démarches-simplifiées, 87 de plus via une recherche par nom validée sur l'annuaire des entreprises) : 1 822 organismes couvrant 29 447 démarches sur 34 185 (86,1 % — le reste n'a pas de correspondance fiable et n'apparaît pas ici). Gain admin (valeur centrale) et gain usagers réalisé (préremplissage, 30 % / 60 % FranceConnect) — même méthode que le <a id="link-to-simu" href="#">simulateur de gains</a>.</p>
         <div class="cover-section">
@@ -936,14 +971,15 @@
       return acc;
     }, {dossiers:0, admin:0, pre30:0, pre60:0});
     let html = `<h3 style="margin-bottom:.6rem">${escapeHtml(org)}</h3><div class="table-wrap"><table><thead><tr>
-      <th>Démarche</th><th>Niveau</th><th>Dossiers</th><th>Gain admin (central)</th><th>Gain usagers réalisé (30 % FC)</th><th>Gain usagers réalisé (60 % FC)</th>
+      <th>Démarche</th><th>Niveau</th><th>Dossiers</th><th>Gain admin (central)</th><th>Gain usagers réalisé (30 % FC)</th><th>Gain usagers réalisé (60 % FC)</th><th>Outils</th>
       </tr></thead><tbody>`;
     rows.forEach(d=>{
-      html += `<tr><td>${escapeHtml(d.titre)}</td><td>${NIVEAU_LABEL_ORG[d.niveau]||d.niveau}</td><td>${fmtInt(d.nb_dossiers)}</td><td>${fmtInt(d.gain_admin_central)} €</td><td>${fmtInt(d.gain_usagers_30)} €</td><td>${fmtInt(d.gain_usagers_60)} €</td></tr>`;
+      html += `<tr><td>${escapeHtml(d.titre)}</td><td>${NIVEAU_LABEL_ORG[d.niveau]||d.niveau}</td><td>${fmtInt(d.nb_dossiers)}</td><td>${fmtInt(d.gain_admin_central)} €</td><td>${fmtInt(d.gain_usagers_30)} €</td><td>${fmtInt(d.gain_usagers_60)} €</td><td>${toolButtonsHtml(d.demarche)}</td></tr>`;
     });
-    html += `<tr style="font-weight:700;border-top:2px solid var(--line-strong)"><td>Total — ${rows.length} démarche${rows.length>1?'s':''}</td><td></td><td>${fmtInt(tot.dossiers)}</td><td>${fmtInt(tot.admin)} €</td><td>${fmtInt(tot.pre30)} €</td><td>${fmtInt(tot.pre60)} €</td></tr>`;
+    html += `<tr style="font-weight:700;border-top:2px solid var(--line-strong)"><td>Total — ${rows.length} démarche${rows.length>1?'s':''}</td><td></td><td>${fmtInt(tot.dossiers)}</td><td>${fmtInt(tot.admin)} €</td><td>${fmtInt(tot.pre30)} €</td><td>${fmtInt(tot.pre60)} €</td><td></td></tr>`;
     html += `</tbody></table></div>`;
     el.innerHTML = html;
+    wireToolButtons(el, id=>rows.find(d=>String(d.demarche)===String(id)));
   }
 
   function renderAccueil(){
@@ -1387,6 +1423,7 @@
             <th>Accès</th>
             <th data-key="perimetre_ministeriel">Périmètre ministériel</th>
             <th data-key="essentielle">Essentielle</th>
+            <th>Outils</th>
           </tr></thead>
           <tbody id="dem-tbody"></tbody>
         </table>
@@ -1482,6 +1519,7 @@
         <td>${d.url ? `<a href="${escapeHtml(d.url)}" target="_blank" rel="noopener" class="ext-link" title="Ouvrir la démarche sur démarche.numérique.gouv.fr">Démarche ↗</a>` : '—'}${d.cerfa_lien ? `<br><a href="${escapeHtml(d.cerfa_lien)}" target="_blank" rel="noopener" class="ext-link" title="Formulaire CERFA (formulaires.service-public.gouv.fr)">CERFA ↗</a>` : ''}</td>
         <td style="font-size:.78rem;color:var(--muted)">${d.perimetre_ministeriel||'—'}</td>
         <td>${d.essentielle ? `<span class="badge" style="background:var(--tab-essentielles-soft);color:var(--tab-essentielles)">Oui</span>` : '—'}</td>
+        <td onclick="event.stopPropagation()">${toolButtonsHtml(d.demarche)}</td>
       </tr>`;
     }).join('');
 
@@ -1494,6 +1532,7 @@
         render();
       });
     });
+    wireToolButtons(tbody, id=>pagedRows.find(d=>String(d.demarche)===String(id)));
     tbody.querySelectorAll('a.ext-link').forEach(a=>a.addEventListener('click', e=>e.stopPropagation()));
     wireCerfaJumps(tbody);
 

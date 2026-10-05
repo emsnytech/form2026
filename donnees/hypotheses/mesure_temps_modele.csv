@@ -1,0 +1,9 @@
+﻿numero_ordre (jamais de numero de dossier);niveau_demarche (simple / modere / complexe);cote (administration / usager);etape;avec_plateforme_ou_pdf_courriel;minutes;commentaire (sans donnee personnelle)
+1;modere;administration;reception et enregistrement;plateforme;0;
+1;modere;administration;classement des pieces;plateforme;0;
+1;modere;administration;ressaisie des donnees;plateforme;0;
+1;modere;administration;controle de completude et relances;plateforme;2;
+1;modere;administration;suivi et reponse aux demandes;plateforme;0,5;
+1;modere;usager;remplissage du formulaire;plateforme;10;observe sur un usager volontaire
+1;modere;usager;envoi des pieces;plateforme;3;
+(exemple);;;;;;"Supprimer cette ligne. Une ligne par etape et par dossier ; renseigner le meme dossier avec la plateforme puis, si possible, en PDF et courriel (ancienne procedure ou estimation)."
