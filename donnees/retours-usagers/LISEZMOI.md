@@ -11,7 +11,7 @@ Production de l'auteur à partir de données ouvertes de data.gouv.fr (jeu « Li
 - **`sp2_standardise_par_annee.csv`** — les mêmes écarts de critères, après standardisation sur la même structure annuelle pour A et B'.
 - **`sp2_robustesse_hors_typologie_dominante.csv`** — les mêmes critères pour A en excluant la typologie « Préfecture » (40 % de A), pour vérifier qu'elle ne porte pas seule l'écart observé.
 - **`sp2_suivi_services.csv`** — part des retours avec réponse, part en attente, délais (quartiles) entre publication et première réponse, par population et par année.
-- **`sp2_coding_A560_motifs.csv`**, **`sp2_coding_A560_par_annee.csv`** — codage manuel (assisté IA) des 560 retours négatifs de la population A en un motif principal (incompréhension du formulaire, pièces demandées, problème technique, délai/absence de réponse, qualité de la réponse, autre), avec intervalle de confiance.
+- **`sp2_coding_A560_motifs.csv`**, **`sp2_coding_A560_par_annee.csv`** — codage assisté par un modèle de langage, contrôlé par recodage à l'aveugle, des 560 retours négatifs de la population A en un motif principal (incompréhension du formulaire, pièces demandées, problème technique, délai/absence de réponse, qualité de la réponse, autre), avec intervalle de confiance.
 - **`sp2_coding_300_resultats.csv`** — accord entre le motif codé et le critère plateforme attendu, sur l'échantillon de contrôle (150 dans A, 150 dans B').
 - **`sp2_coding_accord_criteres.csv`** — le même accord, agrégé par motif.
 - **`sp2_blind_recode_60.csv`** — contrôle de stabilité : 60 des 300 retours recodés une seconde fois à l'aveugle (motif d'origine vs motif du second codage).
