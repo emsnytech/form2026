@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Moins de charge pour l'usager, moins de coûts pour l'État : ce que la numérisation de 18 millions de dossiers nous apprend</title>
+<meta name="description" content="Note de méthode : gains cumulés de la dématérialisation sur Démarche Numérique, 161 à 309 M€ depuis 2018 pour 18,2 millions de dossiers déposés, administration et usagers.">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="FORM 2026">
+<meta property="og:title" content="Moins de charge pour l'usager, moins de coûts pour l'État : ce que la numérisation de 18 millions de dossiers nous apprend">
+<meta property="og:description" content="Gains cumulés de la dématérialisation sur Démarche Numérique : 161 à 309 M€ depuis 2018 pour 18,2 millions de dossiers déposés, soit 11 à 22 fois le coût de la plateforme.">
+<meta property="og:url" content="https://emsnytech.github.io/form2026/note/">
+<meta name="twitter:card" content="summary">
+<meta name="page-version" content="2026-10-07-r7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1e2022;--muted:#5c6066;--paper:#fbf9f5;--surface:#fff;--line:#e2dfd7;--admin:#1d4ed8;--admin-soft:#eff6ff;--usager:#15803d;--usager-soft:#f0fdf4;--accent:#b45309;--warn-soft:#fffbeb;
+ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#f3f4f6;--muted:#9ca3af;--paper:#18181b;--surface:#27272a;--line:#3f3f46;--admin:#60a5fa;--admin-soft:#1e3a8a;--usager:#4ade80;--usager-soft:#14532d;--accent:#f59e0b;--warn-soft:#451a03}}
+:root[data-theme="dark"]{--ink:#f3f4f6;--muted:#9ca3af;--paper:#18181b;--surface:#27272a;--line:#3f3f46;--admin:#60a5fa;--admin-soft:#1e3a8a;--usager:#4ade80;--usager-soft:#14532d;--accent:#f59e0b;--warn-soft:#451a03}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--admin)}
+.wrap{max-width:860px;margin:0 auto;padding:2rem 1.25rem 3rem}
+.topnav{margin:0 0 1.2rem;font-size:.95rem}
+h1{font-size:clamp(1.6rem,3.6vw,2.3rem);line-height:1.25;margin:0;font-weight:800;max-width:32ch}
+h2{font-size:1.25rem;margin:2rem 0 .6rem;font-weight:800}
+.byline{color:var(--muted);margin:.7rem 0 0;font-size:.95rem}
+.lede{color:var(--ink);max-width:68ch;margin:1.2rem 0 0;font-size:1.05rem;line-height:1.55}
+.lede b{color:var(--admin)}
+.actions{display:flex;flex-wrap:wrap;gap:.8rem;margin:1.6rem 0}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;text-decoration:none;padding:.65rem 1.2rem;border-radius:8px;background:var(--admin);color:#fff}
+.btn.secondary{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#18181b}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.2rem 1.4rem;margin:1.2rem 0}
+.card h3{margin:0 0 .5rem;font-size:1.05rem}
+.kv{display:grid;grid-template-columns:1fr auto;gap:.3rem .8rem;font-size:.95rem;margin:.3rem 0}
+.kv dt{color:var(--muted)} .kv dd{margin:0;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.links{display:grid;gap:.5rem;padding:0;list-style:none;margin:.6rem 0 0}
+.links a{font-weight:600}
+.small{font-size:.88rem;color:var(--muted)}
+footer{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="topnav"><a href="../index.html">Retour à FORM 2026</a> · <a href="../simulateur-gains-dematerialisation.html">Estimer ses gains</a> · <a href="../cadrage-dematerialisation.html">Cadrer une démarche</a> · <a href="../comparer-cadre-fonctionnel.html">Comparer un outil</a> · <a href="../compteur-roi.html">Compteur</a></p>
+  <header>
+    <h1>Moins de charge pour l'usager, moins de coûts pour l'État : ce que la numérisation de 18 millions de dossiers nous apprend</h1>
+    <p class="byline">Philippe Vrignaud · 3 octobre 2026</p>
+    <p class="lede">Depuis 2018, les démarches dématérialisées sur Démarche Numérique ont permis <b>161 à 309 M€ de gains cumulés</b> pour 18,2 millions de dossiers déposés : 124 à 195 M€ pour l'administration, 37 à 114 M€ pour les usagers. Rapportés au coût de la plateforme (14 M€ au plus), ces gains représentent <b>11 à 22 fois</b> l'investissement.</p>
+  </header>
+
+  <div class="actions">
+    <a class="btn" href="moins-de-charge-pour-l-usager-moins-de-couts-pour-l-etat.pdf">Lire le PDF</a>
+    <a class="btn secondary" href="moins-de-charge-pour-l-usager-moins-de-couts-pour-l-etat.docx">Télécharger le Word</a>
+  </div>
+
+  <div class="card">
+    <h3>Les chiffres clés</h3>
+    <dl class="kv">
+      <dt>Dossiers déposés depuis 2018</dt><dd>18,2 millions</dd>
+      <dt>Gains cumulés, administration et usagers</dt><dd>161 à 309 M€</dd>
+      <dt>dont administration</dt><dd>124 à 195 M€</dd>
+      <dt>dont usagers</dt><dd>37 à 114 M€</dd>
+      <dt>Coût de la plateforme (estimation haute)</dt><dd>14 M€ au plus</dd>
+      <dt>Gains pour 1 € investi dans la plateforme</dt><dd>11 à 22 €</dd>
+    </dl>
+    <p class="small">Les gains sont des temps et des coûts valorisés, pas des économies budgétaires. Méthode complète dans la note.</p>
+  </div>
+
+  <h2>Aller plus loin</h2>
+  <ul class="links">
+    <li><a href="../index.html">FORM 2026 — l'accueil</a></li>
+    <li><a href="../simulateur-gains-dematerialisation.html">Le simulateur de gains</a></li>
+    <li><a href="../cadrage-dematerialisation.html">La grille de cadrage d'une démarche</a></li>
+    <li><a href="../compteur-roi.html">Le compteur, gains et ROI en continu</a></li>
+    <li><a href="../agent-public.html">Le parcours en cinq étapes pour les agents publics</a></li>
+    <li><a href="../donnees/">Les données ouvertes (gains, délais, base juridique, retours d'usagers, hypothèses)</a></li>
+  </ul>
+
+  <footer>Paramètres version 8, octobre 2026. Version de la page : 7 octobre 2026, révision 7.</footer>
+</div>
+</body>
+</html>
