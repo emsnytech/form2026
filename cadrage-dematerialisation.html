@@ -294,7 +294,7 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
   </div>
 
   <footer>
-    Estimation indicative, fondée sur des conventions publiques : durées de remplissage par type de champ du code source de Démarche Numérique (10 s par champ, 60 s pour un champ long, 180 s par pièce jointe, blocs répétables comptés 2,5 fois) ; coût de traitement évité de 6,79 € à 10,70 € par dossier (France Stratégie, 2018) ; gain de dématérialisation pour l'usager : temps évité par rapport à un PDF envoyé par courriel, de 2 à 9,5 minutes (démarche simple), 4 à 14,5 (modérée) ou 8 à 26,5 (complexe), hypothèses de l'auteur ; valeur de l'heure de 7,28 € pour un particulier (France Stratégie 2018, d'après le rapport Quinet) et de 44,70 € pour une personne morale (Insee, Eurostat, 2025) ; coût de la plateforme : 14 M€ au plus rapportés aux 18,2 millions de dossiers déposés depuis 2018 (estimation haute) ; charge d'instruction rapportée à 1 607 heures travaillées par agent et par an. Formulaires existants : référentiel RIDA de service-public.fr, export du 28 novembre 2022. Niveaux de complexité : score = champs obligatoires + champs répétables + 3 × pièces jointes ; simple jusqu'à 20, modéré jusqu'à 43, complexe au-delà ou à partir de 8 pièces jointes. Une information conservée mais obtenue à la source compte encore pour 20 % (vérification par l'usager). <a href="https://emsnytech.github.io/form2026/note/">Lire la note</a> qui détaille la méthode.
+    Estimation indicative, fondée sur des conventions publiques : durées de remplissage par type de champ du code source de Démarche Numérique (10 s par champ, 60 s pour un champ long, 180 s par pièce jointe, blocs répétables comptés 2,5 fois) ; coût de traitement évité de 6,79 € à 10,70 € par dossier (France Stratégie, 2018) ; gain de dématérialisation pour l'usager : temps évité par rapport à un PDF envoyé par courriel, de 2 à 9,5 minutes (démarche simple), 4 à 14,5 (modérée) ou 8 à 26,5 (complexe), hypothèses de l'auteur ; valeur de l'heure de 7,28 € pour un particulier (France Stratégie 2018, d'après le rapport Quinet) et de 44,70 € pour une personne morale (Insee, Eurostat, 2025) ; coût de la plateforme : 1,6 M€ en 2025 pour 4,3 millions de dossiers, soit 0,37 € par dossier (bilan 2025) ; charge d'instruction rapportée à 1 607 heures travaillées par agent et par an. Formulaires existants : référentiel RIDA de service-public.fr, export du 28 novembre 2022. Niveaux de complexité : score = champs obligatoires + champs répétables + 3 × pièces jointes ; simple jusqu'à 20, modéré jusqu'à 43, complexe au-delà ou à partir de 8 pièces jointes. Une information conservée mais obtenue à la source compte encore pour 20 % (vérification par l'usager). <a href="https://emsnytech.github.io/form2026/note/">Lire la note</a> qui détaille la méthode.
    Version de la page : 7 octobre 2026, révision 7.</footer>
 
   <div class="sheet" id="sheet"></div>
@@ -527,7 +527,7 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
   $("fAnalyse").addEventListener("click",analyseFields);
   $("fUse").addEventListener("click",function(){var o=FIELDREP;$("champs").value=o.filter(function(x){return x.obl}).length;$("longs").value=o.filter(function(x){return x.obl&&(x.long||/siret|iban|rna/.test(FN(x.type+" "+x.lib)))}).length;update();});
 
-  var PLAT = 14000000/18220327; // coût de la plateforme par dossier (14 M€ au plus ÷ 18,2 M de dossiers)
+  var PLAT = 1600000/4300000; // coût de la plateforme par dossier (référence 2025 : 1,6 M€ ÷ 4,3 M de dossiers)
   function drawChart(rows){
     var tot=function(r){return r.segs.reduce(function(a,s){return a+s[2]},0)};
     var max=Math.max.apply(null,rows.map(tot))||1, h="";
@@ -595,7 +595,7 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
     drawChart([
       {label:"Gains, hypothèses basses",sub:"par an",segs:[["a","Administration",r.adminBas],["d","Dématérialisation",r.dematBas],["p","Informations retirées",r.cadrage]]},
       {label:"Gains, hypothèses hautes",sub:"par an",segs:[["a","Administration",r.adminHaut],["d","Dématérialisation",r.dematHaut],["p","Informations retirées",r.cadrage]]},
-      {label:"Coût de la plateforme",sub:"estimation haute",segs:[["c","Plateforme",cost]]}
+      {label:"Coût de la plateforme",sub:"référence 2025",segs:[["c","Plateforme",cost]]}
     ]);
     $("ratioC").textContent= cost>0 ? (gb/cost).toLocaleString("fr-FR",{maximumFractionDigits:0})+" à "+(gh/cost).toLocaleString("fr-FR",{maximumFractionDigits:0})+" € de gains pour 1 €" : "–";
     $("gAdmin").textContent=rng(r.adminBas,r.adminHaut);

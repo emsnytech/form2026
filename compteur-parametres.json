@@ -3,7 +3,7 @@
  "base_month": "2026-09",
  "data_updated": "2026-10-04",
  "ratio_pub": 0.414578,
- "plateforme_annuel": 2100000,
+ "plateforme_annuel": 1600000,
  "months": {
   "2024-10": {
    "depo": 351920,
@@ -150,5 +150,5 @@
    "proc_publiees": null
   }
  },
- "plateforme_annuel_libelle": "estimation haute, retenue par prudence (14 M€ moins 11,9 M€ d'autorisations d'engagement 2018-2025)"
+ "plateforme_annuel_libelle": "référence 2025 : 1,6 M€ de coût de la plateforme (bilan 2025, 4,3 millions de dossiers), soit 0,37 € par dossier"
 }

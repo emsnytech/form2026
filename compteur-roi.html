@@ -162,16 +162,16 @@ footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem;font-si
     <summary>Comment le compteur est calculé</summary>
     <p><b>Activité.</b> Dossiers déposés et dossiers commencés : séries mensuelles publiées sur data.gouv.fr par la plateforme. Démarches publiées : estimées à partir des démarches créées, par le rapport observé en 2025 entre démarches publiées et créées (<span id="ratioPub">–</span>), faute de série publiée.</p>
     <p><b>Gains</b> = dossiers déposés × gain par dossier (niveau de complexité moyen, 66 % de particuliers) : coût de traitement évité pour l'administration, temps évité pour l'usager par rapport à un PDF envoyé par courriel (de 5 à 17 minutes en moyenne selon la complexité) et préremplissage déjà réalisé.</p>
-    <p><b>Coût de la plateforme</b> = budget annuel de la plateforme (estimation haute) réparti à la minute. Le coût de création des démarches est commun à tous les supports (formulaire PDF ou plateforme) : il n'est pas compté dans la comparaison. À titre de borne, la ligne « mise en place des services » l'impute en totalité : démarches publiées × temps de travail d'un agent (niveau de complexité moyen, valorisé à 312,90 € par jour).</p>
-    <p><b>Gains valorisés pour 1 € de plateforme</b> = gains ÷ coût de la plateforme, de gains bas ÷ coût à gains hauts ÷ coût : un rapport sans unité, présenté comme les euros de gains valorisés pour 1 € investi dans la plateforme : le point orange représente cet euro, les points verts les euros de gains (les points clairs, l'écart entre l'hypothèse basse et l'hypothèse haute). Il dépend de l'exercice : sur l'exercice 2026, très actif, il est plus élevé que depuis 2018 (11 à 22 fois, avec les années de construction de la plateforme). En imputant aussi la mise en place, la fourchette va de gains bas ÷ coûts hauts à gains hauts ÷ coûts bas ; la valeur appariée associe les hypothèses basses entre elles et les hautes entre elles.</p>
+    <p><b>Coût de la plateforme</b> = budget annuel de la plateforme (référence 2025 : 1,6 M€) réparti à la minute. Le coût de création des démarches est commun à tous les supports (formulaire PDF ou plateforme) : il n'est pas compté dans la comparaison. À titre de borne, la ligne « mise en place des services » l'impute en totalité : démarches publiées × temps de travail d'un agent (niveau de complexité moyen, valorisé à 312,90 € par jour).</p>
+    <p><b>Gains valorisés pour 1 € de plateforme</b> = gains ÷ coût de la plateforme, de gains bas ÷ coût à gains hauts ÷ coût : un rapport sans unité, présenté comme les euros de gains valorisés pour 1 € investi dans la plateforme : le point orange représente cet euro, les points verts les euros de gains (les points clairs, l'écart entre l'hypothèse basse et l'hypothèse haute). Il dépend de l'exercice : sur l'exercice 2026, très actif, il est plus élevé que depuis 2018 (24 à 46 fois à la référence 2025). En imputant aussi la mise en place, la fourchette va de gains bas ÷ coûts hauts à gains hauts ÷ coûts bas ; la valeur appariée associe les hypothèses basses entre elles et les hautes entre elles.</p>
     <div class="tw"><table id="params"></table></div>
     <p><b>Gain net.</b> Gains moins coût de la plateforme. Avec la mise en place imputée, il est apparié : hypothèses basses avec basses, hautes avec hautes.</p>
-    <p><b>Coût de la plateforme par dossier déposé, mois par mois</b> (budget annuel ÷ 12 ÷ dossiers déposés du mois, estimation haute ; 0,37 € en 2025 selon le bilan 2025 de la plateforme) :</p>
+    <p><b>Coût de la plateforme par dossier déposé, mois par mois</b> (budget annuel ÷ 12 ÷ dossiers déposés du mois, référence 2025 : 0,37 € par dossier selon le bilan 2025 de la plateforme) :</p>
     <div class="tw"><table id="monthly"></table></div>
     <p>Les gains sont des temps et des coûts valorisés, pas des économies budgétaires. <a href="https://emsnytech.github.io/form2026/note/">Lire la note</a>. Données : <a href="https://www.data.gouv.fr/datasets/utilisation-du-service-demarche-numerique-gouv-fr">Utilisation du service demarche.numerique.gouv.fr</a>.</p>
   </details>
 
-  <footer>Paramètres version 8, octobre 2026 (coût de création non compté). Données d'activité publiées par la plateforme sur data.gouv.fr. Le budget annuel de la plateforme (2,1 M€) est une estimation haute, retenue par prudence. Version de la page : 7 octobre 2026, révision 7.</footer>
+  <footer>Paramètres version 8, octobre 2026 (coût de création non compté). Données d'activité publiées par la plateforme sur data.gouv.fr. Le budget annuel de la plateforme (1,6 M€) est la référence du bilan 2025 de la plateforme. Version de la page : 7 octobre 2026, révision 8.</footer>
 </div>
 
 <script>
@@ -188,7 +188,7 @@ footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem;font-si
       "2026-09":{depo:574693,crees:1088427,proc_creees:2605}
     },
     ratio_pub:9083/21909,           // démarches publiées / créées, 2025 (bilan 2025 ; data.gouv.fr)
-    plateforme_annuel:2100000,      // budget 2026 : estimation haute, retenue par prudence (14 M€ − 11,9 M€)
+    plateforme_annuel:1600000,      // référence 2025 : 1,6 M€ (bilan 2025, 4,3 M de dossiers)
     jour_agent:312.90, rate_pp:7.28, rate_pm:44.70, part_pp:.66,
     admin:{bas:6.79,haut:10.70}, demat_min:{bas:{simple:2,modere:4,complexe:8},haut:{simple:9.5,modere:14.5,complexe:26.5}},
     pre:{simple:[0.0409,0.6886],modere:[0.0692,1.1219],complexe:[0.1085,1.2029]},   // €/dossier [particulier, personne morale]
@@ -251,7 +251,7 @@ footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem;font-si
   var X=function(v){return v==null?"–":v.toLocaleString("fr-FR",{minimumFractionDigits:1,maximumFractionDigits:1})};
   function rows(c){
     return '<div class="row g"><span class="l">Gains cumulés (administration et usagers)</span><span class="v">'+EM(c.gb)+' <small>à</small> '+EM(c.gh)+'</span><span class="d">dont administration '+EM(c.gAdmin[0])+' à '+EM(c.gAdmin[1])+' ; usagers '+EM(c.gUsag[0])+' à '+EM(c.gUsag[1])+'</span></div>'+
-      '<div class="row c"><span class="l">Coût de la plateforme (estimation haute)</span><span class="v">'+EM(c.plat)+'</span><span class="d">budget annuel réparti au prorata des mois ; coût moyen par dossier déposé : '+E2(c.platDos)+'</span></div>'+
+      '<div class="row c"><span class="l">Coût de la plateforme (référence 2025)</span><span class="v">'+EM(c.plat)+'</span><span class="d">budget annuel réparti au prorata des mois ; coût moyen par dossier déposé : '+E2(c.platDos)+'</span></div>'+
       '<div class="row n"><span class="l">Gain net (gains moins coût de la plateforme)</span><span class="v">'+EM(c.gb-c.plat)+' <small>à</small> '+EM(c.gh-c.plat)+'</span></div>'+
       '<div class="two"><div class="row n"><span class="l">Dossiers déposés</span><span class="v">'+N(c.a.depo)+'</span></div><div class="row n"><span class="l">Dossiers commencés</span><span class="v">'+N(c.a.crees)+'</span></div></div>'+
       '<div class="row n"><span class="l">Démarches publiées'+(P.months[P.base_month].proc_publiees!=null?'':' (estimation)')+'</span><span class="v">'+N(c.a.proc)+'</span></div>'+
@@ -267,7 +267,7 @@ footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem;font-si
     var rows=[
       {label:"Gains, hypothèses basses",sub:"administration et usagers",segs:[["a","Administration",c.gAdmin[0]],["u","Usagers",c.gUsag[0]]]},
       {label:"Gains, hypothèses hautes",sub:"administration et usagers",segs:[["a","Administration",c.gAdmin[1]],["u","Usagers",c.gUsag[1]]]},
-      {label:"Coût de la plateforme",sub:"estimation haute",segs:[["c","Plateforme",c.plat]]},
+      {label:"Coût de la plateforme",sub:"référence 2025",segs:[["c","Plateforme",c.plat]]},
       {label:"Mise en place des services",sub:"borne haute, si on l'imputait",segs:[["m","Mise en place",c.cMep[1]]]}
     ];
     var tot=function(r){return r.segs.reduce(function(a,s){return a+s[2]},0)}, max=Math.max.apply(null,rows.map(tot))||1, h="";
@@ -280,7 +280,7 @@ footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem;font-si
     var cy=compute(n,1), cm=compute(n,n.m);
     $("rowsY").innerHTML=rows(cy); $("rowsM").innerHTML=rows(cm);
     $("roiY").textContent=(cy.plat>0?X(cy.gb/cy.plat)+" à "+X(cy.gh/cy.plat)+"\u00a0€":"–");
-    $("roiYs").innerHTML="Depuis 2018 (note) : 1 € investi, 11 à 22 € de gains.<br>En imputant aussi la mise en place des services : 1 € de coût, "+(cy.roiApp==null?"–":X(cy.roiMin)+" à "+X(cy.roiMax)+" € de gains (≈ "+X(cy.roiApp)+" appariés)");
+    $("roiYs").innerHTML="Depuis 2018 (note) : 1 € investi, 24 à 46 € de gains.<br>En imputant aussi la mise en place des services : 1 € de coût, "+(cy.roiApp==null?"–":X(cy.roiMin)+" à "+X(cy.roiMax)+" € de gains (≈ "+X(cy.roiApp)+" appariés)");
     $("roiM").textContent=(cm.plat>0?X(cm.gb/cm.plat)+" à "+X(cm.gh/cm.plat)+"\u00a0€":"–");
     $("roiMs").innerHTML=cm.roiApp==null?"Le mois commence":"En imputant aussi la mise en place des services : 1 € de coût, "+X(cm.roiMin)+" à "+X(cm.roiMax)+" € de gains (≈ "+X(cm.roiApp)+" appariés)";
     dots("dotsY",cy.plat>0?cy.gb/cy.plat:0,cy.plat>0?cy.gh/cy.plat:0); dots("dotsM",cm.plat>0?cm.gb/cm.plat:0,cm.plat>0?cm.gh/cm.plat:0);
@@ -302,7 +302,7 @@ footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem;font-si
         '<tr><td>Gain par dossier déposé (administration + usagers + préremplissage)</td><td>'+P.g.bas.toFixed(2).replace(".",",")+' €</td><td>–</td><td>'+P.g.haut.toFixed(2).replace(".",",")+' €</td></tr>'+
         '<tr><td>Temps de mise en place par démarche, niveau moyen (jours)</td><td>'+X(P.c.bas.jours)+'</td><td>'+X(P.c.central.jours)+'</td><td>'+X(P.c.haut.jours)+'</td></tr>'+
         '<tr><td>Coût de mise en place par démarche</td><td>'+E(P.c.bas.eur)+'</td><td>'+E(P.c.central.eur)+'</td><td>'+E(P.c.haut.eur)+'</td></tr>'+
-        '<tr><td>Budget annuel de la plateforme (estimation haute, retenue par prudence)</td><td colspan="3">'+E(P.plateforme_annuel)+'</td></tr></tbody>';
+        '<tr><td>Budget annuel de la plateforme (référence 2025)</td><td colspan="3">'+E(P.plateforme_annuel)+'</td></tr></tbody>';
       window.__tbl=1;
     }
     var mh='<thead><tr><th>Mois</th><th>Dossiers déposés</th><th>Budget du mois</th><th>Coût par dossier</th></tr></thead><tbody>';

@@ -10,7 +10,7 @@ journee_agent;312,90;€ par jour;44,70 € x 7 h (coût horaire moyen, secteur 
 temps_mise_en_place_bas;0,5 / 2,5 / 7,5;jours (simple / modérée / complexe);Hypothèses de l'auteur (moitié du central)
 temps_mise_en_place_central;1 / 5 / 15;jours (simple / modérée / complexe);Hypothèses de l'auteur
 temps_mise_en_place_haut;4,2 / 9,1 / 20;jours (simple / modérée / complexe);Délais médians observés de mise en service, validation comprise
-cout_plateforme_construction_exploitation_2018_2026;14 (au plus);M€;Bilan 2025 de la plateforme (11,9 M€ en autorisations d'engagement 2018-2025) complété d'une estimation haute pour 2026, arrondie au million supérieur
+cout_plateforme_2025;1,6;M€;Bilan 2025 de la plateforme : 1,6 M€ pour 4,3 millions de dossiers, soit 0,372 € par dossier (référence retenue ; contrôle : 11,9 M€ d'autorisations d'engagement 2018-2025)
 dossiers_deposes_depuis_2018;18 220 327;dossiers;Descriptif des démarches publiées, data.gouv.fr
 demarches_publiees_ou_closes;34 185 (34 397 avec celles antérieures à 2018);démarches;Descriptif des démarches publiées, data.gouv.fr
 part_particuliers;66;%;Moyenne de la plateforme
