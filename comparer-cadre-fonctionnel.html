@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Comparer le cadre fonctionnel de votre outil de dématérialisation</title>
-<meta name="description" content="Vérifiez, fonction par fonction, ce que couvre votre outil, et ce qui reste comparable avec les chiffres publiés. La grille ne classe pas les outils.">
+<meta name="description" content="Vérifiez, fonction par fonction, ce que couvre votre outil, et ce qui reste comparable avec les chiffres publiés. Elle mesure la couverture d'un périmètre commun, pas la qualité des outils.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="FORM 2026">
 <meta property="og:title" content="Comparer le cadre fonctionnel de votre outil de dématérialisation">
-<meta property="og:description" content="Vérifiez, fonction par fonction, ce que couvre votre outil, et ce qui reste comparable avec les chiffres publiés. La grille ne classe pas les outils.">
+<meta property="og:description" content="Vérifiez, fonction par fonction, ce que couvre votre outil, et ce qui reste comparable avec les chiffres publiés. Elle mesure la couverture d'un périmètre commun, pas la qualité des outils.">
 <meta property="og:url" content="https://emsnytech.github.io/form2026/comparer-cadre-fonctionnel.html">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +32,29 @@
   --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
   --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
 }
+
+.starter .row{display:flex;gap:.7rem;align-items:center;flex-wrap:wrap;margin:.6rem 0 0}
+select{font:inherit;padding:.45rem .6rem;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);min-width:min(100%,22rem)}
+select:focus-visible{outline:3px solid var(--admin);outline-offset:2px}
+.warn{background:var(--warn-soft);border-left:4px solid var(--warn);padding:.6rem .8rem;border-radius:6px;font-size:.9rem;margin:.7rem 0 0}
+.scroll{overflow-x:auto}
+table.cmp th,table.cmp td{white-space:normal}
+table.cmp td:nth-child(6){white-space:nowrap}
+table.cmp td:first-child{font-weight:600;min-width:11rem}
+table.cmp tr.sel td{background:var(--admin-soft)}
+.cmp .link{background:none;border:0;color:var(--admin);text-decoration:underline;padding:0;font-size:.85rem}
+.sr{position:absolute;left:-9999px}
+.ghost[aria-pressed="true"]{border-color:var(--admin);color:var(--admin);font-weight:700}
+
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.8rem 1rem;margin:.8rem 0}
+.cgrid label{display:flex;flex-direction:column;gap:.25rem;font-size:.9rem;font-weight:600}
+.cgrid input{font:inherit;padding:.4rem .5rem;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);font-weight:400}
+.cgrid input:focus-visible{outline:3px solid var(--admin);outline-offset:2px}
+.lic{background:var(--admin-soft);border-radius:6px;padding:.5rem .7rem;font-size:.9rem;margin:.6rem 0}
+.lic:empty{display:none}
+.out table{width:100%}
+.out .big{font-size:1.15rem;font-weight:700}
+.out .msg{margin:.6rem 0 0}
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -109,9 +132,27 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
   <p class="topnav"><a href="index.html">Retour à FORM 2026</a> · <a href="simulateur-gains-dematerialisation.html">Estimer ses gains</a> · <a href="cadrage-dematerialisation.html">Cadrer une démarche</a> · <a href="comparer-cadre-fonctionnel.html">Comparer un outil</a> · <a href="compteur-roi.html">Compteur</a></p>
   <header>
     <h1>Comparer le cadre fonctionnel de votre outil de dématérialisation</h1>
-    <p class="lede">Les chiffres publiés sur les gains de la dématérialisation valent pour un certain périmètre fonctionnel. Cette grille permet à chacun de vérifier, fonction par fonction, ce que couvre l'outil qu'il utilise, et de mesurer ce qui reste comparable. Elle ne classe pas les outils : elle décrit un cadre commun.</p>
-    <p class="small">Paramètres version 8, octobre 2026. Vos réponses restent dans votre navigateur.</p>
+    <p class="lede">Les chiffres publiés sur les gains de la dématérialisation valent pour un certain périmètre fonctionnel. Cette grille permet à chacun de vérifier, fonction par fonction, ce que couvre l'outil qu'il utilise, et de mesurer ce qui reste comparable. Elle mesure la couverture d'un périmètre commun : un taux de couverture n'est pas un jugement sur la qualité d'un outil, qui peut être excellent pour un autre usage.</p>
+    <p class="small">Paramètres version 8, octobre 2026. Vos réponses restent dans votre navigateur. Version de la page : 8 octobre 2026, révision 9.</p>
   </header>
+
+
+  <section class="card starter" id="starter" aria-labelledby="stH">
+    <h2 id="stH">Vous connaissez ou utilisez déjà un outil ?</h2>
+    <p>Choisissez-le : la grille est préremplie avec ses fonctions, que vous pouvez ensuite corriger. Sinon, remplissez-la vous-même.</p>
+    <p class="row"><label for="toolSel"><b>Votre outil</b></label>
+      <select id="toolSel"><option value="">Choisir un outil…</option></select></p>
+    <p class="small" id="toolNote" aria-live="polite"></p>
+    <p class="warn" id="toolWarn" hidden><b>Préchargement indicatif.</b> Établi par l'auteur d'après les fonctions généralement connues de chaque produit, non vérifié ligne à ligne et à compléter. Les réponses « Je ne sais pas » signalent ce qui reste à vérifier. Corrigez ce qui ne correspond pas à votre version, à votre configuration ou à votre contrat, et signalez les erreurs par une <a href="https://github.com/emsnytech/form2026/issues">proposition de mesure</a>.</p>
+  </section>
+
+  <section class="card" id="cmpBox" aria-labelledby="cmpH">
+    <h2 id="cmpH">Les outils côte à côte</h2>
+    <p class="small" style="margin-top:.2rem">Part du périmètre de référence couverte par chaque outil, d'après le préchargement ci-dessus. La couverture n'est pas la qualité : un outil généraliste de questionnaires n'est pas conçu pour instruire des dossiers. Les fonctions « à vérifier » donnent une fourchette ; un outil dont la plupart des fonctions restent à vérifier est signalé « à compléter » et placé en fin de tri.</p>
+    <p class="actions"><button class="ghost" type="button" id="sortAlpha" aria-pressed="true">Ordre alphabétique</button><button class="ghost" type="button" id="sortCov" aria-pressed="false">Trier par couverture</button></p>
+    <div class="scroll"><table class="res cmp"><thead><tr><th scope="col">Outil</th><th scope="col">Oui</th><th scope="col">Partiel</th><th scope="col">Non</th><th scope="col">À vérifier</th><th scope="col">Couverture</th><th scope="col">Gain de traitement par dossier, démarche modérée</th><th scope="col"><span class="sr">Action</span></th></tr></thead><tbody id="cmpRows"></tbody></table></div>
+    <p class="small">Gain de référence pour une démarche modérée : 11,92 € par dossier (administration). Couverture = fonctions « oui » plus la moitié des « partiel », sur les 20 fonctions de référence.</p>
+  </section>
 
   <div class="encart">
     <h2>Le périmètre de référence des chiffres</h2>
@@ -151,6 +192,29 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
       </div>
     </aside>
   </div>
+
+
+  <section class="card" id="cout" aria-labelledby="coutH">
+    <h2 id="coutH">Coût complet de votre outil et rapport gains / coûts</h2>
+    <p class="small" style="margin-top:.2rem">Les prix dépendent du contrat, du volume et du marché : aucun prix n'est prérempli. Saisissez les vôtres ; la grille les rapporte au gain de traitement transposable calculé plus haut. Les gains des usagers ne sont pas monétisés ici.</p>
+    <p class="lic" id="licLine"></p>
+    <div class="cgrid">
+      <label>Dossiers par an<input type="number" min="0" id="cDos" value="5000"></label>
+      <label>Démarches à mettre en ligne<input type="number" min="0" id="cDem" value="5"></label>
+      <label>Complexité dominante<select id="cLvl"><option value="0">Simple</option><option value="1" selected>Modérée</option><option value="2">Complexe</option></select></label>
+      <label>Licences ou abonnement, par an (€)<input type="number" min="0" id="cLic"></label>
+      <label>Hébergement et exploitation, par an (€)<input type="number" min="0" id="cHeb"></label>
+      <label>Formation et support, par an (€)<input type="number" min="0" id="cFor"></label>
+      <label>Conformité : accessibilité, protection des données, sécurité, par an (€)<input type="number" min="0" id="cConf"></label>
+      <label>Paramétrage et intégration, une fois (€)<input type="number" min="0" id="cPar"></label>
+      <label>Réversibilité (coût de sortie), une fois, facultatif (€)<input type="number" min="0" id="cRev"></label>
+      <label>Durée d'amortissement<select id="cAmo"><option value="1">1 an</option><option value="3" selected>3 ans</option><option value="5">5 ans</option></select></label>
+      <label>Création d'une démarche<select id="cMode"><option value="service" selected>Par le service lui-même (coût commun, non compté)</option><option value="prest">Par un prestataire ou un développeur</option></select></label>
+      <label id="cPrestL" hidden>Coût de création par démarche (€)<input type="number" min="0" id="cPrest"></label>
+    </div>
+    <p class="actions"><button class="ghost" type="button" id="cDN">Prendre la référence publiée de Démarche Numérique (0,77 € par dossier)</button><button class="ghost" type="button" id="cClear">Effacer les coûts</button></p>
+    <div class="out" id="cOut" aria-live="polite"></div>
+  </section>
 
   <footer>
     Périmètre établi à partir des fonctions de Démarche Numérique documentées dans son bilan 2025 et de la formation à la conception de démarches d'une autre plateforme, pour rester à un niveau de description commun. Temps évités par dossier (minutes, simple / modérée / complexe) : réception et accusé 3 / 3 / 3 ; classement des pièces 1 / 3 / 6 ; ressaisie 2 / 5 / 10 ; complétude et relances 2 / 3,5 / 5,5 ; suivi 1,5 / 1,5 / 2,5 (administration) ; remplissage assisté 3 / 5 / 10 ; envoi des pièces 2 / 4 / 8 ; relances 2 / 3 / 5 ; suivi 2 / 2 / 3 ; ressaisie d'identité 0,5 (usager). Ces temps sont des hypothèses de l'auteur, construites étape par étape, et rapprochées du gain de 6,79 € par dossier de France Stratégie (2018).
@@ -211,6 +275,8 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
   ];
   var ALL=[]; BLOCKS.forEach(function(b){b.f.forEach(function(f){f.core=!f.comp;ALL.push(f)})});
   var ans={};
+  var TOOLS=[{"id": "courriel", "n": "Courriel avec formulaire PDF (situation de départ)", "s": "Courriel + PDF", "a": {"f1": "oui", "f2": "non", "f3": "non", "f4": "non", "f5": "oui", "f7": "non", "f8": "non", "f9": "non", "f11": "non", "f12": "non", "f13": "non", "f14": "non", "f15": "non", "f18": "non", "f19": "non", "f23": "non", "f26": "partiel", "f27": "nsp", "f28": "oui", "f29": "non"}, "note": "Situation de départ des chiffres publiés : un formulaire PDF diffusé sur un site, renvoyé par courriel et reçu dans une boîte fonctionnelle. Les gains publiés mesurent l'écart avec cette situation.", "lic": "Pas de licence propre : une boîte fonctionnelle et du temps d'agent."}, {"id": "dn", "n": "Démarche Numérique (outil de référence)", "s": "Démarche Numérique", "a": {"f1": "oui", "f2": "oui", "f3": "oui", "f4": "oui", "f5": "oui", "f7": "oui", "f8": "oui", "f9": "partiel", "f11": "oui", "f12": "oui", "f13": "oui", "f14": "oui", "f15": "oui", "f18": "oui", "f19": "oui", "f23": "oui", "f26": "oui", "f27": "oui", "f28": "oui", "f29": "oui", "f10": "oui", "f16": "oui", "f17": "oui", "f20": "oui", "f21": "oui", "f22": "oui", "f24": "oui", "f25": "partiel"}, "note": "Outil à partir duquel le périmètre de référence est construit : toutes les fonctions sont supposées couvertes, sauf la lecture automatique des justificatifs, partielle.", "lic": "Mise à disposition sans licence par démarche ; coût de la plateforme supporté par l'État (14 M€ au plus depuis 2018, soit 0,77 € par dossier)."}, {"id": "exo", "n": "eXo Platform", "s": "eXo", "a": {"f1": "nsp", "f2": "nsp", "f3": "nsp", "f4": "nsp", "f5": "nsp", "f7": "nsp", "f8": "nsp", "f9": "nsp", "f11": "nsp", "f12": "nsp", "f13": "nsp", "f14": "nsp", "f15": "nsp", "f18": "nsp", "f19": "nsp", "f23": "partiel", "f26": "nsp", "f27": "nsp", "f28": "nsp", "f29": "nsp"}, "note": "Digital workplace libre. La présentation publique consultée cite des circuits de travail configurables sans développement et une interface de programmation complète ; elle ne mentionne ni formulaires, ni circuits de demande et de validation, ni suivi. Tout le reste est à vérifier.", "lic": "Sur devis (à vérifier)."}, {"id": "framaforms", "n": "Framaforms (logiciel Yakforms)", "s": "Framaforms", "a": {"f1": "oui", "f2": "partiel", "f3": "partiel", "f4": "non", "f5": "oui", "f7": "non", "f8": "non", "f9": "non", "f11": "oui", "f12": "partiel", "f13": "nsp", "f14": "non", "f15": "non", "f18": "partiel", "f19": "non", "f23": "partiel", "f26": "partiel", "f27": "nsp", "f28": "oui", "f29": "partiel"}, "note": "Service gratuit d'un éditeur associatif, fondé sur le logiciel libre Yakforms : formulaires simples, sans suivi du dossier par l'usager ni espace d'instruction.", "lic": "Service gratuit, financé par des dons ; le logiciel libre Yakforms peut être auto-hébergé."}, {"id": "google", "n": "Google Forms", "s": "Google Forms", "a": {"f1": "oui", "f2": "partiel", "f3": "partiel", "f4": "non", "f5": "oui", "f7": "non", "f8": "non", "f9": "non", "f11": "oui", "f12": "partiel", "f13": "nsp", "f14": "non", "f15": "non", "f18": "partiel", "f19": "partiel", "f23": "partiel", "f26": "partiel", "f27": "nsp", "f28": "oui", "f29": "oui"}, "note": "Outil généraliste de questionnaires. Les pièces jointes et la reprise de saisie supposent un compte Google ; le suivi et l'instruction sont à construire autour d'un tableur.", "lic": "Abonnement par utilisateur (Google Workspace) ; usage gratuit avec un compte personnel."}, {"id": "grist", "n": "Grist", "s": "Grist", "a": {"f1": "oui", "f2": "partiel", "f3": "nsp", "f4": "non", "f5": "partiel", "f7": "non", "f8": "non", "f9": "non", "f11": "partiel", "f12": "nsp", "f13": "nsp", "f14": "non", "f15": "non", "f18": "nsp", "f19": "oui", "f23": "oui", "f26": "oui", "f27": "nsp", "f28": "oui", "f29": "oui"}, "note": "Tableur et base de données libres avec formulaires : fort sur l'instruction partagée, les droits d'accès et l'interface de programmation ; formulaire encore sommaire pour des démarches complexes.", "lic": "Logiciel libre auto-hébergeable ; offres hébergées payantes (à vérifier)."}, {"id": "jalios", "n": "Jalios (module JProcess)", "s": "Jalios", "a": {"f1": "oui", "f2": "partiel", "f3": "nsp", "f4": "nsp", "f5": "oui", "f7": "nsp", "f8": "nsp", "f9": "nsp", "f11": "oui", "f12": "oui", "f13": "nsp", "f14": "oui", "f15": "partiel", "f18": "partiel", "f19": "oui", "f23": "nsp", "f26": "nsp", "f27": "nsp", "f28": "non", "f29": "nsp"}, "note": "Module de demandes et de circuits de validation d'une digital workplace : constructeur de formulaires par glisser-déposer, contrôles de valeurs et de formats, pièces jointes, suivi en temps réel, notifications. Documentation publique pensée pour des demandes internes : dépôt par des usagers extérieurs, interface de programmation et droits à vérifier.", "lic": "Licence ou abonnement sur devis (à vérifier)."}, {"id": "jamespot", "n": "Jamespot (application Création de formulaires)", "s": "Jamespot", "a": {"f1": "non", "f2": "partiel", "f3": "nsp", "f4": "nsp", "f5": "nsp", "f7": "nsp", "f8": "nsp", "f9": "nsp", "f11": "nsp", "f12": "nsp", "f13": "nsp", "f14": "nsp", "f15": "nsp", "f18": "nsp", "f19": "nsp", "f23": "nsp", "f26": "nsp", "f27": "nsp", "f28": "non", "f29": "nsp"}, "note": "Digital workplace modulaire. La documentation publique consultée décrit seulement une application de création de formulaires, définis en XML par des développeurs ; le reste (circuits de validation, suivi, pièces jointes) n'y figure pas et reste à vérifier dans l'offre complète.", "lic": "Abonnement sur devis (à vérifier)."}, {"id": "limesurvey", "n": "LimeSurvey", "s": "LimeSurvey", "a": {"f1": "oui", "f2": "partiel", "f3": "oui", "f4": "non", "f5": "oui", "f7": "non", "f8": "non", "f9": "non", "f11": "oui", "f12": "oui", "f13": "oui", "f14": "non", "f15": "non", "f18": "partiel", "f19": "partiel", "f23": "oui", "f26": "oui", "f27": "nsp", "f28": "oui", "f29": "partiel"}, "note": "Logiciel libre d'enquêtes très paramétrable (conditions d'affichage, reprise de saisie, dépôt de fichiers, interface de programmation) ; non conçu pour l'instruction des dossiers.", "lic": "Logiciel libre auto-hébergeable ; offres hébergées payantes (à vérifier)."}, {"id": "microsoft", "n": "Microsoft Forms", "s": "Microsoft Forms", "a": {"f1": "oui", "f2": "partiel", "f3": "partiel", "f4": "non", "f5": "oui", "f7": "non", "f8": "non", "f9": "non", "f11": "oui", "f12": "partiel", "f13": "nsp", "f14": "non", "f15": "non", "f18": "partiel", "f19": "partiel", "f23": "partiel", "f26": "partiel", "f27": "nsp", "f28": "partiel", "f29": "oui"}, "note": "Outil généraliste de questionnaires intégré à Microsoft 365. Le dépôt de fichiers et le suivi supposent un compte de l'organisation ; l'instruction passe par d'autres outils (Excel, Power Automate).", "lic": "Inclus dans les abonnements Microsoft 365, par utilisateur."}, {"id": "nextcloud", "n": "Nextcloud Forms", "s": "Nextcloud Forms", "a": {"f1": "oui", "f2": "nsp", "f3": "nsp", "f4": "nsp", "f5": "nsp", "f7": "nsp", "f8": "nsp", "f9": "nsp", "f11": "nsp", "f12": "nsp", "f13": "nsp", "f14": "nsp", "f15": "nsp", "f18": "nsp", "f19": "nsp", "f23": "partiel", "f26": "nsp", "f27": "nsp", "f28": "oui", "f29": "nsp"}, "note": "Application de formulaires de la suite libre Nextcloud, hébergée sur l'instance de l'organisme. La présentation du module cite la création simple de formulaires, la visualisation et l'export des réponses (CSV) et des webhooks ; pièces jointes, conditions d'affichage et champs obligatoires ne sont pas précisés et dépendent de la version.", "lic": "Logiciel libre auto-hébergeable ; offres avec support payant (à vérifier)."}, {"id": "salesforce", "n": "Salesforce", "s": "Salesforce", "a": {"f1": "partiel", "f2": "oui", "f3": "oui", "f4": "partiel", "f5": "oui", "f7": "non", "f8": "non", "f9": "non", "f11": "oui", "f12": "oui", "f13": "oui", "f14": "oui", "f15": "oui", "f18": "oui", "f19": "oui", "f23": "oui", "f26": "oui", "f27": "nsp", "f28": "non", "f29": "oui"}, "note": "Plateforme de gestion de la relation avec l'usager : très large, mais sous licence et paramétrée par des spécialistes.", "lic": "Licences par utilisateur et par produit ; paramétrage par des spécialistes."}, {"id": "talkspirit", "n": "Talkspirit", "s": "Talkspirit", "a": {"f1": "nsp", "f2": "nsp", "f3": "nsp", "f4": "nsp", "f5": "nsp", "f7": "nsp", "f8": "nsp", "f9": "nsp", "f11": "nsp", "f12": "nsp", "f13": "nsp", "f14": "nsp", "f15": "nsp", "f18": "nsp", "f19": "nsp", "f23": "partiel", "f26": "nsp", "f27": "nsp", "f28": "nsp", "f29": "nsp"}, "note": "Plateforme collaborative hébergée en France (communication, projets, documents, réunions). La documentation consultée cite des connexions à des applications par webhooks et un annuaire d'applications ; elle ne mentionne ni formulaires ni circuits de validation. Tout le reste est à vérifier.", "lic": "Abonnement par utilisateur (à vérifier)."}, {"id": "twake", "n": "Twake Workplace (LINAGORA)", "s": "Twake", "a": {"f1": "nsp", "f2": "nsp", "f3": "nsp", "f4": "nsp", "f5": "nsp", "f7": "nsp", "f8": "nsp", "f9": "nsp", "f11": "nsp", "f12": "nsp", "f13": "nsp", "f14": "nsp", "f15": "nsp", "f18": "nsp", "f19": "nsp", "f23": "nsp", "f26": "nsp", "f27": "nsp", "f28": "nsp", "f29": "nsp"}, "note": "Suite collaborative libre (messagerie, courriel, fichiers, édition de documents, gestion de projets). La présentation publique consultée ne mentionne ni formulaires ni circuits de validation, mais une interconnexion avec un outil d'automatisation (n8n). Tout est à vérifier.", "lic": "Logiciel libre ; offre hébergée payante (à vérifier)."}, {"id": "whaller", "n": "Whaller", "s": "Whaller", "a": {"f1": "nsp", "f2": "nsp", "f3": "nsp", "f4": "nsp", "f5": "nsp", "f7": "nsp", "f8": "nsp", "f9": "nsp", "f11": "nsp", "f12": "nsp", "f13": "nsp", "f14": "nsp", "f15": "nsp", "f18": "nsp", "f19": "nsp", "f23": "nsp", "f26": "partiel", "f27": "nsp", "f28": "nsp", "f29": "nsp"}, "note": "Plateforme collaborative souveraine (messagerie, fichiers, tâches, calendrier, portail), hébergeable en France, y compris sur un nuage qualifié ou sur site. Les pages consultées ne mentionnent ni formulaires ni circuits de validation, mais une gestion des droits d'accès. Tout le reste est à vérifier.", "lic": "Version gratuite et offres payantes ; hébergement dédié ou sur site sur devis (à vérifier)."}, {"id": "wire", "n": "Wire", "s": "Wire", "a": {"f1": "nsp", "f2": "nsp", "f3": "nsp", "f4": "nsp", "f5": "nsp", "f7": "nsp", "f8": "nsp", "f9": "nsp", "f11": "nsp", "f12": "partiel", "f13": "nsp", "f14": "nsp", "f15": "partiel", "f18": "nsp", "f19": "nsp", "f23": "nsp", "f26": "partiel", "f27": "nsp", "f28": "nsp", "f29": "nsp"}, "note": "Messagerie sécurisée avec partage de fichiers, appels et administration (authentification SAML, gestion des comptes). Outil de messagerie : aucun formulaire, circuit de validation ou interface de programmation n'est mentionné ; il n'est comparé ici que pour la messagerie et les fichiers.", "lic": "Offre gratuite et offres professionnelles par utilisateur (à vérifier)."}];
+  var tool="";
 
   function render(){
     var h="";
@@ -227,15 +293,15 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
     });
     $("blocks").innerHTML=h;
   }
-  function val(id,mode){var a=ans[id]||"nsp"; if(a==="oui")return 1; if(a==="partiel")return .5; if(a==="non")return 0; return mode==="hi"?1:0;}
-  function compute(){
+  function val(id,mode,A){var a=(A||ans)[id]||"nsp"; if(a==="oui")return 1; if(a==="partiel")return .5; if(a==="non")return 0; return mode==="hi"?1:0;}
+  function compute(A){A=A||ans;
     var r={o:0,p:0,n:0,q:0,adm:[[0,0],[0,0],[0,0]],usg:[[0,0],[0,0],[0,0]],admRef:[0,0,0],usgRef:[0,0,0],alerts:[],comp:{o:0,t:0}};
     ALL.forEach(function(f){
-      var a=ans[f.id]||"nsp";
+      var a=A[f.id]||"nsp";
       if(f.core){ if(a==="oui")r.o++; else if(a==="partiel")r.p++; else if(a==="non")r.n++; else r.q++;
         for(var i=0;i<3;i++){
-          if(f.adm){r.admRef[i]+=f.adm[i]; r.adm[i][0]+=f.adm[i]*val(f.id,"lo"); r.adm[i][1]+=f.adm[i]*val(f.id,"hi");}
-          if(f.usg){r.usgRef[i]+=f.usg[i]; r.usg[i][0]+=f.usg[i]*val(f.id,"lo"); r.usg[i][1]+=f.usg[i]*val(f.id,"hi");}
+          if(f.adm){r.admRef[i]+=f.adm[i]; r.adm[i][0]+=f.adm[i]*val(f.id,"lo",A); r.adm[i][1]+=f.adm[i]*val(f.id,"hi",A);}
+          if(f.usg){r.usgRef[i]+=f.usg[i]; r.usg[i][0]+=f.usg[i]*val(f.id,"lo",A); r.usg[i][1]+=f.usg[i]*val(f.id,"hi",A);}
         }
         if(a==="non"||a==="partiel"){
           var msg=f.note||"";
@@ -263,27 +329,105 @@ footer{margin-top:2.4rem;border-top:1px solid var(--line);padding-top:1rem;font-
     }
     $("tAdmin").innerHTML=ta;$("tUsager").innerHTML=tu;
     $("alerts").innerHTML=r.alerts.length? r.alerts.map(function(x){return"<li><b>"+esc(x.l)+"</b> ("+(x.a==="non"?"non couverte":"partielle")+") — "+esc(x.m)+"</li>"}).join("") : (r.q?"<li>Répondez aux fonctions « à vérifier » pour préciser ce qui est comparable.</li>":"<li>Le périmètre de référence est couvert : les chiffres publiés sont comparables.</li>");
-    save(); window.__r=r;
+    save(); window.__r=r; costUpdate();
   }
-  $("blocks").addEventListener("change",function(e){if(e.target.name){ans[e.target.name]=e.target.value;update();}});
+  $("blocks").addEventListener("change",function(e){if(e.target.name){ans[e.target.name]=e.target.value;update();refreshTool();}});
+  function toolById(id){for(var i=0;i<TOOLS.length;i++)if(TOOLS[i].id===id)return TOOLS[i];return null}
+  var sel=$("toolSel");
+  TOOLS.forEach(function(t){var o=document.createElement("option");o.value=t.id;o.textContent=t.n;sel.appendChild(o)});
+  var oa=document.createElement("option");oa.value="autre";oa.textContent="Autre outil : je remplis moi-même";sel.appendChild(oa);
+  function refreshTool(){
+    var t=toolById(tool);
+    $("toolWarn").hidden=!t||tool==="dn"||tool==="courriel"?!t:false;
+    if(t&&(tool==="dn"||tool==="courriel"))$("toolWarn").hidden=false;
+    if(!t){$("toolNote").textContent=tool==="autre"?"Remplissez la grille ci-dessous, fonction par fonction.":"";return}
+    var q=0,d=0;CORE_IDS().forEach(function(id){if((ans[id]||"nsp")==="nsp")q++;if((ans[id]||"nsp")!==(t.a[id]||"nsp"))d++});
+    $("toolNote").innerHTML="<b>"+esc(t.n)+".</b> "+esc(t.note)+" "+(d?"Vous avez modifié "+d+" réponse"+(d>1?"s":"")+" par rapport au préchargement.":"")
+  }
+  function CORE_IDS(){return ALL.filter(function(f){return f.core}).map(function(f){return f.id})}
+  function applyTool(id,fromUser){
+    tool=id||"";
+    if(tool&&tool!=="autre"){var t=toolById(tool);if(!t)tool="";else{ans={};ALL.forEach(function(f){if(t.a[f.id])ans[f.id]=t.a[f.id]});}}
+    sel.value=tool; render(); update(); refreshTool(); renderCmp();
+    try{var u=new URL(location.href);if(tool&&tool!=="autre")u.searchParams.set("outil",tool);else u.searchParams.delete("outil");history.replaceState(null,"",u);}catch(e){}
+    try{localStorage.setItem(KEY+"-tool",tool)}catch(e){}
+  }
+  sel.addEventListener("change",function(){applyTool(sel.value,true)});
+  var sortMode="alpha";
+  function renderCmp(){
+    var rows=TOOLS.map(function(t){var r=compute(t.a),core=r.core,lo=(r.o+r.p*.5)/core,hi=(r.o+r.p*.5+r.q)/core;return{t:t,r:r,lo:lo,hi:hi}});
+    if(sortMode==="cov")rows.sort(function(a,b){var ta=a.r.q>=10,tb=b.r.q>=10;if(ta!==tb)return ta?1:-1;return b.lo-a.lo||b.hi-a.hi||a.t.n.localeCompare(b.t.n,"fr")});
+    else rows.sort(function(a,b){return a.t.n.localeCompare(b.t.n,"fr")});
+    $("cmpRows").innerHTML=rows.map(function(x){
+      var g=x.r.adm[1],pc=function(v){return Math.round(v*100)+" %"},thin=x.r.q>=10;
+      return"<tr"+(x.t.id===tool?' class="sel"':"")+"><td>"+esc(x.t.n)+"</td><td>"+x.r.o+"</td><td>"+x.r.p+"</td><td>"+x.r.n+"</td><td>"+x.r.q+"</td><td>"+(thin?"À compléter":(x.lo===x.hi?pc(x.lo):pc(x.lo)+" à "+pc(x.hi)))+"</td><td>"+(thin?"—":rangeEur(g[0],g[1],RA))+"</td><td><button class=\"link\" type=\"button\" data-tool=\""+x.t.id+"\">Charger</button></td></tr>"}).join("");
+    $("sortAlpha").setAttribute("aria-pressed",sortMode==="alpha");$("sortCov").setAttribute("aria-pressed",sortMode==="cov");
+  }
+  $("cmpRows").addEventListener("click",function(e){var b=e.target.closest("button[data-tool]");if(b){applyTool(b.getAttribute("data-tool"));$("starter").scrollIntoView({behavior:"smooth",block:"start"})}});
+  $("sortAlpha").addEventListener("click",function(){sortMode="alpha";renderCmp()});
+  $("sortCov").addEventListener("click",function(){sortMode="cov";renderCmp()});
+
 
   function buildSheet(){
     var r=compute(), rows=ALL.map(function(f){var a=ans[f.id]||"nsp";return"<tr><td>"+esc(f.l)+(f.comp?" (complémentaire)":"")+"</td><td>"+({oui:"Oui",partiel:"Partiellement",non:"Non",nsp:"À vérifier"})[a]+"</td></tr>"}).join("");
     var al=r.alerts.map(function(x){return"<li>"+esc(x.l)+" — "+esc(x.m)+"</li>"}).join("");
     var g=[0,1,2].map(function(i){return"<tr><td>"+LV[i]+"</td><td>"+fmt(r.admRef[i])+" min</td><td>"+rangeMin(r.adm[i][0],r.adm[i][1])+" min</td><td>"+fmt(r.usgRef[i])+" min</td><td>"+rangeMin(r.usg[i][0],r.usg[i][1])+" min</td></tr>"}).join("");
-    $("sheet").innerHTML='<h1>Fiche de comparaison du cadre fonctionnel</h1><p>Établie le '+new Date().toLocaleDateString("fr-FR")+' · paramètres version 7</p>'+
+    $("sheet").innerHTML='<h1>Fiche de comparaison du cadre fonctionnel</h1><p>Établie le '+new Date().toLocaleDateString("fr-FR")+' · paramètres version 8'+(toolById(tool)?' · outil : '+esc(toolById(tool).n)+' (préchargement indicatif, à vérifier)':'')+'</p>'+
       '<h2>Couverture</h2><p>'+r.o+' oui · '+r.p+' partiellement · '+r.n+' non · '+r.q+' à vérifier, sur '+r.core+' fonctions de référence.</p>'+
       '<h2>Temps évité par dossier</h2><table><thead><tr><th>Complexité</th><th>Administration, référence</th><th>Administration, votre outil</th><th>Usagers, référence</th><th>Usagers, votre outil</th></tr></thead><tbody>'+g+'</tbody></table>'+
       '<h2>À ne pas comparer sans ajustement</h2><ul>'+(al||"<li>Aucun point.</li>")+'</ul>'+
-      '<h2>Détail des fonctions</h2><table><thead><tr><th>Fonction</th><th>Réponse</th></tr></thead><tbody>'+rows+'</tbody></table>'+
-      '<p style="font-size:9pt">Temps de traitement d\'un PDF : hypothèses de l\'auteur, à caler par des mesures. La grille ne classe pas les outils.</p>';
+      '<h2>Coût et rapport gains / coûts</h2><p style="white-space:pre-line">'+esc($('cOut').innerText||'')+'</p>'+'<h2>Détail des fonctions</h2><table><thead><tr><th>Fonction</th><th>Réponse</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+      '<p style="font-size:9pt">Temps de traitement d\'un PDF : hypothèses de l\'auteur, à caler par des mesures. Elle mesure la couverture d\'un périmètre commun, pas la qualité des outils.</p>';
   }
   $("print").addEventListener("click",function(){buildSheet();window.print();});
-  var KEY="cadre-fonctionnel-v7";
+  var KEY="cadre-fonctionnel-v8";
+  var KC=KEY+"-cout";
+  var CF=["cDos","cDem","cLvl","cLic","cHeb","cFor","cConf","cPar","cRev","cAmo","cMode","cPrest"];
+  function nv(id){var v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0}
+  function kE(v){return Math.round(v).toLocaleString("fr-FR")+" €"}
+  function rng(a,b,f){return Math.round(a)===Math.round(b)?f(a):f(a)+" à "+f(b)}
+  function costUpdate(){
+    $("cPrestL").hidden=$("cMode").value!=="prest";
+    var t=toolById(tool);$("licLine").innerHTML=t&&t.lic?"<b>Modèle de licence, "+esc(t.n)+" :</b> "+esc(t.lic)+" <span class=\"small\">Indicatif, sans montant.</span>":"";
+    var dos=nv("cDos"),dem=nv("cDem"),lv=parseInt($("cLvl").value,10),amo=parseInt($("cAmo").value,10)||3;
+    var prest=$("cMode").value==="prest"?nv("cPrest")*dem:0;
+    var once=nv("cPar")+nv("cRev")+prest;
+    var annual=nv("cLic")+nv("cHeb")+nv("cFor")+nv("cConf")+once/amo;
+    var r=compute(),gl=r.adm[lv][0]*RA/60,gh=r.adm[lv][1]*RA/60,GL=gl*dos,GH=gh*dos;
+    var h="";
+    if(!dos){h="<p class=\"msg\">Indiquez le nombre de dossiers par an.</p>"}
+    else if(!annual){h="<p class=\"msg\">Renseignez au moins un poste de coût : sans coût, le rapport gains / coûts n'est pas calculable. Pour comparer avec la référence publiée de Démarche Numérique, utilisez le bouton ci-dessus.</p>"}
+    else{
+      var rl=GL/annual,rh=GH/annual;
+      h="<table class=\"res\"><tbody>"+
+       "<tr><td>Coût annuel total</td><td>"+kE(annual)+"</td></tr>"+
+       "<tr><td>Coût par dossier</td><td>"+eur(annual/dos)+"</td></tr>"+
+       "<tr><td>Gain de traitement transposable par dossier</td><td>"+rangeEur(r.adm[lv][0],r.adm[lv][1],RA)+"</td></tr>"+
+       "<tr><td>Gain de traitement annuel</td><td>"+rng(GL,GH,kE)+"</td></tr>"+
+       "<tr><td><b>Gains pour 1 € de coût</b></td><td><b>"+rng(rl,rh,function(x){return x.toLocaleString('fr-FR',{maximumFractionDigits:1})+' €'})+"</b></td></tr>"+
+       "<tr><td>Écart annuel (gains moins coûts)</td><td>"+rng(GL-annual,GH-annual,kE)+"</td></tr></tbody></table>";
+      if($("cMode").value==="service"&&dem){
+        var cr=[1,5,15][lv]*312.9*dem/amo;
+        h+="<p class=\"msg small\">Si la création des démarches était imputée au service ("+[1,5,15][lv]+" jour"+([1,5,15][lv]>1?"s":"")+" par démarche à 312,90 € par jour, amortis sur "+amo+" an"+(amo>1?"s":"")+"), le coût annuel passerait à "+kE(annual+cr)+" et le rapport à "+rng(GL/(annual+cr),GH/(annual+cr),function(x){return x.toLocaleString('fr-FR',{maximumFractionDigits:1})+' €'})+" pour 1 €. Ce temps de création est commun aux supports, comme dans la note.</p>";
+      }
+      if(r.q)h+="<p class=\"msg small\">"+r.q+" fonction"+(r.q>1?"s":"")+" restent à vérifier dans la grille : le gain transposable est une fourchette.</p>";
+    }
+    h+="<p class=\"msg small\">Le coût de Démarche Numérique publié est de 14 M€ au plus depuis 2018, soit 0,77 € par dossier (estimation haute). Le gain est un temps valorisé à 44,70 € l'heure, pas une économie budgétaire.</p>";
+    $("cOut").innerHTML=h;
+    try{var o={};CF.forEach(function(i){o[i]=$(i).value});localStorage.setItem(KC,JSON.stringify(o))}catch(e){}
+    window.__cout={annual:annual,dos:dos};
+  }
+  CF.forEach(function(i){$(i).addEventListener("input",costUpdate);$(i).addEventListener("change",costUpdate)});
+  $("cDN").addEventListener("click",function(){var d=nv("cDos")||5000;$("cDos").value=d;["cLic","cFor","cConf","cPar","cRev","cPrest"].forEach(function(i){$(i).value=""});$("cHeb").value=Math.round(0.77*d);$("cMode").value="service";costUpdate()});
+  $("cClear").addEventListener("click",function(){["cLic","cHeb","cFor","cConf","cPar","cRev","cPrest"].forEach(function(i){$(i).value=""});costUpdate()});
+  try{var so=JSON.parse(localStorage.getItem(KC)||"null");if(so)CF.forEach(function(i){if(so[i]!==undefined)$(i).value=so[i]})}catch(e){}
+
   function save(){try{localStorage.setItem(KEY,JSON.stringify(ans));}catch(e){}}
   function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||"null");if(s)ans=s;}catch(e){}}
-  $("reset").addEventListener("click",function(){try{localStorage.removeItem(KEY);}catch(e){} ans={};render();update();});
-  load(); render(); update();
+  $("reset").addEventListener("click",function(){try{localStorage.removeItem(KEY);localStorage.removeItem(KEY+"-tool");}catch(e){} ans={};tool="";sel.value="";render();update();refreshTool();renderCmp();try{var u=new URL(location.href);u.searchParams.delete("outil");history.replaceState(null,"",u);}catch(e){}});
+  load(); try{tool=localStorage.getItem(KEY+"-tool")||""}catch(e){}
+  var qp="";try{qp=new URLSearchParams(location.search).get("outil")||""}catch(e){}
+  if(qp&&toolById(qp)){applyTool(qp)}else{sel.value=tool;render();update();refreshTool();renderCmp();}
 })();
 </script>
 </body>
