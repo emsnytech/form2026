@@ -4,7 +4,7 @@ Logos des produits comparés dans la grille de comparaison du cadre fonctionnel 
 
 Tout titulaire qui souhaite le retrait ou le remplacement d'un logo peut le demander par une [issue du dépôt](https://github.com/emsnytech/form2026/issues).
 
-Citizen Dev n'a pas de logo : ses initiales (« CD ») sont affichées à la place.
+Maarch Courrier n'a pas encore de logo : ses initiales (« MC ») sont affichées à la place.
 
 ## Contenu
 
