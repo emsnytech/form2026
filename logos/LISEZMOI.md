@@ -4,8 +4,6 @@ Logos des produits comparés dans la grille de comparaison du cadre fonctionnel 
 
 Tout titulaire qui souhaite le retrait ou le remplacement d'un logo peut le demander par une [issue du dépôt](https://github.com/emsnytech/form2026/issues).
 
-Maarch Courrier et Wimi n'ont pas encore de logo : leurs initiales (« MC », « WI ») sont affichées à la place.
-
 ## Contenu
 
 - `web/` — versions recadrées, converties en PNG et réduites à 120 px de haut au plus, utilisées par la page.
