@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Atelier Lego : avez-vous vraiment besoin d'un développement spécifique ?</title>
+<meta name="description" content="Empilez les couches de service de votre projet sous Démarche Numérique, réglez la part déjà couverte, reliez les systèmes existants : le coût par dossier se calcule en direct.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="FORM 2026">
+<meta property="og:title" content="Atelier Lego : avez-vous vraiment besoin d'un développement spécifique ?">
+<meta property="og:description" content="Empilez les couches de service de votre projet sous Démarche Numérique, réglez la part déjà couverte, reliez les systèmes existants : le coût par dossier se calcule en direct.">
+<meta property="og:url" content="https://emsnytech.github.io/form2026/atelier-lego.html">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1e2022; --muted:#5c6066; --paper:#fbf9f5; --surface:#ffffff; --line:#e2dfd7;
+  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4; --accent:#b45309; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c;
+  --board:#f1eee7; --stud:rgba(255,255,255,.35); --dn:#1b2a6b;
+  --b1:#2c6bd6; --b2:#13806b; --b3:#c0392b; --b4:#b7791f; --b5:#7a46b8; --b6:#4f6b7a; --b7:#d1561f; --b8:#a8317a; --b9:#3d7a2a;
+  --f-body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+    --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+    --board:#1f1f23; --stud:rgba(255,255,255,.25); --dn:#3a4c9a; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+  --board:#1f1f23; --stud:rgba(255,255,255,.25); --dn:#3a4c9a; color-scheme:dark;
+}
+
+/* Mise en page : palette de briques à gauche, plan d'empilement au centre (DN en haut, couches dessous, systèmes externes à droite), bilan chiffré en dessous. */
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 var(--f-body)}
+a{color:var(--admin)}
+.wrap{max-width:1160px;margin:0 auto;padding:2.2rem 1.25rem 3rem;display:grid;gap:16px}
+h1{font:800 clamp(1.7rem,3.6vw,2.4rem)/1.2 var(--f-body);margin:0;max-width:30ch;text-wrap:balance}
+h2{font:700 .8rem/1 var(--f-body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.lede{color:var(--muted);max-width:70ch;margin:6px 0 0}
+.tag{font:500 11px var(--f-mono);background:var(--board);border:1px solid var(--line);padding:2px 7px;border-radius:4px;color:var(--muted)}
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:16px;align-items:start}
+@media(max-width:760px){.layout{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px}
+.palette{display:grid;gap:8px}
+.pal{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;background:var(--c);color:#fff;cursor:grab;font:600 13px var(--f-body);border:0;text-align:left;width:100%;user-select:none}
+.pal small{display:block;font:400 11px var(--f-body);opacity:.9}
+.pal[disabled]{opacity:.35;cursor:not-allowed}
+.pal .add{margin-left:auto;font:700 16px var(--f-mono)}
+.board{position:relative;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:56px;background:var(--board);border:1px dashed var(--line);border-radius:8px;padding:14px;min-height:300px}
+@media(max-width:560px){.board{gap:28px;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}}
+.col{display:grid;gap:0;align-content:start;min-width:0}
+.col h3{font:700 11px var(--f-body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.zone{display:grid;gap:6px;align-content:start;min-height:120px;border-radius:6px;padding:2px}
+.zone.over{outline:2px dashed var(--admin);outline-offset:2px}
+.empty{color:var(--muted);font-size:12px;padding:14px 8px;text-align:center;border:1px dashed var(--line);border-radius:6px}
+.brick{position:relative;border-radius:6px;background:var(--c);color:#fff;min-height:86px;padding:22px 10px 8px;overflow:hidden;cursor:grab}
+.brick::before{content:"";position:absolute;inset:0 0 auto 0;height:12px;background:radial-gradient(circle at 10px 6px,var(--stud) 3.5px,transparent 4.5px) 0 0/20px 12px repeat-x;opacity:.9}
+.hatch{position:absolute;inset:0 0 auto 0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.34) 0 6px,rgba(255,255,255,.12) 6px 12px);border-bottom:2px solid rgba(255,255,255,.8);pointer-events:none}
+.brick>*:not(.hatch){position:relative}
+.brick.dn{background:var(--dn);min-height:0;padding:22px 10px 8px;cursor:default}
+.brick.linking{outline:3px solid var(--admin);outline-offset:1px}
+.brick.target{outline:3px dashed var(--admin);outline-offset:1px;cursor:crosshair}
+.bt{font:700 13px var(--f-body)}
+.bs{font:400 11px var(--f-body);opacity:.92}
+.bctl{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;align-items:center}
+.chip{font:500 11px var(--f-mono);background:rgba(0,0,0,.28);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:4px;padding:2px 6px;cursor:pointer}
+.chip[aria-pressed="true"]{background:#fff;color:#111}
+.chip.x{margin-left:auto}
+.chip:focus-visible,.pal:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--admin);outline-offset:2px}
+svg.links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+svg.links path{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-dasharray:6 4;pointer-events:stroke;cursor:pointer}
+svg.links path:hover{stroke:var(--bad)}
+svg.links circle{fill:var(--ink)}
+.hint{font-size:12px;color:var(--muted);margin:10px 0 0}
+.params{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+label.f{display:grid;gap:3px;font-size:12px;color:var(--muted)}
+input[type=number]{font:500 14px var(--f-mono);padding:6px 8px;border:1px solid var(--line);border-radius:5px;background:var(--paper);color:var(--ink);width:100%}
+.result{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:14px}
+.kpi{border-left:3px solid var(--line);padding-left:10px}
+.kpi b{display:block;font:700 22px var(--f-body);font-variant-numeric:tabular-nums}
+.kpi span{font-size:12px;color:var(--muted)}
+.verdict{margin-top:14px;padding:12px 14px;border-radius:6px;border:1px solid var(--line);font:600 15px var(--f-body);background:var(--board)}
+.verdict.ok{border-color:var(--usager);color:var(--usager)}.verdict.warn{border-color:var(--warn);color:var(--warn)}.verdict.crit{border-color:var(--bad);color:var(--bad)}
+table{border-collapse:collapse;width:100%}td,th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}
+.scroll{overflow-x:auto}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted);margin-top:10px}
+.sw{display:inline-block;width:22px;height:12px;vertical-align:-2px;margin-right:4px;border-radius:2px}
+button.btn{font:600 13px var(--f-body);padding:6px 12px;border-radius:5px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+
+.topnav{margin:0;font-size:.95rem}
+.lede{max-width:72ch}
+footer{margin-top:1.4rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted);max-width:84ch}
+footer p{margin:.4rem 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="topnav"><a href="index.html">Retour à FORM 2026</a> · <a href="simulateur-gains-dematerialisation.html">Estimer ses gains</a> · <a href="cadrage-dematerialisation.html">Cadrer une démarche</a> · <a href="comparer-cadre-fonctionnel.html">Comparer un outil</a> · <a href="atelier-lego.html" aria-current="page">Atelier Lego</a> · <a href="compteur-roi.html">Compteur</a></p>
+  <header>
+    <h1>Atelier Lego : avez-vous vraiment besoin d'un développement spécifique ?</h1>
+    <p class="lede">Posez les couches dont votre projet a besoin sous Démarche Numérique. Réglez pour chacune la part déjà couverte par la brique du dessus : 100 % ne coûte rien, 0 % se développe en entier. Reliez les systèmes externes. Le coût par dossier se calcule en direct.</p>
+    <p class="hint"><span class="tag">Exemple chargé</span> Les coûts de départ sont des ordres de grandeur à remplacer par les vôtres.</p>
+  </header>
+
+  <div class="layout">
+    <aside class="panel">
+      <h2>Briques</h2>
+      <div class="palette" id="palette"></div>
+      <p class="hint">Glissez une brique sur le plan. Sur écran tactile, touchez le +. Déposez dans la colonne de droite pour un système externe existant.</p>
+    </aside>
+
+    <main class="panel">
+      <h2>Plan d'empilement</h2>
+      <div class="board" id="board">
+        <svg class="links" id="links" aria-hidden="true"></svg>
+        <div class="col">
+          <h3>Votre architecture</h3>
+          <div id="dn"></div>
+          <div class="zone" id="stack" data-zone="stack"></div>
+        </div>
+        <div class="col">
+          <h3>Systèmes externes</h3>
+          <div class="zone" id="ext" data-zone="ext"></div>
+        </div>
+      </div>
+      <div class="legend">
+        <span><span class="sw" style="background:repeating-linear-gradient(135deg,#888 0 4px,#bbb 4px 8px)"></span>Zone hachurée : couverte par la brique du dessus (DN pour la première), sans financement</span>
+        <span><span class="sw" style="background:#555"></span>Zone pleine : part à financer</span>
+        <span>Trait pointillé : interface à construire (cliquez dessus pour le retirer)</span>
+      </div>
+    </main>
+  </div>
+
+  <section class="panel">
+    <h2>Hypothèses</h2>
+    <div class="params">
+      <label class="f" for="p-dos">Dossiers par an<input id="p-dos" type="number" min="0" step="500" value="5000"></label>
+      <label class="f" for="p-yrs">Horizon (années)<input id="p-yrs" type="number" min="1" step="1" value="3"></label>
+      <label class="f" for="p-lnk">Coût d'un lien (€)<input id="p-lnk" type="number" min="0" step="1000" value="8000"></label>
+      <label class="f" for="p-mnt">Maintenance (% du développement par an)<input id="p-mnt" type="number" min="0" step="1" value="15"></label>
+    </div>
+    <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Coût plein de chaque couche si rien n'est couvert (0 %)</summary>
+      <div class="params" id="costs" style="margin-top:10px"></div>
+    </details>
+
+    <div class="result" id="result"></div>
+    <div class="verdict" id="verdict"></div>
+    <div class="scroll" style="margin-top:14px"><table id="detail"></table></div>
+  </section>
+  <footer>
+    <p>Principe : un besoin de démarche se décompose en couches de service. Démarche Numérique couvre le dépôt et l'instruction, y compris à grande échelle ; chaque couche suivante est comparée à la brique du dessus. Seule la part non couverte se finance, et chaque interface vers un système existant a un coût.</p>
+    <p>Référence : 0,37 € par dossier pour Démarche Numérique (bilan 2025 de la plateforme), comme dans les autres outils de FORM 2026. Les coûts pleins par couche (20 000 à 80 000 €), le coût d'un lien (8 000 €) et la maintenance (15 % par an) sont des ordres de grandeur de l'auteur, sans source : remplacez-les par les vôtres.</p>
+    <p>Aucune donnée n'est transmise : tout se calcule dans votre navigateur, et rien n'est conservé à la fermeture de la page.</p>
+  </footer>
+</div>
+
+<script>
+const LAYERS=[
+ {id:1,n:"Dépôt et identité",s:"Formulaire, FranceConnect, pièces",cost:20000},
+ {id:2,n:"Instruction collective",s:"Circuits, avis, décisions, agents",cost:80000},
+ {id:3,n:"Règles métier et calculs",s:"Barèmes, éligibilité, montants",cost:60000},
+ {id:4,n:"Programmation financière",s:"Enveloppes, engagements, paiements",cost:70000},
+ {id:5,n:"Échanges de données",s:"API, Chorus, bases de référence",cost:30000},
+ {id:6,n:"Stockage et archivage",s:"Conservation, coffre, Vitam",cost:25000},
+ {id:7,n:"Restitution",s:"Tableaux de bord, exports, open data",cost:20000},
+ {id:8,n:"Intelligence artificielle",s:"Aide à l'instruction, tri",cost:40000},
+ {id:9,n:"Gestion des droits",s:"Habilitations, rôles, délégations, traçabilité",cost:35000}
+];
+const SHARES=[100,75,50,25,0];
+const SHARE_LABEL={100:"Entièrement couvert",75:"Largement couvert",50:"À moitié couvert",25:"Peu couvert",0:"Non couvert"};
+const S={stack:[3,2,1],ext:[4],share:{1:75,2:75,3:0,4:0},cost:{},links:[[3,4]],linking:null};
+LAYERS.forEach(l=>S.cost[l.id]=l.cost);
+const $=id=>document.getElementById(id);
+const L=id=>id===0?{id:0,n:"Démarche Numérique"}:LAYERS.find(l=>l.id===id);
+const placed=id=>S.stack.includes(id)||S.ext.includes(id);
+const eur=n=>Math.round(n).toLocaleString("fr-FR")+" €";
+const eur2=n=>n.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
+
+function place(id,zone,idx){
+  S.stack=S.stack.filter(x=>x!==id);S.ext=S.ext.filter(x=>x!==id);
+  const arr=zone==="ext"?S.ext:S.stack;
+  if(idx==null||idx>arr.length)idx=arr.length;
+  arr.splice(idx,0,id);
+  if(!(id in S.share))S.share[id]=0;
+  if(zone==="ext"){}
+  render();
+}
+function remove(id){
+  S.stack=S.stack.filter(x=>x!==id);S.ext=S.ext.filter(x=>x!==id);
+  S.links=S.links.filter(p=>!p.includes(id));
+  if(S.linking===id)S.linking=null;
+  render();
+}
+function addLink(a,b){
+  if(a===b)return;
+  if(S.links.some(p=>p.includes(a)&&p.includes(b)))return;
+  S.links.push([a,b]);
+}
+
+function renderPalette(){
+  $("palette").innerHTML=LAYERS.map(l=>`<button class="pal" style="--c:var(--b${l.id})" draggable="${!placed(l.id)}" data-pal="${l.id}" ${placed(l.id)?"disabled":""}><span><span>${l.n}</span><small>${l.s}</small></span><span class="add" data-add="${l.id}">+</span></button>`).join("");
+}
+function brickHTML(id,isExt){
+  const l=L(id),sh=S.share[id];
+  const linking=S.linking===id,target=S.linking!=null&&S.linking!==id;
+  let ctl="";
+  if(!isExt){
+    ctl=SHARES.map(v=>`<button class="chip" data-share="${id}:${v}" aria-pressed="${sh===v}" title="${SHARE_LABEL[v]} par la brique du dessus">${v} %</button>`).join("");
+  }
+  const hatch=isExt?"":`<div class="hatch" style="height:${sh}%"></div>`;
+  return `<div class="brick${linking?" linking":""}${target?" target":""}" style="--c:var(--b${id})" draggable="true" data-brick="${id}" data-l="${id}">
+    ${hatch}
+    <div class="bt">${l.n}</div>
+    <div class="bs">${isExt?"Système existant, hors projet":SHARE_LABEL[sh]+" · "+sh+" % couvert, "+(100-sh)+" % à financer"}</div>
+    <div class="bctl">${ctl}<button class="chip" data-link="${id}">${linking?"Choisir la cible…":"⛓ Relier"}</button><button class="chip x" data-remove="${id}" aria-label="Retirer">✕</button></div>
+  </div>`;
+}
+function renderBoard(){
+  const dl=S.linking===0,dt=S.linking!=null&&S.linking!==0;
+  $("dn").innerHTML=`<div class="brick dn${dl?" linking":""}${dt?" target":""}" data-l="0" aria-label="Démarche Numérique"><div class="bt">Démarche Numérique</div><div class="bs">Dépôt, instruction, API · 0,37 € par dossier</div><div class="bctl"><button class="chip" data-link="0">${dl?"Choisir la cible…":"⛓ Relier"}</button></div></div>`;
+  $("stack").innerHTML=S.stack.length?S.stack.map(i=>brickHTML(i,false)).join(""):`<div class="empty">Déposez une brique ici</div>`;
+  $("ext").innerHTML=S.ext.length?S.ext.map(i=>brickHTML(i,true)).join(""):`<div class="empty">Déposez ici un système existant</div>`;
+}
+function drawLinks(){
+  const svg=$("links"),b=$("board").getBoundingClientRect();
+  let out="";
+  S.links.forEach((p,i)=>{
+    const A=document.querySelector(`[data-l="${p[0]}"]`),B=document.querySelector(`[data-l="${p[1]}"]`);
+    if(!A||!B)return;
+    const ra=A.getBoundingClientRect(),rb=B.getBoundingClientRect();
+    const aExt=S.ext.includes(p[0]),bExt=S.ext.includes(p[1]);
+    let x1,x2,c1,c2;const y1=ra.top+ra.height/2-b.top,y2=rb.top+rb.height/2-b.top;
+    if(!aExt&&!bExt){x1=ra.right-b.left;x2=rb.right-b.left;c1=x1+36;c2=x2+36}
+    else if(aExt&&bExt){x1=ra.left-b.left;x2=rb.left-b.left;c1=x1-30;c2=x2-30}
+    else{const s=aExt?B:A,e=aExt?A:B,rs=s.getBoundingClientRect(),re=e.getBoundingClientRect();
+      x1=rs.right-b.left;x2=re.left-b.left;const ys=rs.top+rs.height/2-b.top,ye=re.top+re.height/2-b.top;
+      const m=(x1+x2)/2;out+=`<path data-lk="${i}" d="M${x1},${ys} C${m},${ys} ${m},${ye} ${x2},${ye}"><title>Retirer ce lien</title></path><circle cx="${x1}" cy="${ys}" r="4"/><circle cx="${x2}" cy="${ye}" r="4"/>`;return}
+    out+=`<path data-lk="${i}" d="M${x1},${y1} C${c1},${y1} ${c2},${y2} ${x2},${y2}"><title>Retirer ce lien</title></path><circle cx="${x1}" cy="${y1}" r="4"/><circle cx="${x2}" cy="${y2}" r="4"/>`;
+  });
+  svg.innerHTML=out;
+}
+function num(id){return Math.max(0,parseFloat($(id).value)||0)}
+function renderResult(){
+  const dos=num("p-dos"),yrs=Math.max(1,num("p-yrs")),lnk=num("p-lnk"),mnt=num("p-mnt");
+  const rows=S.stack.map(id=>({l:L(id),sh:S.share[id],c:S.cost[id]*(100-S.share[id])/100}));
+  const dev=rows.reduce((a,r)=>a+r.c,0);
+  const nLinks=S.links.length,linkCost=nLinks*lnk;
+  const maint=dev*mnt/100*yrs;
+  const total=dev+linkCost+maint,vol=dos*yrs;
+  const per=vol?total/vol:0,ratio=per/0.37;
+  $("result").innerHTML=[
+    [eur(dev),"Développement des couches"],[eur(linkCost),`${nLinks} lien(s) à construire`],[eur(maint),`Maintenance sur ${yrs} an(s)`],
+    [eur(total),"Coût total"],[eur2(per),"Par dossier (DN : 0,37 €)"],[ratio?ratio.toFixed(1).replace(".",",")+" ×":"–","Rapport à la référence DN"]
+  ].map(k=>`<div class="kpi"><b>${k[0]}</b><span>${k[1]}</span></div>`).join("");
+  let v,cls;
+  const full=rows.filter(r=>r.sh===0).length;
+  if(!S.stack.length&&!S.ext.length){v="Posez au moins une brique pour obtenir un bilan.";cls=""}
+  else if(total===0){v="Paramétrage de Démarche Numérique seul : aucune dépense de développement.";cls="ok"}
+  else if(full>0){v=`Développement à justifier : ${full} couche(s) ne sont couvertes en rien par la brique du dessus. Vérifiez qu'aucune brique mutualisée ne les couvre.`;cls="crit"}
+  else{v="Couverture partielle : le besoin se rapproche d'un assemblage. Cadrez chaque part restante et chaque lien.";cls="warn"}
+  $("verdict").className="verdict "+cls;$("verdict").textContent=v;
+  $("detail").innerHTML=`<tr><th>Couche</th><th>Position</th><th>Couverture</th><th>Coût</th></tr>`+
+    rows.map(r=>`<tr><td>${r.l.n}</td><td>Empilée sous DN</td><td>${r.sh} %</td><td>${eur(r.c)}</td></tr>`).join("")+
+    S.ext.map(id=>`<tr><td>${L(id).n}</td><td>Système externe</td><td>–</td><td>${eur(0)}</td></tr>`).join("")+
+    S.links.map(p=>`<tr><td>Lien ${L(p[0]).n} ↔ ${L(p[1]).n}</td><td>Interface</td><td>–</td><td>${eur(lnk)}</td></tr>`).join("");
+}
+function renderCosts(){
+  $("costs").innerHTML=LAYERS.map(l=>`<label class="f" for="c${l.id}">${l.n}<input id="c${l.id}" type="number" min="0" step="5000" value="${S.cost[l.id]}" data-cost="${l.id}"></label>`).join("");
+}
+function render(){renderPalette();renderBoard();renderResult();requestAnimationFrame(drawLinks)}
+
+/* Glisser-déposer */
+let dragData=null;
+document.addEventListener("dragstart",e=>{
+  const p=e.target.closest("[data-pal]"),b=e.target.closest("[data-brick]");
+  if(p&&!p.disabled)dragData={t:"pal",id:+p.dataset.pal};
+  else if(b)dragData={t:"mv",id:+b.dataset.brick};
+  else return;
+  e.dataTransfer.setData("text/plain",String(dragData.id));e.dataTransfer.effectAllowed="move";
+});
+document.addEventListener("dragend",()=>{dragData=null;document.querySelectorAll(".zone.over").forEach(z=>z.classList.remove("over"))});
+document.querySelectorAll(".zone").forEach(z=>{
+  z.addEventListener("dragover",e=>{if(dragData){e.preventDefault();z.classList.add("over")}});
+  z.addEventListener("dragleave",e=>{if(!z.contains(e.relatedTarget))z.classList.remove("over")});
+  z.addEventListener("drop",e=>{
+    e.preventDefault();z.classList.remove("over");if(!dragData)return;
+    const kids=[...z.querySelectorAll("[data-brick]")].filter(k=>+k.dataset.brick!==dragData.id);
+    let idx=kids.length;
+    for(let i=0;i<kids.length;i++){const r=kids[i].getBoundingClientRect();if(e.clientY<r.top+r.height/2){idx=i;break}}
+    place(dragData.id,z.dataset.zone,idx);dragData=null;
+  });
+});
+
+/* Clics */
+document.addEventListener("click",e=>{
+  const t=e.target;
+  const add=t.closest("[data-add]");if(add){const id=+add.dataset.add;if(!placed(id))place(id,"stack");e.stopPropagation();return}
+  const sh=t.closest("[data-share]");if(sh){const[a,b]=sh.dataset.share.split(":").map(Number);S.share[a]=b;render();return}
+  const rm=t.closest("[data-remove]");if(rm){remove(+rm.dataset.remove);return}
+  const lk=t.closest("[data-link]");if(lk){const id=+lk.dataset.link;S.linking=S.linking===id?null:id;render();return}
+  const br=t.closest("[data-l]");
+  if(br&&S.linking!=null&&+br.dataset.l!==S.linking){addLink(S.linking,+br.dataset.l);S.linking=null;render();return}
+  const path=t.closest("path[data-lk]");if(path){S.links.splice(+path.dataset.lk,1);render();return}
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&S.linking!=null){S.linking=null;render()}});
+document.addEventListener("input",e=>{
+  const c=e.target.closest("[data-cost]");
+  if(c){S.cost[+c.dataset.cost]=Math.max(0,parseFloat(c.value)||0)}
+  if(c||e.target.id.startsWith("p-"))renderResult();
+});
+window.addEventListener("resize",drawLinks);
+renderCosts();render();
+</script>
+</body>
+</html>
