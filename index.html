@@ -18,19 +18,19 @@
 <style>
 :root{
   --ink:#1e2022; --muted:#5c6066; --paper:#fbf9f5; --surface:#ffffff; --line:#e2dfd7;
-  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4; --accent:#b45309; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c;
+  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4; --accent:#b45309; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c; --min:#0e7490; --min-soft:#ecfeff;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
-    --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+    --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171; --min:#22d3ee; --min-soft:#164e63;
   }
 }
 :root[data-theme="dark"]{
   --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
-  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171; --min:#22d3ee; --min-soft:#164e63;
 }
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -50,8 +50,8 @@ h2{font-size:1.4rem;margin-bottom:1rem}
 .fig.a b{color:var(--admin)} .fig.u b{color:var(--usager)}
 
 section{margin-top:2.8rem}
-.doors{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
-@media (max-width:1040px){.doors{grid-template-columns:repeat(2,1fr)}}
+.doors{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media (max-width:900px){.doors{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:620px){.doors{grid-template-columns:1fr}}
 .door{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.3rem 1.2rem;text-decoration:none;color:var(--ink);border-top:6px solid var(--c,var(--admin));transition:transform .15s ease,box-shadow .15s ease}
 .door:hover,.door:focus-visible{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08);outline:none}
@@ -87,6 +87,7 @@ section{margin-top:2.8rem}
 @media (max-width:760px){.about{grid-template-columns:1fr}}
 .about p{margin:.5rem 0}
 .note{font-size:.9rem;color:var(--muted)}
+.new{font-style:normal;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--min-soft);color:var(--min);border:1px solid var(--min);border-radius:4px;padding:1px 5px;margin-left:4px;vertical-align:1px}
 footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted)}
 </style>
 </head>
@@ -128,6 +129,14 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
         <p>Indiquez vos démarches, vos dossiers et vos agents : une fourchette de gains pour votre administration et pour vos usagers, avec toutes les hypothèses visibles.</p>
         <span class="go">Ouvrir le simulateur →</span>
         <span class="meta">2 minutes · aucune donnée transmise</span>
+      </a>
+      <!-- fiches-ministeres : porte -->
+      <a class="door" href="fiches-ministeres/" style="--c:var(--min)">
+        <span class="q">Situer <em class="new">Nouveau</em></span>
+        <h3>L'usage de Démarche Numérique, ministère par ministère</h3>
+        <p>Cinq ans de démarches publiées, de dossiers déposés et de frais évités. Les émetteurs sur une carte, les démarches construites plusieurs fois, celles qui pourraient être préremplies.</p>
+        <span class="go">Ouvrir les fiches →</span>
+        <span class="meta">Éducation nationale · autres ministères à venir</span>
       </a>
       <a class="door" href="cadrage-dematerialisation.html" style="--c:var(--admin)">
         <span class="q">Cadrer</span>
@@ -181,6 +190,7 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
           <li><a href="explorer.html#essentielles">Démarches essentielles</a><small>Les plus utilisées</small></li>
           <li><a href="explorer.html#cerfa">CERFA papier</a><small>Formulaires pas encore en ligne</small></li>
           <li><a href="explorer.html#toutes">Toutes les démarches</a></li>
+          <li><a href="fiches-ministeres/">Fiches ministères</a> <em class="new">Nouveau</em><small>Usage par ministère, 2021 → 2026</small></li>
         </ul>
       </div>
       <div class="grp">

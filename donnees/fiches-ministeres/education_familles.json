@@ -1,0 +1,661 @@
+[
+ {
+  "famille": "Relevés de notes, attestations de réussite, diplômes",
+  "demarches": 39,
+  "emetteurs_distincts": 19,
+  "departements": 18,
+  "dossiers": 104401,
+  "champs_moyens": 45.3,
+  "champs_min": 13,
+  "champs_max": 85,
+  "pj_moyennes": 3.4,
+  "avec_annuaire_education": 1,
+  "avec_quotient_familial": 0,
+  "avec_iban": 0,
+  "par_annee": {
+   "2022": 1,
+   "2023": 7,
+   "2024": 12,
+   "2025": 15,
+   "2026": 4
+  },
+  "exemples": [
+   {
+    "number": 97859,
+    "title": "Obtenir un diplôme, un relevé de notes et/ou une attestation d'un examen passé dans l'académie de STRASBOURG ",
+    "organisme": "rectorat de Strasbourg",
+    "dossiers": 14752,
+    "n_champs": 60
+   },
+   {
+    "number": 87846,
+    "title": "Demande de retrait d'une attestation de réussite ou d'un relevé de notes - Rectorat de Nancy-Metz",
+    "organisme": "DEC",
+    "dossiers": 10750,
+    "n_champs": 32
+   },
+   {
+    "number": 103923,
+    "title": "Attestation de réussite et relevé de notes (Académie de Lyon)",
+    "organisme": "Académie de Lyon",
+    "dossiers": 9978,
+    "n_champs": 63
+   },
+   {
+    "number": 94807,
+    "title": "Relevé de notes et attestation de réussite (Académie de Montpellier)",
+    "organisme": "Rectorat Montpellier",
+    "dossiers": 8309,
+    "n_champs": 59
+   },
+   {
+    "number": 111976,
+    "title": "Demande de transmission d'un diplôme original, d'un relevé de notes ou d'une attestation de réussite - Académie de Normandie",
+    "organisme": "DEC/SI3A",
+    "dossiers": 7363,
+    "n_champs": 69
+   },
+   {
+    "number": 103751,
+    "title": "Attestation de réussite et relevé de notes (Académie de Poitiers)",
+    "organisme": "Rectorat de l'académie Poitiers",
+    "dossiers": 6620,
+    "n_champs": 60
+   }
+  ]
+ },
+ {
+  "famille": "Demi-pension, restauration scolaire, internat",
+  "demarches": 220,
+  "emetteurs_distincts": 81,
+  "departements": 24,
+  "dossiers": 58247,
+  "champs_moyens": 35.1,
+  "champs_min": 0,
+  "champs_max": 129,
+  "pj_moyennes": 3.3,
+  "avec_annuaire_education": 9,
+  "avec_quotient_familial": 1,
+  "avec_iban": 30,
+  "par_annee": {
+   "2021": 13,
+   "2022": 20,
+   "2023": 36,
+   "2024": 41,
+   "2025": 56,
+   "2026": 54
+  },
+  "exemples": [
+   {
+    "number": 146293,
+    "title": "Fiche d'inscription au service de restauration scolaire du Lycée Robert Doisneau 2026-2027",
+    "organisme": "LYCEE ROBERT DOISNEAU",
+    "dossiers": 1717,
+    "n_champs": 28
+   },
+   {
+    "number": 77115,
+    "title": "Lycée TURGOT, Paris - niveaux 1ères-Terminales-BTS-DCG-CPGE : Inscriptions cantine et bourse 2026/2027",
+    "organisme": "Lycée Turgot",
+    "dossiers": 1648,
+    "n_champs": 35
+   },
+   {
+    "number": 115995,
+    "title": "Lycée René Cassin Arpajon : inscription à la demi-pension 2025 / 2026",
+    "organisme": "Lycée René CASSIN (ARPAJON)",
+    "dossiers": 1526,
+    "n_champs": 22
+   },
+   {
+    "number": 146593,
+    "title": "Lycée René Cassin Arpajon : inscription à la demi-pension 2026 / 2027",
+    "organisme": "Lycée René CASSIN (ARPAJON)",
+    "dossiers": 1485,
+    "n_champs": 24
+   },
+   {
+    "number": 73627,
+    "title": "Lycée René Cassin Arpajon : inscription à la demi-pension 2023/2024",
+    "organisme": "Lycée René CASSIN (ARPAJON)",
+    "dossiers": 1475,
+    "n_champs": 22
+   },
+   {
+    "number": 93576,
+    "title": "Lycée René Cassin Arpajon : inscription à la demi-pension 2024 / 2025",
+    "organisme": "Lycée René CASSIN (ARPAJON)",
+    "dossiers": 1474,
+    "n_champs": 20
+   }
+  ]
+ },
+ {
+  "famille": "Bourses et fonds sociaux",
+  "demarches": 54,
+  "emetteurs_distincts": 29,
+  "departements": 12,
+  "dossiers": 7888,
+  "champs_moyens": 30.9,
+  "champs_min": 3,
+  "champs_max": 89,
+  "pj_moyennes": 5.0,
+  "avec_annuaire_education": 0,
+  "avec_quotient_familial": 0,
+  "avec_iban": 10,
+  "par_annee": {
+   "2021": 2,
+   "2022": 5,
+   "2023": 10,
+   "2024": 9,
+   "2025": 13,
+   "2026": 15
+  },
+  "exemples": [
+   {
+    "number": 77115,
+    "title": "Lycée TURGOT, Paris - niveaux 1ères-Terminales-BTS-DCG-CPGE : Inscriptions cantine et bourse 2026/2027",
+    "organisme": "Lycée Turgot",
+    "dossiers": 1648,
+    "n_champs": 35
+   },
+   {
+    "number": 119776,
+    "title": " Lycée ARAGO, Paris : Inscription financière (cantine, bourses, aides sociales) 2025/26",
+    "organisme": "Lycée ARAGO, Paris",
+    "dossiers": 602,
+    "n_champs": 60
+   },
+   {
+    "number": 33624,
+    "title": "Lycée ARAGO, Paris 2020 : cantine et bourse",
+    "organisme": "Lycée ARAGO, Paris",
+    "dossiers": 589,
+    "n_champs": 24
+   },
+   {
+    "number": 48870,
+    "title": "Aide Sociale Numérique 2022/2023",
+    "organisme": "Université Jean Monnet",
+    "dossiers": 553,
+    "n_champs": 28
+   },
+   {
+    "number": 149412,
+    "title": " Lycée ARAGO, Paris : Inscription financière (cantine, bourses, aides sociales) 2026/27",
+    "organisme": "Lycée ARAGO, Paris",
+    "dossiers": 528,
+    "n_champs": 51
+   },
+   {
+    "number": 61186,
+    "title": "Lycée ARAGO, Paris : Inscriptions cantine et bourse 2022/23",
+    "organisme": "Lycée ARAGO, Paris",
+    "dossiers": 497,
+    "n_champs": 35
+   }
+  ]
+ },
+ {
+  "famille": "Instruction en famille, dérogations de secteur, contrôle de scolarisation",
+  "demarches": 256,
+  "emetteurs_distincts": 93,
+  "departements": 61,
+  "dossiers": 86553,
+  "champs_moyens": 95.4,
+  "champs_min": 7,
+  "champs_max": 164,
+  "pj_moyennes": 15.8,
+  "avec_annuaire_education": 162,
+  "avec_quotient_familial": 0,
+  "avec_iban": 0,
+  "par_annee": {
+   "2021": 2,
+   "2022": 35,
+   "2023": 33,
+   "2024": 55,
+   "2025": 61,
+   "2026": 70
+  },
+  "exemples": [
+   {
+    "number": 112614,
+    "title": "Demande d’autorisation d’instruction dans la famille année scolaire 2025-2026",
+    "organisme": "MENJ, Rectorat, Directions des services départementaux de l'éducation nationale",
+    "dossiers": 2734,
+    "n_champs": 110
+   },
+   {
+    "number": 131289,
+    "title": "Contrôle de scolarisation 2025/2026 - 2nd degré privé académie de Nantes",
+    "organisme": "Rectorat de l'académie de Nantes, Ministère de l'Éducation nationale et de la jeunesse",
+    "dossiers": 2577,
+    "n_champs": 24
+   },
+   {
+    "number": 84241,
+    "title": "Dépôt des demandes de dérogation à l'affectation en 6e dans le collège de secteur - rentrée 2024 (date limite de dépôt le 4 avril 2024)",
+    "organisme": "Rectorat de Paris",
+    "dossiers": 2327,
+    "n_champs": 9
+   },
+   {
+    "number": 107242,
+    "title": "Dépôt des demandes de dérogation à l'affectation en 6e dans le collège de secteur - rentrée 2025 (date limite de dépôt le 4 avril 2025)",
+    "organisme": "Académie de Paris",
+    "dossiers": 2264,
+    "n_champs": 13
+   },
+   {
+    "number": 64666,
+    "title": "Dépôt des demandes de dérogation à l'affectation en 6e dans le collège de secteur - rentrée 2023 (date limite de dépôt le 14 avril 2023)",
+    "organisme": "Rectorat de Paris",
+    "dossiers": 2258,
+    "n_champs": 7
+   },
+   {
+    "number": 131927,
+    "title": "Dépôt des demandes de dérogation à l'affectation en 6e dans le collège de secteur - rentrée 2026 (date limite de dépôt le 10 avril 2026)",
+    "organisme": "Académie de Paris",
+    "dossiers": 2168,
+    "n_champs": 14
+   }
+  ]
+ },
+ {
+  "famille": "Stages et périodes de formation en milieu professionnel",
+  "demarches": 221,
+  "emetteurs_distincts": 70,
+  "departements": 29,
+  "dossiers": 32761,
+  "champs_moyens": 27.4,
+  "champs_min": 1,
+  "champs_max": 129,
+  "pj_moyennes": 4.7,
+  "avec_annuaire_education": 27,
+  "avec_quotient_familial": 0,
+  "avec_iban": 46,
+  "par_annee": {
+   "2021": 12,
+   "2022": 24,
+   "2023": 34,
+   "2024": 42,
+   "2025": 51,
+   "2026": 58
+  },
+  "exemples": [
+   {
+    "number": 106860,
+    "title": "Allocation de stage  - Lycée Jean Perrin - Année scolaire 2024-2025",
+    "organisme": "Lycée Professionnel Jean Perrin",
+    "dossiers": 1053,
+    "n_champs": 49
+   },
+   {
+    "number": 84155,
+    "title": "Allocation de PFMP 2026 - 2027 - Lycée de l'Observatoire - Meudon La Forêt",
+    "organisme": "Lycée de l'Observatoire",
+    "dossiers": 843,
+    "n_champs": 35
+   },
+   {
+    "number": 128802,
+    "title": "Allocation de stage  - Lycée Jean Perrin - Année scolaire 2025-2026",
+    "organisme": "Lycée Professionnel Jean Perrin",
+    "dossiers": 750,
+    "n_champs": 50
+   },
+   {
+    "number": 101677,
+    "title": "Dossier pour le versement de l'allocation de PFMP",
+    "organisme": " ﻿ ",
+    "dossiers": 700,
+    "n_champs": 37
+   },
+   {
+    "number": 127134,
+    "title": "[DSDEN 29]  Convention de stage d'observation en école maternelle, élementaire ou primaire - 2025-2026",
+    "organisme": "Ministère de l'Education Nationale",
+    "dossiers": 689,
+    "n_champs": 25
+   },
+   {
+    "number": 68664,
+    "title": "1er degré - Année 2023-2024 - Campagne de candidatures aux stages en milieu scolaire - M2 MEEF 1er degré ",
+    "organisme": "Rectorat de Créteil",
+    "dossiers": 628,
+    "n_champs": 39
+   }
+  ]
+ },
+ {
+  "famille": "Recrutement et suivi des contractuels et AESH",
+  "demarches": 271,
+  "emetteurs_distincts": 87,
+  "departements": 34,
+  "dossiers": 62794,
+  "champs_moyens": 30.7,
+  "champs_min": 2,
+  "champs_max": 101,
+  "pj_moyennes": 5.2,
+  "avec_annuaire_education": 27,
+  "avec_quotient_familial": 0,
+  "avec_iban": 6,
+  "par_annee": {
+   "2021": 32,
+   "2022": 41,
+   "2023": 47,
+   "2024": 37,
+   "2025": 65,
+   "2026": 49
+  },
+  "exemples": [
+   {
+    "number": 30950,
+    "title": "ACOUMPAGNA - Recrutement d'accompagnant des élèves en situation de handicap dans le département des Bouches-du-Rhône",
+    "organisme": "Direction des services académiques départementaux des Bouches-du-Rhône",
+    "dossiers": 6846,
+    "n_champs": 26
+   },
+   {
+    "number": 123166,
+    "title": "Demande d'honorabilité préalable au recrutement des agents par les établissements d'enseignement privé sous contrat d'association avec l'état - Nantes",
+    "organisme": "Division de l'enseignement privé",
+    "dossiers": 5601,
+    "n_champs": 30
+   },
+   {
+    "number": 142821,
+    "title": "Entretien professionnel AESH 2025 - 2026-  ACADEMIE DE RENNES - Clôture au 15/06/2026",
+    "organisme": "Rectorat de l'académie de Rennes",
+    "dossiers": 5273,
+    "n_champs": 12
+   },
+   {
+    "number": 56059,
+    "title": "Recrutement des Personnels Non Titulaires 2nd degré Public",
+    "organisme": "RECTORAT DE GUADELOUPE",
+    "dossiers": 2017,
+    "n_champs": 24
+   },
+   {
+    "number": 111127,
+    "title": "Entretien professionnel AESH 2024 - 2025 -  ACADEMIE DE RENNES - Clôture au 12/05/2025",
+    "organisme": "Rectorat de l'académie de Rennes",
+    "dossiers": 2005,
+    "n_champs": 11
+   },
+   {
+    "number": 64789,
+    "title": "DSDEN-33 - Recrutement des professeurs des écoles contractuels de la Gironde",
+    "organisme": "Ministère de l'Éducation nationale, de la Jeunesse et des sports - Académie de Bordeaux",
+    "dossiers": 1098,
+    "n_champs": 17
+   }
+  ]
+ },
+ {
+  "famille": "Heures supplémentaires, indemnités, frais des personnels",
+  "demarches": 36,
+  "emetteurs_distincts": 20,
+  "departements": 15,
+  "dossiers": 24293,
+  "champs_moyens": 23.2,
+  "champs_min": 2,
+  "champs_max": 69,
+  "pj_moyennes": 3.2,
+  "avec_annuaire_education": 10,
+  "avec_quotient_familial": 0,
+  "avec_iban": 2,
+  "par_annee": {
+   "2021": 4,
+   "2022": 3,
+   "2023": 7,
+   "2024": 6,
+   "2025": 8,
+   "2026": 8
+  },
+  "exemples": [
+   {
+    "number": 48855,
+    "title": "Demande d'HSE-RCD 2021/2022",
+    "organisme": "Rectorat de Nantes, Académie de Nantes, Ministère de l'Education Nationale et de la Jeunesse",
+    "dossiers": 7070,
+    "n_champs": 24
+   },
+   {
+    "number": 63910,
+    "title": "Demande d'HSE-RCD 2022/2023",
+    "organisme": "Rectorat de Nantes, Académie de Nantes, Ministère de l'Education Nationale et de la Jeunesse",
+    "dossiers": 6299,
+    "n_champs": 24
+   },
+   {
+    "number": 33883,
+    "title": "Demande d'HSE-RCD 2020/2021",
+    "organisme": "Rectorat de Nantes, Académie de Nantes, Ministère de l'Education Nationale et de la Jeunesse",
+    "dossiers": 4970,
+    "n_champs": 22
+   },
+   {
+    "number": 84620,
+    "title": "GRETA SOMME - DECLARATION DES FRAIS DE DÉPLACEMENT",
+    "organisme": "GRETA SOMME",
+    "dossiers": 1256,
+    "n_champs": 34
+   },
+   {
+    "number": 99854,
+    "title": "Frais de déplacement - Crous Bretagne",
+    "organisme": "Crous Bretagne",
+    "dossiers": 802,
+    "n_champs": 64
+   },
+   {
+    "number": 39387,
+    "title": "DECLARATION DE FRAIS DE DEPLACEMENT AESH",
+    "organisme": "Lycée Douanier Rousseau - LAVAL",
+    "dossiers": 756,
+    "n_champs": 40
+   }
+  ]
+ },
+ {
+  "famille": "Examens : inscriptions, dérogations, aménagements d'épreuves",
+  "demarches": 46,
+  "emetteurs_distincts": 20,
+  "departements": 12,
+  "dossiers": 6808,
+  "champs_moyens": 18.3,
+  "champs_min": 6,
+  "champs_max": 31,
+  "pj_moyennes": 3.5,
+  "avec_annuaire_education": 1,
+  "avec_quotient_familial": 0,
+  "avec_iban": 0,
+  "par_annee": {
+   "2021": 14,
+   "2022": 5,
+   "2023": 6,
+   "2024": 8,
+   "2025": 11,
+   "2026": 2
+  },
+  "exemples": [
+   {
+    "number": 105008,
+    "title": "Académie Rennes : Fiche individuelle de demande de dérogation pour l'inscription au DNB de la série professionnelle (Session 2025)",
+    "organisme": "Rectorat de Rennes",
+    "dossiers": 1702,
+    "n_champs": 27
+   },
+   {
+    "number": 133519,
+    "title": "Académie Rennes : Fiche individuelle de demande de dérogation pour l'inscription au DNB de la série professionnelle (Session 2026)",
+    "organisme": "Rectorat de Rennes",
+    "dossiers": 1586,
+    "n_champs": 21
+   },
+   {
+    "number": 129493,
+    "title": "DEC Académie de Normandie : Fiche individuelle de demande de dérogation pour l'inscription au DNB série professionnelle (session 2026)",
+    "organisme": "DEC3",
+    "dossiers": 561,
+    "n_champs": 12
+   },
+   {
+    "number": 52260,
+    "title": "INSCRIPTION EXAMEN PROBATOIRE DEA-AMM 2022 - AURA - ALPES DU NORD 2",
+    "organisme": "DRJSCS Auvergne Rhône-Alpes - Délégation montagne de Grenoble",
+    "dossiers": 288,
+    "n_champs": 8
+   },
+   {
+    "number": 52245,
+    "title": "INSCRIPTION EXAMEN PROBATOIRE DEA-AMM 2022 - AURA - ALPES DU NORD 1",
+    "organisme": "DRJSCS Auvergne Rhône-Alpes - Délégation montagne de Grenoble",
+    "dossiers": 257,
+    "n_champs": 8
+   },
+   {
+    "number": 102868,
+    "title": "🇫🇷 VAE Inscription à l'examen - DAVA - Académie de Nantes",
+    "organisme": "GIP FCIP EXPERIENCE",
+    "dossiers": 244,
+    "n_champs": 27
+   }
+  ]
+ },
+ {
+  "famille": "Appels à projets et subventions",
+  "demarches": 187,
+  "emetteurs_distincts": 78,
+  "departements": 25,
+  "dossiers": 33489,
+  "champs_moyens": 52.0,
+  "champs_min": 6,
+  "champs_max": 201,
+  "pj_moyennes": 4.2,
+  "avec_annuaire_education": 18,
+  "avec_quotient_familial": 0,
+  "avec_iban": 10,
+  "par_annee": {
+   "2021": 17,
+   "2022": 47,
+   "2023": 26,
+   "2024": 35,
+   "2025": 27,
+   "2026": 35
+  },
+  "exemples": [
+   {
+    "number": 43290,
+    "title": "Plan de relance – continuité pédagogique  Appel à projets pour un socle numérique dans les écoles élémentaires - demande de versement",
+    "organisme": "MENJS",
+    "dossiers": 8576,
+    "n_champs": 19
+   },
+   {
+    "number": 38711,
+    "title": "Plan de relance – continuité pédagogique  Appel à projets pour un socle numérique dans les écoles élémentaires ",
+    "organisme": "MENJS",
+    "dossiers": 7458,
+    "n_champs": 26
+   },
+   {
+    "number": 45627,
+    "title": "Plan de relance – continuité pédagogique –  Appel à projets pour un socle numérique dans les écoles élémentaires - conventionnement",
+    "organisme": "MENJS",
+    "dossiers": 7122,
+    "n_champs": 16
+   },
+   {
+    "number": 91716,
+    "title": "Appel à projets \"classe engagée\"",
+    "organisme": "Délégation générale au service universel, Ministère de l'Education nationale et de la Jeunesse",
+    "dossiers": 1000,
+    "n_champs": 41
+   },
+   {
+    "number": 74202,
+    "title": "Appel à projets \"classes engagées\" et \"lycées engagés\"",
+    "organisme": "Délégation générale au service national universel, Ministère de l'Education nationale et de la Jeunesse",
+    "dossiers": 735,
+    "n_champs": 54
+   },
+   {
+    "number": 86695,
+    "title": " Journée nationale de la résilience-Appel à projets 2024",
+    "organisme": "Direction générale de la sécurité civile et de la gestion des crises - Direction générale d ela prévention des risques",
+    "dossiers": 612,
+    "n_champs": 76
+   }
+  ]
+ },
+ {
+  "famille": "Accueils collectifs de mineurs, BAFA, SNU",
+  "demarches": 99,
+  "emetteurs_distincts": 31,
+  "departements": 15,
+  "dossiers": 14842,
+  "champs_moyens": 35.5,
+  "champs_min": 4,
+  "champs_max": 103,
+  "pj_moyennes": 5.1,
+  "avec_annuaire_education": 0,
+  "avec_quotient_familial": 0,
+  "avec_iban": 35,
+  "par_annee": {
+   "2021": 19,
+   "2022": 20,
+   "2023": 14,
+   "2024": 21,
+   "2025": 19,
+   "2026": 6
+  },
+  "exemples": [
+   {
+    "number": 119007,
+    "title": "Déclaration de sortie d'un accueil collectif de mineurs (ACM) - SDJES de Seine-et-Marne",
+    "organisme": "Direction des services départementaux de l'Éducation Nationale de la Seine-et-Marne (DSDEN)",
+    "dossiers": 3669,
+    "n_champs": 21
+   },
+   {
+    "number": 119268,
+    "title": "Colos Apprenantes Occitanie - Demande individuelle 2025",
+    "organisme": "Région academique, MENJES",
+    "dossiers": 835,
+    "n_champs": 40
+   },
+   {
+    "number": 57774,
+    "title": "Contrat d'engagement éducatif pour le SNU de la Région Académique Occitanie",
+    "organisme": "REGION ACADEMIQUE OCCITANIE",
+    "dossiers": 602,
+    "n_champs": 26
+   },
+   {
+    "number": 95304,
+    "title": "DEMANDE INDIVIDUELLE - Colos App Occitanie 2024",
+    "organisme": "Région academique, MENJES",
+    "dossiers": 500,
+    "n_champs": 20
+   },
+   {
+    "number": 95377,
+    "title": "Dossier SUIVI SEJOUR - Colos App Occitanie 2024",
+    "organisme": "Région academique, MENJES",
+    "dossiers": 497,
+    "n_champs": 30
+   },
+   {
+    "number": 74212,
+    "title": "Contrat d'engagement éducatif pour le SNU de la Région Académique Occitanie Session 2023",
+    "organisme": "REGION ACADEMIQUE OCCITANIE",
+    "dossiers": 486,
+    "n_champs": 49
+   }
+  ]
+ }
+]

@@ -1,0 +1,525 @@
+<title>Fiche Éducation nationale — Démarche Numérique</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Charte FORM 2026 (emsnytech/form2026) : Source Sans 3 + IBM Plex Mono, fond papier, bleu « admin », vert « usager », ambre « accent ».
+   Mise en page : fiche sur une colonne de lecture, graphiques en cartes, tableaux de données repliables. */
+:root{
+  --q0:#efece5; --q1:#dbeafe; --q2:#93c5fd; --q3:#3b82f6; --q4:#1d4ed8; --q5:#1e3a8a;
+  --ink:#1e2022; --muted:#5c6066; --paper:#fbf9f5; --surface:#ffffff; --line:#e2dfd7; --line-2:#efece5;
+  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4; --accent:#b45309; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c;
+  --s1:#1d4ed8; --s2:#b45309; --s3:#15803d; --s4:#9ca3af;
+  --bg:var(--paper); --ink-2:var(--muted); --ink-3:var(--muted); --rule:var(--line); --rule-2:var(--line-2);
+  --warn-bg:var(--warn-soft); --warn-ink:var(--warn);
+  --f-display:"Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-body:"Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-data:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46; --line-2:#323238;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+  --s1:#3b82f6; --s2:#d97706; --s3:#16a34a; --s4:#6b7280; --q0:#323238; --q1:#1e3a5f; --q2:#1e40af; --q3:#2563eb; --q4:#60a5fa; --q5:#bfdbfe; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46; --line-2:#323238;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+  --s1:#3b82f6; --s2:#d97706; --s3:#16a34a; --s4:#6b7280; --q0:#323238; --q1:#1e3a5f; --q2:#1e40af; --q3:#2563eb; --q4:#60a5fa; --q5:#bfdbfe; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:17px/1.55 var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:960px;margin:0 auto}
+.topnav{font-size:.9rem;color:var(--muted);margin:0;padding-top:2rem}
+.topnav a{text-decoration:none;font-weight:600}
+.topnav a:hover{text-decoration:underline}
+.col{max-width:68ch}
+header.top{padding-block:1.2rem 28px;border-bottom:1px solid var(--rule)}
+.eyebrow{display:flex;flex-wrap:wrap;gap:6px 8px}
+.eyebrow span{font:500 11px var(--f-data);background:var(--surface);border:1px solid var(--line);padding:2px 7px;border-radius:4px;color:var(--muted)}
+h1{font:800 clamp(2rem,4.6vw,3.1rem)/1.15 var(--f-body);margin:.6rem 0 .6rem;max-width:24ch;text-wrap:balance}
+.sub{font-size:1.12rem;color:var(--muted);margin:0;max-width:62ch}
+h2{font:800 1.4rem/1.2 var(--f-body);margin:0 0 1rem;text-wrap:balance}
+h3{font-size:15px;font-weight:600;margin:28px 0 6px}
+section{padding-block:36px 8px;border-bottom:1px solid var(--rule-2)}
+section:last-of-type{border-bottom:0}
+.secnum{font:700 .8rem/1 var(--f-body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+p{margin:0 0 14px}
+.muted{color:var(--ink-2)}
+.small{font-size:13.5px;color:var(--ink-3)}
+.num{font-family:var(--f-data);font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:2rem 0 0}
+.kpi{background:var(--surface);padding:1rem 1.1rem;min-width:0}
+@media (max-width:760px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+a.kpi{text-decoration:none;color:inherit;display:block}
+a.kpi:hover{background:var(--warn-soft)}
+a.kpi .go{display:block;margin-top:6px;font-weight:700;font-size:.85rem;color:var(--accent)}
+.kpi .v{font:700 1.65rem/1.1 var(--f-body);font-variant-numeric:tabular-nums;color:var(--admin)}
+.kpi.u .v{color:var(--usager)} .kpi.w .v{color:var(--accent)}
+.kpi .v small{font-size:14px;color:var(--ink-3);font-weight:400}
+.kpi .l{font-size:.9rem;color:var(--muted);margin-top:6px;line-height:1.35}
+.brief{margin:26px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.brief li{padding-left:18px;position:relative;max-width:72ch}
+.brief li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:8px;border-radius:2px;background:var(--admin)}
+figure{margin:22px 0 10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem .7rem;min-width:0}
+figcaption{font-size:1rem;font-weight:700;margin-bottom:2px}
+figcaption span{display:block;font-weight:400;color:var(--ink-3);font-size:13px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink-2);margin:10px 0 4px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.chart{width:100%;overflow-x:auto}
+.chart svg{display:block;width:100%;height:auto}
+.chart text{font-family:var(--f-data);font-size:11px;fill:var(--ink-3)}
+.chart .val{fill:var(--ink-2);font-size:11px}
+.chart .grid{stroke:var(--rule-2)}
+.chart .base{stroke:var(--rule)}
+.mult{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.mult figure{margin:0}
+details{margin:6px 0 4px;font-size:13.5px}
+details summary{cursor:pointer;color:var(--ink-2);font-size:13px}
+details summary:focus-visible, a:focus-visible, .chart:focus-visible{outline:2px solid var(--admin);outline-offset:2px}
+.tbl{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:7px 10px 7px 0;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule-2)}
+th{font-weight:700;color:var(--muted);font-size:12px;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--line)}
+td.r,th.r{text-align:right;font-family:var(--f-data);font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:10px}
+.bar{display:inline-block;height:8px;background:var(--admin);border-radius:0 2px 2px 0;vertical-align:middle}
+.rng{position:relative;height:10px;min-width:120px;background:var(--rule-2);border-radius:2px}
+.rng b{position:absolute;top:0;height:10px;background:var(--accent);opacity:.85;border-radius:2px}
+.rng i{position:absolute;top:-2px;width:2px;height:14px;background:var(--ink)}
+.timeline{list-style:none;padding:0;margin:12px 0 18px;border-left:2px solid var(--rule)}
+.timeline li{padding:0 0 12px 16px;position:relative;max-width:70ch}
+.timeline li::before{content:"";position:absolute;left:-6px;top:.35em;width:10px;height:10px;border-radius:50%;background:var(--paper);border:2px solid var(--admin)}
+.timeline .d{font:700 .8rem var(--f-body);letter-spacing:.05em;text-transform:uppercase;color:var(--admin);display:block}
+.note{background:var(--warn-soft);color:var(--ink);border:1px solid var(--warn);border-radius:8px;padding:12px 14px;font-size:15px;margin:16px 0;max-width:72ch}
+.pistes{counter-reset:p;list-style:none;padding:0;margin:14px 0;display:grid;gap:14px}
+.pistes li{counter-increment:p;padding-left:36px;position:relative;max-width:72ch}
+.pistes li::before{content:counter(p);position:absolute;left:0;top:0;font:700 13px var(--f-body);width:24px;height:24px;background:var(--usager-soft);color:var(--usager);display:grid;place-items:center;border-radius:50%}
+.pistes b{display:block}
+a{color:var(--admin)}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-family:var(--f-data);font-size:12px;padding:6px 8px;border-radius:3px;z-index:20;max-width:260px;line-height:1.35}
+.ex{font-size:12.5px;color:var(--ink-3);margin-top:3px}
+th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
+th.sortable:hover{color:var(--ink)}
+th.sortable::after{content:" ↕";opacity:.35;font-weight:400}
+th[aria-sort="descending"]::after{content:" ↓";opacity:1;color:var(--admin)}
+th[aria-sort="ascending"]::after{content:" ↑";opacity:1;color:var(--admin)}
+th.sortable:focus-visible{outline:2px solid var(--admin);outline-offset:2px}
+.scrollbox{max-height:440px;overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.scrollbox table th{position:sticky;top:0;background:var(--surface);z-index:1}
+.scrollbox td:first-child,.scrollbox th:first-child{padding-left:10px}
+.controls{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:4px 0 10px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{font:600 13px var(--f-body);padding:6px 12px;border:0;background:var(--surface);color:var(--muted);cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--admin);color:#fff}
+.seg button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--admin);outline-offset:2px}
+select,input[type=search]{font:500 14px var(--f-body);padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
+.map svg{display:block;width:100%;height:auto;max-width:720px;margin:0 auto}
+.map path.dep{stroke:var(--surface);stroke-width:.6;cursor:pointer}
+.map path.dep:hover,.map rect.com:hover{stroke:var(--ink);stroke-width:1.4}
+.map rect.frame{fill:none;stroke:var(--line);stroke-width:1}
+.map text{font:600 9px var(--f-body);fill:var(--muted)}
+.map rect.com{stroke:var(--surface);stroke-width:.6;cursor:pointer}
+.ramp{display:flex;flex-wrap:wrap;gap:4px 12px;font:12px var(--f-data);color:var(--muted);margin-top:8px}
+.ramp i{display:inline-block;width:14px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.callout{background:var(--usager-soft);border:1px solid var(--usager);border-radius:10px;padding:14px 16px;margin:18px 0}
+.callout b.big{display:block;font:800 1.5rem/1.2 var(--f-body);color:var(--usager)}
+.card1{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:12px 14px;margin:14px 0;max-width:72ch}
+.btnl{display:inline-block;font:600 12.5px var(--f-body);padding:3px 9px;border:1px solid var(--line);border-radius:5px;text-decoration:none;white-space:nowrap}
+.btnl:hover{border-color:var(--admin)}
+footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.chart rect.m{transition:opacity .15s}}
+</style>
+
+<div class="wrap">
+<p class="topnav"><a href="https://emsnytech.github.io/form2026/">Retour à FORM 2026</a> · <a href="https://emsnytech.github.io/form2026/simulateur-gains-dematerialisation.html">Estimer ses gains</a> · <a href="https://emsnytech.github.io/form2026/cadrage-dematerialisation.html">Cadrer une démarche</a> · <a href="https://emsnytech.github.io/form2026/comparer-cadre-fonctionnel.html">Comparer un outil</a> · <a href="https://emsnytech.github.io/form2026/explorer.html">Explorer les données</a></p>
+<header class="top">
+  <div class="eyebrow"><span>FORM 2026 · Fiches ministères</span><span>Fiche n° 1</span><span>Open data du «date»</span></div>
+  <h1>Éducation nationale, Enseignement supérieur et Recherche, Jeunesse</h1>
+  <p class="sub">Les démarches publiées sur Démarche Numérique pour les trois périmètres, de «y0» à «y1» (au «date»). Sont comptées les démarches en ligne, closes ou dépubliées.</p>
+
+  <div class="kpis" role="list">
+    <div class="kpi" role="listitem"><div class="v">«stock1» <small>/ «stock0»</small></div><div class="l">démarches en ligne fin «y1», contre fin «y0» (×«stock_ratio»)</div></div>
+    <div class="kpi" role="listitem"><div class="v">«pub1»</div><div class="l">démarches publiées en «y1» à date, contre «pub0» en «y0» (+«pub_evol» %)</div></div>
+    <div class="kpi" role="listitem"><div class="v">«dos_fen_m» M</div><div class="l">dossiers déposés de «y0» à «y1» (estimation, voir section 1)</div></div>
+    <div class="kpi u" role="listitem"><div class="v">«g_bas» à «g_haut» M€</div><div class="l">de frais évités de «y0» à «y1», administration et usagers (méthode FORM 2026)</div></div>
+    <div class="kpi" role="listitem"><div class="v">«partstock1» %</div><div class="l">des démarches en ligne sur la plateforme («partstock0» % fin «y0»)</div></div>
+    <div class="kpi u" role="listitem"><div class="v">«siret1»</div><div class="l">émetteurs actifs, en SIRET distincts («siret0» en «y0»)</div></div>
+    <div class="kpi" role="listitem"><div class="v">«deps»</div><div class="l">départements et collectivités d'outre-mer avec au moins un émetteur (voir la carte)</div></div>
+    <a class="kpi w" role="listitem" href="#quotient"><div class="v">«apip»</div><div class="l">démarche branchée sur API Particulier, sur «fen» publiées depuis «y0»</div><span class="go">«qf_n» démarches comparables →</span></a>
+  </div>
+
+  <ul class="brief">
+    <li>Le nombre de démarches en ligne a été multiplié par «stock_ratio» en cinq ans. Le périmètre gagne du poids sur la plateforme : «partstock0» % des démarches en ligne fin «y0», «partstock1» % aujourd'hui.</li>
+    <li>Une part croissante des publications reconduit chaque année la même démarche : «rec0» % en «y0», jusqu'à «recmax» % ensuite. Hors reconductions, les nouveaux usages progressent de «new0» à «new1» par an (+«new_evol» %).</li>
+    <li>La diffusion s'élargit : «etab1» établissements d'enseignement publient en «y1» (SIRET distincts), contre «etab0» en «y0». Les émetteurs couvrent «dep1» départements, contre «dep0».</li>
+    <li>Une même démarche est souvent construite plusieurs fois. «rel_n» démarches de délivrance de relevés de notes ou d'attestations de réussite coexistent, publiées par «rel_e» émetteurs, avec de «rel_min» à «rel_max» champs pour le même service.</li>
+    <li>Le préremplissage reste marginal. Sur «dp_n» démarches de demi-pension et «bo_n» démarches de bourses ou de fonds sociaux, «dp_qf» seule interroge le quotient familial par API.</li>
+  </ul>
+</header>
+
+<section id="trajectoire">
+  <div class="secnum">1 · Trajectoire</div>
+  <h2>Cinq ans de progression, portée pour un tiers par la reconduction</h2>
+  <div class="col">
+    <p>Les publications passent de «pub0» en «y0» à «pub1» en «y1» à date, soit +«pub_evol» %. Une partie de cette hausse ne correspond pas à de nouveaux usages. Une démarche est comptée comme reconduction quand le même émetteur republie le même titre, millésime retiré (« 2025-2026 », « rentrée 2026 »…), une année postérieure à sa première publication. Le calendrier scolaire explique cette pratique : inscription à la demi-pension, campagne d'heures supplémentaires, dérogations de secteur. Chaque rentrée produit une démarche nouvelle et clôt la précédente.</p>
+    <p>La reconduction pèse plus ici que sur l'ensemble de la plateforme : «rec1» % des publications en «y1», contre «recp1» % tous ministères confondus. Les nouveaux usages, seuls, progressent de +«new_evol» %.</p>
+  </div>
+  <figure>
+    <figcaption>Démarches publiées chaque année<span>Nouveaux usages et reconductions annuelles. «y1» au «date».</span></figcaption>
+    <div class="legend"><span><i style="background:var(--s1)"></i>Nouveaux usages</span><span><i style="background:var(--s2)"></i>Reconductions d'une démarche existante</span></div>
+    <div class="chart" id="c-pub"></div>
+    <details><summary>Voir les données</summary><div class="tbl" id="t-pub"></div></details>
+  </figure>
+  <figure>
+    <figcaption>Démarches en ligne en fin d'année<span>Publiées et ni closes ni dépubliées au 31 décembre ; au «date» pour «y1».</span></figcaption>
+    <div class="chart" id="c-stock"></div>
+    <details><summary>Voir les données</summary><div class="tbl" id="t-stock"></div></details>
+  </figure>
+  <figure>
+    <figcaption>Dossiers déposés chaque année (estimation)<span>Dossiers de chaque démarche répartis au prorata de ses jours d'ouverture. «y1» au «date».</span></figcaption>
+    <div class="chart" id="c-dos"></div>
+    <details><summary>Voir les données et le calage</summary><div class="tbl" id="t-dos"></div></details>
+  </figure>
+  <div class="col">
+    <p>L'open data donne, pour chaque démarche, un nombre de dossiers cumulé, sans date de dépôt. Pour obtenir une série annuelle, les dossiers de chaque démarche sont répartis au prorata de ses jours d'ouverture. On obtient environ «dos_fen_m» million de dossiers sur la période : «dos0» en «y0», «dos1» en «y1» à date. La part du périmètre dans les dossiers de la plateforme passe de «dos_part0» % à «dos_part1» %.</p>
+    <p class="small">Contrôle : appliquée à toute la plateforme, la même méthode retrouve «calmin» à «calmax» % des dépôts mensuels publiés par Démarche Numérique (jeu « Utilisation du service »), selon l'année. L'écart vient des dossiers et démarches supprimés, absents du descriptif. Les chiffres présentés sont donc un plancher. Une fois recalés sur les dépôts réels, ils atteignent «dos_cale_m» million de dossiers.</p>
+  </div>
+  <div class="callout">
+    <b class="big">«g_bas» à «g_haut» M€ de frais évités de «y0» à «y1»</b>
+    <p style="margin:6px 0 0">Administration : «ga_bas» à «ga_haut» M€ de coût de traitement évité. Usagers : «gu_bas» à «gu_haut» M€ de temps évité (envoi des pièces, préremplissage). Les gains de chaque démarche sont repris du fichier <a href="https://github.com/emsnytech/form2026/tree/main/donnees/gains" target="_blank" rel="noopener">demarches_gains_v8</a> de FORM 2026, puis ramenés aux dossiers déposés pendant la période. Ce fichier couvre «g_couv» % des dossiers de la période. <a href="https://emsnytech.github.io/form2026/simulateur-gains-dematerialisation.html" target="_blank" rel="noopener">Refaire le calcul avec le simulateur</a>.</p>
+    <p class="small" style="margin:6px 0 0">Ce sont des temps et des coûts valorisés, pas des économies budgétaires constatées. Le coût évité par dossier pour l'administration (6,79 à 10,70 €) vient de France Stratégie (2018), d'après des études étrangères.</p>
+    <details><summary>Voir par année</summary><div class="tbl" id="t-gains"></div></details>
+  </div>
+  <p class="small col">La part du périmètre dans les publications de la plateforme passe de «partpub0» % à «partpub1» %. Dans le stock en ligne, elle passe de «partstock0» % à «partstock1» %. Le stock progresse plus vite que les publications : les démarches de l'Éducation nationale restent ouvertes plus longtemps qu'auparavant.</p>
+</section>
+
+<section id="perimetre">
+  <div class="secnum">2 · Périmètre</div>
+  <h2>Trois pôles, un périmètre ministériel qui bouge</h2>
+  <div class="col">
+    <p>Chaque démarche porte un champ « ministère » (la zone), renseigné par son administrateur. La fiche s'appuie sur quatre zones : Éducation nationale, Enseignement supérieur et Recherche, Jeunesse et Sports, et Sports, Jeunesse et Vie associative. Elles sont regroupées en trois pôles. Trois mouvements expliquent les variations observées.</p>
+  </div>
+  <ol class="timeline">
+    <li><span class="d">2021 – 2022 · un champ encore facultatif</span>Avant 2023, une partie des démarches n'a pas de zone : «sanszone0» publications sans zone sur la plateforme en «y0», «sanszone1» l'année suivante, «sanszone2» en 2023. Pour ne pas créer de fausse croissance, ces démarches sont rattachées par le nom de leur organisme (rectorat, DSDEN, université, DRAJES…) : «nomorg0» en «y0», «nomorg1» en 2022, «nomorg2» en 2023.</li>
+    <li><span class="d">1er janvier 2021 · jeunesse et sports rejoignent les rectorats</span>Les décrets n° 2020-1542 et 2020-1543 du 9 décembre 2020 placent les services déconcentrés jeunesse et sports sous l'autorité des recteurs, avec les DRAJES en région et les SDJES dans les départements. Leurs démarches sont désormais souvent déclarées sous la zone Éducation nationale. Le pôle Jeunesse et sports recule de «js0» publications en «y0» à «jsmin» au plus bas, mais ce recul est surtout un changement de déclaration : sous la zone Éducation nationale, l'activité jeunesse, engagement et sports passe de «tr0» à «trmax» démarches par an.</li>
+    <li><span class="d">2022 – 2026 · des intitulés qui changent plus vite que le référentiel</span>L'intitulé affiché par la zone est le même quelle que soit la date de publication de la démarche. La zone Éducation nationale porte l'intitulé « Éducation nationale, Enseignement supérieur et Recherche » du gouvernement Bayrou (décembre 2024). La composition annoncée le 26 février 2026 sépare l'Éducation nationale, l'Enseignement supérieur, la Recherche et l'Espace, et les Sports, la Jeunesse et la Vie associative. Une démarche de 2019 et une démarche de 2026 affichent donc le même libellé. L'analyse suit l'entité, pas son intitulé.</li>
+  </ol>
+  <div class="mult" id="c-poles"></div>
+  <figure>
+    <figcaption>Démarches jeunesse, engagement et sports publiées chaque année<span>Sous les zones Jeunesse et sports, et sous la zone Éducation nationale (DRAJES, SDJES, accueils collectifs de mineurs, SNU, sport).</span></figcaption>
+    <div class="legend"><span><i style="background:var(--s2)"></i>Sous une zone Jeunesse et sports</span><span><i style="background:var(--s1)"></i>Sous la zone Éducation nationale</span></div>
+    <div class="chart" id="c-transfert"></div>
+    <details><summary>Voir les données</summary><div class="tbl" id="t-transfert"></div></details>
+  </figure>
+  <p class="small col">Les démarches portant plus de trois zones («inter» démarches, typiquement des dispositifs interministériels) sont exclues : elles ne relèvent d'aucun ministère en propre.</p>
+</section>
+
+<section id="emetteurs">
+  <div class="secnum">3 · Émetteurs</div>
+  <h2>Les établissements deviennent un émetteur à part entière</h2>
+  <div class="col">
+    <p>Les services déconcentrés (rectorats, régions académiques, DSDEN) restent le premier émetteur. Les établissements d'enseignement (lycées, collèges, universités) progressent le plus vite et portent en «y1» presque autant de démarches actives que les services académiques. Chacun conçoit sa propre démarche : la section 5 montre l'effet de cette dispersion.</p>
+  </div>
+  <figure>
+    <figcaption>Démarches actives dans l'année, par type d'émetteur<span>Une démarche est active si elle a été en ligne au moins un jour dans l'année.</span></figcaption>
+    <div class="legend" id="l-types"></div>
+    <div class="chart" id="c-types"></div>
+    <details><summary>Voir les données</summary><div class="tbl" id="t-types"></div></details>
+  </figure>
+  <div class="tbl" id="t-diff"></div>
+  <p class="small col">Le compte par SIRET est un minimum : «siret_manquant» démarches du périmètre n'ont pas de SIRET de service, et plusieurs établissements publient sous le SIRET de leur rectorat. Le compte par libellé d'organisme («lib1» en «y1», «lib0» en «y0») est un maximum, gonflé par les variantes d'écriture.</p>
+</section>
+
+<section id="territoires">
+  <div class="secnum">4 · Territoires</div>
+  <h2>Où sont les émetteurs</h2>
+  <div class="col">
+    <p>La carte situe chaque démarche dans le département de son service émetteur. Pour une académie, c'est le rectorat ; pour un établissement, sa commune. Les démarches nationales sont rattachées au département de leur administration centrale, ce qui gonfle Paris. «sansdep» démarches actives sur la période n'ont pas de département renseigné.</p>
+  </div>
+  <figure class="map">
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Indicateur" id="m-metric">
+        <button type="button" data-m="pub" aria-pressed="true">Démarches publiées</button><button type="button" data-m="org" aria-pressed="false">Organismes</button><button type="button" data-m="dos" aria-pressed="false">Dossiers déposés</button>
+      </div>
+      <label class="small" for="m-year">Année <select id="m-year"></select></label>
+    </div>
+    <figcaption id="m-cap"></figcaption>
+    <div id="c-map"></div>
+    <div class="ramp" id="m-ramp"></div>
+    <details><summary>Voir les données par département</summary><div class="tbl scrollbox" id="t-map"></div></details>
+  </figure>
+  <p class="small col">Organismes : SIRET distincts (à défaut, libellés) ayant au moins une démarche active. Dossiers : estimation au prorata des jours d'ouverture (voir section 1). Total : démarches publiées et dossiers de «y0» à «y1», organismes distincts sur toute la période.</p>
+</section>
+
+<section id="usages">
+  <div class="secnum">5 · Usages</div>
+  <h2>Les mêmes démarches, construites plusieurs fois</h2>
+  <div class="col">
+    <p>Dix familles de démarches homologues ont été repérées par leur titre. Elles ne couvrent pas tout le périmètre : ce sont des exemples vérifiables, pas une classification. Leur intérêt tient à l'écart entre émetteurs. Pour délivrer un relevé de notes ou une attestation de réussite, «rel_e» émetteurs ont publié «rel_n» démarches, de «rel_min» à «rel_max» champs, pour «rel_d» dossiers. Pour la demi-pension, «dp_e» émetteurs ont publié «dp_n» démarches.</p>
+  </div>
+  <div class="tbl" id="t-fam"></div>
+  <p class="small">Barre orange : de la démarche la plus courte à la plus longue de la famille, en nombre de champs. Trait vertical : moyenne.</p>
+  <h3>Les douze démarches les plus utilisées depuis «y0»</h3>
+  <div class="tbl" id="t-top"></div>
+  <p class="small col">Sur «fen» démarches publiées depuis «y0» («fen_dossiers» dossiers), la médiane est de «mediane» dossiers. «lt10» démarches («lt10pct» %) ont reçu moins de 10 dossiers. Les dix premières ne concentrent que «top10» % des dossiers : l'usage est diffus, fait de nombreuses démarches de petit volume.</p>
+</section>
+
+<section id="qualite">
+  <div class="secnum">6 · Qualité et « dites-le-nous une fois »</div>
+  <h2>Des formulaires qui s'allongent, une donnée de référence qui progresse</h2>
+  <div class="col">
+    <p>Le nombre moyen de champs par démarche passe de «champs0» à «champs1», au même rythme que la plateforme («champsp0» → «champsp1»). Les pièces justificatives passent de «pj0» à «pj1» par démarche, sous la moyenne de la plateforme («pjp1»).</p>
+    <p>Le champ Annuaire Éducation progresse nettement. Il identifie un établissement par son code UAI au lieu de le faire saisir, et figure dans «annu1» % des démarches publiées en «y1», contre «annu0» % en «y0». C'est le seul référentiel adopté massivement. Le champ SIRET («siretch1» %), l'IBAN («iban1» %) et surtout les données d'API Particulier restent rares. Une seule démarche du périmètre interroge le quotient familial : une inscription à la demi-pension publiée en 2026 (<a href="#quotient">voir les démarches comparables</a>).</p>
+  </div>
+  <figure>
+    <figcaption>Part des démarches publiées avec un champ Annuaire Éducation<span>En % des démarches publiées dans l'année.</span></figcaption>
+    <div class="chart" id="c-annu"></div>
+  </figure>
+  <div class="tbl" id="t-qual"></div>
+  <p class="small col">« Pour particuliers » reprend le champ de la plateforme (forIndividual) : «part1» % des démarches du périmètre, contre «partp1» % sur la plateforme. Ce champ ne distingue pas les usagers des agents. Les démarches internes (heures supplémentaires, recrutements, entretiens professionnels) y sont comptées comme destinées à des particuliers.</p>
+</section>
+
+<section id="quotient">
+  <div class="secnum">7 · Quotient familial</div>
+  <h2>Une démarche branchée sur API Particulier, «qf_n» qui pourraient l'être</h2>
+  <div class="col">
+    <p>Une seule démarche du périmètre récupère le quotient familial par API Particulier au lieu de demander un justificatif à la famille :</p>
+  </div>
+  <div class="card1"><b>N° «qf1_num» · «qf1_t»</b><br><span class="muted">«qf1_o» · «qf1_c» champs · «qf1_d» dossiers</span><br><a href="«qf1_url»" target="_blank" rel="noopener">Voir la démarche sur Démarche Numérique</a></div>
+  <div class="col">
+    <p>Les démarches de même nature (demi-pension, restauration scolaire, internat, bourses, fonds sociaux) pourraient s'appuyer sur la même API. Dans le périmètre, «qf_e» émetteurs en ont publié «qf_n» depuis «y0», pour «qf_d» dossiers. Pour chacune, le bouton « Simuler » ouvre le simulateur de FORM 2026 avec le nombre de dossiers et le niveau de complexité de la démarche.</p>
+  </div>
+  <div class="controls"><label class="small" for="qf-q">Filtrer <input type="search" id="qf-q" placeholder="lycée, académie, bourse…"></label><span class="small" id="qf-count"></span></div>
+  <div class="tbl scrollbox" id="t-qf"></div>
+  <h3>Hors du périmètre</h3>
+  <div class="col">
+    <p class="small">Sur le reste de la plateforme, «qfp_e» émetteurs ont publié depuis «y0» «qfp_n» démarches de crèche, de périscolaire, de cantine ou d'action sociale (hors CAF et MSA, qui détiennent déjà le quotient familial), pour «qfp_d» dossiers. Aucune n'interroge le quotient familial. Sur toute la plateforme, «qf_tot» démarche le fait. La liste complète se consulte dans l'<a href="https://emsnytech.github.io/form2026/explorer.html#demarches" target="_blank" rel="noopener">explorateur de FORM 2026</a>.</p>
+  </div>
+  <details><summary>Les quinze plus utilisées</summary><div class="tbl" id="t-qfp"></div></details>
+</section>
+
+<section id="pistes">
+  <div class="secnum">8 · Pistes</div>
+  <h2>Pour accélérer</h2>
+  <ol class="pistes">
+    <li><b>Des modèles nationaux pour les démarches homologues</b>Relevés de notes, demi-pension, dérogations de secteur, allocations de stage : une démarche modèle, clonable et paramétrable par académie ou par établissement, réduirait les écarts de longueur et les reconductions manuelles.</li>
+    <li><b>Brancher le quotient familial et le statut boursier</b>Demi-pension, bourses et fonds sociaux sont les premiers candidats à API Particulier (<a href="#quotient">«qf_n» démarches repérées</a>). Ce sont des démarches massives, répétées chaque année et adressées aux familles.</li>
+    <li><b>Généraliser ce qui marche déjà</b>Le champ Annuaire Éducation est passé de «annu0» % à «annu1» % sans obligation. Proposer par défaut les champs de référence (établissement, SIRET, IBAN) dans les modèles accélérerait la même dynamique.</li>
+    <li><b>Fiabiliser le champ ministère</b>Mettre à jour le référentiel des zones à chaque changement de gouvernement, contrôler la cohérence entre zone et SIRET de l'émetteur, et distinguer les démarches destinées aux agents de celles destinées aux usagers.</li>
+    <li><b>Publier l'historique en open data</b>Un nombre de dossiers ventilé par année et par démarche remplacerait l'estimation au prorata et permettrait de mesurer l'usage réel.</li>
+  </ol>
+</section>
+
+<footer>
+  <p>FORM 2026 · Philippe Vrignaud · Données ouvertes et code source publics</p>
+  <details>
+    <summary>Méthode et sources</summary>
+    <div class="col">
+      <p>Source : <a href="https://www.data.gouv.fr/datasets/descriptif-des-demarches-publiees-sur-demarche-numerique-gouv-fr" target="_blank" rel="noopener">Descriptif des démarches publiées sur demarche.numerique.gouv.fr</a>, data.gouv.fr, extraction du «date» (44 350 démarches, toutes zones). Périmètre : «total» démarches depuis 2018 et «dossiers_total» dossiers, dont «fen» publiées depuis «y0».</p>
+      <p>Une démarche est publiée l'année de sa date de publication. Elle est close l'année de sa date de fermeture ou de dépublication, active une année si elle a été en ligne au moins un jour, et en stock si elle est en ligne au 31 décembre. Le pôle est attribué par zone. En cas de zones multiples, la priorité va à Éducation nationale, puis Enseignement supérieur, puis Jeunesse et sports. Sans zone, le pôle est attribué par le nom de l'organisme, avec exclusion des collectivités et des services hors champ. Trois démarches déclarées à tort sous une zone du périmètre sont exclues : deux de la MSA (cotisations sociales et complément de mode de garde, «msa_dossiers» dossiers) et une de la CAF.</p>
+      <p>Dossiers par année : répartition de chaque compteur de dossiers au prorata des jours d'ouverture de la démarche, contrôlée sur le jeu <a href="https://www.data.gouv.fr/datasets/utilisation-du-service-demarche-numerique-gouv-fr" target="_blank" rel="noopener">Utilisation du service demarche.numerique.gouv.fr</a> (dossiers déposés par mois). Gains : fichier demarches_gains_v8 de FORM 2026 (paramètres v8), gain par dossier de chaque démarche multiplié par ses dossiers de la période.</p>
+      <p>Contexte réglementaire : décrets n° 2020-1542 et 2020-1543 du 9 décembre 2020 (<a href="https://www.banquedesterritoires.fr/les-services-deconcentres-de-la-jeunesse-et-des-sports-rejoignent-leducation-nationale" target="_blank" rel="noopener">Banque des territoires</a>) ; <a href="https://www.info.gouv.fr/composition-du-gouvernement" target="_blank" rel="noopener">composition du Gouvernement</a> (info.gouv.fr) ; <a href="https://www.education.gouv.fr/elisabeth-borne-ministre-d-etat-ministre-de-l-education-nationale-de-l-enseignement-superieur-et-de-462456" target="_blank" rel="noopener">intitulé du ministère en décembre 2024</a> (education.gouv.fr).</p>
+      <p>Les scripts de calcul (Python, sans dépendance hors ijson) et les fichiers intermédiaires accompagnent la fiche. Chaque chiffre du texte est produit par ces scripts.</p>
+    </div>
+  </details>
+</footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+const DATA = /*DATA*/null;
+const fr = new Intl.NumberFormat("fr-FR");
+const pc = v => (Math.round(v*10)/10).toLocaleString("fr-FR") + " %";
+const tip = document.getElementById("tip");
+function showTip(e, html){ tip.innerHTML = html; tip.hidden = false; moveTip(e); }
+function moveTip(e){ const x = Math.min(e.clientX + 14, innerWidth - tip.offsetWidth - 8); tip.style.left = x + "px"; tip.style.top = (e.clientY + 14) + "px"; }
+function hideTip(){ tip.hidden = true; }
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent){ const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+function niceMax(v){ const p = Math.pow(10, Math.floor(Math.log10(v))); const m = v/p; return (m<=1?1:m<=2?2:m<=2.5?2.5:m<=5?5:10)*p; }
+
+/* Barres verticales empilées : series = [{name, values, color}] */
+function bars(id, cats, series, o = {}){
+  const box = document.getElementById(id), W = Math.max(280, box.clientWidth || o.w || 720), H = o.h || 260, ml = 14 + 6.8 * (fr.format(niceMax(o.max || Math.max(...cats.map((_, i) => series.reduce((t, se) => t + se.values[i], 0))))) + (o.unit || "")).length, mr = 8, mt = 18, mb = 26;
+  const tot = cats.map((_, i) => series.reduce((s, se) => s + se.values[i], 0));
+  const max = niceMax(o.max || Math.max(...tot)), iw = W - ml - mr, ih = H - mt - mb;
+  const svg = el("svg", {viewBox:`0 0 ${W} ${H}`, role:"img", "aria-label": o.label || ""});
+  const ticks = 4;
+  for (let t = 0; t <= ticks; t++){ const v = max*t/ticks, y = mt + ih - ih*v/max;
+    el("line", {x1:ml, x2:W-mr, y1:y, y2:y, class: t ? "grid" : "base"}, svg);
+    const tx = el("text", {x:ml-6, y:y+4, "text-anchor":"end"}, svg); tx.textContent = fr.format(v) + (o.unit||""); }
+  const bw = Math.min(56, iw/cats.length*0.6);
+  cats.forEach((c, i) => {
+    const cx = ml + iw*(i+.5)/cats.length; let acc = 0;
+    series.forEach((se, k) => {
+      const v = se.values[i]; if (!v) return;
+      const h = ih*v/max, y = mt + ih - ih*(acc+v)/max;
+      const top = k === series.length-1 || series.slice(k+1).every(s => !s.values[i]);
+      const r = el(top ? "path" : "rect", {}, svg);
+      const gap = acc ? 2 : 0, hh = Math.max(0, h - gap);
+      if (top){ const rr = Math.min(4, hh); r.setAttribute("d", `M${cx-bw/2},${y+hh+0} V${y+rr} Q${cx-bw/2},${y} ${cx-bw/2+rr},${y} H${cx+bw/2-rr} Q${cx+bw/2},${y} ${cx+bw/2},${y+rr} V${y+hh} Z`); }
+      else { r.setAttribute("x", cx-bw/2); r.setAttribute("y", y); r.setAttribute("width", bw); r.setAttribute("height", hh); }
+      r.setAttribute("fill", se.color); r.setAttribute("class", "m");
+      acc += v;
+    });
+    const hit = el("rect", {x: cx - iw/cats.length/2, y: mt, width: iw/cats.length, height: ih, fill: "transparent"}, svg);
+    hit.addEventListener("mousemove", e => showTip(e, `<b>${c}</b><br>` + series.map(s => `${s.name} : ${fr.format(s.values[i])}${o.unit||""}`).join("<br>") + (series.length > 1 ? `<br>Total : ${fr.format(tot[i])}` : "")));
+    hit.addEventListener("mouseleave", hideTip);
+    if (o.totals !== false){ const tl = el("text", {x:cx, y: mt + ih - ih*tot[i]/max - 5, "text-anchor":"middle", class:"val"}, svg); tl.textContent = fr.format(tot[i]) + (o.unit||""); }
+    const lb = el("text", {x:cx, y:H-8, "text-anchor":"middle"}, svg); lb.textContent = c + (o.star && i === cats.length-1 ? "*" : "");
+  });
+  document.getElementById(id).appendChild(svg);
+}
+/* Tableau triable : un clic sur un intitulé trie la colonne du plus grand au plus petit, un second clic inverse. */
+function sortKey(td){
+  const t = (td.dataset.v ?? td.textContent).trim();
+  const m = t.replace(/[\s\u202f\u00a0]/g, "").replace(",", ".").match(/^-?\d+(\.\d+)?/);
+  return m ? parseFloat(m[0]) : t.toLowerCase();
+}
+function makeSortable(t){
+  const ths = [...t.tHead.rows[0].cells];
+  ths.forEach((th, i) => {
+    if (!th.textContent.trim()) return;
+    th.classList.add("sortable"); th.tabIndex = 0; th.setAttribute("aria-sort", "none");
+    const go = () => {
+      const dir = th.getAttribute("aria-sort") === "descending" ? "ascending" : "descending";
+      ths.forEach(h => h.setAttribute("aria-sort", "none")); th.setAttribute("aria-sort", dir);
+      const body = t.tBodies[0], rows = [...body.rows];
+      rows.sort((a, b) => { const x = sortKey(a.cells[i]), y = sortKey(b.cells[i]);
+        const c = (typeof x === "number" && typeof y === "number") ? x - y : String(x).localeCompare(String(y), "fr", {numeric:true});
+        return dir === "descending" ? -c : c; });
+      rows.forEach(r => body.appendChild(r));
+    };
+    th.addEventListener("click", go);
+    th.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+  });
+}
+function table(id, head, rows, rcols = []){
+  const t = document.createElement("table");
+  t.innerHTML = "<thead><tr>" + head.map((h, i) => `<th scope="col"${rcols.includes(i) ? ' class="r"' : ""}>${h}</th>`).join("") + "</tr></thead><tbody>" +
+    rows.map(r => "<tr>" + r.map((c, i) => `<td${rcols.includes(i) ? ' class="r"' : ""}>${c}</td>`).join("") + "</tr>").join("") + "</tbody>";
+  const box = document.getElementById(id); box.innerHTML = ""; box.appendChild(t);
+  makeSortable(t); return t;
+}
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const Y = DATA.years, YL = Y.map((y, i) => i === Y.length-1 ? y + "*" : String(y));
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const S1 = "var(--s1)", S2 = "var(--s2)", S3 = "var(--s3)", S4 = "var(--s4)";
+
+/* 1. Trajectoire */
+bars("c-pub", YL, [{name:"Nouveaux usages", values:DATA.pub_new, color:S1}, {name:"Reconductions", values:DATA.pub_rec, color:S2}], {label:"Démarches publiées par an"});
+table("t-pub", ["Année", "Publiées", "Nouveaux usages", "Reconductions", "Part reconduite", "Closes", "Part des publications de la plateforme"],
+  Y.map((y, i) => [YL[i], fr.format(DATA.pub_new[i]+DATA.pub_rec[i]), fr.format(DATA.pub_new[i]), fr.format(DATA.pub_rec[i]), pc(100*DATA.pub_rec[i]/(DATA.pub_new[i]+DATA.pub_rec[i])), fr.format(DATA.closes[i]), pc(DATA.part_pub[i])]), [1,2,3,4,5,6]);
+bars("c-stock", YL, [{name:"En ligne au 31/12", values:DATA.stock, color:S1}], {label:"Démarches en ligne en fin d'année", h:220});
+table("t-stock", ["Année", "En ligne fin d'année", "Actives dans l'année", "Part du stock de la plateforme"],
+  Y.map((y, i) => [YL[i], fr.format(DATA.stock[i]), fr.format(DATA.actives[i]), pc(DATA.part_stock[i])]), [1,2,3]);
+
+/* 2. Pôles (petits multiples, même échelle) */
+const PC = {"Éducation nationale":S1, "Enseignement supérieur et recherche":S3, "Jeunesse et sports":S2};
+const pmax = Math.max(...Object.values(DATA.poles).flat());
+Object.entries(DATA.poles).forEach(([k, v], j) => {
+  const f = document.createElement("figure"); f.innerHTML = `<figcaption>${k}<span>Démarches publiées par an</span></figcaption><div class="chart" id="cp${j}"></div>`;
+  document.getElementById("c-poles").appendChild(f);
+});
+Object.entries(DATA.poles).forEach(([k, v], j) => bars("cp" + j, YL, [{name:k, values:v, color:PC[k]}], {w:300, h:190, max:pmax, label:k}));
+const jsz = DATA.poles["Jeunesse et sports"];
+bars("c-transfert", YL, [{name:"Zone Jeunesse et sports", values:jsz, color:S2}, {name:"Zone Éducation nationale", values:DATA.transfert, color:S1}], {h:220, label:"Démarches jeunesse et sports"});
+table("t-transfert", ["Année", "Zone Jeunesse et sports", "Zone Éducation nationale", "Total"], Y.map((y, i) => [YL[i], fr.format(jsz[i]), fr.format(DATA.transfert[i]), fr.format(jsz[i]+DATA.transfert[i])]), [1,2,3]);
+
+/* 3. Émetteurs */
+const TC = [S1, S3, S2, S4];
+document.getElementById("l-types").innerHTML = DATA.types.labels.map((l, i) => `<span><i style="background:${TC[i]}"></i>${l}</span>`).join("");
+bars("c-types", YL, DATA.types.labels.map((l, i) => ({name:l, values:DATA.types.rows.map(r => r[i]), color:TC[i]})), {label:"Démarches actives par type d'émetteur"});
+table("t-types", ["Année", ...DATA.types.labels], Y.map((y, i) => [YL[i], ...DATA.types.rows[i].map(v => fr.format(v))]), [1,2,3,4]);
+table("t-diff", ["Année", "Émetteurs (SIRET distincts)", "dont établissements", "Départements couverts", "Libellés d'organisme distincts"],
+  DATA.diff.map((d, i) => [YL[i], fr.format(d.siret), fr.format(d.etab), fr.format(d.dep), fr.format(d.lib)]), [1,2,3,4]);
+
+/* 4. Familles */
+const fmaxN = Math.max(...DATA.familles.map(f => f.n)), cmax = niceMax(Math.max(...DATA.familles.map(f => f.max)));
+table("t-fam", ["Famille de démarches", "Démarches", "Émetteurs", "Dossiers", "Champs : min – max", "PJ moy.", "Quotient familial"],
+  DATA.familles.map(f => [
+    `${esc(f.nom)}<div class="ex">ex. n° ${f.ex.map(x => `${x.num} (${fr.format(x.c)} champs)`).join(", ")}</div>`,
+    `${fr.format(f.n)} <span class="bar" style="width:${Math.round(60*f.n/fmaxN)}px"></span>`,
+    fr.format(f.e), fr.format(f.d),
+    `<div class="rng" title="${f.min} à ${f.max} champs, moyenne ${String(f.moy).replace(".", ",")}"><b style="left:${100*f.min/cmax}%;width:${Math.max(1, 100*(f.max-f.min)/cmax)}%"></b><i style="left:${100*f.moy/cmax}%"></i></div><span class="small num">${f.min} – ${f.max}</span>`,
+    String(f.pj).replace(".", ","), fr.format(f.qf)]), [1,2,3,5,6]);
+table("t-top", ["N°", "Démarche", "Émetteur", "Pôle", "Publiée", "Champs", "Dossiers"],
+  DATA.top.map(t => [t.num, esc(t.t), esc(t.o), esc(t.pole), t.y + (t.etat === "close" ? " · close" : ""), fr.format(t.c), fr.format(t.d)]), [0,5,6]);
+
+/* 5. Qualité */
+bars("c-annu", YL, [{name:"Annuaire Éducation", values:DATA.annuaire, color:S1}], {h:200, unit:" %", label:"Part avec champ Annuaire Éducation"});
+table("t-qual", ["Année", "Champs moyens (plateforme)", "PJ moyennes (plateforme)", "Annuaire Éducation", "SIRET", "IBAN", "RNA", "API Particulier", "Pour particuliers (plateforme)", "Ouvertes moins de 3 mois"],
+  DATA.qual.map((q, i) => [YL[i], `${String(q.champs).replace(".", ",")} (${String(q.champs_p).replace(".", ",")})`, `${String(q.pj).replace(".", ",")} (${String(q.pj_p).replace(".", ",")})`,
+    pc(q.annu), pc(q.siret), pc(q.iban), pc(q.rna), fr.format(q.apip), `${pc(q.part)} (${pc(q.part_p)})`, fr.format(q.eph)]), [1,2,3,4,5,6,7,8,9]);
+
+/* 1 bis. Dossiers estimés et gains */
+const DOS = DATA.dossiers;
+bars("c-dos", YL, [{name:"Dossiers (estimation)", values:DOS.map(d => d.estime_brut), color:S1}], {h:240, label:"Dossiers déposés par an, estimation"});
+table("t-dos", ["Année", "Dossiers estimés", "Part de la plateforme", "Plateforme : estimation", "Plateforme : dépôts publiés", "Coefficient de calage", "Dossiers recalés"],
+  DOS.map((d, i) => [YL[i], fr.format(d.estime_brut), pc(d.part_plateforme), fr.format(d.plateforme_estime), fr.format(d.plateforme_reel) + (i === DOS.length-1 ? " (à fin sept.)" : ""),
+    String(d.calage).replace(".", ","), fr.format(d.estime_cale)]), [1,2,3,4,5,6]);
+const meur = v => (v/1e6).toLocaleString("fr-FR", {minimumFractionDigits:1, maximumFractionDigits:1}) + " M€";
+table("t-gains", ["Année", "Frais évités, bas", "Frais évités, haut"], DATA.gains_annee.map((g, i) => [YL[i], meur(g.bas), meur(g.haut)]), [1,2]);
+
+/* 4. Carte */
+(function(){
+  const G = DATA.geo, C = DATA.carte, NS = "http://www.w3.org/2000/svg";
+  const MET = {pub:"Démarches publiées", org:"Organismes utilisateurs", dos:"Dossiers déposés (estimation)"};
+  let metric = "pub", yi = "t";
+  const sel = document.getElementById("m-year");
+  sel.innerHTML = `<option value="t">Total ${Y[0]}–${Y[Y.length-1]}</option>` + Y.map((y, i) => `<option value="${i}">${YL[i]}</option>`).join("");
+  const names = {}; Object.entries(G.deps).forEach(([k, v]) => { if (!v.ref) names[k] = v.n; }); (G.com||[]).forEach(c => names[c.c] = c.n);
+  const val = (code, m = metric) => { const c = C[code]; if (!c) return 0; return yi === "t" ? c[m + "_t"] : c[m][yi]; };
+  const svg = el("svg", {viewBox:G.viewBox, role:"img", "aria-label":"Carte des départements"});
+  G.frames.forEach(f => { if (f.h) el("rect", {x:f.x, y:f.y, width:f.w, height:f.h, rx:4, class:"frame"}, svg);
+    const t = el("text", {x:f.x + 4, y:f.y + 10}, svg); t.textContent = f.l; });
+  const shapes = [];
+  Object.entries(G.deps).forEach(([k, v]) => { const code = v.ref || k; const pth = el("path", {d:v.d, class:"dep"}, svg); pth.dataset.code = code; shapes.push(pth); });
+  (G.com||[]).forEach(c => { const r = el("rect", {x:c.x, y:c.y, width:c.s, height:c.s, rx:3, class:"com"}, svg); r.dataset.code = c.c; shapes.push(r);
+    const t = el("text", {x:c.x + c.s/2, y:c.y + c.s/2 + 3, "text-anchor":"middle"}, svg); t.textContent = c.c; t.style.pointerEvents = "none"; });
+  document.getElementById("c-map").appendChild(svg);
+  const tipHtml = code => `<b>${esc(names[code] || code)} (${code})</b><br>${yi === "t" ? "Total" : YL[yi]}<br>Démarches publiées : ${fr.format(val(code,"pub"))}<br>Organismes : ${fr.format(val(code,"org"))}<br>Dossiers (estim.) : ${fr.format(val(code,"dos"))}`;
+  shapes.forEach(s => { s.addEventListener("mousemove", e => showTip(e, tipHtml(s.dataset.code))); s.addEventListener("mouseleave", hideTip); });
+  function breaks(){
+    const v = Object.keys(C).map(k => val(k)).filter(x => x > 0).sort((a, b) => a - b);
+    if (!v.length) return [];
+    const q = [.2, .4, .6, .8].map(p => v[Math.min(v.length-1, Math.floor(p * v.length))]);
+    return [...new Set(q)];
+  }
+  function draw(){
+    const b = breaks();
+    const cls = x => x <= 0 ? 0 : 1 + b.filter(t => x > t).length;
+    shapes.forEach(s => s.setAttribute("fill", `var(--q${Math.min(5, cls(val(s.dataset.code)))})`));
+    const edges = [0, ...b];
+    document.getElementById("m-ramp").innerHTML = `<span><i style="background:var(--q0)"></i>aucun</span>` +
+      edges.map((lo, i) => { const hi = b[i]; return `<span><i style="background:var(--q${i+1})"></i>${hi === undefined ? "plus de " + fr.format(lo) : (i === 0 ? "1" : fr.format(lo + 1)) + " à " + fr.format(hi)}</span>`; }).join("");
+    document.getElementById("m-cap").innerHTML = `${MET[metric]} par département<span>${yi === "t" ? "Total " + Y[0] + "–" + YL[YL.length-1] : "Année " + YL[yi]} · classes par quintiles</span>`;
+    const codes = Object.keys(C).sort();
+    table("t-map", ["Code", "Département", "Démarches publiées", "Organismes", "Dossiers (estim.)"],
+      codes.map(k => [k, esc(names[k] || k), fr.format(val(k,"pub")), fr.format(val(k,"org")), fr.format(val(k,"dos"))]), [2,3,4]);
+  }
+  document.querySelectorAll("#m-metric button").forEach(bt => bt.addEventListener("click", () => {
+    metric = bt.dataset.m; document.querySelectorAll("#m-metric button").forEach(x => x.setAttribute("aria-pressed", x === bt)); draw(); }));
+  sel.addEventListener("change", () => { yi = sel.value === "t" ? "t" : +sel.value; draw(); });
+  draw();
+})();
+
+/* 7. Quotient familial */
+const SIM = "https://emsnytech.github.io/form2026/simulateur-gains-dematerialisation.html";
+const simUrl = x => `${SIM}?dossiers=${x.d}&pp=${x.pp}${x.niv ? "&niveau=" + x.niv : ""}`;
+const qfRow = x => [String(x.num), `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.t)}</a>`, esc(x.o), x.y + (x.etat === "close" ? " · close" : ""),
+  fr.format(x.c), fr.format(x.d), x.qf ? "<b>oui</b>" : "non", `<a class="btnl" href="${simUrl(x)}" target="_blank" rel="noopener">Simuler</a>`];
+const QFH = ["N°", "Démarche", "Émetteur", "Publiée", "Champs", "Dossiers", "Quotient familial", ""];
+function drawQf(){
+  const q = (document.getElementById("qf-q").value || "").trim().toLowerCase();
+  const list = DATA.qf.filter(x => !q || (x.t + " " + x.o).toLowerCase().includes(q));
+  table("t-qf", QFH, list.map(qfRow), [0,4,5]);
+  document.getElementById("qf-count").textContent = `${fr.format(list.length)} démarche${list.length > 1 ? "s" : ""} · ${fr.format(list.reduce((s, x) => s + x.d, 0))} dossiers`;
+}
+document.getElementById("qf-q").addEventListener("input", drawQf); drawQf();
+table("t-qfp", QFH, DATA.qf_plat.map(qfRow), [0,4,5]);
+
+document.querySelectorAll(".chart").forEach(c => c.setAttribute("tabindex", "0"));
+</script>
+<p class="small wrap" style="margin-top:8px">* «y1» : du 1er janvier au «date».</p>

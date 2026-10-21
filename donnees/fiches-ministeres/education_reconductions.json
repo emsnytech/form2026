@@ -1,0 +1,90 @@
+{
+ "perimetre": [
+  {
+   "annee": 2021,
+   "publiees": 888,
+   "reconductions": 158,
+   "nouvelles": 730,
+   "pct_reconductions": 17.8
+  },
+  {
+   "annee": 2022,
+   "publiees": 1016,
+   "reconductions": 247,
+   "nouvelles": 769,
+   "pct_reconductions": 24.3
+  },
+  {
+   "annee": 2023,
+   "publiees": 1111,
+   "reconductions": 262,
+   "nouvelles": 849,
+   "pct_reconductions": 23.6
+  },
+  {
+   "annee": 2024,
+   "publiees": 1354,
+   "reconductions": 444,
+   "nouvelles": 910,
+   "pct_reconductions": 32.8
+  },
+  {
+   "annee": 2025,
+   "publiees": 1547,
+   "reconductions": 576,
+   "nouvelles": 971,
+   "pct_reconductions": 37.2
+  },
+  {
+   "annee": 2026,
+   "publiees": 1651,
+   "reconductions": 559,
+   "nouvelles": 1092,
+   "pct_reconductions": 33.9
+  }
+ ],
+ "plateforme": [
+  {
+   "annee": 2021,
+   "publiees": 4455,
+   "reconductions": 815,
+   "nouvelles": 3640,
+   "pct_reconductions": 18.3
+  },
+  {
+   "annee": 2022,
+   "publiees": 5239,
+   "reconductions": 1219,
+   "nouvelles": 4020,
+   "pct_reconductions": 23.3
+  },
+  {
+   "annee": 2023,
+   "publiees": 5098,
+   "reconductions": 1093,
+   "nouvelles": 4005,
+   "pct_reconductions": 21.4
+  },
+  {
+   "annee": 2024,
+   "publiees": 6198,
+   "reconductions": 1421,
+   "nouvelles": 4777,
+   "pct_reconductions": 22.9
+  },
+  {
+   "annee": 2025,
+   "publiees": 7375,
+   "reconductions": 1937,
+   "nouvelles": 5438,
+   "pct_reconductions": 26.3
+  },
+  {
+   "annee": 2026,
+   "publiees": 7358,
+   "reconductions": 1933,
+   "nouvelles": 5425,
+   "pct_reconductions": 26.3
+  }
+ ]
+}

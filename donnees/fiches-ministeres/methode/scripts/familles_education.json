@@ -1,0 +1,12 @@
+[
+ {"nom":"Relevés de notes, attestations de réussite, diplômes","motif":"relev[ée]s? de notes|attestation de r[ée]ussite|duplicata|dipl[ôo]me original|transmission d.un dipl"},
+ {"nom":"Demi-pension, restauration scolaire, internat","motif":"demi-pension|restauration scolaire|cantine|internat"},
+ {"nom":"Bourses et fonds sociaux","motif":"bourses?\\b|fonds sociaux|fonds social|aides? sociales?"},
+ {"nom":"Instruction en famille, dérogations de secteur, contrôle de scolarisation","motif":"instruction (dans la|en) famille|d[ée]rogation.{0,40}(secteur|affectation|carte scolaire|coll[èe]ge)|contr[ôo]le de scolarisation"},
+ {"nom":"Stages et périodes de formation en milieu professionnel","motif":"\\bstages?\\b|PFMP"},
+ {"nom":"Recrutement et suivi des contractuels et AESH","motif":"recrutement|\\bAESH\\b|contractuels?|vivier"},
+ {"nom":"Heures supplémentaires, indemnités, frais des personnels","motif":"\\bHSE\\b|\\bRCD\\b|heures suppl|indemnit|frais de d[ée]placement"},
+ {"nom":"Examens : inscriptions, dérogations, aménagements d'épreuves","motif":"am[ée]nagement.{0,15}(examen|[ée]preuve)|inscription.{0,20}(examen|concours|baccalaur|DNB|brevet)|d[ée]rogation pour l.inscription au DNB"},
+ {"nom":"Appels à projets et subventions","motif":"appel [àa] projets?|\\bAAP\\b|\\bAMI\\b|subvention"},
+ {"nom":"Accueils collectifs de mineurs, BAFA, SNU","motif":"BAFA|BAFD|accueils? collectifs? de mineurs|\\bACM\\b|\\bcolos?\\b|\\bSNU\\b|service national universel"}
+]
