@@ -1,0 +1,34 @@
+{
+ "source": "data/demarches_slim.jsonl",
+ "date_extraction": "2026-10-21",
+ "annee_debut": 2021,
+ "annee_fin": 2026,
+ "zones": {
+  "Ministère de l’Éducation nationale, de l’Enseignement supérieur et de la Recherche": "Éducation nationale",
+  "Ministère de l’Enseignement supérieur et de la Recherche": "Enseignement supérieur et recherche",
+  "Ministère de la Jeunesse et des Sports": "Jeunesse et sports",
+  "Ministère des Sports, de la Jeunesse et de la Vie associative": "Jeunesse et sports"
+ },
+ "priorite_poles": [
+  "Éducation nationale",
+  "Enseignement supérieur et recherche",
+  "Jeunesse et sports"
+ ],
+ "max_zones": 3,
+ "sans_zone_motifs": {
+  "Éducation nationale": "rectorat|acad[ée]mi|dsden|services? d[ée]partementa?u?x? de l.?[ée]ducation|lyc[ée]e|coll[èe]ge|cit[ée] scolaire|[ée]cole (primaire|[ée]l[ée]mentaire|maternelle)|onisep|canop|cned|[ée]ducation nationale|scolaire|drafpic",
+  "Enseignement supérieur et recherche": "universit|\\bIUT\\b|INSPE|\\bESPE\\b|crous|cnous|enseignement sup|recherche|cnrs|inserm|inria|\\bIRD\\b",
+  "Jeunesse et sports": "drajes|sdjes|jeunesse|\\bsports?\\b|creps|ski et d.alpinisme|sports de montagne"
+ },
+ "sans_zone_exclusions": "v[ée]t[ée]rinaire|architecture|agricole|DDCSPP|DDCS\\b|coh[ée]sion sociale|TEST|DDTM?\\b|territoires|DREAL|DRIEAT|pr[ée]fecture de police|mairie|commune|conseil (r[ée]gional|d[ée]partemental)|transport",
+ "motif_anomalie": "pr[ée]fecture|SRIAS|SGAR|DDT|DREAL|ARS\\b|mairie|commune|conseil d[ée]partemental|r[ée]gion (?!acad)",
+ "sans_zone_types_exclus": [
+  "collectivite_territoriale"
+ ],
+ "exclusions_toutes": "^MSA$|mutualit[ée] sociale agricole|^CAF\\b|CAF DU",
+ "transfert": {
+  "pole_hote": "Éducation nationale",
+  "libelle": "Activité jeunesse, engagement et sports déclarée sous la zone Éducation nationale (DRAJES/SDJES, ACM, SNU…)",
+  "motif": "DRAJES|SDJES|jeunesse,? (de )?l.engagement|engagement,? (à la )?jeunesse|accueils? collectifs? de mineurs|\\bBAFA\\b|\\bSNU\\b|service national universel|colos? apprenantes|sport"
+ }
+}

@@ -1,0 +1,6548 @@
+{
+ "dossiers_annuels": [
+  {
+   "annee": 2021,
+   "estime_brut": 143173,
+   "plateforme_estime": 2388085,
+   "plateforme_reel": 2568554,
+   "calage": 1.076,
+   "estime_cale": 154054,
+   "part_plateforme": 6.0
+  },
+  {
+   "annee": 2022,
+   "estime_brut": 186064,
+   "plateforme_estime": 2263138,
+   "plateforme_reel": 2708052,
+   "calage": 1.197,
+   "estime_cale": 222719,
+   "part_plateforme": 8.2
+  },
+  {
+   "annee": 2023,
+   "estime_brut": 203270,
+   "plateforme_estime": 2537863,
+   "plateforme_reel": 2863250,
+   "calage": 1.128,
+   "estime_cale": 229289,
+   "part_plateforme": 8.0
+  },
+  {
+   "annee": 2024,
+   "estime_brut": 233214,
+   "plateforme_estime": 2994182,
+   "plateforme_reel": 3968056,
+   "calage": 1.325,
+   "estime_cale": 309008,
+   "part_plateforme": 7.8
+  },
+  {
+   "annee": 2025,
+   "estime_brut": 316925,
+   "plateforme_estime": 3702561,
+   "plateforme_reel": 4167309,
+   "calage": 1.126,
+   "estime_cale": 356858,
+   "part_plateforme": 8.6
+  },
+  {
+   "annee": 2026,
+   "estime_brut": 441009,
+   "plateforme_estime": 3870778,
+   "plateforme_reel": 3906898,
+   "calage": 1.087,
+   "estime_cale": 479377,
+   "part_plateforme": 11.4
+  }
+ ],
+ "carte": {
+  "44": {
+   "pub": [
+    98,
+    115,
+    102,
+    135,
+    141,
+    125
+   ],
+   "org": [
+    7,
+    10,
+    11,
+    11,
+    13,
+    14
+   ],
+   "dos": [
+    11316,
+    10026,
+    16422,
+    12868,
+    16081,
+    25563
+   ],
+   "pub_t": 716,
+   "org_t": 15,
+   "dos_t": 92275
+  },
+  "72": {
+   "pub": [
+    11,
+    10,
+    17,
+    19,
+    16,
+    9
+   ],
+   "org": [
+    1,
+    2,
+    5,
+    5,
+    4,
+    4
+   ],
+   "dos": [
+    94,
+    524,
+    760,
+    1098,
+    1358,
+    1288
+   ],
+   "pub_t": 82,
+   "org_t": 5,
+   "dos_t": 5121
+  },
+  "93": {
+   "pub": [
+    23,
+    12,
+    5,
+    16,
+    7,
+    8
+   ],
+   "org": [
+    4,
+    5,
+    4,
+    5,
+    5,
+    6
+   ],
+   "dos": [
+    11531,
+    6374,
+    1574,
+    623,
+    2282,
+    2046
+   ],
+   "pub_t": 71,
+   "org_t": 7,
+   "dos_t": 24430
+  },
+  "92": {
+   "pub": [
+    18,
+    48,
+    87,
+    73,
+    81,
+    73
+   ],
+   "org": [
+    10,
+    15,
+    26,
+    34,
+    37,
+    38
+   ],
+   "dos": [
+    6150,
+    10551,
+    11814,
+    15148,
+    20216,
+    24713
+   ],
+   "pub_t": 380,
+   "org_t": 43,
+   "dos_t": 88592
+  },
+  "78": {
+   "pub": [
+    89,
+    59,
+    54,
+    75,
+    58,
+    76
+   ],
+   "org": [
+    35,
+    35,
+    39,
+    38,
+    39,
+    21
+   ],
+   "dos": [
+    11653,
+    19463,
+    19217,
+    18255,
+    19087,
+    29775
+   ],
+   "pub_t": 411,
+   "org_t": 50,
+   "dos_t": 117449
+  },
+  "31": {
+   "pub": [
+    10,
+    15,
+    29,
+    49,
+    61,
+    48
+   ],
+   "org": [
+    3,
+    3,
+    4,
+    5,
+    8,
+    10
+   ],
+   "dos": [
+    907,
+    3174,
+    3803,
+    6703,
+    11893,
+    11153
+   ],
+   "pub_t": 212,
+   "org_t": 11,
+   "dos_t": 37633
+  },
+  "75": {
+   "pub": [
+    48,
+    143,
+    195,
+    207,
+    209,
+    252
+   ],
+   "org": [
+    12,
+    18,
+    26,
+    30,
+    37,
+    44
+   ],
+   "dos": [
+    18706,
+    28794,
+    42854,
+    46040,
+    51495,
+    65260
+   ],
+   "pub_t": 1054,
+   "org_t": 51,
+   "dos_t": 253149
+  },
+  "64": {
+   "pub": [
+    0,
+    2,
+    7,
+    24,
+    43,
+    38
+   ],
+   "org": [
+    0,
+    1,
+    1,
+    2,
+    4,
+    5
+   ],
+   "dos": [
+    0,
+    14,
+    1129,
+    3808,
+    3777,
+    5612
+   ],
+   "pub_t": 114,
+   "org_t": 5,
+   "dos_t": 14340
+  },
+  "33": {
+   "pub": [
+    9,
+    3,
+    8,
+    16,
+    35,
+    65
+   ],
+   "org": [
+    2,
+    2,
+    3,
+    5,
+    8,
+    15
+   ],
+   "dos": [
+    226,
+    1295,
+    3805,
+    4600,
+    11527,
+    22685
+   ],
+   "pub_t": 136,
+   "org_t": 17,
+   "dos_t": 44138
+  },
+  "87": {
+   "pub": [
+    0,
+    0,
+    6,
+    2,
+    10,
+    18
+   ],
+   "org": [
+    0,
+    0,
+    2,
+    2,
+    4,
+    4
+   ],
+   "dos": [
+    0,
+    0,
+    2312,
+    794,
+    2560,
+    3868
+   ],
+   "pub_t": 36,
+   "org_t": 4,
+   "dos_t": 9534
+  },
+  "01": {
+   "pub": [
+    0,
+    1,
+    0,
+    2,
+    4,
+    10
+   ],
+   "org": [
+    0,
+    1,
+    1,
+    2,
+    2,
+    3
+   ],
+   "dos": [
+    0,
+    1,
+    7,
+    39,
+    681,
+    1141
+   ],
+   "pub_t": 17,
+   "org_t": 4,
+   "dos_t": 1869
+  },
+  "34": {
+   "pub": [
+    11,
+    21,
+    28,
+    54,
+    77,
+    53
+   ],
+   "org": [
+    4,
+    7,
+    8,
+    9,
+    12,
+    12
+   ],
+   "dos": [
+    442,
+    1460,
+    1643,
+    7207,
+    13784,
+    17018
+   ],
+   "pub_t": 244,
+   "org_t": 14,
+   "dos_t": 41555
+  },
+  "86": {
+   "pub": [
+    0,
+    2,
+    5,
+    14,
+    19,
+    30
+   ],
+   "org": [
+    0,
+    2,
+    2,
+    3,
+    3,
+    4
+   ],
+   "dos": [
+    0,
+    331,
+    486,
+    1313,
+    4909,
+    6989
+   ],
+   "pub_t": 70,
+   "org_t": 4,
+   "dos_t": 14028
+  },
+  "85": {
+   "pub": [
+    0,
+    2,
+    14,
+    22,
+    16,
+    13
+   ],
+   "org": [
+    0,
+    1,
+    2,
+    3,
+    2,
+    5
+   ],
+   "dos": [
+    0,
+    317,
+    2667,
+    3433,
+    3685,
+    2540
+   ],
+   "pub_t": 67,
+   "org_t": 6,
+   "dos_t": 12642
+  },
+  "77": {
+   "pub": [
+    0,
+    0,
+    2,
+    2,
+    2,
+    4
+   ],
+   "org": [
+    0,
+    0,
+    2,
+    2,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    13,
+    139,
+    1631,
+    2347
+   ],
+   "pub_t": 10,
+   "org_t": 2,
+   "dos_t": 4130
+  },
+  "84": {
+   "pub": [
+    5,
+    4,
+    5,
+    0,
+    0,
+    2
+   ],
+   "org": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    3
+   ],
+   "dos": [
+    702,
+    781,
+    361,
+    193,
+    192,
+    289
+   ],
+   "pub_t": 16,
+   "org_t": 3,
+   "dos_t": 2517
+  },
+  "29": {
+   "pub": [
+    1,
+    5,
+    6,
+    10,
+    14,
+    14
+   ],
+   "org": [
+    2,
+    3,
+    5,
+    5,
+    5,
+    6
+   ],
+   "dos": [
+    169,
+    291,
+    699,
+    2069,
+    3269,
+    3231
+   ],
+   "pub_t": 50,
+   "org_t": 6,
+   "dos_t": 9728
+  },
+  "987": {
+   "pub": [
+    25,
+    59,
+    65,
+    66,
+    71,
+    66
+   ],
+   "org": [
+    3,
+    4,
+    3,
+    3,
+    4,
+    5
+   ],
+   "dos": [
+    1903,
+    6292,
+    6953,
+    6447,
+    6220,
+    6931
+   ],
+   "pub_t": 352,
+   "org_t": 5,
+   "dos_t": 34745
+  },
+  "79": {
+   "pub": [
+    0,
+    0,
+    0,
+    2,
+    3,
+    9
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    1,
+    2,
+    3
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    207,
+    692,
+    1079
+   ],
+   "pub_t": 14,
+   "org_t": 3,
+   "dos_t": 1978
+  },
+  "91": {
+   "pub": [
+    15,
+    22,
+    47,
+    38,
+    53,
+    64
+   ],
+   "org": [
+    5,
+    5,
+    12,
+    17,
+    24,
+    29
+   ],
+   "dos": [
+    4115,
+    3684,
+    9517,
+    7848,
+    11615,
+    18741
+   ],
+   "pub_t": 239,
+   "org_t": 32,
+   "dos_t": 55521
+  },
+  "54": {
+   "pub": [
+    18,
+    23,
+    23,
+    44,
+    44,
+    40
+   ],
+   "org": [
+    5,
+    5,
+    5,
+    8,
+    6,
+    7
+   ],
+   "dos": [
+    457,
+    978,
+    1699,
+    7508,
+    13761,
+    16835
+   ],
+   "pub_t": 192,
+   "org_t": 10,
+   "dos_t": 41237
+  },
+  "47": {
+   "pub": [
+    0,
+    0,
+    0,
+    3,
+    0,
+    0
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    14,
+    64,
+    50
+   ],
+   "pub_t": 3,
+   "org_t": 1,
+   "dos_t": 128
+  },
+  "14": {
+   "pub": [
+    0,
+    9,
+    18,
+    14,
+    25,
+    32
+   ],
+   "org": [
+    0,
+    1,
+    3,
+    3,
+    4,
+    4
+   ],
+   "dos": [
+    0,
+    792,
+    2743,
+    2937,
+    5694,
+    14011
+   ],
+   "pub_t": 98,
+   "org_t": 4,
+   "dos_t": 26178
+  },
+  "80": {
+   "pub": [
+    0,
+    1,
+    11,
+    9,
+    31,
+    28
+   ],
+   "org": [
+    0,
+    1,
+    4,
+    4,
+    6,
+    6
+   ],
+   "dos": [
+    0,
+    40,
+    279,
+    868,
+    2591,
+    4275
+   ],
+   "pub_t": 80,
+   "org_t": 6,
+   "dos_t": 8052
+  },
+  "971": {
+   "pub": [
+    9,
+    30,
+    31,
+    30,
+    22,
+    16
+   ],
+   "org": [
+    1,
+    3,
+    4,
+    6,
+    7,
+    9
+   ],
+   "dos": [
+    258,
+    3172,
+    3895,
+    4358,
+    3086,
+    11943
+   ],
+   "pub_t": 138,
+   "org_t": 9,
+   "dos_t": 26712
+  },
+  "49": {
+   "pub": [
+    10,
+    17,
+    27,
+    26,
+    22,
+    15
+   ],
+   "org": [
+    1,
+    1,
+    3,
+    2,
+    2,
+    2
+   ],
+   "dos": [
+    835,
+    1789,
+    2985,
+    2949,
+    3113,
+    3454
+   ],
+   "pub_t": 117,
+   "org_t": 3,
+   "dos_t": 15125
+  },
+  "38": {
+   "pub": [
+    17,
+    13,
+    11,
+    6,
+    16,
+    19
+   ],
+   "org": [
+    2,
+    2,
+    3,
+    3,
+    3,
+    5
+   ],
+   "dos": [
+    1797,
+    2591,
+    2274,
+    2823,
+    4875,
+    10865
+   ],
+   "pub_t": 82,
+   "org_t": 5,
+   "dos_t": 25226
+  },
+  "57": {
+   "pub": [
+    7,
+    6,
+    14,
+    5,
+    7,
+    3
+   ],
+   "org": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    337,
+    442,
+    909,
+    962,
+    790,
+    422
+   ],
+   "pub_t": 42,
+   "org_t": 1,
+   "dos_t": 3863
+  },
+  "06": {
+   "pub": [
+    13,
+    19,
+    32,
+    22,
+    24,
+    16
+   ],
+   "org": [
+    3,
+    3,
+    3,
+    3,
+    3,
+    5
+   ],
+   "dos": [
+    961,
+    2389,
+    3788,
+    5064,
+    3892,
+    2753
+   ],
+   "pub_t": 126,
+   "org_t": 5,
+   "dos_t": 18848
+  },
+  "69": {
+   "pub": [
+    3,
+    1,
+    18,
+    13,
+    15,
+    40
+   ],
+   "org": [
+    2,
+    2,
+    6,
+    6,
+    6,
+    11
+   ],
+   "dos": [
+    766,
+    774,
+    1713,
+    4115,
+    10847,
+    13608
+   ],
+   "pub_t": 90,
+   "org_t": 12,
+   "dos_t": 31822
+  },
+  "95": {
+   "pub": [
+    5,
+    12,
+    21,
+    27,
+    30,
+    30
+   ],
+   "org": [
+    2,
+    2,
+    3,
+    4,
+    7,
+    8
+   ],
+   "dos": [
+    862,
+    1502,
+    3350,
+    2807,
+    3973,
+    6259
+   ],
+   "pub_t": 125,
+   "org_t": 9,
+   "dos_t": 18753
+  },
+  "67": {
+   "pub": [
+    0,
+    0,
+    4,
+    12,
+    10,
+    12
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    3,
+    3,
+    5
+   ],
+   "dos": [
+    0,
+    0,
+    636,
+    4764,
+    8532,
+    8446
+   ],
+   "pub_t": 38,
+   "org_t": 5,
+   "dos_t": 22378
+  },
+  "94": {
+   "pub": [
+    8,
+    15,
+    19,
+    12,
+    38,
+    60
+   ],
+   "org": [
+    1,
+    2,
+    2,
+    2,
+    6,
+    12
+   ],
+   "dos": [
+    838,
+    2246,
+    3671,
+    2244,
+    3999,
+    7465
+   ],
+   "pub_t": 152,
+   "org_t": 12,
+   "dos_t": 20463
+  },
+  "81": {
+   "pub": [
+    2,
+    0,
+    4,
+    4,
+    7,
+    4
+   ],
+   "org": [
+    1,
+    0,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    117,
+    0,
+    836,
+    1211,
+    1335,
+    1306
+   ],
+   "pub_t": 21,
+   "org_t": 1,
+   "dos_t": 4805
+  },
+  "35": {
+   "pub": [
+    20,
+    34,
+    38,
+    66,
+    55,
+    73
+   ],
+   "org": [
+    4,
+    5,
+    4,
+    6,
+    7,
+    11
+   ],
+   "dos": [
+    2745,
+    3556,
+    6173,
+    8277,
+    15590,
+    12844
+   ],
+   "pub_t": 286,
+   "org_t": 12,
+   "dos_t": 49185
+  },
+  "43": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    5
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    2
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    640
+   ],
+   "pub_t": 5,
+   "org_t": 2,
+   "dos_t": 640
+  },
+  "30": {
+   "pub": [
+    0,
+    10,
+    9,
+    3,
+    0,
+    3
+   ],
+   "org": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    4
+   ],
+   "dos": [
+    0,
+    584,
+    854,
+    1126,
+    817,
+    1030
+   ],
+   "pub_t": 25,
+   "org_t": 4,
+   "dos_t": 4411
+  },
+  "09": {
+   "pub": [
+    0,
+    0,
+    0,
+    2,
+    3,
+    5
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    2
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    20,
+    94,
+    105
+   ],
+   "pub_t": 10,
+   "org_t": 2,
+   "dos_t": 220
+  },
+  "59": {
+   "pub": [
+    0,
+    2,
+    5,
+    11,
+    11,
+    10
+   ],
+   "org": [
+    1,
+    1,
+    3,
+    6,
+    10,
+    8
+   ],
+   "dos": [
+    12,
+    26,
+    87,
+    965,
+    1032,
+    6695
+   ],
+   "pub_t": 39,
+   "org_t": 14,
+   "dos_t": 8817
+  },
+  "13": {
+   "pub": [
+    5,
+    4,
+    11,
+    20,
+    30,
+    15
+   ],
+   "org": [
+    4,
+    4,
+    6,
+    6,
+    8,
+    8
+   ],
+   "dos": [
+    10544,
+    11874,
+    13748,
+    13885,
+    6163,
+    5193
+   ],
+   "pub_t": 85,
+   "org_t": 8,
+   "dos_t": 61407
+  },
+  "82": {
+   "pub": [
+    0,
+    0,
+    2,
+    9,
+    9,
+    13
+   ],
+   "org": [
+    0,
+    0,
+    2,
+    2,
+    3,
+    4
+   ],
+   "dos": [
+    0,
+    0,
+    10,
+    812,
+    945,
+    2472
+   ],
+   "pub_t": 33,
+   "org_t": 4,
+   "dos_t": 4239
+  },
+  "03": {
+   "pub": [
+    0,
+    0,
+    0,
+    2,
+    2,
+    6
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    2,
+    2,
+    4
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    1093,
+    972,
+    273
+   ],
+   "pub_t": 10,
+   "org_t": 4,
+   "dos_t": 2338
+  },
+  "45": {
+   "pub": [
+    5,
+    2,
+    3,
+    15,
+    7,
+    8
+   ],
+   "org": [
+    1,
+    2,
+    3,
+    5,
+    6,
+    7
+   ],
+   "dos": [
+    10,
+    769,
+    1361,
+    1525,
+    464,
+    890
+   ],
+   "pub_t": 40,
+   "org_t": 8,
+   "dos_t": 5020
+  },
+  "74": {
+   "pub": [
+    21,
+    24,
+    25,
+    36,
+    32,
+    19
+   ],
+   "org": [
+    1,
+    1,
+    2,
+    2,
+    2,
+    2
+   ],
+   "dos": [
+    477,
+    1642,
+    2070,
+    3283,
+    3790,
+    3260
+   ],
+   "pub_t": 157,
+   "org_t": 2,
+   "dos_t": 14521
+  },
+  "15": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    3,
+    1
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    2,
+    6
+   ],
+   "pub_t": 4,
+   "org_t": 1,
+   "dos_t": 8
+  },
+  "56": {
+   "pub": [
+    0,
+    3,
+    2,
+    13,
+    15,
+    20
+   ],
+   "org": [
+    0,
+    1,
+    1,
+    2,
+    2,
+    3
+   ],
+   "dos": [
+    0,
+    308,
+    45,
+    1093,
+    2313,
+    2381
+   ],
+   "pub_t": 53,
+   "org_t": 3,
+   "dos_t": 6139
+  },
+  "21": {
+   "pub": [
+    1,
+    6,
+    4,
+    12,
+    3,
+    5
+   ],
+   "org": [
+    1,
+    2,
+    2,
+    2,
+    2,
+    3
+   ],
+   "dos": [
+    10,
+    100,
+    41,
+    192,
+    157,
+    324
+   ],
+   "pub_t": 31,
+   "org_t": 5,
+   "dos_t": 824
+  },
+  "53": {
+   "pub": [
+    3,
+    2,
+    4,
+    6,
+    7,
+    7
+   ],
+   "org": [
+    2,
+    3,
+    4,
+    4,
+    5,
+    5
+   ],
+   "dos": [
+    155,
+    553,
+    544,
+    585,
+    3203,
+    692
+   ],
+   "pub_t": 29,
+   "org_t": 5,
+   "dos_t": 5732
+  },
+  "976": {
+   "pub": [
+    0,
+    0,
+    5,
+    9,
+    8,
+    2
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    2,
+    3,
+    3
+   ],
+   "dos": [
+    0,
+    0,
+    108,
+    129,
+    167,
+    630
+   ],
+   "pub_t": 24,
+   "org_t": 3,
+   "dos_t": 1034
+  },
+  "62": {
+   "pub": [
+    0,
+    0,
+    0,
+    2,
+    3,
+    4
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    2
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    37,
+    309,
+    1356
+   ],
+   "pub_t": 9,
+   "org_t": 2,
+   "dos_t": 1702
+  },
+  "12": {
+   "pub": [
+    2,
+    2,
+    6,
+    8,
+    8,
+    6
+   ],
+   "org": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    19,
+    88,
+    160,
+    665,
+    844,
+    700
+   ],
+   "pub_t": 32,
+   "org_t": 1,
+   "dos_t": 2477
+  },
+  "973": {
+   "pub": [
+    0,
+    0,
+    1,
+    2,
+    4,
+    4
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    2,
+    1,
+    3
+   ],
+   "dos": [
+    0,
+    0,
+    16,
+    31,
+    658,
+    1019
+   ],
+   "pub_t": 11,
+   "org_t": 3,
+   "dos_t": 1724
+  },
+  "40": {
+   "pub": [
+    0,
+    0,
+    3,
+    5,
+    3,
+    5
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    226,
+    454,
+    245,
+    398
+   ],
+   "pub_t": 16,
+   "org_t": 1,
+   "dos_t": 1323
+  },
+  "39": {
+   "pub": [
+    0,
+    0,
+    5,
+    4,
+    5,
+    2
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    2,
+    2,
+    3
+   ],
+   "dos": [
+    0,
+    0,
+    432,
+    719,
+    789,
+    950
+   ],
+   "pub_t": 16,
+   "org_t": 3,
+   "dos_t": 2889
+  },
+  "22": {
+   "pub": [
+    0,
+    2,
+    3,
+    3,
+    3,
+    8
+   ],
+   "org": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    2
+   ],
+   "dos": [
+    0,
+    272,
+    332,
+    199,
+    198,
+    333
+   ],
+   "pub_t": 19,
+   "org_t": 2,
+   "dos_t": 1333
+  },
+  "04": {
+   "pub": [
+    0,
+    6,
+    4,
+    1,
+    2,
+    3
+   ],
+   "org": [
+    1,
+    1,
+    1,
+    2,
+    1,
+    2
+   ],
+   "dos": [
+    18,
+    84,
+    285,
+    58,
+    55,
+    310
+   ],
+   "pub_t": 16,
+   "org_t": 2,
+   "dos_t": 810
+  },
+  "46": {
+   "pub": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   "org": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    3,
+    3,
+    7,
+    5,
+    3,
+    1
+   ],
+   "pub_t": 1,
+   "org_t": 1,
+   "dos_t": 23
+  },
+  "68": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    10,
+    8
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    2,
+    2
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    739,
+    794
+   ],
+   "pub_t": 18,
+   "org_t": 2,
+   "dos_t": 1533
+  },
+  "974": {
+   "pub": [
+    0,
+    0,
+    1,
+    11,
+    14,
+    12
+   ],
+   "org": [
+    1,
+    1,
+    2,
+    2,
+    3,
+    4
+   ],
+   "dos": [
+    0,
+    0,
+    4,
+    1127,
+    1995,
+    5405
+   ],
+   "pub_t": 38,
+   "org_t": 4,
+   "dos_t": 8532
+  },
+  "61": {
+   "pub": [
+    0,
+    0,
+    2,
+    7,
+    12,
+    8
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    2,
+    2,
+    2
+   ],
+   "dos": [
+    0,
+    0,
+    1,
+    300,
+    239,
+    547
+   ],
+   "pub_t": 29,
+   "org_t": 2,
+   "dos_t": 1087
+  },
+  "16": {
+   "pub": [
+    0,
+    0,
+    0,
+    2,
+    3,
+    1
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    109,
+    113,
+    50
+   ],
+   "pub_t": 6,
+   "org_t": 2,
+   "dos_t": 272
+  },
+  "23": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    0
+   ],
+   "org": [
+    1,
+    1,
+    1,
+    1,
+    2,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    35,
+    0
+   ],
+   "pub_t": 1,
+   "org_t": 2,
+   "dos_t": 36
+  },
+  "07": {
+   "pub": [
+    2,
+    3,
+    1,
+    2,
+    1,
+    2
+   ],
+   "org": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    13,
+    50,
+    62,
+    199,
+    77,
+    36
+   ],
+   "pub_t": 11,
+   "org_t": 1,
+   "dos_t": 437
+  },
+  "48": {
+   "pub": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    0
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    1,
+    3,
+    3,
+    2
+   ],
+   "pub_t": 1,
+   "org_t": 1,
+   "dos_t": 9
+  },
+  "65": {
+   "pub": [
+    0,
+    2,
+    1,
+    1,
+    4,
+    1
+   ],
+   "org": [
+    0,
+    1,
+    1,
+    1,
+    2,
+    2
+   ],
+   "dos": [
+    0,
+    11,
+    18,
+    31,
+    125,
+    93
+   ],
+   "pub_t": 9,
+   "org_t": 2,
+   "dos_t": 278
+  },
+  "27": {
+   "pub": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    7
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    114,
+    96,
+    1621
+   ],
+   "pub_t": 9,
+   "org_t": 1,
+   "dos_t": 1831
+  },
+  "18": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    140,
+    187
+   ],
+   "pub_t": 2,
+   "org_t": 1,
+   "dos_t": 327
+  },
+  "88": {
+   "pub": [
+    0,
+    0,
+    2,
+    0,
+    2,
+    11
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    1,
+    2,
+    3
+   ],
+   "dos": [
+    0,
+    0,
+    426,
+    783,
+    847,
+    3340
+   ],
+   "pub_t": 15,
+   "org_t": 3,
+   "dos_t": 5397
+  },
+  "42": {
+   "pub": [
+    0,
+    0,
+    1,
+    5,
+    10,
+    8
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    27,
+    541,
+    1363,
+    2048
+   ],
+   "pub_t": 24,
+   "org_t": 1,
+   "dos_t": 3978
+  },
+  "66": {
+   "pub": [
+    0,
+    1,
+    2,
+    1,
+    3,
+    2
+   ],
+   "org": [
+    0,
+    1,
+    2,
+    2,
+    2,
+    3
+   ],
+   "dos": [
+    0,
+    1065,
+    1235,
+    323,
+    1945,
+    1742
+   ],
+   "pub_t": 9,
+   "org_t": 5,
+   "dos_t": 6310
+  },
+  "76": {
+   "pub": [
+    0,
+    1,
+    5,
+    1,
+    5,
+    8
+   ],
+   "org": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    7
+   ],
+   "dos": [
+    0,
+    1,
+    11,
+    207,
+    375,
+    1540
+   ],
+   "pub_t": 20,
+   "org_t": 7,
+   "dos_t": 2135
+  },
+  "51": {
+   "pub": [
+    0,
+    0,
+    0,
+    1,
+    6,
+    20
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    1,
+    2,
+    2
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    1,
+    3035,
+    4874
+   ],
+   "pub_t": 27,
+   "org_t": 2,
+   "dos_t": 7910
+  },
+  "24": {
+   "pub": [
+    0,
+    0,
+    0,
+    2,
+    0,
+    3
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    2,
+    2,
+    4
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    60,
+    70,
+    28
+   ],
+   "pub_t": 5,
+   "org_t": 4,
+   "dos_t": 158
+  },
+  "11": {
+   "pub": [
+    1,
+    1,
+    1,
+    1,
+    2,
+    1
+   ],
+   "org": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    783,
+    960,
+    867,
+    670,
+    652,
+    793
+   ],
+   "pub_t": 7,
+   "org_t": 1,
+   "dos_t": 4725
+  },
+  "60": {
+   "pub": [
+    1,
+    0,
+    0,
+    1,
+    0,
+    3
+   ],
+   "org": [
+    1,
+    0,
+    0,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    21,
+    0,
+    0,
+    316,
+    1,
+    2024
+   ],
+   "pub_t": 5,
+   "org_t": 2,
+   "dos_t": 2362
+  },
+  "2A": {
+   "pub": [
+    4,
+    4,
+    9,
+    17,
+    14,
+    3
+   ],
+   "org": [
+    1,
+    1,
+    1,
+    4,
+    3,
+    4
+   ],
+   "dos": [
+    348,
+    311,
+    172,
+    709,
+    675,
+    600
+   ],
+   "pub_t": 51,
+   "org_t": 4,
+   "dos_t": 2816
+  },
+  "10": {
+   "pub": [
+    0,
+    1,
+    0,
+    0,
+    1,
+    1
+   ],
+   "org": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    3,
+    9,
+    9,
+    18,
+    79
+   ],
+   "pub_t": 3,
+   "org_t": 1,
+   "dos_t": 119
+  },
+  "02": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    2,
+    2
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    609,
+    951
+   ],
+   "pub_t": 4,
+   "org_t": 1,
+   "dos_t": 1560
+  },
+  "32": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    4
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    2
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    7,
+    521
+   ],
+   "pub_t": 5,
+   "org_t": 2,
+   "dos_t": 528
+  },
+  "37": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    117,
+    190
+   ],
+   "pub_t": 2,
+   "org_t": 1,
+   "dos_t": 307
+  },
+  "41": {
+   "pub": [
+    0,
+    0,
+    1,
+    0,
+    1,
+    1
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    4,
+    73,
+    129,
+    150
+   ],
+   "pub_t": 3,
+   "org_t": 1,
+   "dos_t": 355
+  },
+  "28": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    122,
+    243
+   ],
+   "pub_t": 2,
+   "org_t": 1,
+   "dos_t": 365
+  },
+  "26": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    2
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    4,
+    19
+   ],
+   "pub_t": 3,
+   "org_t": 1,
+   "dos_t": 23
+  },
+  "972": {
+   "pub": [
+    0,
+    0,
+    2,
+    0,
+    5,
+    1
+   ],
+   "org": [
+    1,
+    1,
+    2,
+    2,
+    2,
+    2
+   ],
+   "dos": [
+    3,
+    3,
+    12,
+    15,
+    229,
+    2097
+   ],
+   "pub_t": 8,
+   "org_t": 2,
+   "dos_t": 2359
+  },
+  "36": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    58,
+    75
+   ],
+   "pub_t": 2,
+   "org_t": 1,
+   "dos_t": 133
+  },
+  "90": {
+   "pub": [
+    0,
+    1,
+    0,
+    1,
+    1,
+    0
+   ],
+   "org": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    5,
+    42,
+    2,
+    47,
+    36
+   ],
+   "pub_t": 3,
+   "org_t": 1,
+   "dos_t": 132
+  },
+  "25": {
+   "pub": [
+    0,
+    2,
+    2,
+    4,
+    4,
+    5
+   ],
+   "org": [
+    0,
+    2,
+    1,
+    2,
+    2,
+    1
+   ],
+   "dos": [
+    0,
+    4,
+    84,
+    103,
+    165,
+    172
+   ],
+   "pub_t": 17,
+   "org_t": 3,
+   "dos_t": 529
+  },
+  "55": {
+   "pub": [
+    0,
+    0,
+    1,
+    2,
+    0,
+    0
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    3,
+    2,
+    2
+   ],
+   "dos": [
+    0,
+    0,
+    6,
+    369,
+    95,
+    77
+   ],
+   "pub_t": 3,
+   "org_t": 3,
+   "dos_t": 546
+  },
+  "63": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    4,
+    7
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    2,
+    2
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    346,
+    557
+   ],
+   "pub_t": 11,
+   "org_t": 2,
+   "dos_t": 903
+  },
+  "73": {
+   "pub": [
+    0,
+    0,
+    1,
+    1,
+    4,
+    1
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    48,
+    267,
+    17,
+    52
+   ],
+   "pub_t": 7,
+   "org_t": 2,
+   "dos_t": 384
+  },
+  "17": {
+   "pub": [
+    1,
+    0,
+    2,
+    3,
+    1,
+    1
+   ],
+   "org": [
+    1,
+    1,
+    3,
+    3,
+    1,
+    1
+   ],
+   "dos": [
+    12,
+    37,
+    171,
+    129,
+    254,
+    99
+   ],
+   "pub_t": 8,
+   "org_t": 4,
+   "dos_t": 702
+  },
+  "83": {
+   "pub": [
+    0,
+    0,
+    3,
+    0,
+    0,
+    0
+   ],
+   "org": [
+    0,
+    0,
+    2,
+    2,
+    2,
+    2
+   ],
+   "dos": [
+    0,
+    0,
+    113,
+    121,
+    121,
+    97
+   ],
+   "pub_t": 3,
+   "org_t": 2,
+   "dos_t": 452
+  },
+  "50": {
+   "pub": [
+    0,
+    0,
+    2,
+    1,
+    1,
+    1
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    2,
+    2,
+    2
+   ],
+   "dos": [
+    0,
+    0,
+    3,
+    73,
+    83,
+    78
+   ],
+   "pub_t": 5,
+   "org_t": 2,
+   "dos_t": 236
+  },
+  "05": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    9
+   ],
+   "pub_t": 1,
+   "org_t": 1,
+   "dos_t": 9
+  },
+  "2B": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    67,
+    223
+   ],
+   "pub_t": 2,
+   "org_t": 1,
+   "dos_t": 290
+  },
+  "988": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    2
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    9
+   ],
+   "pub_t": 2,
+   "org_t": 1,
+   "dos_t": 9
+  },
+  "58": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    0
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    21,
+    19
+   ],
+   "pub_t": 1,
+   "org_t": 1,
+   "dos_t": 40
+  }
+ },
+ "carte_sans_departement": 791,
+ "gains": {
+  "bas": 11683932,
+  "haut": 20797276,
+  "admin_bas": 10196315,
+  "admin_haut": 16067831,
+  "usagers_bas": 1487617,
+  "usagers_haut": 4729451
+ },
+ "gains_par_annee": {
+  "2021": {
+   "bas": 1072659,
+   "haut": 1923026
+  },
+  "2022": {
+   "bas": 1369379,
+   "haut": 2390481
+  },
+  "2023": {
+   "bas": 1539630,
+   "haut": 2717857
+  },
+  "2024": {
+   "bas": 1838244,
+   "haut": 3296052
+  },
+  "2025": {
+   "bas": 2484926,
+   "haut": 4448093
+  },
+  "2026": {
+   "bas": 3379095,
+   "haut": 6021767
+  }
+ },
+ "gains_couverture": {
+  "demarches": 6712,
+  "absentes": 1171,
+  "dossiers_couverts": 1501666,
+  "dossiers_fenetre": 1523655
+ },
+ "quotient_familial": {
+  "perimetre": [
+   {
+    "num": 146293,
+    "t": "Fiche d'inscription au service de restauration scolaire du Lycée Robert Doisneau 2026-2027",
+    "o": "LYCEE ROBERT DOISNEAU",
+    "d": 1717,
+    "c": 28,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/fiche-d-inscription-au-service-de-restauration-sco-3",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 77115,
+    "t": "Lycée TURGOT, Paris - niveaux 1ères-Terminales-BTS-DCG-CPGE : Inscriptions cantine et bourse 2026/2027",
+    "o": "Lycée Turgot",
+    "d": 1648,
+    "c": 35,
+    "y": "2023",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-turgot-paris-niveaux-1eres-terminales-et-superieur",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 115995,
+    "t": "Lycée René Cassin Arpajon : inscription à la demi-pension 2025 / 2026",
+    "o": "Lycée René CASSIN (ARPAJON)",
+    "d": 1526,
+    "c": 22,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-demi-pension-2025-2026",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 146593,
+    "t": "Lycée René Cassin Arpajon : inscription à la demi-pension 2026 / 2027",
+    "o": "Lycée René CASSIN (ARPAJON)",
+    "d": 1485,
+    "c": 24,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-cassin-arpajon-inscription-dp-2026-2027",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 73627,
+    "t": "Lycée René Cassin Arpajon : inscription à la demi-pension 2023/2024",
+    "o": "Lycée René CASSIN (ARPAJON)",
+    "d": 1475,
+    "c": 22,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-rene-cassin-arpajon-inscription-restauration",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 93576,
+    "t": "Lycée René Cassin Arpajon : inscription à la demi-pension 2024 / 2025",
+    "o": "Lycée René CASSIN (ARPAJON)",
+    "d": 1474,
+    "c": 20,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-rene-cassin-arpajon-inscription-dp-2024-2025",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 60348,
+    "t": "LYCEE JEAN PIERRE TIMBAUD - Inscription restauration scolaire 2022-2023",
+    "o": "LYCEE JEAN PIERRE TIMBAUD (BRETIGNY SUR ORGE)",
+    "d": 1378,
+    "c": 25,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/jpt-restauration",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 147414,
+    "t": "Lycée Edmond Michelet Arpajon : inscription à la demi-pension 2026 / 2027",
+    "o": "Lycée Edmond Michelet",
+    "d": 1155,
+    "c": 21,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-edmond-michelet-arpajon-inscription-a-la-dem",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 75547,
+    "t": "Inscription à la demi-pension de la cité scolaire Louis Pasteur de Neuilly sur Seine - Année scolaire 2023-2024",
+    "o": "Lycée Louis Pasteur",
+    "d": 1074,
+    "c": 35,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-cantine-pasteur",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 95546,
+    "t": "Inscription à la demi-pension de la cité scolaire Louis Pasteur de Neuilly sur Seine - Année scolaire 2024-2025",
+    "o": "Lycée Louis Pasteur",
+    "d": 1062,
+    "c": 36,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-a-la-demi-pension-de-la-cite-scolaire",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 43689,
+    "t": "Inscription à la demi-pension du Lycée de la Vallée de Chevreuse - Année 2021-2022",
+    "o": "Lycée de la Vallée de Chevreuse",
+    "d": 993,
+    "c": 26,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/insc_dp_lvc_rs21",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 123462,
+    "t": "Inscription à la demi-pension de la cité scolaire Louis Pasteur de Neuilly sur Seine - Année scolaire 2025-2026",
+    "o": "Lycée Louis Pasteur",
+    "d": 985,
+    "c": 36,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-a-la-demi-pension-de-la-cite-scolaire--2",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 44127,
+    "t": "Inscription à la demi-pension - Lycée Jacques MONOD (CLAMART) - Année scolaire 2021/2022",
+    "o": "LYCÉE JACQUES MONOD - CLAMART",
+    "d": 959,
+    "c": 22,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-monod-inscription-restauration",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 154455,
+    "t": "Inscription à la demi-pension de la cité scolaire Louis Pasteur de Neuilly sur Seine - Année scolaire 2026-2027",
+    "o": "Lycée Louis Pasteur",
+    "d": 937,
+    "c": 43,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-a-la-demi-pension-de-la-cite-scolaire--3",
+    "qf": true,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 119304,
+    "t": "Lycée Racine : Inscription demi-pension 2025-2026",
+    "o": "Lycée Racine",
+    "d": 920,
+    "c": 23,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-racine-inscription-demi-pension-2025-2026",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 96533,
+    "t": "Inscription demi-pension",
+    "o": "Lycée Carnot, rectorat de Paris, Ministère de l'Education Nationale",
+    "d": 901,
+    "c": 17,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-dp-carnot75017-2024",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 77708,
+    "t": "Lycée TURGOT, Paris - Classes de  Secondes : Inscriptions cantine 2026/2027",
+    "o": "Lycée Turgot",
+    "d": 890,
+    "c": 34,
+    "y": "2023",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-turgot-paris-classes-de-secondes-inscription",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 146242,
+    "t": "Lycée Racine : Inscription demi-pension 2026-2027",
+    "o": "Lycée Racine",
+    "d": 887,
+    "c": 25,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-racine-inscription-demi-pension-2026-2027",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 146257,
+    "t": "Forfait demi-pension 1er trimestre 2026-2027",
+    "o": "Lycée Racine",
+    "d": 843,
+    "c": 9,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/forfait-demi-pension-1er-trimestre-2026-2027",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 121443,
+    "t": "Inscription demi-pension du Lycée Carnot 2025-2026",
+    "o": "Lycée Carnot, rectorat de Paris, Ministère de l'Education Nationale",
+    "d": 772,
+    "c": 16,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lyceecarnot-dp-2025-2026",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 147890,
+    "t": "Inscription demi-pension du Lycée Carnot 2026-2027",
+    "o": "Lycée Carnot, rectorat de Paris, Ministère de l'Education Nationale",
+    "d": 768,
+    "c": 18,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dp-lycee-carnot-2026-2027",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 116276,
+    "t": "Forfait demi-pension 1er trimestre 2025-2026",
+    "o": "Lycée Racine",
+    "d": 761,
+    "c": 6,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/forfait-t1-25-26",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 74548,
+    "t": "Rentrée 2023 - Demande d'affectation dans un collège public d'Ille-et-Vilaine en 5ème, 4ème, 3ème, redoublement de 6ème et 6ème avec internat au collège G. Taburet de Guipry Messac ",
+    "o": "DSDEN 35, Rectorat de Rennes, Ministère de l'Education nationale",
+    "d": 704,
+    "c": 55,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/r2023-affectation-clg35-6e-doublement-5e-4e-3e",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 149060,
+    "t": "Lycée Louis Bascan-Inscription au service de restauration scolaire-Année scolaire 2026-2027 ",
+    "o": "Lycée Louis Bascan de Rambouillet",
+    "d": 684,
+    "c": 31,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-louis-bascan-inscription-au-service-de-resta",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 147641,
+    "t": "Inscription à la cantine Collège Kandelaft 26/27",
+    "o": "Collège Alexis Kandelaft ",
+    "d": 633,
+    "c": 34,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-a-la-cantine-college-kandelaft-26-27",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 94783,
+    "t": "inscription à la demi-pension du lycée Emmanuel Mounier (92) année scolaire 2024-2025",
+    "o": "Lycée Emmanuel MOUNIER",
+    "d": 621,
+    "c": 22,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-a-la-demi-pension-du-lycee-emmanuel-mo",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 146157,
+    "t": "LYCEE LEONARD DE VINCI ST MICHEL S/O - Inscription DEMI-PENSION 2026-2027",
+    "o": "Lycée Léonard de Vinci ",
+    "d": 615,
+    "c": 21,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-leonard-de-vinci-st-michel-s-o-inscription",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 118109,
+    "t": "LYCEE LEONARD DE VINCI ST MICHEL S/O - Inscription DEMI-PENSION 2026-2027",
+    "o": "Lycée Léonard de Vinci ",
+    "d": 611,
+    "c": 45,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-leonard-de-vinci-st-michel-s-o-inscription-d-2",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 99334,
+    "t": "Inscription au service de demi-pension Collège Alexis Kandelaft - 2025/2026",
+    "o": "Collège Alexis Kandelaft ",
+    "d": 607,
+    "c": 34,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-au-service-de-demi-pension-college-ale",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 119776,
+    "t": " Lycée ARAGO, Paris : Inscription financière (cantine, bourses, aides sociales) 2025/26",
+    "o": "Lycée ARAGO, Paris",
+    "d": 602,
+    "c": 60,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/arago-paris2025",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 76665,
+    "t": "Inscription demi-pension",
+    "o": "Lycée Carnot, rectorat de Paris, Ministère de l'Education Nationale",
+    "d": 594,
+    "c": 18,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dp-lyceecarnot75017",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 33624,
+    "t": "Lycée ARAGO, Paris 2020 : cantine et bourse",
+    "o": "Lycée ARAGO, Paris",
+    "d": 589,
+    "c": 24,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/arago-cantine2020",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 121646,
+    "t": "INSCRIPTIONS ET RE-INSCRIPTIONS RESTAURATION SCOLAIRE 2025 / 2026 LYCÉE EJ MAREY ",
+    "o": "LYCEE ETIENNE-JULES MAREY BOULOGNE BILLANCOURT",
+    "d": 575,
+    "c": 26,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscriptions-et-re-inscriptions-restauration-scola",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 118952,
+    "t": "inscription à la demi-pension du lycée Emmanuel Mounier (92) année scolaire 2025-2026",
+    "o": "Lycée Emmanuel MOUNIER",
+    "d": 573,
+    "c": 19,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-a-la-demi-pension-du-lycee-emmanuel-mo-2",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 121091,
+    "t": "Inscription demi-pension du collège Carnot 2025-2026",
+    "o": "Lycée Carnot, rectorat de Paris, Ministère de l'Education Nationale",
+    "d": 570,
+    "c": 20,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/clg-dp-2025-2026",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 74307,
+    "t": "Demande d'inscription au service de demi-pension Collège Alexis Kandelaft",
+    "o": "Collège Alexis Kandelaft ",
+    "d": 562,
+    "c": 35,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demi-pension-kandelaft",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 48870,
+    "t": "Aide Sociale Numérique 2022/2023",
+    "o": "Université Jean Monnet",
+    "d": 553,
+    "c": 28,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/aide-sociale-numerique-2021-2022",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 99461,
+    "t": "Inscription demi-pension Collège Alexis Kandelaft",
+    "o": "Collège Alexis Kandelaft ",
+    "d": 543,
+    "c": 33,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-demi-pension-college-alexis-kandelaft",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 146803,
+    "t": "INSCRIPTIONS ET RE-INSCRIPTIONS RESTAURATION SCOLAIRE 2026 / 2027 LYCÉE EJ MAREY ",
+    "o": "LYCEE ETIENNE-JULES MAREY BOULOGNE BILLANCOURT",
+    "d": 536,
+    "c": 27,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscriptions-et-re-inscriptions-restauration-scola-2",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 149412,
+    "t": " Lycée ARAGO, Paris : Inscription financière (cantine, bourses, aides sociales) 2026/27",
+    "o": "Lycée ARAGO, Paris",
+    "d": 528,
+    "c": 51,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/arago-paris2026",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 96542,
+    "t": "Inscription demi-pension",
+    "o": "Lycée Carnot, rectorat de Paris, Ministère de l'Education Nationale",
+    "d": 526,
+    "c": 24,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-demi-pension-clgcarnot75017-2024",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 148001,
+    "t": "Inscription Demi-Pension 2026-2027 Lycée Jean Vilar - Plaisir (78)",
+    "o": "Lycée Jean Vilar, Académie de Versailles, Ministère de l'Education Nationale",
+    "d": 507,
+    "c": 15,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-demi-pension-2026-2027-lycee-jean-vilar",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 147891,
+    "t": "Inscription demi-pension du collège Carnot 2026-2027",
+    "o": "Lycée Carnot, rectorat de Paris, Ministère de l'Education Nationale",
+    "d": 499,
+    "c": 22,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dp-college-carnot-2627",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 61186,
+    "t": "Lycée ARAGO, Paris : Inscriptions cantine et bourse 2022/23",
+    "o": "Lycée ARAGO, Paris",
+    "d": 497,
+    "c": 35,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/arago-cantine2022",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 97122,
+    "t": "Lycée ARAGO, Paris : Inscription financière (cantine, voyages, aides sociales) 2024/25",
+    "o": "Lycée ARAGO, Paris",
+    "d": 494,
+    "c": 36,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/arago-paris2024",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 95052,
+    "t": "LYCEE LEONARD DE VINCI ST MICHEL S/O  - Inscription demi-pension 2024-2025",
+    "o": "Lycée Léonard de Vinci ",
+    "d": 492,
+    "c": 24,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-leonard-de-vinci-st-michel-s-o-inscription-d",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 60237,
+    "t": "LYCÉE EJ MAREY RESTAURATION SCOLAIRE 2022 / 2023",
+    "o": "LYCEE ETIENNE-JULES MAREY BOULOGNE BILLANCOURT",
+    "d": 474,
+    "c": 28,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-ej-marey-restauration-scolaire-2022-2023",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 95415,
+    "t": "Insription à la demi-pension",
+    "o": "Lycée professionnel Jean Monnet",
+    "d": 474,
+    "c": 14,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/insription-a-la-demi-pension",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 45539,
+    "t": "LYCEE JEAN PIERRE TIMBAUD - Inscription restauration scolaire 2021-2022",
+    "o": "LYCEE JEAN PIERRE TIMBAUD (BRETIGNY SUR ORGE)",
+    "d": 463,
+    "c": 28,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-jean-pierre-timbaud-inscription-restauration21",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 76359,
+    "t": "Rentrée 2023 - Réinscription en Première GT ou Terminale GT au Lycée International de Palaiseau Paris Saclay ",
+    "o": "LYCEE INTERNATIONAL DE PALAISEAU PARIS SACLAY",
+    "d": 454,
+    "c": 53,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/reinscription-lipps-rentree2023",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 76289,
+    "t": "Demande d'inscription au service de demi-pension Lycée - 2023/2024",
+    "o": "Lycée Général et Technologique Le Parc Impérial",
+    "d": 450,
+    "c": 13,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-au-service-de-demi-pension-l",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 147976,
+    "t": "inscription à la demi-pension du lycée Emmanuel Mounier (92) année scolaire 2026-2027",
+    "o": "Lycée Emmanuel MOUNIER",
+    "d": 447,
+    "c": 19,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-a-la-demi-pension-du-lycee-emmanuel-mo-3",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 45170,
+    "t": "Demande d'inscription au service de demi-pension Lycée - 2021/2022",
+    "o": "Lycée Général et Technologique Le Parc Impérial",
+    "d": 438,
+    "c": 13,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/5ac5d137-0f16-4a9d-9a11-e42da58d4725",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 73780,
+    "t": "Inscription à la demi-pension du Lycée NADAR de DRAVEIL - Année scolaire 2023-2024",
+    "o": "Lycée NADAR",
+    "d": 430,
+    "c": 28,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-a-la-demi-pension-du-lycee-nadar",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 117441,
+    "t": "REMBOURSEMENT DES SOLDES DE COMPTE DE DEMI-PENSION",
+    "o": "Lycée René CASSIN (ARPAJON)",
+    "d": 414,
+    "c": 10,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-remboursement-des-soldes-de-compte-de-demi-pension",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 40825,
+    "t": "INSCRIPTION A LA CANTINE - Année scolaire 2021/2022",
+    "o": "LYCEE ADOLPHE CHERIOUX - VITRY SUR SEINE",
+    "d": 407,
+    "c": 18,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscriptiondp2021",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 76565,
+    "t": "Lycée ARAGO, Paris - niveaux 1ères-Terminales-BTS : Inscriptions cantine et bourse 2023/24",
+    "o": "Lycée ARAGO, Paris",
+    "d": 406,
+    "c": 44,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/arago-cantinebourse2023",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 129594,
+    "t": "Candidature en 6ème Section Internationale dans le département de l'hérault - Rentrée scolaire 2026",
+    "o": "Direction des Services Départementaux de l'Education Nationale de l'Hérault (DSDEN34)",
+    "d": 399,
+    "c": 35,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/candidature-6eme-section-internationale-herault",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 129586,
+    "t": "Fiche d'évaluation pédagogique  pour le recrutement en 6ème Section Internationale - Rentrée 2026",
+    "o": "Direction des Services Départementaux de l'Education Nationale de l'Hérault (DSDEN34)",
+    "d": 361,
+    "c": 41,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/fiche-pedagogique-6eme-section-internationale-herault",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 59808,
+    "t": "Demande d'inscription au service de demi-pension Lycée - 2022/2023",
+    "o": "Lycée Général et Technologique Le Parc Impérial",
+    "d": 355,
+    "c": 13,
+    "y": "2022",
+    "etat": "depubliee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/a2dd091b-ab88-46ad-b783-67d4c5a32417",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 115357,
+    "t": "COMMISSION INTERNAT D'EXCELLENCE 2025",
+    "o": "Rectorat de l'académie de Toulouse ",
+    "d": 323,
+    "c": 68,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/commission-internat-d-excellence-2025",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 0
+   },
+   {
+    "num": 77498,
+    "t": "Année scolaire 2023/2024 - Inscription de votre enfant en classe de Seconde au Lycée International de Palaiseau Paris Saclay (LIPPS) ",
+    "o": "LYCEE INTERNATIONAL DE PALAISEAU PARIS SACLAY",
+    "d": 303,
+    "c": 61,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-en-seconde-rentree-2023",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 117092,
+    "t": "Dossier d'inscription internat (2025/2026) - Lycée Alexandre Dumas",
+    "o": "Lycée Alexandre Dumas",
+    "d": 292,
+    "c": 50,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dossier-d-inscription-internat-2025-2026-lycee-ale",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 76948,
+    "t": "RE-INSCRIPTION RESTAURATION SCOLAIRE 2023 / 2024 LYCEE EJ MAREY",
+    "o": "LYCEE ETIENNE-JULES MAREY BOULOGNE BILLANCOURT",
+    "d": 273,
+    "c": 25,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/re-inscription-restauration-scolaire-2023-2024-lyc",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 140718,
+    "t": "Assistants de langue_Postuler à une bourse pour le DU FLE",
+    "o": "France Education international ",
+    "d": 272,
+    "c": 12,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/assistants-de-langue_candidature_financement_du",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 143290,
+    "t": "Dossier d'inscription internat (2026/2027) - Lycée Alexandre Dumas",
+    "o": "Lycée Alexandre Dumas",
+    "d": 270,
+    "c": 51,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-internat-lycee-alexandre-dumas-2026-2027",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 151929,
+    "t": "DAM_FORMULAIRE DE RECRUTEMENT_chargé(e) de coopération internationale",
+    "o": "France Éducation international",
+    "d": 266,
+    "c": 10,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dam_formulaire-de-recrutement_charge-e-de-cooperat-2",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 77444,
+    "t": "INSCRIPTIONS RESTAURATION SCOLAIRE 2023 / 2024 LYCÉE EJ MAREY Classes de Seconde / 1ère ST2S / 1ère CAP / 1ère BTS / AP / AS / FCIL (nouveaux élèves)",
+    "o": "LYCEE ETIENNE-JULES MAREY BOULOGNE BILLANCOURT",
+    "d": 263,
+    "c": 25,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscriptions-restauration-scolaire-2023-2024-lycee",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 61950,
+    "t": "Rentrée 2022 - Inscription en Seconde au Lycée International de Palaiseau Paris Saclay ",
+    "o": "Lycée International de Palaiseau Paris Saclay (LIPPS)",
+    "d": 263,
+    "c": 78,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/rentree-2022-inscription-en-seconde-version04072022",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 75391,
+    "t": "Demande d'hébergement à l'internat (2023/2024)",
+    "o": "Lycée Alexandre Dumas",
+    "d": 254,
+    "c": 25,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-hebergement-a-l-internat-2023-2024",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 44390,
+    "t": "FORMULAIRE DEMANDE DE REMBOURSEMENT  AVANCES DEMI-PENSION ET VOYAGES SCOLAIRES 2020-2021",
+    "o": "Lycée ALAIN - Académie de Versailles",
+    "d": 248,
+    "c": 18,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/formulaire-demande-de-remboursement-demi-pension-2020-2021",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 151245,
+    "t": "Restauration au Forfait demi-pension 2026-2027",
+    "o": "Académie de Montpellier, lycée Georges Pompidou",
+    "d": 247,
+    "c": 11,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/restauration-au-forfait-demi-pension-2026-2027",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 99260,
+    "t": "INSCRIPTIONS ET RE-INSCRIPTIONS RESTAURATION SCOLAIRE 2024 / 2025 LYCÉE EJ MAREY ",
+    "o": "LYCEE ETIENNE-JULES MAREY BOULOGNE BILLANCOURT",
+    "d": 247,
+    "c": 27,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/re-inscriptions-restauration-scolaire-2024-2025-ly",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 93604,
+    "t": "Dossier d'inscription internat (2024/2025) - Lycée Alexandre Dumas",
+    "o": "Lycée Alexandre Dumas",
+    "d": 241,
+    "c": 50,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dossier-d-inscription-internat-2024-2025-lycee-ale",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 93449,
+    "t": "Demande de remboursement avances demi-pension - Lycée Albert Camus, BOIS-COLOMBES",
+    "o": "Lycée Albert Camus",
+    "d": 240,
+    "c": 14,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-albert-camus-remboursement-avances-dp",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 154813,
+    "t": "Demande d'aide sur les Fonds sociaux - Enseignement privé Guadeloupe (1er trim Octobre 2026)",
+    "o": "Région académique Guadeloupe",
+    "d": 236,
+    "c": 53,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-aide-sur-les-fonds-sociaux-enseignement--2",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 76311,
+    "t": "Lycée ARAGO, Paris - niveau SECONDES : Inscriptions cantine et bourse 2023/24",
+    "o": "Lycée ARAGO, Paris",
+    "d": 229,
+    "c": 51,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/arago-seconde2023",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 93587,
+    "t": "REMBOURSEMENT DES SOLDES DE COMPTE DE DEMI-PENSION (fin d'année scolaire 2023/2024)",
+    "o": "Lycée René CASSIN (ARPAJON)",
+    "d": 228,
+    "c": 10,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/cassin-arpajon-remboursement-des-soldes-de-compte-de-demi-pension",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 117491,
+    "t": "Inscriptions demi-pension 2025/26 (ELEVES) - Lycée La Tournelle, La Garenne-Colombes",
+    "o": "LP LA TOURNELLE",
+    "d": 228,
+    "c": 17,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/latournelle2526",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 95667,
+    "t": "Inscriptions demi-pension 2024/25 (ELEVES) - Lycée La Tournelle, La Garenne-Colombes",
+    "o": "LP LA TOURNELLE",
+    "d": 225,
+    "c": 17,
+    "y": "2024",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/latournelle2425",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 75528,
+    "t": "Dossier d'inscription internat (2023/2024) - Lycée Alexandre Dumas",
+    "o": "Lycée Alexandre Dumas",
+    "d": 224,
+    "c": 50,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dossier-d-inscription-internat-2023-2024",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 126160,
+    "t": "Demande d'aide sur les Fonds sociaux - Enseignement privé Guadeloupe (2026)",
+    "o": "Région académique Guadeloupe",
+    "d": 217,
+    "c": 53,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-aide-sur-les-fonds-sociaux-enseignement-",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 126489,
+    "t": "Candidature en vue de l'attribution d'une place à l'internat-externat - étudiants de CPGE du lycée Montaigne de Bordeaux",
+    "o": "Lycée Montaigne - Bordeaux",
+    "d": 215,
+    "c": 24,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/candidature-attribution-place-internat-externat",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 148990,
+    "t": "Candidature aux bourses de mobilité d'observation - Consortium Académique Erasmus+ 2026-27 -  Montpellier ",
+    "o": "Région Académique Occitanie",
+    "d": 214,
+    "c": 17,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/candidature-aux-bourses-de-mobilite-d-observation--3",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 75923,
+    "t": "Inscription demi-pension",
+    "o": "COLLEGE LE PETIT PONT",
+    "d": 209,
+    "c": 41,
+    "y": "2023",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-demi-pension-collegelepetitpont",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 72754,
+    "t": "Inscriptions demi-pension 2023/24 (ELEVES) - Lycée La Tournelle, La Garenne-Colombes",
+    "o": "LP LA TOURNELLE",
+    "d": 205,
+    "c": 24,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/latournelle",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 117360,
+    "t": "Inscription demi-pension",
+    "o": "COLLEGE LE PETIT PONT",
+    "d": 204,
+    "c": 41,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-demi-pension-2025-26",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 138656,
+    "t": "DAM_FORMULAIRE DE RECRUTEMENT_chargé(e) de coopération internationale",
+    "o": "France Éducation international",
+    "d": 203,
+    "c": 10,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dam_formulaire-de-recrutement_charge-e-de-cooperat",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 149536,
+    "t": "Inscription demi-pension 2026-2027",
+    "o": "COLLEGE LE PETIT PONT",
+    "d": 198,
+    "c": 47,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-demi-pension-2026-2027",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 38569,
+    "t": "Demande d'admission en internat dans un collège public des Alpes-Maritimes (rentrée 2021)",
+    "o": "Direction des services départementaux de l'Education nationale des Alpes Maritimes (DSDEN 06)",
+    "d": 185,
+    "c": 75,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/520a514e-ea70-4f5e-bc26-2d77fb602090",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 44216,
+    "t": "Demande de remboursement solde demi-pension 2020/2021 - Lycée E. IONESCO",
+    "o": "Collège de Sèvres, Académie de Versailles, Education Nationale",
+    "d": 178,
+    "c": 8,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-remboursement-solde-demi-pension-2020-2",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 51581,
+    "t": "Demande d'admission en internat dans un collège public des Alpes-Maritimes (rentrée 2022)",
+    "o": "Direction des services départementaux de l'Education nationale des Alpes Maritimes (DSDEN 06)",
+    "d": 177,
+    "c": 75,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/internat-college-06",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 58023,
+    "t": "INSCRIPTION A LA CANTINE - Année scolaire 2022/2023",
+    "o": "LYCEE ADOLPHE CHERIOUX - VITRY SUR SEINE",
+    "d": 169,
+    "c": 21,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscriptiondpcherioux2022",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 137555,
+    "t": "Demande de pré-inscription section internationale pour la rentrée scolaire 2026/2027",
+    "o": "Direction des services départementaux de l'Éducation nationale de la Marne",
+    "d": 162,
+    "c": 90,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/pre-inscription-section-internationale-2026-2027",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 130738,
+    "t": "Demande d'admission en internat dans un collège public des Alpes-Maritimes (rentrée 2026)",
+    "o": "Direction des services départementaux de l'Education nationale des Alpes-Maritimes",
+    "d": 161,
+    "c": 83,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/2026-internat-college-06",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 116071,
+    "t": "Inscription à la demi-pension pour les élèves de seconde 2025-2026",
+    "o": "Lycée professionnel Jean Monnet",
+    "d": 156,
+    "c": 13,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-a-la-demi-pension-pour-les-eleves-de-s",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 85277,
+    "t": "Demande d'admission en internat dans un collège public des Alpes-Maritimes (rentrée 2024)",
+    "o": "Direction des services départementaux de l'Education nationale des Alpes Maritimes (DSDEN 06)",
+    "d": 151,
+    "c": 78,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/2024-internat-college-06",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 111122,
+    "t": "Partenariats Internationaux - Recensement SCO",
+    "o": "Rectorat de région académique Pays de la Loire",
+    "d": 150,
+    "c": 19,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/b18de8ce-09ae-443b-a41a-499d819acb8a",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 68139,
+    "t": "Demande d'admission en internat dans un collège public des Alpes-Maritimes (rentrée 2023)",
+    "o": "Direction des services départementaux de l'Education nationale des Alpes Maritimes (DSDEN 06)",
+    "d": 144,
+    "c": 77,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/2023-internat-college-06",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 97226,
+    "t": "Lycée Jean Dautet - Service gestion : inscription à la restauration au FORFAIT (demi-pension 5 jours) pour l'année scolaire 2024-2025",
+    "o": "Lycée Jean Dautet",
+    "d": 141,
+    "c": 30,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-jean-dautet-inscription-demi-pension-forfait",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 99341,
+    "t": "Consentement étude automatique du droit à bourse - Kandelaft",
+    "o": "Collège Alexis Kandelaft ",
+    "d": 140,
+    "c": 40,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/fiche-de-consentement-etude-automatique-du-droit-a",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 119391,
+    "t": "Demande de remboursement solde cantine 2024/2025 - Lycée E. IONESCO",
+    "o": "LYCEE EUGENE IONESCO",
+    "d": 136,
+    "c": 0,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-remboursement-solde-cantine-2024-2025-l",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 95886,
+    "t": "Demande de bourse - Collège de Sèvres",
+    "o": "Collège de Sèvres, Académie de Versailles, Education Nationale",
+    "d": 135,
+    "c": 13,
+    "y": "2024",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-bourse-college-de-sevres",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 110587,
+    "t": "Demande d'admission en internat dans un collège public des Alpes-Maritimes (rentrée 2025)",
+    "o": "CASNAV ",
+    "d": 126,
+    "c": 74,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/2025-internat-college-06",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 60531,
+    "t": "Demande de remboursement solde demi-pension 2021/2022 - Lycée E. IONESCO",
+    "o": "Collège de Sèvres, Académie de Versailles, Education Nationale",
+    "d": 126,
+    "c": 8,
+    "y": "2022",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-remboursement-solde-demi-pension-2021-2",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 117895,
+    "t": "Candidature aux bourses de mobilité d'observation - Consortium Académique Erasmus+ 2026 -  Montpellier ",
+    "o": "Région Académique Occitanie",
+    "d": 126,
+    "c": 17,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/candidature-aux-bourses-de-mobilite-d-observation--2",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 103334,
+    "t": "LDMEMS - choix du nombre de jours demi-pension",
+    "o": "LYCEE DES METIERS ENTRE MEURTHE ET SANON",
+    "d": 125,
+    "c": 10,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/ldmems-choix-du-nombre-de-jours-demi-pension",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 84754,
+    "t": "Rentrée 2024 - Demande d'admission pour un enseignement en section internationale britannique (SIB) ou chinois (SIC) - CE2",
+    "o": "DSDEN 35, Rectorat de Rennes, Ministère de l'Éducation nationale",
+    "d": 120,
+    "c": 45,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/rentree24-admission-ce2-sections-internationales-dpt35",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 133654,
+    "t": "Demande d'admission en 6ème - sections internationales britannique de Nogent-sur-Marne",
+    "o": "DSDEN du Val-de-Marne",
+    "d": 120,
+    "c": 48,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-admissision-en-6eme-section-internationale-nogentsurmarne",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 63736,
+    "t": "Demande d'inscription à la demi-pension (2022/2023)",
+    "o": "Lycée GERVILLE RÉACHE",
+    "d": 117,
+    "c": 19,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-demi-pension-20222023",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 101444,
+    "t": "Candidature aux 14e Jeux Internationaux de la Jeunesse Le Caire 2026",
+    "o": "AEFE",
+    "d": 116,
+    "c": 26,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/candidature-aux-14e-jeux-internationaux-de-la-jeun",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 98118,
+    "t": "Inscription à la Demi-Pension pour l'Année Scolaire 2024-2025",
+    "o": "Lycée polyvalent du BTP - Saint Lambert",
+    "d": 115,
+    "c": 29,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-a-la-demi-pension-2024-2025-saint-lambert",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 99717,
+    "t": "Candidature stage SOPA international ",
+    "o": "INSPE de l'Académie de Versailles",
+    "d": 108,
+    "c": 33,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/candidature-stage-sopa-international",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 123433,
+    "t": "Inscription à la demi-pension du Lycée Carnot 2025-2026 pour les élèves du Lycée Jean Drouant",
+    "o": "Lycée Carnot, rectorat de Paris, Ministère de l'Education Nationale",
+    "d": 105,
+    "c": 15,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/drouantcarnot2025",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 119621,
+    "t": "Demande d'inscription à l'internat du Lycée GERVILLE REACHE (2025/2026)",
+    "o": "Lycée GERVILLE RÉACHE",
+    "d": 105,
+    "c": 64,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-inscription-internat-lgr2025-2026",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 97441,
+    "t": "Lycée Jean Dautet - Service gestion : inscription à l'INTERNAT, facturation au FORFAIT pour l'année scolaire 2024-2025",
+    "o": "Lycée Jean Dautet",
+    "d": 104,
+    "c": 30,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-jean-dautet-inscription-internat",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 59072,
+    "t": "Demande d'inscription à l'internat (2022/2023)",
+    "o": "Lycée GERVILLE RÉACHE",
+    "d": 103,
+    "c": 64,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-a-l-internat-2022-2023",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 147068,
+    "t": "Demande de remboursement avances demi-pension - Lycée Albert Camus, BOIS-COLOMBES 2025/2026",
+    "o": "Lycée Albert Camus",
+    "d": 103,
+    "c": 14,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-remboursement-avances-demi-pension-lyce-2",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 133505,
+    "t": "Demande d'admission en 6ème internationale britannique à Nogent-sur-Marne - transmission des avis écoles",
+    "o": "DSDEN du Val-de-Marne",
+    "d": 103,
+    "c": 17,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/6eme-internationale-colleges-nogent-sur-marne-avis-direction-enseignant",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 136460,
+    "t": "Demande d'aide sur les Fonds sociaux - Enseignement privé Guadeloupe (2ème trim 2026)",
+    "o": "Région académique Guadeloupe",
+    "d": 100,
+    "c": 53,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-aide-sur-les-fonds-sociaux-enseignement",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 67985,
+    "t": "Campagne pour la mise en place d'un réseau d'Enseignants Référents pour l'Action Européenne et Internationale",
+    "o": "Ministère de l'Éducaiton Nationale, de la Jeunesse ",
+    "d": 98,
+    "c": 10,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/campagne-pour-la-mise-en-place-d-un-reseau-d-ensei",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 76281,
+    "t": "Demande d'inscription au service d'internat Lycée 2023-2024",
+    "o": "LGT Parc Imperial",
+    "d": 97,
+    "c": 65,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-au-service-d-internat-lycee",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 75051,
+    "t": "Demande d'inscription à l'internat (2023/2024)",
+    "o": "Lycée GERVILLE RÉACHE",
+    "d": 97,
+    "c": 64,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-a-l-internat-2023-2024",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 44659,
+    "t": "Demande d'inscription au service d'internat 2021-2022",
+    "o": "Lycée Général et Technologique Le Parc Impérial",
+    "d": 95,
+    "c": 59,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-au-service-d-internat-2021-2",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 59811,
+    "t": "Demande d'inscription au service d'internat Lycée 2022-2023",
+    "o": "LGT Parc Imperial",
+    "d": 95,
+    "c": 65,
+    "y": "2022",
+    "etat": "depubliee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/80b0b8c9-bb2a-4154-b001-c38d9281c366",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 71556,
+    "t": " BTS CI (Commerce International) 2023",
+    "o": "Rectorat de l'académie de Toulouse",
+    "d": 90,
+    "c": 17,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/bts-ci-commerce-international-2023",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 97334,
+    "t": "Demande d'inscription à l'internat du Lycée GERVILLE REACHE (2024/2025)",
+    "o": "Lycée GERVILLE RÉACHE",
+    "d": 90,
+    "c": 64,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-inscription-internat-lgr2024-2025",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 44153,
+    "t": "Demande de Fonds Social Lycéen - Lycée E. IONESCO Année 2021/22",
+    "o": "Collège Victor Hugo - Issy Les Moulineaux",
+    "d": 89,
+    "c": 23,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-fonds-social-lyceen-lycee-e-ionesco-ann",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 77388,
+    "t": "Demande de remboursement avances demi-pension (ELEVES)  - Lycée La Tournelle, La Garenne-Colombes",
+    "o": "LP LA TOURNELLE",
+    "d": 89,
+    "c": 15,
+    "y": "2023",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/elevesremboursementlatournelle",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 110668,
+    "t": "Demande d'aide sur les Fonds sociaux - Enseignement privé Guadeloupe (2025)",
+    "o": "Région académique Guadeloupe",
+    "d": 89,
+    "c": 53,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/fonds-sociaux-enseignement-prive-guadeloupe",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 122647,
+    "t": "LDMEMS - choix du nombre de jours demi-pension 2025/2026",
+    "o": "LYCEE DES METIERS ENTRE MEURTHE ET SANON",
+    "d": 89,
+    "c": 10,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/ldmems-choix-du-nombre-de-jours-demi-pension-2025",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 110441,
+    "t": "Inscription internat - 1ère année 2025/2026",
+    "o": "Cité scolaire Lakanal",
+    "d": 88,
+    "c": 33,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-internat-1ere-annee-2025-2026",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 104439,
+    "t": "Rentrée 2025 - Demande d'admission en section internationale britannique (SIB) ou chinois (SIC) - CE2",
+    "o": "DSDEN 35, Rectorat de Rennes, Ministère de l'Éducation nationale",
+    "d": 87,
+    "c": 45,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/rentree-2025-admission-sib-sic",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 82882,
+    "t": "Région académique Bretagne - 2023-2024 - Déclaration des Enseignants Référents à l'Action Européenne et Internationale (ERAEI)",
+    "o": "Region académique Bretagne",
+    "d": 86,
+    "c": 17,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/bretagne-declaration-eraei-2023-2024",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 125634,
+    "t": "Candidature en vue de l'attribution d'une place à l'internat - étudiants de CPGE du lycée Montaigne de Bordeaux",
+    "o": "Lycée Montaigne - Bordeaux",
+    "d": 86,
+    "c": 36,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/candidature-attribution-place-internat",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 117551,
+    "t": "Demande de remboursement avances demi-pension - Lycée Albert Camus, BOIS-COLOMBES",
+    "o": "Lycée Albert Camus",
+    "d": 86,
+    "c": 14,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-remboursement-avances-demi-pension-lyce",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 97528,
+    "t": "Demande d'inscription au service d'internat Lycée 2024-2025",
+    "o": "LGT Parc Imperial",
+    "d": 83,
+    "c": 63,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-au-service-d-internat-lycee--2",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 139283,
+    "t": "Demande d'admission en section internationale dans un collège des Alpes-Maritimes en 5e, 4e, 3e - Rentrée 2026",
+    "o": "Direction des services départementaux de l'Éducation nationale des Alpes-Maritimes",
+    "d": 82,
+    "c": 77,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/si06-2026",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 121941,
+    "t": "Demande d'inscription au service d'internat Lycée 2025-2026",
+    "o": "LGT Parc Imperial",
+    "d": 81,
+    "c": 62,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-au-service-d-internat-lycee--3",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 148423,
+    "t": "Démarche d'inscription à l'internat du lycée d'Apt",
+    "o": "Académie d'Aix-Marseille, ministère de l'éducation nationale",
+    "d": 81,
+    "c": 15,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demarche-d-inscription-a-l-internat-du-lycee-d-apt",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 55624,
+    "t": "Demande d'admission en section internationale dans un collège des Alpes-Maritimes en 5è, 4è, 3è",
+    "o": "Direction des services départementaux de l'Education nationale des Alpes Maritimes (DSDEN 06)",
+    "d": 79,
+    "c": 73,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/sections_internationales06",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 68507,
+    "t": "Demande de Fonds Social Collègien - Collège de Sèvres",
+    "o": "Collège de Sèvres, Académie de Versailles, Education Nationale",
+    "d": 78,
+    "c": 23,
+    "y": "2023",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-fonds-social-collegien-college-de-sevre",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 55601,
+    "t": " BTS CI (Commerce International) 2022 ",
+    "o": "Rectorat de l'académie de Toulouse",
+    "d": 78,
+    "c": 19,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/bts-ci-commerce-international-2022",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 152348,
+    "t": "DRD_FORMULAIRE DE RECRUTEMENT_chargé de coopération internationale",
+    "o": "France Education international",
+    "d": 77,
+    "c": 13,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/drd_formulaire-de-recrutement_charge-de-coop-unite-b",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 144670,
+    "t": "Dossier de candidature Cnam Paris Licence professionnelle LP11200A : Logistique et Transports internationaux 2026/2027",
+    "o": "CNAM",
+    "d": 76,
+    "c": 59,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dossier-de-candidature-cnam-lp112-26-27",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 149083,
+    "t": "FORMULAIRE DEMANDE DE REMBOURSEMENT DEMI-PENSION 2025-2026",
+    "o": "Lycée ALAIN - Académie de Versailles",
+    "d": 76,
+    "c": 17,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/formulaire-demande-de-remboursement-demi-pension-2025-2026",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 97643,
+    "t": "Demande de remboursement solde demi-pension 2023/2024 - Lycée E. IONESCO",
+    "o": "LYCEE EUGENE IONESCO",
+    "d": 75,
+    "c": 8,
+    "y": "2024",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-remboursement-solde-demi-pension-2023-2",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 121765,
+    "t": "FORMULAIRE DEMANDE DE REMBOURSEMENT DEMI-PENSION 2024-2025",
+    "o": "Lycée ALAIN - Académie de Versailles",
+    "d": 74,
+    "c": 17,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/formulaire-demande-de-remboursement-demi-pension-2024-2025",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 157555,
+    "t": "LDMEMS - choix du nombre de jours demi-pension 2026 - 2027",
+    "o": "LYCEE DES METIERS ENTRE MEURTHE ET SANON",
+    "d": 74,
+    "c": 10,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/ldmems-nombre-jours-demi-pension-2026-2027",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 133789,
+    "t": "Rentrée 2026 - Demande d'admission en section internationale britannique (SIB) ou chinois (SIC) - CE2",
+    "o": "DSDEN 35, Rectorat de Rennes, Ministère de l'Education Nationale",
+    "d": 74,
+    "c": 44,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/rentree-2026-demande-d-admission-en-section-intern",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 89073,
+    "t": "Demande d'admission en section internationale dans un collège des Alpes-Maritimes en 5è, 4è, 3è - Rentrée 2024",
+    "o": "CASNAV ",
+    "d": 72,
+    "c": 74,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-admission-en-section-internationale-dans",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 119630,
+    "t": "Demande d'inscription à l'internat (2025/2026)",
+    "o": "Rectorat de la Guadeloupe",
+    "d": 72,
+    "c": 63,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-a-l-internat-2025-2026",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 147062,
+    "t": "Inscription internat - deuxième année interne montant année 2026/2027",
+    "o": "Cité scolaire Lakanal",
+    "d": 71,
+    "c": 30,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-internat-deuxieme-annee-inscrit-a-l-in",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 118079,
+    "t": "MAI 2025 : Candidature bourses de mobilité d'observation - Consortium Académique Erasmus+ 2024-  Montpellier ",
+    "o": "Région Académique Occitanie",
+    "d": 71,
+    "c": 16,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/mai-2025-candidature-bourses-de-mobilite-d-observa",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 147061,
+    "t": "Inscription internat - 1ère demande ou khûbe ou 5/2 2026/2027",
+    "o": "Cité scolaire Lakanal",
+    "d": 69,
+    "c": 37,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-internat-1ere-demande-ou-khube-ou-5-2",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 60940,
+    "t": "FORMULAIRE DEMANDE DE REMBOURSEMENT  AVANCES DEMI-PENSION ET VOYAGES SCOLAIRES 2021-2022",
+    "o": "Lycée ALAIN - Académie de Versailles",
+    "d": 68,
+    "c": 18,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/79e38c3d-a890-4cff-9013-14ed5f7162c7",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 146899,
+    "t": "Demande d'inscription à l'internat (2026/2027)",
+    "o": "Rectorat de la Guadeloupe",
+    "d": 68,
+    "c": 63,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-a-l-internat-2026-2027",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 76688,
+    "t": "LYCÉE NEWTON ENREA - INSCRIPTION A L'INTERNAT/SERVICE DE RESTAURATION - ANNEE SCOLAIRE 2023-2024",
+    "o": "Lycée NEWTON - ENREA",
+    "d": 68,
+    "c": 37,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-newton-enrea-inscription-a-l-internat-servic",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 145722,
+    "t": "Inscription internat - 1ère année 2026/2027",
+    "o": "Cité scolaire Lakanal",
+    "d": 67,
+    "c": 33,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-internat-1ere-annee-2026-2027",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 119217,
+    "t": "Forfait demi-pension 2ème trimestre 2025-2026",
+    "o": "Lycée Racine",
+    "d": 67,
+    "c": 5,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/forfait-t2-25-26",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 149127,
+    "t": "Demande d'inscription à l'internat du Lycée GERVILLE REACHE (2026/2027)",
+    "o": "Lycée GERVILLE RÉACHE",
+    "d": 65,
+    "c": 64,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-a-l-internat-du-lycee-gerville-reache-2026-2027",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 113854,
+    "t": "Demande d'admission en section internationale dans un collège des Alpes-Maritimes en 5e, 4e, 3e - Rentrée 2025",
+    "o": "CASNAV ",
+    "d": 65,
+    "c": 69,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/si06-2025",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 27039,
+    "t": "Demande de bourse 2021 \"BAFD formation générale\" DRAJES",
+    "o": "Délégation Régionale Académique à la Jeunesse, à l'Engagement et aux Sports",
+    "d": 64,
+    "c": 37,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-bourse-idf-2021-bafd-formation-generale",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 148598,
+    "t": "Demande de remboursement solde demi-pension 2025/2026 - Lycée E. IONESCO",
+    "o": "LYCEE EUGENE IONESCO",
+    "d": 63,
+    "c": 8,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-remboursement-solde-demi-pension-2025-2",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 97246,
+    "t": "Demande d'inscription à l'internat (2024/2025)",
+    "o": "Académie de la Guadeloupe",
+    "d": 63,
+    "c": 63,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-a-l-internat-2024-2025",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 112356,
+    "t": " BTS CI (Commerce International) 2025",
+    "o": "Rectorat de Toulouse",
+    "d": 61,
+    "c": 17,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/bts-ci-commerce-international-2025",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 42082,
+    "t": "Demande d'admission en section internationale dans un collège des Alpes-Maritimes en 5è, 4è, 3è",
+    "o": "Direction des services départementaux de l'Education nationale des Alpes Maritimes (DSDEN 06)",
+    "d": 60,
+    "c": 73,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/sections_internationales_college06",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 80021,
+    "t": "REGLEMENT DE L'INTERNAT",
+    "o": "LYCEE BAGATELLE",
+    "d": 60,
+    "c": 11,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/reglement-de-l-internat",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 152556,
+    "t": "DRD_FORMULAIRE DE RECRUTEMENT_chargé de coopération internationale_réf_comm",
+    "o": "France Education international",
+    "d": 60,
+    "c": 14,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/drd_formulaire-de-recrutement_cci_ref_comm",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 130373,
+    "t": "Candidature à une bourse de recherche doctorale de la Fondation Martine Aublet | Application for a doctoral fellowship from the Fondation Martine Aublet",
+    "o": "Musée du Quai Branly - Jacques Chirac",
+    "d": 60,
+    "c": 54,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/bourse-doctorale-fma-mqb",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 90547,
+    "t": " BTS CI (Commerce International) 2024",
+    "o": "Rectorat de l'académie de Toulouse",
+    "d": 52,
+    "c": 17,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/bts-ci-commerce-international-2024",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 71612,
+    "t": "Demande d'admission en section internationale dans un collège des Alpes-Maritimes en 5è, 4è, 3è - Rentrée 2023",
+    "o": "Académie de Nice - DSDEN 06",
+    "d": 52,
+    "c": 74,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/si06-2023",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 98439,
+    "t": "FORMULAIRE DEMANDE DE REMBOURSEMENT  AVANCES DEMI-PENSION ET VOYAGES SCOLAIRES 2023-2024",
+    "o": "Lycée ALAIN - Académie de Versailles",
+    "d": 51,
+    "c": 18,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/formulaire-demande-de-remboursement-demi-pension-2023-2024",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 61869,
+    "t": "Rentrée 2022 - Inscription en Seconde au Lycée International de Palaiseau Paris Saclay ",
+    "o": "Lycée International de Palaiseau Paris Saclay (LIPPS)",
+    "d": 49,
+    "c": 76,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/rentree-2022-inscription-en-seconde",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 127940,
+    "t": "Candidature stage SOPA international 2025-2026",
+    "o": "INSPE de l'Académie de Versailles",
+    "d": 48,
+    "c": 35,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/candidature-stage-sopa-international-2025-2026",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 55171,
+    "t": "Demande de bourse 2022 \"BAFD formation générale\" DRAJES",
+    "o": "Délégation Régionale Académique à la Jeunesse, à l'Engagement et aux Sports",
+    "d": 45,
+    "c": 37,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-bourse-2022-bafd-formation-generale-drajes-idf",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 119220,
+    "t": "Forfait demi-pension 3ème trimestre 2025-2026",
+    "o": "Lycée Racine",
+    "d": 44,
+    "c": 6,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/forfait-t3-25-26",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 154260,
+    "t": "Recensement projets de sorties et voyages pédagogiques 2026-2027 - Campus International de Valbonne",
+    "o": "LYCEE GENERAL INTERNATIONAL",
+    "d": 43,
+    "c": 28,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/recensement-projets-de-sorties-et-voyages-pedagogi",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 147060,
+    "t": "Lycée Paul Belmondo Arpajon : Remboursement des soldes de comptes de demi-pension (fin d'année scolaire 2025/2026)",
+    "o": "Lycée Paul Belmondo",
+    "d": 43,
+    "c": 13,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-paul-belmondo-arpajon-remboursement-des-sold",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 123094,
+    "t": " Lycée ARAGO, Paris : Inscription financière SECONDES (cantine, bourses, aides sociales) 2025/26",
+    "o": "Lycée ARAGO, Paris",
+    "d": 43,
+    "c": 60,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/arago-seconde2025",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 80345,
+    "t": "Service Civique - Appel à projets « Accessibilité du service civique à l’international »",
+    "o": "Agence du Service Civique",
+    "d": 42,
+    "c": 41,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/service-civique-aap-international",
+    "qf": false,
+    "niv": "modere",
+    "pp": 0
+   },
+   {
+    "num": 150485,
+    "t": "Lycée Geoffroy Saint - Hilaire ETAMPES : inscription internat 2026 / 2027",
+    "o": "Lycée GEOFFROY SAINT - HILAIRE",
+    "d": 42,
+    "c": 22,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-gsh-etampes-inscription-internat",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 140580,
+    "t": "Candidature à une bourse de recherche de master de la Fondation Martine Aublet | Application for a master research fellowship from the Fondation Martine Aublet",
+    "o": "Musée du Quai Branly - Jacques Chirac",
+    "d": 42,
+    "c": 42,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/bourse-master-fma-mqb",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 141627,
+    "t": "Inscription administrative des étudiants internationaux 2026-2027",
+    "o": "Université de la Polynésie française",
+    "d": 40,
+    "c": 71,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-international-25-27",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 134471,
+    "t": "Demande d'admission en 6ème internationale britannique au collège Jean Macé - transmission des avis écoles",
+    "o": "DSDEN du Val-de-Marne",
+    "d": 39,
+    "c": 17,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/6eme-internationale-jean-mace-avis-direction-enseignant",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 76871,
+    "t": "Inscriptions demi-pension (COMMENSAUX) - Lycée La Tournelle, La Garenne-Colombes",
+    "o": "LP LA TOURNELLE",
+    "d": 38,
+    "c": 19,
+    "y": "2023",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/commensauxlatournelle",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 72100,
+    "t": "Demande de bourse 2023 \"BAFD formation générale\" DRAJES",
+    "o": "Région académique, Ministère chargé de l'Education Nationale / Ministère chargé des sports",
+    "d": 38,
+    "c": 37,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-bourse-2023-bafd-formation-generale-drajes-idf",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 122208,
+    "t": "Mise à jour information concernant la gestion : demi-pension / bourses",
+    "o": "Collège Montesquieu",
+    "d": 37,
+    "c": 37,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/mise-a-jour-information-concernant-la-gestion-demi",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 133658,
+    "t": "Demande d'admission en 6ème - section internationale britannique du collège Jean Macé de Fontenay-Sous-Bois",
+    "o": "DSDEN du Val-de-Marne",
+    "d": 37,
+    "c": 48,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-admissision-en-6eme-section-internationale-jeanmacefontenay",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 120536,
+    "t": "Inscription, modification ou désinscription - forfait de restauration scolaire",
+    "o": "Lycée des Métiers du Rebberg, Académie de Strasbourg, ministère de l'Education Nationale",
+    "d": 36,
+    "c": 17,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/cantine-rebberg",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 139825,
+    "t": "Demande d'admission en internat dans un collège public du VAR (rentrée 2026)",
+    "o": "Collèges du Fenouillet la Crau, Thomas Edison Lorgues, Général Ferrié Draguignan, DSDEN du Var",
+    "d": 36,
+    "c": 76,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-admission-en-internat-dans-un-college-pu-2",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 77274,
+    "t": "FORMULAIRE DEMANDE DE REMBOURSEMENT  AVANCES DEMI-PENSION ET VOYAGES SCOLAIRES 2022-2023",
+    "o": "Lycée ALAIN - Académie de Versailles",
+    "d": 35,
+    "c": 18,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/formulaire-demande-de-remboursement-demi-pension-2022-2023",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 150818,
+    "t": "REMBOURSEMENT SOLDE CANTINE",
+    "o": "Lycée Fénelon",
+    "d": 35,
+    "c": 2,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/remboursement-solde-cantine",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 82529,
+    "t": "Inscription des étudiants internationaux",
+    "o": "Université de la Polynésie française",
+    "d": 34,
+    "c": 112,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-des-etudiants-internationaux",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 90961,
+    "t": "Demande de bourse 2024 \"BAFD formation générale\" DRAJES",
+    "o": "Région académique, Ministère chargé de l'Education Nationale / Ministère chargé des sports",
+    "d": 33,
+    "c": 37,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-bourse-idf-2024-bafd-formation-generale",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 117442,
+    "t": "REMBOURSEMENT DES SOLDES DE COMPTE DE DEMI-PENSION (fin d'année scolaire 2024/2025)",
+    "o": "Lycée Paul Belmondo",
+    "d": 31,
+    "c": 9,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/remboursement-des-soldes-de-compte-de-demi-pension",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 149027,
+    "t": "Dossier de bourses (pièces justificatives) Lycée Louise Michel - campagne 2026-2027",
+    "o": "Lycée Louise Michel",
+    "d": 29,
+    "c": 9,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dossier-de-bourses-pieces-justificatives-lycee-lou",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 114953,
+    "t": "Dossier de candidature Cnam Licence professionnelle LP11200A : Logistique et Transports internationaux 2025/2026",
+    "o": "CNAM",
+    "d": 28,
+    "c": 59,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dossier-de-candidature-cnam-licence-professionnell-45",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 111062,
+    "t": "Demande de remise d'ordre sur les frais de restauration scolaire facturés",
+    "o": "Académie d'Orléans-Tours, Conseil départemental du Loiret",
+    "d": 28,
+    "c": 10,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/absencedpavecro-0450939b",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 96918,
+    "t": "RE-INSCRIPTION RESTAURATION SCOLAIRE 2024 / 2025 LYCEE Louis Dardenne",
+    "o": "Ministère de l'Education nationale",
+    "d": 26,
+    "c": 25,
+    "y": "2024",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/re-inscription-restauration-scolaire-2023-2024-lyc-2",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 75674,
+    "t": "Demande de Fonds Social Lycéen - Lycée E. IONESCO Année 2023/24",
+    "o": "LYCEE EUGENE IONESCO",
+    "d": 26,
+    "c": 23,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-fsl-2023-2024",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 102215,
+    "t": "Inscription des étudiants internationaux 2024-2025",
+    "o": "Université de la Polynésie française",
+    "d": 24,
+    "c": 115,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-des-etudiants-internationaux-2024-2025",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 149690,
+    "t": "DEMI-PENSION 2026-2027 FENELON",
+    "o": "Lycée Fénelon",
+    "d": 24,
+    "c": 3,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demi-pension-2026-2027-fenelon",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 104990,
+    "t": "Fonds social collégien 2024-2025",
+    "o": "Ministère de l'Education nationale",
+    "d": 23,
+    "c": 17,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/fonds-social-collegien-2024-2025",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 78436,
+    "t": "Demande d'aide auprès du fonds social",
+    "o": " Rectorat de Rennes",
+    "d": 22,
+    "c": 26,
+    "y": "2023",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-aide--fond-social",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 61871,
+    "t": "Demande d'inscription au service d'internat Collège 2022-2023",
+    "o": "LGT Parc Imperial",
+    "d": 22,
+    "c": 64,
+    "y": "2022",
+    "etat": "depubliee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/b9e94d6b-8342-4589-8458-31889a2366a1",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 133679,
+    "t": "Demande d'admission en 6ème - section internationale portugaise du collège Henri Cahn de Bry-sur-Marne",
+    "o": "DSDEN du Val-de-Marne",
+    "d": 22,
+    "c": 48,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-admission-en-6eme-section-internationale-henricahnbry",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 77298,
+    "t": "3PMET INSCRIPTIONS RESTAURATION SCOLAIRE 2023 / 2024 LYCÉE EJ MAREY ",
+    "o": "LYCEE ETIENNE-JULES MAREY BOULOGNE BILLANCOURT",
+    "d": 22,
+    "c": 25,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/3pmet-inscriptions-restauration-scolaire-2023-2024",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 105020,
+    "t": "Déclaration de changement de régime de demi-pension 2024-2025",
+    "o": "Ministère de l'Education nationale",
+    "d": 21,
+    "c": 14,
+    "y": "2024",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/changementdp2024-2025",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 98475,
+    "t": "3PMET INSCRIPTIONS RESTAURATION SCOLAIRE 2024 / 2025 LYCÉE EJ MAREY ",
+    "o": "LYCEE ETIENNE-JULES MAREY BOULOGNE BILLANCOURT",
+    "d": 20,
+    "c": 25,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/3pmet-inscriptions-restauration-scolaire-2024-2025",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 139470,
+    "t": "Admission des étudiants internationaux 2026-2027",
+    "o": "Université de la Polynésie française",
+    "d": 20,
+    "c": 36,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/admission-des-etudiants-internationaux-2026-2027",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 113421,
+    "t": "Inscription des étudiants internationaux 2025-2026",
+    "o": "Université de la Polynésie française",
+    "d": 19,
+    "c": 117,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/admission-des-etudiants-internationaux-2025-2026",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 121989,
+    "t": "Demande d'inscription au service d'internat Collège 2025-2026",
+    "o": "LGT Parc Imperial",
+    "d": 17,
+    "c": 62,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-au-service-d-internat-colleg-3",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 99162,
+    "t": "Candidature : Bien être à l'école - Rencontre internationale - DUBLIN, octobre 2024",
+    "o": "Région Académique Occitanie",
+    "d": 16,
+    "c": 6,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/candidature-bien-etre-a-l-ecole-rencontre-internat",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 131566,
+    "t": "Demande de Fonds Social Lycéen - Voyages Irlande 2026-Lycée E. Mounier 0920135x",
+    "o": "Lycée Emmanuel MOUNIER",
+    "d": 16,
+    "c": 20,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-fonds-social-lyceen-voyages-irlande-202",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 32270,
+    "t": "Demande d'inscription au service d'internat (Collège)",
+    "o": "Lycée Général et Technologique Le Parc Impérial",
+    "d": 15,
+    "c": 59,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/4f96083f-c289-4520-8ea6-12893ac3741d",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 97857,
+    "t": "Demande d'inscription au service d'internat Collège 2024-2025",
+    "o": "LGT Parc Imperial",
+    "d": 15,
+    "c": 63,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-au-service-d-internat-colleg-2",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 76288,
+    "t": "Demande d'inscription au service d'internat Collège 2023-2024",
+    "o": "LGT Parc Imperial",
+    "d": 13,
+    "c": 64,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-au-service-d-internat-colleg",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 130200,
+    "t": "Admission des étudiants internationaux 2025-2026",
+    "o": "Université de la Polynésie française",
+    "d": 12,
+    "c": 37,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/admission-des-etudiants-internationaux-2025-2026-3",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 80418,
+    "t": "Demande de Fonds Social - Collège Elsa Triolet 75013 PARIS - Année scolaire 2025-2026",
+    "o": "Collège Elsa Triolet",
+    "d": 12,
+    "c": 30,
+    "y": "2023",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-fonds-social-college-elsa-triolet-annee",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 102906,
+    "t": "UPSaclay - Ecoles Thématiques Internationales 2025",
+    "o": "Université Paris-Saclay",
+    "d": 12,
+    "c": 72,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/upsaclay-ecoles-thematiques-internationales",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 97567,
+    "t": "Demande de Fonds Social Lycéen - Lycée E. IONESCO Année 2024/25",
+    "o": "LYCEE EUGENE IONESCO",
+    "d": 11,
+    "c": 23,
+    "y": "2024",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-fonds-social-lyceen-lycee-e-ionesco-ann-2",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 136710,
+    "t": "UPSaclay - Bonus Qualité International (BQI)",
+    "o": "UNIVERSITE PARIS-SACLAY",
+    "d": 10,
+    "c": 31,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/upsaclay-bonus-qualite-international",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 148195,
+    "t": "Demande de Fonds Social Lycéen - Lycée E. IONESCO Année 2026/27",
+    "o": "LYCEE EUGENE IONESCO",
+    "d": 10,
+    "c": 23,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-fonds-social-lyceen-lycee-e-ionesco-ann-4",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 130201,
+    "t": "Etudiants étrangers : demande de logement à la résidence internationale et cité universitaire 2025/2026.",
+    "o": "Université de la Polynésie française",
+    "d": 10,
+    "c": 45,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/etudiants-etrangers-demande-de-logement-a-la-resid",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 102775,
+    "t": "UPSaclay - Bonus Qualité International (BQI)",
+    "o": "Université Paris-Saclay",
+    "d": 10,
+    "c": 30,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/c84f9993-83b4-4030-98b4-4588113b241c",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 138691,
+    "t": "Mobilité internationale de stage ou de recherche 2026-2027 — candidature et demande d’aides",
+    "o": "Université de la Polynésie française",
+    "d": 9,
+    "c": 129,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/candidature-demande-aide-mobilite-stage",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 72204,
+    "t": "Réunion DAEP : ordre de mission évaluation Internationale",
+    "o": "Rectorat de l'académie de Nantes",
+    "d": 9,
+    "c": 13,
+    "y": "2023",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/reunion-daep-ordre-de-mission-evaluation-internati",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 155753,
+    "t": "Choix définitif du régime de demi-pension - 3 jours année scolaire 2026-27",
+    "o": "Collège Montesquieu",
+    "d": 8,
+    "c": 16,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/2b1c10c8-5154-43dd-94b3-b95819c9a9d5",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 95728,
+    "t": "Dossier de bourses (pièces justificatives)",
+    "o": "Collège BEL AIR",
+    "d": 8,
+    "c": 9,
+    "y": "2024",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dossier-de-bourses-pieces-justificatives",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 99897,
+    "t": "Candidature Master Enseigner en Etablissement Francophone International (EEFI) - CYU Paris Université - Année universitaire 2024-2025",
+    "o": "INSPE de l'Académie de Versailles",
+    "d": 8,
+    "c": 61,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/candidature-master-eefi-cyu-ufe-2024-2025",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 136805,
+    "t": "UPSaclay - Ecoles Thématiques Internationales 2026",
+    "o": "Université Paris-Saclay",
+    "d": 8,
+    "c": 73,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/upsaclay-ecoles-thematiques-internationales-2026",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 66930,
+    "t": "Campagne de paiement des bourses /  remboursement",
+    "o": "Lycée professionnel Alexandre Bérard",
+    "d": 8,
+    "c": 4,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/campagne-de-paiement-des-bourses-remboursement",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 151152,
+    "t": "Bourse de recherche MIAM - INHA 2026/2027",
+    "o": "INSTITUT NATIONAL D'HISTOIRE DE L'ART",
+    "d": 6,
+    "c": 43,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/bourse-de-recherche-miam-inha-2026-2027",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 99205,
+    "t": "Demande de Fonds Social Lycéen 2024-2025  - Lycée de BAGATELLE",
+    "o": "LYCEE BAGATELLE",
+    "d": 6,
+    "c": 25,
+    "y": "2024",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-fonds-social-lyceen-2024-2025-lycee-de",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 104486,
+    "t": "Demande de Fonds Social Lycéen - Voyages Ski 2025-Lycée E. Mounier 0920135x",
+    "o": "Lycée Emmanuel MOUNIER",
+    "d": 6,
+    "c": 20,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-fonds-social-lyceen-voyages-ski-2025-ly",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 99208,
+    "t": "Démission / changement forfait demi-pension",
+    "o": "LYCEE BAGATELLE",
+    "d": 5,
+    "c": 12,
+    "y": "2024",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demission-changement-forfait-demi-pension",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 67780,
+    "t": "Appel à projet mobilité sortante internationale 2023",
+    "o": "Université de la Polynésie française",
+    "d": 4,
+    "c": 20,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/9a461df2-2f16-40c9-9cd2-71adaee4ccbd",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 157556,
+    "t": "Bourses de mobilité de groupes d'élèves - Collèges en progrès - Consortium académique Erasmus+ - Montpellier 2026-27",
+    "o": "Région Académique Occitanie",
+    "d": 4,
+    "c": 9,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/bourses-de-mobilite-de-groupes-d-eleves-colleges-e",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 107952,
+    "t": "Appel à projet mobilité entrante internationale 2025",
+    "o": "Université de la Polynésie française",
+    "d": 4,
+    "c": 27,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/appel-a-projet-mobilite-entrante-internationale-20",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 85402,
+    "t": "Appel à projet mobilité sortante internationale 2024",
+    "o": "Université de la Polynésie française",
+    "d": 4,
+    "c": 20,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/5addca16-e35c-4ff6-8475-f6e97e7a2e5f",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 146908,
+    "t": "Inscriptions demi-pension 2026/27 (ELEVES) - Lycée La Tournelle, La Garenne-Colombes",
+    "o": "LP LA TOURNELLE",
+    "d": 4,
+    "c": 19,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/latournelle2627",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 107480,
+    "t": "Appel à projet mobilité sortante internationale 2025",
+    "o": "Université de la Polynésie française",
+    "d": 4,
+    "c": 20,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/appel-a-projet-mobilite-sortante-internationale-20",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 126620,
+    "t": "Fonds social collégien 2025-2026",
+    "o": "Ministère de l'Education nationale",
+    "d": 4,
+    "c": 17,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/fonds-social-collegien-2025-2026",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 131565,
+    "t": "Demande de Fonds Social Lycéen - Voyages Chine 2026-Lycée E. Mounier 0920135x",
+    "o": "Lycée Emmanuel MOUNIER",
+    "d": 4,
+    "c": 20,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-fonds-social-lyceen-voyages-chine-2026",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 151076,
+    "t": "Bourse de recherche DFK/INHA 2026-2027",
+    "o": "INSTITUT NATIONAL D'HISTOIRE DE L'ART",
+    "d": 3,
+    "c": 18,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/bourse-de-recherche-dfk-inha-2026-2027",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 136646,
+    "t": "Périodes de jeûne et désinscription cantine ",
+    "o": "Lycée des Métiers du Rebberg, Académie de Strasbourg, ministère de l'Education Nationale",
+    "d": 3,
+    "c": 8,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/periodes-de-jeune-et-suspension-cantine",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 67576,
+    "t": "Appel à projet mobilité entrante internationale 2023",
+    "o": "Université de la Polynésie française",
+    "d": 3,
+    "c": 27,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/fdfa76fa-4e84-45b4-bc89-f9130c6db84e",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 68375,
+    "t": "Bourses de mobilité de stage à l'étranger (BTS)",
+    "o": "Ministère de l'Éducaiton Nationale, de la Jeunesse ",
+    "d": 3,
+    "c": 3,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/bourses-de-mobilite-de-stage-a-l-etranger-bts",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 45171,
+    "t": "Demande d'inscription au service de demi-pension Collège - 2021/2022",
+    "o": "Lycée Général et Technologique Le Parc Impérial",
+    "d": 3,
+    "c": 13,
+    "y": "2021",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-inscription-au-service-de-demi-pension-c",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 120196,
+    "t": "Demande de Fonds Social Lycéen - Lycée E. IONESCO Année 2025/26",
+    "o": "LYCEE EUGENE IONESCO",
+    "d": 3,
+    "c": 23,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-fonds-social-lyceen-lycee-e-ionesco-ann-3",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 143020,
+    "t": "Université Rouen Normandie - Bourse France Excellence Eiffel volet master/ingénieur",
+    "o": "Université de Rouen Normandie, Ministère de l'Enseignement Supérieur de la Recherche et de l'Espace",
+    "d": 2,
+    "c": 89,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/universite-rouen-normandie-bourse-france-excellenc",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 77688,
+    "t": "Demande de Fonds Social Lycéen 2023-2024  - Lycée de BAGATELLE",
+    "o": "LYCEE BAGATELLE",
+    "d": 2,
+    "c": 25,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-fonds-social-lyceen-2023-2024-lycee-de",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 127967,
+    "t": "Transmission du mandat de prélèvement automatique pour le paiement de l'internat",
+    "o": "Lycée Alfred Mongy",
+    "d": 2,
+    "c": 2,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/transmission-du-mandat-de-prelevement-automatique",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 138619,
+    "t": "Commissions d'aides sociales",
+    "o": "Lyon1",
+    "d": 2,
+    "c": 9,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/comissions-d-aides-sociales",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 156784,
+    "t": "Fonds Social urgence 26-27 LMD",
+    "o": "Lycée La Martinière Diderot, accadémie de Lyon, ministère de l'éducation nationale",
+    "d": 1,
+    "c": 41,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/fonds-social-urgence-26-27-lmd",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 156010,
+    "t": "Choix définitif du régime de demi-pension - 3 jours année scolaire 2026-27",
+    "o": "Collège Montesquieu",
+    "d": 1,
+    "c": 17,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/choix-definitif-de-demi-pension-3-jours",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 95418,
+    "t": "Insription à la demi-pension de tous les personnels",
+    "o": "Lycée professionnel Jean Monnet",
+    "d": 1,
+    "c": 9,
+    "y": "2024",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/insription-a-la-demi-pension-de-tous-les-personnel",
+    "qf": false,
+    "niv": "simple",
+    "pp": 100
+   },
+   {
+    "num": 55590,
+    "t": "Demande d'admission en section internationale dans un collège des Alpes-Maritimes en 5è, 4è, 3è",
+    "o": "Direction des services départementaux de l'Education nationale des Alpes Maritimes (DSDEN 06)",
+    "d": 1,
+    "c": 73,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/5e238cbf-addd-497c-94ec-59a51f3adef2",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 129489,
+    "t": " Lycée papillon, Paris : Inscription financière SECONDES (cantine, bourses, aides sociales) 2025/26",
+    "o": "DINUM",
+    "d": 1,
+    "c": 56,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-papillon-paris-inscription-financiere-second",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 158983,
+    "t": "Demande de remise d'ordre sur les frais de restauration scolaire facturés",
+    "o": "Education Nationale",
+    "d": 1,
+    "c": 12,
+    "y": "2026",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-remise-d-ordre-sur-les-frais-de-restaur",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 42081,
+    "t": "Demande d'admission en section internationale dans un collège des Alpes-Maritimes en 5è, 4è, 3è",
+    "o": "Direction des services départementaux de l'Education nationale des Alpes Maritimes (DSDEN 06)",
+    "d": 1,
+    "c": 73,
+    "y": "2021",
+    "etat": "depubliee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dec8f771-8227-4118-bc0b-94ed807316a8",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   },
+   {
+    "num": 143808,
+    "t": "Bourses de production de la chaire VULCA « art / design / santé »",
+    "o": "Ecole nationale des Arts Décoratifs - PSL",
+    "d": 1,
+    "c": 6,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/bourses-de-production-de-la-chaire-vulca-art-desig",
+    "qf": false,
+    "niv": null,
+    "pp": 100
+   }
+  ],
+  "plateforme_hors_perimetre": {
+   "demarches": 144,
+   "dossiers": 23894,
+   "emetteurs": 37,
+   "avec_qf": 0,
+   "par_type": {
+    "service_deconcentre_de_l_etat": 63,
+    "collectivite_territoriale": 48,
+    "administration_centrale": 21,
+    "autre": 10,
+    "etablissement_enseignement": 2
+   },
+   "top": [
+    {
+     "num": 69582,
+     "t": "Pré-inscription en crèche municipale",
+     "o": "Mairie de Nîmes",
+     "d": 2890,
+     "c": 46,
+     "y": "2023",
+     "etat": "publiee",
+     "url": "https://demarche.numerique.gouv.fr/commencer/pre-inscription-en-creche-municipale",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 56069,
+     "t": "Demande  de place en crèche",
+     "o": "Mairie de Saint-Maur-des-Fossés",
+     "d": 1393,
+     "c": 58,
+     "y": "2022",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-place-en-creche-municipale",
+     "qf": false,
+     "niv": "complexe",
+     "pp": 100
+    },
+    {
+     "num": 93364,
+     "t": "SRIAS / PFRH Centre-Val de Loire - Dossier de pré-inscription pour une place en crèche au sein du parc réservé pour les agents de l'Etat ",
+     "o": "SRIAS - Préfecture Centre Val de Loire",
+     "d": 737,
+     "c": 50,
+     "y": "2024",
+     "etat": "publiee",
+     "url": "https://demarche.numerique.gouv.fr/commencer/srias-pfrh-centre-val-de-loire-dossier-de-pre-insc",
+     "qf": false,
+     "niv": "complexe",
+     "pp": 100
+    },
+    {
+     "num": 56557,
+     "t": "PASCO - Garde d'enfants de 0 à 6 ans et garderie périscolaire",
+     "o": "COLLECTIVITE TERRITORIALE DE MARTINIQUE",
+     "d": 696,
+     "c": 60,
+     "y": "2026",
+     "etat": "publiee",
+     "url": "https://demarche.numerique.gouv.fr/commencer/pasco-garde-d-enfants-de-0-a-6-ans-et-garderie-per",
+     "qf": false,
+     "niv": "complexe",
+     "pp": 100
+    },
+    {
+     "num": 44574,
+     "t": "FORMULAIRE DE PRE-INSCRIPTION CRECHES 2021/2022",
+     "o": "CCBPD",
+     "d": 588,
+     "c": 69,
+     "y": "2021",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/formulaire-de-pre-inscription-creches-2021-2022",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 138022,
+     "t": "Candidature animateur - Périscolaire, extrascolaire et séjour - Année scolaire 2026/2027 - Ville de Limoges",
+     "o": "Ville de Limoges",
+     "d": 587,
+     "c": 119,
+     "y": "2026",
+     "etat": "publiee",
+     "url": "https://demarche.numerique.gouv.fr/commencer/candidature-animateur-limoges-2026-2027",
+     "qf": false,
+     "niv": "complexe",
+     "pp": 100
+    },
+    {
+     "num": 28973,
+     "t": "Demande de préinscription en crèche",
+     "o": "Mairie de Saint Gratien",
+     "d": 558,
+     "c": 55,
+     "y": "2021",
+     "etat": "publiee",
+     "url": "https://demarche.numerique.gouv.fr/commencer/saint-gratien-preinscription-petite-enfance",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 61214,
+     "t": "CCBPD - PRE-INSCRIPTION CRECHES 2022/2023",
+     "o": "CCBPD",
+     "d": 544,
+     "c": 69,
+     "y": "2022",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/ccbpd-pre-inscription-creches-2022-2023",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 67034,
+     "t": "Maintien de la demande de place en crèche municipale",
+     "o": "Mairie de Saint-Maur-des-Fossés",
+     "d": 499,
+     "c": 44,
+     "y": "2022",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/maintien-de-la-demande-de-place-en-creche-municipa",
+     "qf": false,
+     "niv": "complexe",
+     "pp": 100
+    },
+    {
+     "num": 76933,
+     "t": "CCBPD - PRE-INSCRIPTION CRECHES 2023/2024",
+     "o": "Communauté de Communes Beaujolais Pierres Dorées",
+     "d": 470,
+     "c": 69,
+     "y": "2023",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/ccbpd-pre-inscription-creches-2023-2024",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 121564,
+     "t": "CCBPD - PRE-INSCRIPTION CRECHES 2025/2026",
+     "o": "Communauté de Communes Beaujolais Pierres Dorées",
+     "d": 463,
+     "c": 66,
+     "y": "2025",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/ccbpd-pre-inscription-creches-2025-2026",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 97012,
+     "t": "CCBPD - PRE-INSCRIPTION CRECHES 2024/2025",
+     "o": "Communauté de Communes Beaujolais Pierres Dorées",
+     "d": 418,
+     "c": 67,
+     "y": "2024",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/ccbpd-pre-inscription-creches-2024-2025",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 118382,
+     "t": "INSCRIPTIONS LES MERCREDIS ET PÉRISCOLAIRE CCTOVAL - ANNÉE SCOLAIRE 2025-2026",
+     "o": "Communauté de communes - Touraine Ouest Val de Loire",
+     "d": 405,
+     "c": 52,
+     "y": "2025",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/inscriptions-les-mercredis-et-periscolaire-cctoval-2025-2026",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 76668,
+     "t": "INSCRIPTIONS LES MERCREDIS ET PÉRISCOLAIRE CCTOVAL - ANNÉE SCOLAIRE 2023-2024",
+     "o": "Communauté de Communes Touraine Ouest Val de Loire",
+     "d": 398,
+     "c": 52,
+     "y": "2023",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/inscriptions-les-mercredis-et-periscolaire-2023-2024",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 146093,
+     "t": "INSCRIPTIONS LES MERCREDIS ET PÉRISCOLAIRE CCTOVAL - ANNÉE SCOLAIRE 2026-2027",
+     "o": "Communauté de communes - Touraine Ouest Val de Loire",
+     "d": 387,
+     "c": 55,
+     "y": "2026",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/inscriptions-les-mercredis-et-periscolaire-cctoval-2026-2027",
+     "qf": false,
+     "niv": "complexe",
+     "pp": 100
+    }
+   ]
+  },
+  "qf_plateforme_total": 1
+ }
+}

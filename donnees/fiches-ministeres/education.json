@@ -1,0 +1,1489 @@
+{
+ "config": {
+  "source": "data/demarches_slim.jsonl",
+  "date_extraction": "2026-10-21",
+  "annee_debut": 2021,
+  "annee_fin": 2026,
+  "zones": {
+   "Ministère de l’Éducation nationale, de l’Enseignement supérieur et de la Recherche": "Éducation nationale",
+   "Ministère de l’Enseignement supérieur et de la Recherche": "Enseignement supérieur et recherche",
+   "Ministère de la Jeunesse et des Sports": "Jeunesse et sports",
+   "Ministère des Sports, de la Jeunesse et de la Vie associative": "Jeunesse et sports"
+  },
+  "priorite_poles": [
+   "Éducation nationale",
+   "Enseignement supérieur et recherche",
+   "Jeunesse et sports"
+  ],
+  "max_zones": 3,
+  "sans_zone_motifs": {
+   "Éducation nationale": "rectorat|acad[ée]mi|dsden|services? d[ée]partementa?u?x? de l.?[ée]ducation|lyc[ée]e|coll[èe]ge|cit[ée] scolaire|[ée]cole (primaire|[ée]l[ée]mentaire|maternelle)|onisep|canop|cned|[ée]ducation nationale|scolaire|drafpic",
+   "Enseignement supérieur et recherche": "universit|\\bIUT\\b|INSPE|\\bESPE\\b|crous|cnous|enseignement sup|recherche|cnrs|inserm|inria|\\bIRD\\b",
+   "Jeunesse et sports": "drajes|sdjes|jeunesse|\\bsports?\\b|creps|ski et d.alpinisme|sports de montagne"
+  },
+  "sans_zone_exclusions": "v[ée]t[ée]rinaire|architecture|agricole|DDCSPP|DDCS\\b|coh[ée]sion sociale|TEST|DDTM?\\b|territoires|DREAL|DRIEAT|pr[ée]fecture de police|mairie|commune|conseil (r[ée]gional|d[ée]partemental)|transport",
+  "motif_anomalie": "pr[ée]fecture|SRIAS|SGAR|DDT|DREAL|ARS\\b|mairie|commune|conseil d[ée]partemental|r[ée]gion (?!acad)",
+  "sans_zone_types_exclus": [
+   "collectivite_territoriale"
+  ],
+  "exclusions_toutes": "^MSA$|mutualit[ée] sociale agricole|^CAF\\b|CAF DU",
+  "transfert": {
+   "pole_hote": "Éducation nationale",
+   "libelle": "Activité jeunesse, engagement et sports déclarée sous la zone Éducation nationale (DRAJES/SDJES, ACM, SNU…)",
+   "motif": "DRAJES|SDJES|jeunesse,? (de )?l.engagement|engagement,? (à la )?jeunesse|accueils? collectifs? de mineurs|\\bBAFA\\b|\\bSNU\\b|service national universel|colos? apprenantes|sport"
+  }
+ },
+ "perimetre": {
+  "total": 8568,
+  "par_source": {
+   "zone": 7737,
+   "nom_organisme": 459,
+   "zone_multi": 372
+  },
+  "par_pole": {
+   "Éducation nationale": 6576,
+   "Enseignement supérieur et recherche": 1497,
+   "Jeunesse et sports": 495
+  },
+  "exclues_interministerielles": 244,
+  "etats": {
+   "publiee": 2453,
+   "close": 5985,
+   "depubliee": 130
+  },
+  "dossiers_total": 1650049
+ },
+ "plateforme": {
+  "total": 44350,
+  "dossiers_total": 19888006
+ },
+ "annees": [
+  {
+   "annee": 2021,
+   "publiees": 888,
+   "closes": 559,
+   "actives_dans_annee": 1204,
+   "stock_fin_annee": 645,
+   "dossiers_cohorte": 254974,
+   "ephemeres_moins_3_mois": 374,
+   "pct_particuliers": 91.7,
+   "champs_moyens": 38.5,
+   "pj_moyennes": 4.46,
+   "pct_siret": 2.4,
+   "pct_annuaire_education": 4.2,
+   "pct_iban": 4.7,
+   "pct_rna": 0.0,
+   "nb_api_particulier": 0,
+   "pct_dossier_lie": 7.0,
+   "type_organisme": {
+    "etablissement_enseignement": 360,
+    "service_deconcentre_de_l_etat": 368,
+    "administration_centrale": 63,
+    "association": 1,
+    "autre": 82,
+    "operateur_d_etat": 10,
+    "non renseigné": 1,
+    "collectivite_territoriale": 3
+   },
+   "par_pole": {
+    "Éducation nationale": 662,
+    "Enseignement supérieur et recherche": 146,
+    "Jeunesse et sports": 80
+   },
+   "par_source": {
+    "nom_organisme": 119,
+    "zone": 769
+   }
+  },
+  {
+   "annee": 2022,
+   "publiees": 1016,
+   "closes": 869,
+   "actives_dans_annee": 1661,
+   "stock_fin_annee": 792,
+   "dossiers_cohorte": 164234,
+   "ephemeres_moins_3_mois": 493,
+   "pct_particuliers": 92.1,
+   "champs_moyens": 43.3,
+   "pj_moyennes": 6.04,
+   "pct_siret": 1.5,
+   "pct_annuaire_education": 12.4,
+   "pct_iban": 8.9,
+   "pct_rna": 0.1,
+   "nb_api_particulier": 0,
+   "pct_dossier_lie": 3.1,
+   "type_organisme": {
+    "administration_centrale": 81,
+    "etablissement_enseignement": 409,
+    "service_deconcentre_de_l_etat": 421,
+    "autre": 61,
+    "operateur_d_etat": 42,
+    "association": 2
+   },
+   "par_pole": {
+    "Jeunesse et sports": 46,
+    "Enseignement supérieur et recherche": 191,
+    "Éducation nationale": 779
+   },
+   "par_source": {
+    "zone": 912,
+    "nom_organisme": 92,
+    "zone_multi": 12
+   }
+  },
+  {
+   "annee": 2023,
+   "publiees": 1111,
+   "closes": 834,
+   "actives_dans_annee": 1903,
+   "stock_fin_annee": 1069,
+   "dossiers_cohorte": 220238,
+   "ephemeres_moins_3_mois": 458,
+   "pct_particuliers": 90.4,
+   "champs_moyens": 44.2,
+   "pj_moyennes": 5.73,
+   "pct_siret": 2.3,
+   "pct_annuaire_education": 15.6,
+   "pct_iban": 5.9,
+   "pct_rna": 0.9,
+   "nb_api_particulier": 0,
+   "pct_dossier_lie": 3.0,
+   "type_organisme": {
+    "service_deconcentre_de_l_etat": 450,
+    "operateur_d_etat": 25,
+    "etablissement_enseignement": 470,
+    "administration_centrale": 105,
+    "autre": 59,
+    "association": 2
+   },
+   "par_pole": {
+    "Éducation nationale": 873,
+    "Enseignement supérieur et recherche": 209,
+    "Jeunesse et sports": 29
+   },
+   "par_source": {
+    "zone": 1058,
+    "zone_multi": 46,
+    "nom_organisme": 7
+   }
+  },
+  {
+   "annee": 2024,
+   "publiees": 1354,
+   "closes": 898,
+   "actives_dans_annee": 2423,
+   "stock_fin_annee": 1525,
+   "dossiers_cohorte": 269299,
+   "ephemeres_moins_3_mois": 452,
+   "pct_particuliers": 87.2,
+   "champs_moyens": 43.4,
+   "pj_moyennes": 5.68,
+   "pct_siret": 2.8,
+   "pct_annuaire_education": 18.1,
+   "pct_iban": 5.0,
+   "pct_rna": 0.4,
+   "nb_api_particulier": 0,
+   "pct_dossier_lie": 2.9,
+   "type_organisme": {
+    "service_deconcentre_de_l_etat": 610,
+    "administration_centrale": 142,
+    "autre": 82,
+    "etablissement_enseignement": 507,
+    "operateur_d_etat": 11,
+    "association": 2
+   },
+   "par_pole": {
+    "Éducation nationale": 1037,
+    "Jeunesse et sports": 61,
+    "Enseignement supérieur et recherche": 256
+   },
+   "par_source": {
+    "zone": 1292,
+    "zone_multi": 62
+   }
+  },
+  {
+   "annee": 2025,
+   "publiees": 1547,
+   "closes": 1071,
+   "actives_dans_annee": 3072,
+   "stock_fin_annee": 2001,
+   "dossiers_cohorte": 295069,
+   "ephemeres_moins_3_mois": 516,
+   "pct_particuliers": 89.5,
+   "champs_moyens": 43.5,
+   "pj_moyennes": 5.25,
+   "pct_siret": 1.8,
+   "pct_annuaire_education": 19.6,
+   "pct_iban": 4.3,
+   "pct_rna": 0.6,
+   "nb_api_particulier": 0,
+   "pct_dossier_lie": 1.7,
+   "type_organisme": {
+    "etablissement_enseignement": 577,
+    "service_deconcentre_de_l_etat": 738,
+    "autre": 98,
+    "administration_centrale": 107,
+    "operateur_d_etat": 25,
+    "association": 2
+   },
+   "par_pole": {
+    "Enseignement supérieur et recherche": 229,
+    "Jeunesse et sports": 63,
+    "Éducation nationale": 1255
+   },
+   "par_source": {
+    "zone": 1428,
+    "zone_multi": 119
+   }
+  },
+  {
+   "annee": 2026,
+   "publiees": 1651,
+   "closes": 1199,
+   "actives_dans_annee": 3652,
+   "stock_fin_annee": 2453,
+   "dossiers_cohorte": 243013,
+   "ephemeres_moins_3_mois": 514,
+   "pct_particuliers": 89.2,
+   "champs_moyens": 45.3,
+   "pj_moyennes": 5.66,
+   "pct_siret": 2.4,
+   "pct_annuaire_education": 20.0,
+   "pct_iban": 4.1,
+   "pct_rna": 0.7,
+   "nb_api_particulier": 1,
+   "pct_dossier_lie": 1.7,
+   "type_organisme": {
+    "service_deconcentre_de_l_etat": 722,
+    "etablissement_enseignement": 708,
+    "administration_centrale": 98,
+    "autre": 93,
+    "operateur_d_etat": 27,
+    "collectivite_territoriale": 3
+   },
+   "par_pole": {
+    "Éducation nationale": 1395,
+    "Enseignement supérieur et recherche": 199,
+    "Jeunesse et sports": 57
+   },
+   "par_source": {
+    "zone": 1518,
+    "zone_multi": 133
+   }
+  }
+ ],
+ "annees_plateforme": [
+  {
+   "annee": 2021,
+   "publiees": 4455,
+   "closes": 3191,
+   "actives_dans_annee": 8343,
+   "stock_fin_annee": 5152,
+   "dossiers_cohorte": 2845293,
+   "ephemeres_moins_3_mois": 1898,
+   "pct_particuliers": 61.5,
+   "champs_moyens": 41.4,
+   "pj_moyennes": 6.45
+  },
+  {
+   "annee": 2022,
+   "publiees": 5239,
+   "closes": 3960,
+   "actives_dans_annee": 10391,
+   "stock_fin_annee": 6431,
+   "dossiers_cohorte": 2341498,
+   "ephemeres_moins_3_mois": 2280,
+   "pct_particuliers": 60.4,
+   "champs_moyens": 42.3,
+   "pj_moyennes": 6.37
+  },
+  {
+   "annee": 2023,
+   "publiees": 5098,
+   "closes": 3821,
+   "actives_dans_annee": 11529,
+   "stock_fin_annee": 7708,
+   "dossiers_cohorte": 2942662,
+   "ephemeres_moins_3_mois": 2086,
+   "pct_particuliers": 61.7,
+   "champs_moyens": 43.6,
+   "pj_moyennes": 6.29
+  },
+  {
+   "annee": 2024,
+   "publiees": 6198,
+   "closes": 4512,
+   "actives_dans_annee": 13906,
+   "stock_fin_annee": 9394,
+   "dossiers_cohorte": 2128201,
+   "ephemeres_moins_3_mois": 2483,
+   "pct_particuliers": 64.1,
+   "champs_moyens": 45.7,
+   "pj_moyennes": 6.5
+  },
+  {
+   "annee": 2025,
+   "publiees": 7375,
+   "closes": 5125,
+   "actives_dans_annee": 16769,
+   "stock_fin_annee": 11644,
+   "dossiers_cohorte": 1867026,
+   "ephemeres_moins_3_mois": 2965,
+   "pct_particuliers": 64.9,
+   "champs_moyens": 43.5,
+   "pj_moyennes": 6.17
+  },
+  {
+   "annee": 2026,
+   "publiees": 7358,
+   "closes": 5473,
+   "actives_dans_annee": 19002,
+   "stock_fin_annee": 13529,
+   "dossiers_cohorte": 1048661,
+   "ephemeres_moins_3_mois": 2776,
+   "pct_particuliers": 64.2,
+   "champs_moyens": 46.0,
+   "pj_moyennes": 6.1
+  }
+ ],
+ "annees_par_pole": {
+  "Éducation nationale": [
+   {
+    "annee": 2021,
+    "publiees": 662,
+    "closes": 376,
+    "actives_dans_annee": 876,
+    "stock_fin_annee": 500,
+    "dossiers_cohorte": 179663
+   },
+   {
+    "annee": 2022,
+    "publiees": 779,
+    "closes": 655,
+    "actives_dans_annee": 1279,
+    "stock_fin_annee": 624,
+    "dossiers_cohorte": 139740
+   },
+   {
+    "annee": 2023,
+    "publiees": 873,
+    "closes": 605,
+    "actives_dans_annee": 1497,
+    "stock_fin_annee": 892,
+    "dossiers_cohorte": 198022
+   },
+   {
+    "annee": 2024,
+    "publiees": 1037,
+    "closes": 725,
+    "actives_dans_annee": 1929,
+    "stock_fin_annee": 1204,
+    "dossiers_cohorte": 242625
+   },
+   {
+    "annee": 2025,
+    "publiees": 1255,
+    "closes": 862,
+    "actives_dans_annee": 2459,
+    "stock_fin_annee": 1597,
+    "dossiers_cohorte": 263205
+   },
+   {
+    "annee": 2026,
+    "publiees": 1395,
+    "closes": 1037,
+    "actives_dans_annee": 2992,
+    "stock_fin_annee": 1955,
+    "dossiers_cohorte": 217941
+   }
+  ],
+  "Enseignement supérieur et recherche": [
+   {
+    "annee": 2021,
+    "publiees": 146,
+    "closes": 138,
+    "actives_dans_annee": 206,
+    "stock_fin_annee": 68,
+    "dossiers_cohorte": 60710
+   },
+   {
+    "annee": 2022,
+    "publiees": 191,
+    "closes": 144,
+    "actives_dans_annee": 259,
+    "stock_fin_annee": 115,
+    "dossiers_cohorte": 17274
+   },
+   {
+    "annee": 2023,
+    "publiees": 209,
+    "closes": 198,
+    "actives_dans_annee": 324,
+    "stock_fin_annee": 126,
+    "dossiers_cohorte": 21164
+   },
+   {
+    "annee": 2024,
+    "publiees": 256,
+    "closes": 141,
+    "actives_dans_annee": 382,
+    "stock_fin_annee": 241,
+    "dossiers_cohorte": 24309
+   },
+   {
+    "annee": 2025,
+    "publiees": 229,
+    "closes": 175,
+    "actives_dans_annee": 470,
+    "stock_fin_annee": 295,
+    "dossiers_cohorte": 29193
+   },
+   {
+    "annee": 2026,
+    "publiees": 199,
+    "closes": 125,
+    "actives_dans_annee": 494,
+    "stock_fin_annee": 369,
+    "dossiers_cohorte": 22441
+   }
+  ],
+  "Jeunesse et sports": [
+   {
+    "annee": 2021,
+    "publiees": 80,
+    "closes": 45,
+    "actives_dans_annee": 122,
+    "stock_fin_annee": 77,
+    "dossiers_cohorte": 14601
+   },
+   {
+    "annee": 2022,
+    "publiees": 46,
+    "closes": 70,
+    "actives_dans_annee": 123,
+    "stock_fin_annee": 53,
+    "dossiers_cohorte": 7220
+   },
+   {
+    "annee": 2023,
+    "publiees": 29,
+    "closes": 31,
+    "actives_dans_annee": 82,
+    "stock_fin_annee": 51,
+    "dossiers_cohorte": 1052
+   },
+   {
+    "annee": 2024,
+    "publiees": 61,
+    "closes": 32,
+    "actives_dans_annee": 112,
+    "stock_fin_annee": 80,
+    "dossiers_cohorte": 2365
+   },
+   {
+    "annee": 2025,
+    "publiees": 63,
+    "closes": 34,
+    "actives_dans_annee": 143,
+    "stock_fin_annee": 109,
+    "dossiers_cohorte": 2671
+   },
+   {
+    "annee": 2026,
+    "publiees": 57,
+    "closes": 37,
+    "actives_dans_annee": 166,
+    "stock_fin_annee": 129,
+    "dossiers_cohorte": 2631
+   }
+  ]
+ },
+ "contexte_avant": [
+  {
+   "annee": 2016,
+   "publiees": 0,
+   "publiees_sans_zone_plateforme": 14,
+   "publiees_plateforme": 14
+  },
+  {
+   "annee": 2017,
+   "publiees": 0,
+   "publiees_sans_zone_plateforme": 280,
+   "publiees_plateforme": 316
+  },
+  {
+   "annee": 2018,
+   "publiees": 132,
+   "publiees_sans_zone_plateforme": 1424,
+   "publiees_plateforme": 2048
+  },
+  {
+   "annee": 2019,
+   "publiees": 268,
+   "publiees_sans_zone_plateforme": 1417,
+   "publiees_plateforme": 2907
+  },
+  {
+   "annee": 2020,
+   "publiees": 601,
+   "publiees_sans_zone_plateforme": 747,
+   "publiees_plateforme": 3342
+  },
+  {
+   "annee": 2021,
+   "publiees": 888,
+   "publiees_sans_zone_plateforme": 1112,
+   "publiees_plateforme": 4455
+  },
+  {
+   "annee": 2022,
+   "publiees": 1016,
+   "publiees_sans_zone_plateforme": 723,
+   "publiees_plateforme": 5239
+  },
+  {
+   "annee": 2023,
+   "publiees": 1111,
+   "publiees_sans_zone_plateforme": 27,
+   "publiees_plateforme": 5098
+  },
+  {
+   "annee": 2024,
+   "publiees": 1354,
+   "publiees_sans_zone_plateforme": 8,
+   "publiees_plateforme": 6198
+  },
+  {
+   "annee": 2025,
+   "publiees": 1547,
+   "publiees_sans_zone_plateforme": 2,
+   "publiees_plateforme": 7375
+  },
+  {
+   "annee": 2026,
+   "publiees": 1651,
+   "publiees_sans_zone_plateforme": 6,
+   "publiees_plateforme": 7358
+  }
+ ],
+ "zones_par_annee": {
+  "Ministère de l’Éducation nationale, de l’Enseignement supérieur et de la Recherche": {
+   "2018": 14,
+   "2019": 93,
+   "2020": 356,
+   "2021": 574,
+   "2022": 720,
+   "2023": 866,
+   "2024": 1037,
+   "2025": 1255,
+   "2026": 1395
+  },
+  "(sans zone)": {
+   "2018": 65,
+   "2019": 107,
+   "2020": 69,
+   "2021": 119,
+   "2022": 92,
+   "2023": 7
+  },
+  "Ministère de l’Enseignement supérieur et de la Recherche": {
+   "2018": 37,
+   "2019": 32,
+   "2020": 104,
+   "2021": 134,
+   "2022": 178,
+   "2023": 232,
+   "2024": 296,
+   "2025": 329,
+   "2026": 308
+  },
+  "Ministère de la Jeunesse et des Sports": {
+   "2018": 16,
+   "2019": 36,
+   "2020": 72,
+   "2021": 61,
+   "2022": 21,
+   "2023": 4,
+   "2024": 3,
+   "2025": 8,
+   "2026": 5
+  },
+  "Ministère des Sports, de la Jeunesse et de la Vie associative": {
+   "2022": 17,
+   "2023": 48,
+   "2024": 80,
+   "2025": 79,
+   "2026": 78
+  }
+ },
+ "top_demarches_fenetre": [
+  {
+   "number": 12222,
+   "title": "Service sanitaire: recueil d'information par étudiant",
+   "organisme": "Ministère de l'enseignement supérieur et de l'insertion professionnelle",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Enseignement supérieur et recherche",
+   "state": "publiee",
+   "datePublication": "2021-05-17T11:08:13+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 36977,
+   "n_champs": 40,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/service-sanitaire-recueil-d-information-par-etudia",
+   "departement": null,
+   "pj": 0
+  },
+  {
+   "number": 44399,
+   "title": "Candidature à des fonctions d'enseignement dans un établissement d'enseignement supérieur privé technique",
+   "organisme": "Région académique d'Île de France",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": "Éducation nationale",
+   "state": "publiee",
+   "datePublication": "2021-09-15T09:35:02+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 21494,
+   "n_champs": 24,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/tech-candidature-enseignement-idf",
+   "departement": "75",
+   "pj": 5
+  },
+  {
+   "number": 80264,
+   "title": "Demande de référencement ADAGE",
+   "organisme": "Ministère de l'Education nationale et de la Jeunesse, Ministère de la Culture",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Éducation nationale",
+   "state": "publiee",
+   "datePublication": "2023-09-14T10:45:55+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 18750,
+   "n_champs": 70,
+   "forIndividual": false,
+   "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-referencement-sur-adage",
+   "departement": "75",
+   "pj": 10
+  },
+  {
+   "number": 97859,
+   "title": "Obtenir un diplôme, un relevé de notes et/ou une attestation d'un examen passé dans l'académie de STRASBOURG ",
+   "organisme": "rectorat de Strasbourg",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Éducation nationale",
+   "state": "publiee",
+   "datePublication": "2024-06-13T10:40:09+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 14752,
+   "n_champs": 60,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-diplome-academie-de-strasbourg",
+   "departement": "67",
+   "pj": 3
+  },
+  {
+   "number": 36494,
+   "title": "Inscription \"30 minutes d’activité physique quotidienne\" 30 min APQ",
+   "organisme": "ministère Education nationale et de la jeunesse",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Éducation nationale",
+   "state": "close",
+   "datePublication": "2022-11-10T10:59:27+01:00",
+   "dateFermeture": "2022-11-10T10:59:54+01:00",
+   "dossiersCount": 12766,
+   "n_champs": 38,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/ami30minapq",
+   "departement": null,
+   "pj": 0
+  },
+  {
+   "number": 87846,
+   "title": "Demande de retrait d'une attestation de réussite ou d'un relevé de notes - Rectorat de Nancy-Metz",
+   "organisme": "DEC",
+   "typeOrganisme": "autre",
+   "pole": "Éducation nationale",
+   "state": "publiee",
+   "datePublication": "2024-02-14T14:28:57+01:00",
+   "dateFermeture": null,
+   "dossiersCount": 10750,
+   "n_champs": 32,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-retrait-d-une-attestation",
+   "departement": "54",
+   "pj": 2
+  },
+  {
+   "number": 103923,
+   "title": "Attestation de réussite et relevé de notes (Académie de Lyon)",
+   "organisme": "Académie de Lyon",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": "Éducation nationale",
+   "state": "publiee",
+   "datePublication": "2024-11-13T11:38:52+01:00",
+   "dateFermeture": null,
+   "dossiersCount": 9978,
+   "n_champs": 63,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/attestation-de-reussite-et-releve-de-notes-academie-de-lyon",
+   "departement": "69",
+   "pj": 1
+  },
+  {
+   "number": 34714,
+   "title": "Dossier de candidature à la labellisation Génération 2024 1er et 2éme degré",
+   "organisme": "Ministère de l'Education nationale et de la jeunesse ",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Éducation nationale",
+   "state": "close",
+   "datePublication": "2021-10-16T12:05:21+02:00",
+   "dateFermeture": "2024-10-02T14:34:43+02:00",
+   "dossiersCount": 9203,
+   "n_champs": 75,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/dossier-de-candidature-a-la-labellisation-generati",
+   "departement": "75",
+   "pj": 8
+  },
+  {
+   "number": 43290,
+   "title": "Plan de relance – continuité pédagogique  Appel à projets pour un socle numérique dans les écoles élémentaires - demande de versement",
+   "organisme": "MENJS",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Éducation nationale",
+   "state": "publiee",
+   "datePublication": "2021-07-09T14:56:17+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 8576,
+   "n_champs": 19,
+   "forIndividual": false,
+   "url": "https://demarche.numerique.gouv.fr/commencer/plan-de-relance-aap-snee-versement",
+   "departement": "75",
+   "pj": 1
+  },
+  {
+   "number": 94807,
+   "title": "Relevé de notes et attestation de réussite (Académie de Montpellier)",
+   "organisme": "Rectorat Montpellier",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": "Éducation nationale",
+   "state": "publiee",
+   "datePublication": "2025-01-13T16:09:24+01:00",
+   "dateFermeture": null,
+   "dossiersCount": 8309,
+   "n_champs": 59,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/releve-de-notes-et-attestation-de-reussite-academi",
+   "departement": "34",
+   "pj": 1
+  },
+  {
+   "number": 38711,
+   "title": "Plan de relance – continuité pédagogique  Appel à projets pour un socle numérique dans les écoles élémentaires ",
+   "organisme": "MENJS",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Éducation nationale",
+   "state": "close",
+   "datePublication": "2021-11-17T16:54:42+01:00",
+   "dateFermeture": "2021-11-17T16:56:03+01:00",
+   "dossiersCount": 7458,
+   "n_champs": 26,
+   "forIndividual": false,
+   "url": "https://demarche.numerique.gouv.fr/commencer/plan-de-relance-aap-snee",
+   "departement": "75",
+   "pj": 0
+  },
+  {
+   "number": 111976,
+   "title": "Demande de transmission d'un diplôme original, d'un relevé de notes ou d'une attestation de réussite - Académie de Normandie",
+   "organisme": "DEC/SI3A",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": "Éducation nationale",
+   "state": "publiee",
+   "datePublication": "2025-11-03T08:40:14+01:00",
+   "dateFermeture": null,
+   "dossiersCount": 7363,
+   "n_champs": 69,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/dec-rad-ac-normandie",
+   "departement": "14",
+   "pj": 1
+  },
+  {
+   "number": 45627,
+   "title": "Plan de relance – continuité pédagogique –  Appel à projets pour un socle numérique dans les écoles élémentaires - conventionnement",
+   "organisme": "MENJS",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Éducation nationale",
+   "state": "depubliee",
+   "datePublication": "2021-06-10T19:04:30+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 7122,
+   "n_champs": 16,
+   "forIndividual": false,
+   "url": "https://demarche.numerique.gouv.fr/commencer/e3f034de-f7f9-4e6b-b636-1975c2657974",
+   "departement": "75",
+   "pj": 1
+  },
+  {
+   "number": 48855,
+   "title": "Demande d'HSE-RCD 2021/2022",
+   "organisme": "Rectorat de Nantes, Académie de Nantes, Ministère de l'Education Nationale et de la Jeunesse",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": "Éducation nationale",
+   "state": "close",
+   "datePublication": "2021-09-24T12:31:01+02:00",
+   "dateFermeture": "2022-06-27T11:38:04+02:00",
+   "dossiersCount": 7070,
+   "n_champs": 24,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/hse_rcd-2021_2022",
+   "departement": "44",
+   "pj": 1
+  },
+  {
+   "number": 30950,
+   "title": "ACOUMPAGNA - Recrutement d'accompagnant des élèves en situation de handicap dans le département des Bouches-du-Rhône",
+   "organisme": "Direction des services académiques départementaux des Bouches-du-Rhône",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": "Éducation nationale",
+   "state": "close",
+   "datePublication": "2024-01-05T09:24:54+01:00",
+   "dateFermeture": "2024-01-06T00:01:05+01:00",
+   "dossiersCount": 6846,
+   "n_champs": 26,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/acoumpagna-recrutement-aesh-13",
+   "departement": "13",
+   "pj": 3
+  },
+  {
+   "number": 103751,
+   "title": "Attestation de réussite et relevé de notes (Académie de Poitiers)",
+   "organisme": "Rectorat de l'académie Poitiers",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": "Éducation nationale",
+   "state": "publiee",
+   "datePublication": "2024-10-08T10:47:47+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 6620,
+   "n_champs": 60,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/attestation-de-reussite-releve-de-notes-poitiers",
+   "departement": "86",
+   "pj": 1
+  },
+  {
+   "number": 63910,
+   "title": "Demande d'HSE-RCD 2022/2023",
+   "organisme": "Rectorat de Nantes, Académie de Nantes, Ministère de l'Education Nationale et de la Jeunesse",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": "Éducation nationale",
+   "state": "close",
+   "datePublication": "2023-07-04T10:49:09+02:00",
+   "dateFermeture": "2023-07-06T00:00:00+02:00",
+   "dossiersCount": 6299,
+   "n_champs": 24,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/demande-d-hse_rcd-2022_2023",
+   "departement": "44",
+   "pj": 1
+  },
+  {
+   "number": 35597,
+   "title": "Authentification 2021 des diplômes d'Etat (Secteurs sanitaire et social) délivrés par la DRCS d'Ile-de-France",
+   "organisme": "Direction régionale et interdépatementale de l'économie, de l'emploi, du travail et des solidarités d'Ile-de-France",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": "Jeunesse et sports",
+   "state": "close",
+   "datePublication": "2021-01-18T16:21:07+01:00",
+   "dateFermeture": "2022-01-01T00:26:52+01:00",
+   "dossiersCount": 6163,
+   "n_champs": 14,
+   "forIndividual": false,
+   "url": "https://demarche.numerique.gouv.fr/commencer/authentif-2021-diplomes-sanitaire-social",
+   "departement": "93",
+   "pj": 3
+  },
+  {
+   "number": 39999,
+   "title": "Devenir psychologue du dispositif Santé Psy Etudiant",
+   "organisme": "Ministère de l'Enseignement Supérieur, la Recherche et l'Innovation",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Enseignement supérieur et recherche",
+   "state": "publiee",
+   "datePublication": "2021-02-11T15:19:17+01:00",
+   "dateFermeture": null,
+   "dossiersCount": 6121,
+   "n_champs": 20,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/postuler-pour-sante-psy-etudiants",
+   "departement": "75",
+   "pj": 1
+  },
+  {
+   "number": 44371,
+   "title": "Demande d'autorisation de cumul d'emploi ou de rémunération d'activité",
+   "organisme": "Académie de Créteil - DSDEN de la Seine-Saint-Denis",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": "Éducation nationale",
+   "state": "close",
+   "datePublication": "2021-09-02T08:06:23+02:00",
+   "dateFermeture": "2022-09-19T17:19:17+02:00",
+   "dossiersCount": 5898,
+   "n_champs": 30,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/cumul-emploi",
+   "departement": "93",
+   "pj": 0
+  }
+ ],
+ "concentration_fenetre": {
+  "demarches": 7567,
+  "dossiers": 1446827,
+  "part_top10": 10.5,
+  "part_top1pct": 27.8,
+  "demarches_0_dossier": 0,
+  "demarches_moins_10_dossiers": 1441,
+  "mediane_dossiers": 48
+ },
+ "top_organismes_fenetre": [
+  [
+   "Conservatoire national des arts et métiers",
+   249
+  ],
+  [
+   "Lycée Clemenceau - Nantes",
+   203
+  ],
+  [
+   "Cnam -Intec",
+   201
+  ],
+  [
+   "Académie de Versailles",
+   174
+  ],
+  [
+   "Université de la Polynésie française",
+   131
+  ],
+  [
+   "GIP FCIP Expérience",
+   98
+  ],
+  [
+   "Lycée LIVET - Nantes",
+   95
+  ],
+  [
+   "Ministère de l'Education Nationale",
+   89
+  ],
+  [
+   "Ecole Nationale de Ski et d'Alpinisme",
+   88
+  ],
+  [
+   "Rectorat de Paris",
+   86
+  ],
+  [
+   "Rectorat de région académique Pays de la Loire",
+   74
+  ],
+  [
+   "Direction de la Scolarité",
+   56
+  ],
+  [
+   "Rectorat de Toulouse",
+   52
+  ],
+  [
+   "Rectorat de Créteil",
+   49
+  ],
+  [
+   "lycée Montesquieu Le Mans",
+   47
+  ],
+  [
+   "DSDEN des Hauts-de-Seine",
+   47
+  ],
+  [
+   "Collège Georges Brassens",
+   47
+  ],
+  [
+   "Lycée ARAGO, Paris",
+   47
+  ],
+  [
+   "Lycée Jean Mermoz MONTPELLIER",
+   45
+  ],
+  [
+   "Lycée GERVILLE RÉACHE",
+   44
+  ],
+  [
+   "Rectorat de l'académie de Nantes",
+   42
+  ],
+  [
+   "Ministère de l'Education nationale",
+   40
+  ],
+  [
+   "DSDEN Vendée, Académie de Nantes, Education Nationale",
+   40
+  ],
+  [
+   "ministère de l'éducation nationale",
+   38
+  ],
+  [
+   "UPF",
+   37
+  ]
+ ],
+ "departements_fenetre": {
+  "44": 716,
+  "72": 82,
+  "93": 71,
+  "92": 380,
+  "78": 411,
+  "31": 212,
+  "75": 1054,
+  "64": 114,
+  "33": 136,
+  "87": 36,
+  "01": 17,
+  "34": 244,
+  "86": 70,
+  "85": 67,
+  "77": 10,
+  "84": 16,
+  "29": 50,
+  "987": 352,
+  "79": 14,
+  "91": 239,
+  "54": 192,
+  "47": 3,
+  "14": 98,
+  "80": 80,
+  "971": 138,
+  "49": 117,
+  "38": 82,
+  "57": 42,
+  "06": 126,
+  "69": 90,
+  "95": 125,
+  "67": 38,
+  "94": 152,
+  "81": 21,
+  "35": 286,
+  "43": 5,
+  "30": 25,
+  "09": 10,
+  "59": 39,
+  "13": 85,
+  "82": 33,
+  "03": 10,
+  "45": 40,
+  "74": 157,
+  "15": 4,
+  "56": 53,
+  "21": 31,
+  "53": 29,
+  "976": 24,
+  "62": 9,
+  "12": 32,
+  "973": 11,
+  "40": 16,
+  "39": 16,
+  "22": 19,
+  "04": 16,
+  "68": 18,
+  "974": 38,
+  "61": 29,
+  "16": 6,
+  "07": 11,
+  "48": 1,
+  "65": 9,
+  "27": 9,
+  "18": 2,
+  "88": 15,
+  "42": 24,
+  "66": 9,
+  "76": 20,
+  "51": 27,
+  "24": 5,
+  "11": 7,
+  "60": 5,
+  "2A": 51,
+  "10": 3,
+  "02": 4,
+  "32": 5,
+  "37": 2,
+  "41": 3,
+  "28": 2,
+  "26": 3,
+  "972": 8,
+  "36": 2,
+  "90": 3,
+  "25": 17,
+  "55": 3,
+  "63": 11,
+  "73": 7,
+  "17": 8,
+  "83": 3,
+  "50": 5,
+  "05": 1,
+  "2B": 2,
+  "23": 1,
+  "988": 2,
+  "46": 1,
+  "58": 1
+ },
+ "type_organisme_fenetre": {
+  "service_deconcentre_de_l_etat": 3309,
+  "etablissement_enseignement": 3031,
+  "administration_centrale": 596,
+  "operateur_d_etat": 140,
+  "autre": 475,
+  "association": 9,
+  "non renseigné": 1,
+  "collectivite_territoriale": 6
+ },
+ "tags_fenetre": [
+  [
+   "Scolaire",
+   839
+  ],
+  [
+   "Éducation",
+   707
+  ],
+  [
+   "Formation",
+   231
+  ],
+  [
+   "Lycée",
+   157
+  ],
+  [
+   "Inscription",
+   136
+  ],
+  [
+   "RH",
+   135
+  ],
+  [
+   "Université",
+   120
+  ],
+  [
+   "Collège",
+   113
+  ],
+  [
+   "Supérieur",
+   109
+  ],
+  [
+   "Affectation",
+   101
+  ],
+  [
+   "DSDEN",
+   95
+  ],
+  [
+   "Association",
+   75
+  ],
+  [
+   "Enseignant",
+   67
+  ],
+  [
+   "Recrutement",
+   64
+  ],
+  [
+   "Écoles",
+   55
+  ],
+  [
+   "Aap",
+   52
+  ],
+  [
+   "Diplôme",
+   49
+  ],
+  [
+   "Numérique",
+   48
+  ],
+  [
+   "Agrément",
+   44
+  ],
+  [
+   "Candidature",
+   43
+  ],
+  [
+   "Accompagnement",
+   41
+  ],
+  [
+   "Convention",
+   39
+  ],
+  [
+   "Culture",
+   36
+  ],
+  [
+   "Appel à projets",
+   36
+  ],
+  [
+   "ENT",
+   35
+  ],
+  [
+   "Bilan",
+   32
+  ],
+  [
+   "Langue française",
+   31
+  ],
+  [
+   "Subvention",
+   30
+  ],
+  [
+   "Enfance et jeunesse",
+   27
+  ],
+  [
+   "Sport",
+   24
+  ]
+ ],
+ "exemples_api_particulier": [
+  {
+   "number": 154455,
+   "title": "Inscription à la demi-pension de la cité scolaire Louis Pasteur de Neuilly sur Seine - Année scolaire 2026-2027",
+   "organisme": "Lycée Louis Pasteur",
+   "typeOrganisme": "etablissement_enseignement",
+   "pole": "Éducation nationale",
+   "state": "close",
+   "datePublication": "2026-08-25T18:29:39+02:00",
+   "dateFermeture": "2026-09-28T11:05:49+02:00",
+   "dossiersCount": 937,
+   "n_champs": 43,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/inscription-a-la-demi-pension-de-la-cite-scolaire--3",
+   "departement": "92",
+   "pj": 2
+  }
+ ],
+ "organismes_hors_education_sous_zone": [
+  [
+   "Région académique de Corse, Préfecture de Corse, Ministère de l'Education nationale et de la Jeunesse",
+   7
+  ],
+  [
+   "Rectorat de l'Académie Région Guadeloupe",
+   4
+  ]
+ ],
+ "transfert": {
+  "libelle": "Activité jeunesse, engagement et sports déclarée sous la zone Éducation nationale (DRAJES/SDJES, ACM, SNU…)",
+  "par_annee": {
+   "2021": 42,
+   "2022": 82,
+   "2023": 119,
+   "2024": 130,
+   "2025": 110,
+   "2026": 74
+  }
+ },
+ "anomalies_exclues": [
+  {
+   "number": 125735,
+   "title": "Demande de prise en charge de cotisations sociales",
+   "organisme": "MSA",
+   "typeOrganisme": "administration_centrale",
+   "pole": null,
+   "state": "publiee",
+   "datePublication": "2026-02-19T11:19:07+01:00",
+   "dateFermeture": null,
+   "dossiersCount": 42150,
+   "n_champs": 76,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-prise-en-charge-de-cotisations-sociales",
+   "departement": "93",
+   "pj": 2,
+   "zones": [
+    "Ministère de l’Enseignement supérieur et de la Recherche"
+   ]
+  },
+  {
+   "number": 65990,
+   "title": "FONDS PUBLICS ET TERRITOIRES - JEUNESSE - BILAN 2022 - AXE 4 et 6",
+   "organisme": "CAF DU PAS DE CALAIS",
+   "typeOrganisme": "autre",
+   "pole": null,
+   "state": "close",
+   "datePublication": "2022-11-16T14:45:01+01:00",
+   "dateFermeture": "2024-03-21T12:14:00+01:00",
+   "dossiersCount": 13,
+   "n_champs": 71,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/fonds-publics-et-territoires-jeunesse-bilan-2022-a",
+   "departement": "62",
+   "pj": 6,
+   "zones": [
+    "Collectivité territoriale",
+    "Ministère de l’Enseignement supérieur et de la Recherche"
+   ]
+  },
+  {
+   "number": 119610,
+   "title": "Demande du complément de libre choix du mode de garde (Cmg) ",
+   "organisme": "MSA",
+   "typeOrganisme": "administration_centrale",
+   "pole": null,
+   "state": "publiee",
+   "datePublication": "2025-10-30T10:34:39+01:00",
+   "dateFermeture": null,
+   "dossiersCount": 10712,
+   "n_champs": 71,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/demande-du-complement-de-libre-choix-du-mode-de-ga",
+   "departement": "93",
+   "pj": 1,
+   "zones": [
+    "Ministère de l’Enseignement supérieur et de la Recherche"
+   ]
+  }
+ ],
+ "diffusion": [
+  {
+   "annee": 2021,
+   "emetteurs_actifs": 316,
+   "siret_emetteurs_actifs": 134,
+   "etablissements_actifs": 101,
+   "siret_etablissements_actifs": 39,
+   "departements_actifs": 41,
+   "type_actives": {
+    "etablissement_enseignement": 489,
+    "autre": 128,
+    "service_deconcentre_de_l_etat": 464,
+    "administration_centrale": 94,
+    "association": 3,
+    "operateur_d_etat": 20,
+    "nr": 1,
+    "collectivite_territoriale": 5
+   }
+  },
+  {
+   "annee": 2022,
+   "emetteurs_actifs": 389,
+   "siret_emetteurs_actifs": 177,
+   "etablissements_actifs": 119,
+   "siret_etablissements_actifs": 53,
+   "departements_actifs": 54,
+   "type_actives": {
+    "etablissement_enseignement": 634,
+    "autre": 139,
+    "service_deconcentre_de_l_etat": 685,
+    "administration_centrale": 139,
+    "association": 5,
+    "operateur_d_etat": 56,
+    "collectivite_territoriale": 3
+   }
+  },
+  {
+   "annee": 2023,
+   "emetteurs_actifs": 488,
+   "siret_emetteurs_actifs": 258,
+   "etablissements_actifs": 159,
+   "siret_etablissements_actifs": 97,
+   "departements_actifs": 72,
+   "type_actives": {
+    "etablissement_enseignement": 756,
+    "autre": 122,
+    "administration_centrale": 183,
+    "service_deconcentre_de_l_etat": 797,
+    "operateur_d_etat": 36,
+    "association": 6,
+    "collectivite_territoriale": 3
+   }
+  },
+  {
+   "annee": 2024,
+   "emetteurs_actifs": 620,
+   "siret_emetteurs_actifs": 320,
+   "etablissements_actifs": 183,
+   "siret_etablissements_actifs": 118,
+   "departements_actifs": 82,
+   "type_actives": {
+    "etablissement_enseignement": 907,
+    "autre": 151,
+    "administration_centrale": 253,
+    "service_deconcentre_de_l_etat": 1078,
+    "operateur_d_etat": 25,
+    "association": 6,
+    "collectivite_territoriale": 3
+   }
+  },
+  {
+   "annee": 2025,
+   "emetteurs_actifs": 775,
+   "siret_emetteurs_actifs": 386,
+   "etablissements_actifs": 230,
+   "siret_etablissements_actifs": 156,
+   "departements_actifs": 94,
+   "type_actives": {
+    "etablissement_enseignement": 1146,
+    "autre": 205,
+    "administration_centrale": 259,
+    "service_deconcentre_de_l_etat": 1411,
+    "operateur_d_etat": 42,
+    "association": 7,
+    "collectivite_territoriale": 2
+   }
+  },
+  {
+   "annee": 2026,
+   "emetteurs_actifs": 918,
+   "siret_emetteurs_actifs": 455,
+   "etablissements_actifs": 319,
+   "siret_etablissements_actifs": 227,
+   "departements_actifs": 97,
+   "type_actives": {
+    "service_deconcentre_de_l_etat": 1559,
+    "etablissement_enseignement": 1512,
+    "autre": 235,
+    "administration_centrale": 275,
+    "operateur_d_etat": 60,
+    "association": 6,
+    "collectivite_territoriale": 5
+   }
+  }
+ ],
+ "siret_manquant": 1303
+}
