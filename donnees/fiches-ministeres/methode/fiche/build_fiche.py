@@ -10,6 +10,8 @@ F = json.load(open(os.path.join(out_dir, f"{prefix}_familles.json")))
 R = json.load(open(os.path.join(out_dir, f"{prefix}_reconductions.json")))
 X = json.load(open(os.path.join(out_dir, f"{prefix}_complements.json")))
 GEO = json.load(open(geo_path))
+papier_path = os.path.join(out_dir, f"{prefix}_papier.json")
+PAP = json.load(open(papier_path)) if os.path.exists(papier_path) else None
 
 def n(x):  # entier à la française
     return f"{x:,}".replace(",", " ")
@@ -95,6 +97,24 @@ K.update({
  "dp_n": n(dp["demarches"]), "dp_e": n(dp["emetteurs_distincts"]), "dp_d": n(dp["dossiers"]), "dp_qf": n(dp["avec_quotient_familial"]),
  "bo_n": n(bo["demarches"]), "bo_e": n(bo["emetteurs_distincts"]), "bo_qf": n(bo["avec_quotient_familial"]),
 })
+if PAP:
+    PE = PAP["exemple_principal"]; PM = PAP["meta"]
+    K.update({
+     "papier_cerfa": PE["cerfa"], "papier_cerfa_titre": PE["cerfa_titre"], "papier_cerfa_url": PE["cerfa_url"],
+     "papier_cerfa_administration": PE["cerfa_administration"],
+     "papier_cerfa_champs": n(PE["cerfa_n_champs"]), "papier_cerfa_champs_prerempli": n(PE["cerfa_n_champs_prerempli"]),
+     "papier_demarches_brutes": n(PE["demarches_brutes"]), "papier_tests": n(PE["tests_exclus"]),
+     "papier_recours": n(PE["recours"]), "papier_declarations": n(PE["declarations_regime_transitoire"]),
+     "papier_demandes_n": n(PE["demandes_autorisation"]),
+     "papier_champs_min": n(PE["champs_min"]), "papier_champs_max": n(PE["champs_max"]),
+     "papier_emetteurs": n(PE["emetteurs_departements"]), "papier_emetteurs_organisme": n(PE["emetteurs_organisme_distinct"]),
+     "papier_departements_2025": n(PE["departements_depuis_2025"]),
+     "papier_dossiers": n(PE["dossiers_total"]), "papier_dossiers_hors_recours": n(PE["dossiers_hors_recours"]),
+     "papier_demarches_sans_siret": n(PE["demarches_sans_siret"]),
+     "papier_demarches_hors_tests": n(PE["demarches_brutes"] - PE["tests_exclus"]),
+     "papier_n_cerfa_total": n(PM["n_cerfa_total"]), "papier_n_dila_total": n(PM["n_dila_total"]),
+     "papier_n_exclusions": n(PM["n_dila_exclusions"]),
+    })
 
 YEARS = list(range(y0, y1 + 1))
 TYPES = [("service_deconcentre_de_l_etat", "Services déconcentrés (rectorats, DSDEN…)"),
@@ -132,8 +152,18 @@ DATA = {
  "dossiers": DA, "gains_annee": [X["gains_par_annee"][str(y)] for y in YEARS],
  "carte": X["carte"], "geo": GEO,
  "qf": QF["perimetre"], "qf_plat": QP["top"],
+ "papier": PAP["candidats"] if PAP else None,
 }
 html = open(tpl_path).read()
+PAPIER_BLOCKS = ["PAPIER_DEBUT|PAPIER_FIN", "PAPIER_BRIEF_DEBUT|PAPIER_BRIEF_FIN", "PAPIER_PISTE_DEBUT|PAPIER_PISTE_FIN", "PAPIER_JS_DEBUT|PAPIER_JS_FIN"]
+if PAP:
+    for pair in PAPIER_BLOCKS:
+        a, b = pair.split("|")
+        html = html.replace(f"<!--{a}-->", "").replace(f"<!--{b}-->", "")
+else:
+    for pair in PAPIER_BLOCKS:
+        a, b = pair.split("|")
+        html = re.sub(rf"<!--{a}-->.*?<!--{b}-->\n?", "", html, flags=re.S)
 html = html.replace("/*DATA*/null", json.dumps(DATA, ensure_ascii=False))
 missing = set(re.findall(r"«(\w+)»", html)) - set(K)
 if missing: raise SystemExit(f"marqueurs sans valeur : {missing}")
