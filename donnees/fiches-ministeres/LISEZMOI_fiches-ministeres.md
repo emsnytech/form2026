@@ -11,6 +11,10 @@ Production de l'auteur à partir de données ouvertes de data.gouv.fr. Voir `don
 - `<prefixe>_reconductions.json` : nouvelles démarches et reconductions annuelles (même émetteur, même titre sans millésime).
 - `<prefixe>_complements.json` : dossiers estimés par année et contrôle sur les dépôts réels, carte par département,
   frais évités, démarches candidates au quotient familial (API Particulier).
+- `<prefixe>_papier.json` : démarches encore sur papier dans le périmètre — un exemple détaillé (l'instruction dans
+  la famille, Cerfa 16212*05) et un tableau de candidats classés « papier seulement », « papier national, versions
+  locales » ou « en ligne ailleurs ». Absent tant que `06_papier.py` n'a pas tourné pour ce ministère ; la section
+  correspondante de la fiche est alors masquée, pas vide.
 - `methode/` : scripts Python, configurations, gabarit et fond de carte qui produisent ces fichiers et la fiche.
 
 ## Sources
@@ -19,6 +23,10 @@ Production de l'auteur à partir de données ouvertes de data.gouv.fr. Voir `don
 - « Utilisation du service demarche.numerique.gouv.fr » (data.gouv.fr), ressource « nb-dossiers-deposes-par-mois ».
 - `donnees/gains/demarches_gains_v8.csv` (FORM 2026, paramètres v8).
 - Fond de carte : gregoiredavid/france-geojson (départements, simplifié).
+- Pour la section « Démarches encore sur papier » : les 68 Cerfa analysés champ par champ et les 3 621 fiches de
+  service-public.fr embarqués dans `explorer.html` (FORM 2026), recoupés avec les démarches en ligne du périmètre.
+  Pour chaque service en ligne cité hors Démarche Numérique, l'URL officielle vérifiée (education.gouv.fr,
+  diplomatie.gouv.fr, afld.fr).
 
 ## Calcul (résumé)
 
@@ -35,3 +43,8 @@ Production de l'auteur à partir de données ouvertes de data.gouv.fr. Voir `don
 - Le champ ministère est déclaratif ; son intitulé suit le référentiel actuel de la plateforme, pas l'intitulé de l'époque.
 - `forIndividual` ne distingue pas usagers et agents.
 - Les frais évités sont des temps et des coûts valorisés, pas des économies budgétaires constatées.
+- Démarches encore sur papier : pour l'exemple détaillé, les émetteurs sont comptés par département (une démarche
+  par DSDEN), pas par libellé d'organisme — ce dernier est orthographié de façon trop variable dans les données
+  sources pour un compte fiable (de 61 à 81 selon la méthode). Quatre candidats restent classés « papier seulement »
+  sans vérification complémentaire au-delà de FORM 2026 et de service-public.fr : les sites concernés
+  (cned.fr, education.gouv.fr, sports.gouv.fr, caf.fr) n'ont pas pu être consultés au moment de la production.

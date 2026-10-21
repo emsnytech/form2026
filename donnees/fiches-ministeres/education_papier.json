@@ -1,0 +1,283 @@
+{
+ "exemple_principal": {
+  "cerfa": "16212*05",
+  "cerfa_titre": "Demande d'autorisation d'instruction dans la famille",
+  "cerfa_url": "https://www.formulaires.service-public.fr/gf/cerfa_16212.do",
+  "cerfa_administration": "Direction des services départementaux de l'éducation nationale (DSDEN)",
+  "cerfa_n_champs": 9,
+  "cerfa_n_champs_prerempli": 3,
+  "demarches_brutes": 221,
+  "tests_exclus": 3,
+  "recours": 13,
+  "declarations_regime_transitoire": 6,
+  "valorisation_acquis": 1,
+  "motif_partiel": 4,
+  "tardif_31mai": 3,
+  "forme_minimale": 2,
+  "demandes_autorisation": 189,
+  "champs_min": 57,
+  "champs_max": 164,
+  "emetteurs_departements": 61,
+  "emetteurs_siret": 67,
+  "demarches_sans_siret": 14,
+  "emetteurs_organisme_distinct": 81,
+  "departements_depuis_2025": 47,
+  "dossiers_total": 59726,
+  "dossiers_hors_recours": 56588
+ },
+ "candidats": [
+  {
+   "id": "bourse_college",
+   "titre": "Demande de bourse de collège",
+   "statut": "en_ligne_ailleurs",
+   "fiche_dila": [
+    "R11499"
+   ],
+   "fiche_dila_urls": [
+    "https://www.service-public.fr/simulateur/calcul/12539"
+   ],
+   "cerfa": "12539*16",
+   "cerfa_url": "https://www.service-public.fr/simulateur/calcul/12539",
+   "cerfa_n_champs": null,
+   "cerfa_n_champs_prerempli": null,
+   "demarches_en_ligne": 2,
+   "emetteurs": 1,
+   "champs_min": 6,
+   "champs_max": 13,
+   "dossiers": 136,
+   "service_en_ligne": {
+    "nom": "Téléservice national des bourses",
+    "url": "https://teleservices.education.gouv.fr/"
+   },
+   "note": null
+  },
+  {
+   "id": "bourse_lycee",
+   "titre": "Demande de bourse nationale de lycée",
+   "statut": "en_ligne_ailleurs",
+   "fiche_dila": [
+    "R43243"
+   ],
+   "fiche_dila_urls": [
+    "https://www.service-public.fr/simulateur/calcul/11319"
+   ],
+   "cerfa": "11319*23",
+   "cerfa_url": "https://www.service-public.fr/simulateur/calcul/11319",
+   "cerfa_n_champs": null,
+   "cerfa_n_champs_prerempli": null,
+   "demarches_en_ligne": 1,
+   "emetteurs": 1,
+   "champs_min": 10,
+   "champs_max": 10,
+   "dossiers": 26,
+   "service_en_ligne": {
+    "nom": "Téléservice national des bourses",
+    "url": "https://teleservices.education.gouv.fr/"
+   },
+   "note": null
+  },
+  {
+   "id": "dap_etudiant_etranger",
+   "titre": "Admission préalable à l'université pour étudiant étranger (DAP)",
+   "statut": "en_ligne_ailleurs",
+   "fiche_dila": [
+    "R1278",
+    "R1279"
+   ],
+   "fiche_dila_urls": [
+    "https://www.enseignementsup-recherche.gouv.fr/sites/default/files/2024-10/dossier-vert-2026-2027-34741.pdf",
+    "https://www.enseignementsup-recherche.gouv.fr/sites/default/files/2022-09/dossier-blanc-24403.pdf"
+   ],
+   "cerfa": "11126*25",
+   "cerfa_url": "https://www.enseignementsup-recherche.gouv.fr/sites/default/files/2024-10/dossier-vert-2026-2027-34741.pdf",
+   "cerfa_n_champs": null,
+   "cerfa_n_champs_prerempli": null,
+   "demarches_en_ligne": 0,
+   "emetteurs": 0,
+   "champs_min": null,
+   "champs_max": null,
+   "dossiers": 0,
+   "service_en_ligne": {
+    "nom": "Études en France",
+    "url": "https://pastel.diplomatie.gouv.fr/etudesenfrance/dyn/public/authentification/login.html"
+   },
+   "note": null
+  },
+  {
+   "id": "mediateur",
+   "titre": "Réclamation auprès du médiateur de l'Éducation nationale",
+   "statut": "en_ligne_ailleurs",
+   "fiche_dila": [
+    "R2436",
+    "R2400"
+   ],
+   "fiche_dila_urls": [
+    "http://media.education.gouv.fr/file/88/4/2884.pdf",
+    "http://media.education.gouv.fr/file/88/5/2885.pdf"
+   ],
+   "cerfa": null,
+   "cerfa_url": "http://media.education.gouv.fr/file/88/4/2884.pdf",
+   "cerfa_n_champs": null,
+   "cerfa_n_champs_prerempli": null,
+   "demarches_en_ligne": 0,
+   "emetteurs": 0,
+   "champs_min": null,
+   "champs_max": null,
+   "dossiers": 0,
+   "service_en_ligne": {
+    "nom": "Formulaire de saisine du médiateur",
+    "url": "https://www.education.gouv.fr/faire-appel-au-mediateur-formulaire-de-saisine-10649"
+   },
+   "note": null
+  },
+  {
+   "id": "aut_dopage",
+   "titre": "Autorisation d'usage à des fins thérapeutiques (AUT, antidopage)",
+   "statut": "en_ligne_ailleurs",
+   "fiche_dila": [
+    "R12139"
+   ],
+   "fiche_dila_urls": [
+    "https://sportifs.afld.fr/wp-content/uploads/sites/3/2018/07/Formulaire-AUT-2018.pdf"
+   ],
+   "cerfa": null,
+   "cerfa_url": "https://sportifs.afld.fr/wp-content/uploads/sites/3/2018/07/Formulaire-AUT-2018.pdf",
+   "cerfa_n_champs": null,
+   "cerfa_n_champs_prerempli": null,
+   "demarches_en_ligne": 0,
+   "emetteurs": 0,
+   "champs_min": null,
+   "champs_max": null,
+   "dossiers": 0,
+   "service_en_ligne": {
+    "nom": "Plateforme AUT de l'AFLD",
+    "url": "https://www.afld.fr/la-lutte-antidopage/education-et-prevention/effectuer-une-demande-daut/"
+   },
+   "note": null
+  },
+  {
+   "id": "convention_stage",
+   "titre": "Conventions de stage et de séquence d'observation en milieu professionnel",
+   "statut": "papier_national_local",
+   "fiche_dila": [
+    "R2353",
+    "R18627",
+    "R18626",
+    "R75836",
+    "R18613",
+    "R74111",
+    "R33438"
+   ],
+   "fiche_dila_urls": [
+    "https://eduscol.education.fr/1184/sections-d-enseignement-general-et-professionnel-adapte",
+    "https://eduscol.education.fr/628/la-classe-de-troisieme-dite-prepa-metiers",
+    "https://eduscol.education.fr/623/sequence-d-observation-en-milieu-professionnel-pour-les-eleves-de-3e",
+    "https://eduscol.education.fr/3993/la-sequence-d-observation-en-milieu-professionnel-somp-en-classe-de-seconde-du-lycee-general-et-technologique",
+    "https://www.education.gouv.fr/sites/default/files/ensel449_annexe2.pdf",
+    "https://eduscol.education.fr/623/sequence-d-observation-en-milieu-professionnel-pour-les-eleves-de-3e",
+    "https://eduscol.education.fr/document/51185/download"
+   ],
+   "cerfa": null,
+   "cerfa_url": "https://eduscol.education.fr/1184/sections-d-enseignement-general-et-professionnel-adapte",
+   "cerfa_n_champs": null,
+   "cerfa_n_champs_prerempli": null,
+   "demarches_en_ligne": 9,
+   "emetteurs": 3,
+   "champs_min": 17,
+   "champs_max": 35,
+   "dossiers": 1477,
+   "service_en_ligne": null,
+   "note": null
+  },
+  {
+   "id": "procuration_bourse_prive",
+   "titre": "Procuration pour le paiement des bourses de collège et de lycée (enseignement privé)",
+   "statut": "papier_seul",
+   "fiche_dila": [
+    "R40723"
+   ],
+   "fiche_dila_urls": [
+    "https://www.education.gouv.fr/sites/default/files/document/annexe-10-procuration-pour-le-paiement-des-bourses-nationales-de-college-et-de-lycee-dans-l.pdf"
+   ],
+   "cerfa": null,
+   "cerfa_url": "https://www.education.gouv.fr/sites/default/files/document/annexe-10-procuration-pour-le-paiement-des-bourses-nationales-de-college-et-de-lycee-dans-l.pdf",
+   "cerfa_n_champs": null,
+   "cerfa_n_champs_prerempli": null,
+   "demarches_en_ligne": 0,
+   "emetteurs": 0,
+   "champs_min": null,
+   "champs_max": null,
+   "dossiers": 0,
+   "service_en_ligne": null,
+   "note": "aucune démarche en ligne repérée ; vérification complémentaire impossible (education.gouv.fr inaccessible)"
+  },
+  {
+   "id": "cned_inscription",
+   "titre": "Inscription au Centre national d'enseignement à distance (Cned)",
+   "statut": "papier_seul",
+   "fiche_dila": [
+    "R47838"
+   ],
+   "fiche_dila_urls": [
+    "https://www.cned.fr/familles-itinerantes"
+   ],
+   "cerfa": null,
+   "cerfa_url": "https://www.cned.fr/familles-itinerantes",
+   "cerfa_n_champs": null,
+   "cerfa_n_champs_prerempli": null,
+   "demarches_en_ligne": 4,
+   "emetteurs": 2,
+   "champs_min": 22,
+   "champs_max": 37,
+   "dossiers": 411,
+   "service_en_ligne": null,
+   "note": "fiche service-public.fr ambiguë (modalité « papier » mais description « en ligne ») ; cned.fr inaccessible pour vérification"
+  },
+  {
+   "id": "eaps_accident",
+   "titre": "Signalement d'accident dans un établissement d'activités physiques et sportives (EAPS)",
+   "statut": "papier_seul",
+   "fiche_dila": [
+    "R49384"
+   ],
+   "fiche_dila_urls": [
+    "https://www.formulaires.service-public.gouv.fr/gf/cerfa_15796.do"
+   ],
+   "cerfa": "15796*02",
+   "cerfa_url": "https://www.formulaires.service-public.gouv.fr/gf/cerfa_15796.do",
+   "cerfa_n_champs": null,
+   "cerfa_n_champs_prerempli": null,
+   "demarches_en_ligne": 3,
+   "emetteurs": 3,
+   "champs_min": 39,
+   "champs_max": 212,
+   "dossiers": 10,
+   "service_en_ligne": null,
+   "note": "aucune démarche en ligne repérée ; vérification complémentaire impossible (sports.gouv.fr inaccessible)"
+  }
+ ],
+ "meta": {
+  "n_cerfa_total": 68,
+  "n_cerfa_perimetre": 1,
+  "cerfa_perimetre": [
+   "16212*05"
+  ],
+  "n_dila_total": 3621,
+  "n_dila_pool": 330,
+  "n_dila_exclusions": 8,
+  "exclusions_dila": {
+   "R57466": "Demande d'admission dans les écoles nationales supérieures d'architecture (dossier bleu) — relève du ministère de la Culture",
+   "R15643": "Demande d'admission dans les écoles nationales supérieures d'architecture (dossier jaune) — relève du ministère de la Culture",
+   "R36750": "Bourse d'études à l'École nationale supérieure maritime — relève du ministère chargé de la Mer",
+   "R50532": "Stage de formation à la traduction au Parlement européen — institution européenne, hors périmètre",
+   "R60840": "Stage au Conseil économique et social européen — institution européenne, hors périmètre",
+   "R50534": "Stage au Conseil de l'Union européenne — institution européenne, hors périmètre",
+   "R33004": "Autorisation de participation à une sortie ou un voyage scolaire — pas une procédure nationale standardisée (pas de Cerfa, formulaire propre à chaque établissement et chaque sortie)",
+   "R58266": "Bafa, aide à la formation — versée par la Caf et les conseils départementaux, pas par le ministère ou ses services déconcentrés (DRAJES/SDJES)"
+  },
+  "n_candidats": 9,
+  "n_en_ligne_ailleurs": 5,
+  "n_papier_national_local": 1,
+  "n_papier_seul": 3
+ }
+}
