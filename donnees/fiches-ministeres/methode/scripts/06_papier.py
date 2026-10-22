@@ -4,14 +4,14 @@ périmètre. Produit un exemple détaillé (instruction dans la famille) et un t
 « papier_seul », « papier_national_local » ou « en_ligne_ailleurs ». Usage : python3 06_papier.py <config.json> <sortie.json>
 Ne rien inventer : chaque candidat cité existe dans les sources A (Cerfa) ou B (DILA) avec son identifiant, et chaque
 service en ligne hors Démarche Numérique cite une URL officielle vérifiée."""
-import json, sys, re, collections
+import json, os, sys, re, collections
 cfg_path, out_path = sys.argv[1], sys.argv[2]
 sys.argv = ["x", cfg_path, "/dev/null"]
 exec(open("scripts/02_fiche_ministere.py").read().split("APIP =")[0])
 P = cfg["papier"]
 
 # ---------- sources A (Cerfa) et B (DILA), extraites de explorer.html ----------
-html = open(P["explorer_html"], encoding="utf-8").read()
+html = open(os.path.expanduser(P["explorer_html"]), encoding="utf-8").read()
 def script_json(id_):
     m = re.search(r'<script type="application/json" id="' + id_ + r'">(.*?)</script>', html, re.S)
     return json.loads(m.group(1))
@@ -116,6 +116,7 @@ for c in P["candidats"]:
         "dossiers": sum(r["dossiersCount"] or 0 for r in m_per),
         "service_en_ligne": c.get("service_en_ligne"),
         "note": c.get("note"),
+        "source_statut": c.get("source_statut"),
     }
     candidats_out.append(row)
 

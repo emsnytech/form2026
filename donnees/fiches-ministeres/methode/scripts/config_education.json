@@ -32,7 +32,7 @@
   "motif": "DRAJES|SDJES|jeunesse,? (de )?l.engagement|engagement,? (à la )?jeunesse|accueils? collectifs? de mineurs|\\bBAFA\\b|\\bSNU\\b|service national universel|colos? apprenantes|sport"
  },
  "papier": {
-  "explorer_html": "/Users/philippevrignaud/Documents/form2026-site/explorer.html",
+  "explorer_html": "~/Documents/form2026-site/explorer.html",
   "cerfa_principal": "16212*05",
   "motif_principal": "instruction (dans la|en) famille",
   "themes_dila": ["Famille - Scolarité", "Travail - Formation", "Loisirs - Sports - Culture"],
@@ -90,9 +90,11 @@
    },
    {
     "id": "cned_inscription", "fiche_dila": ["R47838"], "cerfa": null,
-    "titre": "Inscription au Centre national d'enseignement à distance (Cned)", "statut": "papier_seul",
+    "titre": "Inscription au Centre national d'enseignement à distance (Cned)", "statut": "en_ligne_ailleurs",
     "motif_recherche": "\\bcned\\b",
-    "note": "fiche service-public.fr ambiguë (modalité « papier » mais description « en ligne ») ; cned.fr inaccessible pour vérification"
+    "service_en_ligne": {"nom": "Inscription sur cned.fr", "url": "https://www.cned.fr/"},
+    "source_statut": "https://www.ac-paris.fr/inscription-au-cned-123640",
+    "note": "Inscription sur le site du Cned (académie de Paris : « la famille ou le chef d'établissement se connecte au site du Cned »). Pour une inscription réglementée à l'année, l'autorisation d'instruction dans la famille du DASEN est un préalable."
    },
    {
     "id": "eaps_accident", "fiche_dila": ["R49384"], "cerfa": "15796*02",

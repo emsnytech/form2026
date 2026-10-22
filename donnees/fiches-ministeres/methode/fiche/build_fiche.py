@@ -12,6 +12,8 @@ X = json.load(open(os.path.join(out_dir, f"{prefix}_complements.json")))
 GEO = json.load(open(geo_path))
 papier_path = os.path.join(out_dir, f"{prefix}_papier.json")
 PAP = json.load(open(papier_path)) if os.path.exists(papier_path) else None
+etab_path = os.path.join(out_dir, f"{prefix}_etablissements.json")
+ETB = json.load(open(etab_path)) if os.path.exists(etab_path) else None
 
 def n(x):  # entier à la française
     return f"{x:,}".replace(",", " ")
@@ -97,6 +99,22 @@ K.update({
  "dp_n": n(dp["demarches"]), "dp_e": n(dp["emetteurs_distincts"]), "dp_d": n(dp["dossiers"]), "dp_qf": n(dp["avec_quotient_familial"]),
  "bo_n": n(bo["demarches"]), "bo_e": n(bo["emetteurs_distincts"]), "bo_qf": n(bo["avec_quotient_familial"]),
 })
+if ETB:
+    K.update({"et_n": n(ETB["etablissements"]), "et_lyc": n(ETB["lycees"]), "et_col": n(ETB["colleges"]),
+              "et_dem": n(ETB["demarches"]), "et_dos": n(ETB["dossiers"]), "et_part": p(ETB["part_top10"]),
+              "et_col1": ETB["college_premier"]["nom"] if ETB["college_premier"] else "aucun",
+              "et_col_rang": n(ETB["college_premier_rang"] or 0),
+              "et_col1_dos": n(ETB["college_premier"]["dossiers"] if ETB["college_premier"] else 0),
+              "et1_nom": ETB["top10"][0]["nom"]})
+    t10 = ETB["top10"]; c1 = ETB["college_premier"]
+    if c1 and all(e["type"] == "Lycée" for e in t10):
+        K["et_phrase_college"] = f"Ce sont tous des lycées : le premier collège, {c1['nom']}, n'arrive qu'au {ETB['college_premier_rang']}<sup>e</sup> rang avec {n(c1['dossiers'])} dossiers."
+    elif c1:
+        K["et_phrase_college"] = f"Le premier collège, {c1['nom']}, est au {ETB['college_premier_rang']}<sup>e</sup> rang avec {n(c1['dossiers'])} dossiers."
+    else:
+        K["et_phrase_college"] = "Aucun collège n'y figure."
+    paye = [e for e in t10[:3] if e["usages"].get("Paye et gestion des personnels", 0) >= 5]
+    K["et_phrase_paye"] = (f"{paye[0]['nom']} va plus loin : il héberge un groupement de paye, et une partie de ses démarches sert à gérer les personnels de plusieurs établissements. " if paye else "")
 if PAP:
     PE = PAP["exemple_principal"]; PM = PAP["meta"]
     K.update({
@@ -153,8 +171,11 @@ DATA = {
  "carte": X["carte"], "geo": GEO,
  "qf": QF["perimetre"], "qf_plat": QP["top"],
  "papier": PAP["candidats"] if PAP else None,
+ "etab": ETB["top10"] if ETB else None,
 }
 html = open(tpl_path).read()
+for a, z in (("ETAB_DEBUT", "ETAB_FIN"), ("ETAB_BRIEF_DEBUT", "ETAB_BRIEF_FIN"), ("ETAB_JS_DEBUT", "ETAB_JS_FIN")):
+    html = html.replace(f"<!--{a}-->", "").replace(f"<!--{z}-->", "") if ETB else re.sub(rf"<!--{a}-->.*?<!--{z}-->\n?", "", html, flags=re.S)
 PAPIER_BLOCKS = ["PAPIER_DEBUT|PAPIER_FIN", "PAPIER_BRIEF_DEBUT|PAPIER_BRIEF_FIN", "PAPIER_PISTE_DEBUT|PAPIER_PISTE_FIN", "PAPIER_JS_DEBUT|PAPIER_JS_FIN"]
 if PAP:
     for pair in PAPIER_BLOCKS:
