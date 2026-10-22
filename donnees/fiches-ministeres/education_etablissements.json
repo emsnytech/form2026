@@ -1,0 +1,521 @@
+{
+ "etablissements": 219,
+ "lycees": 170,
+ "colleges": 49,
+ "demarches": 1753,
+ "dossiers": 325553,
+ "part_top10": 33.6,
+ "top10": [
+  {
+   "siret": "19540015500014",
+   "nom": "Lycée des métiers entre Meurthe et Sanon",
+   "type": "Lycée",
+   "departement": "54",
+   "demarches": 57,
+   "dossiers": 19279,
+   "premiere_annee": "2024",
+   "en_ligne": 29,
+   "champs_moyens": 25.7,
+   "annuaire_education": 6,
+   "quotient_familial": 0,
+   "usages": {
+    "Gestion de l'établissement": 19,
+    "Paye et gestion des personnels": 13,
+    "Autres": 12,
+    "Restauration et internat": 5,
+    "Inscriptions et choix d'options": 5,
+    "Post-bac (CPGE, BTS)": 2,
+    "Vie scolaire et santé": 1
+   },
+   "top": {
+    "num": 103205,
+    "t": "Groupement de paye Dombasle - transmission de l'état des présences / absences",
+    "d": 4029,
+    "url": "https://demarche.numerique.gouv.fr/commencer/dombasle-aed-transmission-etat-des-services-faits"
+   }
+  },
+  {
+   "siret": "19920802600021",
+   "nom": "LGT JEAN-PIERRE VERNANT",
+   "type": "Lycée",
+   "departement": "92",
+   "demarches": 42,
+   "dossiers": 16817,
+   "premiere_annee": "2019",
+   "en_ligne": 14,
+   "champs_moyens": 31.9,
+   "annuaire_education": 9,
+   "quotient_familial": 0,
+   "usages": {
+    "Post-bac (CPGE, BTS)": 14,
+    "Inscriptions et choix d'options": 12,
+    "Restauration et internat": 6,
+    "Autres": 4,
+    "Vie scolaire et santé": 4,
+    "Voyages et sorties": 2
+   },
+   "top": {
+    "num": 118734,
+    "t": "LYCÉE JEAN PIERRE VERNANT- Inscription financière Élèves & Étudiants - Année scolaire 2025-2026",
+    "d": 1796,
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-jean-pierre-vernant-inscription-financiere-e"
+   }
+  },
+  {
+   "siret": "19440021400012",
+   "nom": "Lycée Clemenceau - Nantes",
+   "type": "Lycée",
+   "departement": "44",
+   "demarches": 207,
+   "dossiers": 10831,
+   "premiere_annee": "2020",
+   "en_ligne": 98,
+   "champs_moyens": 90.9,
+   "annuaire_education": 0,
+   "quotient_familial": 0,
+   "usages": {
+    "Post-bac (CPGE, BTS)": 110,
+    "Inscriptions et choix d'options": 97
+   },
+   "top": {
+    "num": 44746,
+    "t": "Pièces complémentaires - 1e année CPGE (rentrée 2021)",
+    "d": 482,
+    "url": "https://demarche.numerique.gouv.fr/commencer/pieces-complementaires-1e-annee"
+   }
+  },
+  {
+   "siret": "19060029600015",
+   "nom": "LGT Parc Imperial",
+   "type": "Lycée",
+   "departement": "06",
+   "demarches": 34,
+   "dossiers": 10394,
+   "premiere_annee": "2021",
+   "en_ligne": 4,
+   "champs_moyens": 55.9,
+   "annuaire_education": 0,
+   "quotient_familial": 0,
+   "usages": {
+    "Inscriptions et choix d'options": 18,
+    "Restauration et internat": 9,
+    "Post-bac (CPGE, BTS)": 5,
+    "Vie scolaire et santé": 2
+   },
+   "top": {
+    "num": 97215,
+    "t": "Fiche Infirmerie Lycée - 2024/2025",
+    "d": 1542,
+    "url": "https://demarche.numerique.gouv.fr/commencer/fiche-infirmerie-lycee-2024-2025-infirmerie-leparc"
+   }
+  },
+  {
+   "siret": "19910975200014",
+   "nom": "LYCEE JEAN PIERRE TIMBAUD",
+   "type": "Lycée",
+   "departement": "91",
+   "demarches": 33,
+   "dossiers": 10045,
+   "premiere_annee": "2020",
+   "en_ligne": 3,
+   "champs_moyens": 60.2,
+   "annuaire_education": 0,
+   "quotient_familial": 0,
+   "usages": {
+    "Inscriptions et choix d'options": 17,
+    "Post-bac (CPGE, BTS)": 13,
+    "Restauration et internat": 3
+   },
+   "top": {
+    "num": 60348,
+    "t": "LYCEE JEAN PIERRE TIMBAUD - Inscription restauration scolaire 2022-2023",
+    "d": 1378,
+    "url": "https://demarche.numerique.gouv.fr/commencer/jpt-restauration"
+   }
+  },
+  {
+   "siret": "19782549000018",
+   "nom": "Lycée Louis Bascan de Rambouillet",
+   "type": "Lycée",
+   "departement": "78",
+   "demarches": 16,
+   "dossiers": 9809,
+   "premiere_annee": "2020",
+   "en_ligne": 3,
+   "champs_moyens": 27.9,
+   "annuaire_education": 0,
+   "quotient_familial": 0,
+   "usages": {
+    "Restauration et internat": 15,
+    "Gestion de l'établissement": 1
+   },
+   "top": {
+    "num": 60140,
+    "t": "Lycée Louis Bascan-Réinscription au service de restauration-Année scolaire 2022-2023",
+    "d": 966,
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-louis-bascan-reinscription-au-service-de-restauration"
+   }
+  },
+  {
+   "siret": "19782565600014",
+   "nom": "Lycée Jules Ferry - Versailles",
+   "type": "Lycée",
+   "departement": "78",
+   "demarches": 19,
+   "dossiers": 9197,
+   "premiere_annee": "2020",
+   "en_ligne": 7,
+   "champs_moyens": 39.8,
+   "annuaire_education": 0,
+   "quotient_familial": 0,
+   "usages": {
+    "Restauration et internat": 8,
+    "Post-bac (CPGE, BTS)": 7,
+    "Inscriptions et choix d'options": 2,
+    "Vie scolaire et santé": 2
+   },
+   "top": {
+    "num": 60416,
+    "t": "LYCÉE JULES FERRY - INSCRIPTION AU SERVICE DE RESTAURATION - ANNEE SCOLAIRE 2022-2023",
+    "d": 1358,
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-jules-ferry-inscription-service-de-restauration-2022-2023"
+   }
+  },
+  {
+   "siret": "19782568000014",
+   "nom": "Lycée ALAIN - Académie de Versailles",
+   "type": "Lycée",
+   "departement": "78",
+   "demarches": 15,
+   "dossiers": 8705,
+   "premiere_annee": "2020",
+   "en_ligne": 2,
+   "champs_moyens": 24.8,
+   "annuaire_education": 0,
+   "quotient_familial": 0,
+   "usages": {
+    "Restauration et internat": 15
+   },
+   "top": {
+    "num": 60330,
+    "t": "LYCÉE ALAIN INSCRIPTION AU SERVICE DE RESTAURATION  ANNEE SCOLAIRE 2022-2023",
+    "d": 1157,
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscriptions-demi-pension-2022-2023"
+   }
+  },
+  {
+   "siret": "19911632800014",
+   "nom": "Lycée René CASSIN (ARPAJON)",
+   "type": "Lycée",
+   "departement": "91",
+   "demarches": 12,
+   "dossiers": 7794,
+   "premiere_annee": "2023",
+   "en_ligne": 3,
+   "champs_moyens": 26.1,
+   "annuaire_education": 0,
+   "quotient_familial": 0,
+   "usages": {
+    "Restauration et internat": 6,
+    "Bourses et aides": 4,
+    "Inscriptions et choix d'options": 2
+   },
+   "top": {
+    "num": 115995,
+    "t": "Lycée René Cassin Arpajon : inscription à la demi-pension 2025 / 2026",
+    "d": 1526,
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-demi-pension-2025-2026"
+   }
+  },
+  {
+   "siret": "19911913200017",
+   "nom": "Lycée de la Vallée de Chevreuse",
+   "type": "Lycée",
+   "departement": "91",
+   "demarches": 30,
+   "dossiers": 6389,
+   "premiere_annee": "2020",
+   "en_ligne": 1,
+   "champs_moyens": 64.9,
+   "annuaire_education": 0,
+   "quotient_familial": 0,
+   "usages": {
+    "Inscriptions et choix d'options": 23,
+    "Autres": 6,
+    "Restauration et internat": 1
+   },
+   "top": {
+    "num": 54750,
+    "t": "Dossier financier pour les élèves du Lycée de la Vallée de Chevreuse - Année 2022-2023",
+    "d": 1045,
+    "url": "https://demarche.numerique.gouv.fr/commencer/dossier-financier-lvc-rs22"
+   }
+  }
+ ],
+ "top10_par_demarches": [
+  {
+   "siret": "19440021400012",
+   "nom": "Lycée Clemenceau - Nantes",
+   "type": "Lycée",
+   "departement": "44",
+   "demarches": 207,
+   "dossiers": 10831,
+   "premiere_annee": "2020",
+   "en_ligne": 98,
+   "champs_moyens": 90.9,
+   "annuaire_education": 0,
+   "quotient_familial": 0,
+   "usages": {
+    "Post-bac (CPGE, BTS)": 110,
+    "Inscriptions et choix d'options": 97
+   },
+   "top": {
+    "num": 44746,
+    "t": "Pièces complémentaires - 1e année CPGE (rentrée 2021)",
+    "d": 482,
+    "url": "https://demarche.numerique.gouv.fr/commencer/pieces-complementaires-1e-annee"
+   }
+  },
+  {
+   "siret": "19440029700017",
+   "nom": "Lycée LIVET - Nantes",
+   "type": "Lycée",
+   "departement": "44",
+   "demarches": 95,
+   "dossiers": 2256,
+   "premiere_annee": "2021",
+   "en_ligne": 50,
+   "champs_moyens": 60.2,
+   "annuaire_education": 47,
+   "quotient_familial": 0,
+   "usages": {
+    "Post-bac (CPGE, BTS)": 58,
+    "Inscriptions et choix d'options": 37
+   },
+   "top": {
+    "num": 142357,
+    "t": "1/ Inscription administrative 1ère année CPGE -filière PTSI 2026/2027",
+    "d": 93,
+    "url": "https://demarche.numerique.gouv.fr/commencer/1-inscription-administrative-1ere-annee-cpge-filie-5"
+   }
+  },
+  {
+   "siret": "19540015500014",
+   "nom": "Lycée des métiers entre Meurthe et Sanon",
+   "type": "Lycée",
+   "departement": "54",
+   "demarches": 57,
+   "dossiers": 19279,
+   "premiere_annee": "2024",
+   "en_ligne": 29,
+   "champs_moyens": 25.7,
+   "annuaire_education": 6,
+   "quotient_familial": 0,
+   "usages": {
+    "Gestion de l'établissement": 19,
+    "Paye et gestion des personnels": 13,
+    "Autres": 12,
+    "Restauration et internat": 5,
+    "Inscriptions et choix d'options": 5,
+    "Post-bac (CPGE, BTS)": 2,
+    "Vie scolaire et santé": 1
+   },
+   "top": {
+    "num": 103205,
+    "t": "Groupement de paye Dombasle - transmission de l'état des présences / absences",
+    "d": 4029,
+    "url": "https://demarche.numerique.gouv.fr/commencer/dombasle-aed-transmission-etat-des-services-faits"
+   }
+  },
+  {
+   "siret": "19750680100012",
+   "nom": "Lycée ARAGO, Paris",
+   "type": "Lycée",
+   "departement": "75",
+   "demarches": 47,
+   "dossiers": 5345,
+   "premiere_annee": "2021",
+   "en_ligne": 7,
+   "champs_moyens": 31.0,
+   "annuaire_education": 0,
+   "quotient_familial": 0,
+   "usages": {
+    "Voyages et sorties": 36,
+    "Restauration et internat": 8,
+    "Inscriptions et choix d'options": 3
+   },
+   "top": {
+    "num": 119776,
+    "t": " Lycée ARAGO, Paris : Inscription financière (cantine, bourses, aides sociales) 2025/26",
+    "d": 602,
+    "url": "https://demarche.numerique.gouv.fr/commencer/arago-paris2025"
+   }
+  },
+  {
+   "siret": "19340042100015",
+   "nom": "Lycée Jean Mermoz MONTPELLIER",
+   "type": "Lycée",
+   "departement": "34",
+   "demarches": 47,
+   "dossiers": 2697,
+   "premiere_annee": "2023",
+   "en_ligne": 15,
+   "champs_moyens": 64.8,
+   "annuaire_education": 42,
+   "quotient_familial": 0,
+   "usages": {
+    "Post-bac (CPGE, BTS)": 47
+   },
+   "top": {
+    "num": 120598,
+    "t": " RS26_27_Réinscription administrative formations post-bac",
+    "d": 565,
+    "url": "https://demarche.numerique.gouv.fr/commencer/1-reinscription-administrative-formations-post-bac26"
+   }
+  },
+  {
+   "siret": "19720029800010",
+   "nom": "lycée Montesquieu Le Mans",
+   "type": "Lycée",
+   "departement": "72",
+   "demarches": 47,
+   "dossiers": 1880,
+   "premiere_annee": "2021",
+   "en_ligne": 43,
+   "champs_moyens": 59.5,
+   "annuaire_education": 22,
+   "quotient_familial": 0,
+   "usages": {
+    "Post-bac (CPGE, BTS)": 46,
+    "Inscriptions et choix d'options": 1
+   },
+   "top": {
+    "num": 46446,
+    "t": "Inscription administrative en seconde générale",
+    "d": 171,
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-administrative-en-seconde-generale-pour-la-rentree-2021"
+   }
+  },
+  {
+   "siret": null,
+   "nom": "Collège Georges Brassens",
+   "type": "Collège",
+   "departement": null,
+   "demarches": 47,
+   "dossiers": 1241,
+   "premiere_annee": "2021",
+   "en_ligne": 22,
+   "champs_moyens": 69.8,
+   "annuaire_education": 0,
+   "quotient_familial": 0,
+   "usages": {
+    "Inscriptions et choix d'options": 47
+   },
+   "top": {
+    "num": 44084,
+    "t": "Inscription 6ème Rentrée 2021 -  Collège Georges Brassens",
+    "d": 200,
+    "url": "https://demarche.numerique.gouv.fr/commencer/inscription-6eme-rentree22-clggeorgesbrassens"
+   }
+  },
+  {
+   "siret": "19920802600021",
+   "nom": "LGT JEAN-PIERRE VERNANT",
+   "type": "Lycée",
+   "departement": "92",
+   "demarches": 42,
+   "dossiers": 16817,
+   "premiere_annee": "2019",
+   "en_ligne": 14,
+   "champs_moyens": 31.9,
+   "annuaire_education": 9,
+   "quotient_familial": 0,
+   "usages": {
+    "Post-bac (CPGE, BTS)": 14,
+    "Inscriptions et choix d'options": 12,
+    "Restauration et internat": 6,
+    "Autres": 4,
+    "Vie scolaire et santé": 4,
+    "Voyages et sorties": 2
+   },
+   "top": {
+    "num": 118734,
+    "t": "LYCÉE JEAN PIERRE VERNANT- Inscription financière Élèves & Étudiants - Année scolaire 2025-2026",
+    "d": 1796,
+    "url": "https://demarche.numerique.gouv.fr/commencer/lycee-jean-pierre-vernant-inscription-financiere-e"
+   }
+  },
+  {
+   "siret": "19971002100015",
+   "nom": "Lycée GERVILLE RÉACHE",
+   "type": "Lycée",
+   "departement": "971",
+   "demarches": 35,
+   "dossiers": 1229,
+   "premiere_annee": "2022",
+   "en_ligne": 1,
+   "champs_moyens": 20.2,
+   "annuaire_education": 0,
+   "quotient_familial": 0,
+   "usages": {
+    "Autres": 24,
+    "Voyages et sorties": 7,
+    "Restauration et internat": 4
+   },
+   "top": {
+    "num": 88406,
+    "t": "SONDAGE : QUELLES SONT LES TROIS SPÉCIALITÉS SOUHAITÉES DE CLASSE DE 1ère",
+    "d": 170,
+    "url": "https://demarche.numerique.gouv.fr/commencer/souhaits-trois-specialites-2024-2025"
+   }
+  },
+  {
+   "siret": "19060029600015",
+   "nom": "LGT Parc Imperial",
+   "type": "Lycée",
+   "departement": "06",
+   "demarches": 34,
+   "dossiers": 10394,
+   "premiere_annee": "2021",
+   "en_ligne": 4,
+   "champs_moyens": 55.9,
+   "annuaire_education": 0,
+   "quotient_familial": 0,
+   "usages": {
+    "Inscriptions et choix d'options": 18,
+    "Restauration et internat": 9,
+    "Post-bac (CPGE, BTS)": 5,
+    "Vie scolaire et santé": 2
+   },
+   "top": {
+    "num": 97215,
+    "t": "Fiche Infirmerie Lycée - 2024/2025",
+    "d": 1542,
+    "url": "https://demarche.numerique.gouv.fr/commencer/fiche-infirmerie-lycee-2024-2025-infirmerie-leparc"
+   }
+  }
+ ],
+ "college_premier": {
+  "siret": "19840114300013",
+  "nom": "Collège François Raspail",
+  "type": "Collège",
+  "departement": "84",
+  "demarches": 19,
+  "dossiers": 2816,
+  "premiere_annee": "2020",
+  "en_ligne": 8,
+  "champs_moyens": 85.1,
+  "annuaire_education": 0,
+  "quotient_familial": 0,
+  "usages": {
+   "Inscriptions et choix d'options": 19
+  },
+  "top": {
+   "num": 60603,
+   "t": "Réinscription au collège François Raspail Carpentras  - 5ème, 4ème, 3ème à la rentrée 2022",
+   "d": 572,
+   "url": "https://demarche.numerique.gouv.fr/commencer/reinscription-college-raspail"
+  }
+ },
+ "college_premier_rang": 31
+}

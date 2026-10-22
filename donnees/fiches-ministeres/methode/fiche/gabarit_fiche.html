@@ -152,7 +152,7 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
   <ul class="brief">
     <li>Le nombre de démarches en ligne a été multiplié par «stock_ratio» en cinq ans. Le périmètre gagne du poids sur la plateforme : «partstock0» % des démarches en ligne fin «y0», «partstock1» % aujourd'hui.</li>
     <li>Une part croissante des publications reconduit chaque année la même démarche : «rec0» % en «y0», jusqu'à «recmax» % ensuite. Hors reconductions, les nouveaux usages progressent de «new0» à «new1» par an (+«new_evol» %).</li>
-    <li>La diffusion s'élargit : «etab1» établissements d'enseignement publient en «y1» (SIRET distincts), contre «etab0» en «y0». Les émetteurs couvrent «dep1» départements, contre «dep0».</li>
+    <li>La diffusion s'élargit : «etab1» établissements d'enseignement publient en «y1» (SIRET distincts), contre «etab0» en «y0». Les émetteurs couvrent «dep1» départements, contre «dep0».<!--ETAB_BRIEF_DEBUT--> Les dix lycées les plus actifs portent à eux seuls «et_part» % des dossiers déposés auprès des lycées et collèges (<a href="#etablissements">voir le classement</a>).<!--ETAB_BRIEF_FIN--></li>
     <li>Une même démarche est souvent construite plusieurs fois. «rel_n» démarches de délivrance de relevés de notes ou d'attestations de réussite coexistent, publiées par «rel_e» émetteurs, avec de «rel_min» à «rel_max» champs pour le même service.</li>
     <li>Le préremplissage reste marginal. Sur «dp_n» démarches de demi-pension et «bo_n» démarches de bourses ou de fonds sociaux, «dp_qf» seule interroge le quotient familial par API.</li>
 <!--PAPIER_BRIEF_DEBUT-->
@@ -232,6 +232,15 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
   </figure>
   <div class="tbl" id="t-diff"></div>
   <p class="small col">Le compte par SIRET est un minimum : «siret_manquant» démarches du périmètre n'ont pas de SIRET de service, et plusieurs établissements publient sous le SIRET de leur rectorat. Le compte par libellé d'organisme («lib1» en «y1», «lib0» en «y0») est un maximum, gonflé par les variantes d'écriture.</p>
+<!--ETAB_DEBUT-->
+  <h3 id="etablissements">Les dix lycées et collèges qui utilisent le plus la plateforme</h3>
+  <div class="col">
+    <p>«et_n» lycées et collèges ont au moins une démarche active depuis «y0» («et_lyc» lycées, «et_col» collèges), pour «et_dem» démarches et «et_dos» dossiers. Les dix premiers en concentrent «et_part» %. «et_phrase_college»</p>
+    <p>Leurs usages dessinent ce qu'un établissement peut confier à la plateforme : inscriptions et choix d'options, demi-pension et internat, candidatures en classes préparatoires et BTS, bourses. «et_phrase_paye»Chacun de ces lycées a pourtant construit seul des démarches que tous les autres refont aussi.</p>
+  </div>
+  <div class="tbl" id="t-etab"></div>
+  <p class="small col">Un établissement correspond à un SIRET. Quand un lycée publie sous le SIRET de son rectorat, il est identifié par son nom. Dossiers : total des démarches actives depuis «y0». Usages : classement indicatif d'après le titre des démarches.</p>
+<!--ETAB_FIN-->
 </section>
 
 <section id="territoires">
@@ -488,6 +497,16 @@ table("t-dos", ["Année", "Dossiers estimés", "Part de la plateforme", "Platefo
 const meur = v => (v/1e6).toLocaleString("fr-FR", {minimumFractionDigits:1, maximumFractionDigits:1}) + " M€";
 table("t-gains", ["Année", "Frais évités, bas", "Frais évités, haut"], DATA.gains_annee.map((g, i) => [YL[i], meur(g.bas), meur(g.haut)]), [1,2]);
 
+/* 3 bis. Lycées et collèges */
+<!--ETAB_JS_DEBUT-->
+if (DATA.etab) {
+  const typeNom = e => `${esc(e.nom)}<div class="ex">${e.type}${e.departement ? " · " + e.departement : ""} · depuis ${e.premiere_annee}</div>`;
+  const usg = e => Object.entries(e.usages).filter(([k]) => k !== "Autres").slice(0, 3).map(([k, v]) => `${esc(k)} (${v})`).join("<br>") || "—";
+  table("t-etab", ["Rang", "Établissement", "Démarches", "dont en ligne", "Dossiers", "Usages principaux", "Démarche la plus utilisée"],
+    DATA.etab.map((e, i) => [String(i + 1), typeNom(e), fr.format(e.demarches), fr.format(e.en_ligne), fr.format(e.dossiers), usg(e),
+      `<a href="${esc(e.top.url)}" target="_blank" rel="noopener">${esc(e.top.t)}</a><div class="ex">${fr.format(e.top.d)} dossiers</div>`]), [0,2,3,4]);
+}
+<!--ETAB_JS_FIN-->
 /* 4. Carte */
 (function(){
   const G = DATA.geo, C = DATA.carte, NS = "http://www.w3.org/2000/svg";

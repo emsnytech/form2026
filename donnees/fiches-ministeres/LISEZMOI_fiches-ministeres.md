@@ -15,6 +15,10 @@ Production de l'auteur à partir de données ouvertes de data.gouv.fr. Voir `don
   la famille, Cerfa 16212*05) et un tableau de candidats classés « papier seulement », « papier national, versions
   locales » ou « en ligne ailleurs ». Absent tant que `06_papier.py` n'a pas tourné pour ce ministère ; la section
   correspondante de la fiche est alors masquée, pas vide.
+- `<prefixe>_etablissements.json` : les dix lycées et collèges qui utilisent le plus la plateforme, classés par
+  dossiers des démarches actives depuis 2021. Un établissement = un SIRET, sauf quand ce SIRET appartient surtout à
+  un rectorat ou une DSDEN (regroupement par libellé dans ce cas). Usages classés d'après le titre des démarches
+  (indicatif). Absent tant que `07_etablissements.py` n'a pas tourné ; la section correspondante est alors masquée.
 - `methode/` : scripts Python, configurations, gabarit et fond de carte qui produisent ces fichiers et la fiche.
 
 ## Sources
