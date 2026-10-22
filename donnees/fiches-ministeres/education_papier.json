@@ -49,7 +49,8 @@
     "nom": "Téléservice national des bourses",
     "url": "https://teleservices.education.gouv.fr/"
    },
-   "note": null
+   "note": null,
+   "source_statut": null
   },
   {
    "id": "bourse_lycee",
@@ -74,7 +75,8 @@
     "nom": "Téléservice national des bourses",
     "url": "https://teleservices.education.gouv.fr/"
    },
-   "note": null
+   "note": null,
+   "source_statut": null
   },
   {
    "id": "dap_etudiant_etranger",
@@ -101,7 +103,8 @@
     "nom": "Études en France",
     "url": "https://pastel.diplomatie.gouv.fr/etudesenfrance/dyn/public/authentification/login.html"
    },
-   "note": null
+   "note": null,
+   "source_statut": null
   },
   {
    "id": "mediateur",
@@ -128,7 +131,8 @@
     "nom": "Formulaire de saisine du médiateur",
     "url": "https://www.education.gouv.fr/faire-appel-au-mediateur-formulaire-de-saisine-10649"
    },
-   "note": null
+   "note": null,
+   "source_statut": null
   },
   {
    "id": "aut_dopage",
@@ -153,7 +157,8 @@
     "nom": "Plateforme AUT de l'AFLD",
     "url": "https://www.afld.fr/la-lutte-antidopage/education-et-prevention/effectuer-une-demande-daut/"
    },
-   "note": null
+   "note": null,
+   "source_statut": null
   },
   {
    "id": "convention_stage",
@@ -187,7 +192,8 @@
    "champs_max": 35,
    "dossiers": 1477,
    "service_en_ligne": null,
-   "note": null
+   "note": null,
+   "source_statut": null
   },
   {
    "id": "procuration_bourse_prive",
@@ -209,12 +215,13 @@
    "champs_max": null,
    "dossiers": 0,
    "service_en_ligne": null,
-   "note": "aucune démarche en ligne repérée ; vérification complémentaire impossible (education.gouv.fr inaccessible)"
+   "note": "aucune démarche en ligne repérée ; vérification complémentaire impossible (education.gouv.fr inaccessible)",
+   "source_statut": null
   },
   {
    "id": "cned_inscription",
    "titre": "Inscription au Centre national d'enseignement à distance (Cned)",
-   "statut": "papier_seul",
+   "statut": "en_ligne_ailleurs",
    "fiche_dila": [
     "R47838"
    ],
@@ -230,8 +237,12 @@
    "champs_min": 22,
    "champs_max": 37,
    "dossiers": 411,
-   "service_en_ligne": null,
-   "note": "fiche service-public.fr ambiguë (modalité « papier » mais description « en ligne ») ; cned.fr inaccessible pour vérification"
+   "service_en_ligne": {
+    "nom": "Inscription sur cned.fr",
+    "url": "https://www.cned.fr/"
+   },
+   "note": "Inscription sur le site du Cned (académie de Paris : « la famille ou le chef d'établissement se connecte au site du Cned »). Pour une inscription réglementée à l'année, l'autorisation d'instruction dans la famille du DASEN est un préalable.",
+   "source_statut": "https://www.ac-paris.fr/inscription-au-cned-123640"
   },
   {
    "id": "eaps_accident",
@@ -253,7 +264,8 @@
    "champs_max": 212,
    "dossiers": 10,
    "service_en_ligne": null,
-   "note": "aucune démarche en ligne repérée ; vérification complémentaire impossible (sports.gouv.fr inaccessible)"
+   "note": "aucune démarche en ligne repérée ; vérification complémentaire impossible (sports.gouv.fr inaccessible)",
+   "source_statut": null
   }
  ],
  "meta": {
@@ -276,8 +288,8 @@
    "R58266": "Bafa, aide à la formation — versée par la Caf et les conseils départementaux, pas par le ministère ou ses services déconcentrés (DRAJES/SDJES)"
   },
   "n_candidats": 9,
-  "n_en_ligne_ailleurs": 5,
+  "n_en_ligne_ailleurs": 6,
   "n_papier_national_local": 1,
-  "n_papier_seul": 3
+  "n_papier_seul": 2
  }
 }

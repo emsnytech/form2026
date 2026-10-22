@@ -116,6 +116,7 @@ for c in P["candidats"]:
         "dossiers": sum(r["dossiersCount"] or 0 for r in m_per),
         "service_en_ligne": c.get("service_en_ligne"),
         "note": c.get("note"),
+        "source_statut": c.get("source_statut"),
     }
     candidats_out.append(row)
 
