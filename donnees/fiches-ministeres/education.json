@@ -31,6 +31,154 @@
    "pole_hote": "Éducation nationale",
    "libelle": "Activité jeunesse, engagement et sports déclarée sous la zone Éducation nationale (DRAJES/SDJES, ACM, SNU…)",
    "motif": "DRAJES|SDJES|jeunesse,? (de )?l.engagement|engagement,? (à la )?jeunesse|accueils? collectifs? de mineurs|\\bBAFA\\b|\\bSNU\\b|service national universel|colos? apprenantes|sport"
+  },
+  "papier": {
+   "explorer_html": "/Users/philippevrignaud/Documents/form2026-site/explorer.html",
+   "cerfa_principal": "16212*05",
+   "motif_principal": "instruction (dans la|en) famille",
+   "themes_dila": [
+    "Famille - Scolarité",
+    "Travail - Formation",
+    "Loisirs - Sports - Culture"
+   ],
+   "exclusions_dila": {
+    "R57466": "Demande d'admission dans les écoles nationales supérieures d'architecture (dossier bleu) — relève du ministère de la Culture",
+    "R15643": "Demande d'admission dans les écoles nationales supérieures d'architecture (dossier jaune) — relève du ministère de la Culture",
+    "R36750": "Bourse d'études à l'École nationale supérieure maritime — relève du ministère chargé de la Mer",
+    "R50532": "Stage de formation à la traduction au Parlement européen — institution européenne, hors périmètre",
+    "R60840": "Stage au Conseil économique et social européen — institution européenne, hors périmètre",
+    "R50534": "Stage au Conseil de l'Union européenne — institution européenne, hors périmètre",
+    "R33004": "Autorisation de participation à une sortie ou un voyage scolaire — pas une procédure nationale standardisée (pas de Cerfa, formulaire propre à chaque établissement et chaque sortie)",
+    "R58266": "Bafa, aide à la formation — versée par la Caf et les conseils départementaux, pas par le ministère ou ses services déconcentrés (DRAJES/SDJES)"
+   },
+   "candidats": [
+    {
+     "id": "bourse_college",
+     "fiche_dila": [
+      "R11499"
+     ],
+     "cerfa": "12539*16",
+     "titre": "Demande de bourse de collège",
+     "statut": "en_ligne_ailleurs",
+     "service_en_ligne": {
+      "nom": "Téléservice national des bourses",
+      "url": "https://teleservices.education.gouv.fr/"
+     },
+     "motif_recherche": "bourse.{0,15}coll[èe]ge"
+    },
+    {
+     "id": "bourse_lycee",
+     "fiche_dila": [
+      "R43243"
+     ],
+     "cerfa": "11319*23",
+     "titre": "Demande de bourse nationale de lycée",
+     "statut": "en_ligne_ailleurs",
+     "service_en_ligne": {
+      "nom": "Téléservice national des bourses",
+      "url": "https://teleservices.education.gouv.fr/"
+     },
+     "motif_recherche": "bourse.{0,15}lyc[ée]e"
+    },
+    {
+     "id": "dap_etudiant_etranger",
+     "fiche_dila": [
+      "R1278",
+      "R1279"
+     ],
+     "cerfa": "11126*25",
+     "titre": "Admission préalable à l'université pour étudiant étranger (DAP)",
+     "statut": "en_ligne_ailleurs",
+     "service_en_ligne": {
+      "nom": "Études en France",
+      "url": "https://pastel.diplomatie.gouv.fr/etudesenfrance/dyn/public/authentification/login.html"
+     },
+     "motif_recherche": "admission pr[ée]alable|\\bDAP\\b"
+    },
+    {
+     "id": "mediateur",
+     "fiche_dila": [
+      "R2436",
+      "R2400"
+     ],
+     "cerfa": null,
+     "titre": "Réclamation auprès du médiateur de l'Éducation nationale",
+     "statut": "en_ligne_ailleurs",
+     "service_en_ligne": {
+      "nom": "Formulaire de saisine du médiateur",
+      "url": "https://www.education.gouv.fr/faire-appel-au-mediateur-formulaire-de-saisine-10649"
+     },
+     "motif_recherche": "m[ée]diateur"
+    },
+    {
+     "id": "aut_dopage",
+     "fiche_dila": [
+      "R12139"
+     ],
+     "cerfa": null,
+     "titre": "Autorisation d'usage à des fins thérapeutiques (AUT, antidopage)",
+     "statut": "en_ligne_ailleurs",
+     "service_en_ligne": {
+      "nom": "Plateforme AUT de l'AFLD",
+      "url": "https://www.afld.fr/la-lutte-antidopage/education-et-prevention/effectuer-une-demande-daut/"
+     },
+     "motif_recherche": "\\bAUT\\b|usage th[ée]rapeutique|antidopage"
+    },
+    {
+     "id": "convention_stage",
+     "fiche_dila": [
+      "R2353",
+      "R18627",
+      "R18626",
+      "R75836",
+      "R18613",
+      "R74111",
+      "R33438"
+     ],
+     "cerfa": null,
+     "titre": "Conventions de stage et de séquence d'observation en milieu professionnel",
+     "statut": "papier_national_local",
+     "motif_recherche": "convention.{0,30}stage|stage.{0,20}milieu professionnel|s[ée]quence d.observation|visite d.information"
+    },
+    {
+     "id": "procuration_bourse_prive",
+     "fiche_dila": [
+      "R40723"
+     ],
+     "cerfa": null,
+     "titre": "Procuration pour le paiement des bourses de collège et de lycée (enseignement privé)",
+     "statut": "papier_seul",
+     "motif_recherche": "procuration.{0,20}bourse",
+     "note": "aucune démarche en ligne repérée ; vérification complémentaire impossible (education.gouv.fr inaccessible)"
+    },
+    {
+     "id": "cned_inscription",
+     "fiche_dila": [
+      "R47838"
+     ],
+     "cerfa": null,
+     "titre": "Inscription au Centre national d'enseignement à distance (Cned)",
+     "statut": "en_ligne_ailleurs",
+     "motif_recherche": "\\bcned\\b",
+     "service_en_ligne": {
+      "nom": "Inscription sur cned.fr",
+      "url": "https://www.cned.fr/"
+     },
+     "source_statut": "https://www.ac-paris.fr/inscription-au-cned-123640",
+     "note": "Inscription sur le site du Cned (académie de Paris : « la famille ou le chef d'établissement se connecte au site du Cned »). Pour une inscription réglementée à l'année, l'autorisation d'instruction dans la famille du DASEN est un préalable."
+    },
+    {
+     "id": "eaps_accident",
+     "fiche_dila": [
+      "R49384"
+     ],
+     "cerfa": "15796*02",
+     "titre": "Signalement d'accident dans un établissement d'activités physiques et sportives (EAPS)",
+     "statut": "papier_seul",
+     "motif_recherche": "\\bEAPS\\b",
+     "note": "aucune démarche en ligne repérée ; vérification complémentaire impossible (sports.gouv.fr inaccessible)"
+    }
+   ]
   }
  },
  "perimetre": {
