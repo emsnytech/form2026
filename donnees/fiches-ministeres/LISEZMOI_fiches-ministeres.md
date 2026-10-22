@@ -49,9 +49,11 @@ Production de l'auteur à partir de données ouvertes de data.gouv.fr. Voir `don
 - Les frais évités sont des temps et des coûts valorisés, pas des économies budgétaires constatées.
 - Démarches encore sur papier : pour l'exemple détaillé, les émetteurs sont comptés par département (une démarche
   par DSDEN), pas par libellé d'organisme — ce dernier est orthographié de façon trop variable dans les données
-  sources pour un compte fiable (de 61 à 81 selon la méthode). Quatre candidats restent classés « papier seulement »
-  sans vérification complémentaire au-delà de FORM 2026 et de service-public.fr : les sites concernés
-  (cned.fr, education.gouv.fr, sports.gouv.fr, caf.fr) n'ont pas pu être consultés au moment de la production.
+  sources pour un compte fiable (de 61 à 81 selon la méthode). Sur les 9 autres candidats recensés : 6 sont « en
+  ligne ailleurs » (dont le Cned, reclassé d'après la page de l'académie de Paris sur l'inscription au Cned,
+  https://www.ac-paris.fr/inscription-au-cned-123640), 1 est « papier national, versions locales », et 2 restent
+  classés « papier seulement » sans vérification complémentaire au-delà de FORM 2026 et de service-public.fr
+  (sports.gouv.fr et education.gouv.fr n'ont pas pu être consultés au moment de la production).
 - **Confidentialité** : les adresses e-mail et numéros de téléphone retirés des titres de démarches, noms
   d'organisme et noms de service sont remplacés par `[adresse électronique retirée]` ou `[numéro de téléphone
   retiré]`. Retrait fait à l'extraction, contrôlé une seconde fois avant publication.

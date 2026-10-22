@@ -32,7 +32,7 @@
   "motif": "DRAJES|SDJES|jeunesse,? (de )?l.engagement|engagement,? (à la )?jeunesse|accueils? collectifs? de mineurs|\\bBAFA\\b|\\bSNU\\b|service national universel|colos? apprenantes|sport"
  },
  "papier": {
-  "explorer_html": "/Users/philippevrignaud/Documents/form2026-site/explorer.html",
+  "explorer_html": "~/Documents/form2026-site/explorer.html",
   "cerfa_principal": "16212*05",
   "motif_principal": "instruction (dans la|en) famille",
   "themes_dila": ["Famille - Scolarité", "Travail - Formation", "Loisirs - Sports - Culture"],
