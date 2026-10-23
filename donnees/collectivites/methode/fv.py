@@ -1,6 +1,6 @@
-# Chemins à adapter : script fourni pour documenter la méthode.
+# Chemins à adapter : script fourni pour documenter la méthode. Données d'entrée : jeux data.gouv.fr cités dans le LISEZMOI.
 import pandas as pd, glob, re
-A='/mnt/user-data/attachments/173f4c71-1b36-58e5-879b-d11179f2f59a/'
+A='data/fonds-vert/'
 def num(s): return pd.to_numeric(s.astype(str).str.replace(r'[\s \xa0]','',regex=True).str.replace(',','.'),errors='coerce')
 out=[]
 f23=pd.read_csv(A+'a73e9658-fonds-vert-2023-export.csv',dtype=str); f23['m']=num(f23.montant_engage); f23['ds']=f23.numero_dossier_ds; f23['siren']=f23.siren; f23['an']=2023; f23['src']='principal'; f23['dem']=f23.nom_demarche_ds
