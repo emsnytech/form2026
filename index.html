@@ -53,6 +53,14 @@ section{margin-top:2.8rem}
 .doors{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 @media (max-width:900px){.doors{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:620px){.doors{grid-template-columns:1fr}}
+.une{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem 1.5rem;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--min);border-radius:12px;padding:1.1rem 1.3rem;margin:0 0 1.6rem;text-decoration:none;color:var(--ink);transition:transform .15s ease,box-shadow .15s ease}
+.une:hover,.une:focus-visible{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08);outline:none}
+.une .q{font-size:.85rem;font-weight:700;color:var(--min);text-transform:uppercase;letter-spacing:.05em}
+.une h3{font-size:1.3rem;margin:.3rem 0 .35rem;line-height:1.2}
+.une p{margin:0;color:var(--muted);font-size:.97rem}
+.une .chiffre{font:700 2rem/1 "IBM Plex Mono",ui-monospace,monospace;color:var(--min);text-align:right;white-space:nowrap}
+.une .chiffre small{display:block;font:600 .8rem/1.3 "Source Sans 3",system-ui,sans-serif;color:var(--muted);margin-top:.3rem}
+@media (max-width:620px){.une{grid-template-columns:1fr}.une .chiffre{text-align:left}}
 .door{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.3rem 1.2rem;text-decoration:none;color:var(--ink);border-top:6px solid var(--c,var(--admin));transition:transform .15s ease,box-shadow .15s ease}
 .door:hover,.door:focus-visible{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08);outline:none}
 .door .q{font-size:.85rem;font-weight:700;color:var(--c,var(--admin));text-transform:uppercase;letter-spacing:.05em}
@@ -122,6 +130,15 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
 
   <section aria-labelledby="h-doors">
     <h2 id="h-doors">Que voulez-vous faire ?</h2>
+    <!-- collectivites : a la une -->
+    <a class="une" href="collectivites/">
+      <div>
+        <span class="q">À la une · Salon des maires 2026 <em class="new">Nouveau</em></span>
+        <h3>Démarche Numérique, pour et par les collectivités</h3>
+        <p>Dotations, Fonds vert, démarches de l'État et des collectivités : l'actualisation du bilan 2024 et un complément au bilan DGCL des dotations 2025, à partir des seules données publiques.</p>
+      </div>
+      <div class="chiffre">13,5 Md€<small>de subventions instruites<br>sur la plateforme depuis 2018</small></div>
+    </a>
     <div class="doors">
       <a class="door" href="simulateur-gains-dematerialisation.html" style="--c:var(--usager)">
         <span class="q">Estimer</span>
@@ -191,6 +208,7 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
           <li><a href="explorer.html#cerfa">CERFA papier</a><small>Formulaires pas encore en ligne</small></li>
           <li><a href="explorer.html#toutes">Toutes les démarches</a></li>
           <li><a href="fiches-ministeres/">Fiches ministères</a> <em class="new">Nouveau</em><small>Usage par ministère, 2021 → 2026</small></li>
+          <li><a href="collectivites/">Collectivités</a> <em class="new">Nouveau</em><small>Pour et par les collectivités, dotations et Fonds vert</small></li>
         </ul>
       </div>
       <div class="grp">
