@@ -37,6 +37,7 @@
     --cat-agent_public:#A8432F; --cat-agent_public-soft:#F1DCD6;
     --cat-mixte:#4A6D5E; --cat-mixte-soft:#DCE7E1;
     --cat-indetermine:#7B7365; --cat-indetermine-soft:#E7E4DC;
+    --cat-non_classe:#6B6E76; --cat-non_classe-soft:#E3E4E7;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -72,6 +73,7 @@
       --cat-agent_public:#E48D76; --cat-agent_public-soft:#331F1A;
       --cat-mixte:#8FC0AC; --cat-mixte-soft:#1F2E27;
       --cat-indetermine:#ADA593; --cat-indetermine-soft:#2A2820;
+      --cat-non_classe:#A6A9B0; --cat-non_classe-soft:#292A2E;
     }
   }
   :root[data-theme="dark"]{
@@ -103,6 +105,7 @@
     --cat-agent_public:#E48D76; --cat-agent_public-soft:#331F1A;
     --cat-mixte:#8FC0AC; --cat-mixte-soft:#1F2E27;
     --cat-indetermine:#ADA593; --cat-indetermine-soft:#2A2820;
+    --cat-non_classe:#A6A9B0; --cat-non_classe-soft:#292A2E;
 
   }
 
@@ -435,6 +438,10 @@
   const DEMARCHE_URL_PREFIX = 'https://demarche.numerique.gouv.fr/commencer/';
   DEMARCHES.forEach(d=>{
     if(d.url) d.url = DEMARCHE_URL_PREFIX + d.url;
+    // categorie absente (jamais passée par la classification, à la différence de "indetermine")
+    // : normalisée une fois ici en clé explicite plutôt que laissée à null, pour que filtres,
+    // compteurs et badge affichent "Non classé" au lieu du littéral "null".
+    if(d.categorie === null || d.categorie === undefined) d.categorie = 'non_classe';
     if(d.ministere){
       const parts = d.ministere.split(';').map(s=>s.trim());
       const labels = [];
@@ -710,9 +717,10 @@
     collectivite:  {label:"Collectivité"},
     agent_public:  {label:"Agent public"},
     mixte:         {label:"Mixte"},
-    indetermine:   {label:"Indéterminé"}
+    indetermine:   {label:"Indéterminé"},
+    non_classe:    {label:"Non classé"}
   };
-  const CAT_ORDER = ["particulier","entreprise","association","collectivite","agent_public","mixte","indetermine"];
+  const CAT_ORDER = ["particulier","entreprise","association","collectivite","agent_public","mixte","indetermine","non_classe"];
 
   function catBadge(d){
     const cat = CATS[d.categorie] || {label:d.categorie};

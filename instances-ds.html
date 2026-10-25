@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FORM 2026 — Une plateforme, plusieurs instances</title>
+<meta name="description" content="Tableau de bord consolidé des instances publiques de Démarches Simplifiées / Démarche Numérique : démarches et dossiers déposés, relevés sur les pages de statistiques publiques.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="FORM 2026">
+<meta property="og:title" content="Une plateforme, plusieurs instances : 23,8 millions de dossiers">
+<meta property="og:description" content="Les statistiques de Démarche Numérique ne comptent qu'une instance. Le logiciel libre en fait tourner d'autres : relevé consolidé.">
+<meta property="og:url" content="https://emsnytech.github.io/form2026/instances-ds.html">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1e2022; --muted:#5c6066; --paper:#fbf9f5; --surface:#ffffff; --line:#e2dfd7;
+  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4; --accent:#b45309; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c; --min:#0e7490; --min-soft:#ecfeff;
+  --violet:#7c3aed; --rose:#be185d; --track:#efece5;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+    --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171; --min:#22d3ee; --min-soft:#164e63;
+    --violet:#a78bfa; --rose:#f472b6; --track:#323236;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171; --min:#22d3ee; --min-soft:#164e63;
+  --violet:#a78bfa; --rose:#f472b6; --track:#323236;
+}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--admin)}
+.wrap{max-width:1120px;margin:0 auto;padding:2.4rem 1.25rem 3rem}
+.brand{font-weight:700;letter-spacing:.02em;color:var(--muted);font-size:.95rem;margin:0}
+.brand a{color:inherit;text-decoration:none}
+.brand a:hover{color:var(--admin)}
+h1,h2{font-weight:800;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,4.6vw,3.1rem);max-width:22ch;margin-top:.5rem}
+h2{font-size:1.4rem;margin-bottom:.4rem}
+.lede{font-size:1.12rem;color:var(--muted);max-width:64ch;margin:1rem 0 0}
+.sub{color:var(--muted);margin:0 0 1.2rem;max-width:68ch}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+section{margin-top:2.8rem}
+
+/* Chiffres clés */
+.figures{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:2rem}
+@media (max-width:760px){.figures{grid-template-columns:repeat(2,1fr)}}
+.fig{background:var(--surface);padding:1rem 1.1rem}
+.fig b{display:block;font:700 1.65rem/1.1 "IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.fig span{font-size:.9rem;color:var(--muted)}
+.fig.a b{color:var(--admin)} .fig.u b{color:var(--usager)} .fig.m b{color:var(--min)} .fig.w b{color:var(--accent)}
+
+/* Contrôles */
+.controls{display:flex;flex-wrap:wrap;gap:.8rem 1.4rem;align-items:center;margin:0 0 1.2rem}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;background:var(--surface);padding:3px}
+.seg button{font:600 .92rem "Source Sans 3",system-ui,sans-serif;color:var(--muted);background:none;border:0;border-radius:999px;padding:.4rem .9rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.seg button:focus-visible{outline:2px solid var(--admin);outline-offset:2px}
+.ctl-label{font-size:.85rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-right:.3rem}
+
+/* Barres */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.3rem 1rem}
+.bars{list-style:none;margin:0;padding:0}
+.bar{display:grid;grid-template-columns:minmax(150px,240px) 1fr minmax(92px,auto);gap:.4rem 1rem;align-items:center;padding:.55rem 0;border-bottom:1px solid var(--line)}
+.bar:last-child{border-bottom:0}
+.bar .name{font-weight:700;line-height:1.2}
+.bar .name small{display:block;font-weight:400;color:var(--muted);font-size:.82rem}
+.track{height:22px;background:var(--track);border-radius:4px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--c);border-radius:4px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.val{font:700 1rem "IBM Plex Mono",ui-monospace,monospace;text-align:right;font-variant-numeric:tabular-nums}
+.val small{display:block;font:400 .78rem "Source Sans 3",system-ui,sans-serif;color:var(--muted)}
+.bar.off{opacity:.35}
+@media (max-width:620px){
+  .bar{grid-template-columns:1fr auto}
+  .bar .track{grid-column:1 / -1;grid-row:2}
+}
+.note{font-size:.88rem;color:var(--muted);margin:.9rem 0 0}
+
+/* Part de l'ensemble */
+.stack{display:flex;height:44px;border-radius:6px;overflow:hidden;background:var(--track);margin:.4rem 0 .8rem}
+.stack div{background:var(--c);width:0;transition:width .9s cubic-bezier(.2,.8,.2,1);position:relative}
+.stack div+div{border-left:2px solid var(--surface)}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;list-style:none;margin:0;padding:0;font-size:.9rem}
+.legend li{display:flex;align-items:center;gap:.4rem}
+.legend i{width:12px;height:12px;border-radius:3px;background:var(--c);display:inline-block}
+.legend b{font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:500}
+
+/* Cartes instances */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media (max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.cards{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:12px;padding:1.1rem 1.2rem;display:flex;flex-direction:column}
+.card .q{font-size:.8rem;font-weight:700;color:var(--c);text-transform:uppercase;letter-spacing:.05em}
+.card h3{font-size:1.15rem;margin:.25rem 0 .1rem;line-height:1.2}
+.card .host{font:500 .8rem "IBM Plex Mono",ui-monospace,monospace;color:var(--muted);word-break:break-all}
+.card dl{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:.9rem 0 .6rem}
+.card dt{font-size:.78rem;color:var(--muted)}
+.card dd{margin:0;font:700 1.15rem "IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.card dd .d{font:600 .78rem "Source Sans 3",system-ui,sans-serif;margin-left:.3rem}
+.up{color:var(--usager)} .down{color:var(--bad)} .flat{color:var(--muted)}
+.card p{margin:0;font-size:.88rem;color:var(--muted);flex:1}
+.card .go{margin-top:.8rem;font-weight:700;font-size:.92rem;text-decoration:none;color:var(--c)}
+.card .go:hover{text-decoration:underline}
+.flag{display:inline-block;font-size:.75rem;font-weight:700;background:var(--warn-soft);color:var(--warn);border-radius:4px;padding:.05rem .4rem;margin-left:.3rem;vertical-align:1px}
+
+/* Hors du total */
+.outside{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:760px){.outside{grid-template-columns:1fr}}
+.box{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:1.1rem 1.2rem}
+.box h3{margin:0 0 .2rem;font-size:1.1rem}
+.box > p{margin:0 0 .7rem;color:var(--muted);font-size:.92rem}
+.box ul{list-style:none;margin:0;padding:0}
+.box li{padding:.5rem 0;border-top:1px solid var(--line);font-size:.95rem}
+.box li b{display:block}
+.box li span{color:var(--muted);font-size:.86rem}
+
+/* Méthode */
+.method{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--min);border-radius:12px;padding:1.1rem 1.3rem}
+.method ol{margin:.4rem 0 0;padding-left:1.2rem}
+.method li{margin:.35rem 0}
+.back{display:inline-block;margin-top:2.4rem;font-weight:700;text-decoration:none}
+footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+@media (prefers-reduced-motion:reduce){.fill,.stack div{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="brand"><a href="./">FORM 2026</a> · Situer</p>
+    <h1>Une plateforme, plusieurs instances</h1>
+    <p class="lede">Les statistiques publiées par Démarche Numérique ne comptent qu'une seule instance : celle de l'État. Le logiciel étant libre, d'autres administrations le font tourner chez elles. Additionnées, les instances publiques connues dépassent <strong id="lede-total">23,8 millions</strong> de dossiers déposés.</p>
+  </header>
+
+  <div class="figures" aria-live="polite">
+    <div class="fig a"><b data-count="dossiers">0</b><span>dossiers déposés, toutes instances relevées</span></div>
+    <div class="fig m"><b data-count="demarches">0</b><span>démarches publiées ou en cours</span></div>
+    <div class="fig u"><b data-count="horsnat">0</b><span>dossiers sur les instances hors national</span></div>
+    <div class="fig w"><b data-count="nb">0</b><span>instances relevées, 6 autres identifiées</span></div>
+  </div>
+
+  <section aria-labelledby="t-compare">
+    <h2 id="t-compare">Instance par instance</h2>
+    <p class="sub">Choisissez l'indicateur. L'instance nationale écrase l'échelle : retirez-la pour comparer les autres entre elles.</p>
+    <div class="controls">
+      <div><span class="ctl-label">Indicateur</span>
+        <div class="seg" role="group" aria-label="Indicateur">
+          <button type="button" data-metric="dossiers" aria-pressed="true">Dossiers</button>
+          <button type="button" data-metric="demarches" aria-pressed="false">Démarches</button>
+          <button type="button" data-metric="d30" aria-pressed="false">30 derniers jours</button>
+        </div>
+      </div>
+      <div><span class="ctl-label">Échelle</span>
+        <div class="seg" role="group" aria-label="Échelle">
+          <button type="button" data-scope="all" aria-pressed="true">Toutes</button>
+          <button type="button" data-scope="hors" aria-pressed="false">Hors national</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <ul class="bars" id="bars"></ul>
+      <p class="note" id="bars-note"></p>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-part">
+    <h2 id="t-part">Part de chaque instance</h2>
+    <p class="sub" id="part-sub"></p>
+    <div class="panel">
+      <div class="stack" id="stack" role="img"></div>
+      <ul class="legend" id="legend"></ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-cards">
+    <h2 id="t-cards">Les instances relevées</h2>
+    <p class="sub">Chaque chiffre provient de la page <span class="mono">/stats</span> publique de l'instance. Cliquez pour vérifier.</p>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section aria-labelledby="t-out">
+    <h2 id="t-out">Ce que le total ne compte pas</h2>
+    <p class="sub">Le total est un minimum. D'autres instances existent, mais leurs statistiques ne sont pas publiques ou leur adresse n'est pas confirmée.</p>
+    <div class="outside">
+      <div class="box">
+        <h3>Instances internes</h3>
+        <p>Déployées sur des réseaux fermés : statistiques non accessibles de l'extérieur.</p>
+        <ul>
+          <li><b>Ministère des Armées, intranet</b><span>Instance distincte de l'instance internet relevée ci-dessus</span></li>
+          <li><b>Sénat</b><span>Instance interne</span></li>
+          <li><b>Ministère de l'Europe et des Affaires étrangères</b><span>Instance interne</span></li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Instances à relever ou à confirmer</h3>
+        <p>Opérateurs de mutualisation pour les collectivités, hébergeurs ou distributeurs du logiciel.</p>
+        <ul>
+          <li><b>ARNia (Bourgogne-Franche-Comté)</b><span>Instance en service, confirmée ; adresse publique et statistiques à relever. Territoire ouvert : 3 685 communes, 2,8 millions d'habitants</span></li>
+          <li><b>Mégalis Bretagne</b><span>Service inscrit au bouquet 2025-2029 ; instance propre ou accès à celle de l'ADULLACT, à vérifier</span></li>
+          <li><b>Gironde Numérique</b><span>Instance en expérimentation (2022)</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-method">
+    <h2 id="t-method">Méthode</h2>
+    <div class="method">
+      <ol>
+        <li>Relevé manuel des pages <span class="mono">/stats</span> publiques le <strong id="releve-date">24 octobre 2026</strong>. Les chiffres bougent chaque jour : la date du relevé fait foi.</li>
+        <li>Deux indicateurs, identiques sur toutes les instances : démarches dématérialisées (total) et dossiers déposés (total), avec la variation sur 30 jours.</li>
+        <li>Les instances des ministères sociaux et des Armées tournent sur une version plus ancienne du logiciel. Leur compteur inclut les démarches <em>en cours</em> de dématérialisation. Les dossiers déposés, eux, se comptent de la même façon partout.</li>
+        <li>Aucun double compte : chaque instance a sa propre base. L'instance Hauts-de-France est exploitée par l'ADULLACT, mais ses compteurs sont distincts de ceux de demarches.adullact.org. Une instance revendue par un tiers (cas possible de Mégalis) ne sera ajoutée qu'une fois son indépendance vérifiée.</li>
+        <li>La page de la Nouvelle-Calédonie refuse la lecture automatique : chiffres relevés à l'écran.</li>
+      </ol>
+    </div>
+  </section>
+
+  <a class="back" href="./">← Retour à FORM 2026</a>
+  <footer>FORM 2026 · Philippe Vrignaud · Données ouvertes et code source publics</footer>
+</div>
+
+<script>
+// Relevé du 24 octobre 2026 — mettre à jour ici uniquement.
+const RELEVE = "24 octobre 2026";
+const INSTANCES = [
+  {id:"nat", nom:"Démarche Numérique", court:"National", type:"État · instance nationale (DINUM)", host:"demarche.numerique.gouv.fr", url:"https://demarche.numerique.gouv.fr/stats", c:"--admin",
+   demarches:60192, dossiers:22679986, d30:614095, v30:13, dem30:1350, note:"L'instance de référence, seule comptée dans les statistiques officielles.", national:true},
+  {id:"pf", nom:"Mes-Démarches", court:"Polynésie", type:"Polynésie française", host:"mes-demarches.gov.pf", url:"https://www.mes-demarches.gov.pf/stats", c:"--min",
+   demarches:1601, dossiers:430086, d30:6713, v30:-19, dem30:29, note:"Adaptation polynésienne opérée par la direction des talents et de l'innovation."},
+  {id:"adu", nom:"ADULLACT", court:"ADULLACT", type:"Collectivités adhérentes", host:"demarches.adullact.org", url:"https://demarches.adullact.org/stats", c:"--usager",
+   demarches:2765, dossiers:402003, d30:19266, v30:-27, dem30:90, note:"Ouverte aux collectivités depuis qu'elles ne peuvent plus créer de compte sur l'instance nationale (février 2021)."},
+  {id:"soc", nom:"Démarches Sociales", court:"Ministères sociaux", type:"Ministères sociaux (DNUM)", host:"demat.social.gouv.fr", url:"https://demat.social.gouv.fr/stats", c:"--accent",
+   demarches:403, dossiers:263236, d30:7474, v30:78, dem30:10, ancien:true, note:"Version du logiciel d'avril 2024."},
+  {id:"arm", nom:"Armées · internet", court:"Armées", type:"Ministère des Armées", host:"demarches-simplifiees.defense.gouv.fr", url:"https://demarches-simplifiees.defense.gouv.fr/stats", c:"--violet",
+   demarches:888, dossiers:41505, d30:1087, v30:-17, dem30:38, ancien:true, note:"Instance ouverte sur internet. L'instance intranet n'est pas comptée."},
+  {id:"nc", nom:"Démarches simplifiées NC", court:"Nouvelle-Calédonie", type:"Gouvernement de la Nouvelle-Calédonie", host:"demarches-simplifiees.gouv.nc", url:"https://www.demarches-simplifiees.gouv.nc/stats", c:"--bad",
+   demarches:97, dossiers:3600, d30:293, v30:-15, dem30:5, note:"Instance récente (2026), authentification par NC Connect."},
+  {id:"hdf", nom:"Démarches Hauts-de-France", court:"Hauts-de-France", type:"Collectivités du Nord, du Pas-de-Calais et de la Somme", host:"demarches-hdf.fr", url:"https://demarches-hdf.fr/stats", c:"--rose",
+   demarches:95, dossiers:2017, d30:228, v30:-58, dem30:5, note:"Portée par Somme Numérique, La Fibre Numérique 59-62 et les centres de gestion du Nord et du Pas-de-Calais, avec un financement FEDER ; exploitée par l'ADULLACT, mais sur une base distincte. Relevé du 25 octobre 2026."}
+];
+
+const fmt = n => n.toLocaleString("fr-FR");
+const fmtM = n => n >= 1e6 ? (n/1e6).toLocaleString("fr-FR",{maximumFractionDigits:1})+" M" : fmt(n);
+const pct = (v,t) => { const x=v/t*100; return x>0 && x<0.1 ? "< 0,1 %" : x.toLocaleString("fr-FR",{maximumFractionDigits:1})+" %"; };
+const sum = (k, arr=INSTANCES) => arr.reduce((s,i)=>s+i[k],0);
+const LABELS = {dossiers:"dossiers déposés", demarches:"démarches", d30:"dossiers sur 30 jours"};
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+document.getElementById("releve-date").textContent = RELEVE;
+
+// Compteurs animés
+const totals = {
+  dossiers: sum("dossiers"),
+  demarches: sum("demarches"),
+  horsnat: sum("dossiers", INSTANCES.filter(i=>!i.national)),
+  nb: INSTANCES.length
+};
+document.getElementById("lede-total").textContent = fmtM(totals.dossiers).replace(" M"," millions");
+function countUp(el, target){
+  if (reduce){ el.textContent = fmt(target); return; }
+  const t0 = performance.now(), d = 1400;
+  (function step(t){
+    const p = Math.min(1,(t-t0)/d), e = 1-Math.pow(1-p,3);
+    el.textContent = fmt(Math.round(target*e));
+    if (p<1) requestAnimationFrame(step);
+  })(t0);
+}
+document.querySelectorAll("[data-count]").forEach(el => countUp(el, totals[el.dataset.count]));
+
+// Barres
+let metric = "dossiers", scope = "all";
+const barsEl = document.getElementById("bars");
+barsEl.innerHTML = INSTANCES.map(i => `
+  <li class="bar" data-id="${i.id}" style="--c:var(${i.c})">
+    <div class="name">${i.court}<small>${i.host}</small></div>
+    <div class="track"><div class="fill"></div></div>
+    <div class="val"><span class="n">0</span><small class="s"></small></div>
+  </li>`).join("");
+
+function renderBars(){
+  const shown = INSTANCES.filter(i => scope==="all" || !i.national);
+  const max = Math.max(...shown.map(i=>i[metric]));
+  const tot = sum(metric, shown);
+  INSTANCES.forEach(i => {
+    const li = barsEl.querySelector(`[data-id="${i.id}"]`);
+    const hidden = scope==="hors" && i.national;
+    li.classList.toggle("off", hidden);
+    li.querySelector(".fill").style.width = hidden ? "0%" : Math.max(.4, i[metric]/max*100)+"%";
+    li.querySelector(".n").textContent = hidden ? "—" : fmt(i[metric]);
+    li.querySelector(".s").textContent = hidden ? "masquée" : pct(i[metric],tot);
+  });
+  const scopeTxt = scope==="all" ? "toutes instances" : "hors instance nationale";
+  document.getElementById("bars-note").innerHTML =
+    `Total ${scopeTxt} : <strong class="mono">${fmt(tot)}</strong> ${LABELS[metric]}. Pourcentages calculés sur ce total.` +
+    (metric==="demarches" ? " Ministères sociaux et Armées : démarches en cours de dématérialisation incluses." : "");
+}
+
+// Part de l'ensemble
+const stackEl = document.getElementById("stack"), legEl = document.getElementById("legend");
+function renderStack(){
+  const shown = INSTANCES.filter(i => scope==="all" || !i.national);
+  const tot = sum(metric, shown);
+  stackEl.innerHTML = shown.map(i => `<div style="--c:var(${i.c})" title="${i.court} : ${fmt(i[metric])}"></div>`).join("");
+  legEl.innerHTML = shown.map(i => `<li style="--c:var(${i.c})"><i></i>${i.court} <b>${pct(i[metric],tot)}</b></li>`).join("");
+  stackEl.setAttribute("aria-label", shown.map(i=>`${i.court} ${(i[metric]/tot*100).toFixed(1)} %`).join(", "));
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    [...stackEl.children].forEach((d,k)=> d.style.width = (shown[k][metric]/tot*100)+"%");
+  }));
+  const hn = INSTANCES.filter(i=>!i.national), nat = INSTANCES.find(i=>i.national);
+  document.getElementById("part-sub").textContent = scope==="all"
+    ? `Les instances hors national ajoutent ${(sum(metric,hn)/nat[metric]*100).toLocaleString("fr-FR",{maximumFractionDigits:1})} % aux ${LABELS[metric]} de l'instance nationale.`
+    : `Répartition des ${LABELS[metric]} entre les ${hn.length} instances hors national.`;
+}
+
+function render(){ renderBars(); renderStack(); }
+document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
+  const grp = b.parentElement;
+  grp.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x===b));
+  if (b.dataset.metric) metric = b.dataset.metric;
+  if (b.dataset.scope) scope = b.dataset.scope;
+  render();
+}));
+
+// Cartes
+document.getElementById("cards").innerHTML = INSTANCES.map(i => {
+  const cls = i.v30>0 ? "up" : i.v30<0 ? "down" : "flat";
+  const sign = i.v30>0 ? "+" : "";
+  return `<article class="card" style="--c:var(${i.c})">
+    <span class="q">${i.type}</span>
+    <h3>${i.nom}${i.ancien ? '<span class="flag">version ancienne</span>' : ''}</h3>
+    <span class="host">${i.host}</span>
+    <dl>
+      <div><dt>Dossiers déposés</dt><dd>${fmtM(i.dossiers)}</dd></div>
+      <div><dt>Démarches</dt><dd>${fmt(i.demarches)}</dd></div>
+      <div><dt>Dossiers, 30 jours</dt><dd>${fmt(i.d30)}<span class="d ${cls}">${sign}${i.v30} %</span></dd></div>
+      <div><dt>Démarches, 30 jours</dt><dd>${fmt(i.dem30)}</dd></div>
+    </dl>
+    <p>${i.note}</p>
+    <a class="go" href="${i.url}" target="_blank" rel="noopener">Voir la page /stats →</a>
+  </article>`;
+}).join("");
+
+// Premier rendu, animé à l'entrée dans l'écran
+const io = "IntersectionObserver" in window ? new IntersectionObserver((es,o)=>{ if(es.some(e=>e.isIntersecting)){ render(); o.disconnect(); } },{threshold:.2}) : null;
+if (io) io.observe(barsEl); else render();
+</script>
+</body>
+</html>
