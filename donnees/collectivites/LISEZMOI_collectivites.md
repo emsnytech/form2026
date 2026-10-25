@@ -23,7 +23,7 @@ et complément au bilan DGCL « Les dotations de soutien des collectivités terr
 ## Calcul (résumé)
 
 - « Par les collectivités » : type d'organisme déclaré « collectivité territoriale », moins 104 démarches manifestement mal déclarées.
-- « Pour les collectivités » : démarches d'un autre type d'organisme dont le titre désigne les collectivités ou une dotation (plancher).
+- « Pour les collectivités » : démarches d'un autre type d'organisme dont le titre désigne les collectivités ou une dotation (plancher). Une classification par audience (champ « categorie » de FORM 2026, qui ne se limite pas au titre) identifie environ 3 000 démarches dont les collectivités sont le public principal ; l'écart s'explique par les démarches ouvertes aussi à d'autres publics ou sans mot-clé explicite dans le titre.
 - Montants DGCL : un projet est compté si son département avait, la même année, une démarche de demande active pour la dotation
   (démarches de paiement exclues). Fonds vert : toutes les lignes, chacune portant un numéro de dossier de la plateforme.
 - Séries annuelles de dossiers : compteur cumulé réparti au prorata des jours d'ouverture (plancher, 75 à 93 % des dépôts réels).
