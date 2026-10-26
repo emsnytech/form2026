@@ -33,6 +33,24 @@ cadre juridique déclaré par la démarche, étude FORM 2026 distincte),
 `cadre_est_texte_procedure_generique` (vrai si le seul cadre cité est l'ordonnance
 générique 2014-1330 — ne prouve rien).
 
+### `obligations_sva_avec_statut_AAAA-MM-JJ.csv`
+
+Le référentiel (étape 1) fusionné avec le statut de chaque obligation : colonnes
+`statut_fiche_dila` et `statut_demarche_dn` (`verifie` | `candidat_non_verifie` | `aucun`)
+et `cadre_demarche_est_ordonnance_generique_2014_1330` (vrai si le seul cadre juridique
+cité par une démarche candidate est l'ordonnance générique 2014-1330 — ne prouve rien).
+
+### `liens_dila_verifies_AAAA-MM-JJ.csv` / `liens_dn_verifies_AAAA-MM-JJ.csv`
+
+Les seuls liens comptés dans les indicateurs de la page : relus individuellement sur
+les deux échantillons (56 obligations, puis 50 liens produits), pas seulement scorés.
+
+### `liens_dila_candidats_non_verifies_AAAA-MM-JJ.csv` / `liens_dn_candidats_non_verifies_AAAA-MM-JJ.csv`
+
+Tout ce que le rapprochement automatique (`liens_obligations_dila_*`,
+`liens_obligations_dn_*`) a produit mais qui n'a pas été relu individuellement.
+Exportés à part, jamais comptés dans un indicateur.
+
 ### `NOTE_RESULTATS_AAAA-MM-JJ.md`
 
 Taux par maillon, précision mesurée à la main, exemples retenus, limites.
@@ -58,7 +76,8 @@ Taux par maillon, précision mesurée à la main, exemples retenus, limites.
 délai), puis nouvel échantillon de 50 liens produits relu à la main. Précision mesurée :
 ~28 % (fiche DILA), ~36 % (démarche DN) — très en dessous du seuil de décision fixé à
 l'avance (60 %). **Les volumes bruts du pipeline (74 fiches, 234 démarches) sont une
-borne supérieure, pas un résultat validé.**
+borne supérieure, pas un résultat validé** : la page et les indicateurs ne comptent que
+les 15 fiches et 12 obligations-avec-démarche effectivement relues (`*_verifies_*.csv`).
 
 ## Limites
 

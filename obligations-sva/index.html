@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FORM 2026 — Obligations « silence vaut accord »</title>
-<meta name="description" content="1 283 obligations relevant du principe silence vaut accord : peut-on les relier aux démarches de Démarche Numérique ? Taux par maillon, mesurés à la main, et le constat qui en découle.">
+<meta name="description" content="1 283 obligations relevant du principe silence vaut accord : peut-on les relier aux démarches de Démarche Numérique ? Le constat mesuré à la main, pas estimé — et pourquoi un rapprochement textuel de plus ne suffira pas.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="FORM 2026">
@@ -50,14 +50,16 @@ h3{font-weight:700;font-size:1.1rem;margin:0 0 .4rem}
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:1.6rem}
 @media (max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
 .kpi{background:var(--surface);padding:1rem 1.1rem}
-.kpi b{display:block;font:700 1.6rem/1.1 "IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;color:var(--min)}
+.kpi b{display:block;font:700 1.5rem/1.15 "IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;color:var(--bad)}
 .kpi span{font-size:.86rem;color:var(--muted)}
 .kpi small{display:block;font-size:.78rem;color:var(--muted);margin-top:.2rem}
-.funnel{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin:1.6rem 0}
-.funnel .step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.8rem 1.1rem;text-align:center;min-width:140px}
-.funnel .step b{display:block;font:700 1.4rem "IBM Plex Mono",ui-monospace,monospace}
-.funnel .step span{font-size:.8rem;color:var(--muted)}
-.funnel .arrow{color:var(--muted);font-size:1.3rem}
+.verifie{margin-top:1.6rem;background:var(--usager-soft);border:1px solid var(--usager);border-left:6px solid var(--usager);border-radius:12px;padding:1.1rem 1.3rem}
+.verifie b{color:var(--usager)}
+.vkpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:1.4rem}
+@media (max-width:760px){.vkpis{grid-template-columns:1fr}}
+.vkpi{background:var(--surface);padding:.9rem 1.1rem}
+.vkpi b{display:block;font:700 1.4rem "IBM Plex Mono",ui-monospace,monospace;color:var(--usager)}
+.vkpi span{font-size:.84rem;color:var(--muted)}
 .tbl{overflow-x:auto;margin-top:1rem}
 table{border-collapse:collapse;width:100%;font-size:.92rem}
 th,td{padding:.5rem .7rem;text-align:left;border-bottom:1px solid var(--line)}
@@ -66,9 +68,15 @@ td.r,th.r{text-align:right}
 .ex{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--usager);border-radius:12px;padding:1.1rem 1.3rem;margin:1rem 0}
 .ex h3{color:var(--usager)}
 .ex p{margin:.4rem 0;color:var(--muted)}
+.ex ul{margin:.6rem 0 0;padding-left:1.2rem;columns:2 16rem;color:var(--muted);font-size:.92rem}
+.candidats{margin-top:1.6rem;background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:1.1rem 1.3rem}
+.candidats p{color:var(--muted);margin:.4rem 0}
+.candidats .dl{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;margin-top:.8rem;font-size:.9rem}
 .why{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem}
 @media (max-width:760px){.why{grid-template-columns:1fr}}
 .why div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.2rem}
+.plus{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--min);border-radius:12px;padding:1.1rem 1.3rem;margin-top:1rem}
+.plus h3{color:var(--min)}
 .method{max-width:74ch;color:var(--muted);font-size:.95rem}
 .method ul{padding-left:1.2rem}
 footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted)}
@@ -81,50 +89,57 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
   <header>
     <p class="topnav" style="margin:0;font-weight:700">FORM 2026 · Situer</p>
     <h1>Obligations « silence vaut accord » : peut-on les relier aux démarches ?</h1>
-    <p class="lede">1 283 obligations où le silence de l'administration vaut acceptation, deux bases publiques de l'État pour tenter de les relier à une démarche en ligne — et un rapprochement qui échoue le plus souvent. Voici le constat, mesuré à la main, pas estimé.</p>
+    <p class="lede">1 283 obligations où le silence de l'administration vaut acceptation, deux bases publiques de l'État pour tenter de les relier à une démarche en ligne — et un rapprochement qui échoue le plus souvent. Le vide est le constat de cette page, pas un défaut de méthode : voici ce qui est réellement vérifié, et rien de plus.</p>
   </header>
 
   <div class="verdict">
-    <b>Seuil de décision fixé à l'avance : 60 % de correspondances validées au premier maillon.</b> Mesuré : 28 %. Le seuil n'est pas atteint — on ne généralise pas. Les volumes bruts ci-dessous (74 fiches, 234 démarches) sont une <b>borne supérieure</b> produite par le rapprochement automatique, pas un inventaire validé.
+    <b>Seuil de décision fixé à l'avance : 60 % de correspondances validées au premier maillon.</b> Mesuré à la main sur un échantillon dédié : 28 %. Le seuil n'est pas atteint — on ne généralise pas. Tout rapprochement produit par le texte mais jamais relu individuellement reste un <b>candidat non vérifié</b>, exporté à part, jamais compté ci-dessous.
   </div>
 
   <div class="kpis">
-    <div class="kpi"><b>1 283</b><span>obligations silence-vaut-accord</span><small>périmètre État, source 08/12/2016</small></div>
-    <div class="kpi"><b>74</b><span>liens vers une fiche DILA (brut)</span><small>≈ 28 % confirmés à la main</small></div>
-    <div class="kpi"><b>234</b><span>obligations avec ≥ 1 démarche DN (brut)</span><small>≈ 36 % confirmés à la main</small></div>
-    <div class="kpi"><b>882 k</b><span>dossiers cumulés</span><small>sur les démarches retrouvées</small></div>
+    <div class="kpi"><b>1 283</b><span>obligations silence-vaut-accord examinées</span><small>périmètre État et ses établissements publics</small></div>
+    <div class="kpi"><b>2016</b><span>dernière mise à jour de la source</span><small>08/12/2016 — jamais retenue depuis</small></div>
+    <div class="kpi"><b>28 % / 36 %</b><span>précision mesurée à la main</span><small>fiche DILA / démarche DN, sur échantillon relu un à un</small></div>
+    <div class="kpi"><b>≈ 470</b><span>démarches du corpus FORM 2026</span><small>fondées sur la seule ordonnance générique 2014-1330</small></div>
   </div>
 
-  <h2>La chaîne, maillon par maillon</h2>
-  <p class="sub">Un taux par maillon, pas un taux global : c'est la décroissance d'un maillon à l'autre qui porte le constat.</p>
-  <div class="funnel">
-    <div class="step"><b>1 283</b><span>obligations SVA</span></div>
-    <div class="arrow">→</div>
-    <div class="step"><b>74</b><span>→ fiche DILA (brut)<br>28 % confirmés</span></div>
-    <div class="arrow">→</div>
-    <div class="step"><b>234</b><span>→ démarche DN (brut)<br>36 % confirmés</span></div>
+  <div class="verifie">
+    <b>Ce qui est vérifié — et rien d'autre n'est compté.</b> Chaque lien ci-dessous a été lu individuellement, pas seulement scoré par un rapprochement de mots-clés.
+    <div class="vkpis">
+      <div class="vkpi"><b>15</b><span>obligations avec une fiche DILA confirmée</span></div>
+      <div class="vkpi"><b>12</b><span>obligations avec au moins une démarche DN confirmée</span></div>
+      <div class="vkpi"><b>1 917</b><span>dossiers cumulés, sur les démarches confirmées — pas 882 000</span></div>
+    </div>
   </div>
-  <div class="tbl"><table>
-    <thead><tr><th>Maillon</th><th class="r">Produit (brut)</th><th class="r">Précision mesurée</th><th>Méthode</th></tr></thead>
-    <tbody>
-      <tr><td>Obligation → fiche DILA</td><td class="r">74 / 1 283 (5,8 %)</td><td class="r">28 % (14/50)</td><td>Référence juridique concordante (confiance forte) ou titre proche + autorité cohérente (confiance moyenne), liste noire de fiches génériques écartée</td></tr>
-      <tr><td>Fiche DILA → Cerfa</td><td class="r">—</td><td class="r">—</td><td>Non le facteur limitant : les démarches confirmées n'ont pour la plupart aucun Cerfa</td></tr>
-      <tr><td>Obligation → démarche DN</td><td class="r">234 obl. / 1 277 (18,3 %), 2 216 liens 1→n</td><td class="r">36 % (9/25)</td><td>Rapprochement direct sur le titre, Cerfa et cadre juridique déclaré comme corroboration seulement</td></tr>
-    </tbody>
-  </table></div>
 
-  <h2>Ce qui fonctionne, quand ça fonctionne</h2>
+  <h2>Ce qui est vérifié</h2>
   <div class="ex">
     <h3>Cartes de guide conférencier</h3>
-    <p>Une obligation nationale, dix démarches locales retrouvées : PREF37 (Sous-préfecture de Chinon), Préfecture 93, Préfecture 43, Département de l'Aisne… Exemple net de correspondance 1 → n, le cas où le rapprochement est le plus solide.</p>
+    <p>Une obligation nationale, dix démarches locales confirmées une à une — correspondance 1 → n, le cas le plus solide de tout l'échantillon :</p>
+    <ul>
+      <li>PREF37, Sous-préfecture de Chinon (102322)</li>
+      <li>Préfecture 93 (86912)</li>
+      <li>Préfecture 43 (39382)</li>
+      <li>Département de l'Aisne (32251)</li>
+      <li>CNAM, licence professionnelle (113888, 89473, 139501)</li>
+      <li>CNAM, certificat de compétences (139621, 90279, 113875)</li>
+    </ul>
   </div>
   <div class="ex">
     <h3>Habilitation à dispenser la formation du diplôme d'État de professeur de danse</h3>
-    <p>→ démarche 77412, Ministère de la Culture. Correspondance directe, confirmée à la main.</p>
+    <p>→ démarche 77412, Ministère de la Culture. Et la reconnaissance de qualifications professionnelles associée → démarche 64844, même ministère.</p>
   </div>
   <div class="ex" style="border-left-color:var(--min)">
-    <h3>Autorisation de coupes dans les bois et forêts (Code forestier, L124-5)</h3>
+    <h3>Autorisation de coupes dans les bois et forêts (Code forestier, L124-5 et L312-9)</h3>
     <p>→ fiche DILA R18249, par référence juridique concordante (confiance forte) — la seule méthode dont la précision mesurée atteint 100 % sur les cas vérifiés, mais sur un volume marginal : 2 liens au total sur 1 283 obligations.</p>
+  </div>
+
+  <div class="candidats">
+    <p><b>Candidats non vérifiés, exportés à part.</b> Le rapprochement automatique a produit 66 autres liens vers une fiche DILA et 2 216 autres liens vers une démarche DN (souvent plusieurs candidats par obligation) qui n'ont pas été relus un à un. Ils ne figurent dans aucun chiffre de cette page — téléchargeables séparément, en candidats, pas en résultat :</p>
+    <div class="dl">
+      <a href="../donnees/obligations-sva/liens_dila_candidats_non_verifies_2026-10-26.csv">liens_dila_candidats_non_verifies.csv</a>
+      <a href="../donnees/obligations-sva/liens_dn_candidats_non_verifies_2026-10-26.csv">liens_dn_candidats_non_verifies.csv</a>
+    </div>
   </div>
 
   <h2>Pourquoi ça échoue le plus souvent</h2>
@@ -143,12 +158,18 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
     </div>
     <div>
       <h3>Le Cerfa n'est pas un raccourci fiable</h3>
-      <p class="sub">Les quatre démarches confirmées à la main n'ont aucun Cerfa associé. Et l'unique correspondance Cerfa déjà présente dans la source de ce chantier (Cerfa 12709 pour la certification des gestionnaires de réseaux de transport) s'est révélée fausse une fois vérifiée dans le registre officiel DILA — 12709 est une subvention Anah, sans rapport.</p>
+      <p class="sub">Les démarches confirmées à la main n'ont pour la plupart aucun Cerfa associé. Et l'unique correspondance Cerfa déjà présente dans la source de ce chantier (Cerfa 12709 pour la certification des gestionnaires de réseaux de transport) s'est révélée fausse une fois vérifiée dans le registre officiel DILA — 12709 est une subvention Anah, sans rapport.</p>
     </div>
   </div>
 
+  <h2>Pour aller plus loin</h2>
+  <div class="plus">
+    <h3>La seule voie sérieuse : une clé juridique, pas un rapprochement de plus</h3>
+    <p class="sub">Résoudre les articles de chaque obligation en identifiants Légifrance (LEGIARTI), puis les comparer directement au cadre juridique déclaré par chaque démarche — plutôt que des mots-clés de titre. Un rapprochement textuel supplémentaire, aussi affiné soit-il, ne passera pas le seuil de 60 % : la limite n'est pas la méthode de recherche, c'est l'absence de clé commune entre les deux bases.</p>
+  </div>
+
   <h2>Méthode</h2>
-  <p class="method">Source : « Liste des démarches concernées par le principe Silence vaut accord » (data.gouv.fr, Premier ministre), XML du 8 décembre 2016, périmètre État et ses établissements publics — jamais remis à jour depuis. Un doublon exact du fichier officiel a été retiré (1 284 → 1 283 obligations). Rapprochement en deux temps : obligation → fiche DILA (8 509 fiches service-public.fr), puis obligation → démarche(s) Démarche Numérique en direct, sans passer par le Cerfa. Validé sur un échantillon raisonné de 56 obligations (35 témoins Cerfa + complément par ministère et délai), puis sur un nouvel échantillon de 50 liens produits relus un à un. Absence de lien ≠ absence de dématérialisation : d'autres téléservices existent hors Démarche Numérique. Résultats intermédiaires, scripts et configurations : <a href="../donnees/obligations-sva/">données et méthode</a>.</p>
+  <p class="method">Source : « Liste des démarches concernées par le principe Silence vaut accord » (data.gouv.fr, Premier ministre), XML du 8 décembre 2016, périmètre État et ses établissements publics — jamais remis à jour depuis. Un doublon exact du fichier officiel a été retiré (1 284 → 1 283 obligations). Rapprochement en deux temps : obligation → fiche DILA (8 509 fiches service-public.fr), puis obligation → démarche(s) Démarche Numérique en direct, sans passer par le Cerfa. Chaque lien affiché sur cette page a été relu individuellement sur deux échantillons (56 obligations, puis un nouvel échantillon de 50 liens produits) ; tout ce qui n'a pas été relu reste un candidat non vérifié, exporté à part et jamais compté. Absence de lien ≠ absence de dématérialisation : d'autres téléservices existent hors Démarche Numérique. Résultats intermédiaires, scripts et configurations : <a href="../donnees/obligations-sva/">données et méthode</a>.</p>
   <footer>FORM 2026 · Philippe Vrignaud · Données ouvertes et code source publics</footer>
 </div>
 </body>

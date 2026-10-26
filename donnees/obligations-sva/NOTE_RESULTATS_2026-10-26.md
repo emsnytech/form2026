@@ -1,5 +1,17 @@
 # Obligations « silence vaut accord » — note des résultats (26/10/2026)
 
+## Ce qui est publié comme résultat, et ce qui ne l'est pas
+
+Seuls les liens relus individuellement sur les deux échantillons (56 obligations, puis
+50 liens produits) comptent comme résultat : **15 obligations avec une fiche DILA
+confirmée, 12 avec au moins une démarche DN confirmée, 1 917 dossiers cumulés** sur ces
+démarches confirmées (`obligations_sva_avec_statut_2026-10-26.csv`,
+`liens_dila_verifies_2026-10-26.csv`, `liens_dn_verifies_2026-10-26.csv`). Les volumes
+produits par le rapprochement automatique seul (74 fiches, 234 obligations avec
+démarche, 2 216 liens 1→n) ne sont **jamais comptés** dans un indicateur de tête : ce
+sont des candidats non vérifiés, exportés à part (`liens_dila_candidats_non_verifies_
+2026-10-26.csv`, `liens_dn_candidats_non_verifies_2026-10-26.csv`).
+
 ## Périmètre
 
 1 283 obligations relevant du principe silence vaut accord, périmètre « État et ses
