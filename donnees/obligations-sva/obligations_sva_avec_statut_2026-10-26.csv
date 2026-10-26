@@ -1,4 +1,4 @@
-numdispo,intitule,reference,texte_source,autorite_competente,delai,ministere,type,cerfa_eventuel,date_maj_source,statut_fiche_dila,statut_demarche_dn,cadre_demarche_est_ordonnance_generique_2014_1330
+numdispo,intitule,reference,texte_source,autorite_competente,delai,ministere,type,cerfa_eventuel,date_maj_source,statut_fiche_dila,statut_demarche_dn,demarche_sans_fondement_juridique_propre_ordonnance_seule
 3,Modification de l'état civil ou mention du nom d'usage sur un diplôme,100,Code civil,Chef d'établissement|Recteur d'académie,2 mois,,habilitation,,2016-12-08,aucun,candidat_non_verifie,False
 6,Inscription sur la liste des administrateurs judiciaires (personnes physiques ou morales),L811-2,Code de commerce,Direction des affaires civiles et du sceau,12 mois,Ministère de la justice,habilitation,,2016-12-08,aucun,candidat_non_verifie,False
 7,Dispense de l'examen d'accès au stage professionnel de mandataire judiciaire,L811-5 (8ème alinéa),Code de commerce,Direction des affaires civiles et du sceau,4 mois,Ministère de la justice,habilitation,,2016-12-08,aucun,candidat_non_verifie,False

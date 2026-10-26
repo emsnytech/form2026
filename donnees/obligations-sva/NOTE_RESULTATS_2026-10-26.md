@@ -61,11 +61,13 @@ comme fiable.
   rapprochement sur les seuls mots-clés) : erreur déjà rencontrée et corrigée par
   exclusion explicite (numdispo 719, 758, 713, 391, 1257, 1219).
 - Le cadre juridique déclaré par une démarche Démarche Numérique ne prouve rien à lui
-  seul : **470 démarches** du corpus FORM 2026 ne citent que le texte
-  JORFTEXT000029716839 — identifié comme l'ordonnance n° 2014-1330 du 6 novembre 2014
-  (droit des usagers de saisir l'administration par voie électronique), **identification
-  en attente de confirmation**. Dans tous les cas, un texte de procédure générale, pas
-  le fondement substantiel de l'obligation.
+  seul : **470 démarches** du corpus FORM 2026 — des **démarches sans fondement
+  juridique propre** — ne citent que l'ordonnance n° 2014-1330 du 6 novembre 2014
+  relative au droit des usagers de saisir l'administration par voie électronique
+  (JORFTEXT000029716839, JO n° 258 du 7 novembre 2014, p. 18780). Ce rattachement est
+  juridiquement correct pour toute démarche sans texte spécifique : il signale donc une
+  démarche qui ne procède d'aucune règle qui lui soit propre, jamais le fondement
+  substantiel de l'obligation.
 - Le Cerfa n'est pas un raccourci fiable : sur l'échantillon vérifié à la main, les
   démarches confirmées (dont la carte de guide-conférencier, n° 102322) n'ont
   **aucun** Cerfa associé ; et l'unique correspondance Cerfa présente dans

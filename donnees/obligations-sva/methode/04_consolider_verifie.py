@@ -22,6 +22,12 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE.parent / "out"
 TODAY = date.today().isoformat()
 JORFTEXT_ORDONNANCE_SVA = "JORFTEXT000029716839"
+# Ordonnance n° 2014-1330 du 6 novembre 2014 relative au droit des usagers de saisir
+# l'administration par voie électronique, JO n° 258 du 7 novembre 2014, p. 18780.
+# Rattachement juridiquement correct pour toute démarche sans texte spécifique propre :
+# une démarche qui ne cite QUE ce texte ne procède donc d'aucune règle qui lui soit
+# propre -- c'est un signal (démarche sans fondement juridique propre), pas une erreur
+# de classification de la démarche elle-même.
 
 # --- Liens vérifiés à la main (numdispo, identifiant, méthode, confiance) -----------
 # Fiches DILA : 8 du test à 56 (150,513,695,742,214,215,481,528 -> numdispo),
@@ -75,7 +81,10 @@ DEMARCHES_VERIFIEES = [
 
 
 def main():
-    obl_path = sorted(OUT.glob("obligations_sva_*.csv"))[-1]
+    # glob restreint pour ne jamais reprendre la propre sortie du script (obligations_sva_
+    # avec_statut_*.csv matche aussi "obligations_sva_*.csv" et trie après -- bug rencontré
+    # le 26/10/2026, corrigé) : le nom de fichier de l'étape 1 commence par un chiffre.
+    obl_path = sorted(OUT.glob("obligations_sva_2*.csv"))[-1]
     with obl_path.open(newline="", encoding="utf-8") as f:
         obligations = list(csv.DictReader(f))
     with (sorted(OUT.glob("liens_obligations_dila_*.csv"))[-1]).open(newline="", encoding="utf-8") as f:
@@ -136,7 +145,7 @@ def main():
         row = dict(obl)
         row["statut_fiche_dila"] = statut_fiche
         row["statut_demarche_dn"] = statut_demarche
-        row["cadre_demarche_est_ordonnance_generique_2014_1330"] = jorf_generique
+        row["demarche_sans_fondement_juridique_propre_ordonnance_seule"] = jorf_generique
         consolide.append(row)
 
     out_path = OUT / f"obligations_sva_avec_statut_{TODAY}.csv"
@@ -167,8 +176,8 @@ def main():
     print(f"[étape 4bis] avec démarche DN vérifiée (numdispo distincts) : {n_dn_verif}")
     print(f"[étape 4bis] candidats fiche non vérifiés (exportés à part) : {len(dila_candidats)}")
     print(f"[étape 4bis] candidats démarche non vérifiés (exportés à part) : {len(dn_candidats)}")
-    print(f"[étape 4bis] obligations dont le cadre juridique déclaré par la démarche n'est "
-          f"que l'ordonnance générique 2014-1330 : {n_jorf}")
+    print(f"[étape 4bis] démarches sans fondement juridique propre "
+          f"(ordonnance 2014-1330 seule) : {n_jorf}")
     print(f"[étape 4bis] écrit {out_path.name} et les 4 fichiers vérifiés/candidats")
 
 

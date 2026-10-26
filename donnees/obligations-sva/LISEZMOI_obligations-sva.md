@@ -31,9 +31,13 @@ index : utiliser `*_verifies_*.csv` (résultat) et `*_candidats_non_verifies_*.c
 
 Le référentiel (étape 1) fusionné avec le statut de chaque obligation : colonnes
 `statut_fiche_dila` et `statut_demarche_dn` (`verifie` | `candidat_non_verifie` | `aucun`)
-et `cadre_demarche_est_ordonnance_generique_2014_1330` (vrai si le seul cadre juridique
-cité par une démarche candidate est le texte JORFTEXT000029716839 — identifié comme
-l'ordonnance 2014-1330, identification en attente de confirmation — ne prouve rien).
+et `demarche_sans_fondement_juridique_propre_ordonnance_seule` (vrai si le seul cadre
+juridique cité par une démarche candidate est l'ordonnance n° 2014-1330 du 6 novembre
+2014 relative au droit des usagers de saisir l'administration par voie électronique,
+JO n° 258 du 7 novembre 2014, p. 18780, JORFTEXT000029716839. Ce rattachement est
+juridiquement correct pour toute démarche sans texte spécifique propre : la colonne
+signale donc une démarche qui ne procède d'aucune règle qui lui soit propre, pas une
+erreur de classification).
 
 ### `liens_dila_verifies_AAAA-MM-JJ.csv` / `liens_dn_verifies_AAAA-MM-JJ.csv`
 
