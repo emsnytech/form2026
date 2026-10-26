@@ -14,8 +14,18 @@ publics », reconstitué depuis le XML officiel (08/12/2016) avec repli sur
 
 **Colonnes** : `numdispo` (identifiant stable, officiel), `intitule`, `reference`
 (article normalisé), `texte_source`, `autorite_competente`, `delai`, `ministere`,
-`type` (constant « habilitation » dans cette source), `cerfa_eventuel`,
+`type` (constant « habilitation » dans cette source), `cerfa_eventuel_non_fiable_sans_verification`,
 `date_maj_source` (2016-12-08, constant — la source n'a jamais été mise à jour).
+
+**`cerfa_eventuel_non_fiable_sans_verification` — colonne volontairement renommée.**
+Vérification croisée le 26/10/2026 des 35 valeurs non vides contre le registre officiel
+DILA (titre réel du Cerfa) : **aucune des 35 n'est confirmée correcte**. La seule qui
+semblait l'être (numdispo 1118 → Cerfa 14531, dont le titre DILA évoque bien la
+reconnaissance de qualifications professionnelles de professeur de danse) s'est révélée
+attachée à la mauvaise obligation une fois la notice du Cerfa lue : elle cite l'article
+L362-1-1 du code de l'éducation comme fondement — la référence de **260**, pas de 1118
+(référence « 6 », non retrouvée dans la notice). Ne jamais utiliser cette colonne comme
+preuve sans revérification individuelle via DILA.
 
 C'est la seule liste officielle publiée sur ce périmètre : selon une estimation du
 Sénat (2015), elle ne couvrirait qu'environ un tiers des procédures de l'État
