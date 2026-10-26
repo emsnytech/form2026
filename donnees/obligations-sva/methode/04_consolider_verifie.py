@@ -44,21 +44,32 @@ FICHES_VERIFIEES = [
     ("778", "R18249", "reference", "forte"),          # Autorisation coupe bois, particuliers
 ]
 
-# Démarches : 150->686 (correspondance 1->n, 10 démarches locales), 695->259, 742->260,
-# 1220->320 du test à 56 ; 9 du nouvel échantillon à 50 (970,218,1438,375,1033,354,432,445,260).
+# Démarches : 150->686 (correspondance 1->n), 695->259, 742->260, 1220->320 du test à 56 ;
+# complété par le nouvel échantillon à 50 (354,445,1438).
+# Corrections du 26/10/2026, après relecture plus stricte des titres complets :
+# - 686 (Cartes de guide conférencier) : retrait des 6 démarches CNAM (113888, 89473,
+#   139501, 139621, 90279, 113875) -- ce sont des candidatures à une formation/un diplôme
+#   de guide-conférencier, pas la délivrance de la carte elle-même (objet différent).
+#   Ne restent que les délivrances de carte par une préfecture ou un département.
+# - 432 (collecte/transport de déchets DANGEREUX, régime d'autorisation) -> 41910 était une
+#   simple déclaration de collecte/transport, sans précision "dangereux" : régime différent,
+#   retiré.
+# - 970 (AMM phytopharmaceutiques, reconnaissance mutuelle art. 40 règlement 1107/2009) ->
+#   98239 était une dérogation d'utilisation, objet différent, retiré.
+# - 218 (autorisation de PUBLICITÉ pour dispositifs médicaux) -> 97045 était une dérogation
+#   individuelle ANSM, objet différent, retiré.
+# - 375 (inscription à l'examen du BTS) -> 12794 était une inscription à un examen de
+#   RECYCLAGE du BTS, objet plus étroit et différent, retiré.
+# - 1033 (agrément de caractère pédagogique, BTS agricole) -> 96112 était une habilitation
+#   à pratiquer le contrôle en cours de formation (UC/CCF), acte administratif différent
+#   malgré le même service (DRAAF) : retiré après relecture du titre complet.
 DEMARCHES_VERIFIEES = [
-    ("686", 102322), ("686", 113888), ("686", 139621), ("686", 32251), ("686", 90279),
-    ("686", 89473), ("686", 139501), ("686", 86912), ("686", 39382), ("686", 113875),
+    ("686", 102322), ("686", 86912), ("686", 39382), ("686", 32251),
     ("259", 77412),
     ("260", 64844),
     ("320", 89138),
-    ("970", 98239),
-    ("218", 97045),
     ("1438", 53938),
-    ("375", 12794),
-    ("1033", 96112),
     ("354", 110527),
-    ("432", 41910),
     ("445", 52363),
 ]
 
@@ -77,7 +88,10 @@ def main():
     for n, fid, methode, confiance in FICHES_VERIFIEES:
         fiche_verif_by_numdispo.setdefault(n, []).append((fid, methode, confiance))
 
-    dn_verif_set = {(n, d) for n, d in DEMARCHES_VERIFIEES}
+    # l["demarche"] vient d'un csv.DictReader -> toujours une chaîne : comparer en chaîne
+    # partout, sinon ("259", 77412) [int] ne matche jamais ("259", "77412") [str] et aucun
+    # vérifié n'est jamais exclu des candidats (bug corrigé le 26/10/2026).
+    dn_verif_set = {(n, str(d)) for n, d in DEMARCHES_VERIFIEES}
     dn_verif_by_numdispo = {}
     for n, d in DEMARCHES_VERIFIEES:
         dn_verif_by_numdispo.setdefault(n, []).append(d)

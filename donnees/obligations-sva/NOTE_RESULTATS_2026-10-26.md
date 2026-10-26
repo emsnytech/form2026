@@ -4,13 +4,20 @@
 
 Seuls les liens relus individuellement sur les deux échantillons (56 obligations, puis
 50 liens produits) comptent comme résultat : **15 obligations avec une fiche DILA
-confirmée, 12 avec au moins une démarche DN confirmée, 1 917 dossiers cumulés** sur ces
+confirmée, 7 avec au moins une démarche DN confirmée, 331 dossiers cumulés** sur ces
 démarches confirmées (`obligations_sva_avec_statut_2026-10-26.csv`,
 `liens_dila_verifies_2026-10-26.csv`, `liens_dn_verifies_2026-10-26.csv`). Les volumes
 produits par le rapprochement automatique seul (74 fiches, 234 obligations avec
 démarche, 2 216 liens 1→n) ne sont **jamais comptés** dans un indicateur de tête : ce
 sont des candidats non vérifiés, exportés à part (`liens_dila_candidats_non_verifies_
 2026-10-26.csv`, `liens_dn_candidats_non_verifies_2026-10-26.csv`).
+
+**Correction du 26/10/2026, après relecture plus stricte des titres complets** : 11
+liens démarche initialement retenus se sont révélés des faux amis une fois le titre
+entier vérifié (régime ou objet différent, pas seulement le même vocabulaire) — retirés
+de la liste vérifiée, repassés en candidats non vérifiés. Le script de consolidation
+avait aussi un bug (comparaison entier/chaîne) qui empêchait les liens vérifiés d'être
+retirés du fichier des candidats ; corrigé le même jour.
 
 ## Périmètre
 
@@ -19,6 +26,12 @@ sont des candidats non vérifiés, exportés à part (`liens_dila_candidats_non_
 depuis). Un doublon exact du XML officiel a été retiré (numdispo 1445/1449, libéralité
 Alsace-Moselle en droit local d'Alsace-Moselle) : 1 284 enregistrements bruts → 1 283
 obligations distinctes, cohérent avec `obligations.csv`.
+
+C'est la seule liste officielle publiée sur ce périmètre — selon une estimation du
+Sénat (2015), elle ne couvrirait qu'environ un tiers des procédures de l'État
+effectivement soumises au principe silence vaut accord ; le reste n'a jamais été
+recensé publiquement. Les 1 283 obligations de ce chantier sont donc elles-mêmes un
+sous-ensemble incomplet, pas l'univers entier des procédures SVA.
 
 ## Taux par maillon, mesurés sur un échantillon raisonné de 56 obligations puis
 ## vérifiés à la main sur un nouvel échantillon de 50 liens produits
@@ -48,12 +61,13 @@ comme fiable.
   rapprochement sur les seuls mots-clés) : erreur déjà rencontrée et corrigée par
   exclusion explicite (numdispo 719, 758, 713, 391, 1257, 1219).
 - Le cadre juridique déclaré par une démarche Démarche Numérique ne prouve rien à lui
-  seul : **470 démarches** du corpus FORM 2026 ne citent que l'ordonnance générique
-  n° 2014-1330 du 6 novembre 2014 (JORFTEXT000029716839, droit des usagers de saisir
-  l'administration par voie électronique) — un texte de procédure, pas le fondement
-  substantiel de l'obligation.
+  seul : **470 démarches** du corpus FORM 2026 ne citent que le texte
+  JORFTEXT000029716839 — identifié comme l'ordonnance n° 2014-1330 du 6 novembre 2014
+  (droit des usagers de saisir l'administration par voie électronique), **identification
+  en attente de confirmation**. Dans tous les cas, un texte de procédure générale, pas
+  le fondement substantiel de l'obligation.
 - Le Cerfa n'est pas un raccourci fiable : sur l'échantillon vérifié à la main, les
-  quatre démarches confirmées (dont la carte de guide-conférencier, n° 102322) n'ont
+  démarches confirmées (dont la carte de guide-conférencier, n° 102322) n'ont
   **aucun** Cerfa associé ; et l'unique correspondance Cerfa présente dans
   `obligations.csv` à l'origine de ce chantier (12709, obligation « Certification des
   gestionnaires de réseaux de transports ») s'est révélée fausse une fois vérifiée via
@@ -61,9 +75,11 @@ comme fiable.
 
 ## Exemples retenus (confiance confirmée à la main)
 
-- Obligation « Cartes de guide conférencier » → 10 démarches locales retrouvées,
+- Obligation « Cartes de guide conférencier » → 4 démarches locales retrouvées,
   dont PREF37 (102322, correspondance directe), Préfecture 93, Préfecture 43,
-  Département de l'Aisne — exemple net de correspondance 1 → n.
+  Département de l'Aisne — exemple net de correspondance 1 → n. Des candidatures CNAM
+  à une formation de guide-conférencier, trouvées par le même rapprochement, ont été
+  écartées après relecture : ce sont des formations, pas la délivrance de la carte.
 - Obligation « Habilitation à dispenser la formation… diplôme d'État de professeur de
   danse » → démarche 77412, Ministère de la Culture, correspondance directe.
 - Obligation « Autorisation de coupes dans les bois et forêts… » (Code forestier,
