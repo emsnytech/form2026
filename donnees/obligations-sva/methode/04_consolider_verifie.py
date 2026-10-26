@@ -1,0 +1,185 @@
+#!/usr/bin/env python3
+"""Étape 4bis — Consolide le référentiel avec le statut de vérification.
+
+Les liens "vérifiés" ci-dessous sont une liste figée, établie à la main par
+relecture individuelle sur deux échantillons distincts (le test initial de 56
+obligations, puis le nouvel échantillon de 50 liens produits demandé par la
+consigne). Ce n'est pas un seuil de score : c'est la trace de ce qui a
+réellement été lu et jugé, pas de ce que le rapprochement textuel a produit.
+Tout le reste (liens produits par 02_lien_dila.py / 03_lien_demarches.py mais
+jamais relus individuellement) reste un "candidat non vérifié" -- exporté à
+part, jamais compté dans les indicateurs de la page.
+
+Fusionne aussi le référentiel (étape 1) avec le drapeau "cadre juridique = la
+seule ordonnance générique 2014-1330" (JORFTEXT000029716839), déjà calculé
+par 03_lien_demarches.py pour chaque démarche candidate.
+"""
+import csv
+from datetime import date
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE.parent / "out"
+TODAY = date.today().isoformat()
+JORFTEXT_ORDONNANCE_SVA = "JORFTEXT000029716839"
+# Ordonnance n° 2014-1330 du 6 novembre 2014 relative au droit des usagers de saisir
+# l'administration par voie électronique, JO n° 258 du 7 novembre 2014, p. 18780.
+# Rattachement juridiquement correct pour toute démarche sans texte spécifique propre :
+# une démarche qui ne cite QUE ce texte ne procède donc d'aucune règle qui lui soit
+# propre -- c'est un signal (démarche sans fondement juridique propre), pas une erreur
+# de classification de la démarche elle-même.
+
+# --- Liens vérifiés à la main (numdispo, identifiant, méthode, confiance) -----------
+# Fiches DILA : 8 du test à 56 (150,513,695,742,214,215,481,528 -> numdispo),
+# 5 confirmés en confiance "moyenne" + 2 en confiance "forte" du nouvel échantillon à 50.
+FICHES_VERIFIEES = [
+    ("686", "F38895", "titre+autorite", "moyenne"),   # Cartes de guide conférencier
+    ("1012", "R35397", "titre+autorite", "moyenne"),  # Agrément vin sans AOP/IGP
+    ("259", "R21251", "titre+autorite", "moyenne"),   # Habilitation formation prof. danse
+    ("260", "R2824", "titre+autorite", "moyenne"),    # Reconnaissance qualif. prof. danse
+    ("1504", "F2111", "titre+autorite", "moyenne"),   # Dispense session approfondissement BAFA
+    ("1505", "F2111", "titre+autorite", "moyenne"),   # Dispense session qualification BAFA
+    ("661", "F871", "titre+autorite", "moyenne"),     # Report participation JDC
+    ("713", "R49681", "titre+autorite", "moyenne"),   # Autorisation mineurs 14+ vacances scolaires
+    ("562", "R1298", "titre+autorite", "moyenne"),    # Carte déporté interné résistant
+    ("563", "R1299", "titre+autorite", "moyenne"),    # Carte déporté interné politique
+    ("402", "R21500", "titre+autorite", "moyenne"),   # Agrément suivi régulier des rejets
+    ("674", "R45176", "titre+autorite", "moyenne"),   # Habilitation organismes formation jeunesse/sport
+    ("359", "F2861", "titre+autorite", "moyenne"),    # Première inscription université
+    ("771", "R18249", "reference", "forte"),          # Autorisation coupe bois (Code forestier)
+    ("778", "R18249", "reference", "forte"),          # Autorisation coupe bois, particuliers
+]
+
+# Démarches : 150->686 (correspondance 1->n), 695->259, 742->260, 1220->320 du test à 56 ;
+# complété par le nouvel échantillon à 50 (354,445,1438).
+# Corrections du 26/10/2026, après relecture plus stricte des titres complets :
+# - 686 (Cartes de guide conférencier) : retrait des 6 démarches CNAM (113888, 89473,
+#   139501, 139621, 90279, 113875) -- ce sont des candidatures à une formation/un diplôme
+#   de guide-conférencier, pas la délivrance de la carte elle-même (objet différent).
+#   Ne restent que les délivrances de carte par une préfecture ou un département.
+# - 432 (collecte/transport de déchets DANGEREUX, régime d'autorisation) -> 41910 était une
+#   simple déclaration de collecte/transport, sans précision "dangereux" : régime différent,
+#   retiré.
+# - 970 (AMM phytopharmaceutiques, reconnaissance mutuelle art. 40 règlement 1107/2009) ->
+#   98239 était une dérogation d'utilisation, objet différent, retiré.
+# - 218 (autorisation de PUBLICITÉ pour dispositifs médicaux) -> 97045 était une dérogation
+#   individuelle ANSM, objet différent, retiré.
+# - 375 (inscription à l'examen du BTS) -> 12794 était une inscription à un examen de
+#   RECYCLAGE du BTS, objet plus étroit et différent, retiré.
+# - 1033 (agrément de caractère pédagogique, BTS agricole) -> 96112 était une habilitation
+#   à pratiquer le contrôle en cours de formation (UC/CCF), acte administratif différent
+#   malgré le même service (DRAAF) : retiré après relecture du titre complet.
+DEMARCHES_VERIFIEES = [
+    ("686", 102322), ("686", 86912), ("686", 39382), ("686", 32251),
+    ("259", 77412),
+    ("260", 64844),
+    ("320", 89138),
+    ("1438", 53938),
+    ("354", 110527),
+    ("445", 52363),
+]
+
+
+def main():
+    # glob restreint pour ne jamais reprendre la propre sortie du script (obligations_sva_
+    # avec_statut_*.csv matche aussi "obligations_sva_*.csv" et trie après -- bug rencontré
+    # le 26/10/2026, corrigé) : le nom de fichier de l'étape 1 commence par un chiffre.
+    obl_path = sorted(OUT.glob("obligations_sva_2*.csv"))[-1]
+    with obl_path.open(newline="", encoding="utf-8") as f:
+        obligations = list(csv.DictReader(f))
+    with (sorted(OUT.glob("liens_obligations_dila_*.csv"))[-1]).open(newline="", encoding="utf-8") as f:
+        liens_dila = list(csv.DictReader(f))
+    with (sorted(OUT.glob("liens_obligations_dn_*.csv"))[-1]).open(newline="", encoding="utf-8") as f:
+        liens_dn = list(csv.DictReader(f))
+
+    fiche_verif_set = {(n, fid) for n, fid, _, _ in FICHES_VERIFIEES}
+    fiche_verif_by_numdispo = {}
+    for n, fid, methode, confiance in FICHES_VERIFIEES:
+        fiche_verif_by_numdispo.setdefault(n, []).append((fid, methode, confiance))
+
+    # l["demarche"] vient d'un csv.DictReader -> toujours une chaîne : comparer en chaîne
+    # partout, sinon ("259", 77412) [int] ne matche jamais ("259", "77412") [str] et aucun
+    # vérifié n'est jamais exclu des candidats (bug corrigé le 26/10/2026).
+    dn_verif_set = {(n, str(d)) for n, d in DEMARCHES_VERIFIEES}
+    dn_verif_by_numdispo = {}
+    for n, d in DEMARCHES_VERIFIEES:
+        dn_verif_by_numdispo.setdefault(n, []).append(d)
+
+    dila_candidats = [(l["numdispo"], l["fiche_id"]) for l in liens_dila
+                       if (l["numdispo"], l["fiche_id"]) not in fiche_verif_set]
+    dn_candidats = [(l["numdispo"], l["demarche"]) for l in liens_dn
+                     if (l["numdispo"], l["demarche"]) not in dn_verif_set]
+
+    numdispo_dila_candidat = {n for n, _ in dila_candidats}
+    numdispo_dn_candidat = {n for n, _ in dn_candidats}
+
+    # drapeau ordonnance générique : vrai si une démarche vérifiée OU candidate de cette
+    # obligation ne cite que l'ordonnance 2014-1330 comme cadre juridique
+    jorf_generique_par_numdispo = set()
+    for l in liens_dn:
+        if l["cadre_est_texte_procedure_generique"] == "True":
+            jorf_generique_par_numdispo.add(l["numdispo"])
+
+    consolide = []
+    n_fiche_verif = n_dn_verif = n_jorf = 0
+    for obl in obligations:
+        n = obl["numdispo"]
+        statut_fiche = "aucun"
+        if n in fiche_verif_by_numdispo:
+            statut_fiche = "verifie"
+            n_fiche_verif += 1
+        elif n in numdispo_dila_candidat:
+            statut_fiche = "candidat_non_verifie"
+
+        statut_demarche = "aucun"
+        if n in dn_verif_by_numdispo:
+            statut_demarche = "verifie"
+            n_dn_verif += 1
+        elif n in numdispo_dn_candidat:
+            statut_demarche = "candidat_non_verifie"
+
+        jorf_generique = n in jorf_generique_par_numdispo
+        if jorf_generique:
+            n_jorf += 1
+
+        row = dict(obl)
+        row["statut_fiche_dila"] = statut_fiche
+        row["statut_demarche_dn"] = statut_demarche
+        row["demarche_sans_fondement_juridique_propre_ordonnance_seule"] = jorf_generique
+        consolide.append(row)
+
+    out_path = OUT / f"obligations_sva_avec_statut_{TODAY}.csv"
+    with out_path.open("w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=list(consolide[0].keys()))
+        w.writeheader()
+        w.writerows(consolide)
+
+    # exports "à part" : vérifiés et candidats, séparément, pour chaque maillon
+    def write_pairs(path, pairs, header):
+        with path.open("w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            w.writerow(header)
+            w.writerows(pairs)
+
+    write_pairs(OUT / f"liens_dila_verifies_{TODAY}.csv",
+                [(n, fid, m, c) for n, fid, m, c in FICHES_VERIFIEES],
+                ["numdispo", "fiche_id", "methode", "confiance"])
+    write_pairs(OUT / f"liens_dila_candidats_non_verifies_{TODAY}.csv",
+                dila_candidats, ["numdispo", "fiche_id"])
+    write_pairs(OUT / f"liens_dn_verifies_{TODAY}.csv",
+                DEMARCHES_VERIFIEES, ["numdispo", "demarche"])
+    write_pairs(OUT / f"liens_dn_candidats_non_verifies_{TODAY}.csv",
+                dn_candidats, ["numdispo", "demarche"])
+
+    print(f"[étape 4bis] obligations : {len(obligations)}")
+    print(f"[étape 4bis] avec fiche DILA vérifiée (numdispo distincts) : {n_fiche_verif}")
+    print(f"[étape 4bis] avec démarche DN vérifiée (numdispo distincts) : {n_dn_verif}")
+    print(f"[étape 4bis] candidats fiche non vérifiés (exportés à part) : {len(dila_candidats)}")
+    print(f"[étape 4bis] candidats démarche non vérifiés (exportés à part) : {len(dn_candidats)}")
+    print(f"[étape 4bis] démarches sans fondement juridique propre "
+          f"(ordonnance 2014-1330 seule) : {n_jorf}")
+    print(f"[étape 4bis] écrit {out_path.name} et les 4 fichiers vérifiés/candidats")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FORM 2026 — Obligations « silence vaut accord »</title>
+<meta name="description" content="1 283 obligations relevant du principe silence vaut accord : peut-on les relier aux démarches de Démarche Numérique ? Le constat mesuré à la main, pas estimé — et pourquoi un rapprochement textuel de plus ne suffira pas.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="FORM 2026">
+<meta property="og:title" content="Obligations « silence vaut accord » : peut-on les relier aux démarches ?">
+<meta property="og:description" content="1 283 obligations, deux bases de l'État, un rapprochement qui échoue le plus souvent — et pourquoi.">
+<meta property="og:url" content="https://emsnytech.github.io/form2026/obligations-sva/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1e2022; --muted:#5c6066; --paper:#fbf9f5; --surface:#ffffff; --line:#e2dfd7;
+  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4;
+  --accent:#b45309; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c; --bad-soft:#fef2f2;
+  --min:#0e7490; --min-soft:#ecfeff;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d;
+  --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171; --bad-soft:#3a1f1f;
+  --min:#22d3ee; --min-soft:#164e63; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d;
+  --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171; --bad-soft:#3a1f1f;
+  --min:#22d3ee; --min-soft:#164e63; color-scheme:dark }
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--admin)}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.wrap{max-width:1120px;margin:0 auto;padding:2.4rem max(1.25rem,env(safe-area-inset-right,0px)) 3rem max(1.25rem,env(safe-area-inset-left,0px))}
+.topnav{font-size:.9rem;color:var(--muted);margin:0 0 1rem}.topnav a{text-decoration:none;font-weight:600}
+h1{font-weight:800;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.15;margin:.5rem 0 0;max-width:26ch}
+h2{font-weight:800;font-size:1.4rem;margin:2.6rem 0 1rem}
+h3{font-weight:700;font-size:1.1rem;margin:0 0 .4rem}
+.lede{font-size:1.1rem;color:var(--muted);max-width:68ch;margin:1rem 0 0}
+.sub{color:var(--muted);max-width:72ch}
+.verdict{margin-top:1.6rem;background:var(--bad-soft);border:1px solid var(--bad);border-left:6px solid var(--bad);border-radius:12px;padding:1.1rem 1.3rem;color:var(--ink)}
+.verdict b{color:var(--bad)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:1.6rem}
+@media (max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--surface);padding:1rem 1.1rem}
+.kpi b{display:block;font:700 1.5rem/1.15 "IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;color:var(--bad)}
+.kpi span{font-size:.86rem;color:var(--muted)}
+.kpi small{display:block;font-size:.78rem;color:var(--muted);margin-top:.2rem}
+.verifie{margin-top:1.6rem;background:var(--usager-soft);border:1px solid var(--usager);border-left:6px solid var(--usager);border-radius:12px;padding:1.1rem 1.3rem}
+.verifie b{color:var(--usager)}
+.vkpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:1.4rem}
+@media (max-width:760px){.vkpis{grid-template-columns:1fr}}
+.vkpi{background:var(--surface);padding:.9rem 1.1rem}
+.vkpi b{display:block;font:700 1.4rem "IBM Plex Mono",ui-monospace,monospace;color:var(--usager)}
+.vkpi span{font-size:.84rem;color:var(--muted)}
+.tbl{overflow-x:auto;margin-top:1rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{padding:.5rem .7rem;text-align:left;border-bottom:1px solid var(--line)}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);white-space:nowrap}
+td.r,th.r{text-align:right}
+.ex{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--usager);border-radius:12px;padding:1.1rem 1.3rem;margin:1rem 0}
+.ex h3{color:var(--usager)}
+.ex p{margin:.4rem 0;color:var(--muted)}
+.ex ul{margin:.6rem 0 0;padding-left:1.2rem;columns:2 16rem;color:var(--muted);font-size:.92rem}
+.candidats{margin-top:1.6rem;background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:1.1rem 1.3rem}
+.candidats p{color:var(--muted);margin:.4rem 0}
+.candidats .dl{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;margin-top:.8rem;font-size:.9rem}
+.why{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem}
+@media (max-width:760px){.why{grid-template-columns:1fr}}
+.why div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.2rem}
+.plus{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--min);border-radius:12px;padding:1.1rem 1.3rem;margin-top:1rem}
+.plus h3{color:var(--min)}
+.method{max-width:74ch;color:var(--muted);font-size:.95rem}
+.method ul{padding-left:1.2rem}
+footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted)}
+.back{display:inline-block;margin:0 0 1.4rem;font-weight:700;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../">← Retour à FORM 2026</a>
+  <header>
+    <p class="topnav" style="margin:0;font-weight:700">FORM 2026 · Situer</p>
+    <h1>Obligations « silence vaut accord » : peut-on les relier aux démarches ?</h1>
+    <p class="lede">1 283 obligations où le silence de l'administration vaut acceptation, deux bases publiques de l'État pour tenter de les relier à une démarche en ligne — et un rapprochement qui échoue le plus souvent. Le vide est le constat de cette page, pas un défaut de méthode : voici ce qui est réellement vérifié, et rien de plus.</p>
+    <p class="sub" style="margin-top:.6rem">C'est la seule liste officielle publiée — environ un tiers des procédures de l'État selon une estimation du Sénat (2015), le reste n'ayant jamais été recensé publiquement.</p>
+  </header>
+
+  <div class="verdict">
+    <b>Seuil de décision fixé à l'avance : 60 % de correspondances validées au premier maillon.</b> Mesuré à la main sur un échantillon dédié : 28 %. Le seuil n'est pas atteint — on ne généralise pas. Tout rapprochement produit par le texte mais jamais relu individuellement reste un <b>candidat non vérifié</b>, exporté à part, jamais compté ci-dessous.
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><b>1 283</b><span>obligations silence-vaut-accord examinées</span><small>périmètre État et ses établissements publics</small></div>
+    <div class="kpi"><b>2016</b><span>dernière mise à jour de la source</span><small>08/12/2016 — jamais mise à jour depuis</small></div>
+    <div class="kpi"><b>28 % / 36 %</b><span>précision mesurée à la main</span><small>fiche DILA / démarche DN, sur échantillon relu un à un</small></div>
+    <div class="kpi"><b>≈ 470</b><span>démarches sans fondement juridique propre</span><small>ordonnance n° 2014-1330 seule comme cadre cité</small></div>
+  </div>
+
+  <div class="verifie">
+    <b>Ce qui est vérifié — et rien d'autre n'est compté.</b> Chaque lien ci-dessous a été lu individuellement, pas seulement scoré par un rapprochement de mots-clés.
+    <div class="vkpis">
+      <div class="vkpi"><b>15</b><span>obligations avec une fiche DILA confirmée</span></div>
+      <div class="vkpi"><b>7</b><span>obligations avec au moins une démarche DN confirmée</span></div>
+      <div class="vkpi"><b>331</b><span>dossiers cumulés, sur les démarches confirmées</span></div>
+    </div>
+  </div>
+
+  <h2>Ce qui est vérifié</h2>
+  <div class="ex">
+    <h3>Cartes de guide conférencier</h3>
+    <p>Une obligation nationale, quatre démarches locales confirmées une à une — correspondance 1 → n, le cas le plus solide de tout l'échantillon. Les candidatures CNAM à une licence ou un certificat de compétences de guide-conférencier, trouvées par le même rapprochement, ont été écartées : ce sont des formations, pas la délivrance de la carte elle-même.</p>
+    <ul>
+      <li>PREF37, Sous-préfecture de Chinon (102322)</li>
+      <li>Préfecture 93 (86912)</li>
+      <li>Préfecture 43 (39382)</li>
+      <li>Département de l'Aisne (32251)</li>
+    </ul>
+  </div>
+  <div class="ex">
+    <h3>Habilitation à dispenser la formation du diplôme d'État de professeur de danse</h3>
+    <p>→ démarche 77412, Ministère de la Culture. Et la reconnaissance de qualifications professionnelles associée → démarche 64844, même ministère.</p>
+  </div>
+  <div class="ex" style="border-left-color:var(--min)">
+    <h3>Autorisation de coupes dans les bois et forêts (Code forestier, L124-5 et L312-9)</h3>
+    <p>→ fiche DILA R18249, par référence juridique concordante (confiance forte) — la seule méthode dont la précision mesurée atteint 100 % sur les cas vérifiés, mais sur un volume marginal : 2 liens au total sur 1 283 obligations.</p>
+  </div>
+
+  <div class="candidats">
+    <p><b>Candidats non vérifiés, exportés à part.</b> Le rapprochement automatique a produit 66 autres liens vers une fiche DILA et 2 210 autres liens vers une démarche DN (souvent plusieurs candidats par obligation) qui n'ont pas été relus un à un. Ils ne figurent dans aucun chiffre de cette page — téléchargeables séparément, en candidats, pas en résultat :</p>
+    <div class="dl">
+      <a href="../donnees/obligations-sva/liens_dila_candidats_non_verifies_2026-10-26.csv">liens_dila_candidats_non_verifies.csv</a>
+      <a href="../donnees/obligations-sva/liens_dn_candidats_non_verifies_2026-10-26.csv">liens_dn_candidats_non_verifies.csv</a>
+    </div>
+  </div>
+
+  <h2>Pourquoi ça échoue le plus souvent</h2>
+  <div class="why">
+    <div>
+      <h3>Des obligations institutionnelles, pas citoyennes</h3>
+      <p class="sub">Les 1 283 obligations couvrent surtout des procédures État ↔ organisme régulé, État ↔ collectivité, agrément d'une autre administration — rarement le type de démarche que couvrent DILA et Démarche Numérique, pensés pour l'usager.</p>
+    </div>
+    <div>
+      <h3>Des intitulés presque identiques, des régimes différents</h3>
+      <p class="sub">« Durée de travail minimale » et « durée de travail maximale » partagent le même vocabulaire pour des textes opposés. Faux amis déjà repérés et exclus explicitement du rapprochement (durée de travail, seuils d'âge, « agrément d'organisme » générique qui matchait des stages de sécurité routière).</p>
+    </div>
+    <div>
+      <h3>Le cadre juridique déclaré ne prouve souvent rien</h3>
+      <p class="sub">470 démarches du corpus FORM 2026 — des <b>démarches sans fondement juridique propre</b> — ne citent, comme cadre juridique, que l'ordonnance n° 2014-1330 du 6 novembre 2014 relative au droit des usagers de saisir l'administration par voie électronique (JO n° 258 du 7 novembre 2014, p. 18780). Ce rattachement est juridiquement correct pour toute démarche sans texte spécifique : il signale donc une démarche qui ne procède d'aucune règle qui lui soit propre, jamais le fondement substantiel d'une obligation précise.</p>
+    </div>
+    <div>
+      <h3>Le Cerfa n'est pas un raccourci fiable</h3>
+      <p class="sub">Les démarches confirmées à la main n'ont pour la plupart aucun Cerfa associé. Et l'unique correspondance Cerfa déjà présente dans la source de ce chantier (Cerfa 12709 pour la certification des gestionnaires de réseaux de transport) s'est révélée fausse une fois vérifiée dans le registre officiel DILA — 12709 est une subvention Anah, sans rapport.</p>
+    </div>
+  </div>
+
+  <h2>Pour aller plus loin</h2>
+  <div class="plus">
+    <h3>La seule voie sérieuse : une clé juridique, pas un rapprochement de plus</h3>
+    <p class="sub">Résoudre les articles de chaque obligation en identifiants Légifrance (LEGIARTI), puis les comparer directement au cadre juridique déclaré par chaque démarche — plutôt que des mots-clés de titre. Un rapprochement textuel supplémentaire, aussi affiné soit-il, ne passera pas le seuil de 60 % : la limite n'est pas la méthode de recherche, c'est l'absence de clé commune entre les deux bases.</p>
+  </div>
+
+  <h2>Méthode</h2>
+  <p class="method">Source : « Liste des démarches concernées par le principe Silence vaut accord » (data.gouv.fr, Premier ministre), XML du 8 décembre 2016, périmètre État et ses établissements publics — jamais remis à jour depuis. Un doublon exact du fichier officiel a été retiré (1 284 → 1 283 obligations). Rapprochement en deux temps : obligation → fiche DILA (8 509 fiches service-public.fr), puis obligation → démarche(s) Démarche Numérique en direct, sans passer par le Cerfa. Chaque lien affiché sur cette page a été relu individuellement sur deux échantillons (56 obligations, puis un nouvel échantillon de 50 liens produits) ; tout ce qui n'a pas été relu reste un candidat non vérifié, exporté à part et jamais compté. Absence de lien ≠ absence de dématérialisation : d'autres téléservices existent hors Démarche Numérique. Résultats intermédiaires, scripts et configurations : <a href="../donnees/obligations-sva/">données et méthode</a>.</p>
+  <footer>FORM 2026 · Philippe Vrignaud · Données ouvertes et code source publics</footer>
+</div>
+</body>
+</html>
