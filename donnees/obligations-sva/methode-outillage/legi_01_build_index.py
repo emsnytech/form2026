@@ -5,17 +5,17 @@ RE_NUM = re.compile(rb'<NUM>(.*?)</NUM>')
 RE_ETAT = re.compile(rb'<ETAT>(.*?)</ETAT>')
 RE_DEBUT = re.compile(rb'<DATE_DEBUT>(.*?)</DATE_DEBUT>')
 RE_FIN = re.compile(rb'<DATE_FIN>(.*?)</DATE_FIN>')
+RE_LIEN = re.compile(rb'<LIEN[^>]*typelien="(CONCORDE|CONCORDANCE)"[^>]*>(.*?)</LIEN>')
 
 with open('/tmp/codes_legi.json', encoding='utf-8') as f:
     codes = json.load(f)
 with open('/tmp/matched_codes.json', encoding='utf-8') as f:
     matched = json.load(f)
 
-TODAY = '2026-10-27'
-
-index = {}  # cid -> { NUM -> {'id','etat','debut','fin'} } (version en cours, fin >= TODAY, la plus tardive)
+index = {}  # cid -> { NUM -> [ {id,etat,debut,fin,successeur} ... ] }
 t0 = time.time()
 total_files = 0
+etat_counts = {}
 for cid in matched:
     d = codes[cid]['dir']
     files = glob.glob(d + '/article/LEGI/ARTI/**/LEGIARTI*.xml', recursive=True)
@@ -33,29 +33,30 @@ for cid in matched:
         num = m_num.group(1).decode('utf-8', 'replace').strip()
         if not num:
             continue
-        fin = m_fin.group(1).decode('utf-8', 'replace').strip()
-        debut = m_debut.group(1).decode('utf-8', 'replace').strip() if m_debut else ''
         etat = m_etat.group(1).decode('utf-8', 'replace').strip()
-        aid = m_id.group(1).decode('utf-8', 'replace').strip()
-        entry = {'id': aid, 'etat': etat, 'debut': debut, 'fin': fin}
-        cur = num_idx.get(num)
-        # on garde la version dont la plage [debut,fin] couvre AUJOURD'HUI, sinon celle au fin le plus tardif (dernier etat connu)
-        if cur is None:
-            num_idx[num] = entry
-        else:
-            covers_today_new = entry['debut'] <= TODAY <= entry['fin']
-            covers_today_cur = cur['debut'] <= TODAY <= cur['fin']
-            if covers_today_new and not covers_today_cur:
-                num_idx[num] = entry
-            elif covers_today_new == covers_today_cur:
-                if entry['fin'] > cur['fin']:
-                    num_idx[num] = entry
+        etat_counts[etat] = etat_counts.get(etat, 0) + 1
+        successeur = ''
+        if etat == 'TRANSFERE':
+            m_lien = RE_LIEN.search(content)
+            if m_lien:
+                successeur = m_lien.group(2).decode('utf-8', 'replace').strip()
+        entry = {
+            'id': m_id.group(1).decode('utf-8', 'replace').strip(),
+            'etat': etat,
+            'debut': m_debut.group(1).decode('utf-8', 'replace').strip() if m_debut else '',
+            'fin': m_fin.group(1).decode('utf-8', 'replace').strip(),
+            'successeur': successeur,
+        }
+        num_idx.setdefault(num, []).append(entry)
     index[cid] = num_idx
     total_files += len(files)
     print(f"{codes[cid]['titre']}: {len(files)} fichiers -> {len(num_idx)} numeros distincts", file=sys.stderr)
 
 print(f"TOTAL: {total_files} fichiers parses en {time.time()-t0:.1f}s", file=sys.stderr)
+print("Repartition ETAT (toutes versions, 42 codes apparies):", file=sys.stderr)
+for k, v in sorted(etat_counts.items(), key=lambda x: -x[1]):
+    print(f"  {v} {k}", file=sys.stderr)
 
-with open('/tmp/legi_index.pkl', 'wb') as f:
+with open('/tmp/legi_index_v2.pkl', 'wb') as f:
     pickle.dump(index, f)
-print("Index sauvegarde dans /tmp/legi_index.pkl", file=sys.stderr)
+print("Index v2 sauvegarde dans /tmp/legi_index_v2.pkl", file=sys.stderr)

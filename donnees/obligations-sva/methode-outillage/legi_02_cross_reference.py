@@ -3,14 +3,12 @@ import json, re, csv, pickle
 
 with open('/tmp/codes_legi.json', encoding='utf-8') as f:
     codes = json.load(f)
-with open('/tmp/legi_index.pkl', 'rb') as f:
+with open('/tmp/legi_index_v2.pkl', 'rb') as f:
     index = pickle.load(f)
-
-TODAY = '2026-10-27'
 
 def norm_title(s):
     s = s or ''
-    s = s.replace('’', "'").replace('’', "'")
+    s = s.replace('’', "'")
     s = re.sub(r"\(.*?\)", "", s)
     s = re.sub(r",?\s*CGI\.?\s*$", "", s, flags=re.I)
     s = re.sub(r"[.,;]+$", "", s.strip())
@@ -31,13 +29,15 @@ aliases = {
 code_by_norm.update(aliases)
 
 def match_code(t):
+    tl = t.strip().lower()
+    if tl.startswith('annexe') and 'code général des impôts' in tl:
+        m = re.search(r'annexe\s+(i{1,3}v?|v)\b', tl)
+        target = {'i': 'LEGITEXT000006069568', 'ii': 'LEGITEXT000006069569', 'iii': 'LEGITEXT000006069574', 'iv': 'LEGITEXT000006069576'}
+        if m:
+            return target.get(m.group(1))
+    if tl.startswith('livre des procédures fiscales') or tl.startswith('livre des procedures fiscales'):
+        return 'LEGITEXT000006069583'
     return code_by_norm.get(norm_title(t))
-
-# extraction des numeros d'article depuis un texte de reference
-RE_ART = re.compile(
-    r'(?:article|art\.?)?\s*([LRD])\.?\s*\*?\s*(\d+(?:[\s-]?\d+)*(?:-\d+)*)',
-    re.I
-)
 
 def extract_articles(ref):
     ref = ref or ''
@@ -49,49 +49,51 @@ def extract_articles(ref):
         out.append(f"{prefix}{star}{num}")
     return out
 
-def lookup(cid, artnum):
+def lookup_versions(cid, artnum):
     num_idx = index.get(cid, {})
     if artnum in num_idx:
         return num_idx[artnum]
-    # tolerance : essaye avec/sans l'etoile (convention "R*" du code de l'urbanisme)
     if '*' in artnum:
         alt = artnum.replace('*', '')
     else:
         alt = artnum[0] + '*' + artnum[1:]
-    if alt in num_idx:
-        return num_idx[alt]
-    return None
+    return num_idx.get(alt)
 
-def status_for_entry(entry):
-    if entry is None:
-        return 'non_identifie'
-    etat = entry['etat']
-    fin = entry['fin']
-    debut = entry['debut']
-    covers_today = debut <= TODAY <= fin
-    if etat == 'VIGUEUR' and covers_today:
-        return 'en_vigueur'
-    if not covers_today and fin < TODAY:
-        return 'abroge'
-    if etat == 'VIGUEUR':
-        return 'en_vigueur'
-    return etat.lower()
+def status_for_versions(versions):
+    """Règle corrigée : en vigueur si au moins une version VIGUEUR/VIGUEUR_DIFF ;
+    sinon transféré si la dernière version (max debut) est TRANSFERE ; sinon abrogé."""
+    if not versions:
+        return ('non_identifie', '', '')
+    vig = [v for v in versions if v['etat'] in ('VIGUEUR', 'VIGUEUR_DIFF')]
+    if vig:
+        v = max(vig, key=lambda x: x['debut'])
+        return ('en_vigueur', v['id'], '')
+    last = max(versions, key=lambda x: x['debut'])
+    if last['etat'] == 'TRANSFERE':
+        return ('transfere', last['id'], last.get('successeur', ''))
+    return ('abroge', last['id'], '')
 
-def process_file(path, col_ref, col_source, out_suffix, label):
+def process_file(path, col_ref, col_source, label):
     with open(path, newline='', encoding='utf-8') as f:
         rows = list(csv.DictReader(f))
-    fieldnames = list(rows[0].keys()) + ['legi_code_apparie', 'legi_articles_detectes', 'legi_statut', 'legi_ids']
-    stats = {'en_vigueur':0,'abroge':0,'non_identifie':0,'hors_perimetre_codes':0,'autre':0}
+    fieldnames = list(rows[0].keys())
+    for c in ['legi_code_apparie', 'legi_articles_detectes', 'legi_statut', 'legi_ids', 'legi_transfert_vers']:
+        if c not in fieldnames:
+            fieldnames.append(c)
+    stats = {}
     for r in rows:
         source = r[col_source].strip()
         ref = r[col_ref].strip()
-        cid = match_code(source) if source.lower().startswith('code') else None
+        sl = source.lower()
+        eligible = sl.startswith('code') or sl.startswith('annexe') and 'impôts' in sl or sl.startswith('livre des procédures') or sl.startswith('livre des procedures')
+        cid = match_code(source) if eligible else None
         if cid is None:
             r['legi_code_apparie'] = ''
             r['legi_articles_detectes'] = ''
             r['legi_statut'] = 'hors_perimetre_codes'
             r['legi_ids'] = ''
-            stats['hors_perimetre_codes'] += 1
+            r['legi_transfert_vers'] = ''
+            stats['hors_perimetre_codes'] = stats.get('hors_perimetre_codes', 0) + 1
             continue
         arts = extract_articles(ref)
         if not arts:
@@ -99,19 +101,23 @@ def process_file(path, col_ref, col_source, out_suffix, label):
             r['legi_articles_detectes'] = ''
             r['legi_statut'] = 'non_identifie'
             r['legi_ids'] = ''
-            stats['non_identifie'] += 1
+            r['legi_transfert_vers'] = ''
+            stats['non_identifie'] = stats.get('non_identifie', 0) + 1
             continue
-        statuses = []
-        ids = []
+        statuses, ids, transferts = [], [], []
         for a in arts:
-            e = lookup(cid, a)
-            st = status_for_entry(e)
+            versions = lookup_versions(cid, a)
+            st, aid, succ = status_for_versions(versions)
             statuses.append(st)
-            ids.append(e['id'] if e else '')
+            ids.append(aid)
+            if succ:
+                transferts.append(f"{a} -> {succ}")
         if all(s == 'en_vigueur' for s in statuses):
             final = 'en_vigueur'
+        elif any(s == 'transfere' for s in statuses) and not any(s == 'abroge' for s in statuses) and not all(s=='en_vigueur' for s in statuses):
+            final = 'transfere' if all(s in ('en_vigueur','transfere') for s in statuses) else 'mixte:' + ','.join(sorted(set(statuses)))
         elif any(s == 'abroge' for s in statuses):
-            final = 'abroge'
+            final = 'abroge' if all(s in ('abroge',) for s in statuses) else 'mixte:' + ','.join(sorted(set(statuses)))
         elif all(s == 'non_identifie' for s in statuses):
             final = 'non_identifie'
         else:
@@ -120,20 +126,21 @@ def process_file(path, col_ref, col_source, out_suffix, label):
         r['legi_articles_detectes'] = ';'.join(arts)
         r['legi_statut'] = final
         r['legi_ids'] = ';'.join(ids)
-        key = final if final in stats else 'autre'
-        stats[key] = stats.get(key,0) + 1
+        r['legi_transfert_vers'] = ';'.join(transferts)
+        key = final.split(':')[0]
+        stats[key] = stats.get(key, 0) + 1
 
-    outpath = path.replace('.csv', f'_{out_suffix}.csv')
+    outpath = path if path.endswith('_legi_2026-10-27.csv') else path.replace('.csv', '_legi_2026-10-27.csv')
     with open(outpath, 'w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
         w.writeheader()
         w.writerows(rows)
     print(f"=== {label} ({len(rows)} lignes) -> {outpath}")
-    for k,v in stats.items():
+    for k, v in sorted(stats.items(), key=lambda x: -x[1]):
         print(f"   {k}: {v}")
     return rows
 
 base = '/Users/philippevrignaud/Documents/form2026-site/donnees/obligations-sva'
-process_file(f'{base}/obligations_sva_2026-10-26.csv', 'reference', 'texte_source', 'legi_2026-10-27', 'SVA')
-process_file(f'{base}/methode-svr/obligations_svr_2026-10-27.csv', 'dispositions', 'texte_reference', 'legi_2026-10-27', 'SVR')
-process_file(f'{base}/methode-svr/delais_sva_derogatoires_2026-10-27.csv', 'dispositions', 'texte_reference', 'legi_2026-10-27', 'DELAI_SVA')
+process_file(f'{base}/obligations_sva_2026-10-26.csv', 'reference', 'texte_source', 'SVA')
+process_file(f'{base}/methode-svr/obligations_svr_2026-10-27.csv', 'dispositions', 'texte_reference', 'SVR')
+process_file(f'{base}/methode-svr/delais_sva_derogatoires_2026-10-27.csv', 'dispositions', 'texte_reference', 'DELAI_SVA')
