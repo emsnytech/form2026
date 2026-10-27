@@ -5,14 +5,29 @@ RE_NUM = re.compile(rb'<NUM>(.*?)</NUM>')
 RE_ETAT = re.compile(rb'<ETAT>(.*?)</ETAT>')
 RE_DEBUT = re.compile(rb'<DATE_DEBUT>(.*?)</DATE_DEBUT>')
 RE_FIN = re.compile(rb'<DATE_FIN>(.*?)</DATE_FIN>')
-RE_LIEN = re.compile(rb'<LIEN[^>]*typelien="(CONCORDE|CONCORDANCE)"[^>]*>(.*?)</LIEN>')
+RE_LIEN_CONCORDE = re.compile(rb'<LIEN[^>]*typelien="(CONCORDE|CONCORDANCE)"[^>]*>(.*?)</LIEN>')
+RE_LIEN_TAG = re.compile(rb'<LIEN\s+([^>]*?)>([^<]*)</LIEN>')
+RE_ATTR = re.compile(rb'(\w+)="([^"]*)"')
+
+def find_abrogeant_lien(content):
+    for m in RE_LIEN_TAG.finditer(content):
+        attrs = dict(RE_ATTR.findall(m.group(1)))
+        if attrs.get(b'typelien') == b'ABROGE' and attrs.get(b'sens') == b'cible':
+            return {
+                'cidtexte': attrs.get(b'cidtexte', b'').decode('utf-8', 'replace'),
+                'datesignatexte': attrs.get(b'datesignatexte', b'').decode('utf-8', 'replace'),
+                'naturetexte': attrs.get(b'naturetexte', b'').decode('utf-8', 'replace'),
+                'numtexte': attrs.get(b'numtexte', b'').decode('utf-8', 'replace'),
+                'texte_lien': m.group(2).decode('utf-8', 'replace').strip(),
+            }
+    return None
 
 with open('/tmp/codes_legi.json', encoding='utf-8') as f:
     codes = json.load(f)
 with open('/tmp/matched_codes.json', encoding='utf-8') as f:
     matched = json.load(f)
 
-index = {}  # cid -> { NUM -> [ {id,etat,debut,fin,successeur} ... ] }
+index = {}
 t0 = time.time()
 total_files = 0
 etat_counts = {}
@@ -37,15 +52,17 @@ for cid in matched:
         etat_counts[etat] = etat_counts.get(etat, 0) + 1
         successeur = ''
         if etat == 'TRANSFERE':
-            m_lien = RE_LIEN.search(content)
+            m_lien = RE_LIEN_CONCORDE.search(content)
             if m_lien:
                 successeur = m_lien.group(2).decode('utf-8', 'replace').strip()
+        abrogeant = find_abrogeant_lien(content)
         entry = {
             'id': m_id.group(1).decode('utf-8', 'replace').strip(),
             'etat': etat,
             'debut': m_debut.group(1).decode('utf-8', 'replace').strip() if m_debut else '',
             'fin': m_fin.group(1).decode('utf-8', 'replace').strip(),
             'successeur': successeur,
+            'abrogeant': abrogeant,
         }
         num_idx.setdefault(num, []).append(entry)
     index[cid] = num_idx
@@ -53,10 +70,7 @@ for cid in matched:
     print(f"{codes[cid]['titre']}: {len(files)} fichiers -> {len(num_idx)} numeros distincts", file=sys.stderr)
 
 print(f"TOTAL: {total_files} fichiers parses en {time.time()-t0:.1f}s", file=sys.stderr)
-print("Repartition ETAT (toutes versions, 42 codes apparies):", file=sys.stderr)
-for k, v in sorted(etat_counts.items(), key=lambda x: -x[1]):
-    print(f"  {v} {k}", file=sys.stderr)
 
-with open('/tmp/legi_index_v2.pkl', 'wb') as f:
+with open('/tmp/legi_index_v3.pkl', 'wb') as f:
     pickle.dump(index, f)
-print("Index v2 sauvegarde dans /tmp/legi_index_v2.pkl", file=sys.stderr)
+print("Index v3 sauvegarde dans /tmp/legi_index_v3.pkl", file=sys.stderr)

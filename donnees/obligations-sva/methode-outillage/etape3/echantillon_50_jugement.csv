@@ -1,0 +1,51 @@
+rang,liste,id,canal,intitule_objet,candidat,jugement,motif
+1,SVR,2014-1273,DILA_cerfa,Transport de marchandises dangereuses par voies de navigation intérieure,12251 Déclaration d'un conseiller à la sécurité,incorrect,objets différents (déclarer un conseiller à la sécurité != autoriser un transport)
+2,SVA,348,DILA_cerfa,Inscription au CNED d'un élève relevant du régime scolaire à l'étranger,R47838 S'inscrire au CNED,correct,même institution et action
+3,SVR,2014-1292,DN,Inscription sur les listes électorales,plusieurs démarches "Inscription sur les listes électorales",correct,match exact
+4,SVA,313,DN,Dérogation en vue de l'inscription à l'examen de plus d'une spécialité,DREETS déclaration de dérogation aux travaux réglementés jeunes,incorrect,domaines sans rapport (examen scolaire vs travaux réglementés mineurs)
+5,SVA,956,DN,Demande d'habilitation des personnes réalisant l'identification,Demande d'habilitation pour réaliser la formation,incorrect,objet différent (identification vs formation)
+6,SVA,797,DN,Délivrance attestation gestionnaire forestier professionnel,Formulaire gestionnaire forestier professionnel,correct,match direct
+7,SVA,331,DN,Inscription à l'examen du baccalauréat professionnel,Préparation à l'Examen Professionnel APAE,incorrect,"""examen professionnel"" générique, APAE est un autre examen"
+8,SVR,2014-1298,DN,AMM de matières fertilisantes et supports de culture,ANSM Declaration/Autorisation d'utilisation,incorrect,ANSM = médicament humain, sans rapport avec fertilisants
+9,SVA,130,DN,Changement de nom/forme/adresse au registre des marques,CPAM 71 Mise à jour administrative adresse,incorrect,faux ami CPAM généralisé (registre marques INPI != CPAM)
+10,DELAI_SVA,2014-1287,DN,Autorisation d'exercer ambulancier accordée individuellement,Formulaire carte professionnelle (ambulancier),correct,même profession
+11,SVR,2014-1274,DN,Autorisation ressortissant non-UE (décret ambulancier),Formulaire carte professionnelle (ambulancier),correct,même décret/profession que n°10
+12,DELAI_SVA,2014-1305,DN,Dispense examen aptitude technique danse,Dispense examen aptitude technique de danse,correct,match direct
+13,SVA,597,DILA_cerfa,Autorisation exercice exploitant établissement,R35595 Demande autorisation exercice profession,correct,match direct score 0.86
+14,SVA,69,DN,Agrément intermédiation locative,Demande renouvellement agrément ingénierie sociale,incorrect,agréments juridiquement distincts (intermédiation locative vs ISFT)
+15,SVA,128,DN,Changement de nom/forme/adresse au registre des brevets,CPAM 71 Mise à jour administrative adresse,incorrect,même faux ami CPAM que n°9
+16,SVA,1452,DILA_teleservice,Non-opposition libéralité au profit d'un État étranger,R75005 Déclaration des libéralités à un État,correct,même procédure (deux faces)
+17,SVA,36,DILA_teleservice,Reconnaissance équivalence diplôme étranger,R44999 Demande de reconnaissance qualification,correct,match conceptuel direct
+18,SVA,289,DN,Inscription épreuves remplacement bac général,Demande participation épreuves de remplacement,correct,match direct score 0.8
+19,DELAI_SVA,2014-1278,DN,Retrait liste nationale administrateurs judiciaires,École Nationale des Greffes session,incorrect,greffiers != administrateurs judiciaires
+20,SVA,1116,DILA_cerfa,Agrément organismes formation sécurité,Demande agrément organismes formation sécurité,correct,match quasi exact
+21,SVR,2014-1282,DILA_cerfa,Transfert armes à feu/munitions,Déclaration transfert armes à feu et munitions,correct,match direct
+22,SVR,2014-1292,DN,Autorisation circuler véhicules catégories spécifiques,Renouvellement habilitation Système Immatriculation,incorrect,objet différent (immatriculation != autorisation circulation)
+23,SVA,968,DILA_cerfa,Enregistrement établissements/intermédiaires secteur,Demande enregistrement établissement secteur,correct,match direct
+24,SVR,2014-1298,DILA_cerfa,Autorisation entrée macro-organismes,Demande autorisation entrée territoire macro-organismes,correct,match quasi exact score 0.9
+25,DELAI_SVA,2014-1272,DN,Agrément centres formation examens BAFA/BAFD,Dépôt session examen obtention,correct,même filière (sous réserve)
+26,SVR,2014-1280,DILA_teleservice,Immatriculation registre intermédiaires assurance,Consultation registre intermédiaires assurance,incorrect,consulter != s'immatriculer
+27,SVR,2014-1286,DN,Autorisation exercer audioprothésiste accordée individuellement,Formulaire carte professionnelle (ambulancier),incorrect,faux ami carte professionnelle ambulancier (même que n°31/37)
+28,SVR,2014-1299,DN,Autorisation préfet région implantation ouvrages,Appel d'offres réalisation installations électriques,incorrect,instrument différent (appel d'offres CRE != autorisation préfectorale)
+29,SVR,2014-1294,DN,Autorisation provisoire exercer sécurité privée,Demande autorisation préfectorale exercer sécurité privée,correct,match direct
+30,SVA,49,DILA_cerfa,Autorisation travaux immeuble grande hauteur,Demande étude de dangers canalisation,incorrect,domaines sans rapport (IGH vs canalisation)
+31,DELAI_SVA,2014-1287,DN,Autorisation exercer opticien-lunetier accordée individuellement,Formulaire carte professionnelle (ambulancier),incorrect,même faux ami que n°27/37
+32,SVA,651,DILA_teleservice,Autorisation installation bâches échafaudages publicitaires,Demande en ligne autorisation installation bâches,correct,match direct score 0.62
+33,SVR,2014-1298,DN,AMM produits phytopharmaceutiques,Dépôt demande dérogation utilisation phytopharmaceutiques,incorrect,régime différent (AMM != dérogation d'usage)
+34,SVA,349,DILA_cerfa,Délivrance attestation établissement CNED,R47838 S'inscrire au CNED,correct,même institution
+35,SVR,2014-1292,DILA_teleservice,Conversion brevet militaire de conduite,Demande conversion brevet militaire,correct,match direct score 0.75
+36,SVA,1283,DILA_cerfa,Autorisation transport contingent multilatéral stupéfiants,Demande autorisation transport contingent,correct,match direct
+37,SVR,2014-1274,DN,Délivrance autorisation usage professionnel titre,Formulaire carte professionnelle (ambulancier),incorrect,même faux ami que n°27/31
+38,SVA,68,DN,Agrément ingénierie sociale financière technique,Demande renouvellement agrément ingénierie sociale,correct,match direct (contrairement au n°14, même agrément ISFT exact)
+39,SVA,1291,DN,Agrément organismes audits centres contrôle technique,Déclaration audits défavorables centre contrôle technique,correct,même domaine contrôle technique auto
+40,SVA,276,DN,Décision d'orientation voies d'orientation établissement,Demande de convention dispositif,incorrect,acte différent (décision d'orientation != convention)
+41,SVR,2014-1282,DILA_cerfa,Autorisation transit matériels de guerre,Demande autorisation importation matériels de guerre,correct,même famille de formulaire ATEI (sous réserve transit/import)
+42,SVR,2014-1286,DN,Autorisation laboratoires biologie médicale,Démarche régionale générique destination laboratoires,incorrect,démarche régionale trop générique pour confirmer
+43,SVA,877,DILA_cerfa,Rescrit crédit d'impôt recherche,Crédit d'impôt en faveur de la recherche CIR,correct,match direct
+44,SVA,405,DILA_cerfa,Déclaration établissement chasse commerciale,Déclaration établissement professionnel de chasse,correct,match direct
+45,SVA,779,DN,Délivrance attestation gestionnaire forestier professionnel,Formulaire gestionnaire forestier professionnel,correct,même paire que n°6 (doublon SVA)
+46,DELAI_SVA,2014-1297,DILA_cerfa,Autorisation distraction terres périmètre,Dégrèvement taxe foncière parcelles,incorrect,actes différents (distraction de terres != dégrèvement fiscal)
+47,SVA,1040,DN,Autorisation dérogation entrée formation certificat spécialisation,Demande dérogation préalable entrée formation,correct,match direct
+48,SVA,712,DN,Agrément entreprise solidaire d'utilité sociale,Demande agrément Entreprise Solidaire d'Utilité Sociale,correct,match exact
+49,SVA,407,DN,Autorisation prélèvement animaux vivants chasse,Autorisation destruction à tir,incorrect,régimes différents (prélèvement vivant != destruction à tir)
+50,SVA,603,DILA_cerfa,Homologation systèmes billetterie établissement sportif,R35595 Demande autorisation exercice profession,incorrect,même Cerfa générique que n°13 mais hors sujet ici
