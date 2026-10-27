@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>FORM 2026 — Obligations « silence vaut accord »</title>
-<meta name="description" content="1 283 obligations relevant du principe silence vaut accord : peut-on les relier aux démarches de Démarche Numérique ? Le constat mesuré à la main, pas estimé — et pourquoi un rapprochement textuel de plus ne suffira pas.">
+<title>FORM 2026 — Procédures prévues par les textes : sont-elles outillées ?</title>
+<meta name="description" content="2 806 procédures où le silence de l'administration vaut acceptation ou rejet : moins d'une sur dix a pu être reliée à une démarche en ligne, un formulaire ou un téléservice vérifié individuellement.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="FORM 2026">
-<meta property="og:title" content="Obligations « silence vaut accord » : peut-on les relier aux démarches ?">
-<meta property="og:description" content="1 283 obligations, deux bases de l'État, un rapprochement qui échoue le plus souvent — et pourquoi.">
+<meta property="og:title" content="Procédures prévues par les textes : sont-elles outillées ?">
+<meta property="og:description" content="2 806 procédures, entre 130 et 155 reliées de façon vérifiée à une démarche — moins d'une sur dix.">
 <meta property="og:url" content="https://emsnytech.github.io/form2026/obligations-sva/">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,19 +40,19 @@ a{color:var(--admin)}
 .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
 .wrap{max-width:1120px;margin:0 auto;padding:2.4rem max(1.25rem,env(safe-area-inset-right,0px)) 3rem max(1.25rem,env(safe-area-inset-left,0px))}
 .topnav{font-size:.9rem;color:var(--muted);margin:0 0 1rem}.topnav a{text-decoration:none;font-weight:600}
-h1{font-weight:800;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.15;margin:.5rem 0 0;max-width:26ch}
+h1{font-weight:800;font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.15;margin:.5rem 0 0;max-width:30ch}
 h2{font-weight:800;font-size:1.4rem;margin:2.6rem 0 1rem}
 h3{font-weight:700;font-size:1.1rem;margin:0 0 .4rem}
-.lede{font-size:1.1rem;color:var(--muted);max-width:68ch;margin:1rem 0 0}
+.lede{font-size:1.1rem;color:var(--muted);max-width:70ch;margin:1rem 0 0}
 .sub{color:var(--muted);max-width:72ch}
-.verdict{margin-top:1.6rem;background:var(--bad-soft);border:1px solid var(--bad);border-left:6px solid var(--bad);border-radius:12px;padding:1.1rem 1.3rem;color:var(--ink)}
-.verdict b{color:var(--bad)}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:1.6rem}
-@media (max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.verdict{margin-top:1.6rem;background:var(--warn-soft);border:1px solid var(--warn);border-left:6px solid var(--warn);border-radius:12px;padding:1.1rem 1.3rem;color:var(--ink)}
+.verdict b{color:var(--warn)}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:1.6rem}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
 .kpi{background:var(--surface);padding:1rem 1.1rem}
-.kpi b{display:block;font:700 1.5rem/1.15 "IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;color:var(--bad)}
-.kpi span{font-size:.86rem;color:var(--muted)}
-.kpi small{display:block;font-size:.78rem;color:var(--muted);margin-top:.2rem}
+.kpi b{display:block;font:700 1.4rem/1.15 "IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;color:var(--warn)}
+.kpi span{font-size:.84rem;color:var(--muted)}
+.kpi small{display:block;font-size:.76rem;color:var(--muted);margin-top:.2rem}
 .verifie{margin-top:1.6rem;background:var(--usager-soft);border:1px solid var(--usager);border-left:6px solid var(--usager);border-radius:12px;padding:1.1rem 1.3rem}
 .verifie b{color:var(--usager)}
 .vkpis{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:1.4rem}
@@ -64,7 +64,14 @@ h3{font-weight:700;font-size:1.1rem;margin:0 0 .4rem}
 table{border-collapse:collapse;width:100%;font-size:.92rem}
 th,td{padding:.5rem .7rem;text-align:left;border-bottom:1px solid var(--line)}
 th{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);white-space:nowrap}
-td.r,th.r{text-align:right}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.2rem}
+@media (max-width:760px){.pair{grid-template-columns:1fr}}
+.pair .box{border-radius:12px;padding:1.1rem 1.3rem;border:1px solid var(--line)}
+.pair .box.ok{background:var(--usager-soft);border-color:var(--usager)}
+.pair .box.unk{background:var(--surface)}
+.pair .box b{display:block;font:700 1.6rem "IBM Plex Mono",ui-monospace,monospace;margin-bottom:.2rem}
+.pair .box.ok b{color:var(--usager)}
 .ex{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--usager);border-radius:12px;padding:1.1rem 1.3rem;margin:1rem 0}
 .ex h3{color:var(--usager)}
 .ex p{margin:.4rem 0;color:var(--muted)}
@@ -79,8 +86,14 @@ td.r,th.r{text-align:right}
 .plus h3{color:var(--min)}
 .method{max-width:74ch;color:var(--muted);font-size:.95rem}
 .method ul{padding-left:1.2rem}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem}
+@media (max-width:760px){.cards{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.1rem 1.2rem}
+.card .n{display:inline-block;font:700 .82rem "IBM Plex Mono",ui-monospace,monospace;color:var(--muted);margin-bottom:.3rem}
+.ic{font-size:.82rem;color:var(--muted)}
 footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted)}
 .back{display:inline-block;margin:0 0 1.4rem;font-weight:700;text-decoration:none}
+.prevver{margin-top:1.4rem;font-size:.85rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:.8rem}
 </style>
 </head>
 <body>
@@ -88,87 +101,152 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
   <a class="back" href="../">← Retour à FORM 2026</a>
   <header>
     <p class="topnav" style="margin:0;font-weight:700">FORM 2026 · Situer</p>
-    <h1>Obligations « silence vaut accord » : peut-on les relier aux démarches ?</h1>
-    <p class="lede">1 283 obligations où le silence de l'administration vaut acceptation, deux bases publiques de l'État pour tenter de les relier à une démarche en ligne — et un rapprochement qui échoue le plus souvent. Le vide est le constat de cette page, pas un défaut de méthode : voici ce qui est réellement vérifié, et rien de plus.</p>
-    <p class="sub" style="margin-top:.6rem">C'est la seule liste officielle publiée — environ un tiers des procédures de l'État selon une estimation du Sénat (2015), le reste n'ayant jamais été recensé publiquement.</p>
+    <h1>Procédures prévues par les textes : sont-elles outillées ?</h1>
+    <p class="lede">La liste « silence vaut accord » (2016) et les 39 décrets d'exception d'octobre 2014 (versions consolidées) : 2 806 procédures, rapprochées des démarches en ligne, des formulaires et des téléservices de l'État.</p>
+    <p class="sub" style="margin-top:.6rem">Le constat de cette page n'est pas une liste d'oublis à combler : une procédure vivante sur dix, au mieux, est reliée à sa démarche de façon vérifiable — et la plupart des démarches les plus utilisées relèvent d'autres régimes juridiques, pour lesquels aucune liste équivalente n'existe.</p>
   </header>
 
-  <div class="verdict">
-    <b>Seuil de décision fixé à l'avance : 60 % de correspondances validées au premier maillon.</b> Mesuré à la main sur un échantillon dédié : 28 %. Le seuil n'est pas atteint — on ne généralise pas. Tout rapprochement produit par le texte mais jamais relu individuellement reste un <b>candidat non vérifié</b>, exporté à part, jamais compté ci-dessous.
-  </div>
-
   <div class="kpis">
-    <div class="kpi"><b>1 283</b><span>obligations silence-vaut-accord examinées</span><small>périmètre État et ses établissements publics</small></div>
-    <div class="kpi"><b>2016</b><span>dernière mise à jour de la source</span><small>08/12/2016 — jamais mise à jour depuis</small></div>
-    <div class="kpi"><b>28 % / 36 %</b><span>précision mesurée à la main</span><small>fiche DILA / démarche DN, sur échantillon relu un à un</small></div>
-    <div class="kpi"><b>≈ 470</b><span>démarches sans fondement juridique propre</span><small>ordonnance n° 2014-1330 seule comme cadre cité</small></div>
+    <div class="kpi"><b>2 806</b><span>procédures énumérées</span><small>SVA + SVR + délais dérogatoires</small></div>
+    <div class="kpi"><b>2 026</b><span>encore vivantes</span><small>en vigueur, transférées ou recodifiées</small></div>
+    <div class="kpi"><b>130 à 155</b><span>outillées vérifiées</span><small>moins d'une procédure vivante sur dix</small></div>
+    <div class="kpi"><b>0,15 %</b><span>des téléchargements service-public 2024</span><small>formulaires liés et non partagés / total DILA</small></div>
+    <div class="kpi"><b>0 / 10</b><span>des formulaires les plus téléchargés</span><small>aucun n'est une procédure de ce périmètre</small></div>
   </div>
 
-  <div class="verifie">
-    <b>Ce qui est vérifié — et rien d'autre n'est compté.</b> Chaque lien ci-dessous a été lu individuellement, pas seulement scoré par un rapprochement de mots-clés.
-    <div class="vkpis">
-      <div class="vkpi"><b>15</b><span>obligations avec une fiche DILA confirmée</span></div>
-      <div class="vkpi"><b>7</b><span>obligations avec au moins une démarche DN confirmée</span></div>
-      <div class="vkpi"><b>331</b><span>dossiers cumulés, sur les démarches confirmées</span></div>
-    </div>
+  <h2>Le stock, en trois parts</h2>
+  <p class="sub">Trois référentiels, trois textes d'origine différents, un même principe : le silence de l'administration valant une décision, acceptation ou rejet.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Liste</th><th>Texte d'origine</th><th class="r">Procédures</th></tr></thead>
+      <tbody>
+        <tr><td>SVA — silence vaut accord</td><td>Liste officielle, XML du 08/12/2016</td><td class="r">1 283</td></tr>
+        <tr><td>SVR — silence vaut rejet</td><td>39 décrets d'exception, 23/10/2014 (versions consolidées 2026)</td><td class="r">1 174</td></tr>
+        <tr><td>Délais dérogatoires au SVA</td><td>Mêmes décrets, délai différent du délai de droit commun</td><td class="r">349</td></tr>
+        <tr><td style="font-weight:700">Total</td><td></td><td class="r" style="font-weight:700">2 806</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="sub" style="margin-top:.6rem"><b>Exceptions législatives (demandes à caractère financier, réclamations et recours gracieux, relations avec les collectivités territoriales…) : non listées.</b> Elles ne relèvent pas du principe silence vaut accord/rejet et n'entrent dans aucun des trois référentiels ci-dessus.</p>
+
+  <h2>Vivantes ou éteintes</h2>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Statut</th><th class="r">n</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>En vigueur</td><td class="r">1 766</td><td>article toujours en vigueur dans l'archive LEGI (13/07/2025)</td></tr>
+        <tr><td>Transférées</td><td class="r">9</td><td>nouvel article identifié par un lien de concordance</td></tr>
+        <tr><td>Recodifiées</td><td class="r">251</td><td>principales destinations : CESEDA (34), code pénitentiaire (33), code du travail étendu à Mayotte (38), code des pensions militaires d'invalidité (13), code de la sécurité intérieure (10)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pair">
+    <div class="box" style="background:var(--bad-soft);border-color:var(--bad)"><b style="color:var(--bad)">402</b><span class="sub">éteintes confirmées (supprimées, cause légale identifiée dans l'archive LEGI)</span></div>
+    <div class="box unk"><b>378</b><span class="sub">non vérifiables par cette méthode (texte non codifié non identifiable, numéro introuvable, ou texte de l'Union européenne) — ni vivantes, ni éteintes</span></div>
+  </div>
+  <p class="sub" style="margin-top:1rem"><b>376 décrets SVR/délai en vigueur renvoient pourtant à un article qui ne l'est plus</b> : 152 à un article recodifié (le décret n'a pas été mis à jour après la recodification, le droit existe probablement toujours sous un autre support) et 224 à un article réellement supprimé.</p>
+
+  <h2>Outillées</h2>
+  <p class="sub">Parmi les 2 026 procédures vivantes, celles reliées à une démarche, un formulaire ou un téléservice — relues individuellement à deux reprises (504 candidats relus un par un, puis une contre-lecture à l'aveugle de 51 liens supplémentaires).</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Par canal</th><th class="r">n</th><th>Par liste</th><th class="r">n</th></tr></thead>
+      <tbody>
+        <tr><td>Démarche numérique (DN)</td><td class="r">104</td><td>SVA</td><td class="r">82</td></tr>
+        <tr><td>Formulaire Cerfa (DILA)</td><td class="r">46</td><td>SVR</td><td class="r">56</td></tr>
+        <tr><td>Téléservice (DILA)</td><td class="r">5</td><td>Délai dérogatoire SVA</td><td class="r">17</td></tr>
+        <tr><td style="font-weight:700">Total</td><td class="r" style="font-weight:700">155</td><td style="font-weight:700">Total</td><td class="r" style="font-weight:700">155</td></tr>
+      </tbody>
+    </table>
   </div>
 
-  <h2>Ce qui est vérifié</h2>
   <div class="ex">
-    <h3>Cartes de guide conférencier</h3>
-    <p>Une obligation nationale, quatre démarches locales confirmées une à une — correspondance 1 → n, le cas le plus solide de tout l'échantillon. Les candidatures CNAM à une licence ou un certificat de compétences de guide-conférencier, trouvées par le même rapprochement, ont été écartées : ce sont des formations, pas la délivrance de la carte elle-même.</p>
-    <ul>
-      <li>PREF37, Sous-préfecture de Chinon (102322)</li>
-      <li>Préfecture 93 (86912)</li>
-      <li>Préfecture 43 (39382)</li>
-      <li>Département de l'Aisne (32251)</li>
-    </ul>
-  </div>
-  <div class="ex">
-    <h3>Habilitation à dispenser la formation du diplôme d'État de professeur de danse</h3>
-    <p>→ démarche 77412, Ministère de la Culture. Et la reconnaissance de qualifications professionnelles associée → démarche 64844, même ministère.</p>
+    <h3>Cartes de guide-conférencier</h3>
+    <p>Une procédure nationale, quatre démarches locales confirmées une à une (PREF37/sous-préfecture de Chinon, préfecture 93, préfecture 43, département de l'Aisne) — identifiées par recherche directe, en amont du rapprochement automatique par titre qui ne les avait pas trouvées.</p>
   </div>
   <div class="ex" style="border-left-color:var(--min)">
-    <h3>Autorisation de coupes dans les bois et forêts (Code forestier, L124-5 et L312-9)</h3>
-    <p>→ fiche DILA R18249, par référence juridique concordante (confiance forte) — la seule méthode dont la précision mesurée atteint 100 % sur les cas vérifiés, mais sur un volume marginal : 2 liens au total sur 1 283 obligations.</p>
+    <h3>Autorisation d'exploiter au titre du contrôle des structures</h3>
+    <p>→ Cerfa 11534 (fiche DILA R17084), 9 167 téléchargements en 2024 — une correspondance exacte, elle aussi manquée par le rapprochement automatique par titre et retrouvée lors de la recherche web sur l'échantillon sans candidat.</p>
   </div>
 
   <div class="candidats">
-    <p><b>Candidats non vérifiés, exportés à part.</b> Le rapprochement automatique a produit 66 autres liens vers une fiche DILA et 2 210 autres liens vers une démarche DN (souvent plusieurs candidats par obligation) qui n'ont pas été relus un à un. Ils ne figurent dans aucun chiffre de cette page — téléchargeables séparément, en candidats, pas en résultat :</p>
+    <p><b>Candidats non vérifiés, exportés à part.</b> Le rapprochement automatique par titre a produit 504 candidats au total ; 349 se sont révélés faux ou indéterminés à la relecture individuelle. Ils ne figurent dans aucun chiffre de cette page.</p>
     <div class="dl">
-      <a href="../donnees/obligations-sva/liens_dila_candidats_non_verifies_2026-10-26.csv">liens_dila_candidats_non_verifies.csv</a>
-      <a href="../donnees/obligations-sva/liens_dn_candidats_non_verifies_2026-10-26.csv">liens_dn_candidats_non_verifies.csv</a>
+      <a href="../donnees/obligations-sva/liens_outillage_candidats_non_verifies_2026-10-28.csv">liens_outillage_candidats_non_verifies.csv</a>
     </div>
   </div>
 
-  <h2>Pourquoi ça échoue le plus souvent</h2>
-  <div class="why">
-    <div>
-      <h3>Des obligations institutionnelles, pas citoyennes</h3>
-      <p class="sub">Les 1 283 obligations couvrent surtout des procédures État ↔ organisme régulé, État ↔ collectivité, agrément d'une autre administration — rarement le type de démarche que couvrent DILA et Démarche Numérique, pensés pour l'usager.</p>
-    </div>
-    <div>
-      <h3>Des intitulés presque identiques, des régimes différents</h3>
-      <p class="sub">« Durée de travail minimale » et « durée de travail maximale » partagent le même vocabulaire pour des textes opposés. Faux amis déjà repérés et exclus explicitement du rapprochement (durée de travail, seuils d'âge, « agrément d'organisme » générique qui matchait des stages de sécurité routière).</p>
-    </div>
-    <div>
-      <h3>Le cadre juridique déclaré ne prouve souvent rien</h3>
-      <p class="sub">470 démarches du corpus FORM 2026 — des <b>démarches sans fondement juridique propre</b> — ne citent, comme cadre juridique, que l'ordonnance n° 2014-1330 du 6 novembre 2014 relative au droit des usagers de saisir l'administration par voie électronique (JO n° 258 du 7 novembre 2014, p. 18780). Ce rattachement est juridiquement correct pour toute démarche sans texte spécifique : il signale donc une démarche qui ne procède d'aucune règle qui lui soit propre, jamais le fondement substantiel d'une obligation précise.</p>
-    </div>
-    <div>
-      <h3>Le Cerfa n'est pas un raccourci fiable</h3>
-      <p class="sub">Les démarches confirmées à la main n'ont pour la plupart aucun Cerfa associé. Et l'unique correspondance Cerfa déjà présente dans la source de ce chantier (Cerfa 12709 pour la certification des gestionnaires de réseaux de transport) s'est révélée fausse une fois vérifiée dans le registre officiel DILA — 12709 est une subvention Anah, sans rapport.</p>
-    </div>
+  <h2>Ce que montre l'échantillon</h2>
+  <p class="sub">50 procédures vivantes sans aucun candidat automatique, tirées au hasard et recherchées une à une sur le web. Intervalles de confiance à 95 % larges (n = 50) : à lire en ordres de grandeur, jamais en totaux extrapolés.</p>
+  <div class="cards">
+    <div class="card"><span class="n">7/50 — IC [7 %, 26 %]</span><p class="sub">Manquées par le rapprochement automatique : outillées et présentes dans les bases DN/DILA, mais le titre seul ne les avait pas trouvées.</p></div>
+    <div class="card"><span class="n">16/50 — IC [21 %, 46 %]</span><p class="sub">Outillées hors des bases DN/DILA : formulaires préfectoraux locaux en PDF, procédures de régulateurs (ACPR), procédures d'ordres professionnels.</p></div>
+    <div class="card"><span class="n">16/50 — IC [21 %, 46 %]</span><p class="sub">Confidentielles : quelques bénéficiaires identifiés, aucune démarche publique — un seul cas documenté avec un ordre de grandeur chiffré (une trentaine d'établissements agréés en ostéopathie), les autres restent « quelques », non chiffrés.</p></div>
+    <div class="card"><span class="n">4/50 — IC [3 %, 19 %]</span><p class="sub">Par courrier libre : aucun formulaire, aucune démarche en ligne identifiée.</p></div>
+    <div class="card"><span class="n">4/50 — IC [3 %, 19 %]</span><p class="sub">Obsolètes de fait : le texte existe encore, la pratique a disparu (ex. mines grisouteuses, spécialité de diplôme abrogée).</p></div>
+    <div class="card"><span class="n">2/50 — IC [1 %, 13 %]</span><p class="sub">Hors usager : relations internes à l'administration (titres militaires, relation ministère ↔ sociétés de courses).</p></div>
   </div>
+
+  <h2>Le poids réel</h2>
+  <p class="sub">Les procédures outillées de ce périmètre forment un univers de petit volume : 104 démarches numériques totalisent 115 151 dossiers cumulés depuis leur création (≈ 50 306 par an, estimé par division — jamais confondu avec le cumul) ; 32 formulaires/téléservices liés et non attribuables à plusieurs procédures totalisent 36 431 téléchargements en 2024, soit <b>0,15 %</b> des 24,9 millions de téléchargements de toute la base DILA. <b>Aucun</b> des 10 formulaires les plus téléchargés n'appartient à ce périmètre.</p>
+
+  <p class="sub" style="margin-top:1rem">Pourquoi ? Les 50 formulaires les plus téléchargés de la base DILA relèvent presque tous d'un <b>autre régime juridique</b> que le silence vaut accord/rejet :</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Régime</th><th class="r">n / 50</th><th>Exemples</th></tr></thead>
+      <tbody>
+        <tr><td>Régime propre fixé par un code</td><td class="r">16</td><td>code électoral, code de la route, code de l'urbanisme, code civil, CESEDA, code pénitentiaire…</td></tr>
+        <tr><td>Déclaration (pas de décision, donc pas de silence)</td><td class="r">12</td><td>cession de véhicule, perte de pièce d'identité, PACS, déclaration préalable de travaux…</td></tr>
+        <tr><td>Autre (acte privé, document-type, dispositif disparu…)</td><td class="r">12</td><td>autorisation de sortie de territoire, demande au juge aux affaires familiales, attestation de témoin…</td></tr>
+        <tr><td>Prestation ou demande financière (exclue par la loi)</td><td class="r">6</td><td>prestations MDPH, RSA, aide juridictionnelle, complémentaire santé solidaire…</td></tr>
+        <tr><td>Compétence d'une collectivité ou d'un organisme de sécurité sociale</td><td class="r">3</td><td>attestation d'accueil (maire), droits à l'assurance maladie (CPAM)</td></tr>
+        <tr><td>Fiscalité</td><td class="r">1</td><td>déclaration de don manuel</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="sub" style="margin-top:.8rem"><b>La règle sans démarche, la démarche sans règle</b> : les listes SVA/SVR ne couvrent qu'un seul régime — la demande de décision adressée à l'État et à ses établissements publics. La plupart des démarches vécues par les usagers relèvent d'autres régimes, pour lesquels aucune liste équivalente n'existe.</p>
+
+  <h2>Contradictions apparentes</h2>
+  <p class="sub">Cinq cas où un décret « silence vaut rejet » et la liste SVA (ou un décret de délai) classent apparemment la même procédure dans des sens opposés. Les cinq figurent déjà dans le texte d'origine des décrets de 2014 — pas un ajout récent. <b>À faire confirmer par un juriste.</b></p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Procédure</th><th>Décret SVR</th><th>Liste SVA</th></tr></thead>
+      <tbody>
+        <tr><td>Transfert de portefeuilles, mutuelles ou unions</td><td>2014-1280 (rejet)</td><td>n° 88 (accord)</td></tr>
+        <tr><td>Transfert de portefeuilles, institutions de prévoyance</td><td>2014-1280 (rejet)</td><td>n° 228 (accord)</td></tr>
+        <tr><td>Transfert/modification, sociétés d'assurance et réassurance</td><td>2014-1280 (rejet)</td><td>n° 510 (accord)</td></tr>
+        <tr><td>Accord d'exécution, transport de matières nucléaires</td><td>2014-1273 (rejet)</td><td>n° 81 (accord, 14 jours)</td></tr>
+        <tr><td>Accord d'exécution, transport de matières nucléaires (défense)</td><td>2014-1285 (rejet)</td><td>n° 82 (accord, 14 jours)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="sub" style="margin-top:.6rem">La recherche systématique de toute autre contradiction au-delà de ces 5 cas n'a pas été menée à son terme.</p>
+
+  <h2>Méthode et limites</h2>
+  <p class="method">
+  Sources et dates : liste SVA, XML du 08/12/2016 (jamais mise à jour depuis) ; 39 décrets SVR/délai d'octobre 2014, versions consolidées lues en 2026 ; archive LEGI de la DILA datée du 13/07/2025 (tout changement de vigueur postérieur non vu) ; référentiel DILA (fiches, formulaires, téléservices) du 12-13/09/2026 ; corpus Démarche Numérique daté au plus tard du 02/10/2026 ; volumétrie DILA du 20/09/2026, téléchargements « 2024 à confirmer ».
+  </p>
+  <p class="method">
+  <b>Vérifié ≠ candidat</b>, toujours distingués : seuls les liens relus individuellement sont comptés. Le rapprochement automatique par titre se trompe environ une fois sur deux. Le chiffre des procédures outillées a été corrigé en trois temps au fil des relectures (211 → 203 → 165 → 155) ; une contre-lecture à l'aveugle finale (51 liens relus sans voir les motifs précédents) a mesuré une précision de 41/51, soit environ 80 %, sur le résultat retenu.
+  </p>
+  <p class="method">
+  Volumes de démarches numériques toujours présentés en deux colonnes séparées — cumul depuis la création et taux annualisé estimé par division — jamais mélangés. Un téléchargement de formulaire n'est pas un dossier déposé.
+  </p>
+  <p class="method">Résultats intermédiaires, scripts et configurations : <a href="../donnees/obligations-sva/">données et méthode</a>.</p>
 
   <h2>Pour aller plus loin</h2>
   <div class="plus">
-    <h3>La seule voie sérieuse : une clé juridique, pas un rapprochement de plus</h3>
-    <p class="sub">Résoudre les articles de chaque obligation en identifiants Légifrance (LEGIARTI), puis les comparer directement au cadre juridique déclaré par chaque démarche — plutôt que des mots-clés de titre. Un rapprochement textuel supplémentaire, aussi affiné soit-il, ne passera pas le seuil de 60 % : la limite n'est pas la méthode de recherche, c'est l'absence de clé commune entre les deux bases.</p>
+    <h3>Faire pointer les textes vers les démarches, et les démarches vers les textes</h3>
+    <p class="sub">Une démarche publiée devrait déclarer son fondement juridique précis et son public visé. Une procédure prévue par un texte devrait, réciproquement, pointer vers sa démarche quand elle existe. Sans cette double déclaration, aucun rapprochement — aussi affiné soit-il — ne pourra dépasser la précision mesurée ici.</p>
   </div>
 
-  <h2>Méthode</h2>
-  <p class="method">Source : « Liste des démarches concernées par le principe Silence vaut accord » (data.gouv.fr, Premier ministre), XML du 8 décembre 2016, périmètre État et ses établissements publics — jamais remis à jour depuis. Un doublon exact du fichier officiel a été retiré (1 284 → 1 283 obligations). Rapprochement en deux temps : obligation → fiche DILA (8 509 fiches service-public.fr), puis obligation → démarche(s) Démarche Numérique en direct, sans passer par le Cerfa. Chaque lien affiché sur cette page a été relu individuellement sur deux échantillons (56 obligations, puis un nouvel échantillon de 50 liens produits) ; tout ce qui n'a pas été relu reste un candidat non vérifié, exporté à part et jamais compté. Absence de lien ≠ absence de dématérialisation : d'autres téléservices existent hors Démarche Numérique. Résultats intermédiaires, scripts et configurations : <a href="../donnees/obligations-sva/">données et méthode</a>.</p>
+  <h2>Téléchargements</h2>
+  <div class="candidats" style="border-style:solid">
+    <p>Tous les fichiers de cette étude, datés, avec leurs limites documentées : <a href="../donnees/obligations-sva/">donnees/obligations-sva/</a>.</p>
+  </div>
+
+  <p class="prevver"><b>Version précédente (26/10/2026)</b> : périmètre SVA seule, rapprochement Démarche Numérique seul.</p>
+
   <footer>FORM 2026 · Philippe Vrignaud · Données ouvertes et code source publics</footer>
 </div>
 </body>
