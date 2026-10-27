@@ -1,5 +1,32 @@
 # Étape 3 — Relecture complète des 504 candidats (27/10/2026)
 
+> **CORRECTION 1 (27/10/2026)** : `verdicts_504_2026-10-27.csv` (211 vérifiés,
+> chiffres de cette note telle qu'écrite initialement) est **superseded** par
+> `candidats_canal_verifie_2026-10-27.csv`, une relecture plus stricte et
+> postérieure qui corrige 94 lignes (surtout des faux positifs sur les
+> décrets 2014-1271/2014-1273 SVR). → 203 vérifiés.
+>
+> **CORRECTION 2 (27/10/2026, en préparant la volumétrie)** : en réexaminant
+> les 103 lignes DN au candidat « meilleur score par défaut » pour sommer les
+> déclinaisons régionales/locales légitimes, 38 d'entre elles se sont révélées
+> être des candidats **incorrects** et non de simples ambiguïtés de choix :
+> 20 étaient le faux ami « carte professionnelle UE/EEE (ambulancier) » déjà
+> repéré mais accepté à tort sur ~20 autres professions de santé du décret
+> 2014-1286 (conseiller génétique, préparateur en pharmacie, infirmier,
+> masseur-kinésithérapeute, orthophoniste, orthoptiste, audioprothésiste...),
+> 6 étaient des cartes de combattant/déporté/interné (décret 2014-1284)
+> contaminées par un candidat « carte professionnelle d'agent immobilier »
+> sans rapport, et 12 autres des matches hors sujet divers. **`candidats_canal_verifie_CORRIGE_2026-10-27.csv`
+> fait désormais foi : 165 vérifiés** (114 DN, 46 Cerfa, 5 téléservice ; 82
+> SVA, 64 SVR, 19 délai SVA), pas 203. Les tableaux ci-dessous reflètent cette
+> seconde correction.
+>
+> Point non tranché, laissé tel quel : 8 lignes du décret 2014-1282 (domaine
+> public maritime) restent « vérifié » avec un signal faible (démarches AOT
+> génériques réutilisées sur plusieurs lignes du même décret) — pas assez de
+> doute pour les rejeter d'office, pas assez de certitude pour les confirmer
+> pleinement.
+
 ## Méthode
 
 Relecture individuelle des 504 candidats trouvés par canal (400 DN, 91 Cerfa, 13
@@ -11,20 +38,20 @@ quand ambigu — titres complets retrouvés dans `app_demarches_*.json` et
 à ligne : `etape3/verdicts_504_2026-10-27.csv`. Règle pour les lignes à plusieurs
 candidats : vérifié si au moins un candidat est le bon (précisé dans le motif).
 
-## Résultat global
+## Résultat global (corrigé — voir encadré en tête de note)
 
 | | n | % |
 |---|---|---|
-| **Vérifié** | **211** | **42 %** |
-| Rejeté | 281 | 56 % |
-| Indéterminé (ne peut être tranché avec les sources disponibles) | 12 | 2 % |
+| **Vérifié** | **165** | **33 %** |
+| Rejeté | 332 | 66 % |
+| Indéterminé (ne peut être tranché avec les sources disponibles) | 7 | 1 % |
 
 ### Par canal
 
 | Canal | n | Vérifié | Précision |
 |---|---|---|---|
-| DN | 400 | 161 | 40 % |
-| Cerfa (DILA) | 91 | 45 | 49 % |
+| DN | 400 | 114 | 29 % |
+| Cerfa (DILA) | 91 | 46 | 51 % |
 | Téléservice (DILA) | 13 | 5 | 38 % |
 
 **Écart avec l'échantillon de 50 relu à l'aveugle** (DN 43 %, Cerfa 73 %,
@@ -32,32 +59,35 @@ téléservice 80 %) : la relecture complète donne une précision Cerfa et tél�
 nettement **plus basse** que l'échantillon ne le laissait penser. Explication : avec
 seulement 91 Cerfa et 13 téléservice au total, l'échantillon de 15 et 5 tirés au
 hasard n'était pas assez grand pour être représentatif — la relecture exhaustive
-(cette étape) est la mesure qui fait foi, pas l'estimation par échantillon. Pour DN,
-en revanche, l'échantillon (43 %) et la relecture complète (40 %) sont cohérents (30
-relus sur 400, mais DN est le canal le plus homogène en biais : le même faux ami
-« carte professionnelle UE/EEE » domine partout).
+(cette étape) est la mesure qui fait foi, pas l'estimation par échantillon.
 
 ### Par liste
 
 | Liste | n candidats | Vérifié | Rejeté | Indéterminé |
 |---|---|---|---|---|
-| SVA | 214 | 84 | 123 | 7 |
-| SVR | 213 | 93 | 116 | 4 |
-| délai SVA | 77 | 34 | 42 | 1 |
+| SVA | 214 | 82 | ~125 | ~7 |
+| SVR | 213 | 64 | ~145 | ~4 |
+| délai SVA | 77 | 19 | ~57 | ~1 |
+
+(Répartition rejeté/indéterminé par liste non recalculée en détail après la
+correction des 94 lignes — seul le total vérifié par liste a été vérifié
+précisément ; ordre de grandeur conservé pour les deux autres colonnes.)
 
 ### Procédures vivantes outillées vérifiées, par canal et par liste
 
 | Liste | DN | Cerfa | Téléservice | Total vérifié |
 |---|---|---|---|---|
-| SVA | 60 | 21 | 3 | 84 |
-| SVR | 72 | 19 | 2 | 93 |
-| délai SVA | 29 | 5 | 0 | 34 |
-| **Total** | **161** | **45** | **5** | **211** |
+| SVA | 58 | 21 | 3 | 82 |
+| SVR | 43 | 19 | 2 | 64 |
+| délai SVA | 13 | 6 | 0 | 19 |
+| **Total** | **114** | **46** | **5** | **165** |
 
-**211 procédures vivantes confirmées outillées sur 2 021 lignes vivantes traitées
-(10,4 %)** ; 1 517 lignes vivantes n'avaient aucun candidat (75 %, non outillées par
-construction — pas de vérification possible puisqu'il n'y a rien à vérifier) ; 293
-candidats automatiques se sont révélés faux (rejetés) et 12 restent indéterminés.
+**165 procédures vivantes confirmées outillées sur 2 021 lignes vivantes traitées
+(8,2 %)** ; 1 517 lignes vivantes n'avaient aucun candidat (75 %, non outillées par
+construction — pas de vérification possible puisqu'il n'y a rien à vérifier) ; 332
+candidats automatiques se sont révélés faux (rejetés) et 7 restent indéterminés —
+**339 lignes à signaler à part, non échantillonnées pour la recherche web** (voir
+étape 5, qui n'a tiré que parmi les 1 517 « aucun candidat », pas parmi ces 339).
 
 ## Nouveaux faux amis systématiques confirmés à grande échelle
 
@@ -105,7 +135,7 @@ demandé). Les recherches web ne sont pas effectuées.
 
 ## Étape 4 (volumétrie)
 
-Non calculée — à faire ensuite sur les 211 procédures outillées vérifiées (161 DN +
-45 Cerfa + 5 téléservice), une fois cette relecture validée.
+Calculée dans une étape séparée sur les 165 procédures outillées vérifiées (114 DN +
+46 Cerfa + 5 téléservice, après la seconde correction) — voir `VOLUMETRIE_ETAPE4_2026-10-27.md`.
 
 Rien publié. Commit sans push sur la branche `obligations-sva-canaux`.
