@@ -1,0 +1,52 @@
+rang,liste,id,intitule_objet,jugement,motif
+1,SVR,2014-1291,Retrait de l'autorisation d'extension de la dérogation temporaire au repos dominical,rejete,"candidat = avis des communes/EPCI (étape différente du dossier, pas le retrait lui-même)"
+2,SVR,2014-1286,Autorisation jusqu'au 31/10/2020 des laboratoires de biologie médicale non accrédités,rejete,démarche régionale trop générique (« Démarche à destination de... ») pour confirmer
+3,SVA,926,Enregistrement de certains établissements et intermédiaires,verifie,Cerfa correspondance directe
+4,SVA,735,Approbation du choix par l'employeur de la forme du service de santé au travail,verifie,FICHE SERVICE télédéclaration = même domaine
+5,SVA,1087,Obtention du certificat de compétence protection des animaux,verifie,match direct score 0.78
+6,SVA,1113,Reconnaissance d'équivalence diplôme professeur de danse,verifie,match direct
+7,SVA,562,Carte de déporté et interné résistant,verifie,Cerfa correspondance directe
+8,SVA,289,Inscription épreuves remplacement bac général,verifie,match direct score 0.8
+9,SVA,1114,Dispense diplôme professeur de danse (renommée),verifie,match direct
+10,SVR,2014-1286,Recevabilité dossier VAE,verifie,démarche générique recevabilité VAE plausible pour tout diplôme
+11,DELAI_SVA,2014-1300,Agrément ingénierie sociale financière technique,verifie,agrément ISFT confirmé
+12,DELAI_SVA,2014-1272,Agrément des associations de protection de l'environnement,rejete,"candidat = soutien structuration réseaux (financement, pas un agrément)"
+13,SVR,2014-1298,Agrément établissements éleveur/fournisseur/utilisateur animaux,verifie,match direct
+14,DELAI_SVA,2014-1272,Agrément centres formation examens transporteur,rejete,"candidat = session d'examen générique (acte différent de l'agrément du centre)"
+15,SVR,2014-1291,Autorisation transfert médecin du travail,verifie,"même famille FICHE SERVICE, domaine cohérent"
+16,SVA,1038,Habilitation centres formation,verifie,match direct DRAAF
+17,SVR,2014-1286,Mise en service véhicules transport sanitaire,verifie,match direct AMS
+18,SVR,2014-1286,Recevabilité dossier VAE (variante),verifie,idem n°10
+19,SVA,968,Enregistrement établissements/intermédiaires,verifie,idem n°3
+20,SVA,259,Habilitation formation diplôme,verifie,match direct
+21,SVA,1104,Autorisation projet architectural sans inscription tableau,verifie,match direct score 0.8
+22,SVR,2014-1280,Autorisation inscription tableau ordre experts-comptables,rejete,"candidat DN = architecte (mauvaise profession, faux ami nouveau)"
+23,DELAI_SVA,2014-1305,Agrément organismes formation sécurité,verifie,match quasi exact
+24,SVR,2014-1292,Inscription listes électorales,verifie,match exact score 1.0
+25,SVA,1296,Autorisation introduction grand gibier,verifie,match direct
+26,SVA,651,Autorisation bâches échafaudages publicitaires,verifie,match direct téléservice
+27,SVA,147,Agrément organismes formation débitants boissons,verifie,match direct
+28,SVR,2014-1294,Autorisation loterie bienfaisance,verifie,match direct
+29,SVA,1270,Agrément organismes audits contrôle technique,verifie,candidat agrément initial présent
+30,SVR,2014-1285,Autorisation fabrication commerce armes,verifie,match direct
+31,DELAI_SVA,2014-1284,Carte prisonnier Viet-Minh,verifie,match exact
+32,SVA,149,Autorisation transfert débit de boissons,verifie,match direct score 0.83
+33,SVA,1106,Autorisation projet architectural (variante),verifie,idem n°21
+34,SVA,606,Dérogation délai exploitation œuvre cinéma,verifie,match direct chronologie des médias
+35,DELAI_SVA,2014-1305,Habilitation formation diplôme danse,verifie,match direct
+36,SVA,69,Agrément intermédiation locative,verifie,candidat spécifique présent dans la liste complète
+37,DELAI_SVA,2014-1272,Renouvellement agrément protection environnement,verifie,match direct association environnement
+38,SVA,1291,Agrément audits contrôle technique (variante),verifie,idem n°29
+39,SVA,49,Autorisation travaux IGH,verifie,candidat spécifique (13825) présent
+40,DELAI_SVA,2014-1284,Autorisation création/transfert pharmacie usage intérieur,verifie,match direct PUI
+41,SVR,2014-1282,Autorisation occupation domaine public de l'Etat,verifie,AOT = terme générique correct pour ce régime
+42,SVR,2014-1282,Autorisation occupation domaine public propre établissements,verifie,idem n°41
+43,SVR,2014-1282,Autorisation occupation domaine public de l'Etat (variante),verifie,idem n°41
+44,SVR,2014-1282,Concession domaine public maritime hors ports,rejete,"concession ≠ autorisation d'occupation temporaire (régime différent, plus durable)"
+45,SVR,2014-1282,Titre occupation droits réels domaine public Etat,rejete,"titre constitutif de droits réels ≠ AOT simple (régime différent)"
+46,SVR,2014-1282,Titre occupation droits réels domaine public propre,rejete,idem n°45
+47,SVR,2014-1282,AOT zones mouillages domaine public,verifie,"intitulé dit lui-même ""autorisation d'occupation temporaire"" = match exact de régime"
+48,SVR,2014-1282,AOT zones mouillages domaine public fluvial,verifie,idem n°47
+49,SVR,2014-1282,Autorisation importation armes,rejete,candidat = carte de collectionneur (régime sans rapport)
+50,SVR,2014-1282,Autorisation transit armes,rejete,idem n°49
+51,SVR,2014-1282,Titre occupation fonds marins domaine public maritime,verifie,"""titre d'occupation"" non qualifié, pas de terme régime différent (concession/droits réels) qui l'exclurait"
