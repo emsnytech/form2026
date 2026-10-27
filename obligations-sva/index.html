@@ -48,7 +48,7 @@ h3{font-weight:700;font-size:1.1rem;margin:0 0 .4rem}
 .verdict{margin-top:1.6rem;background:var(--warn-soft);border:1px solid var(--warn);border-left:6px solid var(--warn);border-radius:12px;padding:1.1rem 1.3rem;color:var(--ink)}
 .verdict b{color:var(--warn)}
 .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:1.6rem}
-@media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.kpi:nth-child(5){grid-column:1/-1}}
 .kpi{background:var(--surface);padding:1rem 1.1rem}
 .kpi b{display:block;font:700 1.4rem/1.15 "IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;color:var(--warn)}
 .kpi span{font-size:.84rem;color:var(--muted)}
@@ -64,7 +64,7 @@ h3{font-weight:700;font-size:1.1rem;margin:0 0 .4rem}
 table{border-collapse:collapse;width:100%;font-size:.92rem}
 th,td{padding:.5rem .7rem;text-align:left;border-bottom:1px solid var(--line)}
 th{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);white-space:nowrap}
-td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.2rem}
 @media (max-width:760px){.pair{grid-template-columns:1fr}}
 .pair .box{border-radius:12px;padding:1.1rem 1.3rem;border:1px solid var(--line)}
@@ -111,7 +111,7 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
     <div class="kpi"><b>2 026</b><span>encore vivantes</span><small>en vigueur, transférées ou recodifiées</small></div>
     <div class="kpi"><b>130 à 155</b><span>outillées vérifiées</span><small>moins d'une procédure vivante sur dix</small></div>
     <div class="kpi"><b>0,15 %</b><span>des téléchargements service-public 2024</span><small>formulaires liés et non partagés / total DILA</small></div>
-    <div class="kpi"><b>0 / 10</b><span>des formulaires les plus téléchargés</span><small>aucun n'est une procédure de ce périmètre</small></div>
+    <div class="kpi"><b>0 / 50</b><span>des formulaires les plus téléchargés</span><small>aucun des 50 n'est une procédure de ce périmètre</small></div>
   </div>
 
   <h2>Le stock, en trois parts</h2>
@@ -127,7 +127,8 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
       </tbody>
     </table>
   </div>
-  <p class="sub" style="margin-top:.6rem"><b>Exceptions législatives (demandes à caractère financier, réclamations et recours gracieux, relations avec les collectivités territoriales…) : non listées.</b> Elles ne relèvent pas du principe silence vaut accord/rejet et n'entrent dans aucun des trois référentiels ci-dessus.</p>
+  <p class="sub" style="margin-top:.6rem"><b>Exceptions législatives : non listées.</b> Demandes ne tendant pas à une décision individuelle, réclamations et recours, demandes à caractère financier, relations entre l'administration et ses agents — elles ne relèvent pas du principe silence vaut accord/rejet et n'entrent dans aucun des trois référentiels ci-dessus.</p>
+  <p class="sub" style="margin-top:.4rem">Les procédures des collectivités territoriales et des organismes de sécurité sociale sont, elles, hors du périmètre même de ces listes : celles-ci ne couvrent que l'État et ses établissements publics.</p>
 
   <h2>Vivantes ou éteintes</h2>
   <div class="tbl">
@@ -144,7 +145,7 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
     <div class="box" style="background:var(--bad-soft);border-color:var(--bad)"><b style="color:var(--bad)">402</b><span class="sub">éteintes confirmées (supprimées, cause légale identifiée dans l'archive LEGI)</span></div>
     <div class="box unk"><b>378</b><span class="sub">non vérifiables par cette méthode (texte non codifié non identifiable, numéro introuvable, ou texte de l'Union européenne) — ni vivantes, ni éteintes</span></div>
   </div>
-  <p class="sub" style="margin-top:1rem"><b>376 décrets SVR/délai en vigueur renvoient pourtant à un article qui ne l'est plus</b> : 152 à un article recodifié (le décret n'a pas été mis à jour après la recodification, le droit existe probablement toujours sous un autre support) et 224 à un article réellement supprimé.</p>
+  <p class="sub" style="margin-top:1rem"><b>376 procédures inscrites dans des décrets en vigueur renvoient à un article qui ne l'est plus</b> : 152 à un article recodifié (le décret n'a pas été mis à jour après la recodification, le droit existe probablement toujours sous un autre support) et 224 à un article réellement supprimé.</p>
 
   <h2>Outillées</h2>
   <p class="sub">Parmi les 2 026 procédures vivantes, celles reliées à une démarche, un formulaire ou un téléservice — relues individuellement à deux reprises (504 candidats relus un par un, puis une contre-lecture à l'aveugle de 51 liens supplémentaires).</p>
@@ -160,13 +161,14 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
     </table>
   </div>
 
+  <p class="sub">Deux cas concrets, trouvés par recherche manuelle et <b>hors des 155</b> comptées ci-dessus (pas produits par le rapprochement automatique par titre) :</p>
   <div class="ex">
     <h3>Cartes de guide-conférencier</h3>
     <p>Une procédure nationale, quatre démarches locales confirmées une à une (PREF37/sous-préfecture de Chinon, préfecture 93, préfecture 43, département de l'Aisne) — identifiées par recherche directe, en amont du rapprochement automatique par titre qui ne les avait pas trouvées.</p>
   </div>
   <div class="ex" style="border-left-color:var(--min)">
     <h3>Autorisation d'exploiter au titre du contrôle des structures</h3>
-    <p>→ Cerfa 11534 (fiche DILA R17084), 9 167 téléchargements en 2024 — une correspondance exacte, elle aussi manquée par le rapprochement automatique par titre et retrouvée lors de la recherche web sur l'échantillon sans candidat.</p>
+    <p>→ Cerfa 11534 (fiche DILA R17084), 9 167 téléchargements en 2024 — une correspondance exacte, manquée par le rapprochement automatique par titre et retrouvée lors de la recherche web sur l'échantillon sans candidat (voir « Ce que montre l'échantillon » ci-dessous).</p>
   </div>
 
   <div class="candidats">
@@ -188,7 +190,7 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
   </div>
 
   <h2>Le poids réel</h2>
-  <p class="sub">Les procédures outillées de ce périmètre forment un univers de petit volume : 104 démarches numériques totalisent 115 151 dossiers cumulés depuis leur création (≈ 50 306 par an, estimé par division — jamais confondu avec le cumul) ; 32 formulaires/téléservices liés et non attribuables à plusieurs procédures totalisent 36 431 téléchargements en 2024, soit <b>0,15 %</b> des 24,9 millions de téléchargements de toute la base DILA. <b>Aucun</b> des 10 formulaires les plus téléchargés n'appartient à ce périmètre.</p>
+  <p class="sub">Les procédures outillées de ce périmètre forment un univers de petit volume : 104 démarches numériques totalisent 115 151 dossiers cumulés depuis leur création (≈ 50 306 par an, estimé par division — jamais confondu avec le cumul) ; 32 formulaires/téléservices liés à une seule procédure (formulaires partagés exclus) totalisent 36 431 téléchargements en 2024, soit <b>0,15 %</b> des 24,9 millions de téléchargements de toute la base DILA. <b>Aucun des 50</b> formulaires les plus téléchargés n'est confirmé comme appartenant à ce périmètre.</p>
 
   <p class="sub" style="margin-top:1rem">Pourquoi ? Les 50 formulaires les plus téléchargés de la base DILA relèvent presque tous d'un <b>autre régime juridique</b> que le silence vaut accord/rejet :</p>
   <div class="tbl">
@@ -207,16 +209,16 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
   <p class="sub" style="margin-top:.8rem"><b>La règle sans démarche, la démarche sans règle</b> : les listes SVA/SVR ne couvrent qu'un seul régime — la demande de décision adressée à l'État et à ses établissements publics. La plupart des démarches vécues par les usagers relèvent d'autres régimes, pour lesquels aucune liste équivalente n'existe.</p>
 
   <h2>Contradictions apparentes</h2>
-  <p class="sub">Cinq cas où un décret « silence vaut rejet » et la liste SVA (ou un décret de délai) classent apparemment la même procédure dans des sens opposés. Les cinq figurent déjà dans le texte d'origine des décrets de 2014 — pas un ajout récent. <b>À faire confirmer par un juriste.</b></p>
+  <p class="sub">Cinq cas où un décret « silence vaut rejet » et la liste SVA (ou un décret de délai) classent apparemment la même procédure dans des sens opposés. Les trois premiers viennent de deux décrets du même ministère publiés le même jour (23/10/2014) — l'un classant la procédure en silence vaut rejet, l'autre en délai de 3 mois valant accord. Les cinq cas figurent déjà dans le texte d'origine des décrets de 2014 — pas un ajout récent. <b>À faire confirmer par un juriste.</b></p>
   <div class="tbl">
     <table>
-      <thead><tr><th>Procédure</th><th>Décret SVR</th><th>Liste SVA</th></tr></thead>
+      <thead><tr><th>Procédure</th><th>Décret SVR</th><th>Décret 2014-1281 (accord, 3 mois)</th><th>Liste SVA</th></tr></thead>
       <tbody>
-        <tr><td>Transfert de portefeuilles, mutuelles ou unions</td><td>2014-1280 (rejet)</td><td>n° 88 (accord)</td></tr>
-        <tr><td>Transfert de portefeuilles, institutions de prévoyance</td><td>2014-1280 (rejet)</td><td>n° 228 (accord)</td></tr>
-        <tr><td>Transfert/modification, sociétés d'assurance et réassurance</td><td>2014-1280 (rejet)</td><td>n° 510 (accord)</td></tr>
-        <tr><td>Accord d'exécution, transport de matières nucléaires</td><td>2014-1273 (rejet)</td><td>n° 81 (accord, 14 jours)</td></tr>
-        <tr><td>Accord d'exécution, transport de matières nucléaires (défense)</td><td>2014-1285 (rejet)</td><td>n° 82 (accord, 14 jours)</td></tr>
+        <tr><td>Transfert de portefeuilles, mutuelles ou unions</td><td>2014-1280 (rejet)</td><td>2014-1281</td><td>n° 88 (accord)</td></tr>
+        <tr><td>Transfert de portefeuilles, institutions de prévoyance</td><td>2014-1280 (rejet)</td><td>2014-1281</td><td>n° 228 (accord)</td></tr>
+        <tr><td>Transfert/modification, sociétés d'assurance et réassurance</td><td>2014-1280 (rejet)</td><td>2014-1281</td><td>n° 510 (accord)</td></tr>
+        <tr><td>Accord d'exécution, transport de matières nucléaires</td><td>2014-1273 (rejet)</td><td>—</td><td>n° 81 (accord, 14 jours)</td></tr>
+        <tr><td>Accord d'exécution, transport de matières nucléaires (défense)</td><td>2014-1285 (rejet)</td><td>—</td><td>n° 82 (accord, 14 jours)</td></tr>
       </tbody>
     </table>
   </div>
@@ -227,7 +229,7 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
   Sources et dates : liste SVA, XML du 08/12/2016 (jamais mise à jour depuis) ; 39 décrets SVR/délai d'octobre 2014, versions consolidées lues en 2026 ; archive LEGI de la DILA datée du 13/07/2025 (tout changement de vigueur postérieur non vu) ; référentiel DILA (fiches, formulaires, téléservices) du 12-13/09/2026 ; corpus Démarche Numérique daté au plus tard du 02/10/2026 ; volumétrie DILA du 20/09/2026, téléchargements « 2024 à confirmer ».
   </p>
   <p class="method">
-  <b>Vérifié ≠ candidat</b>, toujours distingués : seuls les liens relus individuellement sont comptés. Le rapprochement automatique par titre se trompe environ une fois sur deux. Le chiffre des procédures outillées a été corrigé en trois temps au fil des relectures (211 → 203 → 165 → 155) ; une contre-lecture à l'aveugle finale (51 liens relus sans voir les motifs précédents) a mesuré une précision de 41/51, soit environ 80 %, sur le résultat retenu.
+  <b>Vérifié ≠ candidat</b>, toujours distingués : seuls les liens relus individuellement sont comptés. Le rapprochement automatique par titre se trompe environ une fois sur deux. Le chiffre des procédures outillées a été corrigé en trois temps au fil des relectures (211 → 203 → 165 → 155). La contre-lecture à l'aveugle finale a mesuré une précision de 41/51 (≈ 80 %) sur l'ensemble précédent (165, avant sa propre correction) ; les 10 erreurs qu'elle a trouvées ont été retirées pour obtenir 155. La fourchette « 130 à 155 » tient compte de l'incertitude restante sur les liens qui n'ont pas eux-mêmes été soumis à cette contre-lecture.
   </p>
   <p class="method">
   Volumes de démarches numériques toujours présentés en deux colonnes séparées — cumul depuis la création et taux annualisé estimé par division — jamais mélangés. Un téléchargement de formulaire n'est pas un dossier déposé.
