@@ -1,10 +1,52 @@
 # Étape 4 — Volumétrie (27/10/2026)
 
-**Base retenue : 165 procédures vérifiées** (114 DN, 46 Cerfa, 5 téléservice —
-voir correction 2 dans `ETAPE3_relecture_complete_2026-10-27.md`, 38 lignes
-rebasculées en rejeté en préparant cette volumétrie), **+ 8 lignes de
-l'échantillon étape 5** marquées « outillée » par vos recherches web.
-Rien commité (fichiers locaux dans `cartographie/outillage-etape3/`).
+> **CORRECTION 3 (27/10/2026, contre-lecture à l'aveugle avant publication)** :
+> voir section 0 ci-dessous. **Le chiffre qui fait foi est désormais 155
+> vérifiés** (104 DN, 46 Cerfa, 5 téléservice ; 82 SVA, 56 SVR, 17 délai SVA),
+> pas 165. Les montants de volumétrie de ce document (§1) ont été recalculés
+> sur cette base. Chaîne complète des corrections tracée : 211 → 203 → 165 →
+> **155**.
+
+**Base retenue : 155 procédures vérifiées** (104 DN, 46 Cerfa, 5 téléservice),
+**+ 8 lignes de l'échantillon étape 5** marquées « outillée » par vos
+recherches web. Rien commité séparément de ce qui a déjà été validé (fichiers
+locaux complémentaires dans `cartographie/outillage-etape3/`).
+
+## 0. Contre-lecture à l'aveugle avant publication (51 liens)
+
+Tirage de 40 liens au hasard parmi les 165 vérifiés (avant correction 3),
+relus sans voir les motifs précédents, + les 11 lignes du décret 2014-1282
+au signal faible (pas 8 exactement : 9 relèvent de la famille « autorisation
+d'occupation temporaire (AOT) », 2 d'une famille différente « carte de
+collectionneur d'armes », tranchées dans la même passe).
+
+**Précision obtenue : 41/51 = 80,4 %.**
+- Échantillon de 40 : 35/40 = **87,5 %**.
+- Les 11 lignes 2014-1282 : **6/11 corrects**. Ligne de partage claire : les
+  intitulés qui disent eux-mêmes « autorisation d'occupation **temporaire** »
+  correspondent bien à la démarche AOT générique (6 lignes, confirmées) ;
+  ceux qui emploient un régime différent — « **concession** », « titre
+  constitutif de **droits réels** », « **carte de collectionneur** » — ne
+  correspondent pas (5 lignes, rejetées) : la démarche AOT ne couvre que
+  l'autorisation temporaire simple, pas les régimes plus lourds/distincts.
+
+**10 lignes rebasculées en rejeté** (5 de l'échantillon de 40 + 5 des
+2014-1282) :
+- Retrait d'une dérogation confondu avec l'avis préalable des communes (étape
+  différente du même dossier).
+- Laboratoires de biologie médicale : démarche régionale trop générique.
+- Agrément d'association environnementale confondu avec un dispositif de
+  soutien/financement (acte différent).
+- Agrément de centre de formation confondu avec une session d'examen
+  générique.
+- **Nouveau faux ami** : démarche DN « autorisation d'exercer la profession
+  d'**architecte** sans inscription au tableau » utilisée à tort pour une
+  ligne SVR concernant les **experts-comptables** — mauvaise profession.
+- 3 lignes « domaine public » à régime distinct de l'AOT (concession, droits
+  réels), 2 lignes armes confondues avec une carte de collectionneur.
+
+Détail ligne à ligne : `cartographie/outillage-etape3/contre_lecture_51_jugement.csv`.
+Fichier verdicts final : `candidats_canal_verifie_CORRIGE2_2026-10-27.csv`.
 
 ## 1. DN — cumul vs flux annuel
 
@@ -15,8 +57,9 @@ export 2024 isolé disponible). Deux colonnes distinctes, jamais mélangées :
 - `nb_dossiers_annualise_estime` : cumul ÷ nombre d'années depuis
   `date_publication` (méthode indiquée par défaut, pas une vraie mesure 2024).
 
-**114 lignes DN** : cumul total **115 947** dossiers, annualisé estimé total
-**≈ 50 715/an**. Détail ligne à ligne : `cartographie/outillage-etape3/volumetrie_DN_finale_2026-10-27.csv`.
+**104 lignes DN** (après correction 3) : cumul total **115 151** dossiers,
+annualisé estimé total **≈ 50 306/an**. Détail ligne à ligne :
+`cartographie/outillage-etape3/volumetrie_DN_finale_CORRIGE_2026-10-27.csv`.
 
 ### Réexamen des 103 lignes « meilleur score par défaut »
 
@@ -78,9 +121,18 @@ fichier de volumétrie. Détail :
 **1 seule correspondance automatique sur 50** avec une ligne SVA/SVR/délai :
 rang 10, « Demande d'acquisition de la nationalité française par
 naturalisation » (401 230 téléchargements, Cerfa 12753) ↔ SVR 2014-1292
-« Attestation constatant l'existence d'un décret de naturalisation » — **match
-probablement incorrect** (attester un décret déjà pris ≠ demander la
-naturalisation ; ce lien n'était pas dans les 165 vérifiées).
+« Attestation constatant l'existence d'un décret de naturalisation ».
+
+**Vérifié à la main : match confirmé incorrect.** La ligne SVR 2014-1292 a
+pour base légale l'article 52 du décret n° 93-1362 du 30 décembre 1993, qui
+régit spécifiquement la délivrance d'une **attestation après qu'un décret de
+naturalisation a déjà été signé** (étape administrative distincte, souvent
+utile avant la publication du décret au JORF). Le Cerfa 12753 sert la
+**demande initiale** de naturalisation, régie par d'autres articles du même
+décret (procédure de dépôt du dossier, en amont). Ce sont deux étapes
+différentes de la même procédure globale, pas la même démarche — cette ligne
+était d'ailleurs déjà classée `rejete` dans les 155 vérifiées, donc cette
+vérification manuelle confirme (et ne change pas) le résultat déjà retenu.
 
 Les 49 autres relèvent de catégories structurellement étrangères au silence-
 vaut-accord/rejet (pas de décision implicite sur demande d'autorisation) :
@@ -91,6 +143,49 @@ d'identité/véhicule de masse, actes d'état civil/justice civile, formalités
 sanitaires ponctuelles, et Cerfa d'urbanisme partagés (permis de construire/
 démolir, déjà vus en §3 comme non attribuables). Détail catégorie par
 catégorie : `cartographie/outillage-etape3/top50_dila_vs_corpus.csv`.
+
+## 4 bis. Part du corpus SVA/SVR/délai dans le total des téléchargements DILA
+
+- Total téléchargements, tous les 1 938 enregistrements de `volumetrie DILA.tab.csv` : **24 953 755**.
+- Somme des téléchargements 2024 des 32 Cerfa/téléservices **liés et non
+  partagés** (procédures vérifiées + échantillon étape 5) : **36 431**.
+- **Part du corpus dans le total DILA : 0,146 %.**
+- Pour mémoire, les Cerfa **partagés** (non attribuables) représentent
+  71 793 téléchargements supplémentaires, non comptés ici car non spécifiques
+  à une procédure du corpus.
+
+Lecture : les procédures SVA/SVR/délai réellement outillées et mesurables
+via les téléchargements de formulaire pèsent très peu dans le volume total
+de téléchargements DILA — cohérent avec le constat du §4 (les plus gros
+volumes sont des démarches de masse étrangères au silence-vaut-accord/rejet).
+
+## 4 ter. Distribution des volumes des seules procédures outillées (corpus)
+
+Deux métriques distinctes, non comparables entre elles (téléchargements de
+formulaire vs dossiers DN) — présentées séparément :
+
+**Cerfa/téléservice liés, non partagés (32 valeurs) :**
+
+| Classe | n |
+|---|---|
+| < 100 | 5 |
+| 100 – 1 000 | 25 |
+| 1 000 – 10 000 | 1 |
+| > 10 000 | 1 |
+
+**DN, cumul depuis publication (104 valeurs) :**
+
+| Classe | n |
+|---|---|
+| < 100 | 65 |
+| 100 – 1 000 | 30 |
+| 1 000 – 10 000 | 17 |
+| > 10 000 | 2 |
+
+Lecture : à l'inverse de la distribution générale DILA (§5, 15 % au-dessus de
+10 000), les procédures du corpus sont massivement de **petit volume** (63 %
+des Cerfa liés et 57 % des DN cumulés sont sous 1 000) — cohérent avec des
+régimes d'autorisation/agrément ciblés, pas des démarches de masse.
 
 ## 5. Distribution des volumes (tous les 1 938 enregistrements de `volumetrie DILA.tab.csv`)
 

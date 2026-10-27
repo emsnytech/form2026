@@ -26,6 +26,16 @@
 > génériques réutilisées sur plusieurs lignes du même décret) — pas assez de
 > doute pour les rejeter d'office, pas assez de certitude pour les confirmer
 > pleinement.
+>
+> **CORRECTION 3 (27/10/2026, contre-lecture à l'aveugle avant publication)** :
+> tranché. Les 11 lignes réelles du décret 2014-1282 (DN) se répartissent en
+> 6 confirmées (famille « autorisation d'occupation temporaire ») et 5
+> rejetées (concession, droits réels, carte de collectionneur — régimes
+> différents). Une contre-lecture à l'aveugle de 40 lignes supplémentaires a
+> aussi trouvé 5 erreurs, dont un nouveau faux ami (démarche « architecte »
+> utilisée à tort pour une ligne « experts-comptables »). **165 → 155
+> vérifiés** (104 DN, 46 Cerfa, 5 téléservice). Détail dans
+> `VOLUMETRIE_ETAPE4_2026-10-27.md` §0 et `etape3/contre_lecture_51_jugement.csv`.
 
 ## Méthode
 
