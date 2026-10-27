@@ -1,0 +1,51 @@
+rang,volume,titre,regime,texte_rattachement
+1,3753879,Certificat de cession d'un véhicule d'occasion,déclaration,Code de la route art. R322-4
+2,789265,Demande d'inscription sur les listes électorales,régime propre (code),Code électoral art. L11
+3,729308,Déclaration de perte de carte d'identité ou de passeport,déclaration,(pas de décision)
+4,667027,Demande de certificat d'immatriculation d'un véhicule,régime propre (code),Code de la route (SIV)
+5,636783,Autorisation de sortie de territoire (AST),autre,acte parental privé (code civil autorité parentale)
+6,509363,Demande de logement social,régime propre (code),Code de la construction et de l'habitation (commissions d'attribution)
+7,502280,Permis de conduire - Avis médical,régime propre (code),Code de la route
+8,493837,Demande ou renouvellement de prestations MDPH,prestation ou demande financière,CASF/Code de la sécurité sociale
+9,493537,Modèle d'attestation de témoin,autre,document-type (justice)
+10,401230,Demande d'acquisition de la nationalité française par naturalisation,régime propre (code),Code civil art. 21-15 ; décret n°93-1362 du 30/12/1993
+11,360981,Demande au juge aux affaires familiales (autorité parentale),autre,justice civile
+12,335158,Déclaration conjointe d'un pacte civil de solidarité (Pacs),déclaration,Code civil art. 515-3
+13,316821,Demande d'aide juridictionnelle,prestation ou demande financière,Loi n°91-647 du 10/07/1991
+14,288882,Attestation de déplacement dérogatoire (Covid-19),autre,dispositif temporaire disparu
+15,280989,Déclaration préalable (construction travaux installations),déclaration,Code de l'urbanisme
+16,279563,Déclaration préalable pour une maison individuelle,déclaration,Code de l'urbanisme
+17,270097,Certificat médical à joindre à une demande MDPH,prestation ou demande financière,CASF (pièce jointe à #8)
+18,267856,Mandat pour effectuer les formalités d'immatriculation,autre,mandat privé
+19,234805,Autorisation parentale (vaccination),autre,acte parental privé
+20,223344,Vote par procuration,régime propre (code),Code électoral art. L71
+21,207034,Demande de permis de construire pour une maison individuelle,régime propre (code),Code de l'urbanisme
+22,203741,Convention-type de Pacs,autre,document-type
+23,189476,Demande de complémentaire santé solidaire,prestation ou demande financière,Code de la sécurité sociale
+24,184403,Établir un contrat d'apprentissage,autre,contrat de droit privé (code du travail)
+25,176770,Demande de RSA ou de prime d'activité,prestation ou demande financière,CASF/Code de la sécurité sociale
+26,176198,Permis bateau - Certificat d'aptitude physique,régime propre (code),Code des transports
+27,168649,Attestation de loyer ou résidence en foyer,autre,document informatif
+28,163106,Demande de permis de conduire international,régime propre (code),Code de la route
+29,162239,Déclaration de perte ou vol d'une carte grise,déclaration,(pas de décision)
+30,155095,Demande d'attestation d'accueil,compétence d'une collectivité,CESEDA art. L311-9 (délivrée par le maire)
+31,150512,Demande de médaille d'honneur du travail,autre,distinction honorifique
+32,148688,Demande d'homologation d'une rupture conventionnelle,régime propre (code),Code du travail art. L1237-14
+33,145841,Déclaration de conduite accompagnée d'un bateau de plaisance,déclaration,Code des transports
+34,142140,Déclaration attestant l'achèvement et la conformité des travaux,déclaration,Code de l'urbanisme
+35,138910,Déclaration d'accident du travail ou de trajet,déclaration,Code de la sécurité sociale
+36,132350,Demande d'autorisation de travail pour embaucher un étranger,régime propre (code),CESEDA/Code du travail
+37,127049,Demande de permis de visite (prison),régime propre (code),Code pénitentiaire
+38,124453,Validation des acquis de l'expérience (VAE) - recevabilité,régime propre (code),Code du travail
+39,123088,S'inscrire à l'opération tranquillité vacances,autre,service d'information policière
+40,121787,Déclaration de don manuel et de don de sommes d'argent,fiscalité,CGI art. 757
+41,120807,Modification d'une association,déclaration,Loi du 1er juillet 1901
+42,117853,Demander l'ouverture des droits à l'assurance maladie,compétence d'un organisme de sécurité sociale,Code de la sécurité sociale (CPAM)
+43,114978,Demande de document de circulation (DCEM) pour un étranger mineur,régime propre (code),CESEDA
+44,114406,Demande de permis de construire (autre),régime propre (code),Code de l'urbanisme
+45,114204,Attestation de salaire pour le paiement des indemnités journalières,compétence d'un organisme de sécurité sociale,Code de la sécurité sociale (CPAM)
+46,113552,Demande de certificat d'urbanisme,régime propre (code),Code de l'urbanisme
+47,109905,Association : demande de subvention,prestation ou demande financière,(subvention publique)
+48,109657,Requête en vue d'une protection juridique d'un majeur,autre,justice civile (code civil)
+49,108612,Déclaration de modification d'une entreprise,déclaration,RCS
+50,106364,Déclaration de la liste des personnes chargées de l'administration,déclaration,RCS/Loi du 1er juillet 1901
