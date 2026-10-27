@@ -126,6 +126,28 @@ les fichiers ci-dessus.
   formulaire approximés (DILA), jamais confondus ; cumul et taux annualisé estimé
   toujours séparés.
 
+## Ce qui se recalcule automatiquement, ce qui exige une relecture manuelle
+
+**Se recalcule automatiquement, sans relecture, si une source change** :
+téléchargement et indexation de l'archive LEGI ; statut en_vigueur/transfere/
+abroge par article (règle fixe sur les versions connues) ; rapprochement par
+titre vers DN/Cerfa/téléservice (production de *candidats*, jamais de
+vérifiés) ; volumétrie (jointure directe par identifiant).
+
+**Exige une relecture manuelle à chaque régénération** : la classification
+recodifié/supprimé (lecture du titre du texte abrogeant, heuristique de
+mots-clés qui peut rater un titre atypique) ; le statut vérifié/rejeté de
+chaque candidat d'outillage (le rapprochement par titre seul se trompe
+environ une fois sur deux) ; la liste noire de faux amis (à enrichir à
+chaque nouvelle relecture, jamais complète) ; les contradictions apparentes
+(lecture du texte d'origine) ; l'échantillon web (recherche humaine,
+non automatisable).
+
+Le skill de mise à jour mensuelle `maj-demarches-form2026` n'a pas pu être
+localisé depuis cette session pour y reporter cette distinction directement
+dans sa documentation — à faire manuellement si ce skill existe ailleurs
+dans l'environnement de l'auteur.
+
 ## Limites
 
 Voir `NOTE_RESULTATS_2026-10-28.md`. Points clés : rapprochement par titre sans clé
