@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Apprécier un projet de dématérialisation : la matrice des gains</title>
+<meta name="description" content="Apprécier un projet numérique avant de le financer : la matrice collecte × traitement calcule les ETP, les frais évités et les gains usagers à partir de l'activité réelle de la démarche, et alimente l'annexe économies du FTAP.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="FORM 2026">
+<meta property="og:title" content="Apprécier un projet de dématérialisation : la matrice des gains">
+<meta property="og:description" content="Apprécier un projet numérique avant de le financer : la matrice collecte × traitement calcule les ETP, les frais évités et les gains usagers à partir de l'activité réelle de la démarche, et alimente l'annexe économies du FTAP.">
+<meta property="og:url" content="https://emsnytech.github.io/form2026/matrice-gains-ftap.html">
+<meta name="twitter:card" content="summary">
+<meta name="page-version" content="2026-10-28-r1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout : bandeau de lecture, puis colonne de saisie à gauche et matrice + indicateurs à droite ; hypothèses dépliables en bas. Charte FORM 2026. */
+:root{
+  --paper:#fbf9f5; --surface:#ffffff; --ink:#1e2022; --muted:#5c6066; --line:#e2dfd7;
+  --accent:#b45309; --accent-soft:#fffbeb;
+  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4;
+  --min:#0e7490; --min-soft:#ecfeff; --bad:#b91c1c; --bad-soft:#fef2f2;
+  --h0:#ecfeff; --h1:#fef3c7; --h2:#f4c7a1; --g0:#ffffff; --g1:#bbf7d0;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  --sans:"Source Sans 3", "Source Sans Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#18181b; --surface:#27272a; --ink:#f3f4f6; --muted:#9ca3af; --line:#3f3f46;
+  --accent:#f59e0b; --accent-soft:#451a03; --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d;
+  --min:#22d3ee; --min-soft:#164e63; --bad:#f87171; --bad-soft:#450a0a;
+  --h0:#123a44; --h1:#4a3a12; --h2:#6b3415; --g0:#27272a; --g1:#166534; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#18181b; --surface:#27272a; --ink:#f3f4f6; --muted:#9ca3af; --line:#3f3f46;
+  --accent:#f59e0b; --accent-soft:#451a03; --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d;
+  --min:#22d3ee; --min-soft:#164e63; --bad:#f87171; --bad-soft:#450a0a;
+  --h0:#123a44; --h1:#4a3a12; --h2:#6b3415; --g0:#27272a; --g1:#166534; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(26px,3.4vw,36px);line-height:1.1;margin:8px 0 10px;font-weight:800;text-wrap:balance}
+h2{font-size:18px;margin:0 0 4px;font-weight:700;text-wrap:balance}
+.lede{max-width:72ch;color:var(--muted);margin:0}
+.lede b{color:var(--ink)}
+.status{display:inline-flex;gap:6px;align-items:center;margin-top:12px;font:500 12px var(--mono);color:var(--accent);background:var(--accent-soft);border:1px solid var(--line);padding:5px 9px;border-radius:4px}
+.grid{display:grid;grid-template-columns:330px minmax(0,1fr);gap:24px;margin-top:24px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px}
+.form{display:flex;flex-direction:column;gap:14px}
+fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+legend{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;padding:0}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:8px;align-items:center}
+.row label{font-size:14px;line-height:1.25}
+input,select{font:500 14px var(--mono);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:6px 8px;width:100%;font-variant-numeric:tabular-nums}
+input:focus-visible,select:focus-visible,button:focus-visible,.cell:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.seg{display:flex;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.seg button{flex:1;font:600 13px var(--sans);padding:6px 4px;border:0;background:var(--paper);color:var(--muted);cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.hint{font-size:12.5px;color:var(--muted);line-height:1.35;margin:0}
+.main{display:flex;flex-direction:column;gap:24px;min-width:0}
+.mhead{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:end;margin-bottom:12px}
+.scroll{overflow-x:auto}
+table.mx{border-collapse:separate;border-spacing:4px;width:100%;min-width:600px}
+.mx th{font-weight:600;font-size:13px;text-align:left;vertical-align:bottom;color:var(--muted);padding:2px 4px}
+.mx th .code{display:block;font:500 12px var(--mono);color:var(--ink)}
+.mx th.rh{width:30%;vertical-align:middle}
+.cell{position:relative;height:62px;border-radius:4px;border:1px solid var(--line);font:500 15px var(--mono);font-variant-numeric:tabular-nums;color:var(--ink);cursor:pointer;text-align:center;width:100%;background:var(--h0)}
+.cell small{display:block;font:400 11px var(--sans);color:var(--muted)}
+.cell.dep{outline:3px solid var(--admin);outline-offset:-3px}
+.cell.cib{outline:3px solid var(--usager);outline-offset:-3px}
+.cell.ref{box-shadow:inset 0 0 0 2px var(--muted);border-style:dashed}
+.tag{position:absolute;top:3px;left:4px;font:600 10px var(--mono);letter-spacing:.04em;padding:1px 4px;border-radius:3px;color:var(--paper)}
+.tag.d{background:var(--admin)} .tag.c{background:var(--usager)} .tag.r{background:var(--muted);left:auto;right:4px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted);margin-top:8px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;background:var(--c)}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:700px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.tile .lab{font-size:12.5px;color:var(--muted);line-height:1.25}
+.tile .val{font:600 24px var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.tile .sub{font-size:12px;color:var(--muted)}
+.tile.ok .val{color:var(--usager)} .tile.ko .val{color:var(--bad)}
+.two{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:24px}
+@media (max-width:1000px){.two{grid-template-columns:1fr}}
+.bars{display:flex;flex-direction:column;gap:9px;margin-top:10px}
+.bar{display:grid;grid-template-columns:150px minmax(0,1fr) 92px;gap:8px;align-items:center;font-size:13px}
+.bar .t{position:relative;height:18px}
+.bar .t i{position:absolute;left:0;height:8px;border-radius:2px}
+.bar .t i.a{top:0;background:var(--admin)} .bar .t i.b{top:10px;background:var(--usager)}
+.bar .n{font:500 12px var(--mono);text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.bar.tot{font-weight:700;border-top:1px solid var(--line);padding-top:8px}
+table.ft{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}
+.ft td{padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+.ft td.n{font:500 13px var(--mono);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ft tr.sum td{font-weight:700;border-bottom:2px solid var(--ink)}
+.ft .o{font:500 10.5px var(--mono);padding:1px 5px;border-radius:3px;white-space:nowrap}
+.o.calc{background:var(--min-soft);color:var(--min)} .o.decl{background:var(--accent-soft);color:var(--accent)} .o.just{background:var(--usager-soft);color:var(--usager)} .o.hors{background:var(--admin-soft);color:var(--admin)}
+.alerts{display:flex;flex-direction:column;gap:6px;margin:10px 0 0;padding:0;list-style:none}
+.alerts li{font-size:13.5px;padding:7px 10px;border-radius:4px;border-left:3px solid var(--usager);background:var(--usager-soft)}
+.alerts li.w{border-color:var(--bad);background:var(--bad-soft)}
+.alerts li.i{border-color:var(--admin);background:var(--admin-soft)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 16px}
+summary{cursor:pointer;font-weight:700;font-size:16px}
+.ptab{overflow-x:auto;margin-top:12px}
+.ptab table{border-collapse:collapse;font-size:12.5px;min-width:760px}
+.ptab th{font-weight:600;text-align:left;color:var(--muted);padding:4px;vertical-align:bottom;max-width:90px}
+.ptab td{padding:3px}
+.ptab input{padding:4px 5px;font-size:12.5px;width:72px}
+.decl{display:flex;flex-direction:column;gap:6px}
+.drow{display:grid;grid-template-columns:minmax(0,1fr) 96px 50px;gap:6px;align-items:center;font-size:13px}
+.drow input[type=checkbox]{width:auto}
+.drow .j{font-size:11px;color:var(--muted);display:flex;gap:3px;align-items:center}
+footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted);max-width:84ch}
+.topnav{margin:0 0 1.2rem;font-size:.95rem}.topnav a,footer a,.res a{color:var(--admin)}
+.res{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:24px}@media (max-width:900px){.res{grid-template-columns:1fr}}
+.res h3{font-size:15px;margin:0 0 6px}.res p{margin:0 0 8px;font-size:14px;color:var(--muted)}.res ul{margin:0;padding-left:18px;font-size:14px}.res li{margin:4px 0}
+@media (prefers-reduced-motion:no-preference){.cell{transition:background .25s}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <p class="topnav"><a href="index.html">Retour à FORM 2026</a> · <a href="simulateur-gains-dematerialisation.html">Estimer ses gains</a> · <a href="matrice-gains-ftap.html" aria-current="page">Apprécier un projet</a> · <a href="cadrage-dematerialisation.html">Cadrer une démarche</a> · <a href="comparer-cadre-fonctionnel.html">Comparer un outil</a> · <a href="atelier-lego.html">Atelier Lego</a> · <a href="compteur-roi.html">Compteur</a></p>
+  <div class="kicker">Apprécier · grille d'appréciation des projets</div>
+  <h1>Quels gains attendre d'un projet de dématérialisation ?</h1>
+  <p class="lede">Le gain d'un projet est l'écart entre deux cellules de cette matrice : <b>là où la démarche en est</b> (canal de collecte, mode de traitement) et <b>là où le projet l'amène</b>. Chaque cellule est recalculée à partir de l'activité réelle de la démarche : dossiers, champs, pièces, étapes d'instruction. Cliquez une cellule pour en faire la cible ; avec le mode « Départ », pour fixer le point de départ.</p>
+  <p class="lede" style="margin-top:10px">Conçue pour les financeurs de projets numériques, comme le Fonds pour la transformation de l'action publique, dont l'annexe « économies » ne calcule que le coût des ETP déclarés. Ici, le porteur renseigne des faits vérifiables ; les ETP, les frais évités et les gains usagers en découlent.</p>
+  <div class="status">Version 1 · hypothèses provisoires, à consolider · exemple fictif préchargé</div>
+
+  <div class="grid">
+    <form class="panel form" id="f" onsubmit="return false">
+      <fieldset><legend>Activité de la démarche</legend>
+        <div class="row"><label for="dossiers">Dossiers par an</label><input id="dossiers" type="number" min="0" step="100" value="40000"></div>
+        <div class="row"><label for="vol_source">Origine du volume</label><select id="vol_source"><option>Estimé</option><option>Mesuré</option></select></div>
+        <div class="row"><label for="pp_share">Part de particuliers (%)</label><input id="pp_share" type="number" min="0" max="100" value="30"></div>
+        <div class="row"><label for="champs">Champs du formulaire</label><input id="champs" type="number" min="0" value="25"></div>
+        <div class="row"><label for="pj">Pièces justificatives</label><input id="pj" type="number" min="0" value="3"></div>
+        <div class="row"><label for="etapes">Étapes d'instruction</label><input id="etapes" type="number" min="0" value="2"></div>
+        <div class="row"><label for="si_aval">Report dans un SI aval</label><select id="si_aval"><option>Oui</option><option>Non</option></select></div>
+        <p class="hint">Champs et pièces : extraction FORM 2026 de la démarche, quand elle existe.</p>
+      </fieldset>
+      <fieldset><legend>Effectifs</legend>
+        <div class="row"><label for="agents">Agents instructeurs</label><input id="agents" type="number" min="0" value="25"></div>
+        <div class="row"><label for="part_temps">Part de leur temps (%)</label><input id="part_temps" type="number" min="0" max="100" value="50"></div>
+        <div class="row"><label for="fond_min">Instruction au fond (min/dossier)</label><input id="fond_min" type="number" min="0" value="20"></div>
+      </fieldset>
+      <fieldset><legend>Jeu d'hypothèses</legend>
+        <div class="seg" id="scen" role="group" aria-label="Jeu d'hypothèses">
+          <button type="button" data-v="prudente" aria-pressed="false">Prudente</button>
+          <button type="button" data-v="centrale" aria-pressed="true">Centrale</button>
+          <button type="button" data-v="haute" aria-pressed="false">Haute</button>
+        </div>
+        <p class="hint" id="scenTxt"></p>
+      </fieldset>
+      <fieldset><legend>Coûts</legend>
+        <div class="row"><label for="build">Investissement (€)</label><input id="build" type="number" min="0" step="1000" value="450000"></div>
+        <div class="row"><label for="run">Fonctionnement annuel (€)</label><input id="run" type="number" min="0" step="1000" value="60000"></div>
+        <div class="row"><label for="horizon">Horizon (années)</label><input id="horizon" type="number" min="1" max="7" value="5"></div>
+        <div class="row"><label for="ref_build">Référence mutualisée : mise en place (€)</label><input id="ref_build" type="number" min="0" step="1000" value="20000"></div>
+      </fieldset>
+      <fieldset><legend>Gains déclarés (€/an)</legend>
+        <div class="decl" id="decl"></div>
+        <p class="hint">Cocher « pièce » quand un justificatif est joint : le taux de factualisation en tient compte.</p>
+      </fieldset>
+    </form>
+
+    <div class="main">
+      <section class="panel">
+        <div class="mhead">
+          <div><h2>Matrice collecte × traitement</h2><p class="hint" id="mxTitle"></p></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <div class="seg" id="metric" role="group" aria-label="Indicateur affiché">
+              <button type="button" data-v="agent" aria-pressed="true">Temps agent</button>
+              <button type="button" data-v="gain" aria-pressed="false">Gain annuel</button>
+              <button type="button" data-v="usager" aria-pressed="false">Temps usager</button>
+              <button type="button" data-v="delai" aria-pressed="false">Délai</button>
+            </div>
+            <div class="seg" id="mode" role="group" aria-label="Le clic fixe">
+              <button type="button" data-v="cib" aria-pressed="true">Clic : cible</button>
+              <button type="button" data-v="dep" aria-pressed="false">Clic : départ</button>
+            </div>
+          </div>
+        </div>
+        <div class="scroll"><table class="mx" id="mx"></table></div>
+        <div class="legend"><span style="--c:var(--admin)">Départ</span><span style="--c:var(--usager)">Cible</span><span style="--c:var(--muted)">Référence mutualisée (C4/T2)</span></div>
+      </section>
+
+      <section class="tiles" id="tiles"></section>
+
+      <div class="two">
+        <section class="panel">
+          <h2>Où se loge le gain, étape par étape</h2>
+          <p class="hint">Minutes par dossier. Barre haute : départ ; barre basse : cible. L'instruction au fond n'est pas comptée.</p>
+          <div class="bars" id="bars"></div>
+        </section>
+        <section class="panel">
+          <h2>Annexe FTAP, alimentée</h2>
+          <p class="hint">Régime de croisière, par an. Origine de chaque montant indiquée.</p>
+          <table class="ft" id="ft"></table>
+          <ul class="alerts" id="alerts"></ul>
+        </section>
+      </div>
+
+      <details id="hyp">
+        <summary>Hypothèses par niveau (modifiables)</summary>
+        <p class="hint" style="margin-top:8px">Valeurs de travail. C2/T0 et C4/T2 sont ancrés sur le simulateur FORM 2026 (11 à 30 min contre 1,5 à 3 min par dossier). Les autres sont à calibrer par mesure ou par le cabinet. Toute modification est recalculée immédiatement et n'est pas enregistrée.</p>
+        <div class="ptab"><table id="tC"></table></div>
+        <div class="ptab"><table id="tT"></table></div>
+        <div class="ptab"><table id="tG"></table></div>
+      </details>
+    </div>
+  </div>
+
+  <section class="res" aria-label="Pour aller plus loin">
+    <div class="panel"><h3>Le classeur de l'annexe FTAP</h3><p>Le même calcul, onglet par onglet : saisie du projet, matrice, annexe économies FTAP 2023 alimentée, indicateurs pluriannuels, synthèse d'une page pour un comité.</p>
+      <ul><li><a href="donnees/ftap/annexe-ftap-gains-demat_v1_2026-10-28.xlsx">Télécharger le classeur (.xlsx)</a></li><li><a href="donnees/ftap/LISEZMOI_ftap.md">Lire la note de méthode</a></li></ul></div>
+    <div class="panel"><h3>Remplacer une hypothèse par une mesure</h3><p>Chronométrez une dizaine de dossiers, étape par étape, avant et après. Une mesure documentée peut remplacer l'hypothèse de référence.</p>
+      <ul><li><a href="donnees/hypotheses/mesure_temps_modele.csv">Modèle de relevé des temps</a></li><li><a href="agent-public.html#mesurer">Le protocole en dix dossiers</a></li><li><a href="https://github.com/emsnytech/form2026/issues/new?template=proposition-de-mesure.yml">Proposer une mesure</a></li></ul></div>
+    <div class="panel"><h3>Les ancrages</h3><p>Les niveaux C2/T0 et C4/T2 reprennent la décomposition publiée des temps par étape (11, 18 et 30 minutes contre 1,5, 2 et 3 minutes).</p>
+      <ul><li><a href="donnees/hypotheses/temps_par_etape.csv">Temps par étape (v8)</a></li><li><a href="simulateur-gains-dematerialisation.html">Le simulateur de gains</a></li><li><a href="atelier-lego.html">L'atelier Lego, pour la solution de référence</a></li></ul></div>
+  </section>
+
+  <footer>Méthode : temps agent décomposé par étape du processus (réception, ressaisie, vérification des pièces, relances, circulation, notification, report dans le SI aval, archivage), frais physiques par dossier, valeur du temps usager reprise du simulateur FORM 2026. Les ETP redéployés sont valorisés hors économies : ils libèrent de la capacité sans réduire la dépense. Le temps libéré est valorisé au coût chargé des catégories d'agents, parce que l'annexe FTAP raisonne en masse salariale ; la note de méthode v8 retient 44,70 € de l'heure (<a href="donnees/hypotheses/cout_horaire_sensibilite.csv">sensibilité à la valeur horaire</a>). Ordre de grandeur pour apprécier un dossier, pas un chiffrage opposable. FORM 2026 · Philippe Vrignaud · données ouvertes et code source publics.</footer>
+</div>
+
+<script>
+(function(){
+var D={"PC": {"C0": {"recep": 4.0, "saisie": 0.2, "verif": 1.6, "incomp": 0.3, "archiv": 2.0, "u_fixe": 20, "u_champ": 0.5, "u_pj": 4.0, "delai": 3, "notifCourrier": 1, "archPhys": 0.6, "affUsager": 1.5}, "C1": {"recep": 2.5, "saisie": 0.2, "verif": 1.5, "incomp": 0.35, "archiv": 0.8, "u_fixe": 8, "u_champ": 0.4, "u_pj": 3.0, "delai": 1, "notifCourrier": 0, "archPhys": 0, "affUsager": 0}, "C2": {"recep": 2.0, "saisie": 0.12, "verif": 1.5, "incomp": 0.25, "archiv": 0.8, "u_fixe": 8, "u_champ": 0.4, "u_pj": 3.0, "delai": 1, "notifCourrier": 0, "archPhys": 0, "affUsager": 0}, "C3": {"recep": 1.0, "saisie": 0.04, "verif": 0.8, "incomp": 0.2, "archiv": 0.5, "u_fixe": 3, "u_champ": 0.3, "u_pj": 2.0, "delai": 0.5, "notifCourrier": 0, "archPhys": 0, "affUsager": 0}, "C4": {"recep": 0.2, "saisie": 0.0, "verif": 0.2, "incomp": 0.1, "archiv": 0.1, "u_fixe": 2, "u_champ": 0.3, "u_pj": 2.0, "delai": 0, "notifCourrier": 0, "archPhys": 0, "affUsager": 0}, "C5": {"recep": 0.2, "saisie": 0.0, "verif": 0.1, "incomp": 0.05, "archiv": 0.1, "u_fixe": 2, "u_champ": 0.3, "u_pj": 2.0, "delai": 0, "notifCourrier": 0, "archPhys": 0, "affUsager": 0}}, "PT": {"T0": {"relance": 8.0, "circ": 2.5, "notif": 2.5, "aval": 4.0, "pages": 3, "pagesPj": 2, "dRelance": 15, "dEtape": 5, "rang": 0}, "T1": {"relance": 7.0, "circ": 2.0, "notif": 2.0, "aval": 4.0, "pages": 1, "pagesPj": 1, "dRelance": 12, "dEtape": 4, "rang": 1}, "T2": {"relance": 2.0, "circ": 0.3, "notif": 0.5, "aval": 4.0, "pages": 0, "pagesPj": 0, "dRelance": 5, "dEtape": 1.5, "rang": 2}, "T3": {"relance": 2.0, "circ": 0.2, "notif": 0.3, "aval": 0.3, "pages": 0, "pagesPj": 0, "dRelance": 5, "dEtape": 1, "rang": 3}}, "G": {"part_saisie": 0.5, "prerempli": 0.4, "pj_api": 0.5, "relance_par_pj": 0.2, "u_relance": 15, "h_etp": 1607, "rate_pp": 7.28, "rate_pm": 44.7, "cout_A": 80000, "cout_B": 60000, "cout_C": 48000, "tarif_lettre": 1.5, "cout_page": 0.04, "cout_num": 1.2, "montee": 0.5}, "CL": {"C0": "Courrier / guichet papier", "C1": "Courriel libre + PJ", "C2": "Formulaire PDF par courriel", "C3": "En ligne, non intégré (export, ressaisie)", "C4": "En ligne structuré, instruit sur plateforme", "C5": "Intégré + prérempli (API, DLNUF)"}, "TL": {"T0": "Boîte fonctionnelle, papier", "T1": "Tableur de suivi", "T2": "Instruction sur plateforme", "T3": "Interconnecté au SI aval"}};
+var SC={prudente:{f:0.75,conv:0.20,ad:0.60},centrale:{f:1,conv:0.35,ad:0.80},haute:{f:1.2,conv:0.50,ad:0.95}};
+var REP={A:0.2,B:0.5,C:0.3};
+var DECL=[["d_presta","Prestations externes","1.2",0,false],["d_mco","MCO décommissionné","1.2",30000,true],["d_lic","Licences","1.2",0,false],["d_immo","Immobilier","1.2",0,false],["d_cont","Contentieux évités","2",15000,false],["d_ind","Autres indirects","2",0,false]];
+var Cs=["C0","C1","C2","C3","C4","C5"],Ts=["T0","T1","T2","T3"];
+var st={dep:["C2","T1"],cib:["C4","T3"],ref:["C4","T2"],scen:"centrale",metric:"agent",mode:"cib"};
+var $=function(i){return document.getElementById(i)};
+function num(id){var v=parseFloat(String($(id).value).replace(",","."));return isFinite(v)&&v>=0?v:0}
+function inputs(){return{N:num("dossiers"),pp:num("pp_share")/100,champs:num("champs"),pj:num("pj"),et:num("etapes"),aval:$("si_aval").value==="Oui",
+  agents:num("agents"),pt:num("part_temps")/100,fond:num("fond_min"),build:num("build"),run:num("run"),H:Math.min(7,Math.max(1,Math.round(num("horizon"))||1)),
+  refBuild:num("ref_build"),mesure:$("vol_source").value==="Mesuré"}}
+function cell(c,t,I){var a=D.PC[c],b=D.PT[t],g=D.G;
+  var pje=c==="C5"?I.pj*(1-g.pj_api):I.pj, fpj=1+g.relance_par_pj*pje;
+  var comp={recep:a.recep,saisie:I.champs*g.part_saisie*a.saisie,verif:pje*a.verif,relance:a.incomp*fpj*b.relance,circ:I.et*b.circ,notif:b.notif,aval:I.aval?b.aval:0,archiv:a.archiv};
+  var agent=0;for(var k in comp)agent+=comp[k];
+  var ch=c==="C5"?I.champs*(1-g.prerempli):I.champs;
+  var usager=a.u_fixe+ch*a.u_champ+pje*a.u_pj+a.incomp*fpj*g.u_relance;
+  var fr={aff:a.notifCourrier*(1+a.incomp*fpj)*g.tarif_lettre,imp:(b.pages+b.pagesPj*I.pj)*g.cout_page,num:(c==="C0"&&b.rang>=2)?g.cout_num:0,arch:a.archPhys};
+  var frais=fr.aff+fr.imp+fr.num+fr.arch;
+  var delai=a.delai+a.incomp*fpj*b.dRelance+I.et*b.dEtape;
+  return{comp:comp,agent:agent,usager:usager,fr:fr,frais:frais,affU:a.affUsager,delai:delai}}
+function economics(I){var g=D.G,s=SC[st.scen];
+  var coutEtp=REP.A*g.cout_A+REP.B*g.cout_B+REP.C*g.cout_C, coutH=coutEtp/g.h_etp, rateU=I.pp*g.rate_pp+(1-I.pp)*g.rate_pm;
+  var d=cell(st.dep[0],st.dep[1],I);
+  function gain(x){var dA=Math.max(0,d.agent-x.agent)*s.f, dU=Math.max(0,d.usager-x.usager)*s.f, nB=I.N*s.ad, hL=nB*dA/60, etpL=hL/g.h_etp, etpS=etpL*s.conv;
+    var fr={};for(var k in d.fr)fr[k]=nB*(d.fr[k]-x.fr[k]);
+    return{dA:dA,dU:dU,nB:nB,etpL:etpL,etpS:etpS,etpR:etpL-etpS,eS:etpS*coutEtp,vR:(etpL-etpS)*coutEtp,eF:nB*(d.frais-x.frais),fr:fr,vU:nB*(dU/60*rateU+d.affU-x.affU),dD:Math.max(0,d.delai-x.delai)}}
+  var c=cell(st.cib[0],st.cib[1],I), r=cell(st.ref[0],st.ref[1],I), P=gain(c), R=gain(r);
+  var decl=DECL.map(function(x){return{v:num(x[0]),j:$(x[0]+"_j").checked,rub:x[2],lab:x[1]}});
+  var declSum=decl.reduce(function(a,x){return a+x.v},0), declJ=decl.reduce(function(a,x){return a+(x.j?x.v:0)},0);
+  var sumB=0,sumC=0,sumE=0,sumRE=0,sumRC=0,cum=0,pay=null,sumDecl=0;
+  for(var y=1;y<=I.H;y++){var f=y===1?g.montee:1, b=f*(P.eS+P.eF)+(y>1?declSum:0), cost=(y===1?I.build:0)+I.run;
+    sumB+=b;sumC+=cost;sumE+=b+f*(P.vR+P.vU);sumRE+=f*(R.eS+R.eF+R.vR+R.vU);sumRC+=(y===1?I.refBuild:0);sumDecl+=(y>1?declSum:0);
+    cum+=b-cost; if(pay===null&&cum>=0)pay=y}
+  var gD=P.nB>0?(P.eS+P.eF)/P.nB:0, seuil=gD*s.ad>0?Math.max(0,sumC-sumDecl)/(gD*s.ad*(g.montee+I.H-1)):Infinity;
+  var calc=P.eS+P.eF, factu=(calc+declSum)>0?(calc*(I.mesure?1:0.5)+declJ)/(calc+declSum):0;
+  var hBes=I.N*(d.agent+I.fond)/60, hDisp=I.agents*I.pt*g.h_etp, ratio=hDisp>0?hBes/hDisp:0;
+  var dG=sumE-sumRE, dC=sumC-sumRC;
+  return{d:d,c:c,P:P,R:R,decl:decl,declSum:declSum,roiB:sumC>0?sumB/sumC:0,roiE:sumC>0?sumE/sumC:0,pay:pay,seuil:seuil,factu:factu,ratio:ratio,dG:dG,dC:dC,dRoi:dC>0?dG/dC:null,coutH:coutH,s:s,sumC:sumC}}
+var fmt=function(v,d){return v.toLocaleString("fr-FR",{maximumFractionDigits:d||0,minimumFractionDigits:d||0})};
+function eur(v){if(!isFinite(v))return"–";var a=Math.abs(v);if(a>=1e6)return fmt(v/1e6,1)+" M€";if(a>=1e4)return fmt(v/1e3)+" k€";return fmt(v)+" €"}
+function mix(a,b,t){return"color-mix(in srgb, var("+b+") "+Math.round(t*100)+"%, var("+a+"))"}
+function renderMatrix(I,E){
+  var vals={},min=Infinity,max=-Infinity,g=D.G,s=E.s;
+  Cs.forEach(function(c){Ts.forEach(function(t){var x=cell(c,t,I),v;
+    if(st.metric==="agent")v=x.agent;else if(st.metric==="usager")v=x.usager;else if(st.metric==="delai")v=x.delai;
+    else v=Math.max(0,I.N*s.ad*((E.d.agent-x.agent)*s.f/60*E.coutH+E.d.frais-x.frais));
+    vals[c+t]=v;min=Math.min(min,v);max=Math.max(max,v)})});
+  var unit={agent:"min/dossier",usager:"min/dossier",delai:"jours",gain:"€/an vs départ"}[st.metric];
+  $("mxTitle").textContent={agent:"Temps agent sensible à la démat, par dossier",usager:"Temps passé par l'usager, par dossier",delai:"Délai indicatif de traitement",gain:"Gain annuel pour l'administration par rapport au départ (temps valorisé + frais)"}[st.metric];
+  var h='<thead><tr><th class="rh"></th>'+Ts.map(function(t){return'<th><span class="code">'+t+'</span>'+D.TL[t]+'</th>'}).join("")+'</tr></thead><tbody>';
+  Cs.forEach(function(c){h+='<tr><th class="rh"><span class="code">'+c+'</span>'+D.CL[c]+'</th>';
+    Ts.forEach(function(t){var v=vals[c+t],k=max>min?(v-min)/(max-min):0,bg;
+      if(st.metric==="gain")bg=mix("--g0","--g1",k);else bg=k<0.5?mix("--h0","--h1",k*2):mix("--h1","--h2",(k-0.5)*2);
+      var isD=st.dep[0]===c&&st.dep[1]===t,isC=st.cib[0]===c&&st.cib[1]===t,isR=st.ref[0]===c&&st.ref[1]===t;
+      var txt=st.metric==="gain"?eur(v):fmt(v,1);
+      h+='<td><button type="button" class="cell'+(isD?" dep":"")+(isC?" cib":"")+(isR?" ref":"")+'" style="background:'+bg+'" data-c="'+c+'" data-t="'+t+'" aria-label="'+c+' '+t+' : '+txt+' '+unit+'">'+
+        (isD?'<span class="tag d">DÉPART</span>':'')+(isC?'<span class="tag c">CIBLE</span>':'')+(isR?'<span class="tag r">RÉF.</span>':'')+txt+'<small>'+unit+'</small></button></td>'});
+    h+='</tr>'});
+  $("mx").innerHTML=h+'</tbody>';
+}
+function tile(lab,val,sub,cls){return'<div class="tile '+(cls||"")+'"><span class="lab">'+lab+'</span><span class="val">'+val+'</span><span class="sub">'+sub+'</span></div>'}
+function render(){
+  var I=inputs(),E=economics(I),P=E.P;
+  $("scenTxt").textContent="Écarts de temps × "+fmt(E.s.f,2)+" · "+fmt(E.s.conv*100)+" % des ETP libérés supprimés · adoption du canal cible "+fmt(E.s.ad*100)+" %";
+  renderMatrix(I,E);
+  $("tiles").innerHTML=
+    tile("ROI budgétaire (FTAP)",fmt(E.roiB,2)+"×",E.pay?"retour en année "+E.pay:"pas de retour sur "+I.H+" ans",E.roiB>=1?"ok":"ko")+
+    tile("ROI élargi (MAREVA)",fmt(E.roiE,2)+"×","avec capacité redéployée et usagers")+
+    tile("Seuil de volume",isFinite(E.seuil)?fmt(E.seuil):"–","dossiers/an pour un ROI de 1 · déclaré "+fmt(I.N),isFinite(E.seuil)&&E.seuil<=I.N?"ok":"ko")+
+    tile("Factualisation",fmt(E.factu*100)+" %","des gains budgétaires",E.factu>=0.5?"ok":"ko");
+  var labs={recep:"Réception",saisie:"Ressaisie",verif:"Vérification des pièces",relance:"Relances",circ:"Circulation entre étapes",notif:"Notification",aval:"Report SI aval",archiv:"Archivage"};
+  var mx=Math.max(E.d.agent,E.c.agent,0.1),bh="";
+  for(var k in labs){var a=E.d.comp[k],b=E.c.comp[k];
+    bh+='<div class="bar"><span>'+labs[k]+'</span><span class="t"><i class="a" style="width:'+(a/mx*100)+'%"></i><i class="b" style="width:'+(b/mx*100)+'%"></i></span><span class="n">'+fmt(a,1)+' → '+fmt(b,1)+'</span></div>'}
+  bh+='<div class="bar tot"><span>Total</span><span class="t"><i class="a" style="width:'+(E.d.agent/mx*100)+'%"></i><i class="b" style="width:'+(E.c.agent/mx*100)+'%"></i></span><span class="n">'+fmt(E.d.agent,1)+' → '+fmt(E.c.agent,1)+'</span></div>';
+  $("bars").innerHTML=bh;
+  var o=function(t){return'<span class="o '+t+'">'+{calc:"calculé",decl:"déclaré",just:"justifié",hors:"hors FTAP"}[t]+'</span>'};
+  var rows=[["1.1.1 ETP supprimés ("+fmt(P.etpS,2)+" ETP)",P.eS,"calc"],["1.1.2 ETP redéployés ("+fmt(P.etpR,2)+" ETP) : économie",0,"calc"],
+    ["1.2 Affranchissement",P.fr.aff,"calc"],["1.2 Impression",P.fr.imp,"calc"],["1.2 Numérisation externalisée",P.fr.num,"calc"],["1.2 Archivage physique",P.fr.arch,"calc"]];
+  E.decl.forEach(function(x){if(x.v>0)rows.push([x.rub+" "+x.lab,x.v,x.j?"just":"decl"])});
+  var tot=rows.reduce(function(a,r){return a+r[1]},0);
+  var th=rows.map(function(r){return'<tr><td>'+r[0]+'</td><td>'+o(r[2])+'</td><td class="n">'+eur(r[1])+'</td></tr>'}).join("");
+  th+='<tr class="sum"><td>Total budgétaire annuel</td><td></td><td class="n">'+eur(tot)+'</td></tr>';
+  th+='<tr><td>Capacité redéployée valorisée</td><td>'+o("hors")+'</td><td class="n">'+eur(P.vR)+'</td></tr><tr><td>Temps et frais des usagers</td><td>'+o("hors")+'</td><td class="n">'+eur(P.vU)+'</td></tr><tr><td>Délai gagné par dossier</td><td>'+o("hors")+'</td><td class="n">'+fmt(P.dD,1)+' j</td></tr>';
+  $("ft").innerHTML=th;
+  var al=[];
+  al.push(E.ratio<0.5||E.ratio>1.5?["w","Effectif déclaré et volume ne concordent pas (besoin calculé / effectif = "+fmt(E.ratio,1)+") : à expliquer."]:["","Effectif et volume cohérents (ratio "+fmt(E.ratio,2)+")."]);
+  if(P.etpL>I.agents*I.pt*0.8)al.push(["w","Les ETP libérés dépassent 80 % de l'effectif consacré à la démarche."]);
+  if(st.dep.join()===st.cib.join())al.push(["w","Départ et cible identiques : aucun gain ne peut être attribué au projet."]);
+  else if(P.dA<=0)al.push(["w","La cible ne réduit pas le temps agent par rapport au départ."]);
+  if(I.run===0)al.push(["w","Coût de fonctionnement nul : le run est-il bien compté ?"]);
+  if(E.dC>0)al.push(E.dRoi<1?["w","Surcoût de "+eur(E.dC)+" par rapport à la solution mutualisée, pour "+eur(E.dG)+" de gain supplémentaire sur l'horizon : non couvert."]:["","Le surcoût par rapport à la solution mutualisée est couvert par le gain supplémentaire."]);
+  if(E.factu<0.5)al.push(["w","Moins de la moitié des gains budgétaires est factualisée."]);
+  al.push(["i","Niveau de départ "+st.dep.join("/")+" : joindre la répartition actuelle des dossiers par canal."]);
+  $("alerts").innerHTML=al.map(function(a){return'<li class="'+a[0]+'">'+a[1]+'</li>'}).join("");
+}
+function paramTables(){
+  var cc=[["recep","Réception (min)"],["saisie","Ressaisie (min/champ)"],["verif","Vérif. (min/PJ)"],["incomp","Incomplets (part)"],["archiv","Archivage (min)"],["u_fixe","Usager fixe (min)"],["u_champ","Usager min/champ"],["u_pj","Usager min/PJ"],["delai","Délai réception (j)"],["tarifs","",1],["archPhys","Archives papier (€)"],["affUsager","Affr. usager (€)"]];
+  cc=cc.filter(function(x){return!x[2]});
+  var h='<tr><th>Collecte</th>'+cc.map(function(x){return'<th>'+x[1]+'</th>'}).join("")+'</tr>';
+  Cs.forEach(function(c){h+='<tr><td><b>'+c+'</b></td>'+cc.map(function(x){return'<td><input id="pc_'+c+'_'+x[0]+'" data-g="PC" data-k="'+c+'" data-f="'+x[0]+'" value="'+D.PC[c][x[0]]+'"></td>'}).join("")+'</tr>'});
+  $("tC").innerHTML=h;
+  var tt=[["relance","Relance (min)"],["circ","Circulation (min/étape)"],["notif","Notification (min)"],["aval","Report SI aval (min)"],["pages","Pages imprimées"],["pagesPj","Pages par PJ"],["dRelance","Délai relance (j)"],["dEtape","Délai par étape (j)"]];
+  h='<tr><th>Traitement</th>'+tt.map(function(x){return'<th>'+x[1]+'</th>'}).join("")+'</tr>';
+  Ts.forEach(function(t){h+='<tr><td><b>'+t+'</b></td>'+tt.map(function(x){return'<td><input id="pt_'+t+'_'+x[0]+'" data-g="PT" data-k="'+t+'" data-f="'+x[0]+'" value="'+D.PT[t][x[0]]+'"></td>'}).join("")+'</tr>'});
+  $("tT").innerHTML=h;
+  var gg=[["part_saisie","Part des champs ressaisis"],["prerempli","Champs préremplis en C5"],["pj_api","PJ remplacées par API en C5"],["cout_A","Coût ETP A (€)"],["cout_B","Coût ETP B (€)"],["cout_C","Coût ETP C (€)"],["tarif_lettre","Affranchissement (€)"],["cout_num","Numérisation (€/dossier)"],["rate_pp","Temps particulier (€/h)"],["rate_pm","Temps personne morale (€/h)"],["montee","Montée en charge an 1"]];
+  h='<tr>'+gg.map(function(x){return'<th>'+x[1]+'</th>'}).join("")+'</tr><tr>'+gg.map(function(x){return'<td><input id="g_'+x[0]+'" data-g="G" data-f="'+x[0]+'" value="'+D.G[x[0]]+'"></td>'}).join("")+'</tr>';
+  $("tG").innerHTML=h;
+  $("hyp").addEventListener("input",function(e){var el=e.target,v=parseFloat(String(el.value).replace(",","."));if(!isFinite(v)||v<0)return;
+    if(el.dataset.g==="G")D.G[el.dataset.f]=v;else D[el.dataset.g][el.dataset.k][el.dataset.f]=v;render()});
+}
+$("decl").innerHTML=DECL.map(function(x){return'<div class="drow"><label for="'+x[0]+'">'+x[1]+' <span class="hint">('+x[2]+')</span></label><input id="'+x[0]+'" type="number" min="0" step="1000" value="'+x[3]+'"><label class="j" for="'+x[0]+'_j"><input type="checkbox" id="'+x[0]+'_j"'+(x[4]?" checked":"")+'>pièce</label></div>'}).join("");
+function seg(id,key,cb){$(id).addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;st[key]=b.dataset.v;
+  [].forEach.call($(id).children,function(x){x.setAttribute("aria-pressed",String(x===b))});(cb||render)()})}
+seg("scen","scen");seg("metric","metric");seg("mode","mode",function(){});
+$("mx").addEventListener("click",function(e){var b=e.target.closest(".cell");if(!b)return;st[st.mode]=[b.dataset.c,b.dataset.t];render()});
+$("f").addEventListener("input",render);$("f").addEventListener("change",render);
+paramTables();render();
+})();
+</script>
+</body>
+</html>
