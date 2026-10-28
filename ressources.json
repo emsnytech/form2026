@@ -1,0 +1,46 @@
+{
+  "a_propos": "Catalogue des ressources de FORM 2026 (emsnytech/form2026). Source unique lue par la page d'accueil pour construire le catalogue groupé par rubrique et la barre de navigation. Toutes les URL sont relatives à https://emsnytech.github.io/form2026/.",
+  "ordre_rubriques": ["mesurer", "concevoir", "situer", "donnees"],
+  "rubriques": {
+    "mesurer":   {"verbe": "Mesurer",   "sous_titre": "Ce que la démat fait gagner",     "couleur": "--usager"},
+    "concevoir": {"verbe": "Concevoir", "sous_titre": "Avant de créer ou de financer",   "couleur": "--admin"},
+    "situer":    {"verbe": "Situer",    "sous_titre": "Où en est-on, et pour qui",        "couleur": "--min"},
+    "donnees":   {"verbe": "Données",   "sous_titre": "Explorer et vérifier",            "couleur": "--accent"}
+  },
+  "types": {
+    "outil":   "Outil",
+    "analyse": "Analyse",
+    "donnees": "Données",
+    "methode": "Méthode"
+  },
+  "profils": {
+    "agent":     "Agent public",
+    "financeur": "Financeur, comité",
+    "decideur":  "Décideur, contrôle",
+    "collectivite": "Collectivité",
+    "chercheur": "Chercheur, journaliste"
+  },
+  "ressources": [
+    {"rubrique": "mesurer",   "type": "outil",   "url": "simulateur-gains-dematerialisation.html", "titre": "Simulateur des gains", "description": "Une fourchette de gains pour votre administration et vos usagers, toutes hypothèses visibles.", "profils": ["agent", "decideur", "collectivite"]},
+    {"rubrique": "mesurer",   "type": "outil",   "url": "matrice-gains-ftap.html", "titre": "Apprécier un projet (matrice FTAP)", "description": "Du canal de départ au traitement visé : ETP, frais évités, gains usagers, annexe FTAP.", "profils": ["financeur", "decideur"]},
+    {"rubrique": "mesurer",   "type": "donnees", "url": "compteur-roi.html", "titre": "Le compteur", "description": "Gains, coûts et ROI depuis le 1er janvier, minute après minute.", "profils": ["decideur", "chercheur"]},
+    {"rubrique": "mesurer",   "type": "methode", "url": "note/", "titre": "La note sur les gains", "description": "Moins de charge pour l'usager, moins de coûts pour l'État : ce qu'apprennent 18 millions de dossiers.", "profils": ["decideur", "financeur", "chercheur"]},
+    {"rubrique": "concevoir", "type": "outil",   "url": "cadrage-dematerialisation.html", "titre": "Cadrer une démarche", "description": "Base juridique, pièces, champs : ce qu'il faut supprimer, remplacer par une donnée ou garder.", "profils": ["agent", "collectivite"]},
+    {"rubrique": "concevoir", "type": "outil",   "url": "comparer-cadre-fonctionnel.html", "titre": "Comparer un outil", "description": "Google Forms, Grist, LimeSurvey, digital workplaces… et le rapport gains / coûts.", "profils": ["agent", "decideur", "collectivite"]},
+    {"rubrique": "concevoir", "type": "outil",   "url": "atelier-lego.html", "titre": "Atelier Lego", "description": "Avez-vous vraiment besoin d'un développement spécifique ? Le coût par dossier en direct.", "profils": ["financeur", "decideur", "agent"]},
+    {"rubrique": "concevoir", "type": "methode", "url": "agent-public.html", "titre": "Parcours agent public", "description": "Retrouver sa démarche, comprendre ses gains, mesurer, repartir avec trois actions.", "profils": ["agent"]},
+    {"rubrique": "situer",    "type": "analyse", "url": "fiches-ministeres/", "titre": "Fiches ministères", "description": "Cinq ans d'usage par ministère : démarches, dossiers, frais évités, préremplissage.", "profils": ["decideur", "chercheur"]},
+    {"rubrique": "situer",    "type": "analyse", "url": "collectivites/", "titre": "Pour et par les collectivités", "description": "Dotations, Fonds vert, démarches de l'État et des collectivités.", "profils": ["collectivite", "decideur"]},
+    {"rubrique": "situer",    "type": "donnees", "url": "instances-ds.html", "titre": "Instances de la plateforme", "description": "Statistiques consolidées de toutes les instances publiques.", "profils": ["chercheur", "decideur", "collectivite"]},
+    {"rubrique": "situer",    "type": "analyse", "url": "obligations-sva/", "titre": "Procédures prévues par les textes", "description": "2 806 procédures, moins d'une sur dix outillée de façon vérifiable.", "profils": ["decideur", "chercheur"]},
+    {"rubrique": "donnees",   "type": "donnees", "url": "explorer.html#demarches", "titre": "Démarches Démarche Numérique", "description": "Ce qui est demandé, démarche par démarche.", "profils": ["agent", "chercheur"]},
+    {"rubrique": "donnees",   "type": "donnees", "url": "explorer.html#pj", "titre": "Pièces justificatives", "description": "Les plus demandées, et leurs alternatives à la source.", "profils": ["agent", "chercheur", "decideur"]},
+    {"rubrique": "donnees",   "type": "donnees", "url": "explorer.html#donnees", "titre": "Données et API", "description": "Ce qui existe déjà à la source.", "profils": ["agent", "chercheur"]},
+    {"rubrique": "donnees",   "type": "donnees", "url": "explorer.html#evenement", "titre": "Événements de vie", "description": "Démarches regroupées par situation.", "profils": ["chercheur", "agent"]},
+    {"rubrique": "donnees",   "type": "donnees", "url": "explorer.html#cerfa", "titre": "CERFA papier", "description": "Formulaires pas encore en ligne.", "profils": ["decideur", "chercheur"]},
+    {"rubrique": "donnees",   "type": "donnees", "url": "explorer.html#dila", "titre": "Démarches DILA", "description": "Fiches de service-public.fr.", "profils": ["chercheur"]},
+    {"rubrique": "donnees",   "type": "methode", "url": "explorer.html#registre", "titre": "Registre RGPD et couverture RIDA", "description": "Les obligations qui encadrent la collecte.", "profils": ["agent", "decideur"]},
+    {"rubrique": "donnees",   "type": "donnees", "url": "donnees/", "titre": "Données dérivées", "description": "Gains, délais, base juridique, hypothèses : tous les fichiers, sous Licence Ouverte.", "profils": ["chercheur", "financeur", "decideur"]},
+    {"rubrique": "donnees",   "type": "methode", "url": "explorer.html#accueil", "titre": "Méthodologie et sources", "description": "Comment tout est calculé, et à partir de quoi.", "profils": ["chercheur"]}
+  ]
+}
