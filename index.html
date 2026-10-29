@@ -36,6 +36,7 @@
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
 a{color:var(--admin)}
 .wrap{max-width:1120px;margin:0 auto;padding:2.4rem 1.25rem 3rem}
+.topnav{margin:0 0 1.2rem;font-size:.95rem}
 .brand{font-weight:700;letter-spacing:.02em;color:var(--muted);font-size:.95rem;margin:0}
 h1,h2{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:800;line-height:1.15;margin:0}
 h1{font-size:clamp(2rem,4.6vw,3.1rem);max-width:22ch;margin-top:.5rem}
@@ -101,6 +102,7 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
 </head>
 <body>
 <div class="wrap">
+  <p class="topnav" data-rubrique=""><!-- nav:début --><a href="index.html">FORM 2026</a> · <a href="index.html#mesurer">Mesurer</a> · <a href="index.html#concevoir">Concevoir</a> · <a href="index.html#situer">Situer</a> · <a href="index.html#donnees">Données</a><!-- nav:fin --></p>
   <header>
     <p class="brand">FORM 2026 · Cartographie des démarches administratives</p>
     <h1>Ne plus demander ce que l'État sait déjà</h1>
@@ -129,7 +131,9 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
 </div>
 
   <section aria-labelledby="h-doors">
+    <span id="mesurer"></span><span id="concevoir"></span>
     <h2 id="h-doors">Que voulez-vous faire ?</h2>
+    <span id="situer"></span>
     <!-- instances-ds : a la une -->
     <a class="une" href="instances-ds.html">
       <div>
@@ -193,6 +197,20 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
         <span class="go">Ouvrir l'atelier →</span>
         <span class="meta">5 minutes · aucune donnée transmise</span>
       </a>
+      <a class="door" href="compteur-roi.html" style="--c:var(--usager)">
+        <span class="q">Mesurer</span>
+        <h3>Le compteur des gains, en continu</h3>
+        <p>Gains, coûts et ROI depuis le 1er janvier, minute après minute, sur les mêmes paramètres que le simulateur et la matrice.</p>
+        <span class="go">Ouvrir le compteur →</span>
+        <span class="meta">Mis à jour en continu</span>
+      </a>
+      <a class="door" href="agent-public.html" style="--c:var(--admin)">
+        <span class="q">Concevoir</span>
+        <h3>Le parcours en cinq étapes pour l'agent public</h3>
+        <p>Retrouver sa démarche, comprendre d'où viennent les gains annoncés, tester ses propres hypothèses, repartir avec trois actions concrètes.</p>
+        <span class="go">Suivre le parcours →</span>
+        <span class="meta">5 étapes</span>
+      </a>
     </div>
   </section>
 
@@ -205,6 +223,7 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
     </div>
   </section>
 
+  <span id="donnees"></span>
   <section id="explorer" aria-labelledby="h-map">
     <h2 id="h-map">Explorer la cartographie</h2>
     <div class="map">
