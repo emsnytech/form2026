@@ -45,20 +45,20 @@ rang_avant,rang_apres,cerfa,titre,volumetrie_dila,total_bas,total_central,total_
 44,41,15187*02,Demande d'autorisation de travail pour conclure un contrat de travail avec un salarié étranger résidant hors de France,19177,601678,671866,1062406,classe,,
 45,42,15973*01,Convention conclue entre le jeune au pair et la famille d'accueil,41018,437771,526781,613082,mention,C,"Convention de droit privé, conservée : à joindre à la demande de visa ou de titre de séjour, absente du classement."
 46,43,15614*04,Éléments du contrat de travail du salarié étranger -- Demande de carte de séjour pluriannuelle Passeport Talent (salarié diplômé / salarié d'entreprise innovante),13308,417539,446417,489402,mention,B,"Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
-47,44,11543*05,Récépissé de déclaration d'ouverture / mutation / translation d'un débit de boissons,4835,151698,162190,177807,classe,,
-48,45,15615*01,"Éléments du contrat de travail justifiant une demande de carte de séjour pluriannuelle Passeport Talent ""Carte bleue européenne""",3932,123367,131899,144599,mention,B,"Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
-49,46,15616*01,"Éléments du contrat de travail justifiant une demande de carte de séjour Passeport Talent ""Salarié en mission""",3932,123367,131899,144599,mention,B,"Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
-50,47,16212*05,Demande d'autorisation d'instruction dans la famille,7622,81347,114533,127796,classe,,
-51,48,14098*02,Déclaration relative à un spectacle pyrotechnique,3384,106173,113516,124447,classe,,
-52,49,15618*01,Notification d'un détachement de courte durée (90 jours au plus) d'un salarié étranger titulaire d'un titre de séjour européen ICT,1278,40097,42871,46998,mention,titre,"Titre rétabli d'après le formulaire officiel : notification autonome, pas une pièce jointe."
-53,50,14363*01,Procédure de reconnaissance des groupements agricoles d'exploitation en commun (GAEC),769,22409,24077,25415,classe,,
-54,51,15824*03,Déclaration des manifestations sportives (hors cyclisme) sur voie publique ou ouverte à la circulation,708,22214,23750,26037,classe,,
-55,52,15617*01,"Éléments du ou des contrats de travail justifiant la demande d'une carte de séjour Passeport Talent ""Profession artistique et culturelle""",690,21649,23146,25375,mention,B,"Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
-56,53,16079*03,Convention d'accueil d'un chercheur ou d'un enseignant étranger,682,21398,22878,25081,mention,C,"Convention d'accueil, conservée : établie en vue de l'admission au séjour, démarche absente du classement."
-57,54,15625*04,Demande d'autorisation individuelle de transport exceptionnel,580,18198,19456,21330,classe,,
-58,55,15476*04,Déclaration d'activité particulière d'un exploitant d'aéronef télépiloté (drone),488,15311,16370,17946,classe,,
-59,56,15651*01,Déclaration de mise en location de logement (permis de louer),1153,12306,14808,17234,classe,,
-60,57,13984,"Déclaration d'activité relevant de la remise directe de denrées alimentaires (restauration, préparation, vente)",438,13742,14693,16107,classe,,
-61,58,11733*02,Demande d'inscription sur le registre des revendeurs d'objets mobiliers,1096,11697,14076,16382,classe,,
-62,59,13837*03,"Déclaration d'ouvrage -- prélèvements, puits et forages à usage domestique",559,5966,7179,8355,classe,,
-63,60,12818*02,Demande de recevabilité d'un dossier de validation des acquis de l'expérience (VAE),517,5518,6640,7727,classe,,
+47,,11543*05,Récépissé de déclaration d'ouverture / mutation / translation d'un débit de boissons,4835,151698,162190,177807,retire,A,"Récépissé délivré par l'administration à la suite de la déclaration : acte de l'administration, pas une démarche accomplie par un usager."
+48,44,15615*01,"Éléments du contrat de travail justifiant une demande de carte de séjour pluriannuelle Passeport Talent ""Carte bleue européenne""",3932,123367,131899,144599,mention,B,"Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
+49,45,15616*01,"Éléments du contrat de travail justifiant une demande de carte de séjour Passeport Talent ""Salarié en mission""",3932,123367,131899,144599,mention,B,"Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
+50,46,16212*05,Demande d'autorisation d'instruction dans la famille,7622,81347,114533,127796,classe,,
+51,47,14098*02,Déclaration relative à un spectacle pyrotechnique,3384,106173,113516,124447,classe,,
+52,48,15618*01,Notification d'un détachement de courte durée (90 jours au plus) d'un salarié étranger titulaire d'un titre de séjour européen ICT,1278,40097,42871,46998,mention,titre,"Titre rétabli d'après le formulaire officiel : notification autonome, pas une pièce jointe."
+53,49,14363*01,Procédure de reconnaissance des groupements agricoles d'exploitation en commun (GAEC),769,22409,24077,25415,classe,,
+54,50,15824*03,Déclaration des manifestations sportives (hors cyclisme) sur voie publique ou ouverte à la circulation,708,22214,23750,26037,classe,,
+55,51,15617*01,"Éléments du ou des contrats de travail justifiant la demande d'une carte de séjour Passeport Talent ""Profession artistique et culturelle""",690,21649,23146,25375,mention,B,"Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
+56,52,16079*03,Convention d'accueil d'un chercheur ou d'un enseignant étranger,682,21398,22878,25081,mention,C,"Convention d'accueil, conservée : établie en vue de l'admission au séjour, démarche absente du classement."
+57,53,15625*04,Demande d'autorisation individuelle de transport exceptionnel,580,18198,19456,21330,classe,,
+58,54,15476*04,Déclaration d'activité particulière d'un exploitant d'aéronef télépiloté (drone),488,15311,16370,17946,classe,,
+59,55,15651*01,Déclaration de mise en location de logement (permis de louer),1153,12306,14808,17234,classe,,
+60,56,13984,"Déclaration d'activité relevant de la remise directe de denrées alimentaires (restauration, préparation, vente)",438,13742,14693,16107,classe,,
+61,57,11733*02,Demande d'inscription sur le registre des revendeurs d'objets mobiliers,1096,11697,14076,16382,classe,,
+62,58,13837*03,"Déclaration d'ouvrage -- prélèvements, puits et forages à usage domestique",559,5966,7179,8355,classe,,
+63,59,12818*02,Demande de recevabilité d'un dossier de validation des acquis de l'expérience (VAE),517,5518,6640,7727,classe,,

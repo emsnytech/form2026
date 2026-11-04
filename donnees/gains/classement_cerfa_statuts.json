@@ -4,6 +4,7 @@
   "statuts": {
     "11527*03": {"statut": "retire", "categorie": "A", "motif": "Attestation destinée à être produite en justice : pas une démarche administrative."},
     "16139*01": {"statut": "retire", "categorie": "A", "motif": "Requête adressée au juge aux affaires familiales : acte de procédure judiciaire, pas une démarche administrative."},
+    "11543*05": {"statut": "retire", "categorie": "A", "motif": "Récépissé délivré par l'administration à la suite de la déclaration : acte de l'administration, pas une démarche accomplie par un usager."},
     "14673*01": {"statut": "retire", "categorie": "B", "parent_cerfa": "14681*03", "parent_au_classement": true, "motif": "Certificat médical exigé par le dossier du permis plaisance (Cerfa 14681), lui-même au classement : le même flux serait compté deux fois."},
     "15695*01": {"statut": "mention", "categorie": "B", "parent_cerfa": "15692*01", "parent_au_classement": false, "mention": "Pièce à joindre à la demande à la MDPH (Cerfa 15692), absente du classement : seule représentation de ce flux."},
     "11752*02": {"statut": "mention", "categorie": "B", "parent_au_classement": null, "mention": "Pièce jointe à des démarches variables : sans démarche parente identifiable, le double compte ne peut être ni établi ni écarté."},
