@@ -7,10 +7,12 @@ Le script est rejouable : relancé, il ne change plus rien. Il s'arrête si un
 motif de retrait ou de maintien ne correspond plus aux données.
 
     python3 scripts/classement_cerfa.py
+    python3 scripts/classement_cerfa.py --check   # n'écrit rien, sort en erreur (1) si la page s'écarte des sources
 """
 import csv
 import json
 import re
+import sys
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parent.parent
@@ -23,6 +25,9 @@ RESUME = re.compile(r'(<script type="application/json" id="data-cerfa-resume">)(
 GAINS = ["gain_admin_bas", "gain_admin_central", "gain_admin_haut", "gain_usagers_demat",
          "gain_usagers_preremplissage_bas", "gain_usagers_preremplissage_central", "gain_usagers_preremplissage_haut"]
 TOTAUX = ["total_bas", "total_central", "total_haut"]
+# Textes et code de la page qui n'existent que dans explorer.html : leur perte doit faire échouer le contrôle.
+PRESENTS = ["cerfaRetire", "CERFA_RESUME", "Un ordre de priorité, pas une mesure", "Un biais de canal", "Téléchargements annuels", "cerfa-retires"]
+ABSENTS = ["Dossiers cumulés", "Volumétrie DILA", "cumul sur la période"]
 BLOC = re.compile(r'(<script type="application/json" id="data-cerfa">)(.*?)(</script>)', re.S)
 
 
@@ -114,18 +119,20 @@ def main():
               "concordance": [bonnes, paires], "rapport_min": calibrage[0]["rapport"], "rapport_max": calibrage[-1]["rapport"],
               "apres": {t: somme(gardes, f"total_{t}") for t in ("bas", "central", "haut")}, "formulaires": len(gardes)}
 
-    with SORTIE.open("w", encoding="utf-8", newline="") as f:
-        w = csv.writer(f)
-        w.writerow(["rang", "cerfa", "titre", "telechargements_annuels", "total_bas",
-                    "total_central", "total_haut", "statut", "categorie", "motif_ou_mention"])
-        rang = {c["cerfa"]: i for i, c in enumerate(sorted(gardes, key=lambda c: -c["total_central"]), 1)}
-        for c in sorted(cerfa, key=lambda c: -(c["total_central"] or 0)):
-            if c["cerfa"] not in unitaires:
-                continue
-            s = c.get("classement", {})
-            w.writerow([rang.get(c["cerfa"], ""), c["cerfa"], c["titre"], c["volumetrie_dila"] or "", c["total_bas"] or "",
-                        c["total_central"] or "", c["total_haut"] or "", s.get("statut", "classe"), s.get("categorie", ""),
-                        s.get("motif") or s.get("mention") or ""])
+    controle = "--check" in sys.argv
+    if not controle:
+        with SORTIE.open("w", encoding="utf-8", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["rang", "cerfa", "titre", "telechargements_annuels", "total_bas",
+                        "total_central", "total_haut", "statut", "categorie", "motif_ou_mention"])
+            rang = {c["cerfa"]: i for i, c in enumerate(sorted(gardes, key=lambda c: -c["total_central"]), 1)}
+            for c in sorted(cerfa, key=lambda c: -(c["total_central"] or 0)):
+                if c["cerfa"] not in unitaires:
+                    continue
+                s = c.get("classement", {})
+                w.writerow([rang.get(c["cerfa"], ""), c["cerfa"], c["titre"], c["volumetrie_dila"] or "", c["total_bas"] or "",
+                            c["total_central"] or "", c["total_haut"] or "", s.get("statut", "classe"), s.get("categorie", ""),
+                            s.get("motif") or s.get("mention") or ""])
 
     texte = json.dumps(cerfa, ensure_ascii=False, separators=(",", ":"))
     assert "</script" not in texte.lower()
@@ -133,6 +140,14 @@ def main():
     r = json.dumps(resume, ensure_ascii=False, separators=(",", ":"))
     m = RESUME.search(page)
     page = page[:m.start(2)] + r + page[m.end(2):]
+    if controle:
+        ecarts = [f"texte absent : {t}" for t in PRESENTS if t not in page] + [f"texte périmé : {t}" for t in ABSENTS if t in page]
+        if page != PAGE.read_text(encoding="utf-8"):
+            ecarts.append("les données de la page diffèrent de celles recalculées depuis les sources")
+        for e in ecarts:
+            print("ÉCART", e)
+        print(f"Classement CERFA : {len(ecarts)} écart(s), total central {resume['apres']['central']:,} €.")
+        sys.exit(1 if ecarts else 0)
     PAGE.write_text(page, encoding="utf-8")
     print(json.dumps({k: v for k, v in resume.items() if k != "calibrage"}, ensure_ascii=False))
     for l in calibrage:

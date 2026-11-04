@@ -19,3 +19,7 @@ Site généré statiquement — publié via GitHub Pages.
 ## Contrôle des liens
 
 `python3 scripts/verifier_liens.py` teste tous les liens internes et externes du site. Le workflow `.github/workflows/verifier-liens.yml` lance les liens des pages à chaque PR, et tous les liens, données embarquées comprises, chaque semaine. Le rapport est disponible dans les artefacts du workflow.
+
+## Sources de `explorer.html`
+
+`explorer.html` est maintenu directement : ne pas le régénérer depuis un ancien gabarit. Les données du classement CERFA viennent de `donnees/gains/` et de `scripts/classement_cerfa.py`. À chaque modification, `classement_cerfa.py --check` échoue si la page s'en écarte ou si un texte de méthode a disparu.
