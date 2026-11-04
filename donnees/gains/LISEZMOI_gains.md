@@ -28,7 +28,7 @@ Les paramètres numériques (constantes, hypothèses, sources) utilisés dans le
 
 Classement des formulaires CERFA papier de l'onglet du même nom dans `explorer.html`. C'est un ordre de priorité, pas une mesure.
 
-- **`telechargements_dila.csv` :** fichier de la DILA, nombre de téléchargements par version de Cerfa sur un an à fin 2024 (`scripts/telechargements_dila.py`). Un formulaire vaut la somme de ses versions.
+- **`telechargements_dila.csv` :** fichier de la DILA, nombre de téléchargements par version de Cerfa sur un an à fin 2024 (`scripts/telechargements_dila.py`). La colonne du fichier s'intitule « Nombre de téléchargements sur GF » : la DILA a confirmé en novembre 2026 qu'il s'agit des téléchargements sur le site service-public. Un formulaire vaut la somme de ses versions.
 - **`classement_cerfa_statuts.json` :** les décisions et leurs motifs. `scripts/classement_cerfa.py` les applique et écrit `classement_cerfa_detail.csv`.
 - **`classement_cerfa_unitaires.json` :** le gain par téléchargement de chaque formulaire.
 - **Total central :** 153 876 242 € avec des sources mélangées, 148 087 599 € avec une lecture provisoire de l'ancien export, 135 979 655 € avec ce fichier. 55 formulaires sont chiffrés, 3 ne le sont pas faute de téléchargement compté, 5 sont retirés.
