@@ -1,0 +1,686 @@
+[
+ {
+  "famille": "Listes d'aptitude : une fiche de candidature par ressort",
+  "demarches": 205,
+  "emetteurs_distincts": 2,
+  "siret_distincts": 1,
+  "pj_max": 1,
+  "departements": 1,
+  "dossiers": 5858,
+  "champs_moyens": 61.4,
+  "champs_min": 61,
+  "champs_max": 62,
+  "pj_moyennes": 1.0,
+  "avec_annuaire_education": 0,
+  "avec_quotient_familial": 0,
+  "avec_iban": 0,
+  "par_annee": {
+   "2024": 83,
+   "2025": 81,
+   "2026": 41
+  },
+  "exemples": [
+   {
+    "number": 106852,
+    "title": "2025-Cadre greffier-LA-Ressort d'Aix-en-Provence - Fiche de candidature - Recrutement sur liste d'aptitude des cadres greffiers, au titre de l'année 2025",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des carrières et de la mobilité professionnelle",
+    "dossiers": 187,
+    "n_champs": 62
+   },
+   {
+    "number": 106890,
+    "title": "2025-Cadre greffier-LA-Ressort de Rennes - Fiche de candidature - Recrutement sur liste d'aptitude des cadres greffiers, au titre de l'année 2025",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des carrières et de la mobilité professionnelle",
+    "dossiers": 162,
+    "n_champs": 62
+   },
+   {
+    "number": 106885,
+    "title": "2025-Cadre greffier-LA-Ressort de Paris - Fiche de candidature - Recrutement sur liste d'aptitude des cadres greffiers, au titre de l'année 2025",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des carrières et de la mobilité professionnelle",
+    "dossiers": 162,
+    "n_champs": 62
+   },
+   {
+    "number": 106877,
+    "title": "2025-Cadre greffier-LA-Ressort de Lyon - Fiche de candidature - Recrutement sur liste d'aptitude des cadres greffiers, au titre de l'année 2025",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des carrières et de la mobilité professionnelle",
+    "dossiers": 151,
+    "n_champs": 62
+   },
+   {
+    "number": 106873,
+    "title": "2025-Cadre greffier-LA-Ressort de Douai - Fiche de candidature - Recrutement sur liste d'aptitude des cadres greffiers, au titre de l'année 2025",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des carrières et de la mobilité professionnelle",
+    "dossiers": 126,
+    "n_champs": 62
+   },
+   {
+    "number": 106096,
+    "title": "2024-CenG-LA-Ressort de Paris - Fiche de candidature - Accès au corps des greffiers des services judiciaires par liste d'aptitude, au titre de l'année 2024",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des carrières et de la mobilité professionnelle",
+    "dossiers": 112,
+    "n_champs": 61
+   }
+  ]
+ },
+ {
+  "famille": "Dossier de prise en charge après concours",
+  "demarches": 50,
+  "emetteurs_distincts": 2,
+  "siret_distincts": 1,
+  "pj_max": 19,
+  "departements": 1,
+  "dossiers": 6823,
+  "champs_moyens": 30.0,
+  "champs_min": 11,
+  "champs_max": 57,
+  "pj_moyennes": 7.6,
+  "avec_annuaire_education": 0,
+  "avec_quotient_familial": 0,
+  "avec_iban": 29,
+  "par_annee": {
+   "2021": 4,
+   "2022": 10,
+   "2023": 12,
+   "2024": 14,
+   "2025": 5,
+   "2026": 5
+  },
+  "exemples": [
+   {
+    "number": 36353,
+    "title": "Dossier de prise en charge suite au concours externe pour le recrutement des greffiers des services judiciaires au titre de l’année 2021 ",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation (RHG4) ",
+    "dossiers": 884,
+    "n_champs": 38
+   },
+   {
+    "number": 59629,
+    "title": "G2022 - Dossier de prise en charge - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l’année 2022",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation (RHG4) ",
+    "dossiers": 859,
+    "n_champs": 40
+   },
+   {
+    "number": 66652,
+    "title": "G2023 - CNAN - Dossier de prise en charge - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l’année 2023",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+    "dossiers": 688,
+    "n_champs": 40
+   },
+   {
+    "number": 147752,
+    "title": "G2026 S2 - Dossier de prise en charge - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l’année 2026 (Session 2)",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+    "dossiers": 556,
+    "n_champs": 41
+   },
+   {
+    "number": 120280,
+    "title": "G2025S02 - Dossier de prise en charge - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l’année 2025 (Session 2)",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+    "dossiers": 550,
+    "n_champs": 40
+   },
+   {
+    "number": 95746,
+    "title": "G2024S2 - Dossier de prise en charge - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l’année 2024 (Session 2)",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+    "dossiers": 410,
+    "n_champs": 40
+   }
+  ]
+ },
+ {
+  "famille": "Dossier RAEP et pièces d'examen professionnel",
+  "demarches": 49,
+  "emetteurs_distincts": 4,
+  "siret_distincts": 3,
+  "pj_max": 2,
+  "departements": 2,
+  "dossiers": 3505,
+  "champs_moyens": 10.8,
+  "champs_min": 7,
+  "champs_max": 17,
+  "pj_moyennes": 1.8,
+  "avec_annuaire_education": 0,
+  "avec_quotient_familial": 0,
+  "avec_iban": 0,
+  "par_annee": {
+   "2022": 7,
+   "2023": 8,
+   "2024": 8,
+   "2025": 8,
+   "2026": 18
+  },
+  "exemples": [
+   {
+    "number": 152846,
+    "title": "GPR 2026 - Dépôt du dossier RAEP - Examen professionnel d'accès au grade de greffier principal du corps des greffiers des services judiciaires, au titre de l'année 2026",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+    "dossiers": 464,
+    "n_champs": 11
+   },
+   {
+    "number": 152847,
+    "title": "GPR 2026 - Dépôt de pièces justificatives - Examen professionnel d'accès au grade de greffier principal du corps des greffiers des services judiciaires au titre de l’année 2026",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+    "dossiers": 444,
+    "n_champs": 10
+   },
+   {
+    "number": 139287,
+    "title": "C en B 2027 - Dépôt du dossier RAEP ",
+    "organisme": "Sous-direction de la stratégie, de l’attractivité et l’accompagnement des évolutions professionnelles, Service des Ressources Humaines, Secrétariat Général, Ministère de la Justice",
+    "dossiers": 205,
+    "n_champs": 8
+   },
+   {
+    "number": 145468,
+    "title": "Dépôt de dossier RAEP - Concours professionnel session 2026 - Ecole Nationale de la Magistrature ",
+    "organisme": "Ministère de la Justice, DSJ, Ecole nationale de la magistrature",
+    "dossiers": 201,
+    "n_champs": 11
+   },
+   {
+    "number": 103530,
+    "title": "Dépôt de dossier RAEP - Concours professionnel session 2025 - Ecole Nationale de la Magistrature ",
+    "organisme": "Ministère de la Justice, DSJ, Ecole nationale de la magistrature",
+    "dossiers": 181,
+    "n_champs": 11
+   },
+   {
+    "number": 71457,
+    "title": "DSG2023 - Dépôt de dossier RAEP dans le cadre du concours interne pour le recrutement des directeurs des services de greffe judiciaires, au titre de l'année 2023",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+    "dossiers": 153,
+    "n_champs": 12
+   }
+  ]
+ },
+ {
+  "famille": "Fiche individuelle de renseignement (FIR)",
+  "demarches": 8,
+  "emetteurs_distincts": 1,
+  "siret_distincts": 1,
+  "pj_max": 1,
+  "departements": 1,
+  "dossiers": 2175,
+  "champs_moyens": 9.0,
+  "champs_min": 9,
+  "champs_max": 9,
+  "pj_moyennes": 1.0,
+  "avec_annuaire_education": 0,
+  "avec_quotient_familial": 0,
+  "avec_iban": 0,
+  "par_annee": {
+   "2024": 1,
+   "2025": 3,
+   "2026": 4
+  },
+  "exemples": [
+   {
+    "number": 120267,
+    "title": "G2025S02 - Dépôt de la FIR - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l'année 2025 (session 2)",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+    "dossiers": 574,
+    "n_champs": 9
+   },
+   {
+    "number": 147749,
+    "title": "G2026 S2 - Dépôt de la FIR - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l'année 2026 (session 2)",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+    "dossiers": 573,
+    "n_champs": 9
+   },
+   {
+    "number": 132020,
+    "title": "G2026 S1 - Dépôt de la FIR - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l'année 2026 (session 1)",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+    "dossiers": 411,
+    "n_champs": 9
+   },
+   {
+    "number": 106032,
+    "title": "G2025S1 - Dépôt de la FIR - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l'année 2025 (session 1)",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+    "dossiers": 360,
+    "n_champs": 9
+   },
+   {
+    "number": 112515,
+    "title": "DSG 2025 - Dépôt de la FIR - Concours externe de directeurs des services de greffe judiciaires au titre de l'année 2025",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+    "dossiers": 126,
+    "n_champs": 9
+   },
+   {
+    "number": 140233,
+    "title": "DSG 2026 - Dépôt de la FIR - Concours externe de directeurs des services de greffe judiciaires au titre de l'année 2026",
+    "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+    "dossiers": 125,
+    "n_champs": 9
+   }
+  ]
+ },
+ {
+  "famille": "Pièces justificatives des concours de la magistrature",
+  "demarches": 8,
+  "emetteurs_distincts": 1,
+  "siret_distincts": 1,
+  "pj_max": 16,
+  "departements": 1,
+  "dossiers": 5486,
+  "champs_moyens": 28.4,
+  "champs_min": 17,
+  "champs_max": 40,
+  "pj_moyennes": 8.8,
+  "avec_annuaire_education": 0,
+  "avec_quotient_familial": 0,
+  "avec_iban": 0,
+  "par_annee": {
+   "2024": 1,
+   "2025": 4,
+   "2026": 3
+  },
+  "exemples": [
+   {
+    "number": 150072,
+    "title": "ENM -  concours-pro-2027 - pièces justificatives ",
+    "organisme": "Ministère de la Justice, DSJ, Ecole nationale de la magistrature",
+    "dossiers": 1626,
+    "n_champs": 32
+   },
+   {
+    "number": 103529,
+    "title": "ENM -  concours professionnel 2025 - pièces justificatives ",
+    "organisme": "Ministère de la Justice, DSJ, Ecole nationale de la magistrature",
+    "dossiers": 1181,
+    "n_champs": 40
+   },
+   {
+    "number": 122531,
+    "title": "ENM -  concours professionnel 2026 - pièces justificatives ",
+    "organisme": "Ministère de la Justice, DSJ, Ecole nationale de la magistrature",
+    "dossiers": 1064,
+    "n_champs": 32
+   },
+   {
+    "number": 134665,
+    "title": "ENM -  3ème concours de recrutement d'ADJ (2026) : pièces à déposer par les candidats ",
+    "organisme": "Ministère de la justice, DSJ, Ecole nationale de la magistrature",
+    "dossiers": 636,
+    "n_champs": 27
+   },
+   {
+    "number": 122417,
+    "title": "ENM -  1er concours et/ou 1er concours spécial talents de recrutement d'ADJ (2025) : pièces à déposer par les candidats déclarés admissibles ",
+    "organisme": "Ministère de la justice, DSJ, Ecole nationale de la magistrature",
+    "dossiers": 478,
+    "n_champs": 25
+   },
+   {
+    "number": 148382,
+    "title": "ENM -  1er concours et/ou 1er concours spécial talents de recrutement d'ADJ (2026) : pièces à déposer par les candidats déclarés admissibles ",
+    "organisme": "Ministère de la justice, DSJ, Ecole nationale de la magistrature",
+    "dossiers": 402,
+    "n_champs": 25
+   }
+  ]
+ },
+ {
+  "famille": "Classe prépa Talents, École nationale de la magistrature",
+  "demarches": 4,
+  "emetteurs_distincts": 1,
+  "siret_distincts": 1,
+  "pj_max": 46,
+  "departements": 1,
+  "dossiers": 1184,
+  "champs_moyens": 185.0,
+  "champs_min": 156,
+  "champs_max": 218,
+  "pj_moyennes": 35.5,
+  "avec_annuaire_education": 0,
+  "avec_quotient_familial": 0,
+  "avec_iban": 0,
+  "par_annee": {
+   "2023": 1,
+   "2024": 1,
+   "2025": 1,
+   "2026": 1
+  },
+  "exemples": [
+   {
+    "number": 109429,
+    "title": "ENM - CPT : Dossier de candidature Classe Prépa Talents 2025-2026",
+    "organisme": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "dossiers": 324,
+    "n_champs": 203
+   },
+   {
+    "number": 135911,
+    "title": "ENM - CPT : Dossier de candidature Classe Prépa Talents 2026-2027",
+    "organisme": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "dossiers": 323,
+    "n_champs": 218
+   },
+   {
+    "number": 68423,
+    "title": "Dossier de candidature Classe Prépa Talents 2023-2024 - ENM",
+    "organisme": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "dossiers": 280,
+    "n_champs": 156
+   },
+   {
+    "number": 85572,
+    "title": "ENM - CPT : Dossier de candidature Classe Prépa Talents 2024-2025",
+    "organisme": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "dossiers": 257,
+    "n_champs": 163
+   }
+  ]
+ },
+ {
+  "famille": "Classe prépa Talents, École nationale des greffes",
+  "demarches": 5,
+  "emetteurs_distincts": 1,
+  "siret_distincts": 1,
+  "pj_max": 17,
+  "departements": 1,
+  "dossiers": 829,
+  "champs_moyens": 87.6,
+  "champs_min": 73,
+  "champs_max": 99,
+  "pj_moyennes": 16.0,
+  "avec_annuaire_education": 5,
+  "avec_quotient_familial": 0,
+  "avec_iban": 0,
+  "par_annee": {
+   "2022": 1,
+   "2023": 1,
+   "2024": 1,
+   "2025": 1,
+   "2026": 1
+  },
+  "exemples": [
+   {
+    "number": 136202,
+    "title": "Dossier d'inscription Classe Prépa Talents de l'Ecole nationale des greffes (ENG) - session 2026-2027",
+    "organisme": "Ecole nationale des greffes",
+    "dossiers": 295,
+    "n_champs": 73
+   },
+   {
+    "number": 112113,
+    "title": "Dossier d'inscription Classe Prépa Talents de l'Ecole nationale des greffes (ENG) - session 2025-2026",
+    "organisme": "Ecole nationale des greffes",
+    "dossiers": 210,
+    "n_champs": 73
+   },
+   {
+    "number": 87684,
+    "title": "Dossier d'inscription Classe Prépa Talents de l'Ecole nationale des greffes (ENG) - session 2024-2025",
+    "organisme": "Ecole nationale des greffes",
+    "dossiers": 158,
+    "n_champs": 94
+   },
+   {
+    "number": 70763,
+    "title": "Dossier d'inscription Classe Prépa Talents de l'Ecole nationale des greffes (ENG) - session 2023-2024",
+    "organisme": "Ecole nationale des greffes",
+    "dossiers": 99,
+    "n_champs": 99
+   },
+   {
+    "number": 54374,
+    "title": "Dossier d'inscription Classe Prépa Talents de l'Ecole nationale des greffes (ENG) - session 2022-2",
+    "organisme": "Ecole nationale des greffes",
+    "dossiers": 67,
+    "n_champs": 99
+   }
+  ]
+ },
+ {
+  "famille": "Bourses de la classe prépa Talents",
+  "demarches": 5,
+  "emetteurs_distincts": 1,
+  "siret_distincts": 1,
+  "pj_max": 18,
+  "departements": 1,
+  "dossiers": 235,
+  "champs_moyens": 52.0,
+  "champs_min": 36,
+  "champs_max": 66,
+  "pj_moyennes": 9.8,
+  "avec_annuaire_education": 0,
+  "avec_quotient_familial": 0,
+  "avec_iban": 0,
+  "par_annee": {
+   "2025": 3,
+   "2026": 2
+  },
+  "exemples": [
+   {
+    "number": 142892,
+    "title": "ENM - CPT 2026/2027 - dossier de demande de bourse et informations complémentaires - primo-entrants",
+    "organisme": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "dossiers": 100,
+    "n_champs": 39
+   },
+   {
+    "number": 121881,
+    "title": "ENM - CPT 2025/2026 - dossier de demande de bourse et informations complémentaires",
+    "organisme": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "dossiers": 82,
+    "n_champs": 36
+   },
+   {
+    "number": 125234,
+    "title": "ENM - CPT 2025/2026 - dossier de demande de bourse et informations complémentaires - réussite à retardement",
+    "organisme": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "dossiers": 23,
+    "n_champs": 59
+   },
+   {
+    "number": 142898,
+    "title": "ENM - CPT 2026/2027 - dossier de demande de bourse et informations complémentaires - réussite à retardement non admissibles",
+    "organisme": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "dossiers": 19,
+    "n_champs": 66
+   },
+   {
+    "number": 132271,
+    "title": "ENM - CPT 2025/2026 - dossier de demande de bourse et informations complémentaires - réussite à retardement - admissibles",
+    "organisme": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "dossiers": 11,
+    "n_champs": 60
+   }
+  ]
+ },
+ {
+  "famille": "Consentement au droit à l'image",
+  "demarches": 6,
+  "emetteurs_distincts": 1,
+  "siret_distincts": 1,
+  "pj_max": 0,
+  "departements": 1,
+  "dossiers": 618,
+  "champs_moyens": 9.2,
+  "champs_min": 9,
+  "champs_max": 10,
+  "pj_moyennes": 0.0,
+  "avec_annuaire_education": 0,
+  "avec_quotient_familial": 0,
+  "avec_iban": 0,
+  "par_annee": {
+   "2026": 6
+  },
+  "exemples": [
+   {
+    "number": 143484,
+    "title": "B2026C01_Formulaire consentement droit à l'image - Prestation de serment 13.05.2026",
+    "organisme": "Ecole nationale des greffes, direction des services judiciaires, ministère de la Justice",
+    "dossiers": 245,
+    "n_champs": 9
+   },
+   {
+    "number": 158906,
+    "title": "B2026C03D01_Formulaire consentement droit à l'image - Prestation de serment 06.11.2026",
+    "organisme": "Ecole nationale des greffes, direction des services judiciaires, ministère de la Justice",
+    "dossiers": 160,
+    "n_champs": 9
+   },
+   {
+    "number": 147158,
+    "title": "B2026C02E01_Formulaire consentement droit à l'image - Prestation de serment 25.06.2026",
+    "organisme": "Ecole nationale des greffes, direction des services judiciaires, ministère de la Justice",
+    "dossiers": 122,
+    "n_champs": 9
+   },
+   {
+    "number": 148202,
+    "title": "A2026C01X01_Formulaire consentement droit à l'image - Prestation de serment 02.10.2026",
+    "organisme": "Ecole nationale des greffes, direction des services judiciaires, ministère de la Justice",
+    "dossiers": 69,
+    "n_champs": 9
+   },
+   {
+    "number": 142956,
+    "title": "Formulaire consentement droit à l'image",
+    "organisme": "Ecole nationale des greffes, direction des services judiciaires, ministère de la Justice",
+    "dossiers": 14,
+    "n_champs": 10
+   },
+   {
+    "number": 145430,
+    "title": "FC_Formulaire consentement droit à l'image ",
+    "organisme": "Ecole nationale des greffes, direction des services judiciaires, ministère de la Justice",
+    "dossiers": 8,
+    "n_champs": 9
+   }
+  ]
+ },
+ {
+  "famille": "Indemnités et vacations",
+  "demarches": 8,
+  "emetteurs_distincts": 2,
+  "siret_distincts": 1,
+  "pj_max": 11,
+  "departements": 1,
+  "dossiers": 5700,
+  "champs_moyens": 23.1,
+  "champs_min": 16,
+  "champs_max": 29,
+  "pj_moyennes": 6.6,
+  "avec_annuaire_education": 0,
+  "avec_quotient_familial": 0,
+  "avec_iban": 0,
+  "par_annee": {
+   "2023": 2,
+   "2024": 4,
+   "2025": 2
+  },
+  "exemples": [
+   {
+    "number": 84443,
+    "title": "ENM - SRH - Dossier administratif de paiement des vacations - intervenants",
+    "organisme": "Ecole Nationale de la Magistrature ",
+    "dossiers": 5009,
+    "n_champs": 29
+   },
+   {
+    "number": 106217,
+    "title": "ENM - RH ADJ P 2025 : Etude calcul - Indemnité forfaitaire mensuelle",
+    "organisme": "ECOLE NATIONALE DE LA MAGISTRATURE (ENM)",
+    "dossiers": 225,
+    "n_champs": 28
+   },
+   {
+    "number": 106210,
+    "title": "ENM - RH ADJ P 2025 : Campagne d'attribution de l'indemnité de maintien de rémunération",
+    "organisme": "ECOLE NATIONALE DE LA MAGISTRATURE (ENM)",
+    "dossiers": 161,
+    "n_champs": 16
+   },
+   {
+    "number": 99653,
+    "title": "ENM - RH - CID octobre 2024 - IFM ",
+    "organisme": "Ecole Nationale de la Magistrature",
+    "dossiers": 106,
+    "n_champs": 26
+   },
+   {
+    "number": 132245,
+    "title": "ENM - RH ADJ P 2026 : Etude calcul - Indemnité forfaitaire mensuelle",
+    "organisme": "Ecole nationale de la magistrature",
+    "dossiers": 86,
+    "n_champs": 28
+   },
+   {
+    "number": 132243,
+    "title": "ENM - RH ADJ P 2026 : Campagne d'attribution de l'indemnité de maintien de rémunération",
+    "organisme": "Ecole nationale de la magistrature",
+    "dossiers": 69,
+    "n_champs": 16
+   }
+  ]
+ },
+ {
+  "famille": "Subventions et appels à projets",
+  "demarches": 5,
+  "emetteurs_distincts": 3,
+  "siret_distincts": 3,
+  "pj_max": 9,
+  "departements": 3,
+  "dossiers": 146,
+  "champs_moyens": 39.2,
+  "champs_min": 20,
+  "champs_max": 58,
+  "pj_moyennes": 6.6,
+  "avec_annuaire_education": 0,
+  "avec_quotient_familial": 0,
+  "avec_iban": 0,
+  "par_annee": {
+   "2025": 2,
+   "2026": 3
+  },
+  "exemples": [
+   {
+    "number": 140053,
+    "title": "Appel à projet 2026 du Lab [Transformation Ecologique]",
+    "organisme": "DISP, établissements pénitentiaires, SPIP",
+    "dossiers": 77,
+    "n_champs": 20
+   },
+   {
+    "number": 150648,
+    "title": "Appel à projet 2027 du Lab [Transformation Ecologique]",
+    "organisme": "DISP, établissements pénitentiaires, SPIP",
+    "dossiers": 35,
+    "n_champs": 20
+   },
+   {
+    "number": 144606,
+    "title": "CDAD 57 - Demande de Subvention Association 2026",
+    "organisme": "CDAD de la Moselle",
+    "dossiers": 15,
+    "n_champs": 47
+   },
+   {
+    "number": 98320,
+    "title": "CDAD 57 - Demande de Subvention Association 2025",
+    "organisme": "CDAD de la Moselle",
+    "dossiers": 14,
+    "n_champs": 58
+   },
+   {
+    "number": 128159,
+    "title": "CDAD de l'Eure - demande de subvention accès au droit 2026",
+    "organisme": "CDAD de l'Eure",
+    "dossiers": 5,
+    "n_champs": 51
+   }
+  ]
+ }
+]

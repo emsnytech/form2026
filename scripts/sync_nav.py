@@ -43,12 +43,12 @@ def load_ressources():
     return data["ordre_rubriques"], data["rubriques"]
 
 
-def build_nav_html(ordre, rubriques, rubrique_courante):
-    parts = ['<a href="index.html">FORM 2026</a>']
+def build_nav_html(ordre, rubriques, rubrique_courante, prefixe=""):
+    parts = [f'<a href="{prefixe}index.html">FORM 2026</a>']
     for k in ordre:
         verbe = rubriques[k]["verbe"]
         attr = ' aria-current="page"' if k == rubrique_courante else ""
-        parts.append(f'<a href="index.html#{k}"{attr}>{verbe}</a>')
+        parts.append(f'<a href="{prefixe}index.html#{k}"{attr}>{verbe}</a>')
     return " · ".join(parts)
 
 
@@ -68,7 +68,9 @@ def sync_file(path, ordre, rubriques):
     rubrique_courante = m.group(2) or None
     if rubrique_courante and rubrique_courante not in rubriques:
         raise ValueError(f"{path}: data-rubrique={rubrique_courante!r} inconnue de ressources.json")
-    new_inner = build_nav_html(ordre, rubriques, rubrique_courante)
+    # Une page dans un sous-dossier remonte à la racine pour atteindre l'accueil.
+    prefixe = "../" * (len(path.relative_to(ROOT).parts) - 1)
+    new_inner = build_nav_html(ordre, rubriques, rubrique_courante, prefixe)
     new_block = m.group(1) + NAV_START + new_inner + NAV_END
     new_text = text[: m.start()] + new_block + text[m.end():]
     changed = new_text != text
