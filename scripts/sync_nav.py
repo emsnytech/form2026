@@ -37,6 +37,9 @@ CARRIER_RE = re.compile(
 # Répertoires jamais parcourus (données, méthode, dossiers de travail non publiés).
 EXCLUDE_DIR_PARTS = {"donnees", "methode", "methode-svr", "methode-outillage", "methode-canaux", "Claude outputs", "_fiches-ministeres", ".git"}
 
+# Pages publiques situées dans un répertoire exclu.
+PAGES_INCLUSES = {"donnees/index.html"}
+
 
 def load_ressources():
     data = json.loads(RESSOURCES.read_text(encoding="utf-8"))
@@ -54,8 +57,8 @@ def build_nav_html(ordre, rubriques, rubrique_courante, prefixe=""):
 
 def iter_candidate_files():
     for path in sorted(ROOT.rglob("*.html")):
-        rel_parts = set(path.relative_to(ROOT).parts)
-        if rel_parts & EXCLUDE_DIR_PARTS:
+        rel = path.relative_to(ROOT)
+        if set(rel.parts) & EXCLUDE_DIR_PARTS and rel.as_posix() not in PAGES_INCLUSES:
             continue
         yield path
 

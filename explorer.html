@@ -121,6 +121,9 @@
   .mono{font-family:'IBM Plex Mono', ui-monospace, monospace}
 
   /* ---- app header ---- */
+  .topnav{margin:0;padding:8px 20px;font-size:.88rem;color:var(--muted)}
+  .topnav a{color:var(--accent);text-decoration:none;font-weight:600}
+  .topnav a:hover{text-decoration:underline}
   header.app{
     background:var(--accent); color:#fff;
     padding:14px 20px; display:flex; align-items:center; gap:14px; flex:none;
@@ -358,6 +361,7 @@
 
 </style>
 
+<p class="topnav" data-rubrique="donnees"><!-- nav:début --><a href="index.html">FORM 2026</a> · <a href="index.html#mesurer">Mesurer</a> · <a href="index.html#concevoir">Concevoir</a> · <a href="index.html#situer">Situer</a> · <a href="index.html#donnees" aria-current="page">Données</a><!-- nav:fin --></p>
 <header class="app">
   <div class="badge-home" id="btn-home" title="Retour à la page de garde" role="button" tabindex="0">🗄️</div>
   <h1 id="title-home" title="Retour à la page de garde">FORM 2026 — Cartographie des démarches administratives</h1>
