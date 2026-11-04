@@ -75,6 +75,8 @@ confirmer ») avec la mention `partage_non_attribuable` quand un Cerfa est utili
 plusieurs procédures distinctes (le volume ne peut alors être attribué à aucune en
 particulier). Un téléchargement de formulaire n'est pas un dossier déposé.
 
+**Correction de novembre 2026 :** `telechargements_2024` et la colonne `volume` du top 50 reprennent la référence unique `donnees/gains/telechargements_dila.csv` : la plus élevée des deux colonnes de l'export DILA, dont la lecture n'est pas confirmée par la DILA. L'ordre du top 50 reste celui de la colonne par fiche, ses volumes ne sont donc plus tous décroissants. Les notes datées et les fichiers de `methode-outillage/` gardent les valeurs d'origine.
+
 ### `top50_regime_juridique_2026-10-28.csv`
 
 Les 50 formulaires les plus téléchargés de la base DILA (tous usages, pas seulement

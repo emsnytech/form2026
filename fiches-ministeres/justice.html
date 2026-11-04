@@ -356,7 +356,7 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
     <p>Les Cerfa <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/R18606" target="_blank" rel="noopener">12821</a> et <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/R1408" target="_blank" rel="noopener">11808</a> se remplissent en ligne, mais s'impriment et s'envoient. Le tribunal judiciaire de Lille en a publié une version en ligne : 2 311 dossiers et 39 champs. Elle a fermé le 29 juillet 2026 sans raison publique, et aucune reprise n'a été trouvée. Trois autres démarches de ce tribunal ont fermé entre le 21 et le 29 juillet 2026, et une quatrième le 24 juin. D'autres cours d'appel publient leurs propres formulaires ou consignes pour le certificat, par exemple <a href="https://www.cours-appel.justice.fr/bordeaux/demande-de-certificat-de-non-appel" target="_blank" rel="noopener">Bordeaux</a> et <a href="https://www.cours-appel.justice.fr/rennes/demande-de-certificat-de-non-appel" target="_blank" rel="noopener">Rennes</a>, et <a href="https://www.justice.fr/formulaire/demande-certificat-non-appel" target="_blank" rel="noopener">justice.fr</a> propose un formulaire. Ce contexte n'explique pas la fermeture lilloise.</p>
   </div>
   <div class="tbl" id="t-papier"></div>
-  <p class="small col">Téléchargements : fichier service-public.fr utilisé par FORM 2026. La nature de l'obstacle est une lecture de la fiche à partir des sources liées, pas une qualification juridique. FORM 2026 a analysé 68 Cerfa, dont 2 adressés à une juridiction. Aucun des exemples ci-dessus n'y figure.</p>
+  <p class="small col">Téléchargements annuels : export DILA repris par FORM 2026, sur une année, lecture de ses colonnes non confirmée par la DILA. Ce ne sont pas des dossiers déposés. La nature de l'obstacle est une lecture de la fiche à partir des sources liées, pas une qualification juridique. FORM 2026 a analysé 68 Cerfa, dont 2 adressés à une juridiction. Aucun des exemples ci-dessus n'y figure.</p>
 </section>
 
 <section id="ressources">
@@ -534,7 +534,7 @@ table("t-qual", ["Année", "Champs (plateforme)", "PJ (plateforme)", "SIRET", "I
   DATA.qual.map((q, i) => [YL[i], `${String(q.champs).replace(".", ",")} (${String(q.champs_p).replace(".", ",")})`, `${String(q.pj).replace(".", ",")} (${String(q.pj_p).replace(".", ",")})`, pc(q.siret), pc(q.iban), pc(q.rna), fr.format(q.apip), fr.format(q.eph)]), [1,2,3,4,5,6,7]);
 
 /* 7. Papier */
-table("t-papier", ["Démarche", "Statut", "Nature de l'obstacle", "Téléchargements"],
+table("t-papier", ["Démarche", "Statut", "Nature de l'obstacle", "Téléchargements annuels"],
   DATA.papier.map(p => [`<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.t)}</a>`, esc(p.s), esc(p.o), fr.format(p.v)]), [3]);
 
 /* 8. Revenu fiscal */

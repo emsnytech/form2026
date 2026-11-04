@@ -1,22 +1,155 @@
 {
-  "_lisezmoi": "Statut de chaque entrée du classement CERFA dont la nature a été examinée (arbitrage du 4 novembre 2026). Appliqué à explorer.html par scripts/classement_cerfa.py. Le test sur les pièces jointes porte sur le double compte : si la démarche dont le formulaire est une pièce figure au classement, la pièce sort ; sinon elle reste, avec une mention.",
-  "date_examen": "2026-11-04",
+  "_lisezmoi": "Statut de chaque entrée du classement CERFA dont la nature a été examinée. Appliqué à explorer.html par scripts/classement_cerfa.py, avec la référence donnees/gains/telechargements_dila.csv. Une pièce jointe sort si sa démarche parente figure au classement ; un formulaire sort pour « en_ligne » seulement si une démarche correspond vraiment à ce formulaire.",
+  "date_examen": "2026-11-05",
   "statuts": {
-    "11527*03": {"statut": "retire", "categorie": "A", "motif": "Attestation destinée à être produite en justice : pas une démarche administrative."},
-    "16139*01": {"statut": "retire", "categorie": "A", "motif": "Requête adressée au juge aux affaires familiales : acte de procédure judiciaire, pas une démarche administrative."},
-    "11543*05": {"statut": "retire", "categorie": "A", "motif": "Récépissé délivré par l'administration à la suite de la déclaration : acte de l'administration, pas une démarche accomplie par un usager."},
-    "14673*01": {"statut": "retire", "categorie": "B", "parent_cerfa": "14681*03", "parent_au_classement": true, "motif": "Certificat médical exigé par le dossier du permis plaisance (Cerfa 14681), lui-même au classement : le même flux serait compté deux fois."},
-    "15695*01": {"statut": "mention", "categorie": "B", "parent_cerfa": "15692*01", "parent_au_classement": false, "mention": "Pièce à joindre à la demande à la MDPH (Cerfa 15692), absente du classement : seule représentation de ce flux."},
-    "11752*02": {"statut": "mention", "categorie": "B", "parent_au_classement": null, "mention": "Pièce jointe à des démarches variables : sans démarche parente identifiable, le double compte ne peut être ni établi ni écarté."},
-    "15619*01": {"statut": "mention", "categorie": "B", "parent_au_classement": false, "mention": "Pièce de la demande de carte de séjour « salarié détaché ICT », absente du classement : seule représentation de ce flux."},
-    "15614*04": {"statut": "mention", "categorie": "B", "parent_au_classement": false, "mention": "Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."},
-    "15615*01": {"statut": "mention", "categorie": "B", "parent_au_classement": false, "mention": "Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."},
-    "15616*01": {"statut": "mention", "categorie": "B", "parent_au_classement": false, "mention": "Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."},
-    "15617*01": {"statut": "mention", "categorie": "B", "parent_au_classement": false, "mention": "Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."},
-    "15618*01": {"statut": "mention", "categorie": "titre", "titre_corrige": "Notification d'un détachement de courte durée (90 jours au plus) d'un salarié étranger titulaire d'un titre de séjour européen ICT", "mention": "Titre rétabli d'après le formulaire officiel : notification autonome, pas une pièce jointe."},
-    "10103*14": {"statut": "mention", "categorie": "C", "mention": "Contrat de droit privé, conservé : déposé auprès d'un opérateur de compétences."},
-    "12434*05": {"statut": "mention", "categorie": "C", "mention": "Contrat de droit privé, conservé : déposé auprès d'un opérateur de compétences."},
-    "15973*01": {"statut": "mention", "categorie": "C", "parent_au_classement": false, "mention": "Convention de droit privé, conservée : à joindre à la demande de visa ou de titre de séjour, absente du classement."},
-    "16079*03": {"statut": "mention", "categorie": "C", "parent_au_classement": false, "mention": "Convention d'accueil, conservée : établie en vue de l'admission au séjour, démarche absente du classement."}
+    "11527*03": {
+      "statut": "retire",
+      "categorie": "A",
+      "motif": "Attestation destinée à être produite en justice : pas une démarche administrative."
+    },
+    "16139*01": {
+      "statut": "retire",
+      "categorie": "A",
+      "motif": "Requête adressée au juge aux affaires familiales : acte de procédure judiciaire, pas une démarche administrative."
+    },
+    "11543*05": {
+      "statut": "retire",
+      "categorie": "A",
+      "motif": "Récépissé délivré par l'administration à la suite de la déclaration : acte de l'administration, pas une démarche accomplie par un usager."
+    },
+    "14673*01": {
+      "statut": "retire",
+      "categorie": "B",
+      "parent_cerfa": "14681*03",
+      "parent_au_classement": true,
+      "motif": "Certificat médical exigé par le dossier du permis plaisance (Cerfa 14681), lui-même au classement : le même flux serait compté deux fois."
+    },
+    "15695*01": {
+      "statut": "mention",
+      "categorie": "B",
+      "parent_cerfa": "15692*01",
+      "parent_au_classement": false,
+      "mention": "Pièce à joindre à la demande à la MDPH (Cerfa 15692), absente du classement. Rempli par un médecin : le modèle valorise pourtant un temps d'usager. Ce gain unitaire reste à revoir, avec une règle commune aux formulaires remplis par un professionnel."
+    },
+    "11752*02": {
+      "statut": "mention",
+      "categorie": "B",
+      "parent_au_classement": null,
+      "mention": "Pièce jointe à des démarches variables : sans démarche parente identifiable, le double compte ne peut être ni établi ni écarté."
+    },
+    "15619*01": {
+      "statut": "mention",
+      "categorie": "B",
+      "parent_au_classement": false,
+      "mention": "Pièce de la demande de carte de séjour « salarié détaché ICT », absente du classement : seule représentation de ce flux."
+    },
+    "15614*04": {
+      "statut": "mention",
+      "categorie": "B",
+      "parent_au_classement": false,
+      "mention": "Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
+    },
+    "15615*01": {
+      "statut": "mention",
+      "categorie": "B",
+      "parent_au_classement": false,
+      "mention": "Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
+    },
+    "15616*01": {
+      "statut": "mention",
+      "categorie": "B",
+      "parent_au_classement": false,
+      "mention": "Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
+    },
+    "15617*01": {
+      "statut": "mention",
+      "categorie": "B",
+      "parent_au_classement": false,
+      "mention": "Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
+    },
+    "15618*01": {
+      "statut": "mention",
+      "categorie": "titre",
+      "titre_corrige": "Notification d'un détachement de courte durée (90 jours au plus) d'un salarié étranger titulaire d'un titre de séjour européen ICT",
+      "mention": "Titre rétabli d'après le formulaire officiel : notification autonome, pas une pièce jointe."
+    },
+    "10103*14": {
+      "statut": "mention",
+      "categorie": "C",
+      "mention": "Contrat de droit privé, conservé : déposé auprès d'un opérateur de compétences."
+    },
+    "12434*05": {
+      "statut": "mention",
+      "categorie": "C",
+      "mention": "Contrat de droit privé, conservé : déposé auprès d'un opérateur de compétences."
+    },
+    "15973*01": {
+      "statut": "mention",
+      "categorie": "C",
+      "parent_au_classement": false,
+      "mention": "Convention de droit privé, conservée : à joindre à la demande de visa ou de titre de séjour, absente du classement."
+    },
+    "16079*03": {
+      "statut": "mention",
+      "categorie": "C",
+      "parent_au_classement": false,
+      "mention": "Convention d'accueil, conservée : établie en vue de l'admission au séjour, démarche absente du classement."
+    },
+    "11796*01": {
+      "statut": "retire",
+      "categorie": "en_ligne",
+      "motif": "Déjà en ligne sur Démarche Numérique : 798 904 dossiers sur des démarches qui portent ce même objet, dont 773 349 sur la démarche nationale."
+    },
+    "11733*02": {
+      "statut": "non_chiffre",
+      "categorie": "volume",
+      "mention": "Aucun téléchargement connu dans l'export DILA : non chiffré."
+    },
+    "14363*01": {
+      "statut": "non_chiffre",
+      "categorie": "volume",
+      "mention": "Aucun téléchargement connu dans l'export DILA : non chiffré."
+    }
+  },
+  "volume_publie_avant": {
+    "bas": 117426692,
+    "central": 153876242,
+    "haut": 177741946,
+    "formulaires": 59
+  },
+  "calibrage": {
+    "source": "Observatoire de la qualité des démarches, édition du 14 juillet 2026, apparié par titre",
+    "lignes": [
+      {
+        "nom": "Complémentaire santé solidaire",
+        "cerfa": "12504",
+        "observatoire": "Demande de Complémentaire Santé Solidaire (CSS)"
+      },
+      {
+        "nom": "Logement social, demande initiale",
+        "cerfa": "14069",
+        "observatoire": "Demande de logement social – demande initiale"
+      },
+      {
+        "nom": "Listes électorales",
+        "cerfa": "12669",
+        "observatoire": "Demande d'inscription sur les listes électorales"
+      },
+      {
+        "nom": "Permis de conduire international",
+        "cerfa": "14881",
+        "observatoire": "Pré-demande de permis de conduire international"
+      },
+      {
+        "nom": "Création d'association",
+        "cerfa": "13973",
+        "observatoire": "Création d'une association"
+      },
+      {
+        "nom": "Regroupement familial",
+        "cerfa": "11436",
+        "observatoire": "Demande de regroupement familial"
+      }
+    ]
   }
 }
