@@ -1,0 +1,785 @@
+{
+ "dossiers_annuels": [
+  {
+   "annee": 2021,
+   "estime_brut": 1098,
+   "plateforme_estime": 2388085,
+   "plateforme_reel": 2568554,
+   "calage": 1.076,
+   "estime_cale": 1182,
+   "part_plateforme": 0.0
+  },
+  {
+   "annee": 2022,
+   "estime_brut": 2010,
+   "plateforme_estime": 2263138,
+   "plateforme_reel": 2708052,
+   "calage": 1.197,
+   "estime_cale": 2406,
+   "part_plateforme": 0.1
+  },
+  {
+   "annee": 2023,
+   "estime_brut": 5149,
+   "plateforme_estime": 2537863,
+   "plateforme_reel": 2863250,
+   "calage": 1.128,
+   "estime_cale": 5808,
+   "part_plateforme": 0.2
+  },
+  {
+   "annee": 2024,
+   "estime_brut": 11944,
+   "plateforme_estime": 2994182,
+   "plateforme_reel": 3968056,
+   "calage": 1.325,
+   "estime_cale": 15825,
+   "part_plateforme": 0.4
+  },
+  {
+   "annee": 2025,
+   "estime_brut": 14318,
+   "plateforme_estime": 3702561,
+   "plateforme_reel": 4167309,
+   "calage": 1.126,
+   "estime_cale": 16123,
+   "part_plateforme": 0.4
+  },
+  {
+   "annee": 2026,
+   "estime_brut": 14770,
+   "plateforme_estime": 3870778,
+   "plateforme_reel": 3906898,
+   "calage": 1.087,
+   "estime_cale": 16055,
+   "part_plateforme": 0.4
+  }
+ ],
+ "carte": {
+  "75": {
+   "pub": [
+    5,
+    17,
+    20,
+    105,
+    100,
+    75
+   ],
+   "org": [
+    2,
+    2,
+    2,
+    2,
+    4,
+    5
+   ],
+   "dos": [
+    1098,
+    1851,
+    4497,
+    7752,
+    7780,
+    7024
+   ],
+   "pub_t": 322,
+   "org_t": 5,
+   "dos_t": 30001
+  },
+  "21": {
+   "pub": [
+    0,
+    0,
+    1,
+    1,
+    2,
+    11
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    99,
+    158,
+    223,
+    1183
+   ],
+   "pub_t": 15,
+   "org_t": 1,
+   "dos_t": 1663
+  },
+  "33": {
+   "pub": [
+    0,
+    1,
+    5,
+    7,
+    13,
+    9
+   ],
+   "org": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    92,
+    551,
+    3353,
+    4695,
+    5328
+   ],
+   "pub_t": 35,
+   "org_t": 1,
+   "dos_t": 14019
+  },
+  "27": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    0
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    4
+   ],
+   "pub_t": 1,
+   "org_t": 1,
+   "dos_t": 5
+  },
+  "57": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    2
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    14,
+    16
+   ],
+   "pub_t": 3,
+   "org_t": 1,
+   "dos_t": 30
+  },
+  "72": {
+   "pub": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    0
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    0,
+    32,
+    93
+   ],
+   "pub_t": 1,
+   "org_t": 1,
+   "dos_t": 125
+  },
+  "59": {
+   "pub": [
+    0,
+    0,
+    0,
+    2,
+    4,
+    0
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    1,
+    3,
+    3
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    566,
+    1347,
+    842
+   ],
+   "pub_t": 6,
+   "org_t": 3,
+   "dos_t": 2755
+  },
+  "45": {
+   "pub": [
+    0,
+    0,
+    1,
+    1,
+    0,
+    1
+   ],
+   "org": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    2
+   ],
+   "dos": [
+    0,
+    0,
+    2,
+    33,
+    34,
+    170
+   ],
+   "pub_t": 3,
+   "org_t": 2,
+   "dos_t": 239
+  },
+  "77": {
+   "pub": [
+    0,
+    0,
+    0,
+    1,
+    0,
+    0
+   ],
+   "org": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+   ],
+   "dos": [
+    0,
+    0,
+    0,
+    5,
+    13,
+    10
+   ],
+   "pub_t": 1,
+   "org_t": 1,
+   "dos_t": 28
+  }
+ },
+ "carte_sans_departement": 3,
+ "gains": {
+  "bas": 360580,
+  "haut": 623011,
+  "admin_bas": 329943,
+  "admin_haut": 519939,
+  "usagers_bas": 30638,
+  "usagers_haut": 103072
+ },
+ "gains_par_annee": {
+  "2021": {
+   "bas": 8684,
+   "haut": 15454
+  },
+  "2022": {
+   "bas": 15352,
+   "haut": 27049
+  },
+  "2023": {
+   "bas": 38410,
+   "haut": 66686
+  },
+  "2024": {
+   "bas": 87550,
+   "haut": 150814
+  },
+  "2025": {
+   "bas": 104335,
+   "haut": 179576
+  },
+  "2026": {
+   "bas": 106249,
+   "haut": 183433
+  }
+ },
+ "gains_couverture": {
+  "demarches": 295,
+  "absentes": 97,
+  "dossiers_couverts": 48592,
+  "dossiers_fenetre": 49288
+ },
+ "quotient_familial": {
+  "perimetre": [
+   {
+    "num": 109429,
+    "t": "ENM - CPT : Dossier de candidature Classe Prépa Talents 2025-2026",
+    "o": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "d": 324,
+    "c": 203,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/enm-cpt-dossier-de-candidature-classe-prepa-talent",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 135911,
+    "t": "ENM - CPT : Dossier de candidature Classe Prépa Talents 2026-2027",
+    "o": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "d": 323,
+    "c": 218,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/enm-cpt-candidatures-2026-2027",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 136202,
+    "t": "Dossier d'inscription Classe Prépa Talents de l'Ecole nationale des greffes (ENG) - session 2026-2027",
+    "o": "Ecole nationale des greffes",
+    "d": 295,
+    "c": 73,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dossier-d-inscription-classe-prepa-talents-de-l-ec-3",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 68423,
+    "t": "Dossier de candidature Classe Prépa Talents 2023-2024 - ENM",
+    "o": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "d": 280,
+    "c": 156,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/candidature-cpt-enm-2023",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 85572,
+    "t": "ENM - CPT : Dossier de candidature Classe Prépa Talents 2024-2025",
+    "o": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "d": 257,
+    "c": 163,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/6bb2cfab-7a96-4ac8-acaf-031d14496dc1",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 112113,
+    "t": "Dossier d'inscription Classe Prépa Talents de l'Ecole nationale des greffes (ENG) - session 2025-2026",
+    "o": "Ecole nationale des greffes",
+    "d": 210,
+    "c": 73,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dossier-d-inscription-classe-prepa-talents-de-l-ec-2",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 87684,
+    "t": "Dossier d'inscription Classe Prépa Talents de l'Ecole nationale des greffes (ENG) - session 2024-2025",
+    "o": "Ecole nationale des greffes",
+    "d": 158,
+    "c": 94,
+    "y": "2024",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dossier-d-inscription-classe-prepa-talents-eng",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 142892,
+    "t": "ENM - CPT 2026/2027 - dossier de demande de bourse et informations complémentaires - primo-entrants",
+    "o": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "d": 100,
+    "c": 39,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/enm-cpt-2026-2027-dossier-bourse",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 70763,
+    "t": "Dossier d'inscription Classe Prépa Talents de l'Ecole nationale des greffes (ENG) - session 2023-2024",
+    "o": "Ecole nationale des greffes",
+    "d": 99,
+    "c": 99,
+    "y": "2023",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dossier-d-inscription-classe-prepa-talents-de-l-ec",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 121881,
+    "t": "ENM - CPT 2025/2026 - dossier de demande de bourse et informations complémentaires",
+    "o": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "d": 82,
+    "c": 36,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/enm-cpt-2025-2026-dossier-bourse",
+    "qf": false,
+    "niv": "modere",
+    "pp": 100
+   },
+   {
+    "num": 53520,
+    "t": "Agrément des associations d'aide aux victimes - compétence spécialisée",
+    "o": "Ministère de la Justice",
+    "d": 75,
+    "c": 16,
+    "y": "2022",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/justice-agrement-aidevictimes-competencespecialisee",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 0
+   },
+   {
+    "num": 54374,
+    "t": "Dossier d'inscription Classe Prépa Talents de l'Ecole nationale des greffes (ENG) - session 2022-2",
+    "o": "Ecole nationale des greffes",
+    "d": 67,
+    "c": 99,
+    "y": "2022",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/prepa-talents-eng",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 116391,
+    "t": "Crèche",
+    "o": "ECOLE NATIONALE DES GREFFES",
+    "d": 31,
+    "c": 77,
+    "y": "2025",
+    "etat": "publiee",
+    "url": "https://demarche.numerique.gouv.fr/commencer/creche",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 125234,
+    "t": "ENM - CPT 2025/2026 - dossier de demande de bourse et informations complémentaires - réussite à retardement",
+    "o": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "d": 23,
+    "c": 59,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/enm-cpt-2025-2026-dossier-bourse-rdbt",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 142898,
+    "t": "ENM - CPT 2026/2027 - dossier de demande de bourse et informations complémentaires - réussite à retardement non admissibles",
+    "o": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "d": 19,
+    "c": 66,
+    "y": "2026",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/enm-cpt-2026-2027-dossier-bourse-rdbt",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   },
+   {
+    "num": 132271,
+    "t": "ENM - CPT 2025/2026 - dossier de demande de bourse et informations complémentaires - réussite à retardement - admissibles",
+    "o": "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+    "d": 11,
+    "c": 60,
+    "y": "2025",
+    "etat": "close",
+    "url": "https://demarche.numerique.gouv.fr/commencer/dossier-bourses-admissibles",
+    "qf": false,
+    "niv": "complexe",
+    "pp": 100
+   }
+  ],
+  "plateforme_hors_perimetre": {
+   "demarches": 278,
+   "dossiers": 72206,
+   "emetteurs": 86,
+   "avec_qf": 1,
+   "par_type": {
+    "service_deconcentre_de_l_etat": 67,
+    "administration_centrale": 32,
+    "etablissement_enseignement": 118,
+    "collectivite_territoriale": 48,
+    "autre": 13
+   },
+   "top": [
+    {
+     "num": 69582,
+     "t": "Pré-inscription en crèche municipale",
+     "o": "Mairie de Nîmes",
+     "d": 2890,
+     "c": 46,
+     "y": "2023",
+     "etat": "publiee",
+     "url": "https://demarche.numerique.gouv.fr/commencer/pre-inscription-en-creche-municipale",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 146293,
+     "t": "Fiche d'inscription au service de restauration scolaire du Lycée Robert Doisneau 2026-2027",
+     "o": "LYCEE ROBERT DOISNEAU",
+     "d": 1717,
+     "c": 28,
+     "y": "2026",
+     "etat": "publiee",
+     "url": "https://demarche.numerique.gouv.fr/commencer/fiche-d-inscription-au-service-de-restauration-sco-3",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 77115,
+     "t": "Lycée TURGOT, Paris - niveaux 1ères-Terminales-BTS-DCG-CPGE : Inscriptions cantine et bourse 2026/2027",
+     "o": "Lycée Turgot",
+     "d": 1648,
+     "c": 35,
+     "y": "2023",
+     "etat": "publiee",
+     "url": "https://demarche.numerique.gouv.fr/commencer/lycee-turgot-paris-niveaux-1eres-terminales-et-superieur",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 115995,
+     "t": "Lycée René Cassin Arpajon : inscription à la demi-pension 2025 / 2026",
+     "o": "Lycée René CASSIN (ARPAJON)",
+     "d": 1526,
+     "c": 22,
+     "y": "2025",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/inscription-demi-pension-2025-2026",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 146593,
+     "t": "Lycée René Cassin Arpajon : inscription à la demi-pension 2026 / 2027",
+     "o": "Lycée René CASSIN (ARPAJON)",
+     "d": 1485,
+     "c": 24,
+     "y": "2026",
+     "etat": "publiee",
+     "url": "https://demarche.numerique.gouv.fr/commencer/lycee-cassin-arpajon-inscription-dp-2026-2027",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 73627,
+     "t": "Lycée René Cassin Arpajon : inscription à la demi-pension 2023/2024",
+     "o": "Lycée René CASSIN (ARPAJON)",
+     "d": 1475,
+     "c": 22,
+     "y": "2023",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/lycee-rene-cassin-arpajon-inscription-restauration",
+     "qf": false,
+     "niv": "simple",
+     "pp": 100
+    },
+    {
+     "num": 93576,
+     "t": "Lycée René Cassin Arpajon : inscription à la demi-pension 2024 / 2025",
+     "o": "Lycée René CASSIN (ARPAJON)",
+     "d": 1474,
+     "c": 20,
+     "y": "2024",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/lycee-rene-cassin-arpajon-inscription-dp-2024-2025",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 56069,
+     "t": "Demande  de place en crèche",
+     "o": "Mairie de Saint-Maur-des-Fossés",
+     "d": 1393,
+     "c": 58,
+     "y": "2022",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-place-en-creche-municipale",
+     "qf": false,
+     "niv": "complexe",
+     "pp": 100
+    },
+    {
+     "num": 60348,
+     "t": "LYCEE JEAN PIERRE TIMBAUD - Inscription restauration scolaire 2022-2023",
+     "o": "LYCEE JEAN PIERRE TIMBAUD (BRETIGNY SUR ORGE)",
+     "d": 1378,
+     "c": 25,
+     "y": "2022",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/jpt-restauration",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 147414,
+     "t": "Lycée Edmond Michelet Arpajon : inscription à la demi-pension 2026 / 2027",
+     "o": "Lycée Edmond Michelet",
+     "d": 1155,
+     "c": 21,
+     "y": "2026",
+     "etat": "publiee",
+     "url": "https://demarche.numerique.gouv.fr/commencer/lycee-edmond-michelet-arpajon-inscription-a-la-dem",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 75547,
+     "t": "Inscription à la demi-pension de la cité scolaire Louis Pasteur de Neuilly sur Seine - Année scolaire 2023-2024",
+     "o": "Lycée Louis Pasteur",
+     "d": 1074,
+     "c": 35,
+     "y": "2023",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/inscription-cantine-pasteur",
+     "qf": false,
+     "niv": "complexe",
+     "pp": 100
+    },
+    {
+     "num": 95546,
+     "t": "Inscription à la demi-pension de la cité scolaire Louis Pasteur de Neuilly sur Seine - Année scolaire 2024-2025",
+     "o": "Lycée Louis Pasteur",
+     "d": 1062,
+     "c": 36,
+     "y": "2024",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/inscription-a-la-demi-pension-de-la-cite-scolaire",
+     "qf": false,
+     "niv": "complexe",
+     "pp": 100
+    },
+    {
+     "num": 43689,
+     "t": "Inscription à la demi-pension du Lycée de la Vallée de Chevreuse - Année 2021-2022",
+     "o": "Lycée de la Vallée de Chevreuse",
+     "d": 993,
+     "c": 26,
+     "y": "2021",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/insc_dp_lvc_rs21",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    },
+    {
+     "num": 123462,
+     "t": "Inscription à la demi-pension de la cité scolaire Louis Pasteur de Neuilly sur Seine - Année scolaire 2025-2026",
+     "o": "Lycée Louis Pasteur",
+     "d": 985,
+     "c": 36,
+     "y": "2025",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/inscription-a-la-demi-pension-de-la-cite-scolaire--2",
+     "qf": false,
+     "niv": "complexe",
+     "pp": 100
+    },
+    {
+     "num": 44127,
+     "t": "Inscription à la demi-pension - Lycée Jacques MONOD (CLAMART) - Année scolaire 2021/2022",
+     "o": "LYCÉE JACQUES MONOD - CLAMART",
+     "d": 959,
+     "c": 22,
+     "y": "2021",
+     "etat": "close",
+     "url": "https://demarche.numerique.gouv.fr/commencer/lycee-monod-inscription-restauration",
+     "qf": false,
+     "niv": "modere",
+     "pp": 100
+    }
+   ]
+  },
+  "qf_plateforme_total": 1
+ }
+}

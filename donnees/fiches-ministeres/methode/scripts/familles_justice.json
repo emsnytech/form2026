@@ -1,0 +1,46 @@
+[
+ {
+  "nom": "Listes d'aptitude : une fiche de candidature par ressort",
+  "motif": "-LA-|liste d.aptitude"
+ },
+ {
+  "nom": "Dossier de prise en charge après concours",
+  "motif": "dossier de prise en charge"
+ },
+ {
+  "nom": "Dossier RAEP et pièces d'examen professionnel",
+  "motif": "RAEP|examen professionnel"
+ },
+ {
+  "nom": "Fiche individuelle de renseignement (FIR)",
+  "motif": "\\bFIR\\b|fiche individuelle de renseignement"
+ },
+ {
+  "nom": "Pièces justificatives des concours de la magistrature",
+  "motif": "ENM.{0,8}(concours|3[èe]me|1er|2nd|second).*(pi[èe]ces|d[ée]poser)"
+ },
+ {
+  "nom": "Classe prépa Talents, École nationale de la magistrature",
+  "motif": "^(?=.*(pr[ée]pa talents|CPT))(?=.*ENM)(?!.*bourse)"
+ },
+ {
+  "nom": "Classe prépa Talents, École nationale des greffes",
+  "motif": "^(?=.*pr[ée]pa talents)(?=.*(greffes|ENG))(?!.*bourse)"
+ },
+ {
+  "nom": "Bourses de la classe prépa Talents",
+  "motif": "(CPT|pr[ée]pa talents).*bourse"
+ },
+ {
+  "nom": "Consentement au droit à l'image",
+  "motif": "droit à l.image"
+ },
+ {
+  "nom": "Indemnités et vacations",
+  "motif": "vacation|indemnit|\\bIFM\\b|\\bIMR\\b"
+ },
+ {
+  "nom": "Subventions et appels à projets",
+  "motif": "subvention|appel à projet"
+ }
+]

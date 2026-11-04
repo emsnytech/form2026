@@ -21,6 +21,17 @@ Production de l'auteur à partir de données ouvertes de data.gouv.fr. Voir `don
   (indicatif). Absent tant que `07_etablissements.py` n'a pas tourné ; la section correspondante est alors masquée.
 - `methode/` : scripts Python, configurations, gabarit et fond de carte qui produisent ces fichiers et la fiche.
 
+## Fiche n° 2 : Justice
+
+- `justice.json`, `justice_familles.json`, `justice_reconductions.json`, `justice_complements.json` : mêmes contenus que pour la fiche n° 1.
+- `justice_hors_opendata.json` : relevés datés des pages publiques des démarches absentes de l'open data.
+- `justice_siren_cours_appel.json` : SIREN des cours d'appel. Une juridiction est un établissement de l'unité légale de sa cour d'appel, ce qu'il faut savoir pour lire les rattachements.
+- `justice_chiffres_fiche.json` : chaque chiffre de la fiche et chaque source externe.
+
+**Ce qui n'est pas publié :** l'inventaire détaillé, les classements par usage et le relevé des rendez-vous. Ces fichiers citent le titre de démarches sensibles (casier judiciaire, suites de plainte, mineurs), que la fiche ne donne qu'agrégées. Pour la même raison, les scripts 09, 10, 11 et 17, qui contiennent des fragments de ces titres, restent hors du dépôt : le classement par usage n'est donc pas rejouable depuis ce seul dépôt.
+
+**Lecture des chiffres :** l'open data ne retient que les démarches publiées ou closes, dont le paramètre `opendata` est activé, ayant au moins un dossier et dont l'adresse de site web ne contient ni « mail » ni « intra ». Les chiffres sont donc des planchers. Les relevés en ligne changent chaque jour : la fiche en affiche la date.
+
 ## Sources
 
 - « Descriptif des démarches publiées sur demarche.numerique.gouv.fr » (data.gouv.fr), extraction du 21/10/2026.

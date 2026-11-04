@@ -14,6 +14,7 @@ EXCL = re.compile(cfg["sans_zone_exclusions"], re.I)
 EXCL_ALL = re.compile(cfg.get("exclusions_toutes", "$^"), re.I)
 TYPES_EXCL = set(cfg.get("sans_zone_types_exclus", []))
 ANOMALIES = []
+INCL = set(cfg.get("inclusions_numeros", []))     # démarches rattachées explicitement, quelle que soit leur zone
 
 def d(s): return dt.date.fromisoformat(s[:10]) if s else None
 def fin(r): return d(r["dateFermeture"]) or d(r["dateDepublication"])
@@ -25,6 +26,7 @@ def classify(r):
     return p, s
 
 def _classify(r):
+    if r["number"] in INCL: return PRIO[0], "inclusion"
     z = r["zones"] or []
     poles = {ZONES[x] for x in z if x in ZONES}
     if z:
