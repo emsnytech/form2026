@@ -15,3 +15,7 @@ Par ailleurs, ce n'est pas exhaustif! il n'y a que ce qui est en open data ou ac
 En particulier, la masse de procédures encore en PDF ou en papier n'est pas encore intégré.
 
 Site généré statiquement — publié via GitHub Pages.
+
+## Contrôle des liens
+
+`python3 scripts/verifier_liens.py` teste tous les liens internes et externes du site. Le workflow `.github/workflows/verifier-liens.yml` lance les liens des pages à chaque PR, et tous les liens, données embarquées comprises, chaque semaine. Le rapport est disponible dans les artefacts du workflow.

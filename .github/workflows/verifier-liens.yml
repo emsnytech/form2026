@@ -1,0 +1,32 @@
+name: Contrôle des liens
+
+on:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 5 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  liens:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Liens des pages (à chaque PR)
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/verifier_liens.py --portee pages --sortie rapport-liens.json
+      - name: Tous les liens, données embarquées et échantillon de démarches (chaque semaine)
+        if: github.event_name != 'pull_request'
+        run: python3 scripts/verifier_liens.py --demarches-echantillon 200 --sortie rapport-liens.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rapport-liens
+          path: rapport-liens.json
+          retention-days: 90
