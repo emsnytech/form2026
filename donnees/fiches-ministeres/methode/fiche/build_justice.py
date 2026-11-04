@@ -88,7 +88,10 @@ SJ = lambda i: json.loads(re.search(r'<script type="application/json" id="' + i 
 CE, ES = SJ("data-cerfa"), SJ("data-essentielles")
 aj = next(e for e in ES if e["id_observatoire"] == 1747)
 dila_t = open(DILA_F, errors="ignore").read()
-def vol(rid): return int(re.search(r'"%s\.serviceLigne".{0,500}?simulateur/calcul/\d+[^"]*",,"(\d+)"' % rid, dila_t, re.S).group(1))
+# Téléchargements sur un an à fin 2024 : référence unique du site, somme des versions du Cerfa.
+_RID_CERFA = {"R1444": "16146", "R18606": "12821", "R1408": "11808", "R15764": "11530", "R45128": "15586"}
+_TELECH = list(csv.DictReader(open(os.path.expanduser("~/Documents/form2026-site/donnees/gains/telechargements_dila.csv"), encoding="utf-8")))
+def vol(rid): return sum(int(r["telechargements"]) for r in _TELECH if r["numero"] == _RID_CERFA[rid])
 for x in I["cerfa_justice"]: pass
 
 def meur(x): return p(x / 1e6, 2)

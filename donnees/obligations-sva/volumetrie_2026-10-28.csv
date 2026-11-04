@@ -108,13 +108,13 @@ SVA,67,Autorisation de travaux dans un immeuble de grande hauteur,DILA_cerfa,,,1
 SVA,147,Agrément des organismes de formation des débitants de boissons,DILA_cerfa,,,3868,OUI,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
 SVA,197,Autorisation de constitution d'une société d'exercice libéral pour les auxiliaires médicaux,DILA_cerfa,,,,,inconnu
 SVA,261,Dispense de l'obtention du diplôme d'État de professeur de danse au titre de l'exercice de l'enseignement de la danse pendant plus de trois ans au 11 juillet 1989,DILA_cerfa,,,,,inconnu
-SVA,348,Inscription au centre national d'enseignement à distance d'un élève relevant de l'instruction obligatoire,DILA_cerfa,,,30314,OUI,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
-SVA,349,Délivrance d'une attestation ou d'un certificat d'établissement par le centre national d'enseignement à distance,DILA_cerfa,,,30314,OUI,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
-SVA,405,Déclaration d'un établissement de chasse commerciale,DILA_cerfa,,,417,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
+SVA,348,Inscription au centre national d'enseignement à distance d'un élève relevant de l'instruction obligatoire,DILA_cerfa,,,,OUI,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
+SVA,349,Délivrance d'une attestation ou d'un certificat d'établissement par le centre national d'enseignement à distance,DILA_cerfa,,,,OUI,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
+SVA,405,Déclaration d'un établissement de chasse commerciale,DILA_cerfa,,,390,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
 SVA,562,Carte de déporté et interné résistant,DILA_cerfa,,,723,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
 SVA,563,Carte de déporté et interné politique,DILA_cerfa,,,772,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
-SVA,591,Autorisation d'exercice de la profession d'exploitant d'établissement de spectacles cinématographiques,DILA_cerfa,,,76,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
-SVA,597,Autorisation d'exercice de la profession d'exploitant d'établissement de spectacles cinématographiques,DILA_cerfa,,,76,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
+SVA,591,Autorisation d'exercice de la profession d'exploitant d'établissement de spectacles cinématographiques,DILA_cerfa,,,,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
+SVA,597,Autorisation d'exercice de la profession d'exploitant d'établissement de spectacles cinématographiques,DILA_cerfa,,,,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
 SVA,618,Autorisation d'installation de bâches d'échafaudages comportant de l'affichage sur monuments historiques classés ou inscrits,DILA_teleservice,,,,,inconnu
 SVA,651,Autorisation d'installation de bâches d'échafaudages comportant de l'affichage sur MH classés ou inscrits,DILA_teleservice,,,,,inconnu
 SVA,750,Agrément des organismes assurant une formation spécifique à la sécurité des spectacles adaptée à la nature du lieu de spectacle,DILA_cerfa,,,636,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
@@ -143,15 +143,15 @@ SVR,2014-1294,Permis de détention d'un chien catégorisé.,DILA_cerfa,,,27818,,
 SVR,2014-1294,Permis provisoire de détention d'un chien catégorisé.,DILA_cerfa,,,27818,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
 SVR,2014-1294,"Autorisations relatives à la fabrication, au commerce et à l'intermédiation des armes, des munitions et de leurs éléments des catégories A1, B, C et D",DILA_cerfa,,,27818,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
 SVR,2014-1294,"Autorisation d'organiser une loterie d'objets mobiliers exclusivement destinée à des actes de bienfaisance, à l'encouragement des arts ou au financement d'activités sportives à but non lucratif.",DILA_cerfa,,,27818,OUI,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
-SVR,2014-1286,Autorisation accordée pour la recherche sur l'embryon humain et les cellules souches embryonnaires,DILA_cerfa,,,222,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
-SVR,2014-1286,"Autorisation délivrée à tout organisme qui assure, à des fins scientifiques, la conservation de cellules souches embryonnaires",DILA_cerfa,,,222,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
+SVR,2014-1286,Autorisation accordée pour la recherche sur l'embryon humain et les cellules souches embryonnaires,DILA_cerfa,,,,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
+SVR,2014-1286,"Autorisation délivrée à tout organisme qui assure, à des fins scientifiques, la conservation de cellules souches embryonnaires",DILA_cerfa,,,,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
 SVR,2014-1292,Conversion de brevet militaire de conduite,DILA_teleservice,,,,,inconnu
 SVR,2014-1301,Autorisation d'occupation d'un immeuble de grande hauteur.,DILA_cerfa,,,3646,OUI,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
 SVR,2014-1298,"Agrément des établissements éleveur, fournisseur ou utilisateur en matière d'expérimentation animale",DILA_cerfa,,,188,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
 SVR,2014-1298,Autorisation d'entrée et d'introduction dans l'environnement de macro-organismes non indigènes utiles aux végétaux,DILA_cerfa,,,188,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
-DELAI_SVA,2014-1284,Demande de carte de prisonnier du Viet-Minh.,DILA_cerfa,,,164,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
+DELAI_SVA,2014-1284,Demande de carte de prisonnier du Viet-Minh.,DILA_cerfa,,,851,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
 DELAI_SVA,2014-1284,Demande d'attribution du titre d'évadé.,DILA_cerfa,,,,,inconnu
 DELAI_SVA,2014-1305,Dispense du diplôme d'Etat de professeur de danse au titre de la renommée particulière et/ou de l'expérience confirmée en matière d'enseignement de la danse et reconnaissance d'équivalence au diplôme d'Etat de professeur de danse,DILA_cerfa,,,,,inconnu
 DELAI_SVA,2014-1305,Agrément des organismes assurant une formation spécifique à la sécurité des spectacles adaptée à la nature du lieu de spectacle,DILA_cerfa,,,636,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
-DELAI_SVA,2014-1287,Renouvellement de l'autorisation préalable à la mise sur le marché d'un produit thérapeutique annexe,DILA_cerfa,,,67,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
+DELAI_SVA,2014-1287,Renouvellement de l'autorisation préalable à la mise sur le marché d'un produit thérapeutique annexe,DILA_cerfa,,,,,"approximé (téléchargements service-public.fr, 1ère valeur, 2024 à confirmer)"
 DELAI_SVA,2014-1287,Autorisation de constitution d'une société d'exercice libéral pour les auxiliaires médicaux,DILA_cerfa,,,,,inconnu
