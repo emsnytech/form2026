@@ -28,10 +28,11 @@ Les paramètres numériques (constantes, hypothèses, sources) utilisés dans le
 
 Classement des formulaires CERFA papier de l'onglet du même nom dans `explorer.html`. C'est un ordre de priorité, pas une mesure.
 
-- **`telechargements_dila.csv` :** référence unique des téléchargements annuels, produite par `scripts/telechargements_dila.py` depuis l'export DILA. La valeur `telech_retenu` est la plus élevée des deux colonnes.
+- **`telechargements_dila.csv` :** fichier de la DILA, nombre de téléchargements par version de Cerfa sur un an à fin 2024 (`scripts/telechargements_dila.py`). Un formulaire vaut la somme de ses versions.
 - **`classement_cerfa_statuts.json` :** les décisions et leurs motifs. `scripts/classement_cerfa.py` les applique et écrit `classement_cerfa_detail.csv`.
-- **Total central :** 153 876 242 € avec les anciens volumes, 160 951 243 € après passage aux téléchargements, 148 087 599 € après retrait de la médaille du travail, déjà en ligne. 56 formulaires sont chiffrés, 2 ne le sont pas faute de téléchargement connu.
-- **Limites :** un téléchargement n'est pas un dossier. Sur six démarches comparées à l'Observatoire, le rapport va de 0,16 à 4,31 : aucun total n'est une estimation, et l'ordre reste indicatif (11 paires sur 15 concordantes). L'export n'a pas d'en-tête : la DILA n'a confirmé ni la lecture des colonnes, ni l'année. Cette base est donc provisoire. Le gain unitaire des formulaires remplis par un professionnel reste à revoir. Les seuils de niveau de complexité ne sont pas recalculés.
+- **`classement_cerfa_unitaires.json` :** le gain par téléchargement de chaque formulaire.
+- **Total central :** 153 876 242 € avec des sources mélangées, 148 087 599 € avec une lecture provisoire de l'ancien export, 135 979 655 € avec ce fichier. 55 formulaires sont chiffrés, 3 ne le sont pas faute de téléchargement compté, 5 sont retirés.
+- **Limites :** un téléchargement n'est pas un dossier. Sur six démarches comparées à l'Observatoire, le rapport va de 0,16 à 4,31 : aucun total n'est une estimation, et l'ordre reste indicatif (13 paires sur 15 concordantes). Le fichier ne compte qu'un canal : l'urbanisme y pèse très peu. Certains formulaires n'y figurent que dans une version antérieure à celle analysée. Le gain unitaire des formulaires remplis par un professionnel reste à revoir. Les seuils de niveau de complexité ne sont pas recalculés.
 
 ## Changements par rapport à la version précédente
 

@@ -75,7 +75,7 @@ confirmer ») avec la mention `partage_non_attribuable` quand un Cerfa est utili
 plusieurs procédures distinctes (le volume ne peut alors être attribué à aucune en
 particulier). Un téléchargement de formulaire n'est pas un dossier déposé.
 
-**Correction de novembre 2026 :** `telechargements_2024` et la colonne `volume` du top 50 reprennent la référence unique `donnees/gains/telechargements_dila.csv` : la plus élevée des deux colonnes de l'export DILA, dont la lecture n'est pas confirmée par la DILA. L'ordre du top 50 reste celui de la colonne par fiche, ses volumes ne sont donc plus tous décroissants. Les notes datées et les fichiers de `methode-outillage/` gardent les valeurs d'origine.
+**Correction de novembre 2026 :** `telechargements_2024` et la colonne `volume` du top 50 reprennent `donnees/gains/telechargements_dila.csv`, le fichier de la DILA sur un an à fin 2024. Une valeur vide signifie que ce fichier ne porte pas ce canal (téléservice notamment). Le top 50 garde son ordre et ses régimes, établis sur une lecture antérieure de l'export : il reste à réexaminer. Les notes datées et les fichiers de `methode-outillage/` gardent les valeurs d'origine.
 
 ### `top50_regime_juridique_2026-10-28.csv`
 
@@ -155,7 +155,7 @@ dans l'environnement de l'auteur.
 Voir `NOTE_RESULTATS_2026-10-28.md`. Points clés : rapprochement par titre sans clé
 commune, se trompe environ une fois sur deux avant relecture ; liste SVA non mise à
 jour depuis 2016 ; archive LEGI datée du 13/07/2025 (tout changement de vigueur
-postérieur non vu) ; volumétrie DILA 2024 à confirmer ; recherche systématique des
+postérieur non vu) ; volumétrie DILA sur un an à fin 2024 ; recherche systématique des
 contradictions non menée à son terme au-delà des 5 cas confirmés ; un seul relecteur
 humain final, deux passes de relecture indépendantes mais pas davantage.
 
@@ -165,7 +165,7 @@ Vigueur et recodification : archive LEGI du 13/07/2025. Décrets consolidés Lé
 lus en 2026. Liste SVA : XML du 08/12/2016 (jamais mise à jour depuis). Référentiel
 DILA (fiches/formulaires/téléservices) : export du 12-13/09/2026. Corpus Démarche
 Numérique : daté au plus tard du 02/10/2026. Volumétrie DILA : export du 20/09/2026,
-téléchargements « 2024 à confirmer ».
+téléchargements sur un an à fin 2024 (fichier DILA remis en novembre 2026).
 
 ---
 
