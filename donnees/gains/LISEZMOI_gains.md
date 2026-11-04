@@ -24,6 +24,14 @@ Un gain estimé par démarche publiée sur demarche.numerique.gouv.fr (méthodol
 
 Les paramètres numériques (constantes, hypothèses, sources) utilisés dans le calcul des gains, version 8 — un paramètre par ligne, avec son unité et sa source ou son statut (mesuré / hypothèse de l'auteur).
 
+### `classement_cerfa_statuts.json` et `classement_cerfa_detail.csv`
+
+Classement des formulaires CERFA papier de l'onglet du même nom dans `explorer.html`. Le JSON contient les décisions, chacune avec son motif ; `scripts/classement_cerfa.py` les applique et écrit le CSV, qui donne le rang avant et après correction de chaque formulaire.
+
+- **Retirés (4) :** les formulaires qui ne sont pas une démarche administrative accomplie par un usager (3) et les pièces jointes dont la démarche parente figure déjà au classement (1). Scénario central : 179 684 215 € avant, 25 807 973 € retirés, 153 876 242 € après.
+- **Conservés avec une mention (12) :** les pièces dont la démarche parente est absente du classement, celle sans parent identifiable, et les contrats et conventions de droit privé.
+- **Limites :** le test de double compte repose sur la lecture des formulaires officiels au 4 novembre 2026. Le gain des formulaires conservés est calculé sur les visites et téléchargements de la DILA, pas sur des dossiers déposés. Les seuils de niveau de complexité ne sont pas recalculés.
+
 ## Changements par rapport à la version précédente
 
 - Le fichier `demarches_gains_v7.csv` est **remplacé** par `demarches_gains_v8.csv` (l'ancienne version reste consultable dans l'historique du dépôt).
