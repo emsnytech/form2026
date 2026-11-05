@@ -4,6 +4,7 @@
     python3 scripts/telechargements_dila.py "<volumetrie DILA BIS.xlsx>"  →  donnees/gains/telechargements_dila.csv
 
 Le fichier donne, par version de Cerfa, le « Nombre de téléchargements sur GF » sur un an à fin 2024.
+« GF » : le site service-public, sens confirmé par la DILA en novembre 2026.
 Le CSV garde une ligne par version. Un formulaire vaut la somme de ses versions. Nécessite openpyxl.
 """
 import csv, sys

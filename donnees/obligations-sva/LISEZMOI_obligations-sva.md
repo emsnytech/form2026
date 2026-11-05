@@ -70,12 +70,11 @@ intervalles de confiance à 95 % larges (n=50), à lire en ordres de grandeur.
 Pour chaque procédure outillée vérifiée : `dossiers_cumule` et
 `dossiers_annualise_estime` (démarches numériques — deux colonnes toujours séparées,
 la seconde est une estimation par division, pas une mesure 2024) ou
-`telechargements_2024` (Cerfa/téléservice, 1ère valeur de l'export DILA, année « 2024 à
-confirmer ») avec la mention `partage_non_attribuable` quand un Cerfa est utilisé par
+`telechargements_2024` (Cerfa/téléservice, fichier DILA sur un an à fin 2024) avec la mention `partage_non_attribuable` quand un Cerfa est utilisé par
 plusieurs procédures distinctes (le volume ne peut alors être attribué à aucune en
 particulier). Un téléchargement de formulaire n'est pas un dossier déposé.
 
-**Correction de novembre 2026 :** `telechargements_2024` et la colonne `volume` du top 50 reprennent `donnees/gains/telechargements_dila.csv`, le fichier de la DILA sur un an à fin 2024. Une valeur vide signifie que ce fichier ne porte pas ce canal (téléservice notamment). Le top 50 garde son ordre et ses régimes, établis sur une lecture antérieure de l'export : il reste à réexaminer. Les notes datées et les fichiers de `methode-outillage/` gardent les valeurs d'origine.
+**Correction de novembre 2026 :** `telechargements_2024` et la colonne `volume` du top 50 reprennent `donnees/gains/telechargements_dila.csv`, le fichier de la DILA sur un an à fin 2024. Une valeur vide signifie que ce fichier ne porte pas ce canal (téléservice notamment). Le top 50 garde son ordre et ses régimes, établis sur une lecture antérieure de l'export : il reste à réexaminer. Les notes datées et les fichiers de `methode-outillage/` gardent les valeurs d'origine. La DILA a confirmé en novembre 2026 que ces chiffres sont les téléchargements sur le site service-public.
 
 ### `top50_regime_juridique_2026-10-28.csv`
 
