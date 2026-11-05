@@ -287,7 +287,10 @@ footer{margin-top:2rem;border-top:1px solid var(--line);padding-top:1rem;font-si
     $("pYsub").textContent=cy.a.est?"dont le mois en cours, estimé":"";
     $("pMsub").textContent=MOIS[n.m-1]+" "+n.y+(cm.a.est?" · extrapolé":"");
     $("now").textContent="Il est "+String(n.h).padStart(2,"0")+" h "+String(n.mi).padStart(2,"0")+" (heure de Paris)";
-    $("fresh").textContent="Dernières données publiées : "+P.data_updated.split("-").reverse().join("/");
+    var bm0=P.base_month.split("-").map(Number), ecart=n.y*12+n.m-bm0[0]*12-bm0[1], fr=$("fresh"), moisBase=MOIS[bm0[1]-1]+" "+bm0[0];
+    var retard=ecart>2||(ecart===2&&n.d>5);
+    fr.textContent=(retard?"Données en retard : dernier mois connu, ":"Données jusqu'à ")+moisBase+" · relevées le "+P.data_updated.split("-").reverse().join("/");
+    fr.style.color=retard?"var(--bad)":""; fr.style.fontWeight=retard?"700":"";
     // rythme à la minute (mois de base)
     var b=P.months[P.base_month], mins=minutesInMonth.apply(null,P.base_month.split("-").map(Number));
     var bm=b.proc_publiees!=null?b.proc_publiees:b.proc_creees*P.ratio_pub, platMin=P.plateforme_annuel/12/mins;
