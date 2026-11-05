@@ -24,6 +24,8 @@ import os
 from pathlib import Path
 import json, re, csv, io, gzip, subprocess, sys, base64, datetime, urllib.request, argparse
 from collections import Counter
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from retirer_adresses import masquer_donnees
 
 CARTO = os.environ.get("FORM2026_CARTOGRAPHIE", str(Path.home() / "Documents/cartographie"))
 SITE = str(Path(__file__).resolve().parents[1])
@@ -46,12 +48,6 @@ NEW_FIELDS_NULL = [
     "gain_usagers_potentiel_v7", "gain_usagers_demat_bas_v7", "gain_usagers_demat_haut_v7",
 ]
 
-
-def sur_main():
-    """Le commit local automatique ne se fait que sur main : jamais sur une branche de travail en cours."""
-    b = subprocess.run(["git", "branch", "--show-current"], cwd=SITE, capture_output=True, text=True).stdout.strip()
-    if b != "main": log(f"Pas de commit : la branche courante est {b or 'détachée'}, pas main.")
-    return b == "main"
 
 def log(msg):
     prefix = "[DRY-RUN] " if DRY_RUN else ""
@@ -239,6 +235,8 @@ def main():
         log(f"Aucune écriture (dry-run) : {len(kept)} démarches auraient été écrites dans "
             f"{APP_FILE} et redécoupées en 4 parts vers {SITE}.")
     else:
+        # Aucune adresse électronique ne doit atteindre les données publiées, quel que soit le champ.
+        kept = masquer_donnees(kept)
         json.dump(kept, open(APP_FILE, "w", encoding="utf-8"), ensure_ascii=False)
         log(f"Écrit : {APP_FILE} ({len(kept)} démarches)")
 
@@ -308,24 +306,7 @@ def main():
         for base in (CARTO, SITE):
             patch_mix(f"{base}/compteur-roi.html")
 
-        # commit local dans le dépôt déployé, SANS pousser
-        try:
-            if not sur_main(): return 0
-            subprocess.run(["git", "add", "app_demarches_0.json", "app_demarches_1.json",
-                             "app_demarches_2.json", "app_demarches_3.json",
-                             "compteur-roi.html"],
-                            cwd=SITE, check=True)
-            diff = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=SITE)
-            if diff.returncode == 0:
-                log("Aucun changement à committer.")
-            else:
-                today = datetime.date.today().isoformat()
-                msg = (f"Mise à jour mensuelle du catalogue des démarches "
-                       f"(+{n_added}, -{n_removed}, {n_updated} rafraîchies, {today})")
-                subprocess.run(["git", "commit", "-m", msg], cwd=SITE, check=True)
-                log(f"Commit local créé : {msg} — à pousser manuellement après vérification.")
-        except subprocess.CalledProcessError as e:
-            log(f"Avertissement : commit git échoué ({e}).")
+        log("Fichiers écrits, aucun commit : à relire et à proposer par une PR depuis une branche.")
 
     log("--- Fin mise à jour mensuelle du catalogue : succès ---")
     return 0

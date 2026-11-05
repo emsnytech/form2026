@@ -3,15 +3,15 @@
 
 Télécharge les séries mensuelles publiées par data.gouv.fr sur le jeu « Utilisation
 du service demarche.numerique.gouv.fr », régénère compteur-parametres.json (mêmes
-clés), et commit le résultat localement (SANS pousser vers GitHub — validation
-manuelle requise avant publication, cf. décision du 2026-10-04).
+clés) dans la copie de travail. Ne touche jamais à git : aucun commit, aucun push.
+`--publier` écrit aussi compteur-parametres.json dans le dépôt, à faire sur une branche, pour une PR.
 
 N'écrit rien si un téléchargement échoue ou si une série requise est vide.
 Exécuté par launchd le 1er et le 2 de chaque mois (voir form2026-counter-update.plist).
 """
 import os
 from pathlib import Path
-import json, csv, io, re, sys, datetime, subprocess, urllib.request, urllib.error
+import json, csv, io, re, sys, datetime, urllib.request, urllib.error
 
 CARTO = os.environ.get("FORM2026_CARTOGRAPHIE", str(Path.home() / "Documents/cartographie"))
 SITE = str(Path(__file__).resolve().parents[1])
@@ -27,12 +27,6 @@ RESOURCE_IDS = {
 }
 HEADERS = {"User-Agent": "FORM2026-compteur-update/1 (contact: cartographie FORM 2026)"}
 
-
-def sur_main():
-    """Le commit local automatique ne se fait que sur main : jamais sur une branche de travail en cours."""
-    b = subprocess.run(["git", "branch", "--show-current"], cwd=SITE, capture_output=True, text=True).stdout.strip()
-    if b != "main": log(f"Pas de commit : la branche courante est {b or 'détachée'}, pas main.")
-    return b == "main"
 
 def log(msg):
     line = f"{datetime.datetime.now().isoformat(timespec='seconds')} {msg}"
@@ -163,7 +157,8 @@ def main():
         "plateforme_annuel_libelle": existing["plateforme_annuel_libelle"],
     }
 
-    for path in (PARAMS_FILE, PARAMS_FILE_SITE):
+    # Par défaut, seule la copie de travail est écrite. --publier écrit aussi celle du dépôt : à faire sur une branche, pour une PR.
+    for path in ((PARAMS_FILE, PARAMS_FILE_SITE) if "--publier" in sys.argv else (PARAMS_FILE,)):
         with open(path, "w", encoding="utf-8") as f:
             json.dump(new_params, f, ensure_ascii=False, indent=1)
             f.write("\n")
@@ -171,20 +166,6 @@ def main():
 
     log(f"base_month={base_month} data_updated={today} mois_couverts={len(common_months)} "
         f"proc_publiees_source={'oui' if proc_publiees_series else 'non (estimation conservée)'}")
-
-    # commit local dans le dépôt déployé, SANS pousser (validation manuelle requise)
-    try:
-        if not sur_main(): return
-        subprocess.run(["git", "add", "compteur-parametres.json"], cwd=SITE, check=True)
-        diff = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=SITE)
-        if diff.returncode == 0:
-            log("Aucun changement à committer (fichier identique au dernier commit).")
-        else:
-            msg = f"Mise à jour mensuelle du compteur (base_month={base_month}, data_updated={today})"
-            subprocess.run(["git", "commit", "-m", msg], cwd=SITE, check=True)
-            log(f"Commit local créé : {msg} — à pousser manuellement après vérification.")
-    except subprocess.CalledProcessError as e:
-        log(f"Avertissement : commit git échoué ({e}) — fichiers néanmoins régénérés sur disque.")
 
     log("--- Fin mise à jour mensuelle : succès ---")
     return 0
