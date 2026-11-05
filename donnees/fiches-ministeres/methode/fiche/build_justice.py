@@ -7,6 +7,7 @@ import json, re, csv, unicodedata, collections as C, datetime as dt
 
 O = lambda n: json.load(open(f"out/{n}.json"))
 E, F, R, X, U, I, H, B = O("justice"), O("justice_familles"), O("justice_reconductions"), O("justice_complements"), O("justice_usages"), O("justice_inventaire"), O("justice_hors_opendata"), O("justice_124249")
+XP = O("justice_experts_publics")  # scripts/22_experts_publics.py : cités, jamais ajoutés aux totaux
 M = O("rdv_cdad_metabase")["cartes"]
 GEO = json.load(open("fiche/carte_departements.json"))
 ROWS = [json.loads(l) for l in open("data/demarches_slim.jsonl")]
@@ -100,7 +101,7 @@ ds = U["_duree"]; K = {
  "total": n(total), "od_total": n(od_total), "hors_n": hors_n, "dossiers": n(dossiers), "od_dos": n(od_dos),
  "part_dem": p(100 * total / (od_plat + hors_n), 2), "part_dos": p(100 * dossiers / (od_plat_d + hors_d), 2),
  "rh": n(rh), "rh_pct": p(100 * rh / total), "dsj_pct": p(100 * DSJ["demarches"] / total, 0), "dsj_n": n(DSJ["demarches"]),
- "us_n": us_n, "us_pct": p(100 * us_d / dossiers), "us_top2_pct": p(100 * (c64["dossiersCount"] + bj_dep) / us_d, 0),
+ "us_n": us_n, "us_pct": p(100 * us_d / dossiers),
  "contact_d": n(c64["dossiersCount"]), "contact_pct": p(100 * c64["dossiersCount"] / dossiers), "contact_pct_od": p(100 * c64["dossiersCount"] / od_dos),
  "contact_num": 64697, "contact_t": c64["title"], "contact_date": dfr(c64["datePublication"]), "contact_champs": c64["n_champs"], "contact_saisie": I_c["champs_saisie"], "contact_url": c64["url"], "contact_an": n(int(round(I_c["par_an"], -1))),
  "jur_n": jur_n, "la_n": n(LA["demarches"]), "la_camp": len(camp), "la_d": n(LA["dossiers"]), "la_min": LA["champs_min"], "la_max": LA["champs_max"],
@@ -132,6 +133,8 @@ ds = U["_duree"]; K = {
  "champs_2023": p(A[2023]["champs_moyens"]), "champs_2025": p(A[2025]["champs_moyens"]), "champs_y1": p(A[y1]["champs_moyens"]), "champsp_y1": p(P[y1]["champs_moyens"]),
  "pj_total": n(I["pj_labels"]["pj_total"]), "pj_id": I["pj_labels"]["identite"]["demarches"], "pj_rib": I["pj_labels"]["rib"]["demarches"], "pj_dip": I["pj_labels"]["diplome"]["demarches"],
  "rib_double": I["rib"]["pj_rib_et_iban"], "ass_n": I["partenaires_associatifs"]["demarches"], "part_y1": p(A[y1]["pct_particuliers"], 0),
+ "exp_total": n(XP["experts_deposes"]), "exp_releve": dfr(XP["releve"]), "exp_nat": n(XP["experts_deposes_par_groupe"]["Campagne nationale 2026"]), "exp_aix": n(XP["experts_deposes_par_groupe"]["Cour d'appel d'Aix-en-Provence"]), "exp_bdx": n(XP["experts_deposes_par_groupe"]["Cour d'appel de Bordeaux"]),
+ "v1_num": XP["barobaj_v1"]["numero"], "v1_dep": n(XP["barobaj_v1"]["avancee"]["Déposés"]),
  "aj_vol": n(int(aj["volumetrie_totale"])), "aj_pct": p(100 * aj["pct_recours_numerique"]),
  "na_d": n(na["dossiersCount"]), "na_c": na["n_champs"], "na_ferm": dfr(na["dateFermeture"]),
  "cerfa_total": len(CE), "cerfa_just": len(I["cerfa_justice"]), "avis_n": len(I["pj_avis"]), "avis_d": n(I["pj_labels"]["avis_imposition"]["dossiers"]),
@@ -206,4 +209,4 @@ assert not re.search(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}", h), "adress
 TETE = '<!DOCTYPE html>\n<html lang="fr">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
 open("fiche/fiche-justice.html", "w", encoding="utf-8").write(TETE + h)
 json.dump({"K": K, "EXT": EXT}, open("out/justice_chiffres_fiche.json", "w"), ensure_ascii=False, indent=0, default=str)
-print("ok fiche/fiche-justice.html", len(h)); print({k: K[k] for k in ("total", "dossiers", "rh", "rh_pct", "dsj_pct", "us_n", "us_pct", "us_top2_pct", "contact_pct", "jur_n", "rdv_total", "rdv_terr", "act_2411", "act_2610", "bj_an", "contact_an", "lien_n", "lien_pct", "deps", "paris_n", "paris_base")})
+print("ok fiche/fiche-justice.html", len(h)); print({k: K[k] for k in ("total", "dossiers", "rh", "rh_pct", "dsj_pct", "us_n", "us_pct", "contact_pct", "jur_n", "rdv_total", "rdv_terr", "act_2411", "act_2610", "bj_an", "contact_an", "lien_n", "lien_pct", "deps", "paris_n", "paris_base")})
