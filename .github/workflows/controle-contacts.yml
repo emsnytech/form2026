@@ -1,4 +1,4 @@
-name: Contrôle des adresses électroniques
+name: Contrôle des données de contact
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  adresses:
+  contacts:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -18,5 +18,5 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Aucune adresse électronique dans ce qui est publié
-        run: python3 scripts/retirer_adresses.py --check
+      - name: Ni adresse ni téléphone dans ce qui est publié
+        run: python3 scripts/retirer_contacts.py --check

@@ -25,7 +25,7 @@ from pathlib import Path
 import json, re, csv, io, gzip, subprocess, sys, base64, datetime, urllib.request, argparse
 from collections import Counter
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from retirer_adresses import masquer_donnees
+from retirer_contacts import masquer_donnees
 
 CARTO = os.environ.get("FORM2026_CARTOGRAPHIE", str(Path.home() / "Documents/cartographie"))
 SITE = str(Path(__file__).resolve().parents[1])
@@ -91,8 +91,8 @@ def _selftest():
     cas = [
         ("Fiche X [contact@exemple.invalid]", "Fiche X [adresse électronique retirée]"),
         ("Contact contact@exemple.invalid", "Contact [adresse électronique retirée]"),
-        ("Tél (01 23 45 67 89)", "Tél [numéro de téléphone retiré]"),
-        ("Tél 01 23 45 67 89", "Tél [numéro de téléphone retiré]"),
+        ("Tél (01 99 00 01 02)", "Tél [numéro de téléphone retiré]"),
+        ("Tél 01 99 00 01 02", "Tél [numéro de téléphone retiré]"),
         ("Demande d'autorisation de voirie", "Demande d'autorisation de voirie"),
     ]
     for entree, attendu in cas:
@@ -235,7 +235,7 @@ def main():
         log(f"Aucune écriture (dry-run) : {len(kept)} démarches auraient été écrites dans "
             f"{APP_FILE} et redécoupées en 4 parts vers {SITE}.")
     else:
-        # Aucune adresse électronique ne doit atteindre les données publiées, quel que soit le champ.
+        # Aucune donnée de contact ne doit atteindre les données publiées, quel que soit le champ.
         kept = masquer_donnees(kept)
         json.dump(kept, open(APP_FILE, "w", encoding="utf-8"), ensure_ascii=False)
         log(f"Écrit : {APP_FILE} ({len(kept)} démarches)")

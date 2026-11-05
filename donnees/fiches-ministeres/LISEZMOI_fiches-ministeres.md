@@ -34,6 +34,10 @@ Production de l'auteur à partir de données ouvertes de data.gouv.fr. Voir `don
 
 **Lecture des chiffres :** chaque fiche décrit les démarches publiées dans l'open data, ce qui ne recouvre pas toutes les démarches d'un ministère. L'open data ne retient que les démarches publiées, closes ou dépubliées, dont le paramètre `opendata` est activé, ayant au moins un dossier et dont l'adresse de site web ne contient ni « mail » ni « intra ». Les volumes sont donc des planchers. Les relevés en ligne changent chaque jour : la fiche en affiche la date.
 
+## Données de contact
+
+Ce site analyse ce que les démarches demandent. Il n'est pas un annuaire de contacts : adresses électroniques et numéros de téléphone sont retirés de tout ce qui est publié (voir le `README.md` du dépôt).
+
 ## Règle et exception
 
 Ce fichier fait foi : il n'en existe pas d'autre version de référence. Ce qui produit une page publiée vit dans ce dépôt et se rejoue depuis lui : voir `methode/REJOUER.md`.

@@ -24,13 +24,17 @@ Site généré statiquement — publié via GitHub Pages.
 
 Une seule exception, écrite dans la méthode : les scripts qui lisent une source interne (voir `donnees/fiches-ministeres/methode/REJOUER.md`). Les fiches ministères se rejouent depuis ce dépôt avec `donnees/fiches-ministeres/methode/rejouer.sh`. Les mises à jour mensuelles (`scripts/update_compteur_parametres.py`, `scripts/update_demarches_catalog.py`) lisent encore un catalogue de travail hors dépôt. Ils ne font aucun commit : leur résultat passe par une PR.
 
-## Adresses électroniques
+## Données de contact
 
-Aucune adresse électronique dans ce qui est publié, y compris dans les données embarquées : une adresse sur la page d'une démarche n'est pas une liste réutilisable. `scripts/retirer_adresses.py --check` le contrôle sur tous les fichiers suivis, à chaque PR. Tout générateur de données publiées appelle `masquer_donnees()`. Seul le domaine réservé `exemple.invalid` est admis, pour les jeux de test des scripts.
+**Ce site analyse ce que les démarches demandent. Il n'est pas un annuaire de contacts.** Ce principe vaut pour les adresses électroniques, les numéros de téléphone et toute autre donnée de contact qui apparaîtrait dans un corpus régénéré, sans tri entre contacts de service et contacts personnels.
+
+`scripts/retirer_contacts.py --check` le contrôle sur tous les fichiers suivis, à chaque PR. Tout générateur de données publiées appelle `masquer_donnees()`. Seuls le domaine réservé `exemple.invalid` et la tranche fictive 01 99 00 sont admis, pour les jeux de test des scripts. Un document binaire ajouté au dépôt n'est pas lu par ce contrôle : à vérifier à la main.
 
 ## Historique git
 
 Le 5 novembre 2026, un titre de démarche touchant des mineurs a été retiré de `justice_hors_opendata.json`. L'historique n'a pas été purgé : ce titre n'identifie personne, la page de la démarche est publique, et une réécriture casserait les liens de commits sans retirer l'information du monde.
+
+Le même jour, les adresses électroniques ont été retirées des fichiers publiés. Elles restent dans l'historique, et il n'a pas été purgé non plus, alors même qu'une adresse peut identifier une personne : ces textes restent publics à leur source, sur la plateforme et dans son open data. Une purge ne protégerait personne tant qu'ils y figurent, et coûterait une réécriture de branches, un force-push et une demande de purge des caches. L'action utile est de signaler à la plateforme les adresses qui paraissent personnelles. Les téléphones suivent la même décision.
 
 ## Sources de `explorer.html`
 
