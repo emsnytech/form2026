@@ -7,7 +7,7 @@
    "plateforme_reel": 2568554,
    "calage": 1.076,
    "estime_cale": 1182,
-   "part_plateforme": 0.0
+   "part_du_fichier": 0.0
   },
   {
    "annee": 2022,
@@ -16,7 +16,7 @@
    "plateforme_reel": 2708052,
    "calage": 1.197,
    "estime_cale": 2406,
-   "part_plateforme": 0.1
+   "part_du_fichier": 0.1
   },
   {
    "annee": 2023,
@@ -25,7 +25,7 @@
    "plateforme_reel": 2863250,
    "calage": 1.128,
    "estime_cale": 5808,
-   "part_plateforme": 0.2
+   "part_du_fichier": 0.2
   },
   {
    "annee": 2024,
@@ -34,7 +34,7 @@
    "plateforme_reel": 3968056,
    "calage": 1.325,
    "estime_cale": 15825,
-   "part_plateforme": 0.4
+   "part_du_fichier": 0.4
   },
   {
    "annee": 2025,
@@ -43,7 +43,7 @@
    "plateforme_reel": 4167309,
    "calage": 1.126,
    "estime_cale": 16123,
-   "part_plateforme": 0.4
+   "part_du_fichier": 0.4
   },
   {
    "annee": 2026,
@@ -52,7 +52,7 @@
    "plateforme_reel": 3906898,
    "calage": 1.087,
    "estime_cale": 16055,
-   "part_plateforme": 0.4
+   "part_du_fichier": 0.4
   }
  ],
  "carte": {

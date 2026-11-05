@@ -80,9 +80,9 @@
    "close_depuis": null
   },
   {
-   "path": "demande-de-rendez-vous-pour-consulter-une-procedur",
+   "path": null,
    "numero": 99723,
-   "titre": "Prise de rendez-vous pour consulter une procédure d&#39;assistance éducative",
+   "titre": "Démarche agrégée dans la fiche",
    "avancee": {
     "Tous (dont brouillon)": 322,
     "Déposés": 322,
@@ -107,14 +107,14 @@
      34
     ]
    ],
-   "close_depuis": "24 juin 2026"
+   "close_depuis": null
   }
  ],
  "recalcul": {
   "demarches": 394,
   "dossiers": 58256,
-  "part_plateforme_demarches": 0.89,
-  "part_plateforme_dossiers": 0.29,
+  "part_du_fichier_demarches": 0.89,
+  "part_du_fichier_dossiers": 0.29,
   "rh": 367,
   "rh_pct_demarches": 93.1,
   "rh_pct_dossiers": 60.6,
@@ -132,5 +132,6 @@
   "stats_dossiers_24_10": 22679986,
   "ecart_dossiers": 2791980,
   "ecart_dossiers_pct": 12.3
- }
+ },
+ "releve_agregee": "2026-11-04"
 }

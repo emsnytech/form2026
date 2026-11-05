@@ -1,0 +1,5 @@
+out/
+data/*
+!data/nb_dossiers_deposes_par_mois.csv
+fiche/fiche-*.html
+__pycache__/

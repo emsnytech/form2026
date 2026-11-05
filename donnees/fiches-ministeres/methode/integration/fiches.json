@@ -1,0 +1,22 @@
+{
+ "fiches": [
+  {
+   "slug": "education",
+   "source": "fiche/fiche-education.html",
+   "titre": "Éducation nationale, Enseignement supérieur et Recherche, Jeunesse",
+   "titre_page": "FORM 2026 — Fiche Éducation nationale",
+   "description": "Usage de Démarche Numérique : Éducation nationale, Enseignement supérieur et Recherche, Jeunesse, 2021 → 2026, open data du 21 octobre 2026.",
+   "carte_meta": "2021 → 2026 · open data du 21 octobre 2026",
+   "donnees": ["education.json", "education_familles.json", "education_reconductions.json", "education_complements.json", "education_papier.json", "education_etablissements.json"]
+  },
+  {
+   "slug": "justice",
+   "source": "fiche/fiche-justice.html",
+   "titre": "Justice",
+   "titre_page": "FORM 2026 — Fiche Justice",
+   "description": "Usage de Démarche Numérique par le ministère de la Justice : open data du 21 octobre 2026, relevé du 4 novembre 2026.",
+   "carte_meta": "open data du 21 octobre 2026 · relevé du 4 novembre 2026",
+   "donnees": ["justice.json", "justice_familles.json", "justice_reconductions.json", "justice_complements.json", "justice_hors_opendata.json", "justice_experts_publics.json", "rdv_cdad_metabase.json", "justice_siren_cours_appel.json", "justice_chiffres_fiche.json"]
+  }
+ ]
+}
