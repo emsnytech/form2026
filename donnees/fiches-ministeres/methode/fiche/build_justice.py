@@ -1,18 +1,16 @@
 """Génère la fiche Justice. Reprend le style et les fonctions graphiques du gabarit de la fiche n° 1, sans le dupliquer.
-Usage (depuis fiches-ministeres) : python3 fiche/build_justice.py
+Usage (depuis donnees/fiches-ministeres/methode) : python3 fiche/build_justice.py
 Entrées : out/justice*.json, out/rdv_cdad_metabase.json, out/scan_rdv_cdad.jsonl, data/demarches_slim.jsonl, explorer.html de FORM 2026, volumétrie DILA.
 Les chiffres de la base sont calculés ici. Les chiffres de sources externes sont consignés dans EXT avec leur source."""
-import os
 import json, re, csv, unicodedata, collections as C, datetime as dt
 
 O = lambda n: json.load(open(f"out/{n}.json"))
-E, F, R, X, U, I, H, B = O("justice"), O("justice_familles"), O("justice_reconductions"), O("justice_complements"), O("justice_usages"), O("justice_inventaire"), O("justice_hors_opendata"), O("justice_124249")
+E, F, R, X, U, I, H = O("justice"), O("justice_familles"), O("justice_reconductions"), O("justice_complements"), O("justice_usages"), O("justice_inventaire"), O("justice_hors_opendata")
 XP = O("justice_experts_publics")  # scripts/22_experts_publics.py : cités, jamais ajoutés aux totaux
 M = O("rdv_cdad_metabase")["cartes"]
 GEO = json.load(open("fiche/carte_departements.json"))
 ROWS = [json.loads(l) for l in open("data/demarches_slim.jsonl")]
-EXPL = os.path.expanduser("~/Documents/form2026-site/explorer.html")
-DILA_F = os.path.expanduser("~/Documents/cartographie/volumetrie DILA.tab.csv")
+EXPL = "../../../explorer.html"
 
 # Sources externes : valeur + source, pour vérification
 EXT = {
@@ -88,10 +86,9 @@ html_x = open(EXPL, encoding="utf-8").read()
 SJ = lambda i: json.loads(re.search(r'<script type="application/json" id="' + i + r'">(.*?)</script>', html_x, re.S).group(1))
 CE, ES = SJ("data-cerfa"), SJ("data-essentielles")
 aj = next(e for e in ES if e["id_observatoire"] == 1747)
-dila_t = open(DILA_F, errors="ignore").read()
 # Téléchargements sur un an à fin 2024 : référence unique du site, somme des versions du Cerfa.
 _RID_CERFA = {"R1444": "16146", "R18606": "12821", "R1408": "11808", "R15764": "11530", "R45128": "15586"}
-_TELECH = list(csv.DictReader(open(os.path.expanduser("~/Documents/form2026-site/donnees/gains/telechargements_dila.csv"), encoding="utf-8")))
+_TELECH = list(csv.DictReader(open("../../gains/telechargements_dila.csv", encoding="utf-8")))
 def vol(rid): return sum(int(r["telechargements"]) for r in _TELECH if r["numero"] == _RID_CERFA[rid])
 for x in I["cerfa_justice"]: pass
 
@@ -198,7 +195,7 @@ assert len(DATA["anomalies"]) == K["excl_n"]
 ref = open("fiche/gabarit_fiche.html", encoding="utf-8").read()
 css = re.search(r"<style>(.*?)</style>", ref, re.S).group(1)
 js = ref[ref.index('const fr = new Intl'):ref.index('/* 1. Trajectoire */')]
-mp = ref[ref.index('/* 4. Carte */'):ref.index('/* 7. Quotient familial */')]
+mp = ref[ref.index('/* 4. Carte */'):ref.index('<!--PAPIER_JS_DEBUT-->')]
 h = open("fiche/gabarit_justice.html", encoding="utf-8").read()
 h = h.replace("/*CSS_COMMUN*/", css).replace("/*JS_COMMUN*/", js).replace("/*JS_CARTE*/", mp).replace("/*DATA*/null", json.dumps(DATA, ensure_ascii=False).replace("</", "<\\/"))
 miss = set(re.findall(r"«(\w+)»", h)) - set(map(str, K))

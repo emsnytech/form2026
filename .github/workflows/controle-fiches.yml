@@ -1,0 +1,26 @@
+name: Contrôle des fiches ministères
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fiches:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Réserve, adresses, titres sensibles, intitulés
+        run: python3 scripts/controle_fiches.py
+      - name: L'index et les listes correspondent à ce que le script produit
+        run: python3 donnees/fiches-ministeres/methode/integration/integrer_fiches.py --verifier
+      - name: La navigation est synchronisée
+        run: python3 scripts/sync_nav.py --check

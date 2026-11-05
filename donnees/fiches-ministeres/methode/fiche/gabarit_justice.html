@@ -55,7 +55,7 @@
     <details><summary>Voir les données et le calage</summary><div class="tbl" id="t-dos"></div></details>
   </figure>
   <div class="col">
-    <p class="small">L'open data donne un nombre de dossiers cumulé, sans date de dépôt. La même méthode, appliquée à toute la plateforme, retrouve «calmin» à «calmax» % des dépôts publiés : ces chiffres sont un plancher. Ils n'incluent pas les «hors_n» démarches absentes de l'open data, faute de dates.</p>
+    <p class="small">L'open data donne un nombre de dossiers cumulé, sans date de dépôt. La même méthode, appliquée à tout le fichier, retrouve «calmin» à «calmax» % des dépôts publiés : ces chiffres sont un plancher. Ils n'incluent pas les «hors_n» démarches absentes de l'open data, faute de dates.</p>
   </div>
   <div class="callout">
     <b class="big">«g_bas» à «g_haut» M€ de frais évités de «y0» à «y1», sur les démarches du fichier</b>
@@ -192,7 +192,7 @@
   <div class="secnum">6 · Qualité et « dites-le-nous une fois »</div>
   <h2>Peu de référentiels, et des pièces demandées plusieurs fois</h2>
   <div class="col">
-    <p>La longueur moyenne d'un formulaire dépend surtout des listes d'aptitude («la_min» à «la_max» champs) : «champs_2023» champs en 2023, «champs_2025» en 2025, «champs_y1» en «y1», contre «champsp_y1» sur la plateforme. Sur «pj_total» pièces justificatives relues dans le périmètre open data, les pièces d'identité apparaissent dans «pj_id» démarches, le RIB dans «pj_rib», les diplômes dans «pj_dip».</p>
+    <p>La longueur moyenne d'un formulaire dépend surtout des listes d'aptitude («la_min» à «la_max» champs) : «champs_2023» champs en 2023, «champs_2025» en 2025, «champs_y1» en «y1», contre «champsp_y1» sur l'ensemble du fichier. Sur «pj_total» pièces justificatives relues dans le périmètre open data, les pièces d'identité apparaissent dans «pj_id» démarches, le RIB dans «pj_rib», les diplômes dans «pj_dip».</p>
     <p>«rib_double» démarches demandent à la fois le RIB en pièce jointe et l'IBAN en champ. Sur «ass_n» démarches associatives ou de subvention, aucune n'utilise le champ RNA. Aucune démarche de l'open data n'interroge API Particulier.</p>
   </div>
   <div class="tbl" id="t-qual"></div>
@@ -271,7 +271,7 @@
       <p><b>Démarches exclues.</b></p>
     </div>
     <div class="tbl" id="t-anom"></div>
-    <div class="col"><p>Les scripts de calcul et les fichiers intermédiaires accompagnent la fiche. Chaque chiffre issu de la base est produit par ces scripts. Les chiffres tirés de sources externes y sont consignés avec leur source.</p></div>
+    <div class="col"><p><a href="https://emsnytech.github.io/form2026/donnees/fiches-ministeres/methode/">Les scripts de calcul</a> et les fichiers intermédiaires accompagnent la fiche. Chaque chiffre issu de la base est produit par ces scripts. Les chiffres tirés de sources externes y sont consignés avec leur source.</p><p><b>Règle et exception.</b> Ce qui produit une page publiée vit dans le dépôt, et se rejoue depuis lui. Une seule exception : le script de comparaison mentionné plus haut reste hors du dépôt public, parce qu'il lit une source interne que le lecteur ne peut pas consulter, et aucun chiffre publié n'en dépend.</p></div>
   </details>
 </footer>
 </div>
@@ -282,14 +282,14 @@ const DATA = /*DATA*/null;
 /*JS_COMMUN*/
 /* 1. Trajectoire */
 bars("c-pub", YL, [{name:"Autres démarches", values:DATA.pub_autres, color:S1}, {name:"Listes d'aptitude", values:DATA.pub_la, color:S2}], {label:"Démarches publiées par an"});
-table("t-pub", ["Année", "Publiées", "dont listes d'aptitude", "Nouveaux usages", "Reconductions", "Closes", "Part plateforme"],
+table("t-pub", ["Année", "Publiées", "dont listes d'aptitude", "Nouveaux usages", "Reconductions", "Closes", "Part du fichier"],
   Y.map((y, i) => [YL[i], fr.format(DATA.pub_autres[i]+DATA.pub_la[i]), fr.format(DATA.pub_la[i]), fr.format(DATA.pub_new[i]), fr.format(DATA.pub_rec[i]), fr.format(DATA.closes[i]), pc(DATA.part_pub[i])]), [1,2,3,4,5,6]);
-table("t-stock", ["Année", "En ligne fin d'année", "Listes d'aptitude", "Autres", "Actives", "Part plateforme"],
+table("t-stock", ["Année", "En ligne fin d'année", "Listes d'aptitude", "Autres", "Actives", "Part du fichier"],
   Y.map((y, i) => [YL[i], fr.format(DATA.stock[i]), fr.format(DATA.stock[i]-DATA.stock_autres[i]), fr.format(DATA.stock_autres[i]), fr.format(DATA.actives[i]), pc(DATA.part_stock[i])]), [1,2,3,4,5]);
 const DOS = DATA.dossiers;
 bars("c-dos", YL, [{name:"Dossiers (estimation)", values:DOS.map(d => d.estime_brut), color:S1}], {h:240, label:"Dossiers déposés par an, estimation"});
-table("t-dos", ["Année", "Dossiers estimés", "Part de la plateforme", "Plateforme : estimation", "Plateforme : dépôts publiés", "Coefficient de calage", "Dossiers recalés"],
-  DOS.map((d, i) => [YL[i], fr.format(d.estime_brut), pc(d.part_plateforme), fr.format(d.plateforme_estime), fr.format(d.plateforme_reel) + (i === DOS.length-1 ? " (à fin sept.)" : ""), String(d.calage).replace(".", ","), fr.format(d.estime_cale)]), [1,2,3,4,5,6]);
+table("t-dos", ["Année", "Dossiers estimés", "Part du fichier", "Fichier : estimation", "Plateforme : dépôts publiés", "Coefficient de calage", "Dossiers recalés"],
+  DOS.map((d, i) => [YL[i], fr.format(d.estime_brut), pc(d.part_du_fichier), fr.format(d.plateforme_estime), fr.format(d.plateforme_reel) + (i === DOS.length-1 ? " (à fin sept.)" : ""), String(d.calage).replace(".", ","), fr.format(d.estime_cale)]), [1,2,3,4,5,6]);
 const keur = v => fr.format(Math.round(v/1000)) + " k€";
 table("t-gains", ["Année", "Frais évités, bas", "Frais évités, haut"], DATA.gains_annee.map((g, i) => [YL[i], keur(g.bas), keur(g.haut)]), [1,2]);
 
@@ -321,7 +321,7 @@ table("t-rdvtop", ["Territoire", "Instance", "Rendez-vous enregistrés", "Démar
   DATA.rdv.top.map(t => [esc(t.nom), esc(t.inst), fr.format(t.r), fr.format(t.n), fr.format(t.d)]), [2,3,4]);
 
 /* 6. Qualité */
-table("t-qual", ["Année", "Champs (plateforme)", "PJ (plateforme)", "SIRET", "IBAN", "RNA", "API", "Moins de 3 mois"],
+table("t-qual", ["Année", "Champs (fichier)", "PJ (fichier)", "SIRET", "IBAN", "RNA", "API", "Moins de 3 mois"],
   DATA.qual.map((q, i) => [YL[i], `${String(q.champs).replace(".", ",")} (${String(q.champs_p).replace(".", ",")})`, `${String(q.pj).replace(".", ",")} (${String(q.pj_p).replace(".", ",")})`, pc(q.siret), pc(q.iban), pc(q.rna), fr.format(q.apip), fr.format(q.eph)]), [1,2,3,4,5,6,7]);
 
 /* 7. Papier */

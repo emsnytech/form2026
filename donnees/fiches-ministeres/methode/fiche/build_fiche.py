@@ -77,7 +77,7 @@ K.update({
  "dos_fen": n(round(sum(a["estime_brut"] for a in DA), -3)), "dos_fen_m": meur(sum(a["estime_brut"] for a in DA)),
  "dos_cale_m": meur(sum(a["estime_cale"] for a in DA)),
  "dos0": n(round(DA[0]["estime_brut"], -3)), "dos1": n(round(DA[-1]["estime_brut"], -3)),
- "dos_part0": p(DA[0]["part_plateforme"]), "dos_part1": p(DA[-1]["part_plateforme"]),
+ "dos_part0": p(DA[0]["part_du_fichier"]), "dos_part1": p(DA[-1]["part_du_fichier"]),
  "calmin": p(100 / max(a["calage"] for a in DA), 0), "calmax": p(100 / min(a["calage"] for a in DA), 0),
  "g_bas": meur(GA["bas"]), "g_haut": meur(GA["haut"]), "ga_bas": meur(GA["admin_bas"]), "ga_haut": meur(GA["admin_haut"]),
  "gu_bas": meur(GA["usagers_bas"]), "gu_haut": meur(GA["usagers_haut"]),

@@ -40,7 +40,7 @@ for y in YEARS:
     calage[y] = round(reel[y] / est, 3) if est else None
 dossiers_annuels = [{"annee": y, "estime_brut": round(est_per[y]), "plateforme_estime": round(est_plat[y]), "plateforme_reel": reel[y],
                      "calage": calage[y], "estime_cale": round(est_per[y] * (calage[y] or 1)),
-                     "part_plateforme": round(100 * est_per[y] / est_plat[y], 1)} for y in YEARS]
+                     "part_du_fichier": round(100 * est_per[y] / est_plat[y], 1)} for y in YEARS]
 
 # ---------- 2. Carte par département ----------
 fen = [r for r in per if any(is_active(r, y) for y in YEARS)]
