@@ -1,0 +1,65 @@
+name: Mise à jour mensuelle du compteur
+
+# Le 1er et le 2 : met à jour compteur-parametres.json et propose le résultat, sans rien écrire sur main.
+# Le 8 : vérifie que le site n'est pas en retard. Tout échec ouvre une issue, en plus de l'avis de GitHub.
+on:
+  schedule:
+    - cron: "0 7 1,2 * *"
+    - cron: "0 7 8 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  compteur:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Mettre à jour et proposer
+        if: github.event.schedule != '0 7 8 * *'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/update_compteur_parametres.py --publier
+          if git diff --quiet compteur-parametres.json; then
+            echo "Données inchangées, rien à proposer."
+            exit 0
+          fi
+          MOIS=$(python3 -c "import json;print(json.load(open('compteur-parametres.json'))['base_month'])")
+          BRANCHE="maj-compteur-$MOIS"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCHE"
+          git add compteur-parametres.json
+          git commit -m "Mise à jour mensuelle du compteur : données jusqu'à $MOIS"
+          git push --force origin "$BRANCHE"
+          if gh pr list --head "$BRANCHE" --json number -q '.[0].number' | grep -q .; then
+            echo "PR déjà ouverte pour cette branche."
+            exit 0
+          fi
+          CORPS="Mise à jour automatique depuis data.gouv.fr. À relire et à fusionner à la main : rien n'atteint main sans accord."
+          if ! gh pr create --base main --head "$BRANCHE" --title "Compteur : données jusqu'à $MOIS" --body "$CORPS"; then
+            # Si le dépôt interdit aux workflows de créer des PR, l'issue donne le lien pour l'ouvrir en un clic.
+            gh issue create --title "Compteur : données jusqu'à $MOIS, PR à ouvrir" \
+              --body "$CORPS Ouvrir la PR : ${{ github.server_url }}/${{ github.repository }}/compare/main...$BRANCHE?expand=1"
+          fi
+
+      - name: Vérifier que le site n'est pas en retard
+        if: github.event.schedule == '0 7 8 * *' || github.event_name == 'workflow_dispatch'
+        run: python3 scripts/update_compteur_parametres.py --verifier-fraicheur
+
+      - name: Signaler l'échec
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --title "Échec du compteur mensuel, $(date +%F)" \
+            --body "La tâche a échoué : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}. Tant que ce n'est pas réglé, le compteur du site reste en retard."

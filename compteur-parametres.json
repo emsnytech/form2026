@@ -1,16 +1,10 @@
 {
  "_commentaire": "Données d'activité publiées par la plateforme (data.gouv.fr, jeu « Utilisation du service demarche.numerique.gouv.fr »). Fichier régénéré chaque mois. proc_publiees : renseigner si une série de démarches publiées par mois existe ; sinon, le compteur estime les démarches publiées à partir de proc_creees × ratio_pub.",
- "base_month": "2026-09",
- "data_updated": "2026-10-04",
+ "base_month": "2026-10",
+ "data_updated": "2026-11-05",
  "ratio_pub": 0.414578,
  "plateforme_annuel": 1600000,
  "months": {
-  "2024-10": {
-   "depo": 351920,
-   "crees": 476424,
-   "proc_creees": 1595,
-   "proc_publiees": null
-  },
   "2024-11": {
    "depo": 259007,
    "crees": 361535,
@@ -147,6 +141,12 @@
    "depo": 574693,
    "crees": 1088427,
    "proc_creees": 2605,
+   "proc_publiees": null
+  },
+  "2026-10": {
+   "depo": 596598,
+   "crees": 1124837,
+   "proc_creees": 2193,
    "proc_publiees": null
   }
  },

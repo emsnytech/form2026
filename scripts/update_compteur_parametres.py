@@ -1,23 +1,22 @@
 #!/usr/bin/env python3
 """Mise à jour mensuelle de compteur-parametres.json pour FORM 2026 (compteur-roi.html).
 
-Télécharge les séries mensuelles publiées par data.gouv.fr sur le jeu « Utilisation
-du service demarche.numerique.gouv.fr », régénère compteur-parametres.json (mêmes
-clés) dans la copie de travail. Ne touche jamais à git : aucun commit, aucun push.
-`--publier` écrit aussi compteur-parametres.json dans le dépôt, à faire sur une branche, pour une PR.
+Télécharge les séries mensuelles publiées par data.gouv.fr sur le jeu « Utilisation du service
+demarche.numerique.gouv.fr ». Le fichier du dépôt est la seule source. Ne touche jamais à git.
 
-N'écrit rien si un téléchargement échoue ou si une série requise est vide.
-Exécuté par launchd le 1er et le 2 de chaque mois (voir form2026-counter-update.plist).
+    python3 scripts/update_compteur_parametres.py --publier              # écrit compteur-parametres.json
+    python3 scripts/update_compteur_parametres.py                        # calcule et journalise, n'écrit rien
+    python3 scripts/update_compteur_parametres.py --verifier-fraicheur   # sort en erreur si le site est en retard
+
+N'écrit rien si un téléchargement échoue ou si une série requise est vide, et sort alors en erreur. Lancé par le
+workflow maj-compteur.yml, qui propose le résultat et ouvre une issue en cas d'échec.
 """
 import os
 from pathlib import Path
 import json, csv, io, re, sys, datetime, urllib.request, urllib.error
 
-CARTO = os.environ.get("FORM2026_CARTOGRAPHIE", str(Path.home() / "Documents/cartographie"))
 SITE = str(Path(__file__).resolve().parents[1])
-PARAMS_FILE = f"{CARTO}/compteur-parametres.json"
-PARAMS_FILE_SITE = f"{SITE}/compteur-parametres.json"
-LOG_FILE = f"{CARTO}/update_compteur_parametres.log"
+PARAMS_FILE = f"{SITE}/compteur-parametres.json"
 
 DATASET_SLUG = "utilisation-du-service-demarche-numerique-gouv-fr"
 RESOURCE_IDS = {
@@ -31,8 +30,6 @@ HEADERS = {"User-Agent": "FORM2026-compteur-update/1 (contact: cartographie FORM
 def log(msg):
     line = f"{datetime.datetime.now().isoformat(timespec='seconds')} {msg}"
     print(line)
-    with open(LOG_FILE, "a", encoding="utf-8") as f:
-        f.write(line + "\n")
 
 
 def fetch(url, timeout=30):
@@ -157,8 +154,7 @@ def main():
         "plateforme_annuel_libelle": existing["plateforme_annuel_libelle"],
     }
 
-    # Par défaut, seule la copie de travail est écrite. --publier écrit aussi celle du dépôt : à faire sur une branche, pour une PR.
-    for path in ((PARAMS_FILE, PARAMS_FILE_SITE) if "--publier" in sys.argv else (PARAMS_FILE,)):
+    for path in ((PARAMS_FILE,) if "--publier" in sys.argv else ()):
         with open(path, "w", encoding="utf-8") as f:
             json.dump(new_params, f, ensure_ascii=False, indent=1)
             f.write("\n")
@@ -171,5 +167,18 @@ def main():
     return 0
 
 
+def verifier_fraicheur():
+    """En retard si, après le 5 du mois, le dernier mois couvert n'est pas le mois précédent."""
+    base = json.load(open(PARAMS_FILE, encoding="utf-8"))["base_month"]
+    a, m = map(int, base.split("-"))
+    auj = datetime.date.today()
+    ecart = auj.year * 12 + auj.month - a * 12 - m
+    if ecart > 2 or (ecart == 2 and auj.day > 5):
+        print(f"RETARD : le compteur s'arrête à {base}, nous sommes le {auj.isoformat()}.")
+        return 1
+    print(f"À jour : données jusqu'à {base}.")
+    return 0
+
+
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(verifier_fraicheur() if "--verifier-fraicheur" in sys.argv else main())
