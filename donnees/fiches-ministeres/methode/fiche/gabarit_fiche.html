@@ -58,6 +58,7 @@ a.kpi .go{display:block;margin-top:6px;font-weight:700;font-size:.85rem;color:va
 .kpi.u .v{color:var(--usager)} .kpi.w .v{color:var(--accent)}
 .kpi .v small{font-size:14px;color:var(--ink-3);font-weight:400}
 .kpi .l{font-size:.9rem;color:var(--muted);margin-top:6px;line-height:1.35}
+.cadre{margin:22px 0 0;padding:14px 18px;border-left:4px solid var(--accent);background:var(--surface);border-radius:0 8px 8px 0;max-width:78ch}.cadre p{margin:0 0 10px;font-size:.98rem;line-height:1.55}.cadre p:last-child{margin:0}
 .brief{margin:26px 0 0;padding:0;list-style:none;display:grid;gap:10px}
 .brief li{padding-left:18px;position:relative;max-width:72ch}
 .brief li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:8px;border-radius:2px;background:var(--admin)}
@@ -137,6 +138,10 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
   <div class="eyebrow"><span>FORM 2026 · Fiches ministères</span><span>Fiche n° 1</span><span>Open data du «date»</span></div>
   <h1>Éducation nationale, Enseignement supérieur et Recherche, Jeunesse</h1>
   <p class="sub">Les démarches publiées sur Démarche Numérique pour les trois périmètres, de «y0» à «y1» (au «date»). Sont comptées les démarches en ligne, closes ou dépubliées.</p>
+  <div class="cadre">
+    <p><b>Ce que cette fiche décrit.</b> Elle porte sur les démarches de ces ministères publiées dans le descriptif ouvert de la plateforme, et non sur l'ensemble de leurs démarches dématérialisées. À l'échelle de la plateforme, environ un dossier sur huit ne figure pas dans ce descriptif, et environ un quart des démarches, cette seconde part comprenant une forte proportion de démarches n'ayant jamais reçu de dossier. Ces ordres de grandeur s'obtiennent en retranchant le fichier ouvert du <a href="https://demarche.numerique.gouv.fr/stats" target="_blank" rel="noopener">compteur public de la plateforme</a>, relevé le 24 octobre 2026. Les absences s'expliquent par les règles de publication inscrites dans le code de la plateforme (paramètre de publication désactivé par le service, absence de dossier, adresse de site web contenant « mail » ou « intra »), et par la suppression de démarches. Les parts données ci-dessous portent donc sur un corpus publié, et non sur l'activité complète de ces ministères.</p>
+    <p><b>Comment les démarches sont rattachées à ces ministères.</b> Deux rattachements distincts existent : le ministère de rattachement du service traitant, et le ministère porteur de la politique publique. Cette fiche retient le second, tel que le service l'a déclaré dans le champ « zone » de la démarche. Pour «cadre_nomorg» démarches sur «cadre_total», sans zone, le nom de l'organisme en tient lieu. La distinction n'est pas une incertitude de mesure mais une caractéristique de l'organisation de l'État : un service déconcentré peut instruire une politique qui ne relève pas de son ministère de rattachement, et certaines politiques, l'action sociale interministérielle par exemple, relèvent de plusieurs ministères à la fois. Les deux lectures sont justes et ne donnent pas le même périmètre.</p>
+  </div>
 
   <div class="kpis" role="list">
     <div class="kpi" role="listitem"><div class="v">«stock1» <small>/ «stock0»</small></div><div class="l">démarches en ligne fin «y1», contre fin «y0» (×«stock_ratio»)</div></div>
