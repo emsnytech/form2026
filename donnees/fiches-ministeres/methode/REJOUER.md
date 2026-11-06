@@ -31,7 +31,17 @@ Le workflow `controle-fiches.yml` lance les deux à chaque PR.
 
 ## L'exception
 
-Le script de comparaison à une extraction interne (n° 21) reste hors du dépôt public, parce qu'il lit une source interne que le lecteur ne peut pas consulter. Aucun chiffre publié n'en dépend : il a seulement servi à décider des réserves de méthode. Tout autre script d'analyse d'une source interne suit le même régime.
+Le script de comparaison à une extraction interne (n° 21) reste hors du dépôt public, parce qu'il lit une source interne que le lecteur ne peut pas consulter. Aucun chiffre publié n'en dépend : il a seulement servi à décider des réserves de méthode. Les autres scripts d'analyse d'une source interne suivent le même régime. Chacun est nommé ici avec sa source :
+
+| Script | Source interne lue | Objet |
+|---|---|---|
+| 21 `ecart_metabase.py` | extraction Metabase retravaillée, périmètre Justice | écart entre une extraction interne et l'open data |
+| 23 `ecart_plateforme.py` | export brut Metabase des démarches publiées, closes ou dépubliées (5 novembre 2026) | écart à l'échelle de la plateforme et causes des absences |
+| 24 `attribution.py` | même export | rattachement de chaque démarche au ministère de son service traitant |
+| 25 `zones_procedures.py` | extraction Metabase de la table des zones des démarches (6 novembre 2026) | couverture et provenance des zones |
+| 26 `ecarts_ministeres.py` | les deux extractions précédentes | écarts par ministère et carte des flux, sur les zones posées par les services |
+
+Aucun de ces scripts n'est publié. Aucun chiffre publié n'en dépend.
 
 ## Démarches agrégées
 
