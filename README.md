@@ -24,6 +24,10 @@ Site généré statiquement — publié via GitHub Pages.
 
 Une seule exception, écrite dans la méthode : les scripts qui lisent une source interne (voir `donnees/fiches-ministeres/methode/REJOUER.md`). Les fiches ministères se rejouent depuis ce dépôt avec `donnees/fiches-ministeres/methode/rejouer.sh`. Le compteur se met à jour par le workflow `maj-compteur.yml`, qui propose le résultat et ouvre une issue en cas d'échec ; sa page affiche le mois couvert et signale un retard. `scripts/update_demarches_catalog.py` lit encore un catalogue de travail hors dépôt ; il ne fait aucun commit, et son résultat passe par une PR.
 
+## Cadre d'entrée
+
+Toute page qui publie des chiffres tirés du descriptif ouvert des démarches porte en tête un cadre : ce qu'elle décrit (le corpus publié, pas l'activité complète) et le rattachement qu'elle retient. Il est produit par `scripts/sync_cadre.py`, jamais écrit à la main, et contrôlé à chaque PR. Une nouvelle page de ce type s'ajoute à la liste `PAGES` du script ; les fiches ministères le produisent par leurs gabarits.
+
 ## Données de contact
 
 **Ce site analyse ce que les démarches demandent. Il n'est pas un annuaire de contacts.** Ce principe vaut pour les adresses électroniques, les numéros de téléphone et toute autre donnée de contact qui apparaîtrait dans un corpus régénéré, sans tri entre contacts de service et contacts personnels.
