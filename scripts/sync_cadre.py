@@ -35,6 +35,27 @@ PAGES = {
 }
 
 
+# Repérage automatique : une page qui cite le descriptif comme source, ou qui charge des données, doit porter le cadre,
+# ou figurer ci-dessous avec sa raison. Une page ne peut donc plus échapper au contrôle en silence.
+CITE = re.compile(r"descriptif-des-demarches-publiees|Descriptif des démarches publiées", re.I)
+CHARGE = re.compile(r"fetch\(['\"][^'\"]*(donnees/|app_|champs_shards|\.json)|<script type=\"application/json\"")
+EXCEPTIONS = {
+    "index.html": "page d'accueil : cite le descriptif parmi les sources du site, sans en tirer de chiffre",
+    "compteur-roi.html": "charge compteur-parametres.json, tiré du jeu « Utilisation du service », pas du descriptif",
+    "explorer.html": "À TRAITER : l'explorateur est construit sur le descriptif ; son cadre reste à ajouter",
+}
+FICHES = {"fiches-ministeres/justice.html", "fiches-ministeres/education.html", "fiches-ministeres/index.html"}
+
+
+def pages_reperees():
+    import subprocess
+    sortie = subprocess.run(["git", "ls-files", "*.html"], cwd=RACINE, capture_output=True, text=True).stdout.split()
+    for rel in sortie:
+        if rel.startswith(("_", "donnees/")): continue
+        t = (RACINE / rel).read_text(encoding="utf-8", errors="ignore")
+        if CITE.search(t) or CHARGE.search(t): yield rel
+
+
 def bloc(cfg):
     return (f"{DEBUT}\n  {STYLE}\n  <div class=\"cadre\">\n    <p>{cfg['decrit']}{CENTRE}{cfg['fin']}</p>\n"
             f"    <p>{cfg['rattachement']}</p>\n  </div>\n  {FIN}")
@@ -65,6 +86,11 @@ def main():
     for rel in ("fiches-ministeres/justice.html", "fiches-ministeres/education.html", "fiches-ministeres/index.html"):
         if phrase not in (RACINE / rel).read_text(encoding="utf-8"):
             ecarts.append(f"{rel} (phrase commune du cadre absente ou différente)")
+    for rel in pages_reperees():
+        if rel not in PAGES and rel not in FICHES and rel not in EXCEPTIONS:
+            ecarts.append(f"{rel} (cite le descriptif ou charge des données : ajouter à PAGES, ou à EXCEPTIONS avec sa raison)")
+    a_traiter = [r for r, why in EXCEPTIONS.items() if why.startswith("À TRAITER")]
+    if a_traiter: print("Pages repérées, sans cadre encore : " + ", ".join(a_traiter))
     for e in ecarts:
         print(("à mettre à jour : " if verifier else "écrit : ") + e)
     if verifier and ecarts:
