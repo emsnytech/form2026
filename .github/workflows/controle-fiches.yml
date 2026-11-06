@@ -22,5 +22,7 @@ jobs:
         run: python3 scripts/controle_fiches.py
       - name: L'index et les listes correspondent à ce que le script produit
         run: python3 donnees/fiches-ministeres/methode/integration/integrer_fiches.py --verifier
+      - name: Le cadre d'entrée est produit par le script, à jour sur chaque page
+        run: python3 scripts/sync_cadre.py --check
       - name: La navigation est synchronisée
         run: python3 scripts/sync_nav.py --check
