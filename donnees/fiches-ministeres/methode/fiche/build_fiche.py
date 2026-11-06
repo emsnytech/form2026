@@ -59,6 +59,7 @@ K = {
  "siretch1": p(A[y1]["pct_siret"]), "iban1": p(A[y1]["pct_iban"]),
  "apip": n(sum(a["nb_api_particulier"] for a in E["annees"])),
  "inter": n(E["perimetre"]["exclues_interministerielles"]),
+ "cadre_nomorg": n(E["perimetre"]["par_source"]["nom_organisme"]), "cadre_total": n(E["perimetre"]["total"]),
  "nomorg0": n((A[y0]["par_source"] or {}).get("nom_organisme", 0)),
  "nomorg1": n((A[y0 + 1]["par_source"] or {}).get("nom_organisme", 0)),
  "nomorg2": n((A[y0 + 2]["par_source"] or {}).get("nom_organisme", 0)),

@@ -35,6 +35,7 @@ a{color:var(--admin)}
 .topnav{font-size:.9rem;color:var(--muted);margin:0 0 1rem}.topnav a{text-decoration:none;font-weight:600}
 h1{font-weight:800;font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.15;margin:.5rem 0 0;max-width:22ch}
 h2{font-weight:800;font-size:1.4rem;margin:2.6rem 0 1rem}
+.cadre{margin:22px 0 0;padding:14px 18px;border-left:4px solid var(--accent);background:var(--surface);border-radius:0 8px 8px 0;max-width:78ch}.cadre p{margin:0 0 10px;font-size:.98rem;line-height:1.55}.cadre p:last-child{margin:0}
 .lede{font-size:1.12rem;color:var(--muted);max-width:62ch;margin:1rem 0 0}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:2rem}
 @media (max-width:760px){.grid{grid-template-columns:1fr}}
@@ -62,6 +63,10 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
     <p class="topnav" style="margin:0;font-weight:700">FORM 2026 · Fiches ministères</p>
     <h1>L'usage de Démarche Numérique, par ministère et par thème</h1>
     <p class="lede">Une fiche par ministère, sur ce qui passe par Démarche Numérique depuis 2021. Toutes partent de l'open data de la plateforme, mais leurs sections et leurs autres sources varient. Chaque fiche indique les siennes et leur date.</p>
+    <div class="cadre">
+    <p><b>Ce que ces fiches décrivent.</b> Elles portent sur les démarches de chaque ministère publiées dans le descriptif ouvert de la plateforme, et non sur l'ensemble de ses démarches dématérialisées. À l'échelle de la plateforme, environ un dossier sur huit ne figure pas dans ce descriptif, en moyenne sur l'ensemble de l'historique de la plateforme, et environ un quart des démarches, cette seconde part comprenant une forte proportion de démarches n'ayant jamais reçu de dossier. Ces ordres de grandeur s'obtiennent en retranchant le fichier ouvert du <a href="https://demarche.numerique.gouv.fr/stats" target="_blank" rel="noopener">compteur public de la plateforme</a>, relevé le 24 octobre 2026. Les absences s'expliquent par les règles de publication inscrites dans le code de la plateforme (paramètre de publication désactivé par le service, absence de dossier, adresse de site web contenant « mail » ou « intra »), et par la suppression de démarches. Les parts données ci-dessous portent donc sur un corpus publié, et non sur l'activité complète des ministères.</p>
+    <p><b>Comment les démarches sont rattachées à un ministère.</b> Deux rattachements distincts existent : le ministère de rattachement du service traitant, et le ministère porteur de la politique publique. Chaque fiche dit en tête lequel elle retient. La distinction n'est pas une incertitude de mesure mais une caractéristique de l'organisation de l'État : un service déconcentré peut instruire une politique qui ne relève pas de son ministère de rattachement, et certaines politiques, l'action sociale interministérielle par exemple, relèvent de plusieurs ministères à la fois. Les deux lectures sont justes et ne donnent pas le même périmètre.</p>
+    </div>
   </header>
   <div class="grid">
     <a class="fiche" href="education.html">
