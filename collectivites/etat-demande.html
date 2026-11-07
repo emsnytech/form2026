@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FORM 2026 — Ce que l'État demande aux collectivités</title>
+<meta name="description" content="Les pièces que les démarches de l'État demandent aux collectivités, et l'administration qui les détient déjà.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Charte FORM 2026 (emsnytech/form2026) : Source Sans 3 + IBM Plex Mono, fond papier, bleu « admin », vert « usager », ambre « accent ».
+   Mise en page : fiche sur une colonne de lecture, graphiques en cartes, tableaux de données repliables. */
+:root{
+  --q0:#efece5; --q1:#dbeafe; --q2:#93c5fd; --q3:#3b82f6; --q4:#1d4ed8; --q5:#1e3a8a;
+  --ink:#1e2022; --muted:#5c6066; --paper:#fbf9f5; --surface:#ffffff; --line:#e2dfd7; --line-2:#efece5;
+  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4; --accent:#b45309; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c;
+  --s1:#1d4ed8; --s2:#b45309; --s3:#15803d; --s4:#9ca3af;
+  --bg:var(--paper); --ink-2:var(--muted); --ink-3:var(--muted); --rule:var(--line); --rule-2:var(--line-2);
+  --warn-bg:var(--warn-soft); --warn-ink:var(--warn);
+  --f-display:"Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-body:"Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-data:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46; --line-2:#323238;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+  --s1:#3b82f6; --s2:#d97706; --s3:#16a34a; --s4:#6b7280; --q0:#323238; --q1:#1e3a5f; --q2:#1e40af; --q3:#2563eb; --q4:#60a5fa; --q5:#bfdbfe; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46; --line-2:#323238;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171;
+  --s1:#3b82f6; --s2:#d97706; --s3:#16a34a; --s4:#6b7280; --q0:#323238; --q1:#1e3a5f; --q2:#1e40af; --q3:#2563eb; --q4:#60a5fa; --q5:#bfdbfe; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:17px/1.55 var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:960px;margin:0 auto}
+.topnav{font-size:.9rem;color:var(--muted);margin:0;padding-top:2rem}
+.topnav a{text-decoration:none;font-weight:600}
+.topnav a:hover{text-decoration:underline}
+.col{max-width:68ch}
+header.top{padding-block:1.2rem 28px;border-bottom:1px solid var(--rule)}
+.eyebrow{display:flex;flex-wrap:wrap;gap:6px 8px}
+.eyebrow span{font:500 11px var(--f-data);background:var(--surface);border:1px solid var(--line);padding:2px 7px;border-radius:4px;color:var(--muted)}
+h1{font:800 clamp(2rem,4.6vw,3.1rem)/1.15 var(--f-body);margin:.6rem 0 .6rem;max-width:24ch;text-wrap:balance}
+.sub{font-size:1.12rem;color:var(--muted);margin:0;max-width:62ch}
+h2{font:800 1.4rem/1.2 var(--f-body);margin:0 0 1rem;text-wrap:balance}
+h3{font-size:15px;font-weight:600;margin:28px 0 6px}
+section{padding-block:36px 8px;border-bottom:1px solid var(--rule-2)}
+section:last-of-type{border-bottom:0}
+.secnum{font:700 .8rem/1 var(--f-body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+p{margin:0 0 14px}
+.muted{color:var(--ink-2)}
+.small{font-size:13.5px;color:var(--ink-3)}
+.num{font-family:var(--f-data);font-variant-numeric:tabular-nums}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:2rem 0 0}
+.kpi{background:var(--surface);padding:1rem 1.1rem;min-width:0}
+@media (max-width:760px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+a.kpi{text-decoration:none;color:inherit;display:block}
+a.kpi:hover{background:var(--warn-soft)}
+a.kpi .go{display:block;margin-top:6px;font-weight:700;font-size:.85rem;color:var(--accent)}
+.kpi .v{font:700 1.65rem/1.1 var(--f-body);font-variant-numeric:tabular-nums;color:var(--admin)}
+.kpi.u .v{color:var(--usager)} .kpi.w .v{color:var(--accent)}
+.kpi .v small{font-size:14px;color:var(--ink-3);font-weight:400}
+.kpi .l{font-size:.9rem;color:var(--muted);margin-top:6px;line-height:1.35}
+.brief{margin:26px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.brief li{padding-left:18px;position:relative;max-width:72ch}
+.brief li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:8px;border-radius:2px;background:var(--admin)}
+figure{margin:22px 0 10px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem .7rem;min-width:0}
+figcaption{font-size:1rem;font-weight:700;margin-bottom:2px}
+figcaption span{display:block;font-weight:400;color:var(--ink-3);font-size:13px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink-2);margin:10px 0 4px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.chart{width:100%;overflow-x:auto}
+.chart svg{display:block;width:100%;height:auto}
+.chart text{font-family:var(--f-data);font-size:11px;fill:var(--ink-3)}
+.chart .val{fill:var(--ink-2);font-size:11px}
+.chart .grid{stroke:var(--rule-2)}
+.chart .base{stroke:var(--rule)}
+.mult{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.mult figure{margin:0}
+details{margin:6px 0 4px;font-size:13.5px}
+details summary{cursor:pointer;color:var(--ink-2);font-size:13px}
+details summary:focus-visible, a:focus-visible, .chart:focus-visible{outline:2px solid var(--admin);outline-offset:2px}
+.tbl{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:7px 10px 7px 0;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule-2)}
+th{font-weight:700;color:var(--muted);font-size:12px;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--line)}
+td.r,th.r{text-align:right;font-family:var(--f-data);font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:10px}
+.bar{display:inline-block;height:8px;background:var(--admin);border-radius:0 2px 2px 0;vertical-align:middle}
+.rng{position:relative;height:10px;min-width:120px;background:var(--rule-2);border-radius:2px}
+.rng b{position:absolute;top:0;height:10px;background:var(--accent);opacity:.85;border-radius:2px}
+.rng i{position:absolute;top:-2px;width:2px;height:14px;background:var(--ink)}
+.timeline{list-style:none;padding:0;margin:12px 0 18px;border-left:2px solid var(--rule)}
+.timeline li{padding:0 0 12px 16px;position:relative;max-width:70ch}
+.timeline li::before{content:"";position:absolute;left:-6px;top:.35em;width:10px;height:10px;border-radius:50%;background:var(--paper);border:2px solid var(--admin)}
+.timeline .d{font:700 .8rem var(--f-body);letter-spacing:.05em;text-transform:uppercase;color:var(--admin);display:block}
+.note{background:var(--warn-soft);color:var(--ink);border:1px solid var(--warn);border-radius:8px;padding:12px 14px;font-size:15px;margin:16px 0;max-width:72ch}
+.pistes{counter-reset:p;list-style:none;padding:0;margin:14px 0;display:grid;gap:14px}
+.pistes li{counter-increment:p;padding-left:36px;position:relative;max-width:72ch}
+.pistes li::before{content:counter(p);position:absolute;left:0;top:0;font:700 13px var(--f-body);width:24px;height:24px;background:var(--usager-soft);color:var(--usager);display:grid;place-items:center;border-radius:50%}
+.pistes b{display:block}
+a{color:var(--admin)}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-family:var(--f-data);font-size:12px;padding:6px 8px;border-radius:3px;z-index:20;max-width:260px;line-height:1.35}
+.ex{font-size:12.5px;color:var(--ink-3);margin-top:3px}
+th.sortable{cursor:pointer;user-select:none;white-space:nowrap}
+th.sortable:hover{color:var(--ink)}
+th.sortable::after{content:" ↕";opacity:.35;font-weight:400}
+th[aria-sort="descending"]::after{content:" ↓";opacity:1;color:var(--admin)}
+th[aria-sort="ascending"]::after{content:" ↑";opacity:1;color:var(--admin)}
+th.sortable:focus-visible{outline:2px solid var(--admin);outline-offset:2px}
+.scrollbox{max-height:440px;overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.scrollbox table th{position:sticky;top:0;background:var(--surface);z-index:1}
+.scrollbox td:first-child,.scrollbox th:first-child{padding-left:10px}
+.controls{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:4px 0 10px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{font:600 13px var(--f-body);padding:6px 12px;border:0;background:var(--surface);color:var(--muted);cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--admin);color:#fff}
+.seg button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--admin);outline-offset:2px}
+select,input[type=search]{font:500 14px var(--f-body);padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
+.map svg{display:block;width:100%;height:auto;max-width:720px;margin:0 auto}
+.map path.dep{stroke:var(--surface);stroke-width:.6;cursor:pointer}
+.map path.dep:hover,.map rect.com:hover{stroke:var(--ink);stroke-width:1.4}
+.map rect.frame{fill:none;stroke:var(--line);stroke-width:1}
+.map text{font:600 9px var(--f-body);fill:var(--muted)}
+.map rect.com{stroke:var(--surface);stroke-width:.6;cursor:pointer}
+.ramp{display:flex;flex-wrap:wrap;gap:4px 12px;font:12px var(--f-data);color:var(--muted);margin-top:8px}
+.ramp i{display:inline-block;width:14px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.callout{background:var(--usager-soft);border:1px solid var(--usager);border-radius:10px;padding:14px 16px;margin:18px 0}
+.callout b.big{display:block;font:800 1.5rem/1.2 var(--f-body);color:var(--usager)}
+.card1{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:12px 14px;margin:14px 0;max-width:72ch}
+.btnl{display:inline-block;font:600 12.5px var(--f-body);padding:3px 9px;border:1px solid var(--line);border-radius:5px;text-decoration:none;white-space:nowrap}
+.btnl:hover{border-color:var(--admin)}
+footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.chart rect.m{transition:opacity .15s}}
+
+table.t{width:100%;border-collapse:collapse;margin:10px 0 6px;font-size:.95rem}table.t th,table.t td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}table.t .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+code{overflow-wrap:anywhere;word-break:break-word}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+section{margin-top:26px}</style>
+</head>
+<body>
+<div class="wrap">
+<p class="topnav" data-rubrique="situer"><!-- nav:début --><a href="../index.html">FORM 2026</a> · <a href="../index.html#mesurer">Mesurer</a> · <a href="../index.html#concevoir">Concevoir</a> · <a href="../index.html#situer" aria-current="page">Situer</a> · <a href="../index.html#donnees">Données</a><!-- nav:fin --></p>
+
+<header class="top">
+  <div class="eyebrow"><span>Open data data.gouv.fr</span><span>extraction du 21 octobre 2026</span><span>relevé des formulaires ouverts du 7 novembre 2026</span></div>
+  <h1>Ce que l'État demande aux collectivités, et ce qu'il détient déjà</h1>
+  <p class="sub">Les pièces que les démarches de l'État destinées aux collectivités demandent, et, pour trois d'entre elles, l'administration qui les détient déjà.</p>
+  <!-- cadre:début -->
+  <style>.cadre{margin:22px 0 0;padding:14px 18px;border-left:4px solid var(--accent,#b45309);background:var(--surface,transparent);border-radius:0 8px 8px 0;max-width:78ch}.cadre p{margin:0 0 10px;font-size:.98rem;line-height:1.55}.cadre p:last-child{margin:0}</style>
+  <div class="cadre">
+    <p><b>Ce que cette page décrit.</b> Elle porte sur les démarches publiées dans le descriptif ouvert de la plateforme, et non sur l'ensemble des démarches que l'État adresse aux collectivités. À l'échelle de la plateforme, environ un dossier sur huit ne figure pas dans ce descriptif, en moyenne sur l'ensemble de l'historique de la plateforme, et environ un quart des démarches, cette seconde part comprenant une forte proportion de démarches n'ayant jamais reçu de dossier. Ces ordres de grandeur s'obtiennent en retranchant le fichier ouvert du <a href="https://demarche.numerique.gouv.fr/stats" target="_blank" rel="noopener">compteur public de la plateforme</a>, relevé le 24 octobre 2026. Les absences s'expliquent par les règles de publication inscrites dans le code de la plateforme (paramètre de publication désactivé par le service, absence de dossier, adresse de site web contenant « mail » ou « intra »), et par la suppression de démarches. Les nombres de démarches et de dossiers donnés ci-dessous portent donc sur un corpus publié.</p>
+    <p><b>Comment les démarches sont rattachées aux collectivités.</b> Sont retenues les démarches d'un organisme qui n'est pas une collectivité, dont le titre désigne les collectivités ou une dotation : un rattachement par l'objet, et un plancher, une démarche pouvant s'adresser aux collectivités sans le dire dans son titre.</p>
+  </div>
+  <!-- cadre:fin -->
+</header>
+
+<section>
+  <h2>En une phrase</h2>
+  <p>Après le plan de financement, la pièce la plus demandée est la <b>délibération</b>, un acte que la préfecture a reçu au titre du contrôle de légalité. Pour la DETR, le texte a cessé de l'exiger le 22 février 2026, et les formulaires publiés depuis ont suivi. Le <b>RIB</b> est demandé dans 21,4 % des démarches, alors que les fonds d'une collectivité sont déposés auprès de l'État.</p>
+</section>
+
+<section>
+  <h2>Le périmètre</h2>
+  <div class="tw"><table class="t"><thead><tr><th></th><th class="num">Démarches</th><th class="num">Dossiers</th></tr></thead><tbody>
+  <tr><td>Démarches de l'État destinées aux collectivités</td><td class="num">2 098</td><td class="num">1 562 438</td></tr>
+  <tr><td>dont dotations et fonds d'investissement local</td><td class="num">1 403</td><td class="num">314 004</td></tr>
+  <tr><td>dont autres dispositifs : appels à projets, aides, conventions</td><td class="num">679</td><td class="num">70 090</td></tr>
+  <tr><td>dont services administratifs : consultation du Domaine, Sit@del2</td><td class="num">13</td><td class="num">695 586</td></tr>
+  <tr><td>dont médaille d'honneur régionale, départementale et communale</td><td class="num">3</td><td class="num">482 758</td></tr>
+  </tbody></table></div>
+  <p class="small">La médaille s'adresse aux agents et aux élus ; la collectivité la propose pour eux. Ni aide ni service administratif, elle est comptée à part. Les services administratifs et la médaille portent 1 178 344 dossiers mais presque aucune pièce : les parts ci-dessous portent sur les 2 082 démarches de financement et d'aide.</p>
+</section>
+
+<section>
+  <h2>Ce qui est demandé</h2>
+  <div class="tw"><table class="t"><thead><tr><th>Part des démarches qui demandent la pièce</th><th class="num">Dotations (1 403)</th><th class="num">Autres dispositifs (679)</th></tr></thead><tbody>
+  <tr><td>Plan de financement ou budget</td><td class="num">90,0 %</td><td class="num">47,6 %</td></tr><tr><td>Devis ou estimation des coûts</td><td class="num">88,5 %</td><td class="num">14,0 %</td></tr><tr><td><b>Délibération</b></td><td class="num">86,7 %</td><td class="num">53,2 %</td></tr><tr><td>Plans, photos, localisation</td><td class="num">85,4 %</td><td class="num">18,7 %</td></tr><tr><td>Attestation de non-commencement</td><td class="num">60,6 %</td><td class="num">23,7 %</td></tr><tr><td>Note ou mémoire de présentation</td><td class="num">51,0 %</td><td class="num">8,2 %</td></tr><tr><td><b>RIB</b></td><td class="num">13,0 %</td><td class="num">39,2 %</td></tr><tr><td>SIRET, Kbis ou avis de situation, en pièce</td><td class="num">3,2 %</td><td class="num">3,2 %</td></tr>
+  <tr><td>Avis d'imposition</td><td class="num">0</td><td class="num">0</td></tr>
+  </tbody></table></div>
+  <p class="small">Médiane : 14 pièces distinctes par démarche de dotation, 7 pour les autres dispositifs. Une pièce répétée dans plusieurs sections du même formulaire, une par catégorie de travaux par exemple, n'est comptée qu'une fois.</p>
+</section>
+
+<section>
+  <h2>Ce que l'État détient déjà</h2>
+  <div class="tw"><table class="t"><thead><tr><th>Pièce</th><th>Demandée</th><th>Qui la détient déjà</th><th>Sur quoi repose l'affirmation</th></tr></thead><tbody>
+  <tr><td><b>Délibération</b></td><td>1 577 démarches, 287 941 dossiers</td><td>la préfecture, qui la reçoit au titre du contrôle de légalité, notamment par la plateforme @ctes</td><td>CGCT, <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000041411348/" target="_blank" rel="noopener">art. L2131-2</a>, avec les exceptions qu'il énumère</td></tr>
+  <tr><td><b>RIB</b></td><td>449 démarches, dont 169 qui demandent aussi l'IBAN dans un champ</td><td>l'État : sauf dérogation, une collectivité dépose ses fonds auprès de lui</td><td>LOLF, <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006321047" target="_blank" rel="noopener">art. 26, 3°</a> ; dérogations : CGCT, <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042194908" target="_blank" rel="noopener">art. L1618-2</a></td></tr>
+  <tr><td><b>SIRET</b></td><td>la plateforme le demande au dépôt de toute démarche ouverte aux personnes morales ; jusqu'à 272 démarches sur 2 067 le redemandent pourtant dans le formulaire (plafond)</td><td>la plateforme, qui l'identifie dans le répertoire Sirene de l'INSEE</td><td>fonctionnement de la plateforme</td></tr>
+  </tbody></table></div>
+</section>
+
+<section>
+  <h2>La délibération, pièce en cascade</h2>
+  <p>Une délibération suppose une démarche préalable : une séance de l'organe délibérant, un vote, une transmission. Pour la DETR, l'<a href="https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000025585028" target="_blank" rel="noopener">arrêté du 23 décembre 2002</a> l'exigeait parmi les pièces du dossier jusqu'au 22 février 2026. L'arrêté du 20 février 2026 l'a retirée de la liste : elle doit toujours exister et peut être contrôlée à l'instruction, mais n'a plus à être transmise.</p>
+  <div class="tw"><table class="t"><thead><tr><th>Démarches DETR</th><th class="num">Délibération obligatoire</th><th class="num">facultative</th><th class="num">non demandée</th></tr></thead><tbody>
+  <tr><td>Publiées avant le 22 février 2026</td><td class="num">407</td><td class="num">178</td><td class="num">83</td></tr>
+  <tr><td>Publiées depuis</td><td class="num">0</td><td class="num">0</td><td class="num">7</td></tr>
+  <tr><td>Publiées avant, encore en ligne au 21 octobre 2026</td><td class="num">19</td><td class="num">15</td><td class="num">43</td></tr>
+  </tbody></table></div>
+  <p>Les formulaires ont suivi le texte. La démarche nationale de la DGCL (<a href="https://demarche.numerique.gouv.fr/commencer/dotations-etat-investissement-local" target="_blank" rel="noopener">n° 128030</a>, ouverte en octobre 2025) avait rendu la délibération facultative avant même l'arrêté. Sur les 19 formulaires encore en ligne qui l'exigent, <b>13 n'ont rendu aucune décision depuis six mois</b> : ce sont des reliquats de campagnes passées, pas une exigence en vigueur. Les 6 autres sont encore instruits, dont 4 campagnes de La Réunion publiées en janvier 2026. Tous ont été publiés sous l'ancien texte et l'appliquaient : ils n'étaient pas en défaut à leur publication, ils sont restés ouverts après la modification. Les pages publiques ne datent pas les dépôts, et l'on ne peut pas dire combien de dossiers y ont été déposés depuis le 22 février.</p>
+  <p class="small">Hors DETR, chaque dispositif a ses propres règles, que cette page n'examine pas une à une ; dans tous les cas, l'acte a été transmis à la préfecture au titre du contrôle de légalité.</p>
+  <p><b>Ordre de grandeur, au conditionnel.</b> Si retrouver, numériser et joindre une délibération déjà adoptée prenait ne serait-ce que quinze minutes, les 287 941 dossiers qui la demandent représenteraient environ 72 000 heures. Durée non mesurée : l'ordre de grandeur dit l'échelle, pas la charge.</p>
+</section>
+
+<section>
+  <h2>Exemples vérifiables</h2>
+  <ul>
+  <li><a href="https://demarche.numerique.gouv.fr/commencer/dotations-etat-investissement-local" target="_blank" rel="noopener">n° 128030</a>, DGCL, DETR et DSIL : 13 pièces, délibération facultative.</li>
+  <li><a href="https://demarche.numerique.gouv.fr/commencer/paiements31" target="_blank" rel="noopener">n° 33107</a>, préfecture de la Haute-Garonne, demande de paiement commune à sept dispositifs : 56 pièces distinctes, le maximum parmi les démarches de dotation.</li>
+  <li><a href="https://demarche.numerique.gouv.fr/commencer/cofinancement-etude-pvd-bretagne" target="_blank" rel="noopener">n° 47660</a>, préfecture de région Bretagne : le RIB en pièce et l'IBAN dans un champ du même formulaire.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Méthode</h2>
+  <ul class="small">
+  <li>Périmètre : l'ensemble « pour les collectivités » de <a href="index.html">la page collectivités</a>, un plancher. Les démarches publiées par les collectivités elles-mêmes sont hors champ.</li>
+  <li>Classement des pièces : règles explicites sur les libellés, dans <code>donnees/collectivites/methode/etat_demande.py</code>. Une pièce peut relever de plusieurs types ; une pièce sans nom (« document 1 ») n'est pas classée.</li>
+  <li>Détenteurs : une lecture du droit, sourcée, pas une mesure. Aucune durée n'est mesurée.</li>
+  <li>251 démarches demandent un formulaire ou un Cerfa à remplir en pièce jointe : leur vrai questionnaire échappe à cette mesure.</li>
+  <li>Formulaires encore ouverts : relevé de leurs pages publiques de statistiques le 7 novembre 2026, par <code>releve_detr_ouverts.py</code>.</li>
+  </ul>
+</section>
+
+<footer>FORM 2026 · données publiques uniquement · <a href="etat-demande-imprimable.html">version imprimable, deux pages</a></footer>
+</div>
+</body>
+</html>
