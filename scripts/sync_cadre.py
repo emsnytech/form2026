@@ -27,6 +27,12 @@ CENTRE = ("À l'échelle de la plateforme, environ un dossier sur huit ne figure
           "absence de dossier, adresse de site web contenant « mail » ou « intra »), et par la suppression de démarches.")
 
 PAGES = {
+    "collectivites/etat-demande.html": {
+        "decrit": "<b>Ce que cette page décrit.</b> Elle porte sur les démarches publiées dans le descriptif ouvert de la plateforme, et non sur l'ensemble des démarches que l'État adresse aux collectivités. ",
+        "fin": " Les nombres de démarches et de dossiers donnés ci-dessous portent donc sur un corpus publié.",
+        "rattachement": "<b>Comment les démarches sont rattachées aux collectivités.</b> Sont retenues les démarches d'un organisme qui n'est pas une collectivité, dont le titre désigne les collectivités ou une dotation : un rattachement par l'objet, et un plancher, une démarche pouvant s'adresser aux collectivités sans le dire dans son titre.",
+    },
+    "collectivites/etat-demande-imprimable.html": None,  # même cadre que la page web
     "collectivites/index.html": {
         "decrit": "<b>Ce que cette page décrit.</b> Elle porte sur les démarches publiées dans le descriptif ouvert de la plateforme, et non sur l'ensemble des démarches dématérialisées des collectivités ou destinées aux collectivités. ",
         "fin": " Les nombres de démarches et de dossiers donnés ci-dessous portent donc sur un corpus publié. Les montants de subventions viennent d'autres sources ouvertes, citées dans la méthode.",
@@ -75,6 +81,7 @@ def main():
     verifier = "--check" in sys.argv
     ecarts = []
     for rel, cfg in PAGES.items():
+        if cfg is None: cfg = PAGES[rel.replace("-imprimable", "")]
         p = RACINE / rel
         t = p.read_text(encoding="utf-8")
         n = appliquer(t, cfg, rel)
