@@ -21,6 +21,16 @@ les 39 décrets d'exception d'octobre 2014 (versions consolidées Légifrance au
 de la lecture, 2026). Colonnes propres à chaque source — voir l'en-tête de chaque
 fichier.
 
+**Dans `obligations_sva_2026-10-26.csv`, `cerfa_eventuel_non_fiable_sans_verification` — colonne volontairement renommée.**
+Vérification croisée le 26/10/2026 des 35 valeurs non vides contre le registre officiel
+DILA (titre réel du Cerfa) : **aucune des 35 n'est confirmée correcte**. La seule qui
+semblait l'être (numdispo 1118 → Cerfa 14531, dont le titre DILA évoque bien la
+reconnaissance de qualifications professionnelles de professeur de danse) s'est révélée
+attachée à la mauvaise obligation une fois la notice du Cerfa lue : elle cite l'article
+L362-1-1 du code de l'éducation comme fondement — la référence de **260**, pas de 1118
+(référence « 6 », non retrouvée dans la notice). Ne jamais utiliser cette colonne comme
+preuve sans revérification individuelle via DILA.
+
 ### `statut_vigueur_2026-10-28.csv` (2 806 lignes, les trois listes)
 
 Pour chaque ligne : `statut` (`en_vigueur` / `transfere` / `recodifie` / `supprime` /

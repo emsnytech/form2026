@@ -187,7 +187,13 @@ def main():
             "delai": delai,
             "ministere": ministere,
             "type": "habilitation",
-            "cerfa_eventuel": cerfa,
+            # Colonne volontairement renommée pour ne jamais être prise pour une donnée
+            # vérifiée : sur les 35 valeurs non vides, vérification croisée contre le
+            # registre DILA (titre réel du Cerfa) le 26/10/2026 -- 0 confirmées correctes
+            # (la seule qui semblait l'être, 1118->14531, s'est révélée attachée à la
+            # mauvaise obligation : le Cerfa 14531 cite L362-1-1, la référence de 260, pas
+            # de 1118). Ne jamais utiliser cette colonne comme témoin sans revérifier.
+            "cerfa_eventuel_non_fiable_sans_verification": cerfa,
             "date_maj_source": SOURCE_DATE,
         })
 

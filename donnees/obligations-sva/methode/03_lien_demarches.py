@@ -98,7 +98,7 @@ def main():
         if candidats:
             n_obl_avec_demarche += 1
         for score, d in candidats:
-            cerfa_concorde = bool(obl["cerfa_eventuel"]) and obl["cerfa_eventuel"] in (d.get("cerfa_numeros") or "")
+            cerfa_concorde = bool(obl["cerfa_eventuel_non_fiable_sans_verification"]) and obl["cerfa_eventuel_non_fiable_sans_verification"] in (d.get("cerfa_numeros") or "")
             jur = juridique.get(str(d["demarche"]))
             cadre_declare = (jur["cadre_declare"] if jur else "") or ""
             cadre_generique = JORFTEXT_ORDONNANCE_SVA in cadre_declare
