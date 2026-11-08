@@ -1,14 +1,19 @@
 name: Alerte de déploiement
 
-# Après chaque déploiement de GitHub Pages, et chaque matin : le site en ligne correspond-il à main ?
-# Sinon, une issue est ouverte, une seule tant qu'elle reste ouverte.
+# Après chaque fusion sur main (le contrôle suit le déploiement jusqu'à sa fin), et chaque matin :
+# le site en ligne correspond-il à main ? Sinon, une issue est ouverte, une seule tant qu'elle reste ouverte.
+# Le déclencheur workflow_run sur « pages build and deployment » n'a jamais réagi (constaté le 08/11/2026) :
+# il est remplacé par push.
 on:
-  workflow_run:
-    workflows: ["pages build and deployment"]
-    types: [completed]
+  push:
+    branches: [main]
   schedule:
     - cron: "0 6 * * *"
   workflow_dispatch:
+
+concurrency:
+  group: alerte-deploiement
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -18,7 +23,7 @@ permissions:
 jobs:
   deploiement:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -27,7 +32,7 @@ jobs:
       - name: Le site en ligne correspond à main
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python3 scripts/verifier_deploiement.py
+        run: python3 scripts/verifier_deploiement.py ${{ github.event_name == 'push' && '--attendre' || '' }}
 
       - name: Ouvrir une issue
         if: failure()
