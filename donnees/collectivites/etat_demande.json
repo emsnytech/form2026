@@ -530,6 +530,15 @@
    "dossiers": 58441,
    "note": "plafond : un champ intitulé seulement « SIRET » peut viser un tiers"
   },
+  "domaine": {
+   "n": 29928,
+   "url": "https://demarche.numerique.gouv.fr/commencer/consultation-du-domaine",
+   "dossiers": 520914,
+   "organisme": "Direction de l'immobilier de l'État",
+   "emplacements": 19,
+   "sans_nom": 10,
+   "avis_anterieur": "Si ce bien a déjà été évalué par le service du Domaine, joindre l'avis d'évaluation"
+  },
   "detr_ouverts_qui_exigent": [
    {
     "n": 136796,

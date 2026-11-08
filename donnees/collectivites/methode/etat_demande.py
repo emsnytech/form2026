@@ -37,10 +37,16 @@ def marche(L):
         yield c; yield from marche(c.get("champDescriptors"))
 D = []
 TITRES = {}
+DOM_INFO = {}
 with open(sys.argv[1], "rb") as f:
     for d in ijson.items(f, "item", use_float=True):
         if d.get("number") not in IDS: continue
         TITRES[d["number"]] = d.get("title") or ""
+        if d["number"] == 29928:
+            _pj = [c for c in marche((d.get("revision") or {}).get("champDescriptors")) if c.get("__typename") == "PieceJustificativeChampDescriptor"]
+            DOM_INFO[29928] = {"n": 29928, "url": d.get("demarcheURL"), "dossiers": d.get("dossiersCount") or 0, "organisme": ((d.get("service") or {}).get("organisme") or ""),
+                "emplacements": len(_pj), "sans_nom": sum(bool(re.fullmatch(r"\s*justificatif\s+\d+\s*", c.get("label") or "", re.I)) for c in _pj),
+                "avis_anterieur": next((c.get("label") for c in _pj if re.search(r"d[ée]j[àa] [ée]t[ée] [ée]valu[ée]", c.get("label") or "", re.I)), None)}
         _del = [c for c in marche((d.get("revision") or {}).get("champDescriptors")) if c.get("__typename") == "PieceJustificativeChampDescriptor" and re.search(r"d[ée]lib[ée]ration", (c.get("label") or "") + " " + (c.get("description") or "")[:200], re.I)]
         # SIRET : demandé au dépôt par la plateforme pour toute démarche ouverte aux personnes morales. On compte les formulaires
         # qui le redemandent pour le déposant (pièce, saisie libre ou champ), hors SIRET d'un tiers (maître d'ouvrage délégué, prestataire…).
@@ -104,6 +110,9 @@ for x in D:
 res["detr_deliberation"] = dict(sorted(res["detr_deliberation"].items()))
 _pm = [x for x in D if x["pm"] and not CAT.get(x["n"], "").startswith(("Services", "Distinctions"))]
 res["siret_redemande"] = {"personnes_morales": len(_pm), "demarches": sum(x["siret_redemande"] for x in _pm), "dossiers": sum(x["dos"] for x in _pm if x["siret_redemande"]), "note": "plafond : un champ intitulé seulement « SIRET » peut viser un tiers"}
+# Consultation du Domaine (DGFiP) : le service qui demande ce qu'il détient lui-même. On relève les libellés tels qu'ils sont.
+DOMAINE = 29928
+res["domaine"] = DOM_INFO.get(DOMAINE)
 res["detr_ouverts_qui_exigent"] = [{"n": x["n"], "url": x["url"], "publication": x["pub"], "organisme": x["organisme"]} for x in D
     if CAT.get(x["n"]) == "Dotations et fonds d'investissement local" and DETR.search(TITRES.get(x["n"], "")) and x["pub"] < "2026-02-22" and x["etat"] == "publiee" and x["delib"] == "obligatoire"]
 EXEMPLES = {128030, 33107, 96210, 47660}
