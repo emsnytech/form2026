@@ -45,6 +45,13 @@ _ann = sorted({f["publication"][:7] for f in _reu})
 ACTIFS = (f", dont {len(_reu)} campagnes de La Réunion publiées en " + ", ".join(date_fr(m + "-01").split(" ", 1)[1] for m in _ann)) if _reu else ""
 assert all(f["publication"] < "2026-02-22" for f in fr), "un formulaire relevé a été publié après la modification : revoir la phrase"
 
+dm = r.get("domaine")
+assert dm and dm["avis_anterieur"] and dm["sans_nom"], "consultation du Domaine : libellés introuvables, revoir l'encadré"
+DOMAINE = f"""<section>
+  <h2>Un service qui demande ce qu'il détient</h2>
+  <p>La consultation du Domaine, démarche de la {html.escape(dm['organisme'])} ({a(dm['url'], 'n°\u00a0' + str(dm['n']))}, {n(dm['dossiers'])} dossiers), demande, <b>lorsque le bien a déjà été évalué par le Domaine</b>, de joindre l'avis d'évaluation que le Domaine a lui-même rendu. Elle offre aussi <b>{dm['sans_nom']} emplacements sans nom</b>, de « Justificatif 1 » à « Justificatif {dm['sans_nom']} », sur {dm['emplacements']} emplacements de pièces : le formulaire ne dit pas quelle pièce chacun attend.</p>
+</section>"""
+
 def corps(imprimable):
     SIRET_LIGNE = (f"<tr><td><b>SIRET</b></td><td>la plateforme le demande au dépôt de toute démarche ouverte aux personnes morales ; jusqu'à {n(siret['demarches'])} démarches sur {n(siret['personnes_morales'])} le redemandent pourtant dans le formulaire (plafond)</td>"
                    f"<td>la plateforme, qui l'identifie dans le répertoire Sirene de l'INSEE</td><td>fonctionnement de la plateforme</td></tr>") if siret else ""
@@ -90,6 +97,7 @@ def corps(imprimable):
   </tbody></table></div>
 </section>
 
+{DOMAINE}
 <section>
   <h2>La délibération, pièce en cascade</h2>
   <p>Une délibération suppose une démarche préalable : une séance de l'organe délibérant, un vote, une transmission. Pour la DETR, l'{a(LEGI['arrete'], 'arrêté du 23 décembre 2002')} l'exigeait parmi les pièces du dossier jusqu'au 22 février 2026. L'arrêté du 20 février 2026 l'a retirée de la liste : elle doit toujours exister et peut être contrôlée à l'instruction, mais n'a plus à être transmise.</p>
@@ -150,11 +158,11 @@ section{{margin-top:26px}}{extra}</style>
 </html>
 """
 IMPRIME = """
-@page{size:A4;margin:11mm 12mm}
+@page{size:A4;margin:9mm 11mm}
 html,body{background:#fff!important}body{font-size:9.6pt}.wrap{max-width:none!important;padding:0!important;margin:0!important}
 .top{margin:0!important;padding:0!important}h1{font-size:16pt!important;margin:2px 0!important;max-width:none!important}h2{font-size:11pt!important;margin:0 0 2px!important}
-section{margin:6px 0 0!important;padding:5px 0 0!important;break-inside:avoid}p,li{font-size:9pt!important;line-height:1.35!important;margin:2px 0!important}
-ul{margin:2px 0!important;padding-left:16px}table.t{font-size:8.4pt!important;margin:3px 0!important}table.t th,table.t td{padding:1px 4px!important}
+section{margin:4px 0 0!important;padding:4px 0 0!important;break-inside:avoid}p,li{font-size:8.7pt!important;line-height:1.3!important;margin:2px 0!important}
+ul{margin:2px 0!important;padding-left:16px}table.t{font-size:8.2pt!important;margin:2px 0!important}table.t th,table.t td{padding:1px 4px!important}
 .cadre{max-width:none!important;margin:5px 0 0!important;padding:5px 9px!important}.cadre p{font-size:7.9pt!important;line-height:1.3!important;margin:0 0 3px!important}
 .eyebrow{margin:0!important}.eyebrow span{font-size:7pt!important}.sub{font-size:9pt!important;max-width:none!important}.small,.small li{font-size:7.9pt!important}footer{margin-top:5px!important;padding-top:4px!important;font-size:7.5pt!important}
 @media screen{body{max-width:210mm;margin:0 auto!important;padding:11mm 12mm!important}}
