@@ -1,0 +1,762 @@
+{
+ "date_open_data": "2026-10-21",
+ "resume": {
+  "demarches": 2098,
+  "dossiers": 1562438,
+  "avec_au_moins_une_pj": 2012,
+  "pj_mediane": 12,
+  "par_piece": {
+   "RIB": {
+    "demarches": 449,
+    "pct_demarches": 21.4,
+    "dossiers": 68518,
+    "pct_dossiers": 4.4
+   },
+   "Délibération": {
+    "demarches": 1577,
+    "pct_demarches": 75.2,
+    "dossiers": 287941,
+    "pct_dossiers": 18.4
+   },
+   "Plan de financement ou budget": {
+    "demarches": 1585,
+    "pct_demarches": 75.5,
+    "dossiers": 294399,
+    "pct_dossiers": 18.8
+   },
+   "Devis ou estimation des coûts": {
+    "demarches": 1337,
+    "pct_demarches": 63.7,
+    "dossiers": 291217,
+    "pct_dossiers": 18.6
+   },
+   "Note ou mémoire de présentation": {
+    "demarches": 772,
+    "pct_demarches": 36.8,
+    "dossiers": 104800,
+    "pct_dossiers": 6.7
+   },
+   "Plans, photos, localisation": {
+    "demarches": 1328,
+    "pct_demarches": 63.3,
+    "dossiers": 768420,
+    "pct_dossiers": 49.2
+   },
+   "Calendrier ou planning": {
+    "demarches": 644,
+    "pct_demarches": 30.7,
+    "dossiers": 86260,
+    "pct_dossiers": 5.5
+   },
+   "Autorisation d'urbanisme": {
+    "demarches": 454,
+    "pct_demarches": 21.6,
+    "dossiers": 76073,
+    "pct_dossiers": 4.9
+   },
+   "Attestation de non-commencement": {
+    "demarches": 1011,
+    "pct_demarches": 48.2,
+    "dossiers": 158702,
+    "pct_dossiers": 10.2
+   },
+   "Arrêté, décision ou convention": {
+    "demarches": 760,
+    "pct_demarches": 36.2,
+    "dossiers": 221497,
+    "pct_dossiers": 14.2
+   },
+   "SIRET, Kbis ou avis de situation": {
+    "demarches": 67,
+    "pct_demarches": 3.2,
+    "dossiers": 5534,
+    "pct_dossiers": 0.4
+   },
+   "Avis d'imposition": {
+    "demarches": 0,
+    "pct_demarches": 0.0,
+    "dossiers": 0,
+    "pct_dossiers": 0.0
+   },
+   "Attestation fiscale ou sociale": {
+    "demarches": 1,
+    "pct_demarches": 0.0,
+    "dossiers": 136,
+    "pct_dossiers": 0.0
+   },
+   "Statuts": {
+    "demarches": 122,
+    "pct_demarches": 5.8,
+    "dossiers": 13043,
+    "pct_dossiers": 0.8
+   },
+   "Factures ou justificatifs de dépenses": {
+    "demarches": 393,
+    "pct_demarches": 18.7,
+    "dossiers": 183502,
+    "pct_dossiers": 11.7
+   },
+   "Formulaire Cerfa ou dossier type joint": {
+    "demarches": 251,
+    "pct_demarches": 12.0,
+    "dossiers": 48090,
+    "pct_dossiers": 3.1
+   }
+  },
+  "champs_structures": {
+   "Annuaire Éducation": {
+    "demarches": 3,
+    "pct_demarches": 0.1
+   },
+   "Commune": {
+    "demarches": 302,
+    "pct_demarches": 14.4
+   },
+   "Département": {
+    "demarches": 81,
+    "pct_demarches": 3.9
+   },
+   "EPCI": {
+    "demarches": 39,
+    "pct_demarches": 1.9
+   },
+   "IBAN": {
+    "demarches": 188,
+    "pct_demarches": 9.0
+   },
+   "RNA": {
+    "demarches": 7,
+    "pct_demarches": 0.3
+   },
+   "SIRET": {
+    "demarches": 348,
+    "pct_demarches": 16.6
+   }
+  },
+  "rib_et_champ_iban": 169,
+  "siret_en_piece_avec_champ_siret": 9,
+  "champ_siret_absent": 1750,
+  "avis_imposition_demarches": 0,
+  "cascade_deliberation": {
+   "demarches": 1577,
+   "dossiers": 287941,
+   "aussi_plan_de_financement": 1409
+  },
+  "forme_dossier": {
+   "pj_anonymes_demarches": 103,
+   "cerfa_ou_formulaire_joint_demarches": 251
+  },
+  "depuis_oct_2022": {
+   "demarches": 1138
+  },
+  "par_categorie": {
+   "Autres dispositifs ciblant les collectivités": {
+    "demarches": 679,
+    "dossiers": 70090,
+    "pj_mediane": 7,
+    "pj_max": 48,
+    "pj_max_n": 96210,
+    "pieces": {
+     "RIB": [
+      266,
+      39.2,
+      14.8
+     ],
+     "Délibération": [
+      361,
+      53.2,
+      33.6
+     ],
+     "Plan de financement ou budget": [
+      323,
+      47.6,
+      22.5
+     ],
+     "Devis ou estimation des coûts": [
+      95,
+      14.0,
+      15.6
+     ],
+     "Note ou mémoire de présentation": [
+      56,
+      8.2,
+      7.2
+     ],
+     "Plans, photos, localisation": [
+      127,
+      18.7,
+      19.7
+     ],
+     "Calendrier ou planning": [
+      58,
+      8.5,
+      8.1
+     ],
+     "Autorisation d'urbanisme": [
+      26,
+      3.8,
+      6.3
+     ],
+     "Attestation de non-commencement": [
+      161,
+      23.7,
+      6.3
+     ],
+     "Arrêté, décision ou convention": [
+      211,
+      31.1,
+      19.9
+     ],
+     "SIRET, Kbis ou avis de situation": [
+      22,
+      3.2,
+      0.9
+     ],
+     "Avis d'imposition": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Attestation fiscale ou sociale": [
+      1,
+      0.1,
+      0.2
+     ],
+     "Statuts": [
+      35,
+      5.2,
+      1.5
+     ],
+     "Factures ou justificatifs de dépenses": [
+      53,
+      7.8,
+      15.8
+     ],
+     "Formulaire Cerfa ou dossier type joint": [
+      55,
+      8.1,
+      5.0
+     ]
+    },
+    "champ_siret_pct": 6.5,
+    "champ_iban_pct": 25.3
+   },
+   "Distinctions des agents et élus locaux": {
+    "demarches": 3,
+    "dossiers": 482758,
+    "pj_mediane": 5,
+    "pj_max": 6,
+    "pj_max_n": 72243,
+    "pieces": {
+     "RIB": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Délibération": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Plan de financement ou budget": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Devis ou estimation des coûts": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Note ou mémoire de présentation": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Plans, photos, localisation": [
+      3,
+      100.0,
+      100.0
+     ],
+     "Calendrier ou planning": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Autorisation d'urbanisme": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Attestation de non-commencement": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Arrêté, décision ou convention": [
+      0,
+      0.0,
+      0.0
+     ],
+     "SIRET, Kbis ou avis de situation": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Avis d'imposition": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Attestation fiscale ou sociale": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Statuts": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Factures ou justificatifs de dépenses": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Formulaire Cerfa ou dossier type joint": [
+      0,
+      0.0,
+      0.0
+     ]
+    },
+    "champ_siret_pct": 0.0,
+    "champ_iban_pct": 0.0
+   },
+   "Dotations et fonds d'investissement local": {
+    "demarches": 1403,
+    "dossiers": 314004,
+    "pj_mediane": 14,
+    "pj_max": 56,
+    "pj_max_n": 33107,
+    "pieces": {
+     "RIB": [
+      183,
+      13.0,
+      18.5
+     ],
+     "Délibération": [
+      1216,
+      86.7,
+      84.2
+     ],
+     "Plan de financement ou budget": [
+      1262,
+      90.0,
+      88.7
+     ],
+     "Devis ou estimation des coûts": [
+      1242,
+      88.5,
+      89.3
+     ],
+     "Note ou mémoire de présentation": [
+      716,
+      51.0,
+      31.8
+     ],
+     "Plans, photos, localisation": [
+      1198,
+      85.4,
+      86.6
+     ],
+     "Calendrier ou planning": [
+      586,
+      41.8,
+      25.7
+     ],
+     "Autorisation d'urbanisme": [
+      428,
+      30.5,
+      22.8
+     ],
+     "Attestation de non-commencement": [
+      850,
+      60.6,
+      49.1
+     ],
+     "Arrêté, décision ou convention": [
+      549,
+      39.1,
+      66.1
+     ],
+     "SIRET, Kbis ou avis de situation": [
+      45,
+      3.2,
+      1.6
+     ],
+     "Avis d'imposition": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Attestation fiscale ou sociale": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Statuts": [
+      87,
+      6.2,
+      3.8
+     ],
+     "Factures ou justificatifs de dépenses": [
+      340,
+      24.2,
+      54.9
+     ],
+     "Formulaire Cerfa ou dossier type joint": [
+      196,
+      14.0,
+      14.2
+     ]
+    },
+    "champ_siret_pct": 21.7,
+    "champ_iban_pct": 1.1
+   },
+   "Services administratifs aux collectivités": {
+    "demarches": 13,
+    "dossiers": 695586,
+    "pj_mediane": 16,
+    "pj_max": 18,
+    "pj_max_n": 29928,
+    "pieces": {
+     "RIB": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Délibération": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Plan de financement ou budget": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Devis ou estimation des coûts": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Note ou mémoire de présentation": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Plans, photos, localisation": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Calendrier ou planning": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Autorisation d'urbanisme": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Attestation de non-commencement": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Arrêté, décision ou convention": [
+      0,
+      0.0,
+      0.0
+     ],
+     "SIRET, Kbis ou avis de situation": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Avis d'imposition": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Attestation fiscale ou sociale": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Statuts": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Factures ou justificatifs de dépenses": [
+      0,
+      0.0,
+      0.0
+     ],
+     "Formulaire Cerfa ou dossier type joint": [
+      0,
+      0.0,
+      0.0
+     ]
+    },
+    "champ_siret_pct": 0.0,
+    "champ_iban_pct": 0.0
+   }
+  },
+  "detr_deliberation": {
+   "avant le 22/02/2026 | facultative": 178,
+   "avant le 22/02/2026 | non demandée": 83,
+   "avant le 22/02/2026 | obligatoire": 407,
+   "avant, encore en ligne | facultative": 15,
+   "avant, encore en ligne | non demandée": 43,
+   "avant, encore en ligne | obligatoire": 19,
+   "depuis le 22/02/2026 | non demandée": 7
+  },
+  "siret_redemande": {
+   "personnes_morales": 2067,
+   "demarches": 272,
+   "dossiers": 58441,
+   "note": "plafond : un champ intitulé seulement « SIRET » peut viser un tiers"
+  },
+  "domaine": {
+   "n": 29928,
+   "url": "https://demarche.numerique.gouv.fr/commencer/consultation-du-domaine",
+   "dossiers": 520914,
+   "organisme": "Direction de l'immobilier de l'État",
+   "emplacements": 19,
+   "sans_nom": 10,
+   "avis_anterieur": "Si ce bien a déjà été évalué par le service du Domaine, joindre l'avis d'évaluation"
+  },
+  "detr_ouverts_qui_exigent": [
+   {
+    "n": 136796,
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-subvention-detr-dsil-saint-denis",
+    "publication": "2026-01-19",
+    "organisme": "Préfecture de La Réunion - Ministère de l'Intérieur"
+   },
+   {
+    "n": 84310,
+    "url": "https://demarche.numerique.gouv.fr/commencer/dotations-investissement-dpt-013",
+    "publication": "2024-12-30",
+    "organisme": "Préfecture des Bouches-du-Rhône"
+   },
+   {
+    "n": 10351,
+    "url": "https://demarche.numerique.gouv.fr/commencer/testdetrloireatlantique",
+    "publication": "2018-11-20",
+    "organisme": "secrétariat général"
+   },
+   {
+    "n": 67136,
+    "url": "https://demarche.numerique.gouv.fr/commencer/pref-37-demande-de-subvention2023-detr-dsil-dsid-fnadt",
+    "publication": "2022-11-30",
+    "organisme": "Bureau d'Appui au Développement Local "
+   },
+   {
+    "n": 9008,
+    "url": "https://demarche.numerique.gouv.fr/commencer/detr09test",
+    "publication": "2018-10-15",
+    "organisme": "Préfecture de l'Ariège"
+   },
+   {
+    "n": 70338,
+    "url": "https://demarche.numerique.gouv.fr/commencer/prefecture-972-demande-de-subvention-detr-dsil2023",
+    "publication": "2023-03-06",
+    "organisme": "PREFECTURE DE LA MARTINIQUE"
+   },
+   {
+    "n": 47497,
+    "url": "https://demarche.numerique.gouv.fr/commencer/pref37-demande-de-subvention2022-detr-dsil-dsid-fnadt",
+    "publication": "2021-10-13",
+    "organisme": "Bureau d'Appui au Développement Local "
+   },
+   {
+    "n": 136798,
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-subvention-detr-dsil-saint-paul",
+    "publication": "2026-01-19",
+    "organisme": "Préfecture de La Réunion - Ministère de l'Intérieur"
+   },
+   {
+    "n": 82205,
+    "url": "https://demarche.numerique.gouv.fr/commencer/dotations-investissement-dpt-029",
+    "publication": "2024-09-23",
+    "organisme": "Préfecture du Finistère"
+   },
+   {
+    "n": 64817,
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-subvention-detr-dsil-2023",
+    "publication": "2022-10-24",
+    "organisme": "Préfecture du Nièvre"
+   },
+   {
+    "n": 77495,
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-subvention-au-titre-de-la-detr-et-de-la",
+    "publication": "2023-08-17",
+    "organisme": "DGCL"
+   },
+   {
+    "n": 2912,
+    "url": "https://demarche.numerique.gouv.fr/commencer/detr-dsil",
+    "publication": "2018-03-06",
+    "organisme": ""
+   },
+   {
+    "n": 49322,
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-subvention-detr-dsil-2022-2",
+    "publication": "2021-12-20",
+    "organisme": "Préfecture du Nièvre"
+   },
+   {
+    "n": 82437,
+    "url": "https://demarche.numerique.gouv.fr/commencer/dotations-investissement-dpt-058",
+    "publication": "2024-09-09",
+    "organisme": "Préfecture du Nièvre"
+   },
+   {
+    "n": 88523,
+    "url": "https://demarche.numerique.gouv.fr/commencer/prefecture-972-demande-de-subvention-detr-dsil2024",
+    "publication": "2024-03-07",
+    "organisme": "PREFECTURE DE LA MARTINIQUE"
+   },
+   {
+    "n": 34971,
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-subvention-detr-dsil-2021",
+    "publication": "2020-12-23",
+    "organisme": "Préfecture du Nièvre"
+   },
+   {
+    "n": 101349,
+    "url": "https://demarche.numerique.gouv.fr/commencer/test-ne-pas-deposer-detr-dsil",
+    "publication": "2024-10-02",
+    "organisme": "Direction générale des collectivités locales"
+   },
+   {
+    "n": 136797,
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-subvention-detr-dsil-saint-pierre",
+    "publication": "2026-01-19",
+    "organisme": "Préfecture de La Réunion - Ministère de l'Intérieur"
+   },
+   {
+    "n": 136800,
+    "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-subvention-detr-dsil-saint-benoit",
+    "publication": "2026-01-19",
+    "organisme": "Préfecture de La Réunion - Ministère de l'Intérieur"
+   }
+  ]
+ },
+ "exemples": [
+  {
+   "n": 47660,
+   "dos": 276,
+   "pub": "2021-09-23",
+   "etat": "publiee",
+   "pj_emplacements": 7,
+   "pj": 7,
+   "delib": "obligatoire",
+   "url": "https://demarche.numerique.gouv.fr/commencer/cofinancement-etude-pvd-bretagne",
+   "pm": true,
+   "siret_redemande": false,
+   "pj_types": [
+    "Arrêté, décision ou convention",
+    "Calendrier ou planning",
+    "Délibération",
+    "Plan de financement ou budget",
+    "RIB"
+   ],
+   "pj_anonymes": 0,
+   "structures": [
+    "IBAN"
+   ],
+   "champs": 23,
+   "organisme": "Préfecture de région Bretagne"
+  },
+  {
+   "n": 33107,
+   "dos": 2659,
+   "pub": "2021-04-28",
+   "etat": "publiee",
+   "pj_emplacements": 56,
+   "pj": 56,
+   "delib": "non demandée",
+   "url": "https://demarche.numerique.gouv.fr/commencer/paiements31",
+   "pm": true,
+   "siret_redemande": false,
+   "pj_types": [
+    "Arrêté, décision ou convention",
+    "Factures ou justificatifs de dépenses",
+    "Plan de financement ou budget"
+   ],
+   "pj_anonymes": 0,
+   "structures": [],
+   "champs": 78,
+   "organisme": "Préfecture de la Haute-Garonne ; Sous-Préfecture de Muret ; "
+  },
+  {
+   "n": 128030,
+   "dos": 26617,
+   "pub": "2025-10-10",
+   "etat": "publiee",
+   "pj_emplacements": 13,
+   "pj": 13,
+   "delib": "facultative",
+   "url": "https://demarche.numerique.gouv.fr/commencer/dotations-etat-investissement-local",
+   "pm": true,
+   "siret_redemande": false,
+   "pj_types": [
+    "Arrêté, décision ou convention",
+    "Attestation de non-commencement",
+    "Devis ou estimation des coûts",
+    "Délibération",
+    "Factures ou justificatifs de dépenses",
+    "Plan de financement ou budget",
+    "Plans, photos, localisation"
+   ],
+   "pj_anonymes": 0,
+   "structures": [
+    "SIRET"
+   ],
+   "champs": 317,
+   "organisme": "Direction générale des collectivités locales (DGCL)"
+  },
+  {
+   "n": 96210,
+   "dos": 16,
+   "pub": "2024-05-23",
+   "etat": "publiee",
+   "pj_emplacements": 68,
+   "pj": 48,
+   "delib": "obligatoire",
+   "url": "https://demarche.numerique.gouv.fr/commencer/demande_subvention_fprnm_dealm976",
+   "pm": true,
+   "siret_redemande": true,
+   "pj_types": [
+    "Arrêté, décision ou convention",
+    "Calendrier ou planning",
+    "Devis ou estimation des coûts",
+    "Délibération",
+    "Factures ou justificatifs de dépenses",
+    "Plans, photos, localisation",
+    "RIB"
+   ],
+   "pj_anonymes": 0,
+   "structures": [
+    "IBAN",
+    "SIRET"
+   ],
+   "champs": 136,
+   "organisme": "Ministère de la transition écologique et de la cohésion des "
+  }
+ ]
+}

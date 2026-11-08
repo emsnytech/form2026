@@ -11,7 +11,7 @@ exec(open("scripts/02_fiche_ministere.py").read().split("APIP =")[0])
 P = cfg["papier"]
 
 # ---------- sources A (Cerfa) et B (DILA), extraites de explorer.html ----------
-html = open(os.path.expanduser(P["explorer_html"]), encoding="utf-8").read()
+html = open(P["explorer_html"], encoding="utf-8").read()
 def script_json(id_):
     m = re.search(r'<script type="application/json" id="' + id_ + r'">(.*?)</script>', html, re.S)
     return json.loads(m.group(1))

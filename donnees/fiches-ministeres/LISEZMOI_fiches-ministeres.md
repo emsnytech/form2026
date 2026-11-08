@@ -21,6 +21,29 @@ Production de l'auteur à partir de données ouvertes de data.gouv.fr. Voir `don
   (indicatif). Absent tant que `07_etablissements.py` n'a pas tourné ; la section correspondante est alors masquée.
 - `methode/` : scripts Python, configurations, gabarit et fond de carte qui produisent ces fichiers et la fiche.
 
+## Fiche n° 2 : Justice
+
+- `justice.json`, `justice_familles.json`, `justice_reconductions.json`, `justice_complements.json` : mêmes contenus que pour la fiche n° 1.
+- `justice_hors_opendata.json` : relevés datés des pages publiques des démarches absentes de l'open data.
+- `justice_experts_publics.json` : relevés datés des pages publiques des démarches d'experts judiciaires et de la première version de BARÔBAJ, absentes de l'open data. Ces chiffres sont cités dans la fiche, jamais ajoutés à ses totaux.
+- `rdv_cdad_metabase.json` : relevé daté du tableau de bord public de RDV Service Public, entrée de la section 5 ter.
+- `justice_siren_cours_appel.json` : SIREN des cours d'appel. Une juridiction est un établissement de l'unité légale de sa cour d'appel, ce qu'il faut savoir pour lire les rattachements.
+- `justice_chiffres_fiche.json` : chaque chiffre de la fiche et chaque source externe.
+
+**Ce qui n'est pas publié :** les sorties intermédiaires qui citent le titre de démarches sensibles (casier judiciaire, suites de plainte, mineurs), que la fiche ne donne qu'agrégées : inventaire détaillé, classement par usage, balayage des rendez-vous. Les scripts 09, 10, 11 et 17 sont publiés et les produisent : ils désignent ces démarches par leur numéro, sans fragment de titre.
+
+**Lecture des chiffres :** chaque fiche décrit les démarches publiées dans l'open data, ce qui ne recouvre pas toutes les démarches d'un ministère. L'open data ne retient que les démarches publiées, closes ou dépubliées, dont le paramètre `opendata` est activé, ayant au moins un dossier et dont l'adresse de site web ne contient ni « mail » ni « intra ». Les volumes sont donc des planchers. Les relevés en ligne changent chaque jour : la fiche en affiche la date.
+
+## Données de contact
+
+Ce site analyse ce que les démarches demandent. Il n'est pas un annuaire de contacts : adresses électroniques et numéros de téléphone sont retirés de tout ce qui est publié (voir le `README.md` du dépôt).
+
+## Règle et exception
+
+Ce fichier fait foi : il n'en existe pas d'autre version de référence. Ce qui produit une page publiée vit dans ce dépôt et se rejoue depuis lui : voir `methode/REJOUER.md`.
+
+**Une exception :** le script de comparaison à une extraction interne (n° 21) reste hors du dépôt public, parce qu'il lit une source interne que le lecteur ne peut pas consulter. Aucun chiffre publié n'en dépend.
+
 ## Sources
 
 - « Descriptif des démarches publiées sur demarche.numerique.gouv.fr » (data.gouv.fr), extraction du 21/10/2026.

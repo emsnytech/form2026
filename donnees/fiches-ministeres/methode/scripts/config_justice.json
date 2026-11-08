@@ -1,0 +1,30 @@
+{
+ "source": "data/demarches_slim.jsonl",
+ "date_extraction": "2026-10-21",
+ "annee_debut": 2021,
+ "annee_fin": 2026,
+ "zones": {
+  "Ministère de la Justice": "Justice"
+ },
+ "priorite_poles": [
+  "Justice"
+ ],
+ "max_zones": 3,
+ "sans_zone_motifs": {
+  "Justice": "minist[eè]re de la justice|garde des sceaux|tribunal judiciaire|cour d.appel|cour de cassation|prud.?homme|services? judiciaires|magistrature|\\bENM\\b|\\bENAP\\b|[ée]cole nationale des greffes|administration p[ée]nitentiaire|services? p[ée]nitentiaires?|\\bSPIP\\b|\\bDISP\\b|protection judiciaire de la jeunesse|\\bPJJ\\b|\\bCDAD\\b|maison d.arr[êe]t|centre de d[ée]tention|centre p[ée]nitentiaire"
+ },
+ "sans_zone_exclusions": "police judiciaire|CCAS|centre communal|pr[ée]fecture|mairie|commune|\\bTEST\\b|XXX",
+ "sans_zone_types_exclus": [
+  "collectivite_territoriale"
+ ],
+ "exclusions_toutes": "^DDETS78$|^<script>|^Ecole Nationale d.Architecture|^ACADEMIE DE STRASBOURG$|^DDCSPP du Haut-Rhin$|^Collectivit[ée] europ[ée]+nne d.Alsace$|cohésion sociale et de la protection des populations \\(DDCSPP\\) des Deux-S[èe]vres|^DESCO 1$|^Minist[eè]re des solidarit[ée]s|^d.un excellent organisme$|^Brigade nationale des enqu[êe]tes domaniales$|^Cour d.appel de X$|^OJI6$",
+ "motif_anomalie": "DDETS|DDCSPP|pr[ée]fecture|rectorat|acad[ée]mie|architecture|collectivit[ée]|solidarit",
+ "complements": {
+  "motif_qf": "aide juridictionnelle|aides? aux victimes|frais de justice|bourses?\\b|cr[èe]che|classe pr[ée]pa"
+ },
+ "inclusions_numeros": [
+  128159
+ ],
+ "familles": "scripts/familles_justice.json",
+ "sortie_familles": "out/justice_familles.json"
+}

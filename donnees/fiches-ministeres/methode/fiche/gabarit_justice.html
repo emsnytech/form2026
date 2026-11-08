@@ -1,0 +1,344 @@
+<title>Fiche Justice — Démarche Numérique</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>/*CSS_COMMUN*/</style>
+
+<div class="wrap">
+<p class="topnav"><a href="https://emsnytech.github.io/form2026/">Retour à FORM 2026</a> · <a href="https://emsnytech.github.io/form2026/fiches-ministeres/">Fiches ministères</a> · <a href="https://emsnytech.github.io/form2026/simulateur-gains-dematerialisation.html">Estimer ses gains</a> · <a href="https://emsnytech.github.io/form2026/explorer.html">Explorer les données</a></p>
+<header class="top">
+  <div class="eyebrow"><span>FORM 2026 · Fiches ministères</span><span>Fiche n° 2</span><span>Open data du «date»</span><span>Relevés publics du «releve»</span></div>
+  <h1>Justice</h1>
+  <p class="sub">Ce que l'open data de Démarche Numérique montre sur la zone du ministère de la Justice, de «y0» à «y1» (au «date»). Sont comptées les démarches en ligne, closes ou dépubliées.</p>
+  <div class="cadre">
+    <p><b>Ce que cette fiche décrit.</b> Elle porte sur les démarches de ce ministère publiées dans le descriptif ouvert de la plateforme, et non sur l'ensemble de ses démarches dématérialisées. À l'échelle de la plateforme, environ un dossier sur huit ne figure pas dans ce descriptif, en moyenne sur l'ensemble de l'historique de la plateforme, et environ un quart des démarches, cette seconde part comprenant une forte proportion de démarches n'ayant jamais reçu de dossier. Ces ordres de grandeur s'obtiennent en retranchant le fichier ouvert du <a href="https://demarche.numerique.gouv.fr/stats" target="_blank" rel="noopener">compteur public de la plateforme</a>, relevé le 24 octobre 2026. Les absences s'expliquent par les règles de publication inscrites dans le code de la plateforme (paramètre de publication désactivé par le service, absence de dossier, adresse de site web contenant « mail » ou « intra »), et par la suppression de démarches. Les parts données ci-dessous portent donc sur un corpus publié, et non sur l'activité complète du ministère.</p>
+    <p><b>Comment les démarches sont rattachées à ce ministère.</b> Deux rattachements distincts existent : le ministère de rattachement du service traitant, et le ministère porteur de la politique publique. Cette fiche retient le second, tel que le service l'a déclaré dans le champ « zone » de la démarche. S'y ajoutent «sans_zone» démarches sans zone, rattachées par le nom de l'organisme, «incl_n» démarche déclarée sous une autre zone, et «hors_n» démarches relevées hors du fichier. La distinction n'est pas une incertitude de mesure mais une caractéristique de l'organisation de l'État : un service déconcentré peut instruire une politique qui ne relève pas de son ministère de rattachement, et certaines politiques, l'action sociale interministérielle par exemple, relèvent de plusieurs ministères à la fois. Les deux lectures sont justes et ne donnent pas le même périmètre.</p>
+  </div>
+
+  <div class="kpis" role="list">
+    <div class="kpi" role="listitem"><div class="v">«total»</div><div class="l">démarches dans le corpus de la fiche, soit «part_dem» % du fichier de la plateforme («od_total» dans l'open data, «hors_n» relevées hors open data)</div></div>
+    <div class="kpi" role="listitem"><div class="v">«dossiers»</div><div class="l">dossiers dans le corpus (open data du «date» et relevés du «releve»), soit «part_dos» % de ceux du fichier de la plateforme</div></div>
+    <div class="kpi" role="listitem"><div class="v">«rh» <small>/ «total»</small></div><div class="l">démarches du corpus relèvent de la fonction RH : recrutement, promotion, formation, gestion («rh_pct» %)</div></div>
+    <div class="kpi" role="listitem"><div class="v">«dsj_pct» %</div><div class="l">des démarches du corpus portées par une seule direction, la Direction des services judiciaires</div></div>
+    <a class="kpi u" role="listitem" href="#usagers"><div class="v">«us_n»</div><div class="l">démarches du corpus pour les usagers et les professionnels du droit, «us_pct» % de ses dossiers</div><span class="go">Voir le détail →</span></a>
+    <a class="kpi u" role="listitem" href="#contact"><div class="v">«contact_d»</div><div class="l">dossiers sur le formulaire de contact, 1re démarche du corpus («contact_pct» % de ses dossiers)</div><span class="go">Voir l'encart →</span></a>
+    <a class="kpi u" role="listitem" href="#experts"><div class="v">«exp_total»</div><div class="l">dossiers déposés sur les démarches d'experts judiciaires, absentes de l'open data et non comptées ici (pages publiques, «exp_releve»)</div><span class="go">Voir l'encart →</span></a>
+    <a class="kpi w" role="listitem" href="#acces-droit"><div class="v">«rdv_total»</div><div class="l">rendez-vous enregistrés sur la brique rendez-vous par les réseaux des CDAD, selon le tableau de bord public au «releve»</div><span class="go">Voir la section →</span></a>
+  </div>
+
+  <ul class="brief">
+    <li><b>Dans ce corpus, la fonction RH domine.</b> «rh» démarches sur «total» relèvent du recrutement, de la promotion, de la formation ou de la gestion RH. «us_n» s'adressent aux usagers ou aux professionnels du droit.</li>
+    <li><b>Ce n'est pas un retard.</b> Les procédures destinées aux justiciables passent par des canaux propres au ministère, comme le <a href="https://casier-judiciaire.justice.gouv.fr/" target="_blank" rel="noopener">casier judiciaire</a>, l'<a href="https://www.aidejuridictionnelle.justice.fr/" target="_blank" rel="noopener">aide juridictionnelle</a> ou le <a href="https://www.penitentiaire.justice.fr/" target="_blank" rel="noopener">portail pénitentiaire</a>. Le traitement juridictionnel relève de systèmes métier. Une plateforme générique de démarches ne s'y substitue pas : son objet est le dépôt, et sa place est naturellement plus étroite ici qu'ailleurs. Cette fiche ne décrit pas tout ce qui passe par elle : seulement ce que son open data publie.</li>
+    <li><b>Des démarches tournées vers l'extérieur manquent au fichier.</b> Côté usagers, le corpus fait ressortir le formulaire de contact du ministère et BARÔBAJ, la passerelle construite à Lille pour les avocats en attendant l'ouverture du système national. Mais les démarches d'<a href="#experts">experts judiciaires</a> n'y figurent pas.</li>
+    <li><b>La répétition est interne.</b> À l'inverse de l'Éducation nationale, les doublons ne viennent pas d'émetteurs dispersés : le corpus compte «la_n» formulaires d'une même direction pour «la_camp» campagnes de listes d'aptitude, un par ressort.</li>
+    <li><b>Un autre service mutualisé porte l'accès au droit.</b> «rdv_terr» territoires enregistrent «rdv_total» rendez-vous au «releve» sur la brique rendez-vous, et «rdv_dn» de ces territoires publient une démarche dans l'open data. Un rendez-vous convient à une consultation, une démarche à un dossier : ce partage paraît cohérent.</li>
+  </ul>
+</header>
+
+<section id="trajectoire">
+  <div class="secnum">1 · Trajectoire</div>
+  <h2>Dans le corpus, des campagnes qui s'ouvrent et se ferment</h2>
+  <div class="col">
+    <p>Le corpus pèse peu dans le fichier de la plateforme. Ses séries varient au rythme des campagnes de ressources humaines : la moitié des démarches closes l'ont été en moins de «duree_med» jours, et «duree_92» sur «duree_n» en moins de trois mois.</p>
+    <p>Le saut de 2024 s'explique par un seul objet. Les listes d'aptitude apparaissent cette année-là, à raison d'un formulaire par ressort : «la_2024» publications en 2024, «la_2025» en 2025, «la_2026» en 2026. Hors listes d'aptitude, les publications passent de «autres_y0» en «y0» à «autres_y1» en «y1» à date. Ces séries ne disent pas comment évolue l'usage du ministère : elles ignorent les démarches absentes du fichier.</p>
+  </div>
+  <figure>
+    <figcaption>Démarches publiées chaque année<span>Listes d'aptitude et autres démarches, open data. «y1» au «date».</span></figcaption>
+    <div class="legend"><span><i style="background:var(--s2)"></i>Listes d'aptitude</span><span><i style="background:var(--s1)"></i>Autres démarches</span></div>
+    <div class="chart" id="c-pub"></div>
+    <details><summary>Voir les données, nouveaux usages et reconductions</summary><div class="tbl" id="t-pub"></div></details>
+  </figure>
+  <div class="col">
+    <p>Dans le corpus, le stock en fin d'année se lit mal seul et ne fait donc pas l'objet d'un graphique. Il atteint «stock_2024» fin 2024 parce que «la_ouvertes_2024» listes d'aptitude sont alors ouvertes. Sans elles, il passe de «stock_y0» fin «y0» à «stock_y1» au «date».</p>
+  </div>
+  <div class="tbl" id="t-stock"></div>
+  <figure>
+    <figcaption>Dossiers déposés chaque année (estimation)<span>Dossiers de chaque démarche répartis au prorata de ses jours d'ouverture, open data. «y1» au «date».</span></figcaption>
+    <div class="chart" id="c-dos"></div>
+    <details><summary>Voir les données et le calage</summary><div class="tbl" id="t-dos"></div></details>
+  </figure>
+  <div class="col">
+    <p class="small">L'open data donne un nombre de dossiers cumulé, sans date de dépôt. La même méthode, appliquée à tout le fichier, retrouve «calmin» à «calmax» % des dépôts publiés : ces chiffres sont un plancher. Ils n'incluent pas les «hors_n» démarches absentes de l'open data, faute de dates.</p>
+  </div>
+  <div class="callout">
+    <b class="big">«g_bas» à «g_haut» M€ de frais évités de «y0» à «y1», sur les démarches du fichier</b>
+    <p style="margin:6px 0 0">Administration : «ga_bas» à «ga_haut» M€. Usagers : «gu_bas» à «gu_haut» M€. Gains repris du fichier <a href="https://github.com/emsnytech/form2026/tree/main/donnees/gains" target="_blank" rel="noopener">demarches_gains_v8</a> de FORM 2026, qui couvre «g_couv» % des dossiers de la période, hors démarches absentes de l'open data.</p>
+    <p class="small" style="margin:6px 0 0">Ce sont des temps et des coûts valorisés, pas des économies budgétaires constatées.</p>
+    <details><summary>Voir par année</summary><div class="tbl" id="t-gains"></div></details>
+  </div>
+</section>
+
+<section id="perimetre">
+  <div class="secnum">2 · Périmètre</div>
+  <h2>De «zone_brut» démarches déclarées à «total» retenues</h2>
+  <div class="col">
+    <p>Le champ « ministère » est déclaratif. La zone Justice en porte «zone_brut», pour «zone_brut_d» dossiers, mais toutes ne relèvent pas du périmètre judiciaire. Quatre mouvements mènent au périmètre retenu.</p>
+  </div>
+  <ol class="timeline">
+    <li><span class="d">−«inter» · plus de trois zones</span>Démarches interministérielles, exclues comme en fiche n° 1 («inter_d» dossiers). «inter_srias» viennent de sections régionales d'action sociale interministérielle.</li>
+    <li><span class="d">−«excl_n» · zone mal déclarée ou démarche de test</span>Nommées dans la méthode. La plus lourde est un formulaire de prévention des expulsions de la DDETS des Yvelines («ccapex_d» dossiers), qui porte la zone Justice parmi trois zones. La conserver en aurait fait la première démarche d'un périmètre dont elle ne relève pas.</li>
+    <li><span class="d">+«sans_zone» · sans zone, et +«incl_n» · autre zone</span>Démarches sans zone rattachées par le nom de l'organisme, comme en fiche n° 1, et le CDAD de l'Eure, déclaré sous une autre zone.</li>
+    <li><span class="d">+«hors_n» · hors du fichier open data</span>BARÔBAJ et une démarche d'un tribunal pour enfants, agrégée dans la suite de la fiche. Les pages publiques de la plateforme les décrivent, mais le fichier du «date» ne les contient pas. Le descriptif open data ne couvre donc pas tout : le compteur public de la plateforme affichait «stats_dos» dossiers le 24 octobre, contre «od_plat_d» dans ce fichier, soit un écart d'environ «ecart_pct» %. La méthode détaille ce que le fichier exclut.</li>
+  </ol>
+  <p class="small col">Ces deux démarches comptent dans les totaux, mais pas dans les séries annuelles, la carte, les champs ni les frais évités, qui requièrent des données absentes de leurs pages publiques. Les séries portent sur «od_total» démarches et «od_dos» dossiers.</p>
+</section>
+
+<section id="emetteurs">
+  <div class="secnum">3 · Émetteurs</div>
+  <h2>Dans le corpus, une direction porte «dsj_pct» % des démarches</h2>
+  <div class="col">
+    <p>La Direction des services judiciaires publie «dsj_n» démarches sur «total», presque toutes pour les ressources humaines des greffes. Avec les écoles, elle forme l'essentiel du corpus. Le reste du ministère y est très peu présent, ce qui ne dit rien de sa présence sur la plateforme.</p>
+    <p><b>Les juridictions ne sont pas des services déconcentrés.</b> Une cour d'appel ou un tribunal qui publie une démarche n'est pas une administration placée sous l'autorité du ministère au même titre qu'un service déconcentré. Elles sont donc comptées à part : «jur_n» juridictions dans le corpus, dont le tribunal judiciaire de Lille pour l'essentiel des volumes. Aucune démarche du corpus n'est publiée au nom d'une cour d'appel, mais des cours d'appel publient sur la plateforme, hors du fichier : voir <a href="#experts">les experts judiciaires</a>. Aucune démarche de la protection judiciaire de la jeunesse n'a été repérée dans le corpus.</p>
+    <p>Les conseils départementaux de l'accès au droit ne sont pas non plus des services du ministère : ce sont des <a href="https://www.justice.gouv.fr/annuaire/lieux-daccueil-dinformation/conseils-departementaux-dacces-au-droit" target="_blank" rel="noopener">groupements d'intérêt public</a>.</p>
+  </div>
+  <div class="tbl" id="t-emetteurs"></div>
+  <div class="note"><b>Le SIRET ne désigne pas l'émetteur.</b> Dans <a href="https://recherche-entreprises.api.gouv.fr/search?q=17590111500709" target="_blank" rel="noopener">Sirene</a>, l'établissement du tribunal judiciaire de Lille relève de l'unité légale « Cour d'appel de Douai » : la cour d'appel est l'unité légale, les juridictions de son ressort en sont des établissements. Tout tribunal peut donc s'afficher « Cour d'appel de X ». La typologie est lue ici sur le nom de l'organisme et, si besoin, sur l'adresse de l'établissement.</div>
+  <div class="tbl" id="t-diff"></div>
+  <p class="small col">SIRET distincts : «siret_n» sur le périmètre open data, un minimum puisque «siret_manquant» démarches n'en ont pas. Le type d'organisme déclaré sur la plateforme n'est pas utilisé : un tribunal y figure en administration centrale, un autre en « autre ».</p>
+</section>
+
+<section id="territoires">
+  <div class="secnum">4 · Territoires</div>
+  <h2>Des sièges, pas une couverture</h2>
+  <div class="col">
+    <p>La carte situe chaque démarche dans le département de son service émetteur. «deps» départements apparaissent dans le fichier, et «paris_n» démarches sur «paris_base» sont rattachées à Paris, siège de l'administration centrale. La Gironde et la Côte-d'Or portent les écoles de la magistrature et des greffes. La carte montre où siègent les émetteurs, pas où vivent les usagers ni où les démarches s'appliquent.</p>
+  </div>
+  <figure class="map">
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Indicateur" id="m-metric">
+        <button type="button" data-m="pub" aria-pressed="true">Démarches publiées</button><button type="button" data-m="org" aria-pressed="false">Organismes</button><button type="button" data-m="dos" aria-pressed="false">Dossiers déposés</button>
+      </div>
+      <label class="small" for="m-year">Année <select id="m-year"></select></label>
+    </div>
+    <figcaption id="m-cap"></figcaption>
+    <div id="c-map"></div>
+    <div class="ramp" id="m-ramp"></div>
+    <details><summary>Voir les données par département</summary><div class="tbl scrollbox" id="t-map"></div></details>
+  </figure>
+  <p class="small col">Open data uniquement. Départements tels que déclarés, sans correction : le tribunal judiciaire de Saumur y figure à Paris. «sansdep» démarches actives n'ont pas de département renseigné.</p>
+</section>
+
+<section id="usages">
+  <div class="secnum">5 · Usages</div>
+  <h2>La fonction RH d'abord, et une répétition interne</h2>
+  <div class="col">
+    <p>Le classement ci-dessous repose sur des règles explicites, appliquées aux titres et relues titre par titre. Le recrutement comprend des concours externes : dans le corpus, au moins «rec_ext_n» démarches («rec_ext_d» dossiers) s'adressent à des candidats extérieurs, comme les classes prépa Talents. Le mot « fonction RH » décrit donc mieux cet usage qu'un simple usage interne.</p>
+  </div>
+  <div class="tbl" id="t-nature"></div>
+  <h3>Les doublons viennent d'un même émetteur</h3>
+  <div class="col">
+    <p>En fiche n° 1, une même démarche est construite séparément par de nombreux territoires. Ici, c'est l'inverse : il ne s'agit pas de dispersion entre territoires, mais de répétition interne. Pour ses listes d'aptitude, la Direction des services judiciaires publie un formulaire par ressort à chaque campagne. Le corpus en compte «la_n», de «la_min» à «la_max» champs, pour «la_camp» campagnes et «la_d» dossiers.</p>
+    <p>Le seul écart net entre émetteurs concerne les classes prépa Talents : de «ptm_min» à «ptm_max» champs à l'École nationale de la magistrature, de «ptg_min» à «ptg_max» à l'École nationale des greffes.</p>
+  </div>
+  <div class="tbl" id="t-fam"></div>
+  <p class="small">Familles repérées par le titre, exemples vérifiables et non classification exhaustive. Barre orange : de la démarche la plus courte à la plus longue. Trait vertical : moyenne.</p>
+  <h3>Les démarches du corpus les plus utilisées depuis «y0»</h3>
+  <div class="tbl" id="t-top"></div>
+  <p class="small col">Sur «fen» démarches de l'open data publiées depuis «y0», la médiane est de «mediane» dossiers et «lt10» ont reçu moins de 10 dossiers. BARÔBAJ, hors open data, est ajoutée à son rang avec son compteur du «releve».</p>
+</section>
+
+<section id="usagers">
+  <div class="secnum">5 bis · Usagers</div>
+  <h2>Un formulaire de contact, une passerelle pour avocats, et des démarches hors du fichier</h2>
+  <div class="tbl" id="t-usagers"></div>
+  <p class="small col">Les démarches touchant au casier judiciaire, au suivi de plaintes et aux mineurs sont agrégées, sans détail : la fiche ne publie aucun palmarès touchant des personnes ou des catégories sensibles.</p>
+  <h3 id="contact">Le formulaire de contact : un canal d'entrée plutôt qu'une démarche</h3>
+  <div class="card1"><b>N° «contact_num» · «contact_t»</b><br><span class="muted">Secrétariat général du ministère de la Justice · publié le «contact_date» · toujours en ligne · «contact_champs» champs, dont «contact_saisie» de saisie · aucune pièce · «contact_d» dossiers</span><br><a href="«contact_url»" target="_blank" rel="noopener">Voir la démarche sur Démarche Numérique</a></div>
+  <div class="col">
+    <p>Quatre catégories orientent le message : courrier du cabinet, site internet, Europe et international, texte officiel. Le formulaire ne donne ni réponse ni conseil sur une situation individuelle et renvoie vers le 3039, les points-justice et l'accueil des tribunaux.</p>
+    <p>Il reçoit environ «contact_an» dossiers par an, soit «contact_pct» % des dossiers du corpus («contact_pct_od» % de ceux du fichier). Cet usage sort de l'emploi habituel de la plateforme : il n'instruit pas un droit, il ouvre un canal écrit traçable pour une institution. Un usage voisin existe à l'échelle d'une juridiction : un tribunal judiciaire présente sa démarche comme un guichet unique pour regrouper certaines demandes.</p>
+  </div>
+  <h3 id="barobaj">BARÔBAJ : une passerelle assumée comme provisoire</h3>
+  <div class="card1"><b>N° «bj_num» · «bj_t»</b><br><span class="muted">Bureau d'aide juridictionnelle du tribunal judiciaire de Lille · pour les avocats du barreau de Lille · ouverte · statistiques depuis «bj_debut» · «bj_dep» dossiers déposés et «bj_trait» traités au «releve» · formulaire de «bj_pages» pages, remplissage estimé à «bj_min» minutes</span><br><a href="«bj_url»" target="_blank" rel="noopener">Voir la démarche</a> · <a href="https://demarche.numerique.gouv.fr/statistiques/barobaj-2" target="_blank" rel="noopener">Voir ses statistiques</a></div>
+  <div class="col">
+    <p>Les avocats n'ayant pas accès au système national d'aide juridictionnelle (SIAJ), le tribunal de Lille a construit une passerelle sur la plateforme : les avocats déposent sur Démarche Numérique, un robot récupère les informations et les pièces, remplit les demandes, et un agent du greffe contrôle et valide. <a href="https://www.lagazettefrance.fr/article/lille-quand-les-robots-s-invitent-au-greffe-du-tribunal-judiciaire" target="_blank" rel="noopener">La Gazette France</a> rapporte le 11 décembre 2025 les résultats présentés par le directeur de greffe : «ga_num» % de demandes numériques, des stocks divisés par trois environ, et un délai moyen de «ga_delai» jours, pour «ga_flux» demandes par an au tribunal. <a href="#papier">La section 7 retrace la chronologie.</a></p>
+    <p>La démarche ne porte qu'une partie de ce flux : environ «bj_an» dossiers par an à son rythme moyen, calculé au «releve». Ses statistiques publiques affichent un délai mensuel de «bj_d_nov» jours en novembre 2025, «bj_d_max» au plus haut et «bj_d_oct» en octobre 2026. Le taux d'acceptation de 100 % de la même page ne se lit pas comme un taux d'admission à l'aide : il décrit le traitement sur la plateforme.</p>
+    <p class="small">Le titre indique une version 2.0 et l'adresse courte <code>/commencer/barobaj</code> y renvoie. <a href="https://demarche.numerique.gouv.fr/statistiques/barobaj" target="_blank" rel="noopener">La page de statistiques de la première version</a> (n° «v1_num») reste publique : son titre l'annonce supprimée et remplacée par la version 2.0, et elle affiche «v1_dep» dossiers déposés au «exp_releve». Aucune des deux ne figure dans l'open data. Cette première version n'est pas comptée dans la fiche. La démarche du conseil de prud'hommes de Lille pour les avocats (BAROCPH, «cph_d» dossiers) suit le même principe : sa première version a fermé en septembre 2025, sa version 3.0 a ouvert en octobre.</p>
+  </div>
+  <h3 id="experts">Les experts judiciaires : un pan absent de l'open data</h3>
+  <div class="col">
+    <p>Les démarches d'inscription, de réinscription et d'extension d'inscription sur les listes d'experts judiciaires ne figurent pas dans le fichier du «date». Leurs pages de statistiques sont pourtant publiques. Au «exp_releve», neuf démarches totalisent <b>«exp_total» dossiers déposés</b> : «exp_nat» pour la campagne nationale 2026 (<a href="https://demarche.numerique.gouv.fr/statistiques/experts-judiciaires-inscription-initiale-campagne-" target="_blank" rel="noopener">inscription</a>, <a href="https://demarche.numerique.gouv.fr/statistiques/experts-judiciaires-reinscription-campagne-nationa" target="_blank" rel="noopener">réinscription</a>, <a href="https://demarche.numerique.gouv.fr/statistiques/experts-judiciaires-extension-d-inscription-campag" target="_blank" rel="noopener">extension</a>), «exp_aix» pour la cour d'appel d'Aix-en-Provence (<a href="https://demarche.numerique.gouv.fr/statistiques/experts-inscription-initiale-ca-aix-en-provence" target="_blank" rel="noopener">inscription</a>, <a href="https://demarche.numerique.gouv.fr/statistiques/experts-reinscription-ca-aix-en-provence" target="_blank" rel="noopener">réinscription</a>, <a href="https://demarche.numerique.gouv.fr/statistiques/experts-extension-d-inscription-ca-aix-en-provence" target="_blank" rel="noopener">extension</a>) et «exp_bdx» pour celle de Bordeaux (<a href="https://demarche.numerique.gouv.fr/statistiques/experts-inscription-initiale-ca-bordeaux" target="_blank" rel="noopener">inscription</a>, <a href="https://demarche.numerique.gouv.fr/statistiques/experts-reinscription-ca-bordeaux" target="_blank" rel="noopener">réinscription</a>, <a href="https://demarche.numerique.gouv.fr/statistiques/experts-extension-d-inscription-ca-bordeaux" target="_blank" rel="noopener">extension</a>). Une dixième, <a href="https://demarche.numerique.gouv.fr/statistiques/ca-noumea-experts-judiciaires-reinscription-prorog" target="_blank" rel="noopener">pour la cour d'appel de Nouméa</a>, n'affiche aucun dossier.</p>
+    <p class="small">Ces démarches sont citées, pas comptées : les ajouter déplacerait tous les pourcentages de la fiche sans rendre le corpus complet. Elles ont été retrouvées une à une. Rien ne garantit qu'elles soient les seules.</p>
+  </div>
+</section>
+
+<section id="acces-droit">
+  <div class="secnum">5 ter · Accès au droit</div>
+  <h2>Sur une autre brique mutualisée : «rdv_total» rendez-vous enregistrés</h2>
+  <div class="col">
+    <p>Les conseils départementaux de l'accès au droit (CDAD) sont des groupements d'intérêt public, et non des services du ministère. Selon <a href="https://rdv-service-public-metabase.osc-secnum-fr1.scalingo.io/public/dashboard/84e59905-144c-4b2f-b12a-ed639e6e27e6" target="_blank" rel="noopener">le tableau de bord public de RDV Service Public</a> (relevé du «releve»), «rdv_terr» territoires y enregistrent «rdv_total» rendez-vous. Le service ne porte pas que leurs propres permanences : avocats, conciliateurs de justice, CIDFF, mairies et juridictions y prennent place dans un même outil, au sein de chaque territoire.</p>
+    <p>L'usage est en cours de montée en charge : «act_2411» territoires actifs en novembre 2024, «act_2610» en octobre 2026. Les nouveaux territoires arrivent sur la seconde instance : «new_p_2025» en 2025 et «new_p_2026» en 2026. Au total, «rdv_ge100» territoires dépassent 100 rendez-vous. Les «rdv_lt100» autres mêlent essais et démarrages récents.</p>
+  </div>
+  <figure>
+    <figcaption>Rendez-vous enregistrés par année de création<span>Deux instances du service. 2026 à fin octobre.</span></figcaption>
+    <div class="legend"><span><i style="background:var(--s1)"></i>RDV Solidarités</span><span><i style="background:var(--s3)"></i>RDV Service Public</span></div>
+    <div class="chart" id="c-rdv"></div>
+    <details><summary>Voir les données et les territoires actifs</summary><div class="tbl" id="t-rdv"></div></details>
+  </figure>
+  <h3>Très présents sur une brique, quasi absents de l'autre</h3>
+  <div class="col">
+    <p>Sur les «rdv_terr» territoires, «rdv_dn» seulement publient une démarche dans l'open data de la plateforme : la Moselle («mos_r» rendez-vous, «mos_n» démarches, «mos_d» dossiers) et l'Eure («eur_r» rendez-vous, «eur_n» démarche, «eur_d» dossiers). Une recherche par nom sur tout l'open data n'en fait pas apparaître d'autre.</p>
+    <p>Un rendez-vous est l'outil juste pour une consultation juridique, une démarche l'outil juste pour un dossier. Le partage observé est cohérent, ce qui explique en partie la faible présence sur la plateforme, sans que ce soit un manque.</p>
+  </div>
+  <div class="tbl" id="t-rdvtop"></div>
+  <details><summary>Lire ces chiffres correctement</summary>
+    <div class="col">
+      <p class="small"><b>Rendez-vous enregistrés, pas tenus.</b> Sur RDV Solidarités, les statuts distinguent «st_seen» rendez-vous honorés, «st_unknown» de statut inconnu, «st_excused» excusés, «st_noshow» absences et «st_revoked» annulés. Le tableau ne permet pas d'isoler les rendez-vous pris en ligne par l'usager de ceux saisis par un agent.</p>
+      <p class="small"><b>Un écart entre cartes.</b> Sur RDV Solidarités, le total diffère selon la carte : «tot_card», «tot_terr» ou «tot_stat», sans explication publique. Le chiffre retenu additionne les totaux par territoire des deux instances. Les cartes ne portent aucune documentation.</p>
+      <p class="small"><b>Pas de cumul par service.</b> Avocats («sv_av»), conciliateurs («sv_co») et CIDFF («sv_ci») sont les chiffres de RDV Solidarités. Les «ag_sp» agents sont ceux de l'instance RDV Service Public. Le tableau mesure les organisations présentes sur le service, pas toute l'activité des CDAD.</p>
+      <p class="small"><b>Un lien presque invisible dans les démarches.</b> Sur les «od_plat» démarches de l'open data, toutes zones, «lien_n» portent une adresse de prise de rendez-vous du service, soit «lien_pct» %. Aucune ne relève de la Justice ni d'un CDAD. C'est un plancher, le lien pouvant exister hors du formulaire. La trace la plus proche est mosellane : un lien de prise de rendez-vous envoyé par courriel après le dépôt, sans que le service soit nommé.</p>
+    </div>
+  </details>
+</section>
+
+<section id="qualite">
+  <div class="secnum">6 · Qualité et « dites-le-nous une fois »</div>
+  <h2>Peu de référentiels, et des pièces demandées plusieurs fois</h2>
+  <div class="col">
+    <p>La longueur moyenne d'un formulaire dépend surtout des listes d'aptitude («la_min» à «la_max» champs) : «champs_2023» champs en 2023, «champs_2025» en 2025, «champs_y1» en «y1», contre «champsp_y1» sur l'ensemble du fichier. Sur «pj_total» pièces justificatives relues dans le périmètre open data, les pièces d'identité apparaissent dans «pj_id» démarches, le RIB dans «pj_rib», les diplômes dans «pj_dip».</p>
+    <p>«rib_double» démarches demandent à la fois le RIB en pièce jointe et l'IBAN en champ. Sur «ass_n» démarches associatives ou de subvention, aucune n'utilise le champ RNA. Aucune démarche de l'open data n'interroge API Particulier.</p>
+  </div>
+  <div class="tbl" id="t-qual"></div>
+  <p class="small col">Le champ « pour particuliers » («part_y1» % en «y1») ne distingue pas les usagers des agents : il n'est pas utilisé pour le classement de la section 5.</p>
+</section>
+
+<section id="papier">
+  <div class="secnum">7 · Démarches encore sur papier</div>
+  <h2>Le papier n'est pas toujours un retard</h2>
+  <div class="col">
+    <p>En matière de justice, une procédure peut rester hors ligne pour des raisons de droit : contradictoire, vérification d'identité, assistance d'un avocat, délais de forclusion, caractère juridictionnel de l'acte. D'autres le restent pour des raisons d'organisation. Le tableau distingue les deux pour chaque exemple.</p>
+  </div>
+  <h3>Exemple principal : l'aide juridictionnelle</h3>
+  <ol class="timeline">
+    <li><span class="d">31 octobre 2025 · le service fonctionne pour les justiciables</span><a href="https://cnb.avocat.fr/actualite/siaj-les-justiciables-peuvent-deposer-et-suivre-leur-demande-d-aide-juridictionnelle-en-ligne" target="_blank" rel="noopener">Le Conseil national des barreaux (CNB) rappelle</a> que les justiciables peuvent déposer et suivre leur demande en ligne, via FranceConnect, pour les procédures devant les juridictions judiciaires.</li>
+    <li><span class="d">17 novembre 2025 · un accès annoncé aux avocats, sans date</span><a href="https://cnb.avocat.fr/actualite/dematerialisation-de-l-aide-juridique-trois-outils-pour-une-chaine-numerique-complete" target="_blank" rel="noopener">Le CNB indique</a> que le déploiement du SIAJ est national et que « les avocats disposeront d'un accès dédié ». Aucune date n'est donnée.</li>
+    <li><span class="d">11 décembre 2025 · une passerelle présentée comme provisoire</span><a href="https://www.lagazettefrance.fr/article/lille-quand-les-robots-s-invitent-au-greffe-du-tribunal-judiciaire" target="_blank" rel="noopener">La Gazette France</a> décrit BARÔBAJ. Le tribunal de Lille qualifie sa solution de « provisoire », dans l'attente d'un espace SIAJ ouvert à tous les avocats. Les statistiques publiques de la démarche commencent en «bj_debut».</li>
+    <li><span class="d">15 septembre 2026 · l'accès n'est toujours pas ouvert, selon le CNB</span><a href="https://cnb.avocat.fr/actualite/mutualisation-des-bureaux-d-aide-juridictionnelle-quelle-place-pour-la-proximite-dans-l-acces-au-droit" target="_blank" rel="noopener">Le CNB</a>, organisation professionnelle des avocats, déplore « l'absence persistante d'accès des avocats au SIAJ ».</li>
+    <li><span class="d">«releve» · la passerelle fonctionne toujours</span><a href="https://demarche.numerique.gouv.fr/statistiques/barobaj-2" target="_blank" rel="noopener">BARÔBAJ est ouverte</a>, avec «bj_dep» dossiers déposés à cette date.</li>
+  </ol>
+  <div class="col">
+    <p>La plateforme générique a permis de tenir pendant l'attente.</p>
+    <p class="small">Hors de cette chronologie, le papier <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F18074" target="_blank" rel="noopener">reste imposé dans certains cas</a> : demande au nom d'une autre personne, juridictions administratives, Conseil d'État, Cour nationale du droit d'asile, Cour de cassation. L'Observatoire de la qualité des démarches, repris dans FORM 2026, indique «aj_vol» demandes, dont «aj_pct» % en ligne, sans que la période de ce chiffre ait pu être vérifiée.</p>
+  </div>
+  <h3>Second exemple : le certificat de non-appel et la copie de décision</h3>
+  <div class="col">
+    <p>Les Cerfa <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/R18606" target="_blank" rel="noopener">12821</a> et <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/R1408" target="_blank" rel="noopener">11808</a> se remplissent en ligne, mais s'impriment et s'envoient. Le tribunal judiciaire de Lille en a publié une version en ligne : «na_d» dossiers et «na_c» champs. Elle a fermé le «na_ferm» sans raison publique, et aucune reprise n'a été trouvée. Trois autres démarches de ce tribunal ont fermé entre le 21 et le 29 juillet 2026, et une quatrième le 24 juin. D'autres cours d'appel publient leurs propres formulaires ou consignes pour le certificat, par exemple <a href="https://www.cours-appel.justice.fr/bordeaux/demande-de-certificat-de-non-appel" target="_blank" rel="noopener">Bordeaux</a> et <a href="https://www.cours-appel.justice.fr/rennes/demande-de-certificat-de-non-appel" target="_blank" rel="noopener">Rennes</a>, et <a href="https://www.justice.fr/formulaire/demande-certificat-non-appel" target="_blank" rel="noopener">justice.fr</a> propose un formulaire. Ce contexte n'explique pas la fermeture lilloise.</p>
+  </div>
+  <div class="tbl" id="t-papier"></div>
+  <p class="small col">Téléchargements annuels : fichier de la DILA, sur un an à fin 2024. Ce ne sont pas des dossiers déposés. La nature de l'obstacle est une lecture de la fiche à partir des sources liées, pas une qualification juridique. FORM 2026 a analysé «cerfa_total» Cerfa, dont «cerfa_just» adressés à une juridiction. Aucun des exemples ci-dessus n'y figure.</p>
+</section>
+
+<section id="ressources">
+  <div class="secnum">8 · Revenu fiscal</div>
+  <h2>La demande en ligne récupère le revenu fiscal ; la voie papier demande l'avis d'imposition</h2>
+  <div class="col">
+    <p><b>Ce constat est limité, et annoncé comme tel.</b> Il n'a pas l'ampleur de celui de la fiche n° 1 sur le quotient familial, mais il est exact et vérifiable.</p>
+    <p>Pour l'aide juridictionnelle, la demande en ligne récupère le revenu fiscal, alors que la <a href="https://www.formulaires.service-public.gouv.fr/gf/getNotice.do?cerfaNotice=51505&cerfaFormulaire=16146" target="_blank" rel="noopener">notice de la voie papier</a> demande l'avis d'imposition le plus récent. Sur la plateforme, BARÔBAJ demande à l'avocat de déclarer le revenu fiscal et de joindre l'avis. <a href="https://www.justice.gouv.fr/sites/default/files/2025-12/JUST2536230C.pdf" target="_blank" rel="noopener">Une circulaire du 26 décembre 2025</a>, relative au recouvrement de l'aide garantie, confirme par ailleurs que le SIAJ reçoit ces données de la DGFiP.</p>
+    <p>Sur le reste du corpus, au moins «avis_n» démarches, toutes portées par les écoles, demandent un avis d'imposition en pièce jointe, pour «avis_d» dossiers, et aucune n'interroge l'API. Le revenu fiscal de référence est référencé <a href="https://emsnytech.github.io/form2026/explorer.html" target="_blank" rel="noopener">dans FORM 2026</a> comme donnée disponible par API Particulier. Le cadre juridique de chaque cas resterait à examiner, en particulier quand un avocat remplit pour autrui.</p>
+  </div>
+  <div class="tbl" id="t-avis"></div>
+</section>
+
+<section id="pistes">
+  <div class="secnum">9 · Pistes</div>
+  <h2>Ce que les données suggèrent</h2>
+  <ol class="pistes">
+    <li><b>Un formulaire par campagne plutôt qu'un par ressort</b>Les listes d'aptitude représentent au moins «la_n» formulaires pour «la_camp» campagnes. La plateforme permet de <a href="https://doc.demarches-simplifiees.fr/pour-aller-plus-loin/routage" target="_blank" rel="noopener">router les dossiers</a> vers des groupes d'instructeurs à partir d'un champ. Reste à vérifier que cela convient à l'organisation de ces campagnes.</li>
+    <li><b>Comparer les deux classes prépa Talents</b>De «ptg_min» à «ptm_max» champs pour un même type de candidature, et un avis d'imposition demandé dans la plupart des cas : un socle commun pourrait alléger le dossier.</li>
+    <li><b>Éviter les doubles demandes</b>Au moins «rib_double» démarches demandent le RIB et l'IBAN. Les modèles de formulaire pourraient retirer l'une des deux demandes.</li>
+    <li><b>Documenter ce que la plateforme a permis d'essayer</b>BARÔBAJ est le rare cas où un gain a été présenté publiquement. Une présentation datée de ce qui a fonctionné, et de ce qui a fermé, éviterait de lire ces démarches sans leur histoire.</li>
+    <li><b>Signaler ce que le descriptif open data exclut</b>Indiquer dans le jeu de données les règles qui écartent une démarche du fichier, et le nombre de démarches concernées, rendrait les mesures par ministère plus fiables.</li>
+  </ol>
+  <h3>La question d'une instance dédiée</h3>
+  <div class="col">
+    <p>Le logiciel est libre, et d'autres l'ont déployé pour leur propre périmètre : <a href="https://demat.social.gouv.fr/stats" target="_blank" rel="noopener">les ministères sociaux</a>, <a href="https://demarches-simplifiees.defense.gouv.fr/stats" target="_blank" rel="noopener">les Armées</a>, <a href="https://www.mes-demarches.gov.pf/stats" target="_blank" rel="noopener">la Polynésie française</a>, <a href="https://demarches-simplifiees.gouv.nc/stats" target="_blank" rel="noopener">la Nouvelle-Calédonie</a>, <a href="https://demarches.adullact.org/stats" target="_blank" rel="noopener">l'ADULLACT</a> et <a href="https://demarches-hdf.fr/stats" target="_blank" rel="noopener">les Hauts-de-France</a> (<a href="https://emsnytech.github.io/form2026/instances-ds.html" target="_blank" rel="noopener">voir le relevé de FORM 2026</a>). Le corpus de cette fiche ne couvre pas toutes les démarches du ministère : il ne permet pas de conclure sur leur dispersion.</p>
+  </div>
+</section>
+
+<footer>
+  <p>FORM 2026 · Philippe Vrignaud · Données ouvertes et code source publics</p>
+  <details>
+    <summary>Méthode et sources</summary>
+    <div class="col">
+      <p><b>Ce que décrit cette fiche.</b> Cette fiche décrit les démarches publiées dans l'open data de la plateforme, ce qui ne recouvre pas toutes les démarches du ministère. Chaque chiffre se lit sur ce corpus : «od_total» démarches du fichier, plus «hors_n» relevées sur les pages publiques. Une part, un rang ou une tendance ne se transpose pas au ministère. Ce qui est dit d'une démarche nommée reste vrai de cette démarche. À notre connaissance, aucune source publique ne donne la liste complète des démarches d'un ministère : le fichier applique des filtres, et les pages publiques ne s'énumèrent pas.</p>
+      <p><b>Dénominateurs.</b> «total» démarches et «dossiers» dossiers pour les totaux et les parts ; «od_total» démarches et «od_dos» dossiers pour les séries annuelles, la carte, les champs et les frais évités, seules à porter ces données.</p>
+      <p><b>Sources et dates.</b> <a href="https://www.data.gouv.fr/datasets/descriptif-des-demarches-publiees-sur-demarche-numerique-gouv-fr" target="_blank" rel="noopener">Descriptif des démarches publiées</a>, data.gouv.fr, extraction du «date» («od_plat» démarches, toutes zones). Pages publiques de la plateforme et tableau de bord de RDV Service Public, relevés du «releve». Les données ne sont pas réalignées sur une même date. Les compteurs vivants, comme celui de BARÔBAJ, portent leur date de relevé. Les experts judiciaires et la première version de BARÔBAJ ont été relevés le «exp_releve».</p>
+      <p><b>Définitions.</b> Identiques à la fiche n° 1 : publiée l'année de sa date de publication, close l'année de sa fermeture ou dépublication, active si en ligne un jour dans l'année, en stock si en ligne au 31 décembre. Attribution par zone, puis par organisme sans zone. Plus de trois zones : exclue.</p>
+      <p><b>Écarts avec la fiche n° 1.</b> Pas de graphique de stock, remplacé par un tableau, car la série reflète les ouvertures de campagnes. Publications empilées par listes d'aptitude plutôt que par reconductions, données en tableau. Deux sections ajoutées (5 bis et 5 ter) pour conserver la numérotation. Typologie des émetteurs lue sur le nom de l'organisme, pas sur le type déclaré ni l'unité légale du SIRET. Deux démarches hors open data ajoutées aux totaux, et une démarche d'une autre zone (CDAD de l'Eure) rattachée explicitement.</p>
+      <p><b>Effet de la correction du périmètre.</b> La recherche élargie (zones, noms, titres, SIRET et SIREN de «siren_n» cours d'appel) n'a ajouté qu'une démarche dans l'open data. Les deux autres ajouts n'y figurent pas et ont été trouvés sur les pages publiques. D'autres démarches absentes du fichier existent, comme celles des experts judiciaires, cités sans être comptés. Elles ne sont pas énumérables.</p>
+      <p><b>Ce que le descriptif open data exclut.</b> D'après <a href="https://github.com/demarche-numerique/demarche.numerique.gouv.fr/blob/main/app/models/procedure.rb" target="_blank" rel="noopener">le code public de la plateforme</a>, le fichier ne retient que les démarches publiées, closes ou dépubliées dont le paramètre open data est activé, ayant au moins un dossier, et dont l'adresse de site web ne contient ni « mail » ni « intra ». Ce paramètre, actif par défaut, peut être désactivé par l'administrateur de la démarche, automatiquement par une restriction d'accès aux agents, ou par une tâche technique. Le fichier ne dit pas quelle voie a joué. Ces filtres font de ses volumes des planchers, et ils en modifient aussi la composition. Pourquoi BARÔBAJ en est absente n'est pas public. Cette absence n'est pas propre aux professionnels : d'autres démarches pour avocats figurent dans le fichier, comme BAROCPH ou une démarche de la préfecture du Nord réservée aux avocats («pref_nord_d» dossiers). Mais pour un ministère dont les usages passent par des professionnels du droit, chaque absence pèse.</p>
+      <p><b>Contrôle interne.</b> Ces réserves ont été décidées après comparaison avec une extraction interne de la plateforme, qui n'est pas consultable par le lecteur. Aucun chiffre de cette fiche n'en provient, et le script de comparaison reste hors du dépôt public pour cette raison.</p>
+      <p><b>Classement des usages.</b> Règles explicites sur les titres, listées dans le script et auditables ligne à ligne. Certains classements restent discutables, sans effet sur l'ordre de grandeur.</p>
+      <p><b>Dossiers et gains.</b> Répartition au prorata des jours d'ouverture, contrôlée sur le jeu <a href="https://www.data.gouv.fr/datasets/utilisation-du-service-demarche-numerique-gouv-fr" target="_blank" rel="noopener">Utilisation du service</a>. Gains : fichier demarches_gains_v8 de FORM 2026.</p>
+      <p><b>Vérifications et limites.</b> Le téléservice national du Cerfa 12821, dont l'adresse apparaît dans des résultats de recherche, n'a pas pu être ouvert. Le chiffre de «lien_n» démarches avec lien de rendez-vous n'est pas une mesure d'usage. Les résultats de BARÔBAJ cités sont ceux présentés par le tribunal et rapportés par la presse, pas une évaluation indépendante.</p>
+      <p><b>Démarches exclues.</b></p>
+    </div>
+    <div class="tbl" id="t-anom"></div>
+    <div class="col"><p><a href="https://emsnytech.github.io/form2026/donnees/fiches-ministeres/methode/">Les scripts de calcul</a> et les fichiers intermédiaires accompagnent la fiche. Chaque chiffre issu de la base est produit par ces scripts. Les chiffres tirés de sources externes y sont consignés avec leur source.</p><p><b>Règle et exception.</b> Ce qui produit une page publiée vit dans le dépôt, et se rejoue depuis lui. Une seule exception : le script de comparaison mentionné plus haut reste hors du dépôt public, parce qu'il lit une source interne que le lecteur ne peut pas consulter, et aucun chiffre publié n'en dépend.</p></div>
+  </details>
+</footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+const DATA = /*DATA*/null;
+/*JS_COMMUN*/
+/* 1. Trajectoire */
+bars("c-pub", YL, [{name:"Autres démarches", values:DATA.pub_autres, color:S1}, {name:"Listes d'aptitude", values:DATA.pub_la, color:S2}], {label:"Démarches publiées par an"});
+table("t-pub", ["Année", "Publiées", "dont listes d'aptitude", "Nouveaux usages", "Reconductions", "Closes", "Part du fichier"],
+  Y.map((y, i) => [YL[i], fr.format(DATA.pub_autres[i]+DATA.pub_la[i]), fr.format(DATA.pub_la[i]), fr.format(DATA.pub_new[i]), fr.format(DATA.pub_rec[i]), fr.format(DATA.closes[i]), pc(DATA.part_pub[i])]), [1,2,3,4,5,6]);
+table("t-stock", ["Année", "En ligne fin d'année", "Listes d'aptitude", "Autres", "Actives", "Part du fichier"],
+  Y.map((y, i) => [YL[i], fr.format(DATA.stock[i]), fr.format(DATA.stock[i]-DATA.stock_autres[i]), fr.format(DATA.stock_autres[i]), fr.format(DATA.actives[i]), pc(DATA.part_stock[i])]), [1,2,3,4,5]);
+const DOS = DATA.dossiers;
+bars("c-dos", YL, [{name:"Dossiers (estimation)", values:DOS.map(d => d.estime_brut), color:S1}], {h:240, label:"Dossiers déposés par an, estimation"});
+table("t-dos", ["Année", "Dossiers estimés", "Part du fichier", "Fichier : estimation", "Plateforme : dépôts publiés", "Coefficient de calage", "Dossiers recalés"],
+  DOS.map((d, i) => [YL[i], fr.format(d.estime_brut), pc(d.part_du_fichier), fr.format(d.plateforme_estime), fr.format(d.plateforme_reel) + (i === DOS.length-1 ? " (à fin sept.)" : ""), String(d.calage).replace(".", ","), fr.format(d.estime_cale)]), [1,2,3,4,5,6]);
+const keur = v => fr.format(Math.round(v/1000)) + " k€";
+table("t-gains", ["Année", "Frais évités, bas", "Frais évités, haut"], DATA.gains_annee.map((g, i) => [YL[i], keur(g.bas), keur(g.haut)]), [1,2]);
+
+/* 3. Émetteurs */
+table("t-emetteurs", ["Type d'émetteur", "Démarches", "Part", "Dossiers", "SIRET", "Principaux émetteurs"],
+  DATA.emetteurs.map(e => [esc(e.type), fr.format(e.n), pc(e.pct), fr.format(e.d), fr.format(e.siret), esc(e.detail)]), [1,2,3,4]);
+table("t-diff", ["Année", "Émetteurs (SIRET distincts)", "Départements couverts", "Libellés d'organisme distincts"],
+  DATA.diff.map((d, i) => [YL[i], fr.format(d.siret), fr.format(d.dep), fr.format(d.lib)]), [1,2,3]);
+
+/* 5. Usages */
+const nmax = Math.max(...DATA.nature.map(x => x.n));
+table("t-nature", ["Usage", "Démarches", "Dossiers", "Part des dossiers", "Encore en ligne"],
+  DATA.nature.map(x => [esc(x.nom), `${fr.format(x.n)} <span class="bar" style="width:${Math.round(60*x.n/nmax)}px"></span>`, fr.format(x.d), pc(x.pct), fr.format(x.ligne)]), [1,2,3,4]);
+const fmaxN = Math.max(...DATA.familles.map(f => f.n)), cmax = niceMax(Math.max(...DATA.familles.map(f => f.max)));
+table("t-fam", ["Famille de démarches", "Démarches", "SIRET", "Dossiers", "Champs : min – max", "PJ moy."],
+  DATA.familles.map(f => [esc(f.nom), `${fr.format(f.n)} <span class="bar" style="width:${Math.round(60*f.n/fmaxN)}px"></span>`, fr.format(f.s), fr.format(f.d),
+    `<div class="rng" title="${f.min} à ${f.max} champs, moyenne ${String(f.moy).replace(".", ",")}"><b style="left:${100*f.min/cmax}%;width:${Math.max(1, 100*(f.max-f.min)/cmax)}%"></b><i style="left:${100*f.moy/cmax}%"></i></div><span class="small num">${f.min} – ${f.max}</span>`,
+    String(f.pj).replace(".", ",")]), [1,2,3,5]);
+table("t-top", ["N°", "Démarche", "Émetteur", "Publiée", "Champs", "Dossiers"],
+  DATA.top.map(t => [t.num, esc(t.t), esc(t.o), esc(t.y), t.c === null ? "n. d." : fr.format(t.c), fr.format(t.d)]), [0,4,5]);
+table("t-usagers", ["Démarche", "Émetteur", "État", "Dossiers", "Part"],
+  DATA.usagers.map(u => [esc(u.t), esc(u.o), esc(u.e), fr.format(u.d), pc(u.pct)]), [3,4]);
+
+/* 5 ter. Accès au droit */
+bars("c-rdv", DATA.rdv.years, [{name:"RDV Solidarités", values:DATA.rdv.s, color:S1}, {name:"RDV Service Public", values:DATA.rdv.p, color:S3}], {h:230, label:"Rendez-vous enregistrés par année"});
+table("t-rdv", ["Mois", "Territoires actifs, RDV Solidarités", "Territoires actifs, RDV Service Public", "Ensemble"],
+  DATA.rdv.actifs.map(a => [a.m, fr.format(a.s), fr.format(a.p), fr.format(a.t)]), [1,2,3]);
+table("t-rdvtop", ["Territoire", "Instance", "Rendez-vous enregistrés", "Démarches dans l'open data", "Dossiers"],
+  DATA.rdv.top.map(t => [esc(t.nom), esc(t.inst), fr.format(t.r), fr.format(t.n), fr.format(t.d)]), [2,3,4]);
+
+/* 6. Qualité */
+table("t-qual", ["Année", "Champs (fichier)", "PJ (fichier)", "SIRET", "IBAN", "RNA", "API", "Moins de 3 mois"],
+  DATA.qual.map((q, i) => [YL[i], `${String(q.champs).replace(".", ",")} (${String(q.champs_p).replace(".", ",")})`, `${String(q.pj).replace(".", ",")} (${String(q.pj_p).replace(".", ",")})`, pc(q.siret), pc(q.iban), pc(q.rna), fr.format(q.apip), fr.format(q.eph)]), [1,2,3,4,5,6,7]);
+
+/* 7. Papier */
+table("t-papier", ["Démarche", "Statut", "Nature de l'obstacle", "Téléchargements annuels"],
+  DATA.papier.map(p => [`<a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.t)}</a>`, esc(p.s), esc(p.o), fr.format(p.v)]), [3]);
+
+/* 8. Revenu fiscal */
+table("t-avis", ["N°", "Démarche", "Émetteur", "Publiée", "Dossiers"],
+  DATA.avis.map(a => [a.n, esc(a.t), esc(a.o), a.y, fr.format(a.d)]), [0,4]);
+table("t-anom", ["N°", "Démarche", "Organisme", "Zones", "Dossiers", "Motif"],
+  DATA.anomalies.map(a => [a.n, esc(a.t), esc(a.o), a.z, fr.format(a.d), esc(a.m)]), [0,3,4]);
+
+/*JS_CARTE*/
+document.querySelectorAll(".chart").forEach(c => c.setAttribute("tabindex", "0"));
+</script>
+<p class="small wrap" style="margin-top:8px">* «y1» : du 1er janvier au «date».</p>

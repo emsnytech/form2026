@@ -1,0 +1,145 @@
+{
+ "releve": "2026-11-05",
+ "source": "https://demarche.numerique.gouv.fr/statistiques/",
+ "absentes_du_fichier_du_21_octobre_2026": true,
+ "experts": [
+  {
+   "groupe": "Campagne nationale 2026",
+   "numero": 131020,
+   "titre": "Experts judiciaires - Inscription initiale - Campagne nationale 2026",
+   "url": "https://demarche.numerique.gouv.fr/statistiques/experts-judiciaires-inscription-initiale-campagne-",
+   "avancee": {
+    "Tous (dont brouillon)": 4003,
+    "Déposés": 4000,
+    "Instruction débutée": 3985,
+    "Traités": 18
+   }
+  },
+  {
+   "groupe": "Campagne nationale 2026",
+   "numero": 131018,
+   "titre": "Experts Judiciaires - Réinscription - Campagne nationale 2026",
+   "url": "https://demarche.numerique.gouv.fr/statistiques/experts-judiciaires-reinscription-campagne-nationa",
+   "avancee": {
+    "Tous (dont brouillon)": 2788,
+    "Déposés": 2786,
+    "Instruction débutée": 2758,
+    "Traités": 36
+   }
+  },
+  {
+   "groupe": "Campagne nationale 2026",
+   "numero": 131021,
+   "titre": "Experts Judiciaires - Extension d'inscription - Campagne nationale 2026",
+   "url": "https://demarche.numerique.gouv.fr/statistiques/experts-judiciaires-extension-d-inscription-campag",
+   "avancee": {
+    "Tous (dont brouillon)": 536,
+    "Déposés": 536,
+    "Instruction débutée": 534,
+    "Traités": 7
+   }
+  },
+  {
+   "groupe": "Cour d'appel d'Aix-en-Provence",
+   "numero": 99291,
+   "titre": "Experts - Inscription initiale (CA Aix-en-Provence)",
+   "url": "https://demarche.numerique.gouv.fr/statistiques/experts-inscription-initiale-ca-aix-en-provence",
+   "avancee": {
+    "Tous (dont brouillon)": 424,
+    "Déposés": 423,
+    "Instruction débutée": 423,
+    "Traités": 423
+   }
+  },
+  {
+   "groupe": "Cour d'appel d'Aix-en-Provence",
+   "numero": 99307,
+   "titre": "Experts - Réinscription (CA Aix-en-Provence)",
+   "url": "https://demarche.numerique.gouv.fr/statistiques/experts-reinscription-ca-aix-en-provence",
+   "avancee": {
+    "Tous (dont brouillon)": 265,
+    "Déposés": 265,
+    "Instruction débutée": 265,
+    "Traités": 265
+   }
+  },
+  {
+   "groupe": "Cour d'appel d'Aix-en-Provence",
+   "numero": 99303,
+   "titre": "Experts - Extension d'inscription (CA Aix-en-Provence)",
+   "url": "https://demarche.numerique.gouv.fr/statistiques/experts-extension-d-inscription-ca-aix-en-provence",
+   "avancee": {
+    "Tous (dont brouillon)": 77,
+    "Déposés": 77,
+    "Instruction débutée": 77,
+    "Traités": 77
+   }
+  },
+  {
+   "groupe": "Cour d'appel de Bordeaux",
+   "numero": 107318,
+   "titre": "Experts - Inscription initiale (CA Bordeaux)",
+   "url": "https://demarche.numerique.gouv.fr/statistiques/experts-inscription-initiale-ca-bordeaux",
+   "avancee": {
+    "Tous (dont brouillon)": 191,
+    "Déposés": 190,
+    "Instruction débutée": 178,
+    "Traités": 175
+   }
+  },
+  {
+   "groupe": "Cour d'appel de Bordeaux",
+   "numero": 107325,
+   "titre": "Experts - Réinscription (CA Bordeaux)",
+   "url": "https://demarche.numerique.gouv.fr/statistiques/experts-reinscription-ca-bordeaux",
+   "avancee": {
+    "Tous (dont brouillon)": 124,
+    "Déposés": 124,
+    "Instruction débutée": 124,
+    "Traités": 122
+   }
+  },
+  {
+   "groupe": "Cour d'appel de Bordeaux",
+   "numero": 107324,
+   "titre": "Experts - Extension d'inscription (CA Bordeaux)",
+   "url": "https://demarche.numerique.gouv.fr/statistiques/experts-extension-d-inscription-ca-bordeaux",
+   "avancee": {
+    "Tous (dont brouillon)": 21,
+    "Déposés": 21,
+    "Instruction débutée": 20,
+    "Traités": 19
+   }
+  },
+  {
+   "groupe": "Cour d'appel de Nouméa",
+   "numero": 140620,
+   "titre": "CA NOUMÉA - Experts judiciaires - Réinscription - Prorogation campagne 2026",
+   "url": "https://demarche.numerique.gouv.fr/statistiques/ca-noumea-experts-judiciaires-reinscription-prorog",
+   "avancee": {
+    "Tous (dont brouillon)": 0,
+    "Déposés": 0,
+    "Instruction débutée": 0,
+    "Traités": 0
+   }
+  }
+ ],
+ "experts_deposes": 8422,
+ "experts_deposes_par_groupe": {
+  "Campagne nationale 2026": 7322,
+  "Cour d'appel d'Aix-en-Provence": 765,
+  "Cour d'appel de Bordeaux": 335,
+  "Cour d'appel de Nouméa": 0
+ },
+ "barobaj_v1": {
+  "numero": 86649,
+  "titre": "Démarche supprimée et remplacée par BARÔBAJ Version 2.0 № 124249",
+  "url": "https://demarche.numerique.gouv.fr/statistiques/barobaj",
+  "avancee": {
+   "Tous (dont brouillon)": 3689,
+   "Déposés": 3688,
+   "Instruction débutée": 3688,
+   "Traités": 3688
+  }
+ }
+}

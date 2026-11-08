@@ -1,0 +1,15055 @@
+{
+"releve": "2026-11-04",
+"cartes": [
+{
+"onglet": "Déploiement - RDV S ",
+"carte": "Nombre RDV CDAD",
+"colonnes": [
+"Count"
+],
+"lignes": [
+[
+163423
+]
+]
+},
+{
+"onglet": "Déploiement - RDV S ",
+"carte": "Nombre RDV CDAD par territoire",
+"colonnes": [
+"Territories → Name",
+"Count"
+],
+"lignes": [
+[
+"CDAD de la Gironde",
+17079
+],
+[
+"CDAD de la Haute-Corse",
+1
+],
+[
+"CDAD de la Haute-Garonne",
+5172
+],
+[
+"CDAD de l'Ain",
+1
+],
+[
+"CDAD de la Loire",
+10049
+],
+[
+"CDAD de la Manche",
+2205
+],
+[
+"CDAD de la Mayenne",
+21
+],
+[
+"CDAD de la Seine Saint-Denis",
+5689
+],
+[
+"CDAD de la Vienne",
+1640
+],
+[
+"CDAD de Saône-et-Loire",
+8619
+],
+[
+"CDAD des Ardennes",
+3938
+],
+[
+"CDAD de Vaucluse",
+4542
+],
+[
+"CDAD Eure",
+26392
+],
+[
+"CDAD Eure-Et-Loir",
+12201
+],
+[
+"CDAD Gard",
+25817
+],
+[
+"CDAD Loire-Atlantique",
+205
+],
+[
+"CDAD Meurthe-et-Moselle",
+4909
+],
+[
+"CDAD Moselle",
+24544
+],
+[
+"CDAD Seine-Maritime",
+45595
+],
+[
+"CDAD Val-de-Marne",
+18345
+]
+]
+},
+{
+"onglet": "Déploiement - RDV S ",
+"carte": "Nombre RDV CDAD par territoire - Duplicate",
+"colonnes": [
+"Territories → Name",
+"Created At: Month",
+"Count"
+],
+"lignes": [
+[
+"CDAD de la Gironde",
+"2024-11-01T00:00:00+01:00",
+20
+],
+[
+"CDAD de la Gironde",
+"2024-12-01T00:00:00+01:00",
+43
+],
+[
+"CDAD de la Gironde",
+"2025-01-01T00:00:00+01:00",
+220
+],
+[
+"CDAD de la Gironde",
+"2025-02-01T00:00:00+01:00",
+194
+],
+[
+"CDAD de la Gironde",
+"2025-03-01T00:00:00+01:00",
+505
+],
+[
+"CDAD de la Gironde",
+"2025-04-01T00:00:00+02:00",
+398
+],
+[
+"CDAD de la Gironde",
+"2025-05-01T00:00:00+02:00",
+364
+],
+[
+"CDAD de la Gironde",
+"2025-06-01T00:00:00+02:00",
+394
+],
+[
+"CDAD de la Gironde",
+"2025-07-01T00:00:00+02:00",
+485
+],
+[
+"CDAD de la Gironde",
+"2025-08-01T00:00:00+02:00",
+324
+],
+[
+"CDAD de la Gironde",
+"2025-09-01T00:00:00+02:00",
+1045
+],
+[
+"CDAD de la Gironde",
+"2025-10-01T00:00:00+02:00",
+946
+],
+[
+"CDAD de la Gironde",
+"2025-11-01T00:00:00+01:00",
+819
+],
+[
+"CDAD de la Gironde",
+"2025-12-01T00:00:00+01:00",
+719
+],
+[
+"CDAD de la Gironde",
+"2026-01-01T00:00:00+01:00",
+1075
+],
+[
+"CDAD de la Gironde",
+"2026-02-01T00:00:00+01:00",
+1018
+],
+[
+"CDAD de la Gironde",
+"2026-03-01T00:00:00+01:00",
+1184
+],
+[
+"CDAD de la Gironde",
+"2026-04-01T00:00:00+02:00",
+1119
+],
+[
+"CDAD de la Gironde",
+"2026-05-01T00:00:00+02:00",
+988
+],
+[
+"CDAD de la Gironde",
+"2026-06-01T00:00:00+02:00",
+1244
+],
+[
+"CDAD de la Gironde",
+"2026-07-01T00:00:00+02:00",
+832
+],
+[
+"CDAD de la Gironde",
+"2026-08-01T00:00:00+02:00",
+510
+],
+[
+"CDAD de la Gironde",
+"2026-09-01T00:00:00+02:00",
+1305
+],
+[
+"CDAD de la Gironde",
+"2026-10-01T00:00:00+02:00",
+1328
+],
+[
+"CDAD de la Haute-Corse",
+"2024-11-01T00:00:00+01:00",
+1
+],
+[
+"CDAD de la Haute-Garonne",
+"2024-11-01T00:00:00+01:00",
+39
+],
+[
+"CDAD de la Haute-Garonne",
+"2024-12-01T00:00:00+01:00",
+342
+],
+[
+"CDAD de la Haute-Garonne",
+"2025-01-01T00:00:00+01:00",
+884
+],
+[
+"CDAD de la Haute-Garonne",
+"2025-02-01T00:00:00+01:00",
+628
+],
+[
+"CDAD de la Haute-Garonne",
+"2025-03-01T00:00:00+01:00",
+584
+],
+[
+"CDAD de la Haute-Garonne",
+"2025-04-01T00:00:00+02:00",
+238
+],
+[
+"CDAD de la Haute-Garonne",
+"2025-05-01T00:00:00+02:00",
+205
+],
+[
+"CDAD de la Haute-Garonne",
+"2025-06-01T00:00:00+02:00",
+165
+],
+[
+"CDAD de la Haute-Garonne",
+"2025-07-01T00:00:00+02:00",
+142
+],
+[
+"CDAD de la Haute-Garonne",
+"2025-08-01T00:00:00+02:00",
+120
+],
+[
+"CDAD de la Haute-Garonne",
+"2025-09-01T00:00:00+02:00",
+169
+],
+[
+"CDAD de la Haute-Garonne",
+"2025-10-01T00:00:00+02:00",
+174
+],
+[
+"CDAD de la Haute-Garonne",
+"2025-11-01T00:00:00+01:00",
+116
+],
+[
+"CDAD de la Haute-Garonne",
+"2025-12-01T00:00:00+01:00",
+116
+],
+[
+"CDAD de la Haute-Garonne",
+"2026-01-01T00:00:00+01:00",
+156
+],
+[
+"CDAD de la Haute-Garonne",
+"2026-02-01T00:00:00+01:00",
+152
+],
+[
+"CDAD de la Haute-Garonne",
+"2026-03-01T00:00:00+01:00",
+152
+],
+[
+"CDAD de la Haute-Garonne",
+"2026-04-01T00:00:00+02:00",
+120
+],
+[
+"CDAD de la Haute-Garonne",
+"2026-05-01T00:00:00+02:00",
+92
+],
+[
+"CDAD de la Haute-Garonne",
+"2026-06-01T00:00:00+02:00",
+137
+],
+[
+"CDAD de la Haute-Garonne",
+"2026-07-01T00:00:00+02:00",
+88
+],
+[
+"CDAD de la Haute-Garonne",
+"2026-08-01T00:00:00+02:00",
+68
+],
+[
+"CDAD de la Haute-Garonne",
+"2026-09-01T00:00:00+02:00",
+144
+],
+[
+"CDAD de la Haute-Garonne",
+"2026-10-01T00:00:00+02:00",
+141
+],
+[
+"CDAD de l'Ain",
+"2026-03-01T00:00:00+01:00",
+1
+],
+[
+"CDAD de la Loire",
+"2024-10-01T00:00:00+02:00",
+196
+],
+[
+"CDAD de la Loire",
+"2024-11-01T00:00:00+01:00",
+419
+],
+[
+"CDAD de la Loire",
+"2024-12-01T00:00:00+01:00",
+323
+],
+[
+"CDAD de la Loire",
+"2025-01-01T00:00:00+01:00",
+441
+],
+[
+"CDAD de la Loire",
+"2025-02-01T00:00:00+01:00",
+497
+],
+[
+"CDAD de la Loire",
+"2025-03-01T00:00:00+01:00",
+431
+],
+[
+"CDAD de la Loire",
+"2025-04-01T00:00:00+02:00",
+310
+],
+[
+"CDAD de la Loire",
+"2025-05-01T00:00:00+02:00",
+273
+],
+[
+"CDAD de la Loire",
+"2025-06-01T00:00:00+02:00",
+391
+],
+[
+"CDAD de la Loire",
+"2025-07-01T00:00:00+02:00",
+288
+],
+[
+"CDAD de la Loire",
+"2025-08-01T00:00:00+02:00",
+116
+],
+[
+"CDAD de la Loire",
+"2025-09-01T00:00:00+02:00",
+446
+],
+[
+"CDAD de la Loire",
+"2025-10-01T00:00:00+02:00",
+448
+],
+[
+"CDAD de la Loire",
+"2025-11-01T00:00:00+01:00",
+555
+],
+[
+"CDAD de la Loire",
+"2025-12-01T00:00:00+01:00",
+365
+],
+[
+"CDAD de la Loire",
+"2026-01-01T00:00:00+01:00",
+535
+],
+[
+"CDAD de la Loire",
+"2026-02-01T00:00:00+01:00",
+939
+],
+[
+"CDAD de la Loire",
+"2026-03-01T00:00:00+01:00",
+601
+],
+[
+"CDAD de la Loire",
+"2026-04-01T00:00:00+02:00",
+414
+],
+[
+"CDAD de la Loire",
+"2026-05-01T00:00:00+02:00",
+325
+],
+[
+"CDAD de la Loire",
+"2026-06-01T00:00:00+02:00",
+369
+],
+[
+"CDAD de la Loire",
+"2026-07-01T00:00:00+02:00",
+216
+],
+[
+"CDAD de la Loire",
+"2026-08-01T00:00:00+02:00",
+144
+],
+[
+"CDAD de la Loire",
+"2026-09-01T00:00:00+02:00",
+524
+],
+[
+"CDAD de la Loire",
+"2026-10-01T00:00:00+02:00",
+483
+],
+[
+"CDAD de la Manche",
+"2024-11-01T00:00:00+01:00",
+11
+],
+[
+"CDAD de la Manche",
+"2024-12-01T00:00:00+01:00",
+30
+],
+[
+"CDAD de la Manche",
+"2025-01-01T00:00:00+01:00",
+87
+],
+[
+"CDAD de la Manche",
+"2025-02-01T00:00:00+01:00",
+98
+],
+[
+"CDAD de la Manche",
+"2025-03-01T00:00:00+01:00",
+111
+],
+[
+"CDAD de la Manche",
+"2025-04-01T00:00:00+02:00",
+105
+],
+[
+"CDAD de la Manche",
+"2025-05-01T00:00:00+02:00",
+95
+],
+[
+"CDAD de la Manche",
+"2025-06-01T00:00:00+02:00",
+132
+],
+[
+"CDAD de la Manche",
+"2025-07-01T00:00:00+02:00",
+96
+],
+[
+"CDAD de la Manche",
+"2025-08-01T00:00:00+02:00",
+4
+],
+[
+"CDAD de la Manche",
+"2025-09-01T00:00:00+02:00",
+158
+],
+[
+"CDAD de la Manche",
+"2025-10-01T00:00:00+02:00",
+121
+],
+[
+"CDAD de la Manche",
+"2025-11-01T00:00:00+01:00",
+109
+],
+[
+"CDAD de la Manche",
+"2025-12-01T00:00:00+01:00",
+77
+],
+[
+"CDAD de la Manche",
+"2026-01-01T00:00:00+01:00",
+121
+],
+[
+"CDAD de la Manche",
+"2026-02-01T00:00:00+01:00",
+103
+],
+[
+"CDAD de la Manche",
+"2026-03-01T00:00:00+01:00",
+127
+],
+[
+"CDAD de la Manche",
+"2026-04-01T00:00:00+02:00",
+104
+],
+[
+"CDAD de la Manche",
+"2026-05-01T00:00:00+02:00",
+101
+],
+[
+"CDAD de la Manche",
+"2026-06-01T00:00:00+02:00",
+107
+],
+[
+"CDAD de la Manche",
+"2026-07-01T00:00:00+02:00",
+76
+],
+[
+"CDAD de la Manche",
+"2026-08-01T00:00:00+02:00",
+19
+],
+[
+"CDAD de la Manche",
+"2026-09-01T00:00:00+02:00",
+124
+],
+[
+"CDAD de la Manche",
+"2026-10-01T00:00:00+02:00",
+89
+],
+[
+"CDAD de la Mayenne",
+"2024-11-01T00:00:00+01:00",
+3
+],
+[
+"CDAD de la Mayenne",
+"2025-02-01T00:00:00+01:00",
+1
+],
+[
+"CDAD de la Mayenne",
+"2025-03-01T00:00:00+01:00",
+4
+],
+[
+"CDAD de la Mayenne",
+"2025-04-01T00:00:00+02:00",
+3
+],
+[
+"CDAD de la Mayenne",
+"2025-05-01T00:00:00+02:00",
+1
+],
+[
+"CDAD de la Mayenne",
+"2025-06-01T00:00:00+02:00",
+6
+],
+[
+"CDAD de la Mayenne",
+"2026-01-01T00:00:00+01:00",
+3
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2024-12-01T00:00:00+01:00",
+3
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2025-01-01T00:00:00+01:00",
+220
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2025-02-01T00:00:00+01:00",
+177
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2025-03-01T00:00:00+01:00",
+190
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2025-04-01T00:00:00+02:00",
+133
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2025-05-01T00:00:00+02:00",
+209
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2025-06-01T00:00:00+02:00",
+143
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2025-07-01T00:00:00+02:00",
+125
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2025-08-01T00:00:00+02:00",
+116
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2025-09-01T00:00:00+02:00",
+204
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2025-10-01T00:00:00+02:00",
+104
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2025-11-01T00:00:00+01:00",
+118
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2025-12-01T00:00:00+01:00",
+74
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2026-01-01T00:00:00+01:00",
+143
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2026-02-01T00:00:00+01:00",
+209
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2026-03-01T00:00:00+01:00",
+432
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2026-04-01T00:00:00+02:00",
+565
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2026-05-01T00:00:00+02:00",
+427
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2026-06-01T00:00:00+02:00",
+437
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2026-07-01T00:00:00+02:00",
+348
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2026-08-01T00:00:00+02:00",
+248
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2026-09-01T00:00:00+02:00",
+550
+],
+[
+"CDAD de la Seine Saint-Denis",
+"2026-10-01T00:00:00+02:00",
+514
+],
+[
+"CDAD de la Vienne",
+"2024-08-01T00:00:00+02:00",
+1
+],
+[
+"CDAD de la Vienne",
+"2024-09-01T00:00:00+02:00",
+2
+],
+[
+"CDAD de la Vienne",
+"2024-10-01T00:00:00+02:00",
+43
+],
+[
+"CDAD de la Vienne",
+"2024-11-01T00:00:00+01:00",
+62
+],
+[
+"CDAD de la Vienne",
+"2024-12-01T00:00:00+01:00",
+67
+],
+[
+"CDAD de la Vienne",
+"2025-01-01T00:00:00+01:00",
+63
+],
+[
+"CDAD de la Vienne",
+"2025-02-01T00:00:00+01:00",
+86
+],
+[
+"CDAD de la Vienne",
+"2025-03-01T00:00:00+01:00",
+83
+],
+[
+"CDAD de la Vienne",
+"2025-04-01T00:00:00+02:00",
+72
+],
+[
+"CDAD de la Vienne",
+"2025-05-01T00:00:00+02:00",
+67
+],
+[
+"CDAD de la Vienne",
+"2025-06-01T00:00:00+02:00",
+45
+],
+[
+"CDAD de la Vienne",
+"2025-07-01T00:00:00+02:00",
+60
+],
+[
+"CDAD de la Vienne",
+"2025-08-01T00:00:00+02:00",
+41
+],
+[
+"CDAD de la Vienne",
+"2025-09-01T00:00:00+02:00",
+74
+],
+[
+"CDAD de la Vienne",
+"2025-10-01T00:00:00+02:00",
+76
+],
+[
+"CDAD de la Vienne",
+"2025-11-01T00:00:00+01:00",
+82
+],
+[
+"CDAD de la Vienne",
+"2025-12-01T00:00:00+01:00",
+59
+],
+[
+"CDAD de la Vienne",
+"2026-01-01T00:00:00+01:00",
+89
+],
+[
+"CDAD de la Vienne",
+"2026-02-01T00:00:00+01:00",
+65
+],
+[
+"CDAD de la Vienne",
+"2026-03-01T00:00:00+01:00",
+87
+],
+[
+"CDAD de la Vienne",
+"2026-04-01T00:00:00+02:00",
+59
+],
+[
+"CDAD de la Vienne",
+"2026-05-01T00:00:00+02:00",
+60
+],
+[
+"CDAD de la Vienne",
+"2026-06-01T00:00:00+02:00",
+57
+],
+[
+"CDAD de la Vienne",
+"2026-07-01T00:00:00+02:00",
+48
+],
+[
+"CDAD de la Vienne",
+"2026-08-01T00:00:00+02:00",
+46
+],
+[
+"CDAD de la Vienne",
+"2026-09-01T00:00:00+02:00",
+78
+],
+[
+"CDAD de la Vienne",
+"2026-10-01T00:00:00+02:00",
+68
+],
+[
+"CDAD de Saône-et-Loire",
+"2024-09-01T00:00:00+02:00",
+12
+],
+[
+"CDAD de Saône-et-Loire",
+"2024-10-01T00:00:00+02:00",
+80
+],
+[
+"CDAD de Saône-et-Loire",
+"2024-11-01T00:00:00+01:00",
+398
+],
+[
+"CDAD de Saône-et-Loire",
+"2024-12-01T00:00:00+01:00",
+290
+],
+[
+"CDAD de Saône-et-Loire",
+"2025-01-01T00:00:00+01:00",
+389
+],
+[
+"CDAD de Saône-et-Loire",
+"2025-02-01T00:00:00+01:00",
+386
+],
+[
+"CDAD de Saône-et-Loire",
+"2025-03-01T00:00:00+01:00",
+335
+],
+[
+"CDAD de Saône-et-Loire",
+"2025-04-01T00:00:00+02:00",
+290
+],
+[
+"CDAD de Saône-et-Loire",
+"2025-05-01T00:00:00+02:00",
+372
+],
+[
+"CDAD de Saône-et-Loire",
+"2025-06-01T00:00:00+02:00",
+340
+],
+[
+"CDAD de Saône-et-Loire",
+"2025-07-01T00:00:00+02:00",
+321
+],
+[
+"CDAD de Saône-et-Loire",
+"2025-08-01T00:00:00+02:00",
+128
+],
+[
+"CDAD de Saône-et-Loire",
+"2025-09-01T00:00:00+02:00",
+436
+],
+[
+"CDAD de Saône-et-Loire",
+"2025-10-01T00:00:00+02:00",
+430
+],
+[
+"CDAD de Saône-et-Loire",
+"2025-11-01T00:00:00+01:00",
+317
+],
+[
+"CDAD de Saône-et-Loire",
+"2025-12-01T00:00:00+01:00",
+303
+],
+[
+"CDAD de Saône-et-Loire",
+"2026-01-01T00:00:00+01:00",
+409
+],
+[
+"CDAD de Saône-et-Loire",
+"2026-02-01T00:00:00+01:00",
+395
+],
+[
+"CDAD de Saône-et-Loire",
+"2026-03-01T00:00:00+01:00",
+408
+],
+[
+"CDAD de Saône-et-Loire",
+"2026-04-01T00:00:00+02:00",
+405
+],
+[
+"CDAD de Saône-et-Loire",
+"2026-05-01T00:00:00+02:00",
+332
+],
+[
+"CDAD de Saône-et-Loire",
+"2026-06-01T00:00:00+02:00",
+386
+],
+[
+"CDAD de Saône-et-Loire",
+"2026-07-01T00:00:00+02:00",
+343
+],
+[
+"CDAD de Saône-et-Loire",
+"2026-08-01T00:00:00+02:00",
+219
+],
+[
+"CDAD de Saône-et-Loire",
+"2026-09-01T00:00:00+02:00",
+442
+],
+[
+"CDAD de Saône-et-Loire",
+"2026-10-01T00:00:00+02:00",
+453
+],
+[
+"CDAD des Ardennes",
+"2024-10-01T00:00:00+02:00",
+8
+],
+[
+"CDAD des Ardennes",
+"2024-11-01T00:00:00+01:00",
+61
+],
+[
+"CDAD des Ardennes",
+"2024-12-01T00:00:00+01:00",
+15
+],
+[
+"CDAD des Ardennes",
+"2025-01-01T00:00:00+01:00",
+165
+],
+[
+"CDAD des Ardennes",
+"2025-02-01T00:00:00+01:00",
+117
+],
+[
+"CDAD des Ardennes",
+"2025-03-01T00:00:00+01:00",
+113
+],
+[
+"CDAD des Ardennes",
+"2025-04-01T00:00:00+02:00",
+157
+],
+[
+"CDAD des Ardennes",
+"2025-05-01T00:00:00+02:00",
+120
+],
+[
+"CDAD des Ardennes",
+"2025-06-01T00:00:00+02:00",
+66
+],
+[
+"CDAD des Ardennes",
+"2025-07-01T00:00:00+02:00",
+53
+],
+[
+"CDAD des Ardennes",
+"2025-08-01T00:00:00+02:00",
+67
+],
+[
+"CDAD des Ardennes",
+"2025-09-01T00:00:00+02:00",
+201
+],
+[
+"CDAD des Ardennes",
+"2025-10-01T00:00:00+02:00",
+185
+],
+[
+"CDAD des Ardennes",
+"2025-11-01T00:00:00+01:00",
+156
+],
+[
+"CDAD des Ardennes",
+"2025-12-01T00:00:00+01:00",
+215
+],
+[
+"CDAD des Ardennes",
+"2026-01-01T00:00:00+01:00",
+240
+],
+[
+"CDAD des Ardennes",
+"2026-02-01T00:00:00+01:00",
+228
+],
+[
+"CDAD des Ardennes",
+"2026-03-01T00:00:00+01:00",
+271
+],
+[
+"CDAD des Ardennes",
+"2026-04-01T00:00:00+02:00",
+225
+],
+[
+"CDAD des Ardennes",
+"2026-05-01T00:00:00+02:00",
+208
+],
+[
+"CDAD des Ardennes",
+"2026-06-01T00:00:00+02:00",
+196
+],
+[
+"CDAD des Ardennes",
+"2026-07-01T00:00:00+02:00",
+195
+],
+[
+"CDAD des Ardennes",
+"2026-08-01T00:00:00+02:00",
+163
+],
+[
+"CDAD des Ardennes",
+"2026-09-01T00:00:00+02:00",
+251
+],
+[
+"CDAD des Ardennes",
+"2026-10-01T00:00:00+02:00",
+262
+],
+[
+"CDAD de Vaucluse",
+"2024-10-01T00:00:00+02:00",
+30
+],
+[
+"CDAD de Vaucluse",
+"2024-11-01T00:00:00+01:00",
+12
+],
+[
+"CDAD de Vaucluse",
+"2024-12-01T00:00:00+01:00",
+61
+],
+[
+"CDAD de Vaucluse",
+"2025-01-01T00:00:00+01:00",
+220
+],
+[
+"CDAD de Vaucluse",
+"2025-02-01T00:00:00+01:00",
+187
+],
+[
+"CDAD de Vaucluse",
+"2025-03-01T00:00:00+01:00",
+276
+],
+[
+"CDAD de Vaucluse",
+"2025-04-01T00:00:00+02:00",
+187
+],
+[
+"CDAD de Vaucluse",
+"2025-05-01T00:00:00+02:00",
+201
+],
+[
+"CDAD de Vaucluse",
+"2025-06-01T00:00:00+02:00",
+144
+],
+[
+"CDAD de Vaucluse",
+"2025-07-01T00:00:00+02:00",
+86
+],
+[
+"CDAD de Vaucluse",
+"2025-08-01T00:00:00+02:00",
+119
+],
+[
+"CDAD de Vaucluse",
+"2025-09-01T00:00:00+02:00",
+281
+],
+[
+"CDAD de Vaucluse",
+"2025-10-01T00:00:00+02:00",
+212
+],
+[
+"CDAD de Vaucluse",
+"2025-11-01T00:00:00+01:00",
+223
+],
+[
+"CDAD de Vaucluse",
+"2025-12-01T00:00:00+01:00",
+146
+],
+[
+"CDAD de Vaucluse",
+"2026-01-01T00:00:00+01:00",
+320
+],
+[
+"CDAD de Vaucluse",
+"2026-02-01T00:00:00+01:00",
+229
+],
+[
+"CDAD de Vaucluse",
+"2026-03-01T00:00:00+01:00",
+231
+],
+[
+"CDAD de Vaucluse",
+"2026-04-01T00:00:00+02:00",
+237
+],
+[
+"CDAD de Vaucluse",
+"2026-05-01T00:00:00+02:00",
+196
+],
+[
+"CDAD de Vaucluse",
+"2026-06-01T00:00:00+02:00",
+155
+],
+[
+"CDAD de Vaucluse",
+"2026-07-01T00:00:00+02:00",
+108
+],
+[
+"CDAD de Vaucluse",
+"2026-08-01T00:00:00+02:00",
+78
+],
+[
+"CDAD de Vaucluse",
+"2026-09-01T00:00:00+02:00",
+327
+],
+[
+"CDAD de Vaucluse",
+"2026-10-01T00:00:00+02:00",
+276
+],
+[
+"CDAD Eure",
+"2024-06-01T00:00:00+02:00",
+1
+],
+[
+"CDAD Eure",
+"2024-08-01T00:00:00+02:00",
+3
+],
+[
+"CDAD Eure",
+"2024-09-01T00:00:00+02:00",
+35
+],
+[
+"CDAD Eure",
+"2024-10-01T00:00:00+02:00",
+615
+],
+[
+"CDAD Eure",
+"2024-11-01T00:00:00+01:00",
+947
+],
+[
+"CDAD Eure",
+"2024-12-01T00:00:00+01:00",
+685
+],
+[
+"CDAD Eure",
+"2025-01-01T00:00:00+01:00",
+1219
+],
+[
+"CDAD Eure",
+"2025-02-01T00:00:00+01:00",
+1094
+],
+[
+"CDAD Eure",
+"2025-03-01T00:00:00+01:00",
+1187
+],
+[
+"CDAD Eure",
+"2025-04-01T00:00:00+02:00",
+1051
+],
+[
+"CDAD Eure",
+"2025-05-01T00:00:00+02:00",
+982
+],
+[
+"CDAD Eure",
+"2025-06-01T00:00:00+02:00",
+1018
+],
+[
+"CDAD Eure",
+"2025-07-01T00:00:00+02:00",
+928
+],
+[
+"CDAD Eure",
+"2025-08-01T00:00:00+02:00",
+705
+],
+[
+"CDAD Eure",
+"2025-09-01T00:00:00+02:00",
+1270
+],
+[
+"CDAD Eure",
+"2025-10-01T00:00:00+02:00",
+1233
+],
+[
+"CDAD Eure",
+"2025-11-01T00:00:00+01:00",
+1111
+],
+[
+"CDAD Eure",
+"2025-12-01T00:00:00+01:00",
+910
+],
+[
+"CDAD Eure",
+"2026-01-01T00:00:00+01:00",
+1262
+],
+[
+"CDAD Eure",
+"2026-02-01T00:00:00+01:00",
+1179
+],
+[
+"CDAD Eure",
+"2026-03-01T00:00:00+01:00",
+1221
+],
+[
+"CDAD Eure",
+"2026-04-01T00:00:00+02:00",
+1143
+],
+[
+"CDAD Eure",
+"2026-05-01T00:00:00+02:00",
+1049
+],
+[
+"CDAD Eure",
+"2026-06-01T00:00:00+02:00",
+1263
+],
+[
+"CDAD Eure",
+"2026-07-01T00:00:00+02:00",
+968
+],
+[
+"CDAD Eure",
+"2026-08-01T00:00:00+02:00",
+833
+],
+[
+"CDAD Eure",
+"2026-09-01T00:00:00+02:00",
+1254
+],
+[
+"CDAD Eure",
+"2026-10-01T00:00:00+02:00",
+1226
+],
+[
+"CDAD Eure-Et-Loir",
+"2024-12-01T00:00:00+01:00",
+167
+],
+[
+"CDAD Eure-Et-Loir",
+"2025-01-01T00:00:00+01:00",
+406
+],
+[
+"CDAD Eure-Et-Loir",
+"2025-02-01T00:00:00+01:00",
+548
+],
+[
+"CDAD Eure-Et-Loir",
+"2025-03-01T00:00:00+01:00",
+603
+],
+[
+"CDAD Eure-Et-Loir",
+"2025-04-01T00:00:00+02:00",
+726
+],
+[
+"CDAD Eure-Et-Loir",
+"2025-05-01T00:00:00+02:00",
+537
+],
+[
+"CDAD Eure-Et-Loir",
+"2025-06-01T00:00:00+02:00",
+526
+],
+[
+"CDAD Eure-Et-Loir",
+"2025-07-01T00:00:00+02:00",
+388
+],
+[
+"CDAD Eure-Et-Loir",
+"2025-08-01T00:00:00+02:00",
+374
+],
+[
+"CDAD Eure-Et-Loir",
+"2025-09-01T00:00:00+02:00",
+581
+],
+[
+"CDAD Eure-Et-Loir",
+"2025-10-01T00:00:00+02:00",
+609
+],
+[
+"CDAD Eure-Et-Loir",
+"2025-11-01T00:00:00+01:00",
+512
+],
+[
+"CDAD Eure-Et-Loir",
+"2025-12-01T00:00:00+01:00",
+433
+],
+[
+"CDAD Eure-Et-Loir",
+"2026-01-01T00:00:00+01:00",
+683
+],
+[
+"CDAD Eure-Et-Loir",
+"2026-02-01T00:00:00+01:00",
+535
+],
+[
+"CDAD Eure-Et-Loir",
+"2026-03-01T00:00:00+01:00",
+609
+],
+[
+"CDAD Eure-Et-Loir",
+"2026-04-01T00:00:00+02:00",
+566
+],
+[
+"CDAD Eure-Et-Loir",
+"2026-05-01T00:00:00+02:00",
+535
+],
+[
+"CDAD Eure-Et-Loir",
+"2026-06-01T00:00:00+02:00",
+660
+],
+[
+"CDAD Eure-Et-Loir",
+"2026-07-01T00:00:00+02:00",
+432
+],
+[
+"CDAD Eure-Et-Loir",
+"2026-08-01T00:00:00+02:00",
+469
+],
+[
+"CDAD Eure-Et-Loir",
+"2026-09-01T00:00:00+02:00",
+623
+],
+[
+"CDAD Eure-Et-Loir",
+"2026-10-01T00:00:00+02:00",
+679
+],
+[
+"CDAD Gard",
+"2024-08-01T00:00:00+02:00",
+1
+],
+[
+"CDAD Gard",
+"2024-09-01T00:00:00+02:00",
+61
+],
+[
+"CDAD Gard",
+"2024-10-01T00:00:00+02:00",
+484
+],
+[
+"CDAD Gard",
+"2024-11-01T00:00:00+01:00",
+792
+],
+[
+"CDAD Gard",
+"2024-12-01T00:00:00+01:00",
+720
+],
+[
+"CDAD Gard",
+"2025-01-01T00:00:00+01:00",
+1182
+],
+[
+"CDAD Gard",
+"2025-02-01T00:00:00+01:00",
+1000
+],
+[
+"CDAD Gard",
+"2025-03-01T00:00:00+01:00",
+1097
+],
+[
+"CDAD Gard",
+"2025-04-01T00:00:00+02:00",
+1056
+],
+[
+"CDAD Gard",
+"2025-05-01T00:00:00+02:00",
+973
+],
+[
+"CDAD Gard",
+"2025-06-01T00:00:00+02:00",
+921
+],
+[
+"CDAD Gard",
+"2025-07-01T00:00:00+02:00",
+817
+],
+[
+"CDAD Gard",
+"2025-08-01T00:00:00+02:00",
+620
+],
+[
+"CDAD Gard",
+"2025-09-01T00:00:00+02:00",
+1160
+],
+[
+"CDAD Gard",
+"2025-10-01T00:00:00+02:00",
+1177
+],
+[
+"CDAD Gard",
+"2025-11-01T00:00:00+01:00",
+851
+],
+[
+"CDAD Gard",
+"2025-12-01T00:00:00+01:00",
+688
+],
+[
+"CDAD Gard",
+"2026-01-01T00:00:00+01:00",
+1226
+],
+[
+"CDAD Gard",
+"2026-02-01T00:00:00+01:00",
+1354
+],
+[
+"CDAD Gard",
+"2026-03-01T00:00:00+01:00",
+1289
+],
+[
+"CDAD Gard",
+"2026-04-01T00:00:00+02:00",
+1220
+],
+[
+"CDAD Gard",
+"2026-05-01T00:00:00+02:00",
+947
+],
+[
+"CDAD Gard",
+"2026-06-01T00:00:00+02:00",
+1251
+],
+[
+"CDAD Gard",
+"2026-07-01T00:00:00+02:00",
+1109
+],
+[
+"CDAD Gard",
+"2026-08-01T00:00:00+02:00",
+920
+],
+[
+"CDAD Gard",
+"2026-09-01T00:00:00+02:00",
+1396
+],
+[
+"CDAD Gard",
+"2026-10-01T00:00:00+02:00",
+1505
+],
+[
+"CDAD Loire-Atlantique",
+"2025-02-01T00:00:00+01:00",
+1
+],
+[
+"CDAD Loire-Atlantique",
+"2025-10-01T00:00:00+02:00",
+29
+],
+[
+"CDAD Loire-Atlantique",
+"2025-11-01T00:00:00+01:00",
+17
+],
+[
+"CDAD Loire-Atlantique",
+"2025-12-01T00:00:00+01:00",
+83
+],
+[
+"CDAD Loire-Atlantique",
+"2026-02-01T00:00:00+01:00",
+51
+],
+[
+"CDAD Loire-Atlantique",
+"2026-03-01T00:00:00+01:00",
+17
+],
+[
+"CDAD Loire-Atlantique",
+"2026-07-01T00:00:00+02:00",
+2
+],
+[
+"CDAD Loire-Atlantique",
+"2026-09-01T00:00:00+02:00",
+2
+],
+[
+"CDAD Loire-Atlantique",
+"2026-10-01T00:00:00+02:00",
+3
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2024-10-01T00:00:00+02:00",
+27
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2024-11-01T00:00:00+01:00",
+226
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2024-12-01T00:00:00+01:00",
+162
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2025-01-01T00:00:00+01:00",
+246
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2025-02-01T00:00:00+01:00",
+169
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2025-03-01T00:00:00+01:00",
+215
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2025-04-01T00:00:00+02:00",
+163
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2025-05-01T00:00:00+02:00",
+141
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2025-06-01T00:00:00+02:00",
+227
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2025-07-01T00:00:00+02:00",
+97
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2025-08-01T00:00:00+02:00",
+103
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2025-09-01T00:00:00+02:00",
+266
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2025-10-01T00:00:00+02:00",
+183
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2025-11-01T00:00:00+01:00",
+238
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2025-12-01T00:00:00+01:00",
+161
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2026-01-01T00:00:00+01:00",
+274
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2026-02-01T00:00:00+01:00",
+156
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2026-03-01T00:00:00+01:00",
+294
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2026-04-01T00:00:00+02:00",
+153
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2026-05-01T00:00:00+02:00",
+179
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2026-06-01T00:00:00+02:00",
+187
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2026-07-01T00:00:00+02:00",
+77
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2026-08-01T00:00:00+02:00",
+112
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2026-09-01T00:00:00+02:00",
+483
+],
+[
+"CDAD Meurthe-et-Moselle",
+"2026-10-01T00:00:00+02:00",
+370
+],
+[
+"CDAD Moselle",
+"2024-06-01T00:00:00+02:00",
+2
+],
+[
+"CDAD Moselle",
+"2024-08-01T00:00:00+02:00",
+5
+],
+[
+"CDAD Moselle",
+"2024-09-01T00:00:00+02:00",
+60
+],
+[
+"CDAD Moselle",
+"2024-10-01T00:00:00+02:00",
+598
+],
+[
+"CDAD Moselle",
+"2024-11-01T00:00:00+01:00",
+932
+],
+[
+"CDAD Moselle",
+"2024-12-01T00:00:00+01:00",
+720
+],
+[
+"CDAD Moselle",
+"2025-01-01T00:00:00+01:00",
+1206
+],
+[
+"CDAD Moselle",
+"2025-02-01T00:00:00+01:00",
+1093
+],
+[
+"CDAD Moselle",
+"2025-03-01T00:00:00+01:00",
+1146
+],
+[
+"CDAD Moselle",
+"2025-04-01T00:00:00+02:00",
+1009
+],
+[
+"CDAD Moselle",
+"2025-05-01T00:00:00+02:00",
+889
+],
+[
+"CDAD Moselle",
+"2025-06-01T00:00:00+02:00",
+1021
+],
+[
+"CDAD Moselle",
+"2025-07-01T00:00:00+02:00",
+853
+],
+[
+"CDAD Moselle",
+"2025-08-01T00:00:00+02:00",
+601
+],
+[
+"CDAD Moselle",
+"2025-09-01T00:00:00+02:00",
+1222
+],
+[
+"CDAD Moselle",
+"2025-10-01T00:00:00+02:00",
+1130
+],
+[
+"CDAD Moselle",
+"2025-11-01T00:00:00+01:00",
+1008
+],
+[
+"CDAD Moselle",
+"2025-12-01T00:00:00+01:00",
+767
+],
+[
+"CDAD Moselle",
+"2026-01-01T00:00:00+01:00",
+1230
+],
+[
+"CDAD Moselle",
+"2026-02-01T00:00:00+01:00",
+1102
+],
+[
+"CDAD Moselle",
+"2026-03-01T00:00:00+01:00",
+1157
+],
+[
+"CDAD Moselle",
+"2026-04-01T00:00:00+02:00",
+1062
+],
+[
+"CDAD Moselle",
+"2026-05-01T00:00:00+02:00",
+855
+],
+[
+"CDAD Moselle",
+"2026-06-01T00:00:00+02:00",
+1054
+],
+[
+"CDAD Moselle",
+"2026-07-01T00:00:00+02:00",
+904
+],
+[
+"CDAD Moselle",
+"2026-08-01T00:00:00+02:00",
+626
+],
+[
+"CDAD Moselle",
+"2026-09-01T00:00:00+02:00",
+1175
+],
+[
+"CDAD Moselle",
+"2026-10-01T00:00:00+02:00",
+1117
+],
+[
+"CDAD Seine-Maritime",
+"2024-07-01T00:00:00+02:00",
+1
+],
+[
+"CDAD Seine-Maritime",
+"2024-08-01T00:00:00+02:00",
+2
+],
+[
+"CDAD Seine-Maritime",
+"2024-09-01T00:00:00+02:00",
+148
+],
+[
+"CDAD Seine-Maritime",
+"2024-10-01T00:00:00+02:00",
+1107
+],
+[
+"CDAD Seine-Maritime",
+"2024-11-01T00:00:00+01:00",
+1865
+],
+[
+"CDAD Seine-Maritime",
+"2024-12-01T00:00:00+01:00",
+1427
+],
+[
+"CDAD Seine-Maritime",
+"2025-01-01T00:00:00+01:00",
+2286
+],
+[
+"CDAD Seine-Maritime",
+"2025-02-01T00:00:00+01:00",
+1903
+],
+[
+"CDAD Seine-Maritime",
+"2025-03-01T00:00:00+01:00",
+1915
+],
+[
+"CDAD Seine-Maritime",
+"2025-04-01T00:00:00+02:00",
+1892
+],
+[
+"CDAD Seine-Maritime",
+"2025-05-01T00:00:00+02:00",
+1744
+],
+[
+"CDAD Seine-Maritime",
+"2025-06-01T00:00:00+02:00",
+1642
+],
+[
+"CDAD Seine-Maritime",
+"2025-07-01T00:00:00+02:00",
+1700
+],
+[
+"CDAD Seine-Maritime",
+"2025-08-01T00:00:00+02:00",
+1208
+],
+[
+"CDAD Seine-Maritime",
+"2025-09-01T00:00:00+02:00",
+2148
+],
+[
+"CDAD Seine-Maritime",
+"2025-10-01T00:00:00+02:00",
+1997
+],
+[
+"CDAD Seine-Maritime",
+"2025-11-01T00:00:00+01:00",
+1675
+],
+[
+"CDAD Seine-Maritime",
+"2025-12-01T00:00:00+01:00",
+1666
+],
+[
+"CDAD Seine-Maritime",
+"2026-01-01T00:00:00+01:00",
+2073
+],
+[
+"CDAD Seine-Maritime",
+"2026-02-01T00:00:00+01:00",
+1890
+],
+[
+"CDAD Seine-Maritime",
+"2026-03-01T00:00:00+01:00",
+2191
+],
+[
+"CDAD Seine-Maritime",
+"2026-04-01T00:00:00+02:00",
+2067
+],
+[
+"CDAD Seine-Maritime",
+"2026-05-01T00:00:00+02:00",
+1515
+],
+[
+"CDAD Seine-Maritime",
+"2026-06-01T00:00:00+02:00",
+1922
+],
+[
+"CDAD Seine-Maritime",
+"2026-07-01T00:00:00+02:00",
+1740
+],
+[
+"CDAD Seine-Maritime",
+"2026-08-01T00:00:00+02:00",
+1324
+],
+[
+"CDAD Seine-Maritime",
+"2026-09-01T00:00:00+02:00",
+2181
+],
+[
+"CDAD Seine-Maritime",
+"2026-10-01T00:00:00+02:00",
+2366
+],
+[
+"CDAD Val-de-Marne",
+"2024-11-01T00:00:00+01:00",
+97
+],
+[
+"CDAD Val-de-Marne",
+"2024-12-01T00:00:00+01:00",
+214
+],
+[
+"CDAD Val-de-Marne",
+"2025-01-01T00:00:00+01:00",
+371
+],
+[
+"CDAD Val-de-Marne",
+"2025-02-01T00:00:00+01:00",
+309
+],
+[
+"CDAD Val-de-Marne",
+"2025-03-01T00:00:00+01:00",
+353
+],
+[
+"CDAD Val-de-Marne",
+"2025-04-01T00:00:00+02:00",
+305
+],
+[
+"CDAD Val-de-Marne",
+"2025-05-01T00:00:00+02:00",
+279
+],
+[
+"CDAD Val-de-Marne",
+"2025-06-01T00:00:00+02:00",
+358
+],
+[
+"CDAD Val-de-Marne",
+"2025-07-01T00:00:00+02:00",
+335
+],
+[
+"CDAD Val-de-Marne",
+"2025-08-01T00:00:00+02:00",
+164
+],
+[
+"CDAD Val-de-Marne",
+"2025-09-01T00:00:00+02:00",
+535
+],
+[
+"CDAD Val-de-Marne",
+"2025-10-01T00:00:00+02:00",
+548
+],
+[
+"CDAD Val-de-Marne",
+"2025-11-01T00:00:00+01:00",
+1090
+],
+[
+"CDAD Val-de-Marne",
+"2025-12-01T00:00:00+01:00",
+718
+],
+[
+"CDAD Val-de-Marne",
+"2026-01-01T00:00:00+01:00",
+1356
+],
+[
+"CDAD Val-de-Marne",
+"2026-02-01T00:00:00+01:00",
+1260
+],
+[
+"CDAD Val-de-Marne",
+"2026-03-01T00:00:00+01:00",
+1323
+],
+[
+"CDAD Val-de-Marne",
+"2026-04-01T00:00:00+02:00",
+1246
+],
+[
+"CDAD Val-de-Marne",
+"2026-05-01T00:00:00+02:00",
+1038
+],
+[
+"CDAD Val-de-Marne",
+"2026-06-01T00:00:00+02:00",
+1327
+],
+[
+"CDAD Val-de-Marne",
+"2026-07-01T00:00:00+02:00",
+896
+],
+[
+"CDAD Val-de-Marne",
+"2026-08-01T00:00:00+02:00",
+966
+],
+[
+"CDAD Val-de-Marne",
+"2026-09-01T00:00:00+02:00",
+1657
+],
+[
+"CDAD Val-de-Marne",
+"2026-10-01T00:00:00+02:00",
+1600
+]
+]
+},
+{
+"onglet": "Déploiement - RDV S ",
+"carte": "Nombre RDV CDAD par services",
+"colonnes": [
+"Services → Name",
+"Count"
+],
+"lignes": [
+[
+"Accès au droit",
+53214
+],
+[
+"Accompagnement administratif",
+2268
+],
+[
+"Accompagnement Aide Juridictionnelle",
+1209
+],
+[
+"ADIL",
+4931
+],
+[
+"Aide aux victimes",
+8873
+],
+[
+"Association départementale d’Education à la Sécurité Routière",
+87
+],
+[
+"Association tutélaire",
+734
+],
+[
+"ATAV",
+432
+],
+[
+"Avocat",
+32829
+],
+[
+"Avocat dommages corporels",
+120
+],
+[
+"Avocat – droit administratif",
+897
+],
+[
+"Avocat – droit des étrangers",
+179
+],
+[
+"Avocat droit des personnes et du patrimoine",
+1121
+],
+[
+"Avocat - Droit des sociétés",
+112
+],
+[
+"Avocat – droit du travail",
+5705
+],
+[
+"Avocat - droit fiscal",
+23
+],
+[
+"Avocat droit public",
+798
+],
+[
+"Avocat (droit restreint)",
+593
+],
+[
+"Avocat – droit rural",
+27
+],
+[
+"Avocat droit social",
+552
+],
+[
+"Budget",
+55
+],
+[
+"CIDFF",
+21782
+],
+[
+"CLCV",
+893
+],
+[
+"Commissaire de Justice",
+1033
+],
+[
+"Conciliateur de Justice",
+29510
+],
+[
+"Conseiller Numérique",
+673
+],
+[
+"CRESUS",
+1420
+],
+[
+"CRESUS 2",
+197
+],
+[
+"Délégué Défenseur des Droits",
+13216
+],
+[
+"Délégué du Procureur",
+4527
+],
+[
+"Démarches juridiques",
+35
+],
+[
+"Droit de la consommation",
+911
+],
+[
+"Droit des étrangers",
+2814
+],
+[
+"DUOVIRI",
+1521
+],
+[
+"Écrivain public",
+3408
+],
+[
+"Emploi formation",
+683
+],
+[
+"Famille de France",
+165
+],
+[
+"Français Langue Étrangère",
+98
+],
+[
+"France Services",
+1440
+],
+[
+"France Victimes",
+2418
+],
+[
+"Frontaliers du Grand Est",
+7
+],
+[
+"Greffe",
+1904
+],
+[
+"Hôtel de Ville",
+402
+],
+[
+"Information et soutien aux tuteurs familiaux",
+800
+],
+[
+"Juriste",
+337
+],
+[
+"Médiation",
+279
+],
+[
+"Médiation familiale",
+1362
+],
+[
+"Notaire",
+3906
+],
+[
+"Point Conseil Budget",
+822
+],
+[
+"Scolaires",
+148
+],
+[
+"Service Enfance Famille",
+34
+],
+[
+"Service psychologie",
+1453
+],
+[
+"Service Psychologie CIDFF",
+1528
+],
+[
+"Service psychologie Insertion",
+618
+],
+[
+"UFC QUE CHOISIR",
+66
+],
+[
+null,
+1795
+]
+]
+},
+{
+"onglet": "Utilisation",
+"carte": "Canaux de prise de rendez-vous - CDAD",
+"colonnes": [
+"Bookable By",
+"Count"
+],
+"lignes": [
+[
+"agents",
+245
+],
+[
+"agents_and_prescripteurs_and_invited_users",
+4
+],
+[
+"everyone",
+22
+]
+]
+},
+{
+"onglet": "Utilisation",
+"carte": "Typologie de rendez-vous",
+"colonnes": [
+"Location Type",
+"Count"
+],
+"lignes": [
+[
+"home",
+12
+],
+[
+"phone",
+1587
+],
+[
+"public_office",
+3830
+],
+[
+"visio",
+134
+]
+]
+},
+{
+"onglet": "Déploiement - RDV S ",
+"carte": "Nombre RDV CDAD - par service",
+"colonnes": [
+"Status",
+"Count"
+],
+"lignes": [
+[
+"excused",
+28374
+],
+[
+"noshow",
+17453
+],
+[
+"revoked",
+9627
+],
+[
+"seen",
+140178
+],
+[
+"unknown",
+50123
+]
+]
+},
+{
+"onglet": "Déploiement - RDV S ",
+"carte": "Nombre agent CDAD",
+"colonnes": [
+"Services → Name",
+"Count"
+],
+"lignes": [
+[
+"Accès au droit",
+468
+],
+[
+"ADIL",
+82
+],
+[
+"Aide aux victimes",
+77
+],
+[
+"Avocat",
+221
+],
+[
+"Avocat dommages corporels",
+1
+],
+[
+"Avocat – droit administratif",
+5
+],
+[
+"Avocat droit des personnes et du patrimoine",
+5
+],
+[
+"Avocat – droit du travail",
+25
+],
+[
+"Avocat droit public",
+3
+],
+[
+"Avocat (droit restreint)",
+15
+],
+[
+"Avocat – droit rural",
+1
+],
+[
+"Avocat droit social",
+3
+],
+[
+"CIDFF",
+108
+],
+[
+"CLCV",
+1
+],
+[
+"Commissaire de Justice",
+54
+],
+[
+"Conciliateur de Justice",
+206
+],
+[
+"CRESUS",
+6
+],
+[
+"CRESUS 2",
+1
+],
+[
+"Délégué Défenseur des Droits",
+165
+],
+[
+"Délégué du Procureur",
+28
+],
+[
+"Droit des étrangers",
+19
+],
+[
+"France Victimes",
+35
+],
+[
+"Notaire",
+86
+]
+]
+},
+{
+"onglet": "Déploiement - RDV SP ",
+"carte": "Nombre RDV CDAD  (RDVSP)",
+"colonnes": [
+"Count"
+],
+"lignes": [
+[
+77510
+]
+]
+},
+{
+"onglet": "Déploiement - RDV SP ",
+"carte": "Nombre RDV CDAD par territoire - RDVSP",
+"colonnes": [
+"Territories → Name",
+"Count"
+],
+"lignes": [
+[
+"CDAD Charente Maritime",
+195
+],
+[
+"CDAD Cher",
+33
+],
+[
+"CDAD Côtes-d'Armor",
+231
+],
+[
+"CDAD de Haute-Loire",
+240
+],
+[
+"CDAD de la Côte-d'Or",
+7920
+],
+[
+"CDAD de la Dordogne",
+1447
+],
+[
+"CDAD de la Haute-Savoie",
+4998
+],
+[
+"CDAD de la Savoie",
+4
+],
+[
+"CDAD de la Seine-Et-Marne",
+2945
+],
+[
+"CDAD de l'Oise",
+772
+],
+[
+"CDAD des Alpes-Maritimes",
+5898
+],
+[
+"CDAD des Bouches-du-Rhône",
+23083
+],
+[
+"CDAD de Seine et Marne",
+713
+],
+[
+"CDAD des Hautes-Alpes",
+422
+],
+[
+"CDAD des Landes",
+29
+],
+[
+"CDAD du Finistère",
+262
+],
+[
+"CDAD du Loiret",
+11865
+],
+[
+"CDAD du Loir-et-Cher",
+789
+],
+[
+"CDAD du Rhône",
+8613
+],
+[
+"CDAD Hauts-de-Seine",
+1361
+],
+[
+"CDAD Hérault",
+3436
+],
+[
+"CDAD Indre-et-Loire",
+321
+],
+[
+"CDAD Maine-et-Loire",
+1743
+],
+[
+"CDAD Pyrénées-Atlantiques",
+190
+]
+]
+},
+{
+"onglet": "Déploiement - RDV SP ",
+"carte": "Nombre RDV CDAD par territoire - RDVSP",
+"colonnes": [
+"Territories → Name",
+"Created At: Month",
+"Count"
+],
+"lignes": [
+[
+"CDAD Charente Maritime",
+"2026-09-01T00:00:00+02:00",
+33
+],
+[
+"CDAD Charente Maritime",
+"2026-10-01T00:00:00+02:00",
+162
+],
+[
+"CDAD Cher",
+"2026-10-01T00:00:00+02:00",
+33
+],
+[
+"CDAD Côtes-d'Armor",
+"2026-04-01T00:00:00+02:00",
+25
+],
+[
+"CDAD Côtes-d'Armor",
+"2026-05-01T00:00:00+02:00",
+38
+],
+[
+"CDAD Côtes-d'Armor",
+"2026-06-01T00:00:00+02:00",
+15
+],
+[
+"CDAD Côtes-d'Armor",
+"2026-07-01T00:00:00+02:00",
+11
+],
+[
+"CDAD Côtes-d'Armor",
+"2026-08-01T00:00:00+02:00",
+22
+],
+[
+"CDAD Côtes-d'Armor",
+"2026-09-01T00:00:00+02:00",
+50
+],
+[
+"CDAD Côtes-d'Armor",
+"2026-10-01T00:00:00+02:00",
+70
+],
+[
+"CDAD de Haute-Loire",
+"2026-01-01T00:00:00+01:00",
+34
+],
+[
+"CDAD de Haute-Loire",
+"2026-02-01T00:00:00+01:00",
+26
+],
+[
+"CDAD de Haute-Loire",
+"2026-03-01T00:00:00+01:00",
+29
+],
+[
+"CDAD de Haute-Loire",
+"2026-04-01T00:00:00+02:00",
+21
+],
+[
+"CDAD de Haute-Loire",
+"2026-05-01T00:00:00+02:00",
+20
+],
+[
+"CDAD de Haute-Loire",
+"2026-06-01T00:00:00+02:00",
+23
+],
+[
+"CDAD de Haute-Loire",
+"2026-07-01T00:00:00+02:00",
+17
+],
+[
+"CDAD de Haute-Loire",
+"2026-08-01T00:00:00+02:00",
+22
+],
+[
+"CDAD de Haute-Loire",
+"2026-09-01T00:00:00+02:00",
+32
+],
+[
+"CDAD de Haute-Loire",
+"2026-10-01T00:00:00+02:00",
+16
+],
+[
+"CDAD de la Côte-d'Or",
+"2025-07-01T00:00:00+02:00",
+108
+],
+[
+"CDAD de la Côte-d'Or",
+"2025-08-01T00:00:00+02:00",
+105
+],
+[
+"CDAD de la Côte-d'Or",
+"2025-09-01T00:00:00+02:00",
+633
+],
+[
+"CDAD de la Côte-d'Or",
+"2025-10-01T00:00:00+02:00",
+574
+],
+[
+"CDAD de la Côte-d'Or",
+"2025-11-01T00:00:00+01:00",
+508
+],
+[
+"CDAD de la Côte-d'Or",
+"2025-12-01T00:00:00+01:00",
+472
+],
+[
+"CDAD de la Côte-d'Or",
+"2026-01-01T00:00:00+01:00",
+643
+],
+[
+"CDAD de la Côte-d'Or",
+"2026-02-01T00:00:00+01:00",
+585
+],
+[
+"CDAD de la Côte-d'Or",
+"2026-03-01T00:00:00+01:00",
+621
+],
+[
+"CDAD de la Côte-d'Or",
+"2026-04-01T00:00:00+02:00",
+590
+],
+[
+"CDAD de la Côte-d'Or",
+"2026-05-01T00:00:00+02:00",
+491
+],
+[
+"CDAD de la Côte-d'Or",
+"2026-06-01T00:00:00+02:00",
+608
+],
+[
+"CDAD de la Côte-d'Or",
+"2026-07-01T00:00:00+02:00",
+323
+],
+[
+"CDAD de la Côte-d'Or",
+"2026-08-01T00:00:00+02:00",
+334
+],
+[
+"CDAD de la Côte-d'Or",
+"2026-09-01T00:00:00+02:00",
+683
+],
+[
+"CDAD de la Côte-d'Or",
+"2026-10-01T00:00:00+02:00",
+642
+],
+[
+"CDAD de la Dordogne",
+"2025-10-01T00:00:00+02:00",
+1
+],
+[
+"CDAD de la Dordogne",
+"2025-11-01T00:00:00+01:00",
+116
+],
+[
+"CDAD de la Dordogne",
+"2025-12-01T00:00:00+01:00",
+93
+],
+[
+"CDAD de la Dordogne",
+"2026-01-01T00:00:00+01:00",
+155
+],
+[
+"CDAD de la Dordogne",
+"2026-02-01T00:00:00+01:00",
+90
+],
+[
+"CDAD de la Dordogne",
+"2026-03-01T00:00:00+01:00",
+156
+],
+[
+"CDAD de la Dordogne",
+"2026-04-01T00:00:00+02:00",
+90
+],
+[
+"CDAD de la Dordogne",
+"2026-05-01T00:00:00+02:00",
+30
+],
+[
+"CDAD de la Dordogne",
+"2026-06-01T00:00:00+02:00",
+154
+],
+[
+"CDAD de la Dordogne",
+"2026-07-01T00:00:00+02:00",
+55
+],
+[
+"CDAD de la Dordogne",
+"2026-08-01T00:00:00+02:00",
+73
+],
+[
+"CDAD de la Dordogne",
+"2026-09-01T00:00:00+02:00",
+209
+],
+[
+"CDAD de la Dordogne",
+"2026-10-01T00:00:00+02:00",
+225
+],
+[
+"CDAD de la Haute-Savoie",
+"2025-06-01T00:00:00+02:00",
+6
+],
+[
+"CDAD de la Haute-Savoie",
+"2025-07-01T00:00:00+02:00",
+8
+],
+[
+"CDAD de la Haute-Savoie",
+"2025-08-01T00:00:00+02:00",
+21
+],
+[
+"CDAD de la Haute-Savoie",
+"2025-09-01T00:00:00+02:00",
+40
+],
+[
+"CDAD de la Haute-Savoie",
+"2025-10-01T00:00:00+02:00",
+26
+],
+[
+"CDAD de la Haute-Savoie",
+"2025-11-01T00:00:00+01:00",
+43
+],
+[
+"CDAD de la Haute-Savoie",
+"2025-12-01T00:00:00+01:00",
+98
+],
+[
+"CDAD de la Haute-Savoie",
+"2026-01-01T00:00:00+01:00",
+189
+],
+[
+"CDAD de la Haute-Savoie",
+"2026-02-01T00:00:00+01:00",
+181
+],
+[
+"CDAD de la Haute-Savoie",
+"2026-03-01T00:00:00+01:00",
+208
+],
+[
+"CDAD de la Haute-Savoie",
+"2026-04-01T00:00:00+02:00",
+226
+],
+[
+"CDAD de la Haute-Savoie",
+"2026-05-01T00:00:00+02:00",
+169
+],
+[
+"CDAD de la Haute-Savoie",
+"2026-06-01T00:00:00+02:00",
+430
+],
+[
+"CDAD de la Haute-Savoie",
+"2026-07-01T00:00:00+02:00",
+560
+],
+[
+"CDAD de la Haute-Savoie",
+"2026-08-01T00:00:00+02:00",
+340
+],
+[
+"CDAD de la Haute-Savoie",
+"2026-09-01T00:00:00+02:00",
+1188
+],
+[
+"CDAD de la Haute-Savoie",
+"2026-10-01T00:00:00+02:00",
+1265
+],
+[
+"CDAD de la Savoie",
+"2025-12-01T00:00:00+01:00",
+3
+],
+[
+"CDAD de la Savoie",
+"2026-01-01T00:00:00+01:00",
+1
+],
+[
+"CDAD de la Seine-Et-Marne",
+"2026-01-01T00:00:00+01:00",
+169
+],
+[
+"CDAD de la Seine-Et-Marne",
+"2026-02-01T00:00:00+01:00",
+356
+],
+[
+"CDAD de la Seine-Et-Marne",
+"2026-03-01T00:00:00+01:00",
+244
+],
+[
+"CDAD de la Seine-Et-Marne",
+"2026-04-01T00:00:00+02:00",
+324
+],
+[
+"CDAD de la Seine-Et-Marne",
+"2026-05-01T00:00:00+02:00",
+308
+],
+[
+"CDAD de la Seine-Et-Marne",
+"2026-06-01T00:00:00+02:00",
+331
+],
+[
+"CDAD de la Seine-Et-Marne",
+"2026-07-01T00:00:00+02:00",
+217
+],
+[
+"CDAD de la Seine-Et-Marne",
+"2026-08-01T00:00:00+02:00",
+233
+],
+[
+"CDAD de la Seine-Et-Marne",
+"2026-09-01T00:00:00+02:00",
+419
+],
+[
+"CDAD de la Seine-Et-Marne",
+"2026-10-01T00:00:00+02:00",
+344
+],
+[
+"CDAD de l'Oise",
+"2026-06-01T00:00:00+02:00",
+63
+],
+[
+"CDAD de l'Oise",
+"2026-07-01T00:00:00+02:00",
+87
+],
+[
+"CDAD de l'Oise",
+"2026-08-01T00:00:00+02:00",
+52
+],
+[
+"CDAD de l'Oise",
+"2026-09-01T00:00:00+02:00",
+274
+],
+[
+"CDAD de l'Oise",
+"2026-10-01T00:00:00+02:00",
+296
+],
+[
+"CDAD des Alpes-Maritimes",
+"2025-04-01T00:00:00+02:00",
+42
+],
+[
+"CDAD des Alpes-Maritimes",
+"2025-05-01T00:00:00+02:00",
+135
+],
+[
+"CDAD des Alpes-Maritimes",
+"2025-06-01T00:00:00+02:00",
+236
+],
+[
+"CDAD des Alpes-Maritimes",
+"2025-07-01T00:00:00+02:00",
+91
+],
+[
+"CDAD des Alpes-Maritimes",
+"2025-08-01T00:00:00+02:00",
+117
+],
+[
+"CDAD des Alpes-Maritimes",
+"2025-09-01T00:00:00+02:00",
+535
+],
+[
+"CDAD des Alpes-Maritimes",
+"2025-10-01T00:00:00+02:00",
+443
+],
+[
+"CDAD des Alpes-Maritimes",
+"2025-11-01T00:00:00+01:00",
+438
+],
+[
+"CDAD des Alpes-Maritimes",
+"2025-12-01T00:00:00+01:00",
+250
+],
+[
+"CDAD des Alpes-Maritimes",
+"2026-01-01T00:00:00+01:00",
+519
+],
+[
+"CDAD des Alpes-Maritimes",
+"2026-02-01T00:00:00+01:00",
+290
+],
+[
+"CDAD des Alpes-Maritimes",
+"2026-03-01T00:00:00+01:00",
+521
+],
+[
+"CDAD des Alpes-Maritimes",
+"2026-04-01T00:00:00+02:00",
+387
+],
+[
+"CDAD des Alpes-Maritimes",
+"2026-05-01T00:00:00+02:00",
+287
+],
+[
+"CDAD des Alpes-Maritimes",
+"2026-06-01T00:00:00+02:00",
+456
+],
+[
+"CDAD des Alpes-Maritimes",
+"2026-07-01T00:00:00+02:00",
+109
+],
+[
+"CDAD des Alpes-Maritimes",
+"2026-08-01T00:00:00+02:00",
+128
+],
+[
+"CDAD des Alpes-Maritimes",
+"2026-09-01T00:00:00+02:00",
+516
+],
+[
+"CDAD des Alpes-Maritimes",
+"2026-10-01T00:00:00+02:00",
+398
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2025-06-01T00:00:00+02:00",
+856
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2025-07-01T00:00:00+02:00",
+448
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2025-08-01T00:00:00+02:00",
+278
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2025-09-01T00:00:00+02:00",
+756
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2025-10-01T00:00:00+02:00",
+867
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2025-11-01T00:00:00+01:00",
+695
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2025-12-01T00:00:00+01:00",
+1348
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2026-01-01T00:00:00+01:00",
+2105
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2026-02-01T00:00:00+01:00",
+1881
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2026-03-01T00:00:00+01:00",
+1939
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2026-04-01T00:00:00+02:00",
+1832
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2026-05-01T00:00:00+02:00",
+1518
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2026-06-01T00:00:00+02:00",
+1749
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2026-07-01T00:00:00+02:00",
+1566
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2026-08-01T00:00:00+02:00",
+1124
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2026-09-01T00:00:00+02:00",
+2150
+],
+[
+"CDAD des Bouches-du-Rhône",
+"2026-10-01T00:00:00+02:00",
+1971
+],
+[
+"CDAD de Seine et Marne",
+"2026-07-01T00:00:00+02:00",
+2
+],
+[
+"CDAD de Seine et Marne",
+"2026-08-01T00:00:00+02:00",
+102
+],
+[
+"CDAD de Seine et Marne",
+"2026-09-01T00:00:00+02:00",
+254
+],
+[
+"CDAD de Seine et Marne",
+"2026-10-01T00:00:00+02:00",
+355
+],
+[
+"CDAD des Hautes-Alpes",
+"2025-06-01T00:00:00+02:00",
+1
+],
+[
+"CDAD des Hautes-Alpes",
+"2025-08-01T00:00:00+02:00",
+12
+],
+[
+"CDAD des Hautes-Alpes",
+"2025-09-01T00:00:00+02:00",
+29
+],
+[
+"CDAD des Hautes-Alpes",
+"2025-10-01T00:00:00+02:00",
+37
+],
+[
+"CDAD des Hautes-Alpes",
+"2025-11-01T00:00:00+01:00",
+22
+],
+[
+"CDAD des Hautes-Alpes",
+"2025-12-01T00:00:00+01:00",
+21
+],
+[
+"CDAD des Hautes-Alpes",
+"2026-01-01T00:00:00+01:00",
+33
+],
+[
+"CDAD des Hautes-Alpes",
+"2026-02-01T00:00:00+01:00",
+28
+],
+[
+"CDAD des Hautes-Alpes",
+"2026-03-01T00:00:00+01:00",
+46
+],
+[
+"CDAD des Hautes-Alpes",
+"2026-04-01T00:00:00+02:00",
+28
+],
+[
+"CDAD des Hautes-Alpes",
+"2026-05-01T00:00:00+02:00",
+31
+],
+[
+"CDAD des Hautes-Alpes",
+"2026-06-01T00:00:00+02:00",
+24
+],
+[
+"CDAD des Hautes-Alpes",
+"2026-07-01T00:00:00+02:00",
+15
+],
+[
+"CDAD des Hautes-Alpes",
+"2026-08-01T00:00:00+02:00",
+21
+],
+[
+"CDAD des Hautes-Alpes",
+"2026-09-01T00:00:00+02:00",
+18
+],
+[
+"CDAD des Hautes-Alpes",
+"2026-10-01T00:00:00+02:00",
+56
+],
+[
+"CDAD des Landes",
+"2026-01-01T00:00:00+01:00",
+2
+],
+[
+"CDAD des Landes",
+"2026-02-01T00:00:00+01:00",
+1
+],
+[
+"CDAD des Landes",
+"2026-03-01T00:00:00+01:00",
+1
+],
+[
+"CDAD des Landes",
+"2026-08-01T00:00:00+02:00",
+6
+],
+[
+"CDAD des Landes",
+"2026-09-01T00:00:00+02:00",
+14
+],
+[
+"CDAD des Landes",
+"2026-10-01T00:00:00+02:00",
+5
+],
+[
+"CDAD du Finistère",
+"2025-12-01T00:00:00+01:00",
+6
+],
+[
+"CDAD du Finistère",
+"2026-01-01T00:00:00+01:00",
+28
+],
+[
+"CDAD du Finistère",
+"2026-02-01T00:00:00+01:00",
+34
+],
+[
+"CDAD du Finistère",
+"2026-03-01T00:00:00+01:00",
+32
+],
+[
+"CDAD du Finistère",
+"2026-04-01T00:00:00+02:00",
+25
+],
+[
+"CDAD du Finistère",
+"2026-05-01T00:00:00+02:00",
+22
+],
+[
+"CDAD du Finistère",
+"2026-06-01T00:00:00+02:00",
+21
+],
+[
+"CDAD du Finistère",
+"2026-07-01T00:00:00+02:00",
+25
+],
+[
+"CDAD du Finistère",
+"2026-08-01T00:00:00+02:00",
+15
+],
+[
+"CDAD du Finistère",
+"2026-09-01T00:00:00+02:00",
+23
+],
+[
+"CDAD du Finistère",
+"2026-10-01T00:00:00+02:00",
+31
+],
+[
+"CDAD du Loiret",
+"2025-01-01T00:00:00+01:00",
+8
+],
+[
+"CDAD du Loiret",
+"2025-02-01T00:00:00+01:00",
+276
+],
+[
+"CDAD du Loiret",
+"2025-03-01T00:00:00+01:00",
+823
+],
+[
+"CDAD du Loiret",
+"2025-04-01T00:00:00+02:00",
+623
+],
+[
+"CDAD du Loiret",
+"2025-05-01T00:00:00+02:00",
+667
+],
+[
+"CDAD du Loiret",
+"2025-06-01T00:00:00+02:00",
+650
+],
+[
+"CDAD du Loiret",
+"2025-07-01T00:00:00+02:00",
+507
+],
+[
+"CDAD du Loiret",
+"2025-08-01T00:00:00+02:00",
+24
+],
+[
+"CDAD du Loiret",
+"2025-09-01T00:00:00+02:00",
+828
+],
+[
+"CDAD du Loiret",
+"2025-10-01T00:00:00+02:00",
+741
+],
+[
+"CDAD du Loiret",
+"2025-11-01T00:00:00+01:00",
+705
+],
+[
+"CDAD du Loiret",
+"2025-12-01T00:00:00+01:00",
+420
+],
+[
+"CDAD du Loiret",
+"2026-01-01T00:00:00+01:00",
+699
+],
+[
+"CDAD du Loiret",
+"2026-02-01T00:00:00+01:00",
+575
+],
+[
+"CDAD du Loiret",
+"2026-03-01T00:00:00+01:00",
+691
+],
+[
+"CDAD du Loiret",
+"2026-04-01T00:00:00+02:00",
+527
+],
+[
+"CDAD du Loiret",
+"2026-05-01T00:00:00+02:00",
+614
+],
+[
+"CDAD du Loiret",
+"2026-06-01T00:00:00+02:00",
+630
+],
+[
+"CDAD du Loiret",
+"2026-07-01T00:00:00+02:00",
+409
+],
+[
+"CDAD du Loiret",
+"2026-08-01T00:00:00+02:00",
+83
+],
+[
+"CDAD du Loiret",
+"2026-09-01T00:00:00+02:00",
+681
+],
+[
+"CDAD du Loiret",
+"2026-10-01T00:00:00+02:00",
+684
+],
+[
+"CDAD du Loir-et-Cher",
+"2025-08-01T00:00:00+02:00",
+1
+],
+[
+"CDAD du Loir-et-Cher",
+"2025-10-01T00:00:00+02:00",
+1
+],
+[
+"CDAD du Loir-et-Cher",
+"2025-11-01T00:00:00+01:00",
+3
+],
+[
+"CDAD du Loir-et-Cher",
+"2025-12-01T00:00:00+01:00",
+1
+],
+[
+"CDAD du Loir-et-Cher",
+"2026-01-01T00:00:00+01:00",
+23
+],
+[
+"CDAD du Loir-et-Cher",
+"2026-02-01T00:00:00+01:00",
+92
+],
+[
+"CDAD du Loir-et-Cher",
+"2026-03-01T00:00:00+01:00",
+109
+],
+[
+"CDAD du Loir-et-Cher",
+"2026-04-01T00:00:00+02:00",
+81
+],
+[
+"CDAD du Loir-et-Cher",
+"2026-05-01T00:00:00+02:00",
+58
+],
+[
+"CDAD du Loir-et-Cher",
+"2026-06-01T00:00:00+02:00",
+102
+],
+[
+"CDAD du Loir-et-Cher",
+"2026-07-01T00:00:00+02:00",
+65
+],
+[
+"CDAD du Loir-et-Cher",
+"2026-08-01T00:00:00+02:00",
+33
+],
+[
+"CDAD du Loir-et-Cher",
+"2026-09-01T00:00:00+02:00",
+108
+],
+[
+"CDAD du Loir-et-Cher",
+"2026-10-01T00:00:00+02:00",
+112
+],
+[
+"CDAD du Rhône",
+"2025-12-01T00:00:00+01:00",
+154
+],
+[
+"CDAD du Rhône",
+"2026-01-01T00:00:00+01:00",
+231
+],
+[
+"CDAD du Rhône",
+"2026-02-01T00:00:00+01:00",
+399
+],
+[
+"CDAD du Rhône",
+"2026-03-01T00:00:00+01:00",
+700
+],
+[
+"CDAD du Rhône",
+"2026-04-01T00:00:00+02:00",
+702
+],
+[
+"CDAD du Rhône",
+"2026-05-01T00:00:00+02:00",
+801
+],
+[
+"CDAD du Rhône",
+"2026-06-01T00:00:00+02:00",
+771
+],
+[
+"CDAD du Rhône",
+"2026-07-01T00:00:00+02:00",
+588
+],
+[
+"CDAD du Rhône",
+"2026-08-01T00:00:00+02:00",
+533
+],
+[
+"CDAD du Rhône",
+"2026-09-01T00:00:00+02:00",
+1706
+],
+[
+"CDAD du Rhône",
+"2026-10-01T00:00:00+02:00",
+2028
+],
+[
+"CDAD Hauts-de-Seine",
+"2026-02-01T00:00:00+01:00",
+74
+],
+[
+"CDAD Hauts-de-Seine",
+"2026-03-01T00:00:00+01:00",
+215
+],
+[
+"CDAD Hauts-de-Seine",
+"2026-04-01T00:00:00+02:00",
+127
+],
+[
+"CDAD Hauts-de-Seine",
+"2026-05-01T00:00:00+02:00",
+107
+],
+[
+"CDAD Hauts-de-Seine",
+"2026-06-01T00:00:00+02:00",
+124
+],
+[
+"CDAD Hauts-de-Seine",
+"2026-07-01T00:00:00+02:00",
+62
+],
+[
+"CDAD Hauts-de-Seine",
+"2026-08-01T00:00:00+02:00",
+83
+],
+[
+"CDAD Hauts-de-Seine",
+"2026-09-01T00:00:00+02:00",
+151
+],
+[
+"CDAD Hauts-de-Seine",
+"2026-10-01T00:00:00+02:00",
+418
+],
+[
+"CDAD Hérault",
+"2026-01-01T00:00:00+01:00",
+80
+],
+[
+"CDAD Hérault",
+"2026-02-01T00:00:00+01:00",
+96
+],
+[
+"CDAD Hérault",
+"2026-03-01T00:00:00+01:00",
+343
+],
+[
+"CDAD Hérault",
+"2026-04-01T00:00:00+02:00",
+469
+],
+[
+"CDAD Hérault",
+"2026-05-01T00:00:00+02:00",
+349
+],
+[
+"CDAD Hérault",
+"2026-06-01T00:00:00+02:00",
+510
+],
+[
+"CDAD Hérault",
+"2026-07-01T00:00:00+02:00",
+348
+],
+[
+"CDAD Hérault",
+"2026-08-01T00:00:00+02:00",
+137
+],
+[
+"CDAD Hérault",
+"2026-09-01T00:00:00+02:00",
+582
+],
+[
+"CDAD Hérault",
+"2026-10-01T00:00:00+02:00",
+522
+],
+[
+"CDAD Indre-et-Loire",
+"2026-06-01T00:00:00+02:00",
+2
+],
+[
+"CDAD Indre-et-Loire",
+"2026-07-01T00:00:00+02:00",
+2
+],
+[
+"CDAD Indre-et-Loire",
+"2026-08-01T00:00:00+02:00",
+84
+],
+[
+"CDAD Indre-et-Loire",
+"2026-09-01T00:00:00+02:00",
+122
+],
+[
+"CDAD Indre-et-Loire",
+"2026-10-01T00:00:00+02:00",
+111
+],
+[
+"CDAD Maine-et-Loire",
+"2025-11-01T00:00:00+01:00",
+4
+],
+[
+"CDAD Maine-et-Loire",
+"2025-12-01T00:00:00+01:00",
+32
+],
+[
+"CDAD Maine-et-Loire",
+"2026-01-01T00:00:00+01:00",
+196
+],
+[
+"CDAD Maine-et-Loire",
+"2026-02-01T00:00:00+01:00",
+76
+],
+[
+"CDAD Maine-et-Loire",
+"2026-03-01T00:00:00+01:00",
+162
+],
+[
+"CDAD Maine-et-Loire",
+"2026-04-01T00:00:00+02:00",
+105
+],
+[
+"CDAD Maine-et-Loire",
+"2026-05-01T00:00:00+02:00",
+157
+],
+[
+"CDAD Maine-et-Loire",
+"2026-06-01T00:00:00+02:00",
+114
+],
+[
+"CDAD Maine-et-Loire",
+"2026-07-01T00:00:00+02:00",
+239
+],
+[
+"CDAD Maine-et-Loire",
+"2026-08-01T00:00:00+02:00",
+2
+],
+[
+"CDAD Maine-et-Loire",
+"2026-09-01T00:00:00+02:00",
+348
+],
+[
+"CDAD Maine-et-Loire",
+"2026-10-01T00:00:00+02:00",
+308
+],
+[
+"CDAD Pyrénées-Atlantiques",
+"2026-07-01T00:00:00+02:00",
+2
+],
+[
+"CDAD Pyrénées-Atlantiques",
+"2026-08-01T00:00:00+02:00",
+43
+],
+[
+"CDAD Pyrénées-Atlantiques",
+"2026-09-01T00:00:00+02:00",
+69
+],
+[
+"CDAD Pyrénées-Atlantiques",
+"2026-10-01T00:00:00+02:00",
+76
+]
+]
+},
+{
+"onglet": "Déploiement - RDV SP ",
+"carte": "Organisations par CDAD RDVSP",
+"colonnes": [
+"Name",
+"Territories → Name",
+"pivot-grouping"
+],
+"lignes": [
+[
+"ADJ de Lyon 9",
+"CDAD du Rhône",
+0
+],
+[
+"ADJ de Meyzieu",
+"CDAD du Rhône",
+0
+],
+[
+"Antenne de Justice & du Droit en Chablais",
+"CDAD de la Haute-Savoie",
+0
+],
+[
+"Association Justice et Partage",
+"CDAD de Haute-Loire",
+0
+],
+[
+"Bureau central des conciliateurs et des délégués du défenseur des droits Aix",
+"CDAD des Bouches-du-Rhône",
+0
+],
+[
+"Carrefour de Femmes",
+"CDAD de l'Oise",
+0
+],
+[
+"CDAD 40",
+"CDAD des Landes",
+0
+],
+[
+"CDAD 43 - Permanences notaire",
+"CDAD de Haute-Loire",
+0
+],
+[
+"CDAD de Haute-Loire",
+"CDAD de Haute-Loire",
+0
+],
+[
+"CDAD du Pas-De-Calais",
+"CDAD du Pas-De-Calais",
+0
+],
+[
+"CDAD du Rhône",
+"CDAD du Rhône",
+0
+],
+[
+"CDAD Hautes-Pyrénées",
+"CDAD Hautes-Pyrénées",
+0
+],
+[
+"CDAD Pyrénées-Atlantiques",
+"CDAD Pyrénées-Atlantiques",
+0
+],
+[
+"Centre Administratif de PARENTIS-EN-BORN",
+"CDAD des Landes",
+0
+],
+[
+"Centre Communal d'Action Sociale de MIMIZAN",
+"CDAD des Landes",
+0
+],
+[
+"Centre Communal d'Action Sociale de MONT-DE-MARSAN",
+"CDAD des Landes",
+0
+],
+[
+"Centre Communal d'Action Sociale de SOUSTONS",
+"CDAD des Landes",
+0
+],
+[
+"Centre de Vie du Sanitas",
+"CDAD Indre-et-Loire",
+0
+],
+[
+"CIDFF 43 (Centre d'information sur le droit des femmes et des familles)",
+"CDAD de Haute-Loire",
+0
+],
+[
+"CIN",
+"CDAD Pyrénées-Atlantiques",
+0
+],
+[
+"Conciliateurs à la Maison de justice et du droit d'Orléans",
+"CDAD du Loiret",
+0
+],
+[
+"Conseil départemental d'accès au droit",
+"CDAD Maine-et-Loire",
+0
+],
+[
+"Conseil départemental de l'accès au droit de Haute-Savoie",
+"CDAD de la Haute-Savoie",
+0
+],
+[
+"Conseil Départemental de l'Accès au Droit du Cher ( CDAD 18 )",
+"CDAD Cher",
+0
+],
+[
+"Conseil des Prud'hommes - DAX",
+"CDAD des Landes",
+0
+],
+[
+"Escale Info - CAPBRETON",
+"CDAD des Landes",
+0
+],
+[
+"Espace France Services d'AIRE-SUR-L'ADOUR",
+"CDAD des Landes",
+0
+],
+[
+"Espace France Services de GABARRET",
+"CDAD des Landes",
+0
+],
+[
+"Espace France Services de MONTFORT-EN-CHALOSSE",
+"CDAD des Landes",
+0
+],
+[
+"Espace France Services de PEYREHORADE",
+"CDAD des Landes",
+0
+],
+[
+"Espace France Services de ROQUEFORT",
+"CDAD des Landes",
+0
+],
+[
+"Espace France Services d'HAGETMAU",
+"CDAD des Landes",
+0
+],
+[
+"France Services Cap Sizun",
+"CDAD du Finistère",
+0
+],
+[
+"France Services CCA KERANDON",
+"CDAD du Finistère",
+0
+],
+[
+"France Services Saint Pol de Léon",
+"CDAD du Finistère",
+0
+],
+[
+"Journées portes ouvertes",
+"CDAD du Loiret",
+0
+],
+[
+"JURISTE ASSISTANT DU CDAD HERAULT",
+"CDAD Hérault",
+0
+],
+[
+"Mairie Annexe Saint Augustin",
+"CDAD des Alpes-Maritimes",
+0
+],
+[
+"Mairie de Brioude",
+"CDAD de Haute-Loire",
+0
+],
+[
+"Mairie de Monistrol-sur-Loire",
+"CDAD de Haute-Loire",
+0
+],
+[
+"Mairie de MORCENX",
+"CDAD des Landes",
+0
+],
+[
+"Mairie de SAINT-PAUL-LES-DAX",
+"CDAD des Landes",
+0
+],
+[
+"Mairie du Chambon-sur-Lignon",
+"CDAD de Haute-Loire",
+0
+],
+[
+"Maison de Justice et du Droit d'Angers",
+"CDAD Maine-et-Loire",
+0
+],
+[
+"Maison de justice et du droit de Blois",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"Maison de justice et du droit de Gennevilliers",
+"CDAD Hauts-de-Seine",
+0
+],
+[
+"Maison de Justice et du Droit de Lannion",
+"CDAD Côtes-d'Armor",
+0
+],
+[
+"Maison de Justice et du Droit de Loudéac",
+"CDAD Côtes-d'Armor",
+0
+],
+[
+"Maison de Justice et du Droit de Noyon",
+"CDAD de l'Oise",
+0
+],
+[
+"Maison de Justice et du Droit de Rillieux-la-pape",
+"CDAD du Rhône",
+0
+],
+[
+"Maison de justice et du droit des Blagis",
+"CDAD Hauts-de-Seine",
+0
+],
+[
+"Maison de justice et du droit d'Orléans",
+"CDAD du Loiret",
+0
+],
+[
+"Maison de la justice et du droit de Châtenay-Malabry",
+"CDAD Hauts-de-Seine",
+0
+],
+[
+"Maison de la justice et du droit de Lodève",
+"CDAD Hérault",
+0
+],
+[
+"Maison de la Justice et du Droit de Lodève",
+"CDAD Hérault",
+0
+],
+[
+"Maison de la Justice et du Droit de Lunel",
+"CDAD Hérault",
+0
+],
+[
+"Maison de la Justice et du Droit de Montpellier",
+"CDAD Hérault",
+0
+],
+[
+"Maison de la Justice et du Droit de Montpellier Méditerranée Métropole à Lattes",
+"CDAD Hérault",
+0
+],
+[
+"Maison du citoyen - Centre ville - Pau",
+"CDAD Pyrénées-Atlantiques",
+0
+],
+[
+"Maison du citoyen - Ousse des Bois - Pau",
+"CDAD Pyrénées-Atlantiques",
+0
+],
+[
+"Maison Municipale de la Justice et du Droit de BISCARROSSE",
+"CDAD des Landes",
+0
+],
+[
+"MJD CHENÔVE",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"MJD CHENÔVE - Conciliateur de justice",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"MJD d’Aix",
+"CDAD des Bouches-du-Rhône",
+0
+],
+[
+"MJD d'Aix-les-Bains",
+"CDAD de la Savoie",
+0
+],
+[
+"MJD d'Annemasse",
+"CDAD de la Haute-Savoie",
+0
+],
+[
+"MJD d'Aubagne",
+"CDAD des Bouches-du-Rhône",
+0
+],
+[
+"MJD de Bron",
+"CDAD du Rhône",
+0
+],
+[
+"MJD de Chambéry",
+"CDAD de la Savoie",
+0
+],
+[
+"MJD de Creil",
+"CDAD de l'Oise",
+0
+],
+[
+"MJD de la Rochelle",
+"CDAD Charente Maritime",
+0
+],
+[
+"MJD de Lognes",
+"CDAD de la Seine-Et-Marne",
+0
+],
+[
+"MJD de Lyon 8",
+"CDAD du Rhône",
+0
+],
+[
+"MJD de Marseille",
+"CDAD des Bouches-du-Rhône",
+0
+],
+[
+"MJD de Menton",
+"CDAD des Alpes-Maritimes",
+0
+],
+[
+"MJD de Méru",
+"CDAD de l'Oise",
+0
+],
+[
+"MJD de Nice",
+"CDAD des Alpes-Maritimes",
+0
+],
+[
+"MJD de Noyon",
+"CDAD de l'Oise",
+0
+],
+[
+"MJD de Pontault-Combault",
+"CDAD de Seine et Marne",
+0
+],
+[
+"MJD de Saint-Julien-en-Genevois",
+"CDAD de la Haute-Savoie",
+0
+],
+[
+"MJD de Tours",
+"CDAD Indre-et-Loire",
+0
+],
+[
+"MJD de Venissieux",
+"CDAD du Rhône",
+0
+],
+[
+"MJD de Vierzon",
+"CDAD Cher",
+0
+],
+[
+"MJD de villeurbanne",
+"CDAD du Rhône",
+0
+],
+[
+"MJD - France Victimes 21",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"MJD GIVORS",
+"CDAD du Rhône",
+0
+],
+[
+"MJD Martigues",
+"CDAD des Bouches-du-Rhône",
+0
+],
+[
+"MJD Salon de Provence",
+"CDAD des Bouches-du-Rhône",
+0
+],
+[
+"MJD Sénart",
+"CDAD de Seine et Marne",
+0
+],
+[
+"MJD VAULX-EN-VELIN",
+"CDAD du Rhône",
+0
+],
+[
+"Nationalité",
+"CDAD Maine-et-Loire",
+0
+],
+[
+"notaire",
+"CDAD Maine-et-Loire",
+0
+],
+[
+"Permanence avocat - Arnay le Duc",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Auxonne",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Châtillon sur Seine",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Clénay",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence Avocat - Dijon (personnes en grande précarité)",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Fontaine d'Ouche",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Genlis",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Longvic",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Maison d'Arrêt",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Maison des adolescents",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Maison des avocats",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Maison des Seniors",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Mirebeau sur Bèze",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Norges et Tille",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Nuits St Georges",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Pouilly en Auxois",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Quetigny",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat (réservée aux étudiants et personnel de l'UBE) - Université",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Saulieu",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Saulon la Chapelle",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Semur en Auxois",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Seurre",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Sombernon",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - St Apollinaire",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Talant",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Tribunal administratif",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Tribunal de proximité de Beaune",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence avocat - Tribunal de proximité de Montbard",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence CIDFF - Episourire",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence CIDFF - Genlis",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence CIDFF - Is sur Tille",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence CIDFF - Mirebeau sur Bèze",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence CIDFF - Semur en Auxois",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence CIDFF - Seurre",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence CIDFF - St Jean de Losne",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence Infodroits - Restos du Coeur",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence juriste - Restos du Coeur Beaune",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence juriste - Restos du Coeur Venarey-les-Laumes",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanence notaire - Chambre des notaires",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanences CIDFF",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Permanences téléphoniques juriste CDAD 41",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"Permanence téléphonique - CDAD 21",
+"CDAD de la Côte-d'Or",
+0
+],
+[
+"Point Justice",
+"CDAD de la Dordogne",
+0
+],
+[
+"point-justice Breteuil",
+"CDAD de l'Oise",
+0
+],
+[
+"Point-Justice CCAS Villers Saint Paul",
+"CDAD de l'Oise",
+0
+],
+[
+"Point-Justice CDAD",
+"CDAD du Finistère",
+0
+],
+[
+"point-justice Chaumont en Vexin",
+"CDAD de l'Oise",
+0
+],
+[
+"Point Justice de Gap",
+"CDAD des Hautes-Alpes",
+0
+],
+[
+"Point-justice de Laragne",
+"CDAD des Hautes-Alpes",
+0
+],
+[
+"Point-justice d'Embrun",
+"CDAD des Hautes-Alpes",
+0
+],
+[
+"point-justice de Romorantin-Lanthenay",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"POINT JUSTICE DROIT DES ETRANGERS QUIMPER",
+"CDAD du Finistère",
+0
+],
+[
+"Point-justice du PIMM's de Blois",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"Point-Justice ebus CCA",
+"CDAD du Finistère",
+0
+],
+[
+"point-justice en France services de Bracieux",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Chailles",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Cour-Cheverny",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de La Chapelle-Vendômoise",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Lamotte-Beuvron",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Le Controis-en-Sologne",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Mer",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Mondoubleau",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Montoire-sur-Le-Loir",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Montrichard Val de Cher",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Neung-sur-Beuvron",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Saint-Aignan",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Salbris",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Selles-sur-Cher",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Veuzain-sur-Loire",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services de Vineuil",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services La Poste de Mennetou-sur-Cher",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services La Poste de Morée",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services La Poste de Saint-Laurent-Nouan",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services La Poste d'Herbault",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services La Poste d'Ouzouer-le-Marché",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice en France services La Poste Droué",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"Point-Justice ERGUE GABERIC",
+"CDAD du Finistère",
+0
+],
+[
+"Point-Justice France Services Châteaulin",
+"CDAD du Finistère",
+0
+],
+[
+"Point-Justice France Services CROZON",
+"CDAD du Finistère",
+0
+],
+[
+"Point-Justice France Services Lesneven",
+"CDAD du Finistère",
+0
+],
+[
+"Point-Justice France Services Pays des Abers",
+"CDAD du Finistère",
+0
+],
+[
+"Point-Justice France Services PLOUARZEL",
+"CDAD du Finistère",
+0
+],
+[
+"Point-Justice France Services Quimperlé",
+"CDAD du Finistère",
+0
+],
+[
+"point-justice généraliste Vendôme",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"point-justice Grandvilliers",
+"CDAD de l'Oise",
+0
+],
+[
+"Point Justice Kermoysan",
+"CDAD du Finistère",
+0
+],
+[
+"Point-justice Maison de ressources - Crépy-en-Valois",
+"CDAD de l'Oise",
+0
+],
+[
+"POINT JUSTICE POHER COMMUNAUTE",
+"CDAD du Finistère",
+0
+],
+[
+"point-justice Ressons-sur-Matz",
+"CDAD de l'Oise",
+0
+],
+[
+"point-justice TJ Beauvais",
+"CDAD de l'Oise",
+0
+],
+[
+"point-justice TJ Compiègne",
+"CDAD de l'Oise",
+0
+],
+[
+"point-justice TJ Senlis",
+"CDAD de l'Oise",
+0
+],
+[
+"POINT-JUSTICE TRIBUNAL JUDICAIRE DE MONTPELLIER",
+"CDAD Hérault",
+0
+],
+[
+"point-justice & tribunal judiciaire de Blois",
+"CDAD du Loir-et-Cher",
+0
+],
+[
+"Point Justice - Tribunal Judiciaire de Nanterre",
+"CDAD Hauts-de-Seine",
+0
+],
+[
+"point-justice UTC",
+"CDAD de l'Oise",
+0
+],
+[
+"Projets jeunes",
+"CDAD du Loiret",
+0
+],
+[
+"SAMU SOCIAL",
+"CDAD de l'Oise",
+0
+],
+[
+"TJ NICE",
+"CDAD des Alpes-Maritimes",
+0
+],
+[
+"Tribunal de proximité de Guingamp",
+"CDAD Côtes-d'Armor",
+0
+],
+[
+"Tribunal Judiciaire - DAX",
+"CDAD des Landes",
+0
+],
+[
+"Tribunal judiciaire de Montargis",
+"CDAD du Loiret",
+0
+],
+[
+"Tribunal Judiciaire de Saint-Brieuc",
+"CDAD Côtes-d'Armor",
+0
+],
+[
+"Tribunal judiciaire d'Orléans",
+"CDAD du Loiret",
+0
+],
+[
+"Tribunal judiciaire du Puy en Velay",
+"CDAD de Haute-Loire",
+0
+],
+[
+"Tribunal judiciaire du Puy-en-Velay",
+"CDAD de Haute-Loire",
+0
+],
+[
+"Tribunal Judiciaire - MONT-DE-MARSAN",
+"CDAD des Landes",
+0
+],
+[
+"UPJV Beauvais",
+"CDAD de l'Oise",
+0
+],
+[
+null,
+"CDAD Charente Maritime",
+1
+],
+[
+null,
+"CDAD Cher",
+1
+],
+[
+null,
+"CDAD Côtes-d'Armor",
+1
+],
+[
+null,
+"CDAD de Haute-Loire",
+1
+],
+[
+null,
+"CDAD de la Côte-d'Or",
+1
+],
+[
+null,
+"CDAD de la Dordogne",
+1
+],
+[
+null,
+"CDAD de la Haute-Savoie",
+1
+],
+[
+null,
+"CDAD de la Savoie",
+1
+],
+[
+null,
+"CDAD de la Seine-Et-Marne",
+1
+],
+[
+null,
+"CDAD de l'Oise",
+1
+],
+[
+null,
+"CDAD des Alpes-Maritimes",
+1
+],
+[
+null,
+"CDAD des Bouches-du-Rhône",
+1
+],
+[
+null,
+"CDAD de Seine et Marne",
+1
+],
+[
+null,
+"CDAD des Hautes-Alpes",
+1
+],
+[
+null,
+"CDAD des Landes",
+1
+],
+[
+null,
+"CDAD du Finistère",
+1
+],
+[
+null,
+"CDAD du Loiret",
+1
+],
+[
+null,
+"CDAD du Loir-et-Cher",
+1
+],
+[
+null,
+"CDAD du Pas-De-Calais",
+1
+],
+[
+null,
+"CDAD du Rhône",
+1
+],
+[
+null,
+"CDAD Hautes-Pyrénées",
+1
+],
+[
+null,
+"CDAD Hauts-de-Seine",
+1
+],
+[
+null,
+"CDAD Hérault",
+1
+],
+[
+null,
+"CDAD Indre-et-Loire",
+1
+],
+[
+null,
+"CDAD Maine-et-Loire",
+1
+],
+[
+null,
+"CDAD Pyrénées-Atlantiques",
+1
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+]
+]
+},
+{
+"onglet": "Déploiement - RDV SP ",
+"carte": "Création des organisations par CDAD RDVSP - Modified",
+"colonnes": [
+"Created At: Month",
+"Territories → Name",
+"Count"
+],
+"lignes": [
+[
+"2024-12-01T00:00:00+01:00",
+"CDAD du Loiret",
+1
+],
+[
+"2025-01-01T00:00:00+01:00",
+"CDAD du Loiret",
+3
+],
+[
+"2025-02-01T00:00:00+01:00",
+"CDAD des Alpes-Maritimes",
+2
+],
+[
+"2025-02-01T00:00:00+01:00",
+"CDAD du Loiret",
+2
+],
+[
+"2025-03-01T00:00:00+01:00",
+"CDAD des Hautes-Alpes",
+1
+],
+[
+"2025-04-01T00:00:00+02:00",
+"CDAD de la Savoie",
+1
+],
+[
+"2025-04-01T00:00:00+02:00",
+"CDAD des Alpes-Maritimes",
+1
+],
+[
+"2025-05-01T00:00:00+02:00",
+"CDAD de la Haute-Savoie",
+1
+],
+[
+"2025-05-01T00:00:00+02:00",
+"CDAD des Bouches-du-Rhône",
+1
+],
+[
+"2025-06-01T00:00:00+02:00",
+"CDAD de Haute-Loire",
+1
+],
+[
+"2025-06-01T00:00:00+02:00",
+"CDAD des Bouches-du-Rhône",
+3
+],
+[
+"2025-06-01T00:00:00+02:00",
+"CDAD du Pas-De-Calais",
+1
+],
+[
+"2025-07-01T00:00:00+02:00",
+"CDAD de Haute-Loire",
+3
+],
+[
+"2025-07-01T00:00:00+02:00",
+"CDAD de la Côte-d'Or",
+38
+],
+[
+"2025-07-01T00:00:00+02:00",
+"CDAD des Alpes-Maritimes",
+1
+],
+[
+"2025-08-01T00:00:00+02:00",
+"CDAD de la Côte-d'Or",
+1
+],
+[
+"2025-08-01T00:00:00+02:00",
+"CDAD du Loir-et-Cher",
+25
+],
+[
+"2025-09-01T00:00:00+02:00",
+"CDAD de Haute-Loire",
+5
+],
+[
+"2025-09-01T00:00:00+02:00",
+"CDAD de la Côte-d'Or",
+1
+],
+[
+"2025-09-01T00:00:00+02:00",
+"CDAD de l'Oise",
+6
+],
+[
+"2025-09-01T00:00:00+02:00",
+"CDAD des Bouches-du-Rhône",
+1
+],
+[
+"2025-09-01T00:00:00+02:00",
+"CDAD des Landes",
+1
+],
+[
+"2025-10-01T00:00:00+02:00",
+"CDAD de la Dordogne",
+1
+],
+[
+"2025-10-01T00:00:00+02:00",
+"CDAD du Finistère",
+3
+],
+[
+"2025-11-01T00:00:00+01:00",
+"CDAD de la Côte-d'Or",
+1
+],
+[
+"2025-11-01T00:00:00+01:00",
+"CDAD de la Savoie",
+1
+],
+[
+"2025-11-01T00:00:00+01:00",
+"CDAD de la Seine-Et-Marne",
+1
+],
+[
+"2025-11-01T00:00:00+01:00",
+"CDAD Hérault",
+4
+],
+[
+"2025-11-01T00:00:00+01:00",
+"CDAD Maine-et-Loire",
+2
+],
+[
+"2025-12-01T00:00:00+01:00",
+"CDAD du Finistère",
+12
+],
+[
+"2025-12-01T00:00:00+01:00",
+"CDAD du Rhône",
+9
+],
+[
+"2025-12-01T00:00:00+01:00",
+"CDAD Maine-et-Loire",
+1
+],
+[
+"2026-01-01T00:00:00+01:00",
+"CDAD des Bouches-du-Rhône",
+1
+],
+[
+"2026-01-01T00:00:00+01:00",
+"CDAD des Landes",
+8
+],
+[
+"2026-01-01T00:00:00+01:00",
+"CDAD du Loir-et-Cher",
+3
+],
+[
+"2026-01-01T00:00:00+01:00",
+"CDAD Hauts-de-Seine",
+2
+],
+[
+"2026-01-01T00:00:00+01:00",
+"CDAD Hérault",
+2
+],
+[
+"2026-02-01T00:00:00+01:00",
+"CDAD de la Côte-d'Or",
+1
+],
+[
+"2026-02-01T00:00:00+01:00",
+"CDAD des Landes",
+1
+],
+[
+"2026-02-01T00:00:00+01:00",
+"CDAD du Rhône",
+1
+],
+[
+"2026-03-01T00:00:00+01:00",
+"CDAD Côtes-d'Armor",
+3
+],
+[
+"2026-03-01T00:00:00+01:00",
+"CDAD des Landes",
+8
+],
+[
+"2026-04-01T00:00:00+02:00",
+"CDAD Côtes-d'Armor",
+1
+],
+[
+"2026-04-01T00:00:00+02:00",
+"CDAD de la Haute-Savoie",
+1
+],
+[
+"2026-04-01T00:00:00+02:00",
+"CDAD Indre-et-Loire",
+2
+],
+[
+"2026-05-01T00:00:00+02:00",
+"CDAD de la Côte-d'Or",
+2
+],
+[
+"2026-05-01T00:00:00+02:00",
+"CDAD de la Haute-Savoie",
+1
+],
+[
+"2026-05-01T00:00:00+02:00",
+"CDAD de Seine et Marne",
+2
+],
+[
+"2026-05-01T00:00:00+02:00",
+"CDAD des Hautes-Alpes",
+1
+],
+[
+"2026-05-01T00:00:00+02:00",
+"CDAD Hautes-Pyrénées",
+1
+],
+[
+"2026-05-01T00:00:00+02:00",
+"CDAD Maine-et-Loire",
+1
+],
+[
+"2026-05-01T00:00:00+02:00",
+"CDAD Pyrénées-Atlantiques",
+4
+],
+[
+"2026-06-01T00:00:00+02:00",
+"CDAD des Hautes-Alpes",
+1
+],
+[
+"2026-07-01T00:00:00+02:00",
+"CDAD Charente Maritime",
+1
+],
+[
+"2026-07-01T00:00:00+02:00",
+"CDAD de l'Oise",
+2
+],
+[
+"2026-08-01T00:00:00+02:00",
+"CDAD de la Haute-Savoie",
+1
+],
+[
+"2026-08-01T00:00:00+02:00",
+"CDAD de l'Oise",
+2
+],
+[
+"2026-08-01T00:00:00+02:00",
+"CDAD Hérault",
+1
+],
+[
+"2026-09-01T00:00:00+02:00",
+"CDAD de l'Oise",
+5
+],
+[
+"2026-09-01T00:00:00+02:00",
+"CDAD Hauts-de-Seine",
+2
+],
+[
+"2026-10-01T00:00:00+02:00",
+"CDAD Cher",
+2
+],
+[
+"2026-10-01T00:00:00+02:00",
+"CDAD de l'Oise",
+2
+]
+]
+},
+{
+"onglet": "Déploiement - RDV SP ",
+"carte": "Nombre agent CDAD - RDV SP",
+"colonnes": [
+"Count"
+],
+"lignes": [
+[
+1506
+]
+]
+},
+{
+"onglet": "Déploiement - RDV SP ",
+"carte": "Répartition des agents par niveau de permission",
+"colonnes": [
+"Access Level",
+"Count"
+],
+"lignes": [
+[
+"admin",
+352
+],
+[
+"basic",
+485
+],
+[
+"intervenant",
+669
+]
+]
+},
+{
+"onglet": "Vue globale ",
+"carte": "Répartitions des organisations dans chaque CDAD",
+"colonnes": [
+"Territories → Name",
+"Name",
+"pivot-grouping"
+],
+"lignes": [
+[
+"CDAD Côtes-d'Armor",
+"Maison de Justice et du Droit de Lannion",
+0
+],
+[
+"CDAD Côtes-d'Armor",
+"Maison de Justice et du Droit de Loudéac",
+0
+],
+[
+"CDAD Côtes-d'Armor",
+"Tribunal de proximité de Guingamp",
+0
+],
+[
+"CDAD Côtes-d'Armor",
+"Tribunal Judiciaire de Saint-Brieuc",
+0
+],
+[
+"CDAD de Haute-Loire",
+"Association Justice et Partage",
+0
+],
+[
+"CDAD de Haute-Loire",
+"CDAD 43 - Permanences notaire",
+0
+],
+[
+"CDAD de Haute-Loire",
+"CDAD de Haute-Loire",
+0
+],
+[
+"CDAD de Haute-Loire",
+"CIDFF 43 (Centre d'information sur le droit des femmes et des familles)",
+0
+],
+[
+"CDAD de Haute-Loire",
+"Mairie de Brioude",
+0
+],
+[
+"CDAD de Haute-Loire",
+"Mairie de Monistrol-sur-Loire",
+0
+],
+[
+"CDAD de Haute-Loire",
+"Mairie du Chambon-sur-Lignon",
+0
+],
+[
+"CDAD de Haute-Loire",
+"Tribunal judiciaire du Puy en Velay",
+0
+],
+[
+"CDAD de Haute-Loire",
+"Tribunal judiciaire du Puy-en-Velay",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"MJD CHENÔVE",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"MJD CHENÔVE - Conciliateur de justice",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"MJD - France Victimes 21",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Arnay le Duc",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Auxonne",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Châtillon sur Seine",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Clénay",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence Avocat - Dijon (personnes en grande précarité)",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Fontaine d'Ouche",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Genlis",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Longvic",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Maison d'Arrêt",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Maison des adolescents",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Maison des avocats",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Maison des Seniors",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Mirebeau sur Bèze",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Norges et Tille",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Nuits St Georges",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Pouilly en Auxois",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Quetigny",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat (réservée aux étudiants et personnel de l'UBE) - Université",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Saulieu",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Saulon la Chapelle",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Semur en Auxois",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Seurre",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Sombernon",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - St Apollinaire",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Talant",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Tribunal administratif",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Tribunal de proximité de Beaune",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Tribunal de proximité de Montbard",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - Episourire",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - Genlis",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - Is sur Tille",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - Mirebeau sur Bèze",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - Semur en Auxois",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - Seurre",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - St Jean de Losne",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence Infodroits - Restos du Coeur",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence juriste - Restos du Coeur Beaune",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence juriste - Restos du Coeur Venarey-les-Laumes",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence notaire - Chambre des notaires",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanences CIDFF",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence téléphonique - CDAD 21",
+0
+],
+[
+"CDAD de la Dordogne",
+"Point Justice",
+0
+],
+[
+"CDAD de la Haute-Savoie",
+"Antenne de Justice & du Droit en Chablais",
+0
+],
+[
+"CDAD de la Haute-Savoie",
+"Conseil départemental de l'accès au droit de Haute-Savoie",
+0
+],
+[
+"CDAD de la Haute-Savoie",
+"MJD d'Annemasse",
+0
+],
+[
+"CDAD de la Haute-Savoie",
+"MJD de Saint-Julien-en-Genevois",
+0
+],
+[
+"CDAD de la Savoie",
+"MJD d'Aix-les-Bains",
+0
+],
+[
+"CDAD de la Savoie",
+"MJD de Chambéry",
+0
+],
+[
+"CDAD de la Seine-Et-Marne",
+"MJD de Lognes",
+0
+],
+[
+"CDAD de l'Oise",
+"Carrefour de Femmes",
+0
+],
+[
+"CDAD de l'Oise",
+"Maison de Justice et du Droit de Noyon",
+0
+],
+[
+"CDAD de l'Oise",
+"MJD de Creil",
+0
+],
+[
+"CDAD de l'Oise",
+"MJD de Méru",
+0
+],
+[
+"CDAD de l'Oise",
+"MJD de Noyon",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice Breteuil",
+0
+],
+[
+"CDAD de l'Oise",
+"Point-Justice CCAS Villers Saint Paul",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice Chaumont en Vexin",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice Grandvilliers",
+0
+],
+[
+"CDAD de l'Oise",
+"Point-justice Maison de ressources - Crépy-en-Valois",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice Ressons-sur-Matz",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice TJ Beauvais",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice TJ Compiègne",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice TJ Senlis",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice UTC",
+0
+],
+[
+"CDAD de l'Oise",
+"SAMU SOCIAL",
+0
+],
+[
+"CDAD de l'Oise",
+"UPJV Beauvais",
+0
+],
+[
+"CDAD des Alpes-Maritimes",
+"Mairie Annexe Saint Augustin",
+0
+],
+[
+"CDAD des Alpes-Maritimes",
+"MJD de Menton",
+0
+],
+[
+"CDAD des Alpes-Maritimes",
+"MJD de Nice",
+0
+],
+[
+"CDAD des Alpes-Maritimes",
+"TJ NICE",
+0
+],
+[
+"CDAD des Bouches-du-Rhône",
+"Bureau central des conciliateurs et des délégués du défenseur des droits Aix",
+0
+],
+[
+"CDAD des Bouches-du-Rhône",
+"MJD d’Aix",
+0
+],
+[
+"CDAD des Bouches-du-Rhône",
+"MJD d'Aubagne",
+0
+],
+[
+"CDAD des Bouches-du-Rhône",
+"MJD de Marseille",
+0
+],
+[
+"CDAD des Bouches-du-Rhône",
+"MJD Martigues",
+0
+],
+[
+"CDAD des Bouches-du-Rhône",
+"MJD Salon de Provence",
+0
+],
+[
+"CDAD des Hautes-Alpes",
+"Point Justice de Gap",
+0
+],
+[
+"CDAD des Hautes-Alpes",
+"Point-justice de Laragne",
+0
+],
+[
+"CDAD des Hautes-Alpes",
+"Point-justice d'Embrun",
+0
+],
+[
+"CDAD des Landes",
+"CDAD 40",
+0
+],
+[
+"CDAD des Landes",
+"Centre Administratif de PARENTIS-EN-BORN",
+0
+],
+[
+"CDAD des Landes",
+"Centre Communal d'Action Sociale de MIMIZAN",
+0
+],
+[
+"CDAD des Landes",
+"Centre Communal d'Action Sociale de MONT-DE-MARSAN",
+0
+],
+[
+"CDAD des Landes",
+"Centre Communal d'Action Sociale de SOUSTONS",
+0
+],
+[
+"CDAD des Landes",
+"Conseil des Prud'hommes - DAX",
+0
+],
+[
+"CDAD des Landes",
+"Escale Info - CAPBRETON",
+0
+],
+[
+"CDAD des Landes",
+"Espace France Services d'AIRE-SUR-L'ADOUR",
+0
+],
+[
+"CDAD des Landes",
+"Espace France Services de GABARRET",
+0
+],
+[
+"CDAD des Landes",
+"Espace France Services de MONTFORT-EN-CHALOSSE",
+0
+],
+[
+"CDAD des Landes",
+"Espace France Services de PEYREHORADE",
+0
+],
+[
+"CDAD des Landes",
+"Espace France Services de ROQUEFORT",
+0
+],
+[
+"CDAD des Landes",
+"Espace France Services d'HAGETMAU",
+0
+],
+[
+"CDAD des Landes",
+"Mairie de MORCENX",
+0
+],
+[
+"CDAD des Landes",
+"Mairie de SAINT-PAUL-LES-DAX",
+0
+],
+[
+"CDAD des Landes",
+"Maison Municipale de la Justice et du Droit de BISCARROSSE",
+0
+],
+[
+"CDAD des Landes",
+"Tribunal Judiciaire - DAX",
+0
+],
+[
+"CDAD des Landes",
+"Tribunal Judiciaire - MONT-DE-MARSAN",
+0
+],
+[
+"CDAD du Finistère",
+"France Services Cap Sizun",
+0
+],
+[
+"CDAD du Finistère",
+"France Services CCA KERANDON",
+0
+],
+[
+"CDAD du Finistère",
+"France Services Saint Pol de Léon",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice CDAD",
+0
+],
+[
+"CDAD du Finistère",
+"POINT JUSTICE DROIT DES ETRANGERS QUIMPER",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice ebus CCA",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice ERGUE GABERIC",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice France Services Châteaulin",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice France Services CROZON",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice France Services Lesneven",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice France Services Pays des Abers",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice France Services PLOUARZEL",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice France Services Quimperlé",
+0
+],
+[
+"CDAD du Finistère",
+"Point Justice Kermoysan",
+0
+],
+[
+"CDAD du Finistère",
+"POINT JUSTICE POHER COMMUNAUTE",
+0
+],
+[
+"CDAD du Loiret",
+"Conciliateurs à la Maison de justice et du droit d'Orléans",
+0
+],
+[
+"CDAD du Loiret",
+"Journées portes ouvertes",
+0
+],
+[
+"CDAD du Loiret",
+"Maison de justice et du droit d'Orléans",
+0
+],
+[
+"CDAD du Loiret",
+"Projets jeunes",
+0
+],
+[
+"CDAD du Loiret",
+"Tribunal judiciaire de Montargis",
+0
+],
+[
+"CDAD du Loiret",
+"Tribunal judiciaire d'Orléans",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"Maison de justice et du droit de Blois",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"Permanences téléphoniques juriste CDAD 41",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice de Romorantin-Lanthenay",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"Point-justice du PIMM's de Blois",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Bracieux",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Chailles",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Cour-Cheverny",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de La Chapelle-Vendômoise",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Lamotte-Beuvron",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Le Controis-en-Sologne",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Mer",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Mondoubleau",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Montoire-sur-Le-Loir",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Montrichard Val de Cher",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Neung-sur-Beuvron",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Saint-Aignan",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Salbris",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Selles-sur-Cher",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Veuzain-sur-Loire",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Vineuil",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services La Poste de Mennetou-sur-Cher",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services La Poste de Morée",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services La Poste de Saint-Laurent-Nouan",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services La Poste d'Herbault",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services La Poste d'Ouzouer-le-Marché",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services La Poste Droué",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice généraliste Vendôme",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice & tribunal judiciaire de Blois",
+0
+],
+[
+"CDAD du Pas-De-Calais",
+"CDAD du Pas-De-Calais",
+0
+],
+[
+"CDAD du Rhône",
+"ADJ de Lyon 9",
+0
+],
+[
+"CDAD du Rhône",
+"ADJ de Meyzieu",
+0
+],
+[
+"CDAD du Rhône",
+"CDAD du Rhône",
+0
+],
+[
+"CDAD du Rhône",
+"Maison de Justice et du Droit de Rillieux-la-pape",
+0
+],
+[
+"CDAD du Rhône",
+"MJD de Bron",
+0
+],
+[
+"CDAD du Rhône",
+"MJD de Lyon 8",
+0
+],
+[
+"CDAD du Rhône",
+"MJD de Venissieux",
+0
+],
+[
+"CDAD du Rhône",
+"MJD de villeurbanne",
+0
+],
+[
+"CDAD du Rhône",
+"MJD GIVORS",
+0
+],
+[
+"CDAD du Rhône",
+"MJD VAULX-EN-VELIN",
+0
+],
+[
+"CDAD Hauts-de-Seine",
+"Maison de justice et du droit de Gennevilliers",
+0
+],
+[
+"CDAD Hauts-de-Seine",
+"Maison de justice et du droit des Blagis",
+0
+],
+[
+"CDAD Hauts-de-Seine",
+"Maison de la justice et du droit de Châtenay-Malabry",
+0
+],
+[
+"CDAD Hauts-de-Seine",
+"Point Justice - Tribunal Judiciaire de Nanterre",
+0
+],
+[
+"CDAD Hérault",
+"JURISTE ASSISTANT DU CDAD HERAULT",
+0
+],
+[
+"CDAD Hérault",
+"Maison de la justice et du droit de Lodève",
+0
+],
+[
+"CDAD Hérault",
+"Maison de la Justice et du Droit de Lodève",
+0
+],
+[
+"CDAD Hérault",
+"Maison de la Justice et du Droit de Lunel",
+0
+],
+[
+"CDAD Hérault",
+"Maison de la Justice et du Droit de Montpellier",
+0
+],
+[
+"CDAD Hérault",
+"Maison de la Justice et du Droit de Montpellier Méditerranée Métropole à Lattes",
+0
+],
+[
+"CDAD Hérault",
+"POINT-JUSTICE TRIBUNAL JUDICAIRE DE MONTPELLIER",
+0
+],
+[
+"CDAD Maine-et-Loire",
+"Conseil départemental d'accès au droit",
+0
+],
+[
+"CDAD Maine-et-Loire",
+"Maison de Justice et du Droit d'Angers",
+0
+],
+[
+"CDAD Maine-et-Loire",
+"Nationalité",
+0
+],
+[
+"CDAD Maine-et-Loire",
+"notaire",
+0
+],
+[
+"Cour d'Appel de Caen",
+"TJ CAEN",
+0
+],
+[
+"Cour d'Appel de Caen",
+"TJ CHERBOURG",
+0
+],
+[
+"Cour d'Appel de Caen",
+"TJ LISIEUX",
+0
+],
+[
+"Cour d'appel de Colmar",
+"TJ COLMAR",
+0
+],
+[
+"Cour d'appel de Colmar",
+"TJ MULHOUSE",
+0
+],
+[
+"Cour d'appel de Colmar",
+"TJ SAVERNE",
+0
+],
+[
+"Cour d'appel de Colmar",
+"TJ STRASBOURG",
+0
+],
+[
+"Cours d'Appel de Nice",
+"Conciliateurs",
+0
+],
+[
+"Tribunal judiciaire d'Aix en Provence - Scellés",
+"Tribunal judiciaire d'Aix en Provence - Service des scellés",
+0
+],
+[
+"Tribunal judiciaire de CAEN",
+"CDAD CALVADOS",
+0
+],
+[
+"Tribunal judiciaire de CAEN",
+"MJD MONDEVILLE",
+0
+],
+[
+"Tribunal judiciaire de CAEN",
+"TJ CAEN",
+0
+],
+[
+"Tribunal judiciaire de CAEN",
+"Tribunal de proximité de VIRE",
+0
+],
+[
+"Tribunal Judiciaire de Laval",
+"Tribunal Judiciaire de Laval",
+0
+],
+[
+"Tribunal Judiciaire de Lille",
+"Tribunal Judiciaire de Lille",
+0
+],
+[
+"Tribunal Judiciaire de Niort",
+"Avocats",
+0
+],
+[
+"Tribunal Judiciaire de Niort",
+"Intermède",
+0
+],
+[
+"Tribunal Judiciaire de Niort",
+"JAF",
+0
+],
+[
+"Tribunal Judiciaire de Niort",
+"UDAF",
+0
+],
+[
+"Tribunal Judiciaire de Tulle",
+"Tribunal Judiciaire de Tulle",
+0
+],
+[
+null,
+"Cour nationale du droit d'asile (CNDA)",
+0
+],
+[
+null,
+"Service Pénitentiaire d'Insertion et de Probation du Rhône",
+0
+],
+[
+null,
+"stemo orne",
+0
+],
+[
+null,
+"TRIBUNAL DE PROXIMITE DE GUEBWILLER",
+0
+],
+[
+null,
+"UEMO CHERBOURG",
+0
+],
+[
+"CDAD Côtes-d'Armor",
+null,
+2
+],
+[
+"CDAD de Haute-Loire",
+null,
+2
+],
+[
+"CDAD de la Côte-d'Or",
+null,
+2
+],
+[
+"CDAD de la Dordogne",
+null,
+2
+],
+[
+"CDAD de la Haute-Savoie",
+null,
+2
+],
+[
+"CDAD de la Savoie",
+null,
+2
+],
+[
+"CDAD de la Seine-Et-Marne",
+null,
+2
+],
+[
+"CDAD de l'Oise",
+null,
+2
+],
+[
+"CDAD des Alpes-Maritimes",
+null,
+2
+],
+[
+"CDAD des Bouches-du-Rhône",
+null,
+2
+],
+[
+"CDAD des Hautes-Alpes",
+null,
+2
+],
+[
+"CDAD des Landes",
+null,
+2
+],
+[
+"CDAD du Finistère",
+null,
+2
+],
+[
+"CDAD du Loiret",
+null,
+2
+],
+[
+"CDAD du Loir-et-Cher",
+null,
+2
+],
+[
+"CDAD du Pas-De-Calais",
+null,
+2
+],
+[
+"CDAD du Rhône",
+null,
+2
+],
+[
+"CDAD Hauts-de-Seine",
+null,
+2
+],
+[
+"CDAD Hérault",
+null,
+2
+],
+[
+"CDAD Maine-et-Loire",
+null,
+2
+],
+[
+"Cour d'Appel de Caen",
+null,
+2
+],
+[
+"Cour d'appel de Colmar",
+null,
+2
+],
+[
+"Cours d'Appel de Nice",
+null,
+2
+],
+[
+"Tribunal judiciaire d'Aix en Provence - Scellés",
+null,
+2
+],
+[
+"Tribunal judiciaire de CAEN",
+null,
+2
+],
+[
+"Tribunal Judiciaire de Laval",
+null,
+2
+],
+[
+"Tribunal Judiciaire de Lille",
+null,
+2
+],
+[
+"Tribunal Judiciaire de Niort",
+null,
+2
+],
+[
+"Tribunal Judiciaire de Tulle",
+null,
+2
+],
+[
+null,
+null,
+2
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+]
+]
+},
+{
+"onglet": "Vue globale ",
+"carte": "Répartition des organisations dans chaque CDAD - RDVS",
+"colonnes": [
+"Territories → Name",
+"Name",
+"pivot-grouping"
+],
+"lignes": [
+[
+"CDAD de la Gironde",
+"Agenda partagé Ordre des avocats-CDAD",
+0
+],
+[
+"CDAD de la Gironde",
+"Atelier Graphite",
+0
+],
+[
+"CDAD de la Gironde",
+"France Services Permanences téléphoniques",
+0
+],
+[
+"CDAD de la Gironde",
+"MJD de Bordeaux",
+0
+],
+[
+"CDAD de la Gironde",
+"MJD Lesparre-Médoc",
+0
+],
+[
+"CDAD de la Gironde",
+"MJD Lormont",
+0
+],
+[
+"CDAD de la Gironde",
+"Point-justice de Langon",
+0
+],
+[
+"CDAD de la Gironde",
+"Point-justice du PPP",
+0
+],
+[
+"CDAD de la Gironde",
+"Point Justice du Tribunal de Bordeaux",
+0
+],
+[
+"CDAD de la Gironde",
+"point-justice Le Porge",
+0
+],
+[
+"CDAD de la Haute-Corse",
+"Permanence NOTAIRE Palais de Justice BASTIA",
+0
+],
+[
+"CDAD de la Haute-Corse",
+"Point Justice de Ponte-Leccia",
+0
+],
+[
+"CDAD de la Haute-Corse",
+"Point-Justice Palais de Justice BASTIA",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"CDAD de la Haute-Garonne",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"Conseil de Prud'Hommes de Toulouse",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"Maison Toulouse Services Cartoucherie",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"MJD Toulouse Nord",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"MJD Toulouse Sud",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ Cornebarrieu",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ de Caraman",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ de Carbonne",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ de Colomiers",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ de Cornebarrieu",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ de Muret",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ de Nailloux",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ d'Escalquens",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ de Villefranche-du-Lauragais",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ du TJ de Toulouse",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ Escalquens",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ Labège",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ numérique",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ Ramonville",
+0
+],
+[
+"CDAD de la Haute-Garonne",
+"PJ Tribunal Judiciaire Camille Pujol",
+0
+],
+[
+"CDAD de l'Ain",
+"MJD de Bourg-en-Bresse",
+0
+],
+[
+"CDAD de la Loire",
+"Maison de Justice et du Droit de Saint-Etienne",
+0
+],
+[
+"CDAD de la Loire",
+"Point Justice COURONNE",
+0
+],
+[
+"CDAD de la Loire",
+"Point Justice GOP",
+0
+],
+[
+"CDAD de la Loire",
+"Point Justice MONTBRISON",
+0
+],
+[
+"CDAD de la Loire",
+"Point Justice PIMM'S St Etienne",
+0
+],
+[
+"CDAD de la Loire",
+"Point Justice ROANNE",
+0
+],
+[
+"CDAD de la Manche",
+"/",
+0
+],
+[
+"CDAD de la Manche",
+"ADESR Manche",
+0
+],
+[
+"CDAD de la Manche",
+"Mairie de Coutances",
+0
+],
+[
+"CDAD de la Manche",
+"MJD de Saint-Lô",
+0
+],
+[
+"CDAD de la Mayenne",
+"Point Justice CDAD 53 - Palais de Justice de Laval",
+0
+],
+[
+"CDAD de la Seine Saint-Denis",
+"Maison de justice et du droit AUBERVILLIERS",
+0
+],
+[
+"CDAD de la Seine Saint-Denis",
+"Maison de la Justice et du Droit de LA COURNEUVE",
+0
+],
+[
+"CDAD de la Seine Saint-Denis",
+"Maison de la justice et du droit PANTIN",
+0
+],
+[
+"CDAD de la Seine Saint-Denis",
+"Maison de la justice et du droit SAINT-DENIS",
+0
+],
+[
+"CDAD de la Seine Saint-Denis",
+"Point justice AULNAY-SOUS-BOIS",
+0
+],
+[
+"CDAD de la Seine Saint-Denis",
+"POINT JUSTICE DE BOBIGNY",
+0
+],
+[
+"CDAD de la Seine Saint-Denis",
+"Point Justice du BLANC-MESNIL",
+0
+],
+[
+"CDAD de la Vienne",
+"CCAS de Poitiers",
+0
+],
+[
+"CDAD de la Vienne",
+"Centre hospitalier Henri Laborit",
+0
+],
+[
+"CDAD de la Vienne",
+"Croix-Rouge Française - Accueil de jour",
+0
+],
+[
+"CDAD de la Vienne",
+"PJ Châtellerault",
+0
+],
+[
+"CDAD de la Vienne",
+"PJ de Civray",
+0
+],
+[
+"CDAD de la Vienne",
+"PJ de Montmorillon",
+0
+],
+[
+"CDAD de la Vienne",
+"PJ de Poitiers Saint-Eloi",
+0
+],
+[
+"CDAD de la Vienne",
+"PJ du Tribunal Judiciaire de Poitiers",
+0
+],
+[
+"CDAD de la Vienne",
+"PJ Gençay",
+0
+],
+[
+"CDAD de la Vienne",
+"PJ Monts-Sur-Guesnes",
+0
+],
+[
+"CDAD de la Vienne",
+"Point-Justice de Loudun",
+0
+],
+[
+"CDAD de l'Essonne",
+"MJD Athis-Mons",
+0
+],
+[
+"CDAD de l'Essonne",
+"MJD Étampes",
+0
+],
+[
+"CDAD de l'Essonne",
+"MJD Les Ulis",
+0
+],
+[
+"CDAD de l'Essonne",
+"MJD Villemoisson-sur-Orge",
+0
+],
+[
+"CDAD de l'Essonne",
+"PJ Arpajon",
+0
+],
+[
+"CDAD de l'Essonne",
+"PJ Chilly-Mazarin",
+0
+],
+[
+"CDAD de l'Essonne",
+"PJ Dourdan",
+0
+],
+[
+"CDAD de l'Essonne",
+"PJ Épinay-sous-Sénart",
+0
+],
+[
+"CDAD de l'Essonne",
+"PJ Évry",
+0
+],
+[
+"CDAD de l'Essonne",
+"PJ Gif-sur-Yvette",
+0
+],
+[
+"CDAD de l'Essonne",
+"PJ Grigny",
+0
+],
+[
+"CDAD de l'Essonne",
+"PJ Ris-Orangis",
+0
+],
+[
+"CDAD de l'Essonne",
+"PJ Verrières-le-Buisson",
+0
+],
+[
+"CDAD de l'Essonne",
+"PJ Vigneux-sur-Seine",
+0
+],
+[
+"CDAD de l'Essonne",
+"Point Justice du Tribunal Judiciaire",
+0
+],
+[
+"CDAD de Paris",
+"MJD Paris Nord-Est",
+0
+],
+[
+"CDAD de Paris",
+"MJD Paris Nord-Ouest",
+0
+],
+[
+"CDAD de Paris",
+"MJD Paris-Sud",
+0
+],
+[
+"CDAD de Paris",
+"MJD Paris-Sud-Est",
+0
+],
+[
+"CDAD de Paris",
+"PAD 17",
+0
+],
+[
+"CDAD de Paris",
+"PAD Jeunes Paris",
+0
+],
+[
+"CDAD des Alpes-de-Haute-Provence",
+"CDAD 04 - point-justice des Alpes-de-Haute-Provence",
+0
+],
+[
+"CDAD des Alpes-de-Haute-Provence",
+"point-justice - CCAPV",
+0
+],
+[
+"CDAD des Alpes-de-Haute-Provence",
+"point-justice de Barcelonnette",
+0
+],
+[
+"CDAD des Alpes-de-Haute-Provence",
+"point-justice de la France services de Digne-les-Bains",
+0
+],
+[
+"CDAD des Alpes-de-Haute-Provence",
+"point-justice de la France services de Manosque",
+0
+],
+[
+"CDAD des Alpes-de-Haute-Provence",
+"point-justice de la France services de Sisteron",
+0
+],
+[
+"CDAD des Alpes-de-Haute-Provence",
+"point-justice du tribunal de proximité de Manosque",
+0
+],
+[
+"CDAD des Alpes-de-Haute-Provence",
+"point-justice du Tribunal judiciaire de Digne-les-Bains",
+0
+],
+[
+"CDAD des Alpes-de-Haute-Provence",
+"point-justice - France services (hors FS postales)",
+0
+],
+[
+"CDAD des Alpes-de-Haute-Provence",
+"point-justice - France services postales",
+0
+],
+[
+"CDAD de Saône-et-Loire",
+"CDAD Saône-et-Loire",
+0
+],
+[
+"CDAD de Saône-et-Loire",
+"MJD de Chalon-sur-Saône",
+0
+],
+[
+"CDAD de Saône-et-Loire",
+"MJD de Mâcon",
+0
+],
+[
+"CDAD de Saône-et-Loire",
+"Point Justice Adil 71 Mâcon",
+0
+],
+[
+"CDAD de Saône-et-Loire",
+"Point Justice Autun",
+0
+],
+[
+"CDAD de Saône-et-Loire",
+"Point Justice Le Creusot",
+0
+],
+[
+"CDAD de Saône-et-Loire",
+"Point Justice Montceau-les-Mines",
+0
+],
+[
+"CDAD de Saône-et-Loire",
+"Point Justice Tournus",
+0
+],
+[
+"CDAD des Ardennes",
+"CCAS de Vouziers",
+0
+],
+[
+"CDAD des Ardennes",
+"Centres sociaux",
+0
+],
+[
+"CDAD des Ardennes",
+"Chambre interdépartementale des notaires",
+0
+],
+[
+"CDAD des Ardennes",
+"Commissaires de Justice",
+0
+],
+[
+"CDAD des Ardennes",
+"Conseil départemental de l'accès au droit  des Ardennes",
+0
+],
+[
+"CDAD des Ardennes",
+"France services d'Asfeld",
+0
+],
+[
+"CDAD des Ardennes",
+"France services de Bogny-sur-Meuse",
+0
+],
+[
+"CDAD des Ardennes",
+"France services de Carignan",
+0
+],
+[
+"CDAD des Ardennes",
+"France services de Rethel",
+0
+],
+[
+"CDAD des Ardennes",
+"France services de Revin",
+0
+],
+[
+"CDAD des Ardennes",
+"France services de Signy-L'Abbaye",
+0
+],
+[
+"CDAD des Ardennes",
+"France services de Vouziers",
+0
+],
+[
+"CDAD des Ardennes",
+"France services / mairie de Vireux-Molhain",
+0
+],
+[
+"CDAD des Ardennes",
+"Mairie de Chaumont-Porcien",
+0
+],
+[
+"CDAD des Ardennes",
+"Mairie de Signy-Le-Petit",
+0
+],
+[
+"CDAD des Ardennes",
+"Maison d'arrêt de Charleville-Mézières",
+0
+],
+[
+"CDAD des Ardennes",
+"Maison Pour Tous de Rocroi",
+0
+],
+[
+"CDAD des Ardennes",
+"MJD Charleville-Mézières",
+0
+],
+[
+"CDAD des Ardennes",
+"MJD Sedan",
+0
+],
+[
+"CDAD des Ardennes",
+"Permanence téléphonique avocat",
+0
+],
+[
+"CDAD des Ardennes",
+"Tribunal Judiciaire de Charleville-Mézières",
+0
+],
+[
+"CDAD de Vaucluse",
+"Apt Maison Bonhomme",
+0
+],
+[
+"CDAD de Vaucluse",
+"Apt sous-préfecture",
+0
+],
+[
+"CDAD de Vaucluse",
+"Avignon MJD",
+0
+],
+[
+"CDAD de Vaucluse",
+"Avignon TJ",
+0
+],
+[
+"CDAD de Vaucluse",
+"Bédoin EFS",
+0
+],
+[
+"CDAD de Vaucluse",
+"Bollène CCAS",
+0
+],
+[
+"CDAD de Vaucluse",
+"Carpentras Maison du citoyen",
+0
+],
+[
+"CDAD de Vaucluse",
+"Cavaillon EFS LMV",
+0
+],
+[
+"CDAD de Vaucluse",
+"CDAD de Vaucluse: actions jeunes",
+0
+],
+[
+"CDAD de Vaucluse",
+"Isle sur la Sorgue EFS",
+0
+],
+[
+"CDAD de Vaucluse",
+"Le Pontet Espace Ressources",
+0
+],
+[
+"CDAD de Vaucluse",
+"Malaucène EFS",
+0
+],
+[
+"CDAD de Vaucluse",
+"Orange Mairie",
+0
+],
+[
+"CDAD de Vaucluse",
+"Orange Tribunal de Proximité",
+0
+],
+[
+"CDAD de Vaucluse",
+"Pertuis Maison de la citoyenneté",
+0
+],
+[
+"CDAD de Vaucluse",
+"Point-Justice fictif",
+0
+],
+[
+"CDAD de Vaucluse",
+"Point-justice fictif 2",
+0
+],
+[
+"CDAD de Vaucluse",
+"Sarrians Mairie",
+0
+],
+[
+"CDAD de Vaucluse",
+"Sault EFS CCVS",
+0
+],
+[
+"CDAD de Vaucluse",
+"Sorgues EFS",
+0
+],
+[
+"CDAD de Vaucluse",
+"Vaison la Romaine CCAS",
+0
+],
+[
+"CDAD de Vaucluse",
+"Valréas EFS",
+0
+],
+[
+"CDAD de Vaucluse",
+"Vedène CCAS",
+0
+],
+[
+"CDAD de Vaucluse : actions jeunes",
+"CDAD de Vaucluse",
+0
+],
+[
+"CDAD du Nord",
+"Accueil des scolaires",
+0
+],
+[
+"CDAD du Nord",
+"Antenne de Justice de Jeumont",
+0
+],
+[
+"CDAD du Nord",
+"MJD Aulnoye-Aymeries",
+0
+],
+[
+"CDAD du Nord",
+"MJD d'AULNOYE-AYMERIES",
+0
+],
+[
+"CDAD du Nord",
+"MJD de Maubeuge",
+0
+],
+[
+"CDAD du Nord",
+"MJD Denain",
+0
+],
+[
+"CDAD du Nord",
+"MJD de Roubaix",
+0
+],
+[
+"CDAD du Nord",
+"MJD Dunkerque",
+0
+],
+[
+"CDAD du Nord",
+"MJD Tourcoing",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice d'Armentières",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice de Condé-Sur-l'Escaut",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice de Flandre-Intérieure",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice de Flandre-Lys",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice de Fourmies",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice de Grande-Synthe",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice de Jeumont",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice de l'Amandinois",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice de Lille - Maison de la médiation et du citoyen",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice de Villeneuve d'Ascq",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice de Wattrelos",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice d'Haubourdin",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice / France Services Coeur de l'Avesnois",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice / France Services de Bergues",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice / France Services de Pecquencourt",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice / France Services de Saint-André-Lez-lille",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice / France Services d'Hem",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice / France Services du Pays de Mormal",
+0
+],
+[
+"CDAD du Nord",
+"Point-Justice Hellemmes - Espace citoyen",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice Lomme - Maison du citoyen et des solidarités",
+0
+],
+[
+"CDAD du Nord",
+"Point-justice - Mairie de Caudry",
+0
+],
+[
+"CDAD Eure",
+"ADIL 27",
+0
+],
+[
+"CDAD Eure",
+"AVEDE-ACJE",
+0
+],
+[
+"CDAD Eure",
+"CDAD de l'Eure",
+0
+],
+[
+"CDAD Eure",
+"CIDFF 27",
+0
+],
+[
+"CDAD Eure",
+"Mairie Nonancourt",
+0
+],
+[
+"CDAD Eure",
+"MJD de Vernon",
+0
+],
+[
+"CDAD Eure",
+"MJD Evreux",
+0
+],
+[
+"CDAD Eure",
+"MJD Louviers",
+0
+],
+[
+"CDAD Eure",
+"MJD Pont-Audemer",
+0
+],
+[
+"CDAD Eure",
+"MJD Vernon",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Beaumont-le-Roger",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Bernay",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Beuzeville",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Bourg-Achard",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Breteuil-sur-Iton",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Brionne",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Conches-en-Ouche",
+0
+],
+[
+"CDAD Eure",
+"Point-justice de Brionne",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Epaignes",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Etrépagny",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Evreux La Madeleine",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Evreux Restos du cœur",
+0
+],
+[
+"CDAD Eure",
+"point-justice Fleury-sur-Andelle",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Gaillon",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Gisors",
+0
+],
+[
+"CDAD Eure",
+"Point-justice La Trinité de Réville",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Le Grand-Bourgtheroulde",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Le Neubourg",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Les Andelys",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Le Thuit de l'Oison",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Louviers voyageurs",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Mesnil-en-Ouche",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Mesnils-sur-Iton (Damville)",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Pacy-sur-Eure",
+0
+],
+[
+"CDAD Eure",
+"point-justice PIMM'S mobile - Seine-Eure",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Pont-de-l'Arche",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Rugles",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Saint André de l'Eure",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Val de Reuil",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Verneuil d'Avre et d'Iton",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Vernon (Espace information Médiation)",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Vernon (Simone Veil)",
+0
+],
+[
+"CDAD Eure",
+"Point-justice Vexin-sur-Epte",
+0
+],
+[
+"CDAD Eure-Et-Loir",
+"Maison de justice et du droit de Dreux",
+0
+],
+[
+"CDAD Eure-Et-Loir",
+"Maison de la justice et du droit de Nogent-le-Rotrou",
+0
+],
+[
+"CDAD Eure-Et-Loir",
+"Point-Justice de Chartres",
+0
+],
+[
+"CDAD Eure-Et-Loir",
+"Point-justice de Châteaudun",
+0
+],
+[
+"CDAD Eure-Et-Loir",
+"Tribunal judiciaire de Chartres",
+0
+],
+[
+"CDAD Gard",
+"AGAVIP Siège",
+0
+],
+[
+"CDAD Gard",
+"Annexe Mairie - Beaucaire",
+0
+],
+[
+"CDAD Gard",
+"Bureau d'aide aux victimes - Nîmes",
+0
+],
+[
+"CDAD Gard",
+"CCAS Marguerittes",
+0
+],
+[
+"CDAD Gard",
+"Centre Administratif Municipal - Pissevin",
+0
+],
+[
+"CDAD Gard",
+"Centre Jean Paulhan - Mas de Mingue",
+0
+],
+[
+"CDAD Gard",
+"Centre Social La Croisée - Saint-Gilles",
+0
+],
+[
+"CDAD Gard",
+"Centre social Manduel",
+0
+],
+[
+"CDAD Gard",
+"CIDFF Siège",
+0
+],
+[
+"CDAD Gard",
+"CMS Chemin Bas d'Avignon",
+0
+],
+[
+"CDAD Gard",
+"Espace Jules Cazot - Alès",
+0
+],
+[
+"CDAD Gard",
+"FS Aimargues",
+0
+],
+[
+"CDAD Gard",
+"FS Calade Calvisson",
+0
+],
+[
+"CDAD Gard",
+"FS Le Vigan - Espace pour tous",
+0
+],
+[
+"CDAD Gard",
+"FS Mobile Gard Rhodanien",
+0
+],
+[
+"CDAD Gard",
+"FS Point-justice Aigues-Mortes",
+0
+],
+[
+"CDAD Gard",
+"FS Point-Justice La Grand'Combe",
+0
+],
+[
+"CDAD Gard",
+"FS Point-Justice Quissac",
+0
+],
+[
+"CDAD Gard",
+"FS Point-Justice Roquemaure",
+0
+],
+[
+"CDAD Gard",
+"FS Point-Justice Sommières",
+0
+],
+[
+"CDAD Gard",
+"FS Point-Justice Villeneuve-lès-Avignon",
+0
+],
+[
+"CDAD Gard",
+"FS Remoulins",
+0
+],
+[
+"CDAD Gard",
+"FS Ricochets De La Clède - Anduze",
+0
+],
+[
+"CDAD Gard",
+"Les Mille Couleurs - Nîmes",
+0
+],
+[
+"CDAD Gard",
+"Mairie Vergèze",
+0
+],
+[
+"CDAD Gard",
+"Maison de Justice et du Droit Alès",
+0
+],
+[
+"CDAD Gard",
+"Maison de Justice et du Droit de Bagnols-sur-Cèze",
+0
+],
+[
+"CDAD Gard",
+"Maison de Justice et du Droit de Nîmes",
+0
+],
+[
+"CDAD Gard",
+"Maison de Justice et du Droit de Vauvert",
+0
+],
+[
+"CDAD Gard",
+"Maison de la Région - Nîmes",
+0
+],
+[
+"CDAD Gard",
+"Maison des Artisans d'Art - Uzès",
+0
+],
+[
+"CDAD Gard",
+"Maison des Familles CEFAE - Beaucaire",
+0
+],
+[
+"CDAD Gard",
+"Mission Locale Jeunes Nîmes Métropole",
+0
+],
+[
+"CDAD Gard",
+"Permanences téléphoniques CDAD",
+0
+],
+[
+"CDAD Gard",
+"Permanences téléphoniques du CDAD (Réalisation)",
+0
+],
+[
+"CDAD Gard",
+"Point-Justice Le Vigan",
+0
+],
+[
+"CDAD Gard",
+"Point-Justice MDPH",
+0
+],
+[
+"CDAD Gard",
+"Point-Justice Milhaud",
+0
+],
+[
+"CDAD Gard",
+"Point-Justice Pont St Esprit",
+0
+],
+[
+"CDAD Gard",
+"Point-Justice Saint-Gilles",
+0
+],
+[
+"CDAD Gard",
+"Point-Justice Tribunal administratif de Nîmes",
+0
+],
+[
+"CDAD Gard",
+"Point-Justice Uzès",
+0
+],
+[
+"CDAD Gard",
+"Tribunal de proximité d'Uzès",
+0
+],
+[
+"CDAD Gard",
+"UDAF30 siège social",
+0
+],
+[
+"CDAD Loire-Atlantique",
+"MJD de Rezé",
+0
+],
+[
+"CDAD Loire-Atlantique",
+"Secrétariat Président",
+0
+],
+[
+"CDAD Lot (46)",
+"Point-justice Biars Sur Cère",
+0
+],
+[
+"CDAD Lot (46)",
+"Point-justice Cahors",
+0
+],
+[
+"CDAD Lot (46)",
+"Point-justice Figeac",
+0
+],
+[
+"CDAD Lot (46)",
+"Point-justice Gourdon",
+0
+],
+[
+"CDAD Lot (46)",
+"Point-justice Gramat",
+0
+],
+[
+"CDAD Lot (46)",
+"Point-justice Lot",
+0
+],
+[
+"CDAD Lot (46)",
+"Point-justice Saint Céré",
+0
+],
+[
+"CDAD Lot (46)",
+"Tribunal judiciaire de Cahors",
+0
+],
+[
+"CDAD Meurthe-et-Moselle",
+"CDAD de Meurthe-et-Moselle",
+0
+],
+[
+"CDAD Meurthe-et-Moselle",
+"Défenseur des droits",
+0
+],
+[
+"CDAD Meurthe-et-Moselle",
+"Ecrivains publics",
+0
+],
+[
+"CDAD Meurthe-et-Moselle",
+"Espace France services de Thiaucourt-Regniéville",
+0
+],
+[
+"CDAD Meurthe-et-Moselle",
+"France Victimes 54",
+0
+],
+[
+"CDAD Meurthe-et-Moselle",
+"France Victimes (interne)",
+0
+],
+[
+"CDAD Meurthe-et-Moselle",
+"MJD de Nancy",
+0
+],
+[
+"CDAD Meurthe-et-Moselle",
+"MJD de Saint-Max",
+0
+],
+[
+"CDAD Meurthe-et-Moselle",
+"MJD de Toul",
+0
+],
+[
+"CDAD Meurthe-et-Moselle",
+"MJD de Vandoeuvre-lès-Nancy",
+0
+],
+[
+"CDAD Meurthe-et-Moselle",
+"Point-justice de Lunéville",
+0
+],
+[
+"CDAD Meurthe-et-Moselle",
+"Scolaires",
+0
+],
+[
+"CDAD Moselle",
+"BAV Mineurs Metz",
+0
+],
+[
+"CDAD Moselle",
+"CIDFF Forbach",
+0
+],
+[
+"CDAD Moselle",
+"Délégués du Procureur de la République du TJ de Metz",
+0
+],
+[
+"CDAD Moselle",
+"Maison de la Justice et du Droit de Faulquemont",
+0
+],
+[
+"CDAD Moselle",
+"Maison de la Justice et du Droit de Forbach",
+0
+],
+[
+"CDAD Moselle",
+"Maison de la Justice et du Droit de Woippy",
+0
+],
+[
+"CDAD Moselle",
+"Maison de la Justice et du Droit du Val de Fensch",
+0
+],
+[
+"CDAD Moselle",
+"Point Justice de Château-Salins",
+0
+],
+[
+"CDAD Moselle",
+"Point Justice de Creutzwald",
+0
+],
+[
+"CDAD Moselle",
+"Point Justice de Metz Borny",
+0
+],
+[
+"CDAD Moselle",
+"Point justice de TJ Metz",
+0
+],
+[
+"CDAD Moselle",
+"Point Justice en FS Bouzonville",
+0
+],
+[
+"CDAD Moselle",
+"Point Justice en FS d’Ancy-Dornot",
+0
+],
+[
+"CDAD Moselle",
+"Point Justice en FS d'Ars-sur-Moselle",
+0
+],
+[
+"CDAD Moselle",
+"Point justice en FS de Behren-Les-Forbach",
+0
+],
+[
+"CDAD Moselle",
+"Point-justice en FS de Bitche",
+0
+],
+[
+"CDAD Moselle",
+"Point Justice en FS de Boulay",
+0
+],
+[
+"CDAD Moselle",
+"Point Justice en FS de Freyming-Merlebach",
+0
+],
+[
+"CDAD Moselle",
+"Point Justice en FS de Montigny-lès-Metz",
+0
+],
+[
+"CDAD Moselle",
+"Point justice en FS de Phalsbourg",
+0
+],
+[
+"CDAD Moselle",
+"Point Justice en FS de Rombas",
+0
+],
+[
+"CDAD Moselle",
+"Point justice en FS Vigy",
+0
+],
+[
+"CDAD Moselle",
+"Visite scolaire TJ Metz",
+0
+],
+[
+"CDAD Seine-Maritime",
+"ADIL 76",
+0
+],
+[
+"CDAD Seine-Maritime",
+"AVIPP",
+0
+],
+[
+"CDAD Seine-Maritime",
+"AVRE 76",
+0
+],
+[
+"CDAD Seine-Maritime",
+"CDAD de Seine-Maritime",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Centre de médiation du barreau de Rouen",
+0
+],
+[
+"CDAD Seine-Maritime",
+"CFAM",
+0
+],
+[
+"CDAD Seine-Maritime",
+"CIDFF 76",
+0
+],
+[
+"CDAD Seine-Maritime",
+"ISCG Dieppe",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Médiation notaires normands",
+0
+],
+[
+"CDAD Seine-Maritime",
+"MJD Canteleu",
+0
+],
+[
+"CDAD Seine-Maritime",
+"MJD d'Elbeuf",
+0
+],
+[
+"CDAD Seine-Maritime",
+"MJD Fécamp",
+0
+],
+[
+"CDAD Seine-Maritime",
+"MJD Le Havre",
+0
+],
+[
+"CDAD Seine-Maritime",
+"MJD Rouen",
+0
+],
+[
+"CDAD Seine-Maritime",
+"MJD Saint-Etienne-du-Rouvray",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Aumale",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Bacqueville-en-Caux",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Barentin",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Bellencombre",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Blangy-sur-Bresle",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Bolbec",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Buchy",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Criquetôt-l'Esneval",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice de la Côte d'Albâtre (Cany-Barville, Fontaine de Dun, St Valéry en Caux)",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Dieppe",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Dieppe (Hôpital - VIF)",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Doudeville",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Envermeu",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Etretat",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Eu",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Fontaine-le-Dun",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Formation",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice (formation-tests)",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Goderville",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Gonfreville-l'Orcher",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Gournay-en-Bray",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Jumièges",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Le Havre - lieu solidaire",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Le Petit-Quevilly",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Le Trait",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Lillebonne",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Londinières",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Montivilliers",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Neufchâtel-en-Bray",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Notre-Dame-de-Bondeville",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Oissel-sur-Seine",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Rives-en-Seine (Caudebec-en-Caux)",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Rouen restos du coeur Desseaux",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Rouen - Restos du coeur St Hilaire",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Sahurs",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Saint Romain de Colbosc",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Sotteville-les-Rouen",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Terres-de-Caux (Fauville-en-Caux)",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Valmont",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Yerville",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Point-justice Yvetot",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Trialogue",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Trialogue - TJ",
+0
+],
+[
+"CDAD Seine-Maritime",
+"Tribunal judiciaire de Rouen",
+0
+],
+[
+"CDAD Seine-Maritime",
+"UDAF 76",
+0
+],
+[
+"CDAD Val-de-Marne",
+"Association Espace Droit Famille",
+0
+],
+[
+"CDAD Val-de-Marne",
+"Journée nationale de l'accès au droit",
+0
+],
+[
+"CDAD Val-de-Marne",
+"Maison de justice et du droit de Champigny-sur-Marne",
+0
+],
+[
+"CDAD Val-de-Marne",
+"Maison de justice et du droit Val de Bièvre",
+0
+],
+[
+"CDAD Val-de-Marne",
+"Point-justice Bureau d'aide juridictionnelle",
+0
+],
+[
+"CDAD Val-de-Marne",
+"Point-justice des jeunes",
+0
+],
+[
+"CDAD Val-de-Marne",
+"Point-justice de Valenton",
+0
+],
+[
+"CDAD Val-de-Marne",
+"Point-justice de Villiers-sur-Marne",
+0
+],
+[
+"CDAD Val-de-Marne",
+"Point Justice de Vitry-sur-Seine",
+0
+],
+[
+"CDAD Val-de-Marne",
+"Stages de citoyenneté majeurs",
+0
+],
+[
+"CDAD de la Gironde",
+null,
+2
+],
+[
+"CDAD de la Haute-Corse",
+null,
+2
+],
+[
+"CDAD de la Haute-Garonne",
+null,
+2
+],
+[
+"CDAD de l'Ain",
+null,
+2
+],
+[
+"CDAD de la Loire",
+null,
+2
+],
+[
+"CDAD de la Manche",
+null,
+2
+],
+[
+"CDAD de la Mayenne",
+null,
+2
+],
+[
+"CDAD de la Seine Saint-Denis",
+null,
+2
+],
+[
+"CDAD de la Vienne",
+null,
+2
+],
+[
+"CDAD de l'Essonne",
+null,
+2
+],
+[
+"CDAD de Paris",
+null,
+2
+],
+[
+"CDAD des Alpes-de-Haute-Provence",
+null,
+2
+],
+[
+"CDAD de Saône-et-Loire",
+null,
+2
+],
+[
+"CDAD des Ardennes",
+null,
+2
+],
+[
+"CDAD de Vaucluse",
+null,
+2
+],
+[
+"CDAD de Vaucluse : actions jeunes",
+null,
+2
+],
+[
+"CDAD du Nord",
+null,
+2
+],
+[
+"CDAD Eure",
+null,
+2
+],
+[
+"CDAD Eure-Et-Loir",
+null,
+2
+],
+[
+"CDAD Gard",
+null,
+2
+],
+[
+"CDAD Loire-Atlantique",
+null,
+2
+],
+[
+"CDAD Lot (46)",
+null,
+2
+],
+[
+"CDAD Meurthe-et-Moselle",
+null,
+2
+],
+[
+"CDAD Moselle",
+null,
+2
+],
+[
+"CDAD Seine-Maritime",
+null,
+2
+],
+[
+"CDAD Val-de-Marne",
+null,
+2
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+]
+]
+},
+{
+"onglet": "Vue globale ",
+"carte": "Répartitions des organisations dans chaque CDAD",
+"colonnes": [
+"Territories → Name",
+"Name",
+"pivot-grouping"
+],
+"lignes": [
+[
+"CDAD Côtes-d'Armor",
+"Maison de Justice et du Droit de Lannion",
+0
+],
+[
+"CDAD Côtes-d'Armor",
+"Maison de Justice et du Droit de Loudéac",
+0
+],
+[
+"CDAD Côtes-d'Armor",
+"Tribunal de proximité de Guingamp",
+0
+],
+[
+"CDAD Côtes-d'Armor",
+"Tribunal Judiciaire de Saint-Brieuc",
+0
+],
+[
+"CDAD de Haute-Loire",
+"Association Justice et Partage",
+0
+],
+[
+"CDAD de Haute-Loire",
+"CDAD 43 - Permanences notaire",
+0
+],
+[
+"CDAD de Haute-Loire",
+"CDAD de Haute-Loire",
+0
+],
+[
+"CDAD de Haute-Loire",
+"CIDFF 43 (Centre d'information sur le droit des femmes et des familles)",
+0
+],
+[
+"CDAD de Haute-Loire",
+"Mairie de Brioude",
+0
+],
+[
+"CDAD de Haute-Loire",
+"Mairie de Monistrol-sur-Loire",
+0
+],
+[
+"CDAD de Haute-Loire",
+"Mairie du Chambon-sur-Lignon",
+0
+],
+[
+"CDAD de Haute-Loire",
+"Tribunal judiciaire du Puy en Velay",
+0
+],
+[
+"CDAD de Haute-Loire",
+"Tribunal judiciaire du Puy-en-Velay",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"MJD CHENÔVE",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"MJD CHENÔVE - Conciliateur de justice",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"MJD - France Victimes 21",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Arnay le Duc",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Auxonne",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Châtillon sur Seine",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Clénay",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence Avocat - Dijon (personnes en grande précarité)",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Fontaine d'Ouche",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Genlis",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Longvic",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Maison d'Arrêt",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Maison des adolescents",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Maison des avocats",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Maison des Seniors",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Mirebeau sur Bèze",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Norges et Tille",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Nuits St Georges",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Pouilly en Auxois",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Quetigny",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat (réservée aux étudiants et personnel de l'UBE) - Université",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Saulieu",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Saulon la Chapelle",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Semur en Auxois",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Seurre",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Sombernon",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - St Apollinaire",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Talant",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Tribunal administratif",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Tribunal de proximité de Beaune",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence avocat - Tribunal de proximité de Montbard",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - Episourire",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - Genlis",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - Is sur Tille",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - Mirebeau sur Bèze",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - Semur en Auxois",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - Seurre",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence CIDFF - St Jean de Losne",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence Infodroits - Restos du Coeur",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence juriste - Restos du Coeur Beaune",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence juriste - Restos du Coeur Venarey-les-Laumes",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence notaire - Chambre des notaires",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanences CIDFF",
+0
+],
+[
+"CDAD de la Côte-d'Or",
+"Permanence téléphonique - CDAD 21",
+0
+],
+[
+"CDAD de la Dordogne",
+"Point Justice",
+0
+],
+[
+"CDAD de la Haute-Savoie",
+"Antenne de Justice & du Droit en Chablais",
+0
+],
+[
+"CDAD de la Haute-Savoie",
+"Conseil départemental de l'accès au droit de Haute-Savoie",
+0
+],
+[
+"CDAD de la Haute-Savoie",
+"MJD d'Annemasse",
+0
+],
+[
+"CDAD de la Haute-Savoie",
+"MJD de Saint-Julien-en-Genevois",
+0
+],
+[
+"CDAD de la Savoie",
+"MJD d'Aix-les-Bains",
+0
+],
+[
+"CDAD de la Savoie",
+"MJD de Chambéry",
+0
+],
+[
+"CDAD de la Seine-Et-Marne",
+"MJD de Lognes",
+0
+],
+[
+"CDAD de l'Oise",
+"Carrefour de Femmes",
+0
+],
+[
+"CDAD de l'Oise",
+"Maison de Justice et du Droit de Noyon",
+0
+],
+[
+"CDAD de l'Oise",
+"MJD de Creil",
+0
+],
+[
+"CDAD de l'Oise",
+"MJD de Méru",
+0
+],
+[
+"CDAD de l'Oise",
+"MJD de Noyon",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice Breteuil",
+0
+],
+[
+"CDAD de l'Oise",
+"Point-Justice CCAS Villers Saint Paul",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice Chaumont en Vexin",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice Grandvilliers",
+0
+],
+[
+"CDAD de l'Oise",
+"Point-justice Maison de ressources - Crépy-en-Valois",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice Ressons-sur-Matz",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice TJ Beauvais",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice TJ Compiègne",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice TJ Senlis",
+0
+],
+[
+"CDAD de l'Oise",
+"point-justice UTC",
+0
+],
+[
+"CDAD de l'Oise",
+"SAMU SOCIAL",
+0
+],
+[
+"CDAD de l'Oise",
+"UPJV Beauvais",
+0
+],
+[
+"CDAD des Alpes-Maritimes",
+"Mairie Annexe Saint Augustin",
+0
+],
+[
+"CDAD des Alpes-Maritimes",
+"MJD de Menton",
+0
+],
+[
+"CDAD des Alpes-Maritimes",
+"MJD de Nice",
+0
+],
+[
+"CDAD des Alpes-Maritimes",
+"TJ NICE",
+0
+],
+[
+"CDAD des Bouches-du-Rhône",
+"Bureau central des conciliateurs et des délégués du défenseur des droits Aix",
+0
+],
+[
+"CDAD des Bouches-du-Rhône",
+"MJD d’Aix",
+0
+],
+[
+"CDAD des Bouches-du-Rhône",
+"MJD d'Aubagne",
+0
+],
+[
+"CDAD des Bouches-du-Rhône",
+"MJD de Marseille",
+0
+],
+[
+"CDAD des Bouches-du-Rhône",
+"MJD Martigues",
+0
+],
+[
+"CDAD des Bouches-du-Rhône",
+"MJD Salon de Provence",
+0
+],
+[
+"CDAD des Hautes-Alpes",
+"Point Justice de Gap",
+0
+],
+[
+"CDAD des Hautes-Alpes",
+"Point-justice de Laragne",
+0
+],
+[
+"CDAD des Hautes-Alpes",
+"Point-justice d'Embrun",
+0
+],
+[
+"CDAD des Landes",
+"CDAD 40",
+0
+],
+[
+"CDAD des Landes",
+"Centre Administratif de PARENTIS-EN-BORN",
+0
+],
+[
+"CDAD des Landes",
+"Centre Communal d'Action Sociale de MIMIZAN",
+0
+],
+[
+"CDAD des Landes",
+"Centre Communal d'Action Sociale de MONT-DE-MARSAN",
+0
+],
+[
+"CDAD des Landes",
+"Centre Communal d'Action Sociale de SOUSTONS",
+0
+],
+[
+"CDAD des Landes",
+"Conseil des Prud'hommes - DAX",
+0
+],
+[
+"CDAD des Landes",
+"Escale Info - CAPBRETON",
+0
+],
+[
+"CDAD des Landes",
+"Espace France Services d'AIRE-SUR-L'ADOUR",
+0
+],
+[
+"CDAD des Landes",
+"Espace France Services de GABARRET",
+0
+],
+[
+"CDAD des Landes",
+"Espace France Services de MONTFORT-EN-CHALOSSE",
+0
+],
+[
+"CDAD des Landes",
+"Espace France Services de PEYREHORADE",
+0
+],
+[
+"CDAD des Landes",
+"Espace France Services de ROQUEFORT",
+0
+],
+[
+"CDAD des Landes",
+"Espace France Services d'HAGETMAU",
+0
+],
+[
+"CDAD des Landes",
+"Mairie de MORCENX",
+0
+],
+[
+"CDAD des Landes",
+"Mairie de SAINT-PAUL-LES-DAX",
+0
+],
+[
+"CDAD des Landes",
+"Maison Municipale de la Justice et du Droit de BISCARROSSE",
+0
+],
+[
+"CDAD des Landes",
+"Tribunal Judiciaire - DAX",
+0
+],
+[
+"CDAD des Landes",
+"Tribunal Judiciaire - MONT-DE-MARSAN",
+0
+],
+[
+"CDAD du Finistère",
+"France Services Cap Sizun",
+0
+],
+[
+"CDAD du Finistère",
+"France Services CCA KERANDON",
+0
+],
+[
+"CDAD du Finistère",
+"France Services Saint Pol de Léon",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice CDAD",
+0
+],
+[
+"CDAD du Finistère",
+"POINT JUSTICE DROIT DES ETRANGERS QUIMPER",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice ebus CCA",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice ERGUE GABERIC",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice France Services Châteaulin",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice France Services CROZON",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice France Services Lesneven",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice France Services Pays des Abers",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice France Services PLOUARZEL",
+0
+],
+[
+"CDAD du Finistère",
+"Point-Justice France Services Quimperlé",
+0
+],
+[
+"CDAD du Finistère",
+"Point Justice Kermoysan",
+0
+],
+[
+"CDAD du Finistère",
+"POINT JUSTICE POHER COMMUNAUTE",
+0
+],
+[
+"CDAD du Loiret",
+"Conciliateurs à la Maison de justice et du droit d'Orléans",
+0
+],
+[
+"CDAD du Loiret",
+"Journées portes ouvertes",
+0
+],
+[
+"CDAD du Loiret",
+"Maison de justice et du droit d'Orléans",
+0
+],
+[
+"CDAD du Loiret",
+"Projets jeunes",
+0
+],
+[
+"CDAD du Loiret",
+"Tribunal judiciaire de Montargis",
+0
+],
+[
+"CDAD du Loiret",
+"Tribunal judiciaire d'Orléans",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"Maison de justice et du droit de Blois",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"Permanences téléphoniques juriste CDAD 41",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice de Romorantin-Lanthenay",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"Point-justice du PIMM's de Blois",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Bracieux",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Chailles",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Cour-Cheverny",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de La Chapelle-Vendômoise",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Lamotte-Beuvron",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Le Controis-en-Sologne",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Mer",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Mondoubleau",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Montoire-sur-Le-Loir",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Montrichard Val de Cher",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Neung-sur-Beuvron",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Saint-Aignan",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Salbris",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Selles-sur-Cher",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Veuzain-sur-Loire",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services de Vineuil",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services La Poste de Mennetou-sur-Cher",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services La Poste de Morée",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services La Poste de Saint-Laurent-Nouan",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services La Poste d'Herbault",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services La Poste d'Ouzouer-le-Marché",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice en France services La Poste Droué",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice généraliste Vendôme",
+0
+],
+[
+"CDAD du Loir-et-Cher",
+"point-justice & tribunal judiciaire de Blois",
+0
+],
+[
+"CDAD du Pas-De-Calais",
+"CDAD du Pas-De-Calais",
+0
+],
+[
+"CDAD du Rhône",
+"ADJ de Lyon 9",
+0
+],
+[
+"CDAD du Rhône",
+"ADJ de Meyzieu",
+0
+],
+[
+"CDAD du Rhône",
+"CDAD du Rhône",
+0
+],
+[
+"CDAD du Rhône",
+"Maison de Justice et du Droit de Rillieux-la-pape",
+0
+],
+[
+"CDAD du Rhône",
+"MJD de Bron",
+0
+],
+[
+"CDAD du Rhône",
+"MJD de Lyon 8",
+0
+],
+[
+"CDAD du Rhône",
+"MJD de Venissieux",
+0
+],
+[
+"CDAD du Rhône",
+"MJD de villeurbanne",
+0
+],
+[
+"CDAD du Rhône",
+"MJD GIVORS",
+0
+],
+[
+"CDAD du Rhône",
+"MJD VAULX-EN-VELIN",
+0
+],
+[
+"CDAD Hauts-de-Seine",
+"Maison de justice et du droit de Gennevilliers",
+0
+],
+[
+"CDAD Hauts-de-Seine",
+"Maison de justice et du droit des Blagis",
+0
+],
+[
+"CDAD Hauts-de-Seine",
+"Maison de la justice et du droit de Châtenay-Malabry",
+0
+],
+[
+"CDAD Hauts-de-Seine",
+"Point Justice - Tribunal Judiciaire de Nanterre",
+0
+],
+[
+"CDAD Hérault",
+"JURISTE ASSISTANT DU CDAD HERAULT",
+0
+],
+[
+"CDAD Hérault",
+"Maison de la justice et du droit de Lodève",
+0
+],
+[
+"CDAD Hérault",
+"Maison de la Justice et du Droit de Lodève",
+0
+],
+[
+"CDAD Hérault",
+"Maison de la Justice et du Droit de Lunel",
+0
+],
+[
+"CDAD Hérault",
+"Maison de la Justice et du Droit de Montpellier",
+0
+],
+[
+"CDAD Hérault",
+"Maison de la Justice et du Droit de Montpellier Méditerranée Métropole à Lattes",
+0
+],
+[
+"CDAD Hérault",
+"POINT-JUSTICE TRIBUNAL JUDICAIRE DE MONTPELLIER",
+0
+],
+[
+"CDAD Maine-et-Loire",
+"Conseil départemental d'accès au droit",
+0
+],
+[
+"CDAD Maine-et-Loire",
+"Maison de Justice et du Droit d'Angers",
+0
+],
+[
+"CDAD Maine-et-Loire",
+"Nationalité",
+0
+],
+[
+"CDAD Maine-et-Loire",
+"notaire",
+0
+],
+[
+"Cour d'Appel de Caen",
+"TJ CAEN",
+0
+],
+[
+"Cour d'Appel de Caen",
+"TJ CHERBOURG",
+0
+],
+[
+"Cour d'Appel de Caen",
+"TJ LISIEUX",
+0
+],
+[
+"Cour d'appel de Colmar",
+"TJ COLMAR",
+0
+],
+[
+"Cour d'appel de Colmar",
+"TJ MULHOUSE",
+0
+],
+[
+"Cour d'appel de Colmar",
+"TJ SAVERNE",
+0
+],
+[
+"Cour d'appel de Colmar",
+"TJ STRASBOURG",
+0
+],
+[
+"Cours d'Appel de Nice",
+"Conciliateurs",
+0
+],
+[
+"Tribunal judiciaire d'Aix en Provence - Scellés",
+"Tribunal judiciaire d'Aix en Provence - Service des scellés",
+0
+],
+[
+"Tribunal judiciaire de CAEN",
+"CDAD CALVADOS",
+0
+],
+[
+"Tribunal judiciaire de CAEN",
+"MJD MONDEVILLE",
+0
+],
+[
+"Tribunal judiciaire de CAEN",
+"TJ CAEN",
+0
+],
+[
+"Tribunal judiciaire de CAEN",
+"Tribunal de proximité de VIRE",
+0
+],
+[
+"Tribunal Judiciaire de Laval",
+"Tribunal Judiciaire de Laval",
+0
+],
+[
+"Tribunal Judiciaire de Lille",
+"Tribunal Judiciaire de Lille",
+0
+],
+[
+"Tribunal Judiciaire de Niort",
+"Avocats",
+0
+],
+[
+"Tribunal Judiciaire de Niort",
+"Intermède",
+0
+],
+[
+"Tribunal Judiciaire de Niort",
+"JAF",
+0
+],
+[
+"Tribunal Judiciaire de Niort",
+"UDAF",
+0
+],
+[
+"Tribunal Judiciaire de Tulle",
+"Tribunal Judiciaire de Tulle",
+0
+],
+[
+null,
+"Cour nationale du droit d'asile (CNDA)",
+0
+],
+[
+null,
+"Service Pénitentiaire d'Insertion et de Probation du Rhône",
+0
+],
+[
+null,
+"stemo orne",
+0
+],
+[
+null,
+"TRIBUNAL DE PROXIMITE DE GUEBWILLER",
+0
+],
+[
+null,
+"UEMO CHERBOURG",
+0
+],
+[
+"CDAD Côtes-d'Armor",
+null,
+2
+],
+[
+"CDAD de Haute-Loire",
+null,
+2
+],
+[
+"CDAD de la Côte-d'Or",
+null,
+2
+],
+[
+"CDAD de la Dordogne",
+null,
+2
+],
+[
+"CDAD de la Haute-Savoie",
+null,
+2
+],
+[
+"CDAD de la Savoie",
+null,
+2
+],
+[
+"CDAD de la Seine-Et-Marne",
+null,
+2
+],
+[
+"CDAD de l'Oise",
+null,
+2
+],
+[
+"CDAD des Alpes-Maritimes",
+null,
+2
+],
+[
+"CDAD des Bouches-du-Rhône",
+null,
+2
+],
+[
+"CDAD des Hautes-Alpes",
+null,
+2
+],
+[
+"CDAD des Landes",
+null,
+2
+],
+[
+"CDAD du Finistère",
+null,
+2
+],
+[
+"CDAD du Loiret",
+null,
+2
+],
+[
+"CDAD du Loir-et-Cher",
+null,
+2
+],
+[
+"CDAD du Pas-De-Calais",
+null,
+2
+],
+[
+"CDAD du Rhône",
+null,
+2
+],
+[
+"CDAD Hauts-de-Seine",
+null,
+2
+],
+[
+"CDAD Hérault",
+null,
+2
+],
+[
+"CDAD Maine-et-Loire",
+null,
+2
+],
+[
+"Cour d'Appel de Caen",
+null,
+2
+],
+[
+"Cour d'appel de Colmar",
+null,
+2
+],
+[
+"Cours d'Appel de Nice",
+null,
+2
+],
+[
+"Tribunal judiciaire d'Aix en Provence - Scellés",
+null,
+2
+],
+[
+"Tribunal judiciaire de CAEN",
+null,
+2
+],
+[
+"Tribunal Judiciaire de Laval",
+null,
+2
+],
+[
+"Tribunal Judiciaire de Lille",
+null,
+2
+],
+[
+"Tribunal Judiciaire de Niort",
+null,
+2
+],
+[
+"Tribunal Judiciaire de Tulle",
+null,
+2
+],
+[
+null,
+null,
+2
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+],
+[
+null,
+null,
+3
+]
+]
+}
+]
+}

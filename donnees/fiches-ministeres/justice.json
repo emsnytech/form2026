@@ -1,0 +1,1363 @@
+{
+ "config": {
+  "source": "data/demarches_slim.jsonl",
+  "date_extraction": "2026-10-21",
+  "annee_debut": 2021,
+  "annee_fin": 2026,
+  "zones": {
+   "Ministère de la Justice": "Justice"
+  },
+  "priorite_poles": [
+   "Justice"
+  ],
+  "max_zones": 3,
+  "sans_zone_motifs": {
+   "Justice": "minist[eè]re de la justice|garde des sceaux|tribunal judiciaire|cour d.appel|cour de cassation|prud.?homme|services? judiciaires|magistrature|\\bENM\\b|\\bENAP\\b|[ée]cole nationale des greffes|administration p[ée]nitentiaire|services? p[ée]nitentiaires?|\\bSPIP\\b|\\bDISP\\b|protection judiciaire de la jeunesse|\\bPJJ\\b|\\bCDAD\\b|maison d.arr[êe]t|centre de d[ée]tention|centre p[ée]nitentiaire"
+  },
+  "sans_zone_exclusions": "police judiciaire|CCAS|centre communal|pr[ée]fecture|mairie|commune|\\bTEST\\b|XXX",
+  "sans_zone_types_exclus": [
+   "collectivite_territoriale"
+  ],
+  "exclusions_toutes": "^DDETS78$|^<script>|^Ecole Nationale d.Architecture|^ACADEMIE DE STRASBOURG$|^DDCSPP du Haut-Rhin$|^Collectivit[ée] europ[ée]+nne d.Alsace$|cohésion sociale et de la protection des populations \\(DDCSPP\\) des Deux-S[èe]vres|^DESCO 1$|^Minist[eè]re des solidarit[ée]s|^d.un excellent organisme$|^Brigade nationale des enqu[êe]tes domaniales$|^Cour d.appel de X$|^OJI6$",
+  "motif_anomalie": "DDETS|DDCSPP|pr[ée]fecture|rectorat|acad[ée]mie|architecture|collectivit[ée]|solidarit",
+  "complements": {
+   "motif_qf": "aide juridictionnelle|aides? aux victimes|frais de justice|bourses?\\b|cr[èe]che|classe pr[ée]pa"
+  },
+  "inclusions_numeros": [
+   128159
+  ],
+  "familles": "scripts/familles_justice.json",
+  "sortie_familles": "out/justice_familles.json"
+ },
+ "perimetre": {
+  "total": 392,
+  "par_source": {
+   "zone": 386,
+   "nom_organisme": 5,
+   "inclusion": 1
+  },
+  "par_pole": {
+   "Justice": 392
+  },
+  "exclues_interministerielles": 180,
+  "etats": {
+   "publiee": 57,
+   "close": 333,
+   "depubliee": 2
+  },
+  "dossiers_total": 49320
+ },
+ "plateforme": {
+  "total": 44350,
+  "dossiers_total": 19888006
+ },
+ "annees": [
+  {
+   "annee": 2021,
+   "publiees": 5,
+   "closes": 0,
+   "actives_dans_annee": 7,
+   "stock_fin_annee": 7,
+   "dossiers_cohorte": 1848,
+   "ephemeres_moins_3_mois": 0,
+   "pct_particuliers": 100.0,
+   "champs_moyens": 22.4,
+   "pj_moyennes": 5.6,
+   "pct_siret": 0.0,
+   "pct_annuaire_education": 0.0,
+   "pct_iban": 40.0,
+   "pct_rna": 0.0,
+   "nb_api_particulier": 0,
+   "pct_dossier_lie": 0.0,
+   "type_organisme": {
+    "administration_centrale": 5
+   },
+   "par_pole": {
+    "Justice": 5
+   },
+   "par_source": {
+    "zone": 4,
+    "nom_organisme": 1
+   }
+  },
+  {
+   "annee": 2022,
+   "publiees": 19,
+   "closes": 9,
+   "actives_dans_annee": 26,
+   "stock_fin_annee": 17,
+   "dossiers_cohorte": 1911,
+   "ephemeres_moins_3_mois": 5,
+   "pct_particuliers": 94.7,
+   "champs_moyens": 33.3,
+   "pj_moyennes": 7.58,
+   "pct_siret": 5.3,
+   "pct_annuaire_education": 5.3,
+   "pct_iban": 36.8,
+   "pct_rna": 0.0,
+   "nb_api_particulier": 0,
+   "pct_dossier_lie": 0.0,
+   "type_organisme": {
+    "administration_centrale": 17,
+    "autre": 1,
+    "etablissement_enseignement": 1
+   },
+   "par_pole": {
+    "Justice": 19
+   },
+   "par_source": {
+    "zone": 16,
+    "nom_organisme": 3
+   }
+  },
+  {
+   "annee": 2023,
+   "publiees": 27,
+   "closes": 29,
+   "actives_dans_annee": 44,
+   "stock_fin_annee": 15,
+   "dossiers_cohorte": 17498,
+   "ephemeres_moins_3_mois": 9,
+   "pct_particuliers": 100.0,
+   "champs_moyens": 30.1,
+   "pj_moyennes": 6.15,
+   "pct_siret": 0.0,
+   "pct_annuaire_education": 3.7,
+   "pct_iban": 22.2,
+   "pct_rna": 0.0,
+   "nb_api_particulier": 0,
+   "pct_dossier_lie": 0.0,
+   "type_organisme": {
+    "administration_centrale": 20,
+    "etablissement_enseignement": 2,
+    "service_deconcentre_de_l_etat": 1,
+    "autre": 4
+   },
+   "par_pole": {
+    "Justice": 27
+   },
+   "par_source": {
+    "zone": 27
+   }
+  },
+  {
+   "annee": 2024,
+   "publiees": 119,
+   "closes": 68,
+   "actives_dans_annee": 134,
+   "stock_fin_annee": 66,
+   "dossiers_cohorte": 10540,
+   "ephemeres_moins_3_mois": 93,
+   "pct_particuliers": 100.0,
+   "champs_moyens": 51.5,
+   "pj_moyennes": 2.55,
+   "pct_siret": 0.8,
+   "pct_annuaire_education": 0.8,
+   "pct_iban": 6.7,
+   "pct_rna": 0.0,
+   "nb_api_particulier": 0,
+   "pct_dossier_lie": 0.0,
+   "type_organisme": {
+    "administration_centrale": 106,
+    "service_deconcentre_de_l_etat": 4,
+    "autre": 5,
+    "etablissement_enseignement": 4
+   },
+   "par_pole": {
+    "Justice": 119
+   },
+   "par_source": {
+    "zone": 119
+   }
+  },
+  {
+   "annee": 2025,
+   "publiees": 122,
+   "closes": 155,
+   "actives_dans_annee": 188,
+   "stock_fin_annee": 33,
+   "dossiers_cohorte": 8970,
+   "ephemeres_moins_3_mois": 103,
+   "pct_particuliers": 98.4,
+   "champs_moyens": 53.3,
+   "pj_moyennes": 2.93,
+   "pct_siret": 1.6,
+   "pct_annuaire_education": 0.8,
+   "pct_iban": 3.3,
+   "pct_rna": 0.0,
+   "nb_api_particulier": 0,
+   "pct_dossier_lie": 0.0,
+   "type_organisme": {
+    "administration_centrale": 106,
+    "autre": 10,
+    "etablissement_enseignement": 5,
+    "service_deconcentre_de_l_etat": 1
+   },
+   "par_pole": {
+    "Justice": 122
+   },
+   "par_source": {
+    "zone": 121,
+    "inclusion": 1
+   }
+  },
+  {
+   "annee": 2026,
+   "publiees": 98,
+   "closes": 74,
+   "actives_dans_annee": 131,
+   "stock_fin_annee": 57,
+   "dossiers_cohorte": 8291,
+   "ephemeres_moins_3_mois": 64,
+   "pct_particuliers": 99.0,
+   "champs_moyens": 38.9,
+   "pj_moyennes": 3.07,
+   "pct_siret": 1.0,
+   "pct_annuaire_education": 2.0,
+   "pct_iban": 5.1,
+   "pct_rna": 0.0,
+   "nb_api_particulier": 0,
+   "pct_dossier_lie": 0.0,
+   "type_organisme": {
+    "administration_centrale": 75,
+    "etablissement_enseignement": 11,
+    "autre": 9,
+    "service_deconcentre_de_l_etat": 3
+   },
+   "par_pole": {
+    "Justice": 98
+   },
+   "par_source": {
+    "zone": 98
+   }
+  }
+ ],
+ "annees_plateforme": [
+  {
+   "annee": 2021,
+   "publiees": 4455,
+   "closes": 3191,
+   "actives_dans_annee": 8343,
+   "stock_fin_annee": 5152,
+   "dossiers_cohorte": 2845293,
+   "ephemeres_moins_3_mois": 1898,
+   "pct_particuliers": 61.5,
+   "champs_moyens": 41.4,
+   "pj_moyennes": 6.45
+  },
+  {
+   "annee": 2022,
+   "publiees": 5239,
+   "closes": 3960,
+   "actives_dans_annee": 10391,
+   "stock_fin_annee": 6431,
+   "dossiers_cohorte": 2341498,
+   "ephemeres_moins_3_mois": 2280,
+   "pct_particuliers": 60.4,
+   "champs_moyens": 42.3,
+   "pj_moyennes": 6.37
+  },
+  {
+   "annee": 2023,
+   "publiees": 5098,
+   "closes": 3821,
+   "actives_dans_annee": 11529,
+   "stock_fin_annee": 7708,
+   "dossiers_cohorte": 2942662,
+   "ephemeres_moins_3_mois": 2086,
+   "pct_particuliers": 61.7,
+   "champs_moyens": 43.6,
+   "pj_moyennes": 6.29
+  },
+  {
+   "annee": 2024,
+   "publiees": 6198,
+   "closes": 4512,
+   "actives_dans_annee": 13906,
+   "stock_fin_annee": 9394,
+   "dossiers_cohorte": 2128201,
+   "ephemeres_moins_3_mois": 2483,
+   "pct_particuliers": 64.1,
+   "champs_moyens": 45.7,
+   "pj_moyennes": 6.5
+  },
+  {
+   "annee": 2025,
+   "publiees": 7375,
+   "closes": 5125,
+   "actives_dans_annee": 16769,
+   "stock_fin_annee": 11644,
+   "dossiers_cohorte": 1867026,
+   "ephemeres_moins_3_mois": 2965,
+   "pct_particuliers": 64.9,
+   "champs_moyens": 43.5,
+   "pj_moyennes": 6.17
+  },
+  {
+   "annee": 2026,
+   "publiees": 7358,
+   "closes": 5473,
+   "actives_dans_annee": 19002,
+   "stock_fin_annee": 13529,
+   "dossiers_cohorte": 1048661,
+   "ephemeres_moins_3_mois": 2776,
+   "pct_particuliers": 64.2,
+   "champs_moyens": 46.0,
+   "pj_moyennes": 6.1
+  }
+ ],
+ "annees_par_pole": {
+  "Justice": [
+   {
+    "annee": 2021,
+    "publiees": 5,
+    "closes": 0,
+    "actives_dans_annee": 7,
+    "stock_fin_annee": 7,
+    "dossiers_cohorte": 1848
+   },
+   {
+    "annee": 2022,
+    "publiees": 19,
+    "closes": 9,
+    "actives_dans_annee": 26,
+    "stock_fin_annee": 17,
+    "dossiers_cohorte": 1911
+   },
+   {
+    "annee": 2023,
+    "publiees": 27,
+    "closes": 29,
+    "actives_dans_annee": 44,
+    "stock_fin_annee": 15,
+    "dossiers_cohorte": 17498
+   },
+   {
+    "annee": 2024,
+    "publiees": 119,
+    "closes": 68,
+    "actives_dans_annee": 134,
+    "stock_fin_annee": 66,
+    "dossiers_cohorte": 10540
+   },
+   {
+    "annee": 2025,
+    "publiees": 122,
+    "closes": 155,
+    "actives_dans_annee": 188,
+    "stock_fin_annee": 33,
+    "dossiers_cohorte": 8970
+   },
+   {
+    "annee": 2026,
+    "publiees": 98,
+    "closes": 74,
+    "actives_dans_annee": 131,
+    "stock_fin_annee": 57,
+    "dossiers_cohorte": 8291
+   }
+  ]
+ },
+ "contexte_avant": [
+  {
+   "annee": 2016,
+   "publiees": 0,
+   "publiees_sans_zone_plateforme": 14,
+   "publiees_plateforme": 14
+  },
+  {
+   "annee": 2017,
+   "publiees": 0,
+   "publiees_sans_zone_plateforme": 280,
+   "publiees_plateforme": 316
+  },
+  {
+   "annee": 2018,
+   "publiees": 0,
+   "publiees_sans_zone_plateforme": 1424,
+   "publiees_plateforme": 2048
+  },
+  {
+   "annee": 2019,
+   "publiees": 0,
+   "publiees_sans_zone_plateforme": 1417,
+   "publiees_plateforme": 2907
+  },
+  {
+   "annee": 2020,
+   "publiees": 2,
+   "publiees_sans_zone_plateforme": 747,
+   "publiees_plateforme": 3342
+  },
+  {
+   "annee": 2021,
+   "publiees": 5,
+   "publiees_sans_zone_plateforme": 1112,
+   "publiees_plateforme": 4455
+  },
+  {
+   "annee": 2022,
+   "publiees": 19,
+   "publiees_sans_zone_plateforme": 723,
+   "publiees_plateforme": 5239
+  },
+  {
+   "annee": 2023,
+   "publiees": 27,
+   "publiees_sans_zone_plateforme": 27,
+   "publiees_plateforme": 5098
+  },
+  {
+   "annee": 2024,
+   "publiees": 119,
+   "publiees_sans_zone_plateforme": 8,
+   "publiees_plateforme": 6198
+  },
+  {
+   "annee": 2025,
+   "publiees": 122,
+   "publiees_sans_zone_plateforme": 2,
+   "publiees_plateforme": 7375
+  },
+  {
+   "annee": 2026,
+   "publiees": 98,
+   "publiees_sans_zone_plateforme": 6,
+   "publiees_plateforme": 7358
+  }
+ ],
+ "zones_par_annee": {
+  "Ministère de la Justice": {
+   "2020": 1,
+   "2021": 4,
+   "2022": 16,
+   "2023": 27,
+   "2024": 119,
+   "2025": 121,
+   "2026": 98
+  },
+  "(sans zone)": {
+   "2020": 1,
+   "2021": 1,
+   "2022": 3
+  }
+ },
+ "top_demarches_fenetre": [
+  {
+   "number": 64697,
+   "title": "Question au ministère de la Justice",
+   "organisme": "Cabinet du garde des sceaux et secrétariat général, ministère de la justice",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "publiee",
+   "datePublication": "2023-03-08T10:07:39+01:00",
+   "dateFermeture": null,
+   "dossiersCount": 10006,
+   "n_champs": 7,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/questions-au-ministere-de-la-justice",
+   "departement": "75",
+   "pj": 0
+  },
+  {
+   "number": 84443,
+   "title": "ENM - SRH - Dossier administratif de paiement des vacations - intervenants",
+   "organisme": "Ecole Nationale de la Magistrature ",
+   "typeOrganisme": "autre",
+   "pole": "Justice",
+   "state": "publiee",
+   "datePublication": "2023-11-20T11:06:46+01:00",
+   "dateFermeture": null,
+   "dossiersCount": 5009,
+   "n_champs": 29,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/dossier-administratif-de-paiement-des-vacations-in",
+   "departement": "33",
+   "pj": 6
+  },
+  {
+   "number": 99859,
+   "title": "Demande de certificat de non appel et de copie de jugement adressée au Tribunal Judiciaire de Lille",
+   "organisme": "Tribunal judiciaire de Lille",
+   "typeOrganisme": "autre",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2024-07-30T14:19:49+02:00",
+   "dateFermeture": "2026-07-29T14:57:53+02:00",
+   "dossiersCount": 2311,
+   "n_champs": 39,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/demande-de-certificat-de-non-appel-et-de-copie-de",
+   "departement": "59",
+   "pj": 2
+  },
+  {
+   "number": 150072,
+   "title": "ENM -  concours-pro-2027 - pièces justificatives ",
+   "organisme": "Ministère de la Justice, DSJ, Ecole nationale de la magistrature",
+   "typeOrganisme": "autre",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2026-09-07T15:54:19+02:00",
+   "dateFermeture": "2026-10-17T00:00:15+02:00",
+   "dossiersCount": 1626,
+   "n_champs": 32,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/enm-concours-pro-2027-pieces-justificatives",
+   "departement": "33",
+   "pj": 12
+  },
+  {
+   "number": 103529,
+   "title": "ENM -  concours professionnel 2025 - pièces justificatives ",
+   "organisme": "Ministère de la Justice, DSJ, Ecole nationale de la magistrature",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2024-10-21T08:33:28+02:00",
+   "dateFermeture": "2024-11-22T17:03:02+01:00",
+   "dossiersCount": 1181,
+   "n_champs": 40,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/enm-concours-professionnel-2025-pieces-justificatives",
+   "departement": "33",
+   "pj": 16
+  },
+  {
+   "number": 122531,
+   "title": "ENM -  concours professionnel 2026 - pièces justificatives ",
+   "organisme": "Ministère de la Justice, DSJ, Ecole nationale de la magistrature",
+   "typeOrganisme": "autre",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2025-10-17T17:42:32+02:00",
+   "dateFermeture": "2025-10-17T17:42:57+02:00",
+   "dossiersCount": 1064,
+   "n_champs": 32,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/enm-concours-pro-2026-pieces-justificatives",
+   "departement": "33",
+   "pj": 12
+  },
+  {
+   "number": 36353,
+   "title": "Dossier de prise en charge suite au concours externe pour le recrutement des greffiers des services judiciaires au titre de l’année 2021 ",
+   "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation (RHG4) ",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2021-05-17T17:57:55+02:00",
+   "dateFermeture": "2022-04-22T09:27:21+02:00",
+   "dossiersCount": 884,
+   "n_champs": 38,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/recrutement-greffier-externe-21",
+   "departement": "75",
+   "pj": 11
+  },
+  {
+   "number": 59629,
+   "title": "G2022 - Dossier de prise en charge - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l’année 2022",
+   "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation (RHG4) ",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2022-05-16T08:22:33+02:00",
+   "dateFermeture": "2023-10-17T16:47:39+02:00",
+   "dossiersCount": 859,
+   "n_champs": 40,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/recrutement-greffier-externe-22",
+   "departement": "75",
+   "pj": 11
+  },
+  {
+   "number": 49090,
+   "title": "Recrutement sans concours d’adjoints administratifs du ministère de la justice pour l’administration de la Polynésie Française, au titre de l'année 2022",
+   "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation (RHG4) ",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2021-11-03T09:38:57+01:00",
+   "dateFermeture": "2022-04-15T14:43:07+02:00",
+   "dossiersCount": 697,
+   "n_champs": 14,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/recrutement-rscaa-ceapf-inscription-2022",
+   "departement": "75",
+   "pj": 4
+  },
+  {
+   "number": 66652,
+   "title": "G2023 - CNAN - Dossier de prise en charge - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l’année 2023",
+   "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2023-05-19T18:40:37+02:00",
+   "dateFermeture": "2023-10-17T16:50:46+02:00",
+   "dossiersCount": 688,
+   "n_champs": 40,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/recrutement-greffier-externe-23",
+   "departement": "75",
+   "pj": 11
+  },
+  {
+   "number": 134665,
+   "title": "ENM -  3ème concours de recrutement d'ADJ (2026) : pièces à déposer par les candidats ",
+   "organisme": "Ministère de la justice, DSJ, Ecole nationale de la magistrature",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2025-12-22T09:21:58+01:00",
+   "dateFermeture": "2026-02-21T00:00:17+01:00",
+   "dossiersCount": 636,
+   "n_champs": 27,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/enm-3eme-concours-de-recrutement-d-adj-2026-pieces",
+   "departement": "33",
+   "pj": 8
+  },
+  {
+   "number": 120267,
+   "title": "G2025S02 - Dépôt de la FIR - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l'année 2025 (session 2)",
+   "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2025-05-20T12:09:40+02:00",
+   "dateFermeture": "2025-07-29T11:35:31+02:00",
+   "dossiersCount": 574,
+   "n_champs": 9,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/greffier2025s2-fir",
+   "departement": "75",
+   "pj": 1
+  },
+  {
+   "number": 147749,
+   "title": "G2026 S2 - Dépôt de la FIR - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l'année 2026 (session 2)",
+   "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "publiee",
+   "datePublication": "2026-05-21T18:34:23+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 573,
+   "n_champs": 9,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/greffier2026s2-fir",
+   "departement": "75",
+   "pj": 1
+  },
+  {
+   "number": 147752,
+   "title": "G2026 S2 - Dossier de prise en charge - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l’année 2026 (Session 2)",
+   "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "publiee",
+   "datePublication": "2026-05-21T19:44:54+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 556,
+   "n_champs": 41,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/greffier2026s2-pj-externe",
+   "departement": "75",
+   "pj": 12
+  },
+  {
+   "number": 120280,
+   "title": "G2025S02 - Dossier de prise en charge - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l’année 2025 (Session 2)",
+   "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2025-05-20T13:01:31+02:00",
+   "dateFermeture": "2026-01-30T18:38:59+01:00",
+   "dossiersCount": 550,
+   "n_champs": 40,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/greffier2025s2-pj-externe",
+   "departement": "75",
+   "pj": 11
+  },
+  {
+   "number": 122417,
+   "title": "ENM -  1er concours et/ou 1er concours spécial talents de recrutement d'ADJ (2025) : pièces à déposer par les candidats déclarés admissibles ",
+   "organisme": "Ministère de la justice, DSJ, Ecole nationale de la magistrature",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2025-07-22T10:00:09+02:00",
+   "dateFermeture": "2025-08-12T00:00:07+02:00",
+   "dossiersCount": 478,
+   "n_champs": 25,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/enm-1er-concours-et-ou-1er-concours-special-talent",
+   "departement": "33",
+   "pj": 6
+  },
+  {
+   "number": 152846,
+   "title": "GPR 2026 - Dépôt du dossier RAEP - Examen professionnel d'accès au grade de greffier principal du corps des greffiers des services judiciaires, au titre de l'année 2026",
+   "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "publiee",
+   "datePublication": "2026-07-23T19:46:00+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 464,
+   "n_champs": 11,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/exapro-gpr-2026-raep",
+   "departement": "75",
+   "pj": 2
+  },
+  {
+   "number": 152847,
+   "title": "GPR 2026 - Dépôt de pièces justificatives - Examen professionnel d'accès au grade de greffier principal du corps des greffiers des services judiciaires au titre de l’année 2026",
+   "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "publiee",
+   "datePublication": "2026-07-23T19:55:02+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 444,
+   "n_champs": 10,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/exapro-gpr-2026-pj",
+   "departement": "75",
+   "pj": 1
+  },
+  {
+   "number": 132020,
+   "title": "G2026 S1 - Dépôt de la FIR - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l'année 2026 (session 1)",
+   "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2025-11-12T16:57:21+01:00",
+   "dateFermeture": "2025-12-22T18:17:06+01:00",
+   "dossiersCount": 411,
+   "n_champs": 9,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/greffier2026s1-fir",
+   "departement": "75",
+   "pj": 1
+  },
+  {
+   "number": 95746,
+   "title": "G2024S2 - Dossier de prise en charge - Concours externe pour le recrutement des greffiers des services judiciaires au titre de l’année 2024 (Session 2)",
+   "organisme": "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+   "typeOrganisme": "administration_centrale",
+   "pole": "Justice",
+   "state": "close",
+   "datePublication": "2024-05-24T23:05:17+02:00",
+   "dateFermeture": "2024-10-18T22:58:43+02:00",
+   "dossiersCount": 410,
+   "n_champs": 40,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/greffier2024s2-pj-externe",
+   "departement": "75",
+   "pj": 11
+  }
+ ],
+ "concentration_fenetre": {
+  "demarches": 390,
+  "dossiers": 49058,
+  "part_top10": 49.6,
+  "part_top1pct": 35.3,
+  "demarches_0_dossier": 0,
+  "demarches_moins_10_dossiers": 93,
+  "mediane_dossiers": 27
+ },
+ "top_organismes_fenetre": [
+  [
+   "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des carrières et de la mobilité professionnelle",
+   163
+  ],
+  [
+   "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation",
+   122
+  ],
+  [
+   "Direction des services judiciaires - Sous-direction des ressources humaines des greffes - Bureau des recrutements et de la formation (RHG4)",
+   18
+  ],
+  [
+   "Sous-direction de la stratégie, de l’attractivité et l’accompagnement des évolutions professionnelles, Service des Ressources Humaines, Secrétariat Général, Ministère de la Justice",
+   11
+  ],
+  [
+   "Ecole Nationale de la Magistrature, Minsitère de la Justice",
+   10
+  ],
+  [
+   "Ministère de la justice, DSJ, Ecole nationale de la magistrature",
+   8
+  ],
+  [
+   "Ecole nationale des greffes, direction des services judiciaires, ministère de la Justice",
+   6
+  ],
+  [
+   "Ministère de la Justice, DSJ, Ecole nationale de la magistrature",
+   6
+  ],
+  [
+   "Ecole nationale des greffes",
+   6
+  ],
+  [
+   "Ecole Nationale de la Magistrature",
+   6
+  ],
+  [
+   "Tribunal judiciaire de Lille",
+   4
+  ],
+  [
+   "ENG",
+   3
+  ],
+  [
+   "CDAD de la Moselle",
+   3
+  ],
+  [
+   "ECOLE NATIONALE DE LA MAGISTRATURE (ENM)",
+   3
+  ],
+  [
+   "DISP, établissements pénitentiaires, SPIP",
+   2
+  ],
+  [
+   "ECOLE NATIONALE DES GREFFES",
+   2
+  ],
+  [
+   "Conseil de prud'hommes de LILLE",
+   2
+  ],
+  [
+   "SPIP du Loiret",
+   2
+  ],
+  [
+   "Ecole nationale de la magistrature",
+   2
+  ],
+  [
+   "CDAD de l'Eure",
+   1
+  ],
+  [
+   "Tribunal judiciaire du Mans",
+   1
+  ],
+  [
+   "Cabinet du garde des sceaux et secrétariat général, ministère de la justice",
+   1
+  ],
+  [
+   "Tribunal judiciaire d'Orléans",
+   1
+  ],
+  [
+   "Direction interrégionale des services pénitentiaires de Lille",
+   1
+  ],
+  [
+   "Ministère de la justice",
+   1
+  ]
+ ],
+ "departements_fenetre": {
+  "75": 322,
+  "21": 15,
+  "33": 35,
+  "27": 1,
+  "57": 3,
+  "72": 1,
+  "59": 6,
+  "45": 3,
+  "77": 1
+ },
+ "type_organisme_fenetre": {
+  "administration_centrale": 329,
+  "etablissement_enseignement": 23,
+  "autre": 29,
+  "service_deconcentre_de_l_etat": 9
+ },
+ "tags_fenetre": [
+  [
+   "RH",
+   59
+  ],
+  [
+   "Justice",
+   4
+  ],
+  [
+   "Subvention",
+   2
+  ],
+  [
+   "Appel à projets",
+   2
+  ],
+  [
+   "Biodiversité",
+   2
+  ],
+  [
+   "Énergie",
+   2
+  ],
+  [
+   "Environnement",
+   2
+  ],
+  [
+   "Santé",
+   2
+  ],
+  [
+   "Transition écologique",
+   2
+  ],
+  [
+   "Association",
+   2
+  ],
+  [
+   "Accompagnement",
+   2
+  ],
+  [
+   "Candidature",
+   2
+  ],
+  [
+   "Recrutement",
+   1
+  ],
+  [
+   "Autorisation",
+   1
+  ],
+  [
+   "Numérique",
+   1
+  ],
+  [
+   "Action sociale",
+   1
+  ],
+  [
+   "Agriculture",
+   1
+  ],
+  [
+   "Agroécologie",
+   1
+  ],
+  [
+   "Aide financière",
+   1
+  ],
+  [
+   "Animaux",
+   1
+  ],
+  [
+   "Eau",
+   1
+  ],
+  [
+   "Éducation",
+   1
+  ],
+  [
+   "Formation",
+   1
+  ],
+  [
+   "Innovation",
+   1
+  ],
+  [
+   "Sécurité",
+   1
+  ],
+  [
+   "Transport",
+   1
+  ],
+  [
+   "Travail",
+   1
+  ]
+ ],
+ "exemples_api_particulier": [],
+ "organismes_hors_education_sous_zone": [],
+ "anomalies_exclues": [
+  {
+   "number": 152981,
+   "title": "RPJ TEST MOA formulaire unique 2027",
+   "organisme": "OJI6",
+   "typeOrganisme": "administration_centrale",
+   "pole": null,
+   "state": "publiee",
+   "datePublication": "2026-07-27T15:44:09+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 6,
+   "n_champs": 124,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/rpj-test-moa-formulaire-unique-2027",
+   "departement": "75",
+   "pj": 20,
+   "zones": [
+    "Ministère de la Justice"
+   ]
+  },
+  {
+   "number": 156923,
+   "title": "<script>alert()</script>AAAaaaa",
+   "organisme": "<script>AAAA</script>mat12618631",
+   "typeOrganisme": "association",
+   "pole": null,
+   "state": "publiee",
+   "datePublication": "2026-09-22T10:28:14+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 2,
+   "n_champs": 2,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/000",
+   "departement": "75",
+   "pj": 0,
+   "zones": [
+    "Ministère de la Justice"
+   ]
+  },
+  {
+   "number": 76720,
+   "title": "CCAPEX des Yvelines - Transmission des Diagnostics Sociaux et Financiers (DSF)",
+   "organisme": "DDETS78",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": null,
+   "state": "publiee",
+   "datePublication": "2024-04-02T13:34:45+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 13184,
+   "n_champs": 16,
+   "forIndividual": false,
+   "url": "https://demarche.numerique.gouv.fr/commencer/dsf78",
+   "departement": "78",
+   "pj": 1,
+   "zones": [
+    "Ministère de l’Intérieur",
+    "Ministère de la Justice",
+    "Ministère de la Transition écologique, de la Biodiversité, de la Forêt, de la Mer et de la Pêche"
+   ]
+  },
+  {
+   "number": 49479,
+   "title": "ENSAP Bordeaux - recrutement MCFAssociés - TPCAU - S4 - 2021/2022   ",
+   "organisme": "Ecole Nationale d'Architecture et de Paysage de Bordeaux",
+   "typeOrganisme": "etablissement_enseignement",
+   "pole": null,
+   "state": "close",
+   "datePublication": "2021-10-14T11:11:59+02:00",
+   "dateFermeture": "2021-11-04T00:00:39+01:00",
+   "dossiersCount": 6,
+   "n_champs": 12,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/ensap-bordeaux-recrutement-mcfa-tpcau-s4-21-22",
+   "departement": null,
+   "pj": 5,
+   "zones": [
+    "Ministère de la Justice"
+   ]
+  },
+  {
+   "number": 30548,
+   "title": "Appels à projets Sport & Handicap",
+   "organisme": "ACADEMIE DE STRASBOURG",
+   "typeOrganisme": "collectivite_territoriale",
+   "pole": null,
+   "state": "close",
+   "datePublication": "2020-06-16T14:33:05+02:00",
+   "dateFermeture": "2020-10-01T00:14:34+02:00",
+   "dossiersCount": 7,
+   "n_champs": 72,
+   "forIndividual": false,
+   "url": "https://demarche.numerique.gouv.fr/commencer/appels-a-projets-sport-handicap",
+   "departement": null,
+   "pj": 7,
+   "zones": [
+    "Ministère de la Justice"
+   ]
+  },
+  {
+   "number": 56695,
+   "title": "TEST IRA NANTES - Collecte des jours de télétravail pendant le 4ème trimestre 2021 et le 1er trimestre 2022",
+   "organisme": "Cour d'appel de X",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": null,
+   "state": "publiee",
+   "datePublication": "2022-03-22T20:40:52+01:00",
+   "dateFermeture": null,
+   "dossiersCount": 2,
+   "n_champs": 6,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/test-ira-nantes-collecte-des-jours-de-teletravail",
+   "departement": null,
+   "pj": 0,
+   "zones": [
+    "Ministère de la Justice"
+   ]
+  },
+  {
+   "number": 32023,
+   "title": "Demande d'aide exceptionnelle aux accueils de loisirs du Haut-Rhin - DDCSPP 68 - Vacances apprenantes",
+   "organisme": "DDCSPP du Haut-Rhin",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": null,
+   "state": "close",
+   "datePublication": "2020-07-07T11:50:04+02:00",
+   "dateFermeture": "2020-07-28T00:00:39+02:00",
+   "dossiersCount": 108,
+   "n_champs": 44,
+   "forIndividual": false,
+   "url": "https://demarche.numerique.gouv.fr/commencer/aide-exceptionnelle-accueils-de-loisirs-68",
+   "departement": null,
+   "pj": 3,
+   "zones": [
+    "Ministère de la Justice"
+   ]
+  },
+  {
+   "number": 41259,
+   "title": "DEMANDE DE SUBVENTION DANS LE DOMAINE DE LA SOLIDARITE - hors délais",
+   "organisme": "Collectivité européeenne d'Alsace",
+   "typeOrganisme": "collectivite_territoriale",
+   "pole": null,
+   "state": "close",
+   "datePublication": "2021-03-16T12:18:03+01:00",
+   "dateFermeture": "2021-04-16T00:09:03+02:00",
+   "dossiersCount": 5,
+   "n_champs": 81,
+   "forIndividual": false,
+   "url": "https://demarche.numerique.gouv.fr/commencer/demande-subv-solidarite-hors_delais",
+   "departement": null,
+   "pj": 14,
+   "zones": [
+    "Ministère de la Justice"
+   ]
+  },
+  {
+   "number": 122129,
+   "title": "Audiences Assistées_Tribunal judiciaire de Bourg-en-Bresse_Candidatures",
+   "organisme": "DESCO 1",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": null,
+   "state": "close",
+   "datePublication": "2026-06-18T14:02:37+02:00",
+   "dateFermeture": "2026-09-06T00:00:19+02:00",
+   "dossiersCount": 56,
+   "n_champs": 16,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/audiences-assistees_tjbourgenbresse_candidature",
+   "departement": "01",
+   "pj": 2,
+   "zones": [
+    "Ministère de l’Éducation nationale, de l’Enseignement supérieur et de la Recherche",
+    "Ministère de la Justice"
+   ]
+  },
+  {
+   "number": 107372,
+   "title": "Grille d'autocontrôle MJPM individuel ",
+   "organisme": "Ministère des solidarités, de l'autonomie et des personnes handicapées ",
+   "typeOrganisme": "administration_centrale",
+   "pole": null,
+   "state": "close",
+   "datePublication": "2025-03-20T17:54:13+01:00",
+   "dateFermeture": "2026-01-01T00:00:36+01:00",
+   "dossiersCount": 3,
+   "n_champs": 55,
+   "forIndividual": false,
+   "url": "https://demarche.numerique.gouv.fr/commencer/grille-d-autocontrole-mjpm-individuel",
+   "departement": "75",
+   "pj": 6,
+   "zones": [
+    "Ministère des Solidarités, de l’Autonomie et des personnes handicapées",
+    "Ministère du Travail, de la Santé, des Solidarités et des Familles",
+    "Ministère de la Justice"
+   ]
+  },
+  {
+   "number": 132277,
+   "title": "FORFAIT MOBILITES DURABLES 2025",
+   "organisme": "d'un excellent organisme",
+   "typeOrganisme": "autre",
+   "pole": null,
+   "state": "publiee",
+   "datePublication": "2025-11-17T11:12:49+01:00",
+   "dateFermeture": null,
+   "dossiersCount": 79,
+   "n_champs": 26,
+   "forIndividual": true,
+   "url": "https://demarche.numerique.gouv.fr/commencer/forfait-mobilites-durables-2025",
+   "departement": "33",
+   "pj": 3,
+   "zones": [
+    "Ministère de la Justice"
+   ]
+  },
+  {
+   "number": 34664,
+   "title": "Demande d'aide exceptionnelle aux accueils de loisirs sans hébergement en milieu rural (Haut-Rhin) - DDCSPP 68 - Vacances apprenantes - Toussaint 2020",
+   "organisme": "DDCSPP du Haut-Rhin",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": null,
+   "state": "close",
+   "datePublication": "2020-10-05T16:55:27+02:00",
+   "dateFermeture": "2020-10-21T00:00:04+02:00",
+   "dossiersCount": 23,
+   "n_champs": 47,
+   "forIndividual": false,
+   "url": "https://demarche.numerique.gouv.fr/commencer/aide-exceptionnelle-alsh-milieu-rural",
+   "departement": null,
+   "pj": 3,
+   "zones": [
+    "Ministère de la Justice"
+   ]
+  },
+  {
+   "number": 121261,
+   "title": "Consultation du Domaine (version de mai 2020)",
+   "organisme": "Brigade nationale des enquêtes domaniales",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": null,
+   "state": "publiee",
+   "datePublication": "2025-06-02T14:03:41+02:00",
+   "dateFermeture": null,
+   "dossiersCount": 20,
+   "n_champs": 69,
+   "forIndividual": false,
+   "url": "https://demarche.numerique.gouv.fr/commencer/consultation-du-domaine-version-de-mai-2020-2",
+   "departement": "94",
+   "pj": 19,
+   "zones": [
+    "Ministère de la Justice"
+   ]
+  },
+  {
+   "number": 31827,
+   "title": "Demande d'aide exceptionnelle aux accueils de loisirs des Deux-Sèvres - DDCSPP 79 - Vacances apprenantes",
+   "organisme": "Direction départmentale de la cohésion sociale et de la protection des populations (DDCSPP) des Deux-Sèvres",
+   "typeOrganisme": "service_deconcentre_de_l_etat",
+   "pole": null,
+   "state": "close",
+   "datePublication": "2020-07-31T10:57:54+02:00",
+   "dateFermeture": "2020-08-18T00:01:15+02:00",
+   "dossiersCount": 30,
+   "n_champs": 64,
+   "forIndividual": false,
+   "url": "https://demarche.numerique.gouv.fr/commencer/aide-alsh-79",
+   "departement": null,
+   "pj": 3,
+   "zones": [
+    "Ministère de la Justice"
+   ]
+  }
+ ],
+ "diffusion": [
+  {
+   "annee": 2021,
+   "emetteurs_actifs": 2,
+   "siret_emetteurs_actifs": 2,
+   "etablissements_actifs": 0,
+   "siret_etablissements_actifs": 0,
+   "departements_actifs": 1,
+   "type_actives": {
+    "administration_centrale": 7
+   }
+  },
+  {
+   "annee": 2022,
+   "emetteurs_actifs": 5,
+   "siret_emetteurs_actifs": 3,
+   "etablissements_actifs": 1,
+   "siret_etablissements_actifs": 1,
+   "departements_actifs": 2,
+   "type_actives": {
+    "administration_centrale": 24,
+    "autre": 1,
+    "etablissement_enseignement": 1
+   }
+  },
+  {
+   "annee": 2023,
+   "emetteurs_actifs": 9,
+   "siret_emetteurs_actifs": 5,
+   "etablissements_actifs": 2,
+   "siret_etablissements_actifs": 1,
+   "departements_actifs": 4,
+   "type_actives": {
+    "administration_centrale": 37,
+    "etablissement_enseignement": 2,
+    "service_deconcentre_de_l_etat": 1,
+    "autre": 4
+   }
+  },
+  {
+   "annee": 2024,
+   "emetteurs_actifs": 13,
+   "siret_emetteurs_actifs": 7,
+   "etablissements_actifs": 3,
+   "siret_etablissements_actifs": 1,
+   "departements_actifs": 6,
+   "type_actives": {
+    "administration_centrale": 117,
+    "etablissement_enseignement": 5,
+    "service_deconcentre_de_l_etat": 5,
+    "autre": 7
+   }
+  },
+  {
+   "annee": 2025,
+   "emetteurs_actifs": 19,
+   "siret_emetteurs_actifs": 14,
+   "etablissements_actifs": 4,
+   "siret_etablissements_actifs": 2,
+   "departements_actifs": 9,
+   "type_actives": {
+    "administration_centrale": 158,
+    "autre": 15,
+    "etablissement_enseignement": 9,
+    "service_deconcentre_de_l_etat": 6
+   }
+  },
+  {
+   "annee": 2026,
+   "emetteurs_actifs": 24,
+   "siret_emetteurs_actifs": 16,
+   "etablissements_actifs": 4,
+   "siret_etablissements_actifs": 2,
+   "departements_actifs": 9,
+   "type_actives": {
+    "administration_centrale": 89,
+    "etablissement_enseignement": 13,
+    "autre": 20,
+    "service_deconcentre_de_l_etat": 9
+   }
+  }
+ ],
+ "siret_manquant": 3
+}

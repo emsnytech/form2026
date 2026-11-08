@@ -1,0 +1,137 @@
+{
+ "releve": "2026-11-04",
+ "demarches": [
+  {
+   "path": "barobaj-2",
+   "numero": 124249,
+   "titre": "BARÔBAJ Version 2.0",
+   "avancee": {
+    "Tous (dont brouillon)": 8764,
+    "Déposés": 8614,
+    "Instruction débutée": 8299,
+    "Traités": 8196
+   },
+   "delai_moyen_par_mois": [
+    [
+     "juillet 2025",
+     3
+    ],
+    [
+     "août 2025",
+     6
+    ],
+    [
+     "septembre 2025",
+     11
+    ],
+    [
+     "octobre 2025",
+     22
+    ],
+    [
+     "novembre 2025",
+     9
+    ],
+    [
+     "décembre 2025",
+     9
+    ],
+    [
+     "janvier 2026",
+     9
+    ],
+    [
+     "février 2026",
+     11
+    ],
+    [
+     "mars 2026",
+     22
+    ],
+    [
+     "avril 2026",
+     18
+    ],
+    [
+     "mai 2026",
+     16
+    ],
+    [
+     "juin 2026",
+     14
+    ],
+    [
+     "juillet 2026",
+     16
+    ],
+    [
+     "août 2026",
+     10
+    ],
+    [
+     "septembre 2026",
+     13
+    ],
+    [
+     "octobre 2026",
+     15
+    ]
+   ],
+   "close_depuis": null
+  },
+  {
+   "path": null,
+   "numero": 99723,
+   "titre": "Démarche agrégée dans la fiche",
+   "avancee": {
+    "Tous (dont brouillon)": 322,
+    "Déposés": 322,
+    "Instruction débutée": 317,
+    "Traités": 209
+   },
+   "delai_moyen_par_mois": [
+    [
+     "juin 2025",
+     5
+    ],
+    [
+     "janvier 2026",
+     2
+    ],
+    [
+     "mai 2026",
+     7
+    ],
+    [
+     "juin 2026",
+     34
+    ]
+   ],
+   "close_depuis": null
+  }
+ ],
+ "recalcul": {
+  "demarches": 394,
+  "dossiers": 58256,
+  "part_du_fichier_demarches": 0.89,
+  "part_du_fichier_dossiers": 0.29,
+  "rh": 367,
+  "rh_pct_demarches": 93.1,
+  "rh_pct_dossiers": 60.6,
+  "usagers": 11,
+  "usagers_dossiers": 22135,
+  "usagers_pct_dossiers": 38.0,
+  "contact_pct": 17.2,
+  "dsj_pct": 77.2,
+  "ajout_dossiers": 8936
+ },
+ "ecart_plateforme": {
+  "extrait_demarches": 44350,
+  "extrait_dossiers": 19888006,
+  "stats_demarches_24_10": 60192,
+  "stats_dossiers_24_10": 22679986,
+  "ecart_dossiers": 2791980,
+  "ecart_dossiers_pct": 12.3
+ },
+ "releve_agregee": "2026-11-04"
+}

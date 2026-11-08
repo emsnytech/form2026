@@ -1,0 +1,64 @@
+rang,cerfa,titre,telechargements_annuels,total_bas,total_central,total_haut,statut,categorie,motif_ou_mention
+,11527*03,Attestation de témoin,1456604,15545849,18706680,21771375,retire,A,Attestation destinée à être produite en justice : pas une démarche administrative.
+1,15695*01,Certificat médical à joindre à une demande à la Maison Départementale des Personnes Handicapées (MDPH),1302220,13898160,16723977,19463848,mention,B,"Pièce à joindre à la demande à la MDPH (Cerfa 15692), absente du classement. Rempli par un médecin : le modèle valorise pourtant un temps d'usager. Ce gain unitaire reste à revoir, avec une règle commune aux formulaires remplis par un professionnel."
+,11796*01,Demande de médaille d'honneur du travail,239725,7521372,12863644,13280766,retire,en_ligne,"Déjà en ligne sur Démarche Numérique : 798 904 dossiers sur des démarches qui portent ce même objet, dont 773 349 sur la démarche nationale."
+2,10103*14,Contrat d'apprentissage,351945,11042275,11805996,12942777,mention,C,"Contrat de droit privé, conservé : déposé auprès d'un opérateur de compétences. Volume additionnant les versions 10 et 11 du Cerfa, antérieures à la version analysée (14, en vigueur depuis juillet 2025) : leur usage courant n'est pas établi. Avec la seule version 11, le gain serait de 5,95 M€."
+3,13971*04,Déclaration de la liste des personnes chargées de l'administration d'une association,329248,10330156,11044624,12108096,classe,,
+4,15186*03,Demande d'autorisation de travail pour embaucher un étranger résidant en France,202699,6359681,10876829,11229525,classe,,
+5,14023*01,"Demande de permission ou d'autorisation de voirie, de permis de stationnement, ou d'autorisation d'entreprendre des travaux",202247,6345499,10852573,11204483,classe,,
+,14673*01,Certificat d'aptitude physique des candidats au titre de conduite des bateaux de plaisance à moteur,449624,4798687,5774371,6720380,retire,B,"Certificat médical exigé par le dossier du permis plaisance (Cerfa 14681), lui-même au classement : le même flux serait compté deux fois."
+6,11542*05,Déclaration d'un restaurant ou d'un débit de boissons à consommer sur place ou à emporter,146092,4583637,5118333,8093496,classe,,
+7,11573*05,Demande d'aide médicale de l'État (AME),307044,3276978,4613847,5148104,classe,,
+8,13824*04,"Demande d'autorisation de construire, d'aménager ou de modifier un établissement recevant du public (ERP)",120965,3795277,4238009,6701462,classe,,
+9,10798*04,Demande d'attestation d'accueil,275806,2943586,4144445,4624347,classe,,
+10,16130*01,Déclaration de maladie professionnelle ou demande de reconnaissance de maladie professionnelle,269953,2881119,4056494,4526212,classe,,
+11,15036*02,Recours amiable devant la commission départementale de médiation en vue d'une offre de logement (DALO),301261,3215258,3978654,5051143,classe,,
+12,15763*02,Demander l'ouverture des droits à l'assurance maladie (protection universelle maladie),238334,2543660,3581366,3996067,classe,,
+13,14675*01,Déclaration de conduite accompagnée d'un bateau de plaisance à moteur,272098,2904011,3494464,4066959,classe,,
+14,15059*02,Association : compte-rendu financier de subvention,97041,3044661,3255240,3568683,classe,,
+15,16229*03,Demande de changement de nom de famille,204896,2186786,3078903,3435422,classe,,
+16,12818*02,Demande de recevabilité d'un dossier de validation des acquis de l'expérience (VAE),202205,2157766,2596594,3022515,classe,,
+17,13984,"Déclaration d'activité relevant de la remise directe de denrées alimentaires (restauration, préparation, vente)",71194,2233671,2388087,2618249,classe,,
+18,14022*02,Déclaration préalable d'une activité commerciale ou artisanale ambulante,67068,2104259,2349727,3715568,classe,,
+19,13394*05,Demande d'agrément d'assistante maternelle ou assistant maternel,149010,1590334,2239124,2498401,classe,,
+20,15277*04,Déclaration de nationalité française - Mariage avec un français,147154,1570526,2211235,2467283,classe,,
+21,12644*04,"Demande d'autorisation d'acquisition et de détention d'armes et de munitions, de renouvellement d'autorisation et de détention (armes de catégorie B et certaines armes de catégorie A)",159311,1700273,2103968,2671115,classe,,
+22,16212*05,Demande d'autorisation d'instruction dans la famille,138234,1475324,2077191,2317714,classe,,
+,11543*05,Récépissé de déclaration d'ouverture / mutation / translation d'un débit de boissons,58646,1840017,1967279,2156693,retire,A,"Récépissé délivré par l'administration à la suite de la déclaration : acte de l'administration, pas une démarche accomplie par un usager."
+23,11203*03,Demande de document de circulation pour étranger mineur (DCEM),96760,1032687,1277877,1622342,classe,,
+24,14445*02,Demande de rattachement des enfants à l'un ou aux deux parents - Assurances maladie et maternité,92905,991544,1226965,1557706,classe,,
+25,14681*03,Demande d'inscription à une option de base du permis de conduire des bateaux de plaisance à moteur (côtière / eaux intérieures),80115,855041,1203861,1343261,classe,,
+,16139*01,Requête conjointe aux fins d'homologation d'une convention parentale,77511,827249,1164732,1299601,retire,A,"Requête adressée au juge aux affaires familiales : acte de procédure judiciaire, pas une démarche administrative."
+26,12267*06,Soins reçus à l'étranger -- Déclaration à compléter par l'assuré(e),76880,820514,1155250,1289021,classe,,
+27,10400*28,Déclaration de ressources auprès de la MSA,87173,930369,1119534,1302946,classe,,
+28,15614*04,Éléments du contrat de travail du salarié étranger -- Demande de carte de séjour pluriannuelle Passeport Talent (salarié diplômé / salarié d'entreprise innovante),31752,996218,1065122,1167680,mention,B,"Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
+29,15983*01,Désignation du vétérinaire sanitaire par le détenteur d'animaux,19459,610527,1044171,1078029,classe,,
+30,15286*04,Déclaration conjointe de choix d'un nom de famille,80595,860164,1035055,1204626,classe,,
+31,11139*03,Cure thermale -- Questionnaire de prise en charge (accompagné d'une déclaration de ressources),68712,733340,1032513,1152071,classe,,
+32,16079*03,Convention d'accueil d'un chercheur ou d'un enseignant étranger,26982,846570,905124,992242,mention,C,"Convention d'accueil, conservée : établie en vue de l'admission au séjour, démarche absente du classement."
+33,11414*05,Demande d'attestation de capacité professionnelle pour les transporteurs publics et les commissionnaires de transport,53609,572151,805565,898844,classe,,
+34,15652*01,Demande d'autorisation préalable de mise en location de logement,61418,655494,788771,917995,classe,,
+35,15561*03,Déclaration de nationalité française au titre de la résidence en France et de la qualité d'ascendant de Français,51898,553890,779854,870157,classe,,
+36,11752*02,Déclaration sur l'honneur de son domicile,58767,627201,754725,878371,mention,B,"Pièce jointe à des démarches variables : sans démarche parente identifiable, le double compte ne peut être ni établi ni écarté."
+37,15187*02,Demande d'autorisation de travail pour conclure un contrat de travail avec un salarié étranger résidant hors de France,19177,601679,671866,1062406,classe,,
+38,13837*03,"Déclaration d'ouvrage -- prélèvements, puits et forages à usage domestique",45467,485334,583995,679564,classe,,
+39,15973*01,Convention conclue entre le jeune au pair et la famille d'accueil,39814,424922,511318,595087,mention,C,"Convention de droit privé, conservée : à joindre à la demande de visa ou de titre de séjour, absente du classement."
+40,15615*01,"Éléments du contrat de travail justifiant une demande de carte de séjour pluriannuelle Passeport Talent ""Carte bleue européenne""",14581,457477,489120,536215,mention,B,"Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
+41,15824*03,Déclaration des manifestations sportives (hors cyclisme) sur voie publique ou ouverte à la circulation,13295,417121,445983,488929,classe,,
+42,14098*02,Déclaration relative à un spectacle pyrotechnique,12473,391336,418405,458692,classe,,
+43,15651*01,Déclaration de mise en location de logement (permis de louer),32262,344334,414342,482196,classe,,
+44,13703*12,Déclaration préalable à la réalisation de constructions et travaux non soumis à permis de construire portant sur une maison individuelle et/ou ses annexes (DPMI),27816,296871,367356,466381,classe,,
+45,15476*04,Déclaration d'activité particulière d'un exploitant d'aéronef télépiloté (drone),9378,294254,314586,344891,classe,,
+46,15619*01,"Éléments du contrat de travail justifiant la demande de carte de séjour ""salarié détaché ICT""",5844,183355,196036,214913,mention,B,"Pièce de la demande de carte de séjour « salarié détaché ICT », absente du classement : seule représentation de ce flux."
+47,15616*01,"Éléments du contrat de travail justifiant une demande de carte de séjour Passeport Talent ""Salarié en mission""",4542,142504,152361,167031,mention,B,"Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
+48,15617*01,"Éléments du ou des contrats de travail justifiant la demande d'une carte de séjour Passeport Talent ""Profession artistique et culturelle""",4330,135856,145250,159238,mention,B,"Pièce de la demande de carte de séjour Passeport Talent, absente du classement : seule représentation de ce flux."
+49,13408*14,Déclaration attestant l'achèvement et la conformité des travaux (DAACT),7695,82126,98824,115014,classe,,
+50,15618*01,Notification d'un détachement de courte durée (90 jours au plus) d'un salarié étranger titulaire d'un titre de séjour européen ICT,1245,39061,41762,45785,mention,titre,"Titre rétabli d'après le formulaire officiel : notification autonome, pas une pièce jointe."
+51,13410*13,Demande de certificat d'urbanisme,2396,25571,31643,40172,classe,,
+52,15625*04,Demande d'autorisation individuelle de transport exceptionnel,907,28456,30425,33354,classe,,
+53,13407*11,Déclaration d'ouverture de chantier (DOC),1955,20864,25107,29221,classe,,
+54,14363*01,Procédure de reconnaissance des groupements agricoles d'exploitation en commun (GAEC),284,8276,8892,9386,classe,,
+55,12434*05,Contrat de professionnalisation,155,4862,8317,8586,mention,C,"Contrat de droit privé, conservé : déposé auprès d'un opérateur de compétences."
+,13406*17,Demande de permis de construire pour une maison individuelle et/ou ses annexes (PCMI),,,,,non_chiffre,volume,"Aucun téléchargement compté dans le fichier DILA : non chiffré. Cela ne dit rien de son usage réel, le formulaire pouvant circuler par d'autres canaux."
+,16702*03,Déclaration préalable -- constructions et travaux non soumis à permis de construire,,,,,non_chiffre,volume,"Aucun téléchargement compté dans le fichier DILA : non chiffré. Cela ne dit rien de son usage réel, le formulaire pouvant circuler par d'autres canaux."
+,11733*02,Demande d'inscription sur le registre des revendeurs d'objets mobiliers,,,,,non_chiffre,volume,"Aucun téléchargement compté dans le fichier DILA : non chiffré. Cela ne dit rien de son usage réel, le formulaire pouvant circuler par d'autres canaux."

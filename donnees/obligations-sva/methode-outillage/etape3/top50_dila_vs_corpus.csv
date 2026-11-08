@@ -1,0 +1,51 @@
+rang,volume,cerfa,r_id,titre,correspond_sva_svr_delai,details,categorie
+1,3753879,,R20300,Certificat de cession d'un véhicule d'occasion,non,,identité/véhicule — démarche de masse non juridique SVA/SVR
+2,789265,12669,R16024,Demande d'inscription sur les listes électorales,non,,démarche électorale/citoyenne (hors périmètre SVA/SVR)
+3,729308,,R13630,Déclaration de perte de carte d'identité ou de passeport,non,,déclaration/notification (pas de décision implicite)
+4,667027,,R13567,Demande de certificat d'immatriculation d'un véhicule,non,,identité/véhicule — démarche de masse non juridique SVA/SVR
+5,636783,,R46121,Autorisation de sortie de territoire (AST),non,,"formalité parentale (autorisation de sortie d'un mineur, pas une démarche administrative soumise à décision implicite)"
+6,509363,14069,R149,Demande de logement social,non,,"demande financière/sociale (prestation, pas une autorisation SVA/SVR)"
+7,502280,,R14006,Permis de conduire - Avis médical,non,,formalité médicale rattachée à une autre procédure (permis)
+8,493837,15692,R19993,Demande ou renouvellement de prestations auprès de la maison départementale des personnes handicapées (MDPH),non,,"demande financière/sociale (prestation, pas une autorisation SVA/SVR)"
+9,493537,11527,R11307,Modèle d'attestation de témoin,non,,"modèle de document (attestation de témoin), pas une démarche administrative"
+10,401230,12753,R16995,Demande d'acquisition de la nationalité française par naturalisation ou réintégration,oui,SVR/2014-1292:Attestation constatant l'existence d'un décret de ; SVR/2014-1292:Attestation constatant l'existence d'un décret de ,proche d'un numdispo SVR (2014-1292) mais match probable incorrect (demande vs attestation)
+11,360981,,R15764,"Demande au juge aux affaires familiales (autorité parentale, droit de visite, pension alimentaire...)",non,,acte d'état civil / justice civile
+12,335158,15725,R48756,"Déclaration conjointe d'un pacte civil de solidarité (Pacs) et attestations sur l'honneur de non-parenté, non-alliance et résidence commune",non,,déclaration/notification (pas de décision implicite)
+13,316821,,R1444,Demande d'aide juridictionnelle,non,,"demande financière/sociale (prestation, pas une autorisation SVA/SVR)"
+14,288882,,R57403,Attestation de déplacement dérogatoire (Covid-19) - Attestation papier,non,,"attestation sanitaire ponctuelle (Covid, dispositif temporaire disparu)"
+15,280989,13404,R11646,"Déclaration préalable (construction, travaux, installations et aménagements non soumis à permis de construire)",non,,"urbanisme — Cerfa partagé par de nombreux régimes (voir note ""volume partagé"")"
+16,279563,13703,R2028,Déclaration préalable pour une maison individuelle et/ou ses annexes - DPMI,non,,"urbanisme — Cerfa partagé par de nombreux régimes (voir note ""volume partagé"")"
+17,270097,15695,R19996,Certificat médical à joindre à une demande à la maison départementale des personnes handicapées (MDPH),non,,formalité médicale rattachée à une autre procédure (permis)
+18,267856,,R1137,Mandat pour effectuer les formalités d'immatriculation,non,,identité/véhicule — démarche de masse non juridique SVA/SVR
+19,234805,,R59553,Autorisation parentale dans le cadre de la vaccination contre la Covid-19 (5-15 ans),non,,formalité sanitaire ponctuelle
+20,223344,14952,R12675,Vote par procuration,non,,démarche électorale/citoyenne (hors périmètre SVA/SVR)
+21,207034,13406,R11637,Demande de permis de construire pour une maison individuelle et/ou ses annexes (PCMI),non,,"urbanisme — Cerfa partagé par de nombreux régimes (voir note ""volume partagé"")"
+22,203741,15726,R48755,Convention-type de Pacs,non,,acte d'état civil / justice civile
+23,189476,12504,R54651,Demande de complémentaire santé solidaire,non,,"demande financière/sociale (prestation, pas une autorisation SVA/SVR)"
+24,184403,10103,R1319,Établir un contrat d'apprentissage,non,,enregistrement contractuel (pas une autorisation)
+25,176770,15481,R1350,Demande de RSA ou de prime d'activité,non,,"demande financière/sociale (prestation, pas une autorisation SVA/SVR)"
+26,176198,14673,R1309,Permis bateau - Certificat d'aptitude physique,non,,formalité médicale rattachée à une autre procédure (permis)
+27,168649,,R51280,Attestation de loyer ou résidence en foyer,non,,certificat d'hébergement informationnel (pas une autorisation)
+28,163106,14881,R33870,Demande de permis de conduire international si vous habitez à l'étranger,non,,droit des étrangers (CESEDA) — procédures existent côté SVA mais pas ce Cerfa précis
+29,162239,,R1417,Déclaration de perte ou vol d'une carte grise,non,,déclaration/notification (pas de décision implicite)
+30,155095,10798,R10751,Demande d'attestation d'accueil,non,,"attestation d'accueil (maire) — proche du droit des étrangers mais non trouvé automatiquement, à vérifier séparément"
+31,150512,11796,R1494,Demande de médaille d'honneur du travail,non,,distinction honorifique (pas une autorisation)
+32,148688,14598,R19136,Demande d'homologation d'une rupture conventionnelle d'un contrat de travail à durée indéterminée (CDI),non,,"homologation travail (SVA existe mais sous un autre numdispo, non dans le top50 des candidats automatiques)"
+33,145841,14675,R1373,Déclaration de conduite accompagnée d'un bateau de plaisance à moteur,non,,déclaration/notification (pas de décision implicite)
+34,142140,13408,R1978,Déclaration attestant l'achèvement et la conformité des travaux,non,,déclaration/notification (pas de décision implicite)
+35,138910,,R14587,Déclaration d'accident du travail ou de trajet,non,,déclaration/notification (pas de décision implicite)
+36,132350,15186,R18894,Demande d'autorisation de travail pour embaucher un étranger résidant en France,non,,droit des étrangers (CESEDA) — procédures existent côté SVA mais pas ce Cerfa précis
+37,127049,13960,R1027,Demande de permis de visite (prison),non,,démarche pénitentiaire usager (pas un numdispo SVA/SVR identifié)
+38,124453,"12818,12818021281802",R10282,Validation des acquis de l'expérience (VAE) - Demande de recevabilité,non,,certification individuelle (pas un régime SVA classique)
+39,123088,,R41033,S'inscrire à l'opération tranquillité vacances,non,,service d'information policière (pas une démarche réglementaire)
+40,121787,,R1224,Déclaration de don manuel et de don de sommes d'argent,non,,déclaration/notification (pas de décision implicite)
+41,120807,13972,R19468,"Modification d'une association (titre, objet, siège social, adresse de gestion, dissolution)",non,,formalité associative déclarative (pas une autorisation SVA/SVR)
+42,117853,15763,R45084,Demander l'ouverture des droits à l'assurance maladie,non,,prestation sociale
+43,114978,11203,R1457,Demande de document de circulation (DCEM) pour un étranger mineur,non,,droit des étrangers (CESEDA) — procédures existent côté SVA mais pas ce Cerfa précis
+44,114406,13409,R20835,Demande de permis de construire (autre que portant sur une maison individuelle ou ses annexes),non,,"urbanisme — Cerfa partagé par de nombreux régimes (voir note ""volume partagé"")"
+45,114204,,R14583,Attestation de salaire pour le paiement des indemnités journalières,non,,prestation sociale
+46,113552,"13410,13702113702",R1970,Demande de certificat d'urbanisme,non,,"urbanisme — Cerfa partagé par de nombreux régimes (voir note ""volume partagé"")"
+47,109905,"12156,15059",R1271,Association : demande de subvention,non,,"demande financière/sociale (prestation, pas une autorisation SVA/SVR)"
+48,109657,,R50473,Requête en vue d'une protection juridique d'un majeur (habilitation familiale ou protection judiciaire),non,,protection juridique des majeurs (justice civile)
+49,108612,"11682,11681",R17342,Déclaration de modification d'une entreprise - Personne morale (M2),non,,déclaration/notification (pas de décision implicite)
+50,106364,13971,R20991,Déclaration de la liste des personnes chargées de l'administration d'une association (formulaire),non,,déclaration/notification (pas de décision implicite)

@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FORM 2026 — Fiches ministères</title>
-<meta name="description" content="L'usage de Démarche Numérique, par ministère et par thème : démarches publiées, dossiers déposés, frais évités, émetteurs, préremplissage.">
+<meta name="description" content="L'usage de Démarche Numérique, par ministère et par thème : démarches publiées, dossiers déposés, émetteurs. Les sources et les sections varient selon les fiches.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="FORM 2026">
 <meta property="og:title" content="FORM 2026 — Fiches ministères">
-<meta property="og:description" content="L'usage de Démarche Numérique, par ministère et par thème : démarches publiées, dossiers déposés, frais évités, émetteurs, préremplissage.">
+<meta property="og:description" content="L'usage de Démarche Numérique, par ministère et par thème : démarches publiées, dossiers déposés, émetteurs. Les sources et les sections varient selon les fiches.">
 <meta property="og:url" content="https://emsnytech.github.io/form2026/fiches-ministeres/">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,6 +35,7 @@ a{color:var(--admin)}
 .topnav{font-size:.9rem;color:var(--muted);margin:0 0 1rem}.topnav a{text-decoration:none;font-weight:600}
 h1{font-weight:800;font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.15;margin:.5rem 0 0;max-width:22ch}
 h2{font-weight:800;font-size:1.4rem;margin:2.6rem 0 1rem}
+.cadre{margin:22px 0 0;padding:14px 18px;border-left:4px solid var(--accent);background:var(--surface);border-radius:0 8px 8px 0;max-width:78ch}.cadre p{margin:0 0 10px;font-size:.98rem;line-height:1.55}.cadre p:last-child{margin:0}
 .lede{font-size:1.12rem;color:var(--muted);max-width:62ch;margin:1rem 0 0}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:2rem}
 @media (max-width:760px){.grid{grid-template-columns:1fr}}
@@ -57,11 +58,15 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
 </head>
 <body>
 <div class="wrap">
-<p class="topnav"><a href="../index.html">Retour à FORM 2026</a> · <a href="../simulateur-gains-dematerialisation.html">Estimer ses gains</a> · <a href="../cadrage-dematerialisation.html">Cadrer une démarche</a> · <a href="../comparer-cadre-fonctionnel.html">Comparer un outil</a> · <a href="../explorer.html">Explorer les données</a> · <a href="../donnees/index.html#fiches-ministeres">Données et méthode</a></p>
+<p class="topnav" data-rubrique="situer"><!-- nav:début --><a href="../index.html">FORM 2026</a> · <a href="../index.html#mesurer">Mesurer</a> · <a href="../index.html#concevoir">Concevoir</a> · <a href="../index.html#situer" aria-current="page">Situer</a> · <a href="../index.html#donnees">Données</a><!-- nav:fin --></p>
   <header>
     <p class="topnav" style="margin:0;font-weight:700">FORM 2026 · Fiches ministères</p>
     <h1>L'usage de Démarche Numérique, par ministère et par thème</h1>
-    <p class="lede">Une fiche par ministère, à partir des seules données ouvertes : cinq ans de démarches publiées, de dossiers déposés et de frais évités, les émetteurs sur une carte, les démarches construites plusieurs fois et celles qui pourraient être préremplies.</p>
+    <p class="lede">Une fiche par ministère, sur ce qui passe par Démarche Numérique depuis 2021. Toutes partent de l'open data de la plateforme, mais leurs sections et leurs autres sources varient. Chaque fiche indique les siennes et leur date.</p>
+    <div class="cadre">
+    <p><b>Ce que ces fiches décrivent.</b> Elles portent sur les démarches de chaque ministère publiées dans le descriptif ouvert de la plateforme, et non sur l'ensemble de ses démarches dématérialisées. À l'échelle de la plateforme, environ un dossier sur huit ne figure pas dans ce descriptif, en moyenne sur l'ensemble de l'historique de la plateforme, et environ un quart des démarches, cette seconde part comprenant une forte proportion de démarches n'ayant jamais reçu de dossier. Ces ordres de grandeur s'obtiennent en retranchant le fichier ouvert du <a href="https://demarche.numerique.gouv.fr/stats" target="_blank" rel="noopener">compteur public de la plateforme</a>, relevé le 24 octobre 2026. Les absences s'expliquent par les règles de publication inscrites dans le code de la plateforme (paramètre de publication désactivé par le service, absence de dossier, adresse de site web contenant « mail » ou « intra »), et par la suppression de démarches. Les parts données ci-dessous portent donc sur un corpus publié, et non sur l'activité complète des ministères.</p>
+    <p><b>Comment les démarches sont rattachées à un ministère.</b> Deux rattachements distincts existent : le ministère de rattachement du service traitant, et le ministère porteur de la politique publique. Chaque fiche dit en tête lequel elle retient. La distinction n'est pas une incertitude de mesure mais une caractéristique de l'organisation de l'État : un service déconcentré peut instruire une politique qui ne relève pas de son ministère de rattachement, et certaines politiques, l'action sociale interministérielle par exemple, relèvent de plusieurs ministères à la fois. Les deux lectures sont justes et ne donnent pas le même périmètre.</p>
+    </div>
   </header>
   <div class="grid">
     <a class="fiche" href="education.html">
@@ -71,7 +76,14 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
       <span class="go">Ouvrir la fiche →</span>
       <span class="meta">2021 → 2026 · open data du 21 octobre 2026</span>
     </a>
-    <div class="venir"><b>À venir</b><ul><li>Intérieur</li><li>Transition écologique</li><li>Agriculture et Alimentation</li><li>Travail, Santé et Solidarités</li><li>Économie et Finances</li><li>Culture</li><li>Armées</li><li>Justice</li><li>Europe et Affaires étrangères</li></ul></div>
+    <a class="fiche" href="justice.html">
+      <span class="q">Fiche disponible</span>
+      <h3>Justice</h3>
+      <div class="kpis"><div class="k"><b>394</b><span>démarches du corpus</span></div><div class="k"><b>58 256</b><span>dossiers</span></div><div class="k"><b>93,1 %</b><span>des démarches du corpus relèvent de la fonction RH</span></div></div>
+      <span class="go">Ouvrir la fiche →</span>
+      <span class="meta">open data du 21 octobre 2026 · relevé du 4 novembre 2026</span>
+    </a>
+    <div class="venir"><b>À venir</b><ul><li>Intérieur</li><li>Transition écologique</li><li>Agriculture et Alimentation</li><li>Travail, Santé et Solidarités</li><li>Économie et Finances</li><li>Culture</li><li>Armées</li><li>Europe et Affaires étrangères</li></ul></div>
   </div>
   <h2>Publications thématiques</h2>
   <p class="lede">D'autres pages, au-delà du découpage par ministère : un même thème, toutes les démarches qui le traversent.</p>
@@ -85,14 +97,14 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
     </a>
     <a class="fiche" href="../obligations-sva/">
       <span class="q">Publication disponible</span>
-      <h3>Obligations « silence vaut accord » : peut-on les relier aux démarches ?</h3>
-      <div class="kpis"><div class="k"><b>1 283</b><span>obligations silence-vaut-accord examinées</span></div><div class="k"><b>28 %</b><span>liées à une fiche DILA, confirmé à la main</span></div><div class="k"><b>36 %</b><span>liées à une démarche DN, confirmé à la main</span></div></div>
+      <h3>Procédures prévues par les textes : sont-elles outillées ?</h3>
+      <div class="kpis"><div class="k"><b>2 806</b><span>procédures SVA + SVR + délai examinées</span></div><div class="k"><b>2 026</b><span>encore vivantes</span></div><div class="k"><b>130 à 155</b><span>reliées de façon vérifiée, moins d'une sur dix</span></div></div>
       <span class="go">Ouvrir la page →</span>
       <span class="meta">octobre 2026</span>
     </a>
   </div>
   <h2>Méthode</h2>
-  <p class="method">Source : « Descriptif des démarches publiées sur demarche.numerique.gouv.fr » (data.gouv.fr). Le ministère est lu dans le champ « zone » de chaque démarche, complété par le nom de l'organisme quand la zone manque. Les dossiers par année sont estimés au prorata des jours d'ouverture et contrôlés sur les dépôts mensuels publiés par la plateforme. Les frais évités reprennent les gains par démarche de FORM 2026 (paramètres v8). Résultats intermédiaires, scripts et configurations : <a href="../donnees/index.html#fiches-ministeres">données et méthode</a>.</p>
+  <p class="method">Socle commun : « Descriptif des démarches publiées sur demarche.numerique.gouv.fr » (data.gouv.fr). Les fiches décrivent les démarches publiées dans cet open data, ce qui ne recouvre pas toutes les démarches d'un ministère : à notre connaissance, aucune source publique n'en donne la liste complète. Le ministère est lu dans le champ « zone » de chaque démarche, complété par le nom de l'organisme quand la zone manque. Les dossiers par année sont estimés au prorata des jours d'ouverture. Les frais évités reprennent les gains par démarche de FORM 2026 (paramètres v8). Fiche Éducation nationale : les dossiers sont contrôlés sur les dépôts mensuels publiés par la plateforme, et l'analyse recoupe aussi des Cerfa et des fiches de service-public.fr. Fiche Justice : s'y ajoutent des relevés datés de pages publiques et du tableau de bord de RDV Service Public, ainsi que des sources citées. Ce qui produit ces pages vit dans le dépôt et se rejoue depuis lui, à une exception près, écrite dans la méthode. Résultats intermédiaires, scripts et configurations : <a href="../donnees/index.html#fiches-ministeres">données et méthode</a>.</p>
   <footer>FORM 2026 · Philippe Vrignaud · Données ouvertes et code source publics</footer>
 </div>
 </body>
