@@ -7,7 +7,7 @@ Sort en erreur sinon, pour que le workflow alerte-deploiement.yml ouvre une issu
 
 Un déploiement en cours n'est pas une erreur : le dernier commit de main a 45 minutes pour être en ligne.
 Avec --attendre, le script interroge toutes les 30 secondes tant que main n'est pas en ligne et que le délai court,
-puis rend son verdict ; un déploiement remplacé par un plus récent n'est pas un échec, c'est le plus récent qui compte."""
+puis rend son verdict ; un déploiement remplacé par un plus récent n'est pas un échec (l'API le marque pourtant « errored ») : seul compte celui du commit de main."""
 import datetime as dt, json, subprocess, sys, time
 
 DEPOT, DELAI = "emsnytech/form2026", dt.timedelta(minutes=45)
@@ -27,12 +27,13 @@ while True:
     main = gh(f"repos/{DEPOT}/commits/main")
     sha, quand = main["sha"], date(main["commit"]["committer"]["date"])
     maintenant = dt.datetime.now(dt.timezone.utc)
-    fini = build["status"] == "errored" or (build["commit"] == sha and build["status"] == "built")
+    # Un déploiement remplacé par un plus récent est marqué « errored » par l'API : seul compte l'échec sur le commit de main.
+    fini = build["commit"] == sha and build["status"] in ("built", "errored")
     if not ATTENDRE or fini or maintenant - quand > DELAI:
         break
     time.sleep(30)
 print(f"main : {sha[:7]} du {quand:%d/%m %H:%M} UTC ; dernier déploiement : {build['status']} sur {build['commit'][:7]} du {date(build['created_at']):%d/%m %H:%M} UTC")
-if build["status"] == "errored":
+if build["status"] == "errored" and build["commit"] == sha:
     print(f"ÉCHEC : le dernier déploiement a échoué ({(build.get('error') or {}).get('message') or 'sans message'}). Le site en ligne n'est pas à jour.")
     sys.exit(1)
 if build["commit"] != sha and maintenant - quand > DELAI:
