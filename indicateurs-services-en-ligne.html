@@ -162,7 +162,7 @@ footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--line);color
   <div class="figures" aria-label="Chiffres clés">
     <div class="fig k"><b>34<sup style="font-size:.6em">e</sup></b><span>rang à l'indice ONU de l'administration en ligne (4<sup>e</sup> en 2014) ; 25<sup>e</sup> sur 27 au DESI 2026</span></div>
     <div class="fig k"><b>143</b><span>indicateurs attendus qui n'ont pas pu être trouvés simplement, sur 308 cases</span></div>
-    <div class="fig w"><b>3 / 28</b><span>services publient des données de moins de trois mois</span></div>
+    <div class="fig w"><b>4 / 29</b><span>services publient des données de moins de trois mois</span></div>
     <div class="fig u"><b>36 %</b><span>des produits conçus selon la méthode beta.gouv.fr publient leur budget ; aucun des autres services passés en revue</span></div>
   </div>
 
@@ -265,7 +265,7 @@ footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--line);color
     <ul class="legend">
       <li><i class="dot" style="--c:var(--ok)"></i>Moins de 3 mois</li>
       <li><i class="dot" style="--c:var(--part)"></i>3 à 12 mois</li>
-      <li><i class="dot" style="--c:var(--ko)"></i>Plus de 12 mois, ou rien</li>
+      <li><i class="dot" style="--c:var(--ko)"></i>Plus de 12 mois, ou rien trouvé</li>
     </ul>
     <div class="panel"><ul class="fresh" id="fresh"></ul></div>
     <p class="note">Les jeux ouverts s'abandonnent sans bruit : celui de FranceConnect s'arrête à mars 2022 et porte la mention « fréquence de mise à jour non respectée ».</p>
@@ -449,6 +449,7 @@ const FRESH = [
   ["g","data.gouv.fr","En continu (Matomo public)"],
   ["g","Démarche Numérique","Octobre 2026, jeu mensuel mis à jour le 1er novembre"],
   ["g","Parcoursup","Session 2026, bilan d'octobre"],
+  ["g","RDV Service Public (hors matrice)","En continu, page /stats sur douze mois glissants"],
   ["o","service-public.gouv.fr","Année 2025, rapport annuel"],
   ["o","Légifrance","Année 2025, rapport annuel"],
   ["o","impots.gouv.fr","Année 2025, rapport publié en mai 2026"],
@@ -475,7 +476,7 @@ const FRESH = [
   ["r","Docs","Aucun chiffre public"],
   ["r","Le Compte Asso","Aucun chiffre public"]
 ];
-document.getElementById("fresh").innerHTML = FRESH.map(f=>`<li><i class="dot" style="--c:${COL[f[0]]}" role="img" aria-label="${f[0]==='g'?'moins de 3 mois':f[0]==='o'?'3 à 12 mois':'plus de 12 mois ou rien'}"></i><b>${f[1]}</b><span>${f[2]}</span></li>`).join("");
+document.getElementById("fresh").innerHTML = FRESH.map(f=>`<li><i class="dot" style="--c:${COL[f[0]]}" role="img" aria-label="${f[0]==='g'?'moins de 3 mois':f[0]==='o'?'3 à 12 mois':'plus de 12 mois ou rien trouvé'}"></i><b>${f[1]}</b><span>${f[2]}</span></li>`).join("");
 const cnt = {g:0,o:0,r:0}; FRESH.forEach(f=>cnt[f[0]]++);
 const fs = document.getElementById("fsum");
 fs.setAttribute("aria-label",`${cnt.g} services à jour, ${cnt.o} entre 3 et 12 mois, ${cnt.r} plus anciens ou sans données`);
