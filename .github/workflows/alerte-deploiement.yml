@@ -19,6 +19,7 @@ permissions:
   contents: read
   issues: write
   pages: read
+  deployments: read
 
 jobs:
   deploiement:

@@ -17,13 +17,25 @@ def gh(*args):
     return json.loads(subprocess.run(["gh", "api", *args], capture_output=True, text=True, check=True).stdout)
 
 
+def dernier_deploiement():
+    """Dernier déploiement de l'environnement github-pages et son dernier état.
+    L'API des déploiements suit les relances d'un déploiement échoué ; l'API des builds Pages ne les voit pas
+    (constaté le 09/11/2026 : déploiement relancé avec succès, build toujours « errored »)."""
+    d = gh(f"repos/{DEPOT}/deployments?environment=github-pages&per_page=1")[0]
+    etats = gh(f"repos/{DEPOT}/deployments/{d['id']}/statuses?per_page=1")
+    etat = etats[0]["state"] if etats else "queued"
+    statut = {"success": "built", "failure": "errored", "error": "errored"}.get(etat, etat)
+    return {"status": statut, "commit": d["sha"], "created_at": d["created_at"],
+            "error": {"message": f"état du déploiement : {etat}"}}
+
+
 def date(s):
     return dt.datetime.fromisoformat(s.replace("Z", "+00:00"))
 
 
 ATTENDRE = "--attendre" in sys.argv[1:]
 while True:
-    build = gh(f"repos/{DEPOT}/pages/builds/latest")
+    build = dernier_deploiement()
     main = gh(f"repos/{DEPOT}/commits/main")
     sha, quand = main["sha"], date(main["commit"]["committer"]["date"])
     maintenant = dt.datetime.now(dt.timezone.utc)
