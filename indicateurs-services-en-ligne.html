@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Combien de personnes utilisent nos services publics en ligne ? La transparence doit progresser pour créer de la confiance</title>
+<meta name="description" content="Une grille commune d'indicateurs d'activité pour les services publics en ligne, confrontée à 28 grands services : ce qui est publié, ce qui manque, la fraîcheur des données et le cas des produits conçus selon la méthode beta.gouv.fr.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="FORM 2026">
+<meta property="og:title" content="Combien de personnes utilisent nos services publics en ligne ? La transparence doit progresser pour créer de la confiance">
+<meta property="og:description" content="28 services, 11 indicateurs : ce qui est publié et ce qui pourrait l'être. Une grille commune et une matrice de ce que l'État publie vraiment sur l'usage de ses services en ligne.">
+<meta property="og:url" content="https://emsnytech.github.io/form2026/indicateurs-services-en-ligne.html">
+<meta property="og:image" content="https://emsnytech.github.io/form2026/illustration-transparence-services-en-ligne.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1200">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://emsnytech.github.io/form2026/illustration-transparence-services-en-ligne.png">
+<meta name="page-version" content="2026-11-09-r1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1e2022; --muted:#5c6066; --paper:#fbf9f5; --surface:#ffffff; --line:#e2dfd7;
+  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4; --accent:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c; --bad-soft:#fef2f2; --min:#0e7490; --min-soft:#ecfeff;
+  --ok:#15803d; --part:#d97706; --ko:#b91c1c; --na:#d6d3cb; --track:#efece5;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+    --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn-soft:#451a03; --bad:#f87171; --bad-soft:#450a0a; --min:#22d3ee; --min-soft:#164e63;
+    --ok:#4ade80; --part:#fbbf24; --ko:#f87171; --na:#3f3f46; --track:#323236; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
+  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn-soft:#451a03; --bad:#f87171; --bad-soft:#450a0a; --min:#22d3ee; --min-soft:#164e63;
+  --ok:#4ade80; --part:#fbbf24; --ko:#f87171; --na:#3f3f46; --track:#323236; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--admin)}
+.wrap{max-width:1120px;margin:0 auto;padding:2.4rem 1.25rem 3rem}
+.topnav{margin:0 0 1.2rem;font-size:.95rem}.topnav a{text-decoration:none;font-weight:600}
+.brand{font-weight:700;letter-spacing:.02em;color:var(--muted);font-size:.95rem;margin:0}
+.brand a{color:inherit;text-decoration:none}
+h1,h2,h3{font-weight:800;line-height:1.15;margin:0}
+h1{font-size:clamp(2rem,4.6vw,3.1rem);max-width:24ch;margin-top:.5rem;text-wrap:balance}
+.h1sub{display:block;font-size:.5em;font-weight:700;color:var(--muted);margin-top:.6rem;line-height:1.25}
+h2{font-size:1.4rem;margin-bottom:.4rem;text-wrap:balance}
+h3{font-size:1.05rem;margin-bottom:.3rem}
+.lede{font-size:1.12rem;color:var(--muted);max-width:66ch;margin:1rem 0 0}
+.lede b{color:var(--ink)}
+.sub{color:var(--muted);margin:0 0 1.2rem;max-width:70ch}
+.asof{display:inline-block;margin-top:1rem;font:500 .8rem "IBM Plex Mono",ui-monospace,monospace;color:var(--accent);background:var(--warn-soft);border:1px solid var(--line);padding:.25rem .55rem;border-radius:4px}
+section{margin-top:2.8rem}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+
+.figures{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:2rem}
+@media (max-width:760px){.figures{grid-template-columns:repeat(2,1fr)}}
+.fig{background:var(--surface);padding:1rem 1.1rem}
+.fig b{display:block;font:700 1.65rem/1.1 "IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.fig span{font-size:.9rem;color:var(--muted)}
+.fig.k b{color:var(--bad)} .fig.a b{color:var(--admin)} .fig.u b{color:var(--usager)} .fig.w b{color:var(--accent)}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.2rem 1.3rem}
+.cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+@media (max-width:860px){.cols{grid-template-columns:1fr}}
+.cols.two-col{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:start}
+@media (max-width:860px){.cols.two-col{grid-template-columns:1fr}}
+.cols .panel p{margin:.2rem 0 0;font-size:.95rem}
+.cols .panel .what{font-size:.85rem;color:var(--muted);margin-top:.6rem;border-top:1px solid var(--line);padding-top:.5rem}
+.q{font:500 .75rem "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.rank li{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:1rem;align-items:baseline;padding:.6rem 0;border-bottom:1px solid var(--line)}
+.rank li:last-child{border-bottom:0}
+.rank b{font:700 1.15rem "IBM Plex Mono",ui-monospace,monospace}
+.rank span{color:var(--muted);font-size:.95rem}
+.spark{display:flex;gap:.35rem;align-items:flex-end;height:64px;margin:.6rem 0 0}
+.spark div{flex:1;background:var(--admin);border-radius:3px 3px 0 0;position:relative;min-width:18px}
+.spark div.last{background:var(--bad)}
+.spark small{position:absolute;bottom:-1.3rem;left:0;right:0;text-align:center;font:500 .7rem "IBM Plex Mono",monospace;color:var(--muted)}
+.spark em{position:absolute;top:-1.2rem;left:0;right:0;text-align:center;font:700 .72rem "IBM Plex Mono",monospace;font-style:normal;color:var(--ink)}
+
+table{border-collapse:collapse;width:100%}
+.grid-tab td,.grid-tab th{padding:.45rem .5rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:.93rem}
+.grid-tab th{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.grid-tab td.code{font:700 .85rem "IBM Plex Mono",monospace;white-space:nowrap}
+.grid-tab tr.grp td{background:var(--track);font-weight:700;font-size:.85rem}
+
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;list-style:none;margin:0 0 .9rem;padding:0;font-size:.9rem}
+.legend li{display:flex;align-items:center;gap:.4rem}
+.dot{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--c);vertical-align:-2px}
+.dot.n{width:14px;height:3px;border-radius:2px;background:var(--na);vertical-align:3px}
+.controls{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;margin:0 0 1rem}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;background:var(--surface);padding:3px;flex-wrap:wrap}
+.seg button{font:600 .9rem "Source Sans 3",system-ui,sans-serif;color:var(--muted);background:none;border:0;border-radius:999px;padding:.35rem .85rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.seg button:focus-visible{outline:2px solid var(--admin);outline-offset:2px}
+table.mx{min-width:860px}
+.mx th,.mx td{padding:.42rem .3rem;border-bottom:1px solid var(--line);text-align:center;font-size:.88rem}
+.mx thead th{font-size:.74rem;color:var(--muted);font-weight:700;vertical-align:bottom;line-height:1.15}
+.mx thead th .c{display:block;font:500 .7rem "IBM Plex Mono",monospace;color:var(--ink)}
+.mx th.svc,.mx td.svc{text-align:left;font-weight:700;min-width:190px}
+.mx td.svc small{display:block;font-weight:400;color:var(--muted);font-size:.78rem}
+.mx tr.se td.svc::after{content:"méthode beta.gouv.fr";margin-left:.4rem;font:500 .66rem "IBM Plex Mono",monospace;color:var(--usager);border:1px solid var(--usager);border-radius:3px;padding:0 .25rem;vertical-align:1px}
+.mx tfoot td{font:700 .85rem "IBM Plex Mono",monospace;border-bottom:0}
+.mx tfoot td.svc{font:700 .85rem "Source Sans 3",sans-serif}
+.mx tfoot tr.g td{color:var(--ok)} .mx tfoot tr.r td{color:var(--ko)}
+.mx tr.hide{display:none}
+.note{font-size:.88rem;color:var(--muted);margin:.9rem 0 0}
+
+.fresh{list-style:none;margin:0;padding:0}
+.fresh li{display:grid;grid-template-columns:20px minmax(150px,220px) 1fr;gap:.3rem .8rem;align-items:baseline;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:.93rem}
+.fresh li:last-child{border-bottom:0}
+.fresh b{font-weight:700}
+.fresh span{color:var(--muted)}
+.fresh .dot{align-self:center}
+.fsum{display:flex;height:34px;border-radius:6px;overflow:hidden;margin:.2rem 0 .6rem}
+.fsum div{background:var(--c);display:flex;align-items:center;justify-content:center;color:#fff;font:700 .85rem "IBM Plex Mono",monospace}
+.fsum div+div{border-left:2px solid var(--surface)}
+
+.vs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+@media (max-width:760px){.vs{grid-template-columns:1fr}}
+.vs .panel ul{margin:.3rem 0 0;padding-left:1.1rem}
+.vs .panel li{margin:.25rem 0;font-size:.95rem}
+.vs .plus h3{color:var(--usager)} .vs .minus h3{color:var(--bad)}
+.big{font:700 2.2rem/1 "IBM Plex Mono",monospace;color:var(--usager)}
+.big.b{color:var(--bad)}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-bottom:1rem}
+@media (max-width:600px){.duo{grid-template-columns:1fr}}
+
+ol.steps{counter-reset:s;list-style:none;margin:0;padding:0;display:grid;gap:.7rem}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:2.2rem 1fr;gap:.8rem;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem}
+ol.steps li::before{content:counter(s);font:700 1.2rem "IBM Plex Mono",monospace;color:var(--admin)}
+ol.steps li b{display:block}
+ol.steps li span{color:var(--muted);font-size:.95rem}
+ol.steps li.first{border-color:var(--usager);background:var(--usager-soft)}
+ol.steps li.first::before{color:var(--usager)}
+
+.src{font-size:.88rem;color:var(--muted);columns:2;column-gap:2rem;padding-left:1.1rem}
+@media (max-width:760px){.src{columns:1}}
+.src li{break-inside:avoid;margin:.2rem 0}
+footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="topnav" data-rubrique="situer"><!-- nav:début --><a href="index.html">FORM 2026</a> · <a href="index.html#mesurer">Mesurer</a> · <a href="index.html#concevoir">Concevoir</a> · <a href="index.html#situer" aria-current="page">Situer</a> · <a href="index.html#donnees">Données</a><!-- nav:fin --></p>
+  <header>
+    <p class="brand"><a href="./">FORM 2026</a> · Situer</p>
+    <h1>Combien de personnes utilisent nos services publics en ligne ?<span class="h1sub">La transparence doit progresser pour créer de la confiance</span></h1>
+    <p class="lede">Chaque service public en ligne compte ses visites, ses comptes, ses dossiers et ses délais. Ces chiffres sont encore rarement publiés, et rarement avec les mêmes définitions. Cette page propose <b>une grille commune de 18 indicateurs</b> et vérifie, pour <b>28 grands services</b>, ce qui est réellement publié aujourd'hui.</p>
+    <span class="asof">État au 9 novembre 2026 · sources publiques uniquement</span>
+  </header>
+
+  <div class="figures" aria-label="Chiffres clés">
+    <div class="fig k"><b>34<sup style="font-size:.6em">e</sup></b><span>rang à l'indice ONU de l'administration en ligne (4<sup>e</sup> en 2014) ; 25<sup>e</sup> sur 27 au DESI 2026</span></div>
+    <div class="fig k"><b>143</b><span>indicateurs attendus qui n'ont pas pu être trouvés simplement, sur 308 cases</span></div>
+    <div class="fig w"><b>3 / 28</b><span>services publient des données de moins de trois mois</span></div>
+    <div class="fig u"><b>36 %</b><span>des produits conçus selon la méthode beta.gouv.fr publient leur budget ; aucun des autres services passés en revue</span></div>
+  </div>
+
+  <section aria-labelledby="europe">
+    <h2 id="europe">L'Europe mesure l'offre, pas l'usage</h2>
+    <p class="sub">Trois textes européens encadrent déjà les services publics en ligne. Aucun n'oblige à publier combien de personnes les utilisent.</p>
+    <div class="cols">
+      <div class="panel">
+        <span class="q">Règlement 2018/1724</span>
+        <h3>Portail numérique unique</h3>
+        <p>Les articles 24 et 25 imposent de collecter des statistiques sur les visites des procédures liées au portail et de recueillir l'avis des usagers.</p>
+        <p class="what">Rien trouvé au niveau national dans cette revue. Les chiffres remontent à la Commission.</p>
+      </div>
+      <div class="panel">
+        <span class="q">Décennie numérique 2030</span>
+        <h3>100 % des services clés en ligne</h3>
+        <p>L'objectif est suivi par l'eGovernment Benchmark, qui teste la disponibilité des services avec des « clients mystères ».</p>
+        <p class="what">Mesuré : l'existence du service, pas son usage réel.</p>
+      </div>
+      <div class="panel">
+        <span class="q">Directive 2016/2102</span>
+        <h3>Accessibilité des sites publics</h3>
+        <p>Chaque site doit publier sa déclaration d'accessibilité.</p>
+        <p class="what">La preuve qu'une obligation de publication service par service est possible.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="rang">
+    <h2 id="rang">Le rang de la France</h2>
+    <div class="cols two-col">
+      <div class="panel">
+        <span class="q">ONU · rang mondial, indice EGDI</span>
+        <div class="spark" role="img" aria-label="Rang de la France : 4e en 2014, 10e en 2016, 9e en 2018, 19e en 2020, 19e en 2022, 34e en 2024">
+          <div style="height:12%"><em>4</em><small>2014</small></div>
+          <div style="height:29%"><em>10</em><small>2016</small></div>
+          <div style="height:26%"><em>9</em><small>2018</small></div>
+          <div style="height:56%"><em>19</em><small>2020</small></div>
+          <div style="height:56%"><em>19</em><small>2022</small></div>
+          <div class="last" style="height:100%"><em>34</em><small>2024</small></div>
+        </div>
+        <p class="note" style="margin-top:1.8rem">Plus la barre est haute, plus le rang est mauvais. L'édition 2026 n'a pas été trouvée.</p>
+      </div>
+      <div class="panel">
+        <ul class="rank">
+          <li><b>25<sup style="font-size:.6em">e</sup> / 27</b><span>DESI 2026 : services publics numériques aux citoyens (72,0 contre 84,6 pour l'UE). 24<sup>e</sup> sur 27 pour les entreprises. La France était 8<sup>e</sup> pour les services publics en ligne en 2015.</span></li>
+          <li><b>6<sup style="font-size:.6em">e</sup> / 27</b><span>Pour l'usage : 91 % des internautes français utilisent l'administration en ligne, contre 76 % en Europe. Les Français s'en servent, mais l'offre est notée parmi les plus faibles.</span></li>
+          <li><b>54 / 70</b><span>« Transparence de la délivrance des services » : France contre UE. L'Europe constate déjà que l'administration française rend mal compte de la manière dont elle sert ses usagers.</span></li>
+          <li><b>0,67 / 0,71</b><span>OCDE : France contre moyenne pour le fonctionnement centré sur l'usager, alors que la France figure parmi les meilleurs pour l'ouverture des données.</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">Rangs DESI calculés à partir de l'outil de visualisation de la Commission (extraction du 9 novembre 2026) ; scores du rapport pays France 2026. Pour les seuls usagers français, le score citoyens atteint 92,9 : le retard tient d'abord aux services transfrontaliers, régionaux et locaux, et aux événements de vie Famille, Santé et Carrière.</p>
+    <p class="note">Le paradoxe : un des pays qui ouvrent le mieux leurs données publiques ne publie pas les données d'usage de ses propres services en ligne.</p>
+  </section>
+
+  <section aria-labelledby="grille">
+    <h2 id="grille">Une grille commune : 18 indicateurs mensuels</h2>
+    <p class="sub">Un socle pour tout service, puis un module par « couche » active : information, démarche, compte usager, back office. C'est la définition, plus que la liste, qui rend la comparaison possible.</p>
+    <div class="panel scroll">
+      <table class="grid-tab">
+        <thead><tr><th>Code</th><th>Indicateur</th><th>Définition</th></tr></thead>
+        <tbody id="grid-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="matrice">
+    <h2 id="matrice">Ce qui est publié : 33 points verts, 143 rouges</h2>
+    <p class="sub">Onze indicateurs clés, vingt-huit services. Rouge veut dire : l'indicateur devrait exister pour ce type de service, et l'opérateur ne le publie pas, ou il n'a pas été possible de le trouver simplement.</p>
+    <ul class="legend">
+      <li><i class="dot" style="--c:var(--ok)"></i>Publié régulièrement</li>
+      <li><i class="dot" style="--c:var(--part)"></i>Partiel, ponctuel ou interne</li>
+      <li><i class="dot" style="--c:var(--ko)"></i>Devrait exister, pas trouvé simplement</li>
+      <li><i class="dot n"></i>Sans objet</li>
+    </ul>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Filtrer les services">
+        <button type="button" data-f="all" aria-pressed="true">Tous</button>
+        <button type="button" data-f="usager">Services aux usagers</button>
+        <button type="button" data-f="agent">Outils des agents</button>
+        <button type="button" data-f="se">Méthode beta.gouv.fr</button>
+      </div>
+    </div>
+    <div class="panel scroll">
+      <table class="mx">
+        <thead><tr id="mx-head"></tr></thead>
+        <tbody id="mx-body"></tbody>
+        <tfoot id="mx-foot"></tfoot>
+      </table>
+    </div>
+    <p class="note">Les six services conçus selon cette méthode ont 30 % de cases vertes parmi celles qui s'appliquent, contre 12 % pour les autres. Le permis de construire illustre l'indicateur qui existe en interne (un classement des départements de A à E) sans être publié.</p>
+    <p class="note">Un chiffre retrouvé au détour d'un rapport de la Cour des comptes, d'une inspection ou d'une réponse parlementaire ne ferait pas passer la case au vert : il prouverait seulement que la donnée existe et n'est pas mise à disposition, sans série ni mise à jour.</p>
+  </section>
+
+  <section aria-labelledby="fraicheur">
+    <h2 id="fraicheur">Des données publiées, mais pas toujours à jour</h2>
+    <p class="sub">Âge de la donnée publique la plus récente au 9 novembre 2026. Un rapport annuel publié au printemps a déjà quatre à seize mois quand on le lit ; un jeu de données mensuel reste à jour sans effort.</p>
+    <div class="fsum" id="fsum" role="img"></div>
+    <ul class="legend">
+      <li><i class="dot" style="--c:var(--ok)"></i>Moins de 3 mois</li>
+      <li><i class="dot" style="--c:var(--part)"></i>3 à 12 mois</li>
+      <li><i class="dot" style="--c:var(--ko)"></i>Plus de 12 mois, ou rien</li>
+    </ul>
+    <div class="panel"><ul class="fresh" id="fresh"></ul></div>
+    <p class="note">Les jeux ouverts s'abandonnent sans bruit : celui de FranceConnect s'arrête à mars 2022 et porte la mention « fréquence de mise à jour non respectée ».</p>
+  </section>
+
+  <section aria-labelledby="se">
+    <h2 id="se">La méthode beta.gouv.fr ouvre la voie</h2>
+    <p class="sub">La méthode recommandée par beta.gouv.fr demande depuis l'origine une page publique de statistiques à chaque produit. Le résultat est meilleur que la moyenne sur la transparence, pas sur la comparabilité.</p>
+    <div class="duo">
+      <div class="panel"><span class="big">65 %</span><p style="margin:.3rem 0 0">des 280 services du réseau publient une page de statistiques (bilan 2025).</p></div>
+      <div class="panel"><span class="big">36 %</span><p style="margin:.3rem 0 0">publient leur budget ; plusieurs, un coût par usager (4,20 € pour DossierFacile, 0,60 € par personne informée pour Réfugiés.info).</p></div>
+    </div>
+    <div class="vs">
+      <div class="panel plus"><h3>Ce qui est meilleur</h3><ul>
+        <li>La publication est une obligation inscrite dans les conventions DINUM : « mesurer et diffuser l'impact […] par l'intermédiaire d'une page internet présentant les statistiques du service ».</li>
+        <li>Le budget et le coût par usager, absents des autres services passés en revue.</li>
+        <li>Des indicateurs d'impact plutôt que des « indicateurs de vanité ».</li>
+        <li>Une matrice d'impact commune depuis l'été 2025 : utilisable, utilisé, utile, impactant, efficient.</li>
+      </ul></div>
+      <div class="panel minus"><h3>Ce qui ne l'est pas</h3><ul>
+        <li>Chaque équipe choisit ses métriques, sur une page au format libre.</li>
+        <li>Aucun registre des matrices d'impact, ni décompte de celles qui sont remplies, n'a été trouvé.</li>
+        <li>Des services phares sans matrice, dont Démarche Numérique.</li>
+        <li>Aucune fréquence ni date de mise à jour exigée n'a été trouvée ; tout est déclaratif.</li>
+      </ul></div>
+    </div>
+    <p class="note">Exemple d'une page de statistiques bien tenue : <a href="https://rdv.anct.gouv.fr/stats" target="_blank" rel="noopener">RDV Service Public</a>, liée depuis le pied de page, avec 2,6 millions de rendez-vous sur douze mois glissants, 12 703 agents actifs et 2 118 organisations actives par mois. Un produit sans page de statistiques, ou qui ne la rend pas trouvable depuis son site, s'écarte de son engagement.</p>
+    <p class="note">Constats sur les conventions DINUM, le bilan beta.gouv.fr et les matrices d'impact (dont l'absence de matrice pour Démarche Numérique) établis au 9 novembre 2026.</p>
+    <p class="note">Exemple d'une matrice complète : <a href="https://boris.beta.gouv.fr/matrice-impact" target="_blank" rel="noopener">BoRiS</a>, avec série mensuelle et coût par simulation, mise à jour en avril 2026.</p>
+  </section>
+
+  <section aria-labelledby="propositions">
+    <div class="panel" style="margin-top:2.8rem;border-left:4px solid var(--bad)"><h3>Une question de confiance</h3><p style="margin:.3rem 0 0">« La société a le droit de demander compte à tout agent public de son administration » (article 15 de la Déclaration de 1789). Quand un service ne dit ni combien de personnes l'utilisent, ni combien abandonnent, ni combien de temps on attend, ce silence peut être lu comme une façon de cacher des réalités décevantes, à tort ou à raison. C'est la confiance dans l'État lui-même qui en pâtit.</p></div>
+<div class="panel" style="margin-top:1.4rem"><h3>Le cas Resana</h3><p style="margin:.3rem 0 0">La DINUM a annoncé en juin 2026 la <a href="https://lasuite.numerique.gouv.fr/resana-en-2027">fin de son financement de Resana au 31 décembre 2026</a>, au profit de Fichiers. Devant la réaction des ministères, l'outil <a href="https://acteurspublics.fr/articles/fin-du-financement-de-la-plateforme-collaborative-resana-les-ministeres-confrontes-au-cout-de-linstabilite-numerique/">continue finalement en 2027</a>, opéré par Interstis et payé par les administrations qui le souhaitent. Les chiffres qui éclairent cet arbitrage n'ont circulé que par la presse : <a href="https://elegartech.fr/articles/resana-l-etat-desadopte-un-outil-collaboratif-adopte">69 883 utilisateurs actifs pour Resana en septembre 2026, contre 39 135 pour Fichiers</a>. Publiés régulièrement, ils auraient permis à chacun de juger la décision et d'en anticiper les effets.</p></div>
+<div class="panel" style="margin-top:1.4rem"><h3>Trois démarches régaliennes, trois situations</h3><p style="margin:.3rem 0 0">Les trois figurent dans l'Observatoire Vos démarches essentielles, qui publie chaque trimestre leur satisfaction : 9,1/10 pour l'acte de naissance des Français nés à l'étranger, 8,7 pour l'aide juridictionnelle, 7,2 pour la demande de titre de séjour. Au-delà, tout diverge. L'état civil suit un vrai indicateur d'impact (95 à 96 % de délivrance électronique, en 48 heures environ), mais connu seulement par des réponses parlementaires. L'aide juridictionnelle compte 810 269 demandes, dont 22 % en ligne, sans délai de décision publié. L'ANEF reçoit 1,23 million de demandes de titre de séjour, toutes en ligne, avec la satisfaction la plus basse des trois ; le Défenseur des droits relève 400 % de réclamations en plus entre 2020 et 2024, et ni délais ni stock de dossiers ne sont publiés.</p></div>
+    <h2 id="propositions" style="margin-top:2.8rem">Être exemplaire commence par publier</h2>
+    <p class="sub">Publier ne demande ni loi nouvelle ni budget lourd ; les délais et les abandons demandent en revanche un travail d'instrumentation. C'est la première étape, la moins coûteuse et la plus visible.</p>
+    <ol class="steps">
+      <li class="first"><div><b>Publier un noyau de six indicateurs pour les 28 services, en six mois</b><span>Visites, visiteurs uniques, dossiers déposés, taux d'abandon, actifs mensuels, délai médian de traitement.</span></div></li>
+      <li><div><b>Fixer les définitions dans un schéma ouvert</b><span>Un CSV mensuel par service sur schema.data.gouv.fr, avec la version de chaque définition.</span></div></li>
+      <li><div><b>Publier chaque mois, au plus tard quinze jours après la fin du mois</b><span>Et afficher à côté de chaque chiffre la période couverte et la date de mise à jour.</span></div></li>
+      <li><div><b>Étendre la matrice d'impact beta.gouv.fr à tous les services</b><span>Avec un registre public, ce qui ajoute l'efficience : le coût rapporté à l'usage.</span></div></li>
+      <li><div><b>Rendre public ce que le règlement 2018/1724 oblige déjà à collecter</b><span>Le coût marginal est nul.</span></div></li>
+      <li><div><b>Conditionner les moyens mutualisés à la publication</b><span>Raccordement à FranceConnect et ProConnect, financements du FTAP, accompagnement beta.gouv.fr.</span></div></li>
+    </ol>
+    <p class="note"><b>Question ouverte : qui garantit la qualité des chiffres publiés ?</b> Sans définitions communes, contrôle et responsable identifié, un noyau publié en six mois juxtaposerait des chiffres incomparables ; c'est la condition la plus difficile de la première proposition.</p>
+  </section>
+
+  <section aria-labelledby="sources">
+    <h2 id="sources">Sources</h2>
+    <p class="sub">Cette revue cherche ce qu'un citoyen peut trouver simplement, auprès de l'opérateur lui-même. Un point rouge signifie « pas trouvé simplement », pas « inexistant ». Les opérateurs sont invités à signaler un chiffre publié qui aurait échappé à cette revue, ou à demander le référencement d'un service.</p>
+    <ul class="src">
+      <li><a href="https://eur-lex.europa.eu/eli/reg/2018/1724/oj/fra">Règlement (UE) 2018/1724</a> et <a href="https://eur-lex.europa.eu/eli/reg/2020/1121/oj">règlement d'exécution 2020/1121</a></li>
+      <li><a href="https://publicadministration.un.org/egovkb/en-us/Data/Country-Information/id/61-France">ONU, E-Government Survey, fiche France</a></li>
+      <li><a href="https://data.consilium.europa.eu/doc/document/ST-10476-2026-ADD-39/en/pdf">Commission européenne, rapport pays France 2026, SWD(2026) 155</a>, <a href="https://digital-decade-desi.digital-strategy.ec.europa.eu/datasets/desi/indicators">outil DESI</a> et <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX%3A52026DC0288">communication 2026</a></li>
+      <li><a href="https://data.consilium.europa.eu/doc/document/ST-10407-2025-ADD-11/en/pdf">DESI 2025, rapport pays France</a> et <a href="https://acteurspublics.fr/articles/un-classement-europeen-juge-moyen-le-developpement-du-numerique-en-france/">DESI 2015</a></li>
+      <li><a href="https://www.oecd.org/fr/publications/perspectives-de-l-administration-numerique-2026_1f4a646d-fr/france_6039a143-fr.html">OCDE, Perspectives de l'administration numérique 2026</a></li>
+            <li><a href="https://www.capgemini.com/insights/research-library/egovernment-benchmark-report-towards-digital-government/">eGovernment Benchmark 2026</a></li>
+      <li><a href="https://www.dila.gouv.fr/IMG/pdf/rapport_dila_2025-_web_accessible.pdf">DILA, rapport d'activité 2025</a></li>
+      <li><a href="https://www.impots.gouv.fr/etudes-et-statistiques">DGFiP, études et statistiques</a></li>
+      <li><a href="https://numerique.gouv.fr/uploads/CP_ARRIVEE_FRANCECONNECT_CAF.pdf">DINUM, FranceConnect+ sur caf.fr</a></li>
+      <li><a href="https://www.assemblee-nationale.fr/dyn/17/comptes-rendus/cesecu/l17cesecu2526012_compte-rendu.pdf">Audition CNAM, janvier 2026</a></li>
+      <li><a href="https://esante.gouv.fr/actualites/mon-espace-sante-du-dossier-medical-la-prevention-personnalisee">ANS, Mon espace santé</a></li>
+      <li><a href="https://www.lassuranceretraite.fr/portail-info/hors-menu/actualites-nationales/institutionnel/2026/l-espace-personnel-poursuit-sa-d.html">Assurance retraite, bilan 2025</a></li>
+      <li><a href="https://www.francetravail.org/files/live/sites/peorg/files/documents/Publications/FT_Chiffres_Cles_2024">France Travail, chiffres clés 2024</a></li>
+      <li><a href="https://www.enseignementsup-recherche.gouv.fr/sites/default/files/2026-10/Bilan%20de%20la%20proc%C3%A9dure%20d%27admission%20Parcoursup%202026.pdf">MESR, bilan Parcoursup 2026</a></li>
+      <li><a href="https://www.seringas.caissedesdepots.fr/sites/default/files/251231_Infographie-MCF.pdf">Caisse des Dépôts, Mon Compte Formation</a></li>
+      <li><a href="https://www.inpi.fr/a-la-une/guichet-unique-chiffres-cles-de-lannee-2024">INPI, guichet unique 2024</a></li>
+      <li><a href="https://ma-facture-electronique.org/portail-public-facturation/chorus-pro/">Chorus Pro, bilan 2025</a></li>
+      <li><a href="https://www.lemoniteur.fr/reglementation/droit-de-l-urbanisme/droit-de-preemption-la-dematerialisation-des-declarations-dintention-daliener-via-la-plateforme-de-letat-platau-est-dans-les-starting-blocks.ZWRV6WYS2NABHJVJAV4KGUDMEY.html">Le Moniteur, PLAT'AU</a> et <a href="https://www.maire-info.com/permis-de-construire-en-ligne-l%27%C3%A9tat-rappelle-%C3%A0-l%27ordre-ses-propres-services%C2%A0-article2-27858">Maire-info</a></li>
+      <li><a href="https://www.data.gouv.fr/datasets/utilisation-du-service-demarche-numerique-gouv-fr">Démarche Numérique, jeu d'utilisation</a></li>
+      <li><a href="https://www.data.gouv.fr/datasets/statistiques-dusage-de-franceconnect">FranceConnect, statistiques d'usage</a></li>
+      <li><a href="https://next.ink/241596/simplification-securisation-souverainete-la-dinum-affirme-son-role-de-chef-dorchestre/">DINUM, rapport d'activité 2025 (Tchap, FranceConnect)</a></li>
+      <li><a href="https://indico.math.cnrs.fr/event/15889/contributions/15215/attachments/6380/11212/2026-03-11-journees-mathrice-la-suite-DINUM.pdf">DINUM, La Suite, mars 2026</a></li>
+      <li><a href="https://www.economie.gouv.fr/dae/les-projets-achats-les-consultations/place-la-plateforme-des-achats-de-letat">DAE, PLACE, chiffres clés 2025</a></li>
+      <li><a href="https://www.fonction-publique.gouv.fr/toutes-les-actualites/mentor-fete-ses-5-ans-une-plateforme-mutualisee-au-service-de-la-formation-des-agents-publics">DGAFP, Mentor fête ses 5 ans</a> et <a href="https://acteurspublics.fr/articles/480-000-comptes-crees-en-5-ans-sur-la-plateforme-de-formation-mentor/">Acteurs publics</a></li>
+      <li><a href="https://www.senat.fr/questions/base/2025/qSEQ250404348.html">Sénat, réponse sur l'ANEF (juin 2025)</a> et <a href="https://www.vie-publique.fr/rapport/297548-ladministration-numerique-pour-les-etrangers-en-france-anef">Défenseur des droits, rapport ANEF</a></li>
+      <li><a href="https://cnb.avocat.fr/actualite/dematerialisation-des-demandes-daj-ou-en-est-on">CNB, dématérialisation de l'AJ</a> et <a href="https://www.dalloz-actualite.fr/document/rapport-de-cour-des-comptes-7">Cour des comptes, l'aide juridictionnelle (2023)</a></li>
+      <li><a href="https://www.senat.fr/questions/base/2025/qSEQ250303898.html">Sénat, réponse sur l'état civil électronique</a> et <a href="https://alliancesolidaire.org/2026/09/21/etat-civil-des-francais-de-letranger-ou-en-est-la-dematerialisation/">ASFE, septembre 2026</a></li>
+      <li><a href="https://beta.gouv.fr/bilan/2025">beta.gouv.fr, bilan 2025</a> et <a href="https://beta.gouv.fr/startups/">fiches des services</a></li>
+      <li><a href="https://www.data.gouv.fr/datasets/observatoire-de-la-qualite-des-demarches-en-ligne/informations">Observatoire Vos démarches essentielles</a></li>
+    </ul>
+  </section>
+
+  <footer>FORM 2026 · Philippe Vrignaud · Données ouvertes et code source publics</footer>
+</div>
+
+<script>
+// Grille : code, indicateur, définition, groupe
+const GRID = [
+  ["S","Socle, pour tout service"],
+  ["S1","Visites","Sessions sur le mois, coupure après 30 min d'inactivité, robots exclus"],
+  ["S2","Visiteurs uniques","Navigateurs distincts sur le mois ; non additionnables d'un mois à l'autre, fiabilité limitée par le consentement aux traceurs exigé par la CNIL"],
+  ["S3","Part mobile et application","Visites depuis smartphone ou appli, en %"],
+  ["S4","Disponibilité","Temps de service ouvert / temps total, hors maintenances annoncées"],
+  ["S5","Satisfaction","Note moyenne (MonAvis ou équivalent) et nombre d'avis"],
+  ["A","Information"],
+  ["A1","Pages vues","Pages affichées sur le mois"],
+  ["A2","Durée médiane de visite","Médiane et non moyenne ; à lire avec prudence"],
+  ["A3","Orientation vers une démarche","Visites ayant cliqué vers un service transactionnel, en %"],
+  ["B","Démarche"],
+  ["B1","Dossiers commencés","Brouillons créés sur le mois"],
+  ["B2","Dossiers déposés","Dossiers soumis à l'administration sur le mois"],
+  ["B3","Taux d'abandon","1 − déposés / commencés, sur une cohorte de 30 jours"],
+  ["B4","Recours au numérique","Demandes en ligne / demandes tous canaux"],
+  ["C","Compte usager"],
+  ["C1","Comptes activés","Comptes ayant fait leur première connexion (distincts des comptes ouverts d'office)"],
+  ["C2","Utilisateurs actifs mensuels","Comptes distincts connectés au moins une fois dans le mois"],
+  ["C3","Connexions par identité fédérée","Part FranceConnect ou ProConnect, en %"],
+  ["D","Back office"],
+  ["D1","Agents actifs mensuels","Agents distincts connectés au moins une fois dans le mois"],
+  ["D2","Dossiers traités","Décisions rendues sur le mois"],
+  ["D3","Délai médian de traitement","Dépôt → décision, en jours calendaires"]
+];
+document.getElementById("grid-body").innerHTML = GRID.map(r => r.length === 2
+  ? `<tr class="grp"><td colspan="3">${r[1]}</td></tr>`
+  : `<tr><td class="code">${r[0]}</td><td><b>${r[1]}</b></td><td>${r[2]}</td></tr>`).join("");
+
+// Matrice : g vert, o orange, r rouge, n sans objet
+const COLS = [["S1","Visites"],["S2","Uniques"],["S5","Satisfaction"],["B1-B3","Commencés, abandon"],["B2","Déposés"],["B4","Recours numérique"],["C1","Comptes activés"],["C2","Actifs mensuels"],["D1","Agents actifs"],["D3","Délais"],["","Série ouverte"]];
+const SVC = [
+  ["service-public.gouv.fr","DILA","usager",0,"g r g n n n n n n n r"],
+  ["Légifrance","DILA","usager",0,"g r r n n n n n n n r"],
+  ["data.gouv.fr","DINUM","usager",1,"g g r n n n n n n n g"],
+  ["impots.gouv.fr","DGFiP","usager",0,"r r o r g g o r r r o"],
+  ["caf.fr","CNAF","usager",0,"g r r r r r r o r r r"],
+  ["Compte ameli","CNAM","usager",0,"r r o r r r o o r r r"],
+  ["Mon espace santé","CNAM, ANS","usager",0,"r r r n n n g g o n o"],
+  ["lassuranceretraite.fr","CNAV","usager",0,"g r r r r r g r r r r"],
+  ["francetravail.fr","France Travail","usager",0,"g o o r o r r r r r r"],
+  ["Parcoursup","MESR","usager",0,"r r o g g n r r r o g"],
+  ["Mon Compte Formation","Caisse des Dépôts","usager",0,"r r r r g r o r r r r"],
+  ["Guichet unique","INPI","usager",0,"r r r r g o r r r r o"],
+  ["Chorus Pro","AIFE","usager",0,"r r r r g o o r o r r"],
+  ["PLACE (achats de l'État)","DAE","usager",0,"r r r r o n o r o r r"],
+  ["ANEF (étrangers en France)","Intérieur, DGEF","usager",0,"r r g r g n r r r r o"],
+  ["Aide juridictionnelle","Justice, SIAJ","usager",0,"r r g r g g r r r r r"],
+  ["État civil des Français nés à l'étranger","MEAE, SCEC Nantes","usager",0,"r r g r o o n n n o r"],
+  ["ANTS, France Titres","ANTS","usager",0,"r r r r o n r r r o r"],
+  ["Permis de construire","AD'AU + PLAT'AU","usager",0,"r r r r o o n n o r r"],
+  ["Le Compte Asso","DJEPVA","usager",0,"r r r r r r r r r r r"],
+  ["Démarche Numérique","DINUM","usager",1,"r r r g g n o r g g g"],
+  ["FranceConnect","DINUM","usager",0,"n n r n n n g o n n o"],
+  ["Tchap","DINUM","agent",1,"n n r n n n o g n n o"],
+  ["Visio","DINUM","agent",1,"n n r n n n r o n n o"],
+  ["Docs","DINUM","agent",1,"n n r n n n r o n n o"],
+  ["Grist","DINUM","agent",1,"n n r n n n r o n n o"],
+  ["Resana","DINUM / Interstis","agent",0,"n n r n n n o o n n o"],
+  ["Mentor","DGAFP","agent",0,"n n r n n n o o n n r"]
+];
+const LAB = {g:"publié",o:"partiel",r:"non publié",n:"sans objet"};
+const COL = {g:"var(--ok)",o:"var(--part)",r:"var(--ko)"};
+document.getElementById("mx-head").innerHTML = `<th class="svc">Service</th>` + COLS.map(c=>`<th scope="col"><span class="c">${c[0]}</span>${c[1]}</th>`).join("");
+document.getElementById("mx-body").innerHTML = SVC.map(s => {
+  const cells = s[4].split(" ").map((v,i)=> v==="n"
+    ? `<td><i class="dot n" role="img" aria-label="${COLS[i][1]} : sans objet"></i></td>`
+    : `<td><i class="dot" style="--c:${COL[v]}" role="img" aria-label="${COLS[i][1]} : ${LAB[v]}" title="${LAB[v]}"></i></td>`).join("");
+  return `<tr class="${s[3]?'se':''}" data-k="${s[2]}" data-se="${s[3]}"><td class="svc">${s[0]}<small>${s[1]}</small></td>${cells}</tr>`;
+}).join("");
+function totals(){
+  const rows=[...document.querySelectorAll("#mx-body tr:not(.hide)")];
+  const g=Array(COLS.length).fill(0), r=Array(COLS.length).fill(0);
+  rows.forEach(tr=>{ const s=SVC.find(x=>x[0]===tr.cells[0].firstChild.textContent); s[4].split(" ").forEach((v,i)=>{ if(v==="g")g[i]++; if(v==="r")r[i]++; }); });
+  document.getElementById("mx-foot").innerHTML =
+    `<tr class="g"><td class="svc">Services en vert</td>${g.map(n=>`<td>${n}</td>`).join("")}</tr>`+
+    `<tr class="r"><td class="svc">Services en rouge</td>${r.map(n=>`<td>${n}</td>`).join("")}</tr>`;
+}
+document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  const f=b.dataset.f;
+  document.querySelectorAll("#mx-body tr").forEach(tr=>{
+    const show = f==="all" || (f==="se" ? tr.dataset.se==="1" : tr.dataset.k===f);
+    tr.classList.toggle("hide",!show);
+  });
+  totals();
+}));
+totals();
+
+// Fraîcheur
+const FRESH = [
+  ["g","data.gouv.fr","En continu (Matomo public)"],
+  ["g","Démarche Numérique","Octobre 2026, jeu mensuel mis à jour le 1er novembre"],
+  ["g","Parcoursup","Session 2026, bilan d'octobre"],
+  ["o","service-public.gouv.fr","Année 2025, rapport annuel"],
+  ["o","Légifrance","Année 2025, rapport annuel"],
+  ["o","impots.gouv.fr","Année 2025, rapport publié en mai 2026"],
+  ["o","Compte ameli","Début 2026, audition parlementaire"],
+  ["o","Mon espace santé","Janvier 2026, communiqués"],
+  ["o","lassuranceretraite.fr","Fin 2025"],
+  ["o","Mon Compte Formation","31 décembre 2025"],
+  ["o","Chorus Pro","Année 2025"],
+  ["o","PLACE","Année 2025, chiffres clés de la DAE"],
+  ["o","Mentor","Été 2026, bilan des cinq ans (DGAFP)"],
+  ["o","ANEF","Observatoire d'octobre 2026 : volume annuel, satisfaction trimestrielle"],
+  ["o","Aide juridictionnelle","Observatoire d'octobre 2026 : volume annuel, satisfaction trimestrielle"],
+  ["o","État civil des Français nés à l'étranger","Septembre 2026, cumul depuis 2021 relayé"],
+  ["o","Permis de construire","Cumul 2021-2026 cité en 2026"],
+  ["o","Tchap","2025, rapport DINUM de juin 2026"],
+  ["o","Visio","Mars 2026, présentation DINUM"],
+  ["o","Grist","Novembre 2025"],
+  ["o","Resana","Septembre 2026, chiffre DINUM relayé par la presse"],
+  ["r","caf.fr","Année 2024"],
+  ["r","francetravail.fr","Année 2024"],
+  ["r","Guichet unique INPI","Mai 2025, dernier point mensuel trouvé"],
+  ["r","FranceConnect","Mars 2022 dans l'open data"],
+  ["r","ANTS, France Titres","Vers 2020"],
+  ["r","Docs","Aucun chiffre public"],
+  ["r","Le Compte Asso","Aucun chiffre public"]
+];
+document.getElementById("fresh").innerHTML = FRESH.map(f=>`<li><i class="dot" style="--c:${COL[f[0]]}" role="img" aria-label="${f[0]==='g'?'moins de 3 mois':f[0]==='o'?'3 à 12 mois':'plus de 12 mois ou rien'}"></i><b>${f[1]}</b><span>${f[2]}</span></li>`).join("");
+const cnt = {g:0,o:0,r:0}; FRESH.forEach(f=>cnt[f[0]]++);
+const fs = document.getElementById("fsum");
+fs.setAttribute("aria-label",`${cnt.g} services à jour, ${cnt.o} entre 3 et 12 mois, ${cnt.r} plus anciens ou sans données`);
+fs.innerHTML = ["g","o","r"].map(k=>`<div style="--c:${COL[k]};width:${cnt[k]/FRESH.length*100}%">${cnt[k]}</div>`).join("");
+</script>
+</body>
+</html>
