@@ -407,7 +407,7 @@ const SVC = [
   ["ANTS, France Titres","ANTS","usager",0,"r r r r o n r r r o r"],
   ["Permis de construire","AD'AU + PLAT'AU","usager",0,"r r r r o o n n o r r"],
   ["Le Compte Asso","DJEPVA","usager",0,"r r r r r r r r r r r"],
-  ["Démarche Numérique","DINUM","usager",1,"r r r g g n o r g g g"],
+  ["Démarche Numérique","DINUM · usagers et agents","usager agent",1,"r r r g g n o r g g g"],
   ["FranceConnect","DINUM","usager",0,"n n r n n n g o n n o"],
   ["Tchap","DINUM","agent",1,"n n r n n n o g n n o"],
   ["Visio","DINUM","agent",1,"n n r n n n r o n n o"],
@@ -437,7 +437,7 @@ document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",(
   document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x===b));
   const f=b.dataset.f;
   document.querySelectorAll("#mx-body tr").forEach(tr=>{
-    const show = f==="all" || (f==="se" ? tr.dataset.se==="1" : tr.dataset.k===f);
+    const show = f==="all" || (f==="se" ? tr.dataset.se==="1" : tr.dataset.k.split(" ").includes(f));
     tr.classList.toggle("hide",!show);
   });
   totals();
