@@ -49,9 +49,15 @@ Correction intégrée avant publication : le Compte Asso passe de NC à ND (cons
 | caf.fr | partiel 91,8 % | partiel 73 % | téléservice « Espace Mon Compte » ; Avencod, RGAA 4 (décembre 2021, reconduit en décembre 2024). Le 91,8 % est celui de la partie éditoriale |
 | FranceConnect | conforme 100 % | conforme 100 % | commentaire précisé : la déclaration porte sur le site d'information ; le parcours de connexion est annoncé conforme, sans déclaration propre trouvée |
 
+### 15 novembre 2026 : précision du taux de Mon Compte Formation
+
+| Service | Avant | Après | Déclaration relue |
+|---|---|---|---|
+| Mon Compte Formation | partiel 91,9 % | partiel 91,94 % | plateforme, audit Access42 mis à jour par la Caisse des Dépôts, RGAA 4.1.2 ; « Consulter mes droits » 100 %, « Achat de formation » 91,84 % |
+
 ### Vérifiés sans changement le 15 novembre 2026
 
-service-public.gouv.fr, data.gouv.fr, Assurance retraite (espace personnel), France Travail, Parcoursup (dossier candidat), Mon Compte Formation, ANTS (par démarche, observatoire), État civil des Français nés à l'étranger, Permis de construire (AD'AU), Démarche Numérique, Acceslibre, Le Compte Asso. Chorus Pro et PLACE gardent leur source du relevé initial. Tchap, Docs, Grist, Resana, seLEXpert et DORA restent « non trouvé ».
+service-public.gouv.fr, data.gouv.fr, Assurance retraite (espace personnel), France Travail, Parcoursup (dossier candidat), ANTS (par démarche, observatoire), État civil des Français nés à l'étranger, Permis de construire (AD'AU), Démarche Numérique, Acceslibre, Le Compte Asso. Chorus Pro et PLACE gardent leur source du relevé initial. Tchap, Docs, Grist, Resana, seLEXpert et DORA restent « non trouvé ».
 
 ## Signaler une erreur
 
