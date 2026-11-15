@@ -104,6 +104,9 @@ table{border-collapse:collapse;width:100%}
 .seg button:focus-visible{outline:2px solid var(--admin);outline-offset:2px}
 table.mx{min-width:980px}
 .mx th.acc,.mx td.acc{text-align:left;border-left:1px solid var(--line);padding-left:.6rem;min-width:118px}
+.mx td.acc{white-space:nowrap}
+.mx td.acc .dot{margin-right:.45rem;vertical-align:top;margin-top:.15rem}
+.mx td.acc .lb{display:inline-block;vertical-align:top;white-space:normal}
 .mx td.acc .st{display:block;font-weight:700;font-size:.8rem;line-height:1.2}
 .mx td.acc .tx{display:block;font:500 .74rem "IBM Plex Mono",monospace;color:var(--muted)}
 .mx td.acc.nd .st{font-weight:400;font-style:italic;color:var(--muted)}
@@ -117,6 +120,11 @@ table.mx{min-width:980px}
 .mx tfoot td.svc{font:700 .85rem "Source Sans 3",sans-serif}
 .mx tfoot tr.g td{color:var(--ok)} .mx tfoot tr.r td{color:var(--ko)}
 .mx tr.hide{display:none}
+.mx th button.sort{all:unset;cursor:pointer;display:block;width:100%;text-align:inherit}
+.mx th button.sort:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.mx th button.sort::after{content:"\2195";display:block;font-size:.7rem;color:var(--muted);opacity:.5}
+.mx th[aria-sort=ascending] button.sort::after{content:"\25B2";opacity:1;color:var(--ink)}
+.mx th[aria-sort=descending] button.sort::after{content:"\25BC";opacity:1;color:var(--ink)}
 .note{font-size:.88rem;color:var(--muted);margin:.9rem 0 0}
 
 .fresh{list-style:none;margin:0;padding:0}
@@ -258,7 +266,7 @@ footer{margin-top:3rem;padding-top:1.2rem;border-top:1px solid var(--line);color
         <tfoot id="mx-foot"></tfoot>
       </table>
     </div>
-    <p class="note"><b>Transparence de l'accessibilité.</b> Vingt et un services sur quarante ont un niveau d'accessibilité établi par une déclaration ou par l'observatoire de la DINUM : quatre conformes, seize partiellement conformes, un non conforme. Pour les dix-neuf autres, aucune déclaration n'a été trouvée simplement ou les constats se contredisent : « non trouvé » ne veut pas dire « non conforme ». Le taux, le périmètre, la date et la source de chaque relevé s'affichent au survol de la case. Cette colonne n'entre pas dans les totaux verts et rouges.</p>
+    <p class="note"><b>Transparence de l'accessibilité.</b> Vingt et un services sur quarante ont un niveau d'accessibilité établi par une déclaration ou par l'observatoire de la DINUM : quatre conformes, seize partiellement conformes, un non conforme. Pour les dix-neuf autres, aucune déclaration n'a été trouvée simplement ou les constats se contredisent : « non trouvé » ne veut pas dire « non conforme ». Pastille : vert pour conforme (100 %), orange pour partiel, rouge pour non conforme ou non trouvé, comme dans le reste de la matrice où le rouge signale ce qui n'a pas été trouvé simplement. Le taux, le périmètre, la date et la source de chaque relevé s'affichent au survol de la case. Cette colonne n'entre pas dans les totaux verts et rouges.</p>
     <p class="note">Les dix-huit services conçus selon la méthode beta.gouv.fr ont 28 % de cases vertes parmi celles qui s'appliquent, contre 12 % pour les vingt-deux autres. Le permis de construire illustre l'indicateur qui existe en interne (un classement des départements de A à E) sans être publié.</p>
     <p class="note">Un chiffre retrouvé au détour d'un rapport de la Cour des comptes, d'une inspection ou d'une réponse parlementaire ne ferait pas passer la case au vert : il prouverait seulement que la donnée existe et n'est pas mise à disposition, sans série ni mise à jour.</p>
   </section>
@@ -455,20 +463,25 @@ const SVC = [
 // Données reprises de accessibilite_services_form2026.csv ; n'entrent pas dans les totaux de la matrice.
 const ACC = {"service-public.gouv.fr": ["TC", "100 %", "site (22 pages) ; démarches en ligne : 62 à 100 %", "janv. 2023", "service-public.gouv.fr/P10000 et P10125"], "Légifrance": ["ND", "", "aucun taux publié trouvé ; audit de conformité prévu en 2026", "", "plan annuel DILA 2026"], "data.gouv.fr": ["PC", "79,2 %", "site", "juin 2023", "data.gouv.fr/pages/legal/accessibility"], "impots.gouv.fr": ["PC", "89,8 %", "portail ; espace Finances publiques 79,3 % (2024) ; déclaration des revenus 26 %, non conforme (juin 2026)", "nov. 2024", "impots.gouv.fr/accessibilite"], "caf.fr": ["PC", "91,8 %", "espace allocataire non connecté ; une vingtaine de démarches déclarées, de 73 à 100 %", "juin 2026", "caf.fr, déclarations d'accessibilité numérique"], "Compte ameli": ["ND", "", "ameli.fr : 100 % (juil. 2025) ; pas de déclaration trouvée pour le compte ; observatoire T3 2025 : 76 à 84 %", "", "ameli.fr/assure/accessibilite"], "Mon espace santé": ["ND", "", "non relevé dans cette passe", "", ""], "lassuranceretraite.fr": ["PC", "85,5 %", "espace personnel ; portail d'information 88,4 % (juin 2024)", "avr. 2026", "lassuranceretraite.fr, page accessibilité"], "francetravail.fr": ["PC", "57 %", "recherche d'offres d'emploi ; de 50 à 98 % selon le service", "sept. 2026", "francetravail.fr/informations/aide-et-accessibilite.html"], "Parcoursup": ["PC", "68 %", "dossier candidat (22 pages)", "mai 2026", "dossier.parcoursup.fr, pied de page"], "Mon Compte Formation": ["PC", "91,9 %", "plateforme ; « Consulter mes droits » 100 %", "juin 2026", "moncompteformation.gouv.fr, accessibilité numérique"], "Guichet unique": ["TC", "100 %", "formalites.entreprises.gouv.fr ; audit de décembre 2021", "déc. 2021", "formalites.entreprises.gouv.fr/accessibilite.php"], "Chorus Pro": ["PC", "80,7 %", "factures émises, selon l'observatoire T3 2025 ; déclaration du portail non lue", "2025", "observatoire DINUM T3 2025"], "PLACE (achats de l'État)": ["PC", "62,1 %", "espace entreprise", "déc. 2024", "marches-publics.gouv.fr, déclaration accessibilité"], "ANEF (étrangers en France)": ["PC", "98,4 %", "portail des étrangers en France ; l'ANEF n'est pas citée dans le périmètre ; titre de séjour « non conforme » à l'observatoire", "mars 2026", "etrangers-en-france.interieur.gouv.fr/accessibilite"], "Aide juridictionnelle": ["NC", "", "démarche « non conforme » à l'observatoire T3 2025 ; justice.fr : 54,4 % (mars 2022)", "2025", "observatoire DINUM ; justice.fr"], "État civil des Français nés à l'étranger": ["PC", "81,8 %", "démarche opérée par la DILA ; audit de décembre 2021 reconduit sans nouvel audit", "déc. 2021", "service-public.gouv.fr/P10125"], "ANTS, France Titres": ["PC", "40 à 100 %", "selon la démarche, à l'observatoire T3 2025 (16 démarches, dont 7 non conformes)", "2025", "observatoire DINUM T3 2025"], "Permis de construire": ["PC", "69 %", "AD'AU, opérée par la DILA ; audit d'octobre 2022 reconduit en mai 2025", "oct. 2022", "service-public.gouv.fr/P10125"], "Le Compte Asso": ["ND", "", "contradictoire : « non conforme » à l'observatoire T3 2025 ; pied de page du téléservice « totalement conforme » sans lien actif vers la déclaration (constat 15/11/2026) ; le site d'information associations.gouv.fr publie une déclaration à 79,66 % (25/08/2025, périmètre : le site, pas le téléservice)", "2026", "observatoire DINUM T3 2025 ; constat direct ; associations.gouv.fr"], "RDV Service Public": ["ND", "", "non relevé dans cette passe", "", ""], "JeVeuxAider.gouv.fr": ["ND", "", "non relevé dans cette passe", "", ""], "Nos Gestes Climat": ["PC", "50 %", "site ; audit de juin 2022", "juin 2022", "nosgestesclimat.fr/accessibilite"], "Acceslibre": ["TC", "100 %", "site", "juin 2026", "acceslibre.beta.gouv.fr/accessibilite"], "L'Annuaire des Entreprises": ["ND", "", "non relevé dans cette passe", "", ""], "La bonne alternance": ["PC", "n. p.", "mention « partiellement conforme » ; taux non lisible", "", "labonnealternance.apprentissage.beta.gouv.fr/accessibilite"], "Mes Aides Réno": ["ND", "", "non relevé dans cette passe", "", ""], "La Bonne Boîte": ["ND", "", "non relevé dans cette passe", "", ""], "Santé Psy Étudiant": ["ND", "", "non relevé dans cette passe", "", ""], "FARITAS": ["ND", "", "non relevé dans cette passe", "", ""], "Démarche Numérique": ["PC", "93,1 %", "plateforme (démarche type), audit interne", "avr. 2025", "demarche.numerique.gouv.fr/declaration-accessibilite"], "FranceConnect": ["TC", "100 %", "site franceconnect.gouv.fr (11 pages)", "juin 2026", "franceconnect.gouv.fr/accessibilite"], "Tchap": ["ND", "", "non relevé dans cette passe", "", ""], "Visio": ["ND", "", "non relevé dans cette passe", "", ""], "Docs": ["ND", "", "non relevé dans cette passe", "", ""], "Grist": ["ND", "", "non relevé dans cette passe", "", ""], "Resana": ["ND", "", "non relevé dans cette passe", "", ""], "Mentor": ["ND", "", "non relevé dans cette passe", "", ""], "seLEXpert": ["ND", "", "non relevé dans cette passe", "", ""], "DORA": ["ND", "", "non relevé dans cette passe", "", ""]};
 const ACCL = {TC:"conforme",PC:"partiel",NC:"non conforme",ND:"non trouvé"};
+// Pastille : vert conforme (100 %), orange partiel, rouge pour les autres (non conforme ou non trouvé)
+const ACCC = {TC:"var(--ok)",PC:"var(--part)",NC:"var(--ko)",ND:"var(--ko)"};
 const escA = v => String(v).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function accCell(name){
-  const a = ACC[name]; if (!a) return `<td class="acc nd"><span class="st">non trouvé</span></td>`;
+  const a = ACC[name]; if (!a) return `<td class="acc nd"><i class="dot" style="--c:${ACCC.ND}" aria-hidden="true"></i><span class="lb"><span class="st">non trouvé</span></span></td>`;
   const info = [a[2], a[3], a[4]].filter(Boolean).join(" · ");
-  return `<td class="acc${a[0]==="ND"?" nd":""}" title="${escA(info)}"><span class="st">${ACCL[a[0]]}</span>${a[1]?`<span class="tx">${escA(a[1])}</span>`:""}</td>`;
+  return `<td class="acc${a[0]==="ND"?" nd":""}" title="${escA(info)}"><i class="dot" style="--c:${ACCC[a[0]]}" aria-hidden="true"></i><span class="lb"><span class="st">${ACCL[a[0]]}</span>${a[1]?`<span class="tx">${escA(a[1])}</span>`:""}</span></td>`;
 }
 const LAB = {g:"publié",o:"partiel",r:"non publié",n:"sans objet"};
 const COL = {g:"var(--ok)",o:"var(--part)",r:"var(--ko)"};
-document.getElementById("mx-head").innerHTML = `<th class="svc">Service</th>` + COLS.map(c=>`<th scope="col"><span class="c">${c[0]}</span>${c[1]}</th>`).join("") + `<th scope="col" class="acc"><span class="c">RGAA</span>Accessibilité déclarée</th>`;
+const sortBtn = (k, inner, lab) => `<button type="button" class="sort" data-k="${k}" aria-label="Trier par ${lab}">${inner}</button>`;
+document.getElementById("mx-head").innerHTML = `<th scope="col" class="svc" aria-sort="none">${sortBtn("s","Service","service")}</th>`
+  + COLS.map((c,i)=>`<th scope="col" aria-sort="none">${sortBtn(i,`<span class="c">${c[0]}</span>${c[1]}`,c[1])}</th>`).join("")
+  + `<th scope="col" class="acc" aria-sort="none">${sortBtn("a",`<span class="c">RGAA</span>Accessibilité déclarée`,"accessibilité déclarée")}</th>`;
 document.getElementById("mx-body").innerHTML = SVC.map(s => {
   const cells = s[4].split(" ").map((v,i)=> v==="n"
     ? `<td><i class="dot n" role="img" aria-label="${COLS[i][1]} : sans objet"></i></td>`
     : `<td><i class="dot" style="--c:${COL[v]}" role="img" aria-label="${COLS[i][1]} : ${LAB[v]}" title="${LAB[v]}"></i></td>`).join("");
-  return `<tr class="${s[3]?'se':''}" data-k="${s[2]}" data-se="${s[3]}"><td class="svc">${s[0]}<small>${s[1]}</small></td>${cells}${accCell(s[0])}</tr>`;
+  return `<tr class="${s[3]?'se':''}" data-k="${s[2]}" data-se="${s[3]}" data-i="${SVC.indexOf(s)}"><td class="svc">${s[0]}<small>${s[1]}</small></td>${cells}${accCell(s[0])}</tr>`;
 }).join("");
 function totals(){
   const rows=[...document.querySelectorAll("#mx-body tr:not(.hide)")];
@@ -488,6 +501,31 @@ document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",(
   totals();
 }));
 totals();
+
+// Tri par colonne : croissant, décroissant, puis ordre d'origine
+const RANG = {g:0,o:1,r:2,n:3}, RANGA = {TC:0,PC:1,NC:2,ND:3};
+const tauxA = a => { const m = (a && a[1] || "").match(/\d+(?:,\d+)?/g); return m ? parseFloat(m[0].replace(",",".")) : -1; };
+function cle(k, s){
+  if (k === "s") return [s[0]];
+  if (k === "a") { const a = ACC[s[0]]; return [a ? RANGA[a[0]] : 3, -tauxA(a)]; }
+  return [RANG[s[4].split(" ")[+k]]];
+}
+const cmp = (x, y) => { for (let i = 0; i < x.length; i++) { const c = typeof x[i] === "string" ? x[i].localeCompare(y[i], "fr", {sensitivity:"base"}) : (x[i] > y[i]) - (x[i] < y[i]); if (c) return c; } return 0; };
+let triK = null, triSens = 0;
+document.querySelectorAll("#mx-head button.sort").forEach(b => b.addEventListener("click", () => {
+  const k = b.dataset.k;
+  triSens = triK === k ? (triSens + 1) % 3 : 1; triK = triSens ? k : null;
+  document.querySelectorAll("#mx-head th").forEach(th => th.setAttribute("aria-sort", "none"));
+  if (triSens) b.parentElement.setAttribute("aria-sort", triSens === 1 ? "ascending" : "descending");
+  const body = document.getElementById("mx-body");
+  const rows = [...body.querySelectorAll("tr")];
+  rows.sort((r1, r2) => {
+    const i1 = +r1.dataset.i, i2 = +r2.dataset.i;
+    if (!triSens) return i1 - i2;
+    const c = cmp(cle(k, SVC[i1]), cle(k, SVC[i2])) * (triSens === 1 ? 1 : -1);
+    return c || i1 - i2;
+  }).forEach(r => body.appendChild(r));
+}));
 
 // Fraîcheur
 const FRESH = [
