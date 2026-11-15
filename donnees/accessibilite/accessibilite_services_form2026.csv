@@ -1,0 +1,41 @@
+﻿service;operateur;public;methode_beta;transparence_verts;transparence_cases;accessibilite_statut;accessibilite_taux;perimetre;date;source
+service-public.gouv.fr;DILA;usager;0;2;4;TC;100 %;"site (22 pages) ; démarches en ligne : 62 à 100 %";janv. 2023;service-public.gouv.fr/P10000 et P10125
+Légifrance;DILA;usager;0;1;4;PC;83,93 %;"site ; audit Temesis au RGAA 4.1.2 : 63,33 %, revu à 83,93 % après corrections";mars 2026;legifrance.gouv.fr, pied de page « Accessibilité : partiellement conforme »
+data.gouv.fr;DINUM;usager;1;3;4;PC;79,2 %;site;juin 2023;data.gouv.fr/pages/legal/accessibility
+impots.gouv.fr;DGFiP;usager;0;2;11;NC;46,37 %;"téléservice « Déclaration des revenus en ligne », déclaré non conforme ; audit interne du pôle accessibilité de la DTNum, RGAA 4.1 ; 46,37 % = taux moyen de conformité, 26 % des critères respectés. Périmètres distincts : Mon espace Finances publiques 97,37 % après contre-audit (oct. 2026) ; portail usager impots.gouv.fr 89,83 % (Access42, nov. 2024)";juin 2026;impots.gouv.fr/accessibilite-de-la-declaration-en-ligne-des-revenus
+caf.fr;CNAF;usager;0;1;11;PC;73 %;"téléservice « Espace Mon Compte » ; audit Avencod, RGAA 4 ; déclaration de décembre 2021, reconduite en décembre 2024 sans évolution. Périmètres distincts : connexion à l'Espace Mon Compte 90,20 % (août 2026) ; partie éditoriale 91,80 % (juin 2026) ; démarches déclarées une à une, de 55 à 100 %";déc. 2024;caf.fr, déclarations d'accessibilité numérique
+Compte ameli;CNAM;usager;0;0;11;NC;46,51 %;"compte ameli (assure.ameli.fr), déclaré non conforme ; audit Capgemini, RGAA 4 ; taux moyen 73,2 % ; demande de pension d'invalidité 44 % (DINUM, janv. 2025) ; ameli.fr : 100 % (juil. 2025)";juin 2025;assure.ameli.fr, page accessibilité
+Mon espace santé;CNAM, ANS;usager;0;2;7;PC;86 %;"site monespacesante.fr ; audit de l'Assurance maladie sur le site en production, RGAA 4.1.2 ; taux moyen par page 94 %";janv. 2026;monespacesante.fr/accessibilite
+lassuranceretraite.fr;CNAV;usager;0;2;11;PC;85,5 %;"espace personnel ; portail d'information 88,4 % (juin 2024)";avr. 2026;lassuranceretraite.fr, page accessibilité
+francetravail.fr;France Travail;usager;0;1;11;PC;57 %;"recherche d'offres d'emploi ; de 50 à 98 % selon le service";sept. 2026;francetravail.fr/informations/aide-et-accessibilite.html
+Parcoursup;MESR;usager;0;3;10;PC;68 %;dossier candidat (22 pages);mai 2026;dossier.parcoursup.fr, pied de page
+Mon Compte Formation;Caisse des Dépôts;usager;0;1;11;PC;91,9 %;"plateforme ; « Consulter mes droits » 100 %";juin 2026;moncompteformation.gouv.fr, accessibilité numérique
+Guichet unique;INPI;usager;0;1;11;PC;85,45 %;"portail e-procédures procedures.inpi.fr, où se font les déclarations (audit Boscop sur pré-production) ; le site d'accueil formalites.entreprises.gouv.fr déclare 100 % (déc. 2021)";août 2025;procedures.inpi.fr/?/accessibility
+Chorus Pro;AIFE;usager;0;1;11;PC;80,7 %;"factures émises, selon l'observatoire T3 2025 ; déclaration du portail non lue";2025;observatoire DINUM T3 2025
+PLACE (achats de l'État);DAE;usager;0;0;10;PC;62,1 %;espace entreprise;déc. 2024;marches-publics.gouv.fr, déclaration accessibilité
+ANEF (étrangers en France);Intérieur, DGEF;usager;0;2;10;NC;32 %;"téléservice administration-etrangers-en-france.interieur.gouv.fr, de la connexion à la demande de titre de séjour ; audit DINUM (DesignGouv), RGAA 4 ; 32 % = taux moyen de conformité ; déclaration établie en juin 2018. Deux périmètres distincts : le portail d'information etrangers-en-france.interieur.gouv.fr a sa propre déclaration, partiellement conforme à 98,4 % (Ideance, RGAA 4.1.2, mars 2026). Titre de séjour « non conforme » à l'observatoire";mai 2024;administration-etrangers-en-france.interieur.gouv.fr, déclaration de conformité RGAA
+Aide juridictionnelle;Justice, SIAJ;usager;0;3;11;PC;97 %;"téléservice aidejuridictionnelle.justice.fr ; audit ciblé (accueil non connecté et étape 3 du formulaire), taux estimé, RGAA 4.1 ; « non conforme » à l'observatoire T3 2025";févr. 2026;aidejuridictionnelle.justice.fr/accessibilite
+État civil des Français nés à l'étranger;MEAE, SCEC;usager;0;1;8;PC;81,8 %;"démarche opérée par la DILA ; audit de décembre 2021 reconduit sans nouvel audit";déc. 2021;service-public.gouv.fr/P10125
+ANTS, France Titres;ANTS;usager;0;0;10;PC;40 à 100 %;selon la démarche, à l'observatoire T3 2025 (16 démarches, dont 7 non conformes);2025;observatoire DINUM T3 2025
+Permis de construire;AD'AU + PLAT'AU;usager;0;0;9;PC;69 %;"AD'AU, opérée par la DILA ; audit d'octobre 2022 reconduit en mai 2025";oct. 2022;service-public.gouv.fr/P10125
+Le Compte Asso;DJEPVA;usager;0;0;11;ND;–;"contradictoire : « non conforme » à l'observatoire T3 2025 ; pied de page du téléservice « totalement conforme » sans lien actif vers la déclaration (constat 15/11/2026) ; le site d'information associations.gouv.fr publie une déclaration à 79,66 % (25/08/2025, périmètre : le site, pas le téléservice)";2026;"observatoire DINUM T3 2025 ; constat direct ; associations.gouv.fr"
+RDV Service Public;ANCT, DINUM;usager agent;1;2;6;PC;94 %;"rdv.anct.gouv.fr ; audit interne, RGAA 4.1.2";mai 2025;rdv.anct.gouv.fr/accessibilite
+JeVeuxAider.gouv.fr;DJEPVA;usager;1;2;8;TC;100 %;"site ; audit Ethic First, RGAA 4.1.2";déc. 2025;jeveuxaider.gouv.fr/accessibilite
+Nos Gestes Climat;ADEME;usager;1;2;6;PC;72,86 %;"site ; audit Access42, RGAA 4.1";juil. 2025;nosgestesclimat.fr/accessibilite
+Acceslibre;DGALN, DHUP;usager;1;2;7;TC;100 %;site;juin 2026;acceslibre.beta.gouv.fr/accessibilite
+L'Annuaire des Entreprises;DINUM;usager agent;1;5;6;NC;non audité;déclaré non conforme : « le site n'a pas encore été audité »;mars 2021;annuaire-entreprises.data.gouv.fr/accessibilite
+La bonne alternance;Éducation, Travail;usager;1;3;7;PC;81,97 %;"site ; audit Audit-Web : 58,33 %, puis 81,97 % après corrections";oct. 2026;labonnealternance.apprentissage.beta.gouv.fr/accessibilite
+Mes Aides Réno;Anah, DINUM;usager;1;4;6;ND;–;pied de page « partiellement conforme », mais la page accessibilité indique que le site n'a pas encore été audité;–;mesaidesreno.beta.gouv.fr/accessibilite
+La Bonne Boîte;France Travail;usager;1;0;5;NC;non audité;déclaré non conforme : « le site n'a encore pas été audité »;nov. 2024;labonneboite.francetravail.fr/accessibilite
+Santé Psy Étudiant;DGESIP;usager;1;0;5;NC;non audité;déclaré non conforme : « le site n'a encore pas été audité »;févr. 2026;santepsy.etudiant.gouv.fr/declaration-accessibilite
+FARITAS;DGFiP;usager agent;1;0;8;PC;92 %;"service déployé via le portail professionnel de la DGFiP ; évaluation externe";avr. 2025;faritas.beta.gouv.fr/accessibilite
+Démarche Numérique;DINUM;usager agent;1;5;10;PC;93,1 %;plateforme (démarche type), audit interne;avr. 2025;demarche.numerique.gouv.fr/declaration-accessibilite
+FranceConnect;DINUM;usager;0;1;4;TC;100 %;"site d'information www.franceconnect.gouv.fr (11 pages) ; audit DINUM, RGAA 4.1.2. Le parcours de connexion est annoncé conforme par FranceConnect, sans déclaration propre trouvée";juin 2026;franceconnect.gouv.fr/accessibilite
+Tchap;DINUM;agent;1;1;4;ND;–;non relevé dans cette passe;–;–
+Visio;DINUM;agent;1;0;4;NC;non audité;déclaré non conforme : « le site n'a pas encore été audité »;déc. 2024;visio.numerique.gouv.fr/accessibilite
+Docs;DINUM;agent;1;0;4;ND;–;non relevé dans cette passe;–;–
+Grist;DINUM;agent;1;0;4;ND;–;non relevé dans cette passe;–;–
+Resana;DINUM / Interstis;agent;0;0;4;ND;–;non relevé dans cette passe;–;–
+Mentor;DGAFP;agent;0;0;4;PC;74,36 %;"site ; audit Ethic First sur 23 pages, RGAA 4.1.2";mars 2026;mentor.gouv.fr, page accessibilité
+seLEXpert;Justice;agent;1;0;7;ND;–;non relevé dans cette passe;–;–
+DORA;GIP de l'inclusion;agent;1;1;5;ND;–;non relevé dans cette passe;–;–
