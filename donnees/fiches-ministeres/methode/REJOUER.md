@@ -11,9 +11,24 @@ donnees/fiches-ministeres/methode/rejouer.sh <chemin du brut>
 git diff
 ```
 
-Le script reconstruit les deux fiches et les publie dans l'arbre de travail. Il ne fait ni commit ni push. Avec le même fichier brut, `git diff` ne doit rien montrer. `out/`, `data/` et les fiches construites restent hors du dépôt : ils citent des titres sensibles, ou pèsent trop.
+Le script reconstruit les trois fiches et les publie dans l'arbre de travail. Il ne fait ni commit ni push. Avec le même fichier brut, `git diff` ne doit rien montrer. `out/`, `data/` et les fiches construites restent hors du dépôt : ils citent des titres sensibles, ou pèsent trop.
 
 Pour republier sans reconstruire : `python3 integration/integrer_fiches.py`. C'est le seul point d'entrée. Il refuse d'écrire une page sans réserve de méthode, avec une adresse électronique ou avec un titre sensible.
+
+## Fiche n° 3 : Intérieur
+
+`rejouer.sh` la reconstruit avec le même fichier brut : `02_fiche_ministere.py` sur `scripts/config_interieur.json`, puis les scripts 30 à 44 (familles dans `scripts/familles_interieur.json`, codes et noms des départements dans `scripts/departements.json`), le script 39 en dernier, qui écrit la maquette `out/maquette_interieur.md`. `fiche/build_interieur.py` la met en page sans ajouter de chiffre. Les scripts 35 et 41 relisent le fichier brut, dont `rejouer.sh` passe le chemin par la variable `FORM2026_RAW`.
+
+Deux entrées ne viennent pas du descriptif ouvert ; elles sont versées dans `sources/` avec leur note :
+
+- `insee_populations_reference_2023_departements.csv` : populations de référence 2023 de l'INSEE, pour le contrôle de taille (script 40) ;
+- les quatre exports du tableau de bord public de ProConnect du 15 novembre 2026, pour l'encadré « Côté agents » (script 43). Un libellé de service y est masqué, sans effet sur les chiffres (voir `sources/SOURCE_proconnect.md`).
+
+Les circulaires DETR et DSIL, la charte IA et la documentation Maarch sont citées par leur lien, leur date et leurs extraits (`sources/SOURCE_*.md`) : aucun PDF n'est versé.
+
+`build_interieur.py` s'arrête si la page contient une adresse électronique, un numéro de téléphone, un nom de département hors des données de la carte et de son tableau replié, un titre qui attribue Turgot au ministère, une marque de travail, un intitulé « part de la plateforme », ou si la réserve de méthode ou le cadre d'entrée de `scripts/sync_cadre.py` manquent. Sa version de relecture (`fiche/relecture-interieur.html`) reste hors du dépôt.
+
+Les sorties qui nomment des départements ne sont pas publiées : `rejouer.sh` les reproduit dans `out/`.
 
 ## Contrôles
 

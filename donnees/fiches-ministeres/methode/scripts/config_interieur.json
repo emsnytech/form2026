@@ -1,0 +1,24 @@
+{
+ "source": "data/demarches_slim.jsonl",
+ "date_extraction": "2026-10-21",
+ "annee_debut": 2021,
+ "annee_fin": 2026,
+ "zones": {
+  "Ministère de l’Intérieur": "Interieur"
+ },
+ "priorite_poles": [
+  "Interieur"
+ ],
+ "max_zones": 3,
+ "sans_zone_motifs": {
+  "Interieur": "pr[ée]fecture|minist[eè]re de l.int[ée]rieur|police nationale|gendarmerie|\\bDGPN\\b|\\bDGGN\\b|\\bDGEF\\b|\\bDGSCGC\\b|\\bDLPAJ\\b|\\bANTS\\b|\\bOFII\\b|\\bOFPRA\\b|s[ée]curit[ée] routi[eè]re|\\bSGAMI\\b|\\bDCPAF\\b|police aux fronti"
+ },
+ "sans_zone_exclusions": "\\bTEST\\b|XXX",
+ "sans_zone_types_exclus": [],
+ "exclusions_toutes": "^d.un excellent organisme$",
+ "motif_anomalie": "DDETS|DDCSPP|rectorat|acad[ée]mie|collectivit[ée]|solidarit|DRAAF|DRIAAF|biodiversit|la poste|ligue",
+ "complements": {},
+ "inclusions_numeros": [],
+ "familles": "scripts/familles_interieur.json",
+ "sortie_familles": "out/interieur_familles.json"
+}

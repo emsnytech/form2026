@@ -15,7 +15,7 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parents[1]
 DONNEES = RACINE / "donnees/fiches-ministeres"
 METHODE = DONNEES / "methode"
-PAGES = [RACINE / "fiches-ministeres" / n for n in ("index.html", "education.html", "justice.html")]
+PAGES = [RACINE / "fiches-ministeres" / n for n in ("index.html", "education.html", "justice.html", "interieur.html")]
 GABARITS = [METHODE / "fiche" / n for n in ("gabarit_fiche.html", "gabarit_justice.html", "gabarit_index.html")]
 
 COURRIEL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}")
@@ -39,7 +39,7 @@ def fichiers_publies(base):
         if not p.is_file():
             continue
         r = p.relative_to(base).as_posix()
-        if r.startswith("out/") or "__pycache__" in r or re.fullmatch(r"fiche/fiche-[a-z]+\.html", r):
+        if r.startswith("out/") or "__pycache__" in r or re.fullmatch(r"fiche/(fiche|relecture)-[a-z]+\.html", r):
             continue
         if r.startswith("data/") and r != "data/nb_dossiers_deposes_par_mois.csv":
             continue

@@ -1,0 +1,133 @@
+{
+ "157165": {
+  "publication": "2026-09-23",
+  "dossiers": 5,
+  "champs": 15,
+  "pieces_emplacements": 1,
+  "pieces_distinctes": 1,
+  "pieces_obligatoires": 0,
+  "libelles_pieces": [
+   "titre de sejour du futur employe"
+  ],
+  "siret": false,
+  "titre_identite": false,
+  "cadre_juridique": true,
+  "pour_particuliers": false
+ },
+ "13583": {
+  "publication": "2019-06-03",
+  "dossiers": 155791,
+  "champs": 28,
+  "pieces_emplacements": 3,
+  "pieces_distinctes": 3,
+  "pieces_obligatoires": 0,
+  "libelles_pieces": [
+   "autres documents a joindre",
+   "pour les etudiants algeriens et les personnes disposant d'un titre de sejour travailleur temporaire",
+   "titre de sejour etranger du salarie ou recepisse"
+  ],
+  "siret": true,
+  "titre_identite": false,
+  "cadre_juridique": true,
+  "pour_particuliers": true
+ },
+ "29111": {
+  "publication": "2021-01-28",
+  "dossiers": 201953,
+  "champs": 22,
+  "pieces_emplacements": 3,
+  "pieces_distinctes": 2,
+  "pieces_obligatoires": 1,
+  "libelles_pieces": [
+   "document supplementaire",
+   "titre de sejour ou recepisse a authentifier"
+  ],
+  "siret": true,
+  "titre_identite": false,
+  "cadre_juridique": true,
+  "pour_particuliers": true
+ },
+ "121371": {
+  "publication": "2026-07-09",
+  "dossiers": 1706,
+  "champs": 39,
+  "pieces_emplacements": 23,
+  "pieces_distinctes": 19,
+  "pieces_obligatoires": 19,
+  "libelles_pieces": [
+   "ancien titre de sejour (ts) recto",
+   "ancien titre de sejour (ts) recto verso ou passeport",
+   "ancien titre de sejour (ts) verso",
+   "attestation de confirmation de validation du visa",
+   "attestation de decision favorable (adf)",
+   "attestation de demandeur d'asile",
+   "attestation de prolongation d'instruction beneficiaire de la protection internationale (bpi)",
+   "autorisation provisoire de sejour (aps)",
+   "cni recto",
+   "cni verso",
+   "justificatif d'identite mentionne sur l'aps (ex: passeport: cni recto-verso, carte consulaire)",
+   "passeport",
+   "recepisse de premiere demande",
+   "recepisse ou attestation de prolongation d'instruction (adp)",
+   "titre de sejour recto",
+   "titre de sejour verso",
+   "visa long sejour valant titre de sejour (vls-ts)",
+   "visa long sejour valant titre de sejour (vls-ts) de moins de 3 mois",
+   "visa vacances travail"
+  ],
+  "siret": true,
+  "titre_identite": false,
+  "cadre_juridique": true,
+  "pour_particuliers": true
+ },
+ "55067": {
+  "publication": "2022-05-18",
+  "dossiers": 144783,
+  "champs": 19,
+  "pieces_emplacements": 2,
+  "pieces_distinctes": 2,
+  "pieces_obligatoires": 1,
+  "libelles_pieces": [
+   "autre document (facultatif)",
+   "titre de sejour du salarie"
+  ],
+  "siret": false,
+  "titre_identite": false,
+  "cadre_juridique": true,
+  "pour_particuliers": false
+ },
+ "74335": {
+  "publication": "2023-05-05",
+  "dossiers": 138270,
+  "champs": 20,
+  "pieces_emplacements": 2,
+  "pieces_distinctes": 2,
+  "pieces_obligatoires": 1,
+  "libelles_pieces": [
+   "document complementaire (si besoin)",
+   "document(s) presente par le salarie (recto-verso)"
+  ],
+  "siret": false,
+  "titre_identite": false,
+  "cadre_juridique": true,
+  "pour_particuliers": false
+ },
+ "104225": {
+  "publication": "2025-01-28",
+  "dossiers": 15261,
+  "champs": 32,
+  "pieces_emplacements": 4,
+  "pieces_distinctes": 4,
+  "pieces_obligatoires": 2,
+  "libelles_pieces": [
+   "autorisation de travail correspondant a l'emploi occupe si concerne",
+   "document supplementaire a transmettre au serviceurt",
+   "pour les etudiants algeriens et les personnes disposant d'un titre de sejour soumis a autorisation de travail",
+   "titre de sejour ou titre d'identite recto/verso du futur salarie"
+  ],
+  "siret": true,
+  "titre_identite": false,
+  "cadre_juridique": true,
+  "pour_particuliers": true
+ }
+}

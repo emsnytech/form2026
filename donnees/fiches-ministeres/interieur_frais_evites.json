@@ -1,0 +1,60 @@
+{
+ "methode": "script 05, partie 3 (gains v8 × dossiers de la période au prorata des jours d'ouverture)",
+ "periode": [
+  2021,
+  2026
+ ],
+ "perimetre": {
+  "demarches_actives": 8218,
+  "gains": {
+   "bas": 61690141,
+   "haut": 119255453,
+   "admin_bas": 46852229,
+   "admin_haut": 73831937,
+   "usagers_bas": 14837907,
+   "usagers_haut": 45423517
+  },
+  "couverture": {
+   "demarches": 7055,
+   "absentes": 1163,
+   "dossiers_couverts": 6900181,
+   "dossiers_fenetre": 7395334
+  },
+  "taux_couverture": 93.3
+ },
+ "sans_medailles_travail_agricoles": {
+  "demarches_retirees": 15,
+  "gains": {
+   "bas": 49922245,
+   "haut": 92625810,
+   "admin_bas": 41077450,
+   "admin_haut": 64731769,
+   "usagers_bas": 8844790,
+   "usagers_haut": 27894042
+  },
+  "couverture": {
+   "demarches": 7044,
+   "absentes": 1159,
+   "dossiers_couverts": 6049698,
+   "dossiers_fenetre": 6216157
+  },
+  "taux_couverture": 97.3
+ },
+ "cout_admin_par_dossier": [
+  6.79,
+  10.7
+ ],
+ "controle_utilisation_du_service": {
+  "calage_par_annee": {
+   "2021": 1.076,
+   "2022": 1.197,
+   "2023": 1.128,
+   "2024": 1.325,
+   "2025": 1.126,
+   "2026": 1.087
+  },
+  "part_retrouvee_min": 75,
+  "part_retrouvee_max": 93,
+  "gains_recales": false
+ }
+}

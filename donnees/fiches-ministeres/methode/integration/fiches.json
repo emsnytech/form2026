@@ -17,6 +17,15 @@
    "description": "Usage de Démarche Numérique par le ministère de la Justice : open data du 21 octobre 2026, relevé du 4 novembre 2026.",
    "carte_meta": "open data du 21 octobre 2026 · relevé du 4 novembre 2026",
    "donnees": ["justice.json", "justice_familles.json", "justice_reconductions.json", "justice_complements.json", "justice_hors_opendata.json", "justice_experts_publics.json", "rdv_cdad_metabase.json", "justice_siren_cours_appel.json", "justice_chiffres_fiche.json"]
+  },
+  {
+   "slug": "interieur",
+   "source": "fiche/fiche-interieur.html",
+   "titre": "Intérieur",
+   "titre_page": "FORM 2026 — Fiche Intérieur",
+   "description": "Usage de Démarche Numérique pour le ministère de l'Intérieur : l'appropriation par les préfectures et la variété des usages ; open data du 21 octobre 2026.",
+   "carte_meta": "open data du 21 octobre 2026 · relevés du 14 et du 15 novembre 2026",
+   "donnees": ["interieur_maquette_chiffres.json", "interieur_frais_evites.json", "interieur_carte.json", "interieur_familles_etape1.json", "interieur_complements_etape1.json", "interieur_etrangers.json", "interieur_qui_instruit.json", "interieur_briques.json", "interieur_verification_embauche.json"]
   }
  ]
 }

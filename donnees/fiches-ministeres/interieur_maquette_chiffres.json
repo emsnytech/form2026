@@ -1,0 +1,156 @@
+{
+ "sensibilite": {
+  "perimetre": [
+   8848,
+   8300883,
+   41.7
+  ],
+  "plateforme_dossiers": 19888006,
+  "retraits": {
+   "médailles d'honneur du travail": [
+    9,
+    1387125,
+    16.7
+   ],
+   "médailles d'honneur agricoles": [
+    21,
+    62444,
+    0.8
+   ],
+   "logement et hébergement": [
+    72,
+    131139,
+    1.6
+   ]
+  },
+  "sans_autres_ministeres": [
+   8746,
+   6720175,
+   33.8
+  ],
+  "sans_medailles_travail": [
+   8839,
+   6913758,
+   34.8
+  ],
+  "sans_medailles_travail_agricoles": [
+   8818,
+   6851314,
+   34.4
+  ]
+ },
+ "national": {
+  "total": [
+   497,
+   2474066,
+   29.8
+  ],
+  "dont_medailles": [
+   19,
+   1905741,
+   77.0
+  ],
+  "sans_medailles": [
+   478,
+   568325,
+   8.9
+  ],
+  "sans_autres_ministeres": [
+   481,
+   993288,
+   14.8
+  ]
+ },
+ "local": [
+  7726,
+  5613491,
+  67.6
+ ],
+ "etrangers_calendrier_arrete": {
+  "bornes": [
+   "2021-05-01",
+   "2022-09-28"
+  ],
+  "par_fonction": {
+   "dépôt d'une demande": {
+    "avant": [
+     248,
+     699080,
+     58
+    ],
+    "pendant": [
+     135,
+     447934,
+     60
+    ],
+    "après": [
+     232,
+     579586,
+     174
+    ]
+   },
+   "rendez-vous": {
+    "avant": [
+     44,
+     259563,
+     13
+    ],
+    "pendant": [
+     11,
+     173337,
+     8
+    ],
+    "après": [
+     30,
+     335291,
+     23
+    ]
+   },
+   "contact et renseignement": {
+    "avant": [
+     1,
+     54322,
+     0
+    ],
+    "pendant": [
+     1,
+     9821,
+     0
+    ],
+    "après": [
+     2,
+     81207,
+     2
+    ]
+   },
+   "complément ou suivi": {
+    "avant": [
+     31,
+     43573,
+     7
+    ],
+    "pendant": [
+     4,
+     10933,
+     2
+    ],
+    "après": [
+     87,
+     111287,
+     83
+    ]
+   }
+  },
+  "citant_anef_apres": 30
+ },
+ "verification": {
+  "demarches": 7,
+  "dossiers": 657769,
+  "trois_plus_lourdes": 502527,
+  "pieces_min": 1,
+  "pieces_max": 19,
+  "siret": 4,
+  "premiere": "2019",
+  "derniere": "2026"
+ }
+}

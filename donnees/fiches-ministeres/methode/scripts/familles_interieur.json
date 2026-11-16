@@ -1,0 +1,71 @@
+[
+ {
+  "nom": "Étrangers : vérification d'un titre avant embauche",
+  "motif": "v[ée]rification.{0,40}(titre|autorisation)|avant (l.)?embauche|pr[ée]alable [àa] l.embauche|^(?!organismes)\\W*\\w{0,8}\\W*authentification des titres de s[ée]jour",
+  "note": "Arbitrage 22, décision 4 : n° 74335 (préfecture, employeurs, consigne citant R. 5221-42) entre dans la famille ; n° 100682 (organismes sociaux, détection de faux documents) reste en « employeurs et tiers »."
+ },
+ {
+  "nom": "Collectivités : contrôle de légalité, finances locales",
+  "motif": "contr[ôo]le de l[ée]galit[ée]|actes soumis|finances locales|budget|concours financiers|\\bFCTVA\\b|intercommunal|\\bEPCI\\b|\\bCDCI\\b|\\bRNF\\b|identifiant RNF|r[ée]pertoire national des [ée]lus|indemnit[ée]s? des [ée]lus|[ée]lus locaux|fiscalit[ée] directe locale|\\bDGF\\b|tutelle des chambres|chambres consulaires"
+ },
+ {
+  "nom": "Élections",
+  "motif": "^(?!.*[ée]lections? professionnelles?)(?=.*([ée]lecti|[ée]lecto|scrutin|candidat.{0,20}(liste|[ée]lection)|vote|propagande|comptes de campagne|coll[eè]ge [ée]lectoral|s[ée]natori|\\bREU\\b|procuration))"
+ },
+ {
+  "nom": "Action sociale des agents",
+  "motif": "\\bSRIAS\\b|\\bCLAS\\b|action sociale|arbre de no[eë]l|ch[eè]que.{0,10}(vacances|culture)|loisirs|colonies|séjours? enfants|restauration collective|prestation.{0,15}sociale|aide aux agents|\\bCLASAC\\b|carte cadeau|parc ast[ée]rix|futuroscope|cin[ée]ma|billets?|rentr[ée]e scolaire|tarif r[ée]duit|cr[eè]che|\\bCLAS\\s?\\d|vacances"
+ },
+ {
+  "nom": "Logement et hébergement (accords collectifs, contingent, CCAPEX)",
+  "motif": "logement|h[ée]bergement|accord collectif|\\bCCAPEX\\b|\\bDALO\\b|contingent|expulsion|SIAO"
+ },
+ {
+  "nom": "Étrangers : séjour, asile, nationalité",
+  "motif": "^(?!.*permis de conduire)(?=.*([ée]trangers?|s[ée]jour|r[ée]c[ée]piss[ée]|\\bAPS\\b|naturalisation|nationalit[ée]|\\bANEF\\b|regroupement familial|asile|\\bOFII\\b|\\bOFPRA\\b|visa\\b(?! du carnet)|\\bDCEM\\b|\\bTIR\\b|carte de r[ée]sident|attestation de prolongation|autorisation de travail|protection temporaire|titre de voyage|titre d.identit[ée] et de voyage|r[ée]fugi[ée]|apatride|r[ée]gularisation|changement de statut|passeport talent|retrait de titres?|remise de titres?|compl[ée]ter mon dossier|ukrainien|admission exceptionnelle|\\bAES\\b|salari[ée].{0,30}(CDI|CDD)|[ée]tudiant|ukrain|migrations?\\b|\\bIMMI\\b|conjoint de fran[çc]ais|pacs[ée]|\\bVLS.TS\\b|titre .salari[ée]))"
+ },
+ {
+  "nom": "Médailles et distinctions",
+  "motif": "m[ée]daille|distinction|d[ée]coration|l[ée]gion d.honneur|ordre national"
+ },
+ {
+  "nom": "Permis de conduire, aptitude à la conduite, éducation routière",
+  "motif": "\\bNEPH\\b|permis de conduire|permis [AB]\\b|[ée]ducation routi[eè]re|auto.?[ée]cole|examen.{0,20}(conduite|code)|\\bETG\\b|\\bBSR\\b|\\bBEPECASER\\b|\\bECSR\\b|aptitude.{0,20}(physique|m[ée]dicale)?.{0,20}conduite|droits? [àa] conduire|stagiaires? SSR|sensibilisation [àa] la s[ée]curit[ée] routi[eè]re|r[ée]cup[ée]ration de points|commission m[ée]dicale|enseigner la conduite|enseignement de la conduite|\\bCEPC\\b|candidat individuel|[ée]preuve th[ée]orique|\\bATRE\\b|retour au permis|attestation de capacit[ée] professionnelle"
+ },
+ {
+  "nom": "Titres sécurisés : identité, passeport (ANTS)",
+  "motif": "France Titres|\\bANTS\\b|passeport|carte nationale d.identit[ée]|\\bCNI\\b|titres? s[ée]curis[ée]s|\\bCERT\\b|webinaires?.{0,5}\\["
+ },
+ {
+  "nom": "Transport de personnes et véhicules (taxis, VTC, contrôle technique, fourrière)",
+  "motif": "taxi|\\bVTC\\b|\\bVMDTR\\b|\\bADS\\b|autorisations? de stationnement|contr[ôo]leur technique|contr[ôo]le technique|experts? automobiles?|fourri[eè]re|carte de stationnement|ambulanc|transports? publics? de personnes|\\bSIV\\b|immatriculation|carte grise|d[ée]panneu|voiture de tourisme|permis de stationnement"
+ },
+ {
+  "nom": "Dotations et subventions",
+  "motif": "\\bDETR\\b|\\bDSIL\\b|\\bDSID\\b|\\bDPV\\b|\\bFIPD\\b|\\bFIPDR\\b|\\bMILDECA\\b|\\bPDASR\\b|(?<!fonds de )dotation|subvention|appel [àa] projets?|appel [àa] manifestation d.int[ée]r[eê]t|appel [àa] candidatures?.{0,40}(projet|centres?.villes|dynamisme)|\\bFNADT\\b|fonds vert|financement|\\bfonds\\b(?! de dotation)"
+ },
+ {
+  "nom": "Réglementation et polices administratives",
+  "motif": "fun[ée]raire|inhumation|cr[ée]mation|mortuaire|d[ée]bits? de boissons?|licences?|restaurant|vente [àa] emporter|manifestation|rassemblement|nuisance|bruit|sons amplifi|armes?\\b|munition|chasse|s[ée]curit[ée] priv[ée]e|vid[ée]oprotection|vid[ée]osurveillance|associations?\\b|fondation|\\bRNA\\b|loterie|tombola|brocante|vide.grenier|ventes? au d[ée]ballage|liquidation|soldes|drone|feux d.artifice|artifice|pyrotechn|[ée]tablissements? recevant du public|\\bERP\\b|ouverture tardive|dérogation|heliport|h[ée]lisurface|survol|\\bICPE\\b|carri[eè]re|enqu[eê]te publique|domiciliation|chiens? dangereux|ball-trap|gardiennage|surveillance sur la voie publique|enqu[eê]tes? administratives?|criblage|\\bFIJAIS\\b|d[ée]minage|captation|transport de corps|fichier des personnes recherch|droit d.acc[eè]s|fonds de dotation"
+ },
+ {
+  "nom": "Crises : déplacements sanitaires, motifs impérieux",
+  "motif": "motifs? imp[ée]rieux|voyager|voyageurs?|polyn[ée]sie fran|covid|confinement|crise sanitaire|quarantaine|masques|\\bACM\\b.{0,40}(ouverts|personnels mobilis)|personnels mobilis|french polynesia|travel from"
+ },
+ {
+  "nom": "Plaintes et signalements",
+  "motif": "plainte|signalement|pr[ée]plainte|escroquerie|fuite de donn[ée]es|cybermalveillance|victime"
+ },
+ {
+  "nom": "Contact et accueil",
+  "motif": "formulaire de contact|nous contacter|contacter|prise de contact|demande de rendez.vous|prendre rendez.vous|nous transmettre|nous [ée]crire|autre demande|une question|modifier la date de mon rendez"
+ },
+ {
+  "nom": "Sécurité civile, secours, sapeurs-pompiers",
+  "motif": "pompier|\\bSDIS\\b|secour|secourisme|\\bPSC1\\b|\\bPSE\\b|s[ée]curit[ée] civile|protection civile|\\bORSEC\\b|incendie|\\bDFCI\\b|sauvetage|baignade|risques? majeurs?|plan communal de sauvegarde"
+ },
+ {
+  "nom": "Recrutement, concours, formation et gestion des agents",
+  "motif": "recrutement|concours|candidature|\\bRH\\b|mutation|formation|stage|emploi|poste\\b|cadet|r[ée]serv|adjoint de s[ée]curit|gardien de la paix|apprenti|contractuel|t[ée]l[ée]travail|frais de d[ée]placement|d[ée]placements? effectu[ée]s|indemnit|vacation|titres? d.abonnement|agents?\\b|personnels?\\b|[ée]cole de gendarmerie|\\bENP\\b|acad[ée]mie de police|gendarm|[ée]lections? professionnelles?|vaccination"
+ }
+]

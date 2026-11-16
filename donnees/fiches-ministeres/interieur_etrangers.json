@@ -1,0 +1,345 @@
+{
+ "total": [
+  957,
+  3507949
+ ],
+ "par_deposant": {
+  "personne concernée": [
+   826,
+   2805934,
+   430
+  ],
+  "employeur ou tiers": [
+   131,
+   702015,
+   21
+  ]
+ },
+ "par_fonction_personne": {
+  "dépôt d'une demande": {
+   "demarches": 615,
+   "dossiers": 1726600,
+   "publiees_aujourdhui": 292,
+   "emetteurs": 164,
+   "dont_recepisses_prolongations": [
+    70,
+    400392
+   ]
+  },
+  "rendez-vous": {
+   "demarches": 85,
+   "dossiers": 768191,
+   "publiees_aujourdhui": 44,
+   "emetteurs": 35,
+   "dont_recepisses_prolongations": [
+    3,
+    33712
+   ]
+  },
+  "contact et renseignement": {
+   "demarches": 4,
+   "dossiers": 145350,
+   "publiees_aujourdhui": 2,
+   "emetteurs": 3,
+   "dont_recepisses_prolongations": [
+    0,
+    0
+   ]
+  },
+  "complément ou suivi": {
+   "demarches": 122,
+   "dossiers": 165793,
+   "publiees_aujourdhui": 92,
+   "emetteurs": 72,
+   "dont_recepisses_prolongations": [
+    7,
+    79294
+   ]
+  }
+ },
+ "par_annee": {
+  "2018": {
+   "dépôt d'une demande": {
+    "publiees": 15,
+    "closes": 4,
+    "actives_fin_annee": 11,
+    "dossiers_cohorte": 9321
+   },
+   "rendez-vous": {
+    "publiees": 2,
+    "closes": 0,
+    "actives_fin_annee": 2,
+    "dossiers_cohorte": 953
+   },
+   "contact et renseignement": {
+    "publiees": 0,
+    "closes": 0,
+    "actives_fin_annee": 0,
+    "dossiers_cohorte": 0
+   },
+   "complément ou suivi": {
+    "publiees": 0,
+    "closes": 0,
+    "actives_fin_annee": 0,
+    "dossiers_cohorte": 0
+   }
+  },
+  "2019": {
+   "dépôt d'une demande": {
+    "publiees": 55,
+    "closes": 13,
+    "actives_fin_annee": 53,
+    "dossiers_cohorte": 59135
+   },
+   "rendez-vous": {
+    "publiees": 3,
+    "closes": 2,
+    "actives_fin_annee": 3,
+    "dossiers_cohorte": 2202
+   },
+   "contact et renseignement": {
+    "publiees": 0,
+    "closes": 0,
+    "actives_fin_annee": 0,
+    "dossiers_cohorte": 0
+   },
+   "complément ou suivi": {
+    "publiees": 7,
+    "closes": 2,
+    "actives_fin_annee": 5,
+    "dossiers_cohorte": 8493
+   }
+  },
+  "2020": {
+   "dépôt d'une demande": {
+    "publiees": 143,
+    "closes": 53,
+    "actives_fin_annee": 143,
+    "dossiers_cohorte": 600721
+   },
+   "rendez-vous": {
+    "publiees": 39,
+    "closes": 5,
+    "actives_fin_annee": 37,
+    "dossiers_cohorte": 256408
+   },
+   "contact et renseignement": {
+    "publiees": 1,
+    "closes": 0,
+    "actives_fin_annee": 1,
+    "dossiers_cohorte": 54322
+   },
+   "complément ou suivi": {
+    "publiees": 24,
+    "closes": 12,
+    "actives_fin_annee": 17,
+    "dossiers_cohorte": 35080
+   }
+  },
+  "2021": {
+   "dépôt d'une demande": {
+    "publiees": 103,
+    "closes": 54,
+    "actives_fin_annee": 192,
+    "dossiers_cohorte": 180119
+   },
+   "rendez-vous": {
+    "publiees": 10,
+    "closes": 4,
+    "actives_fin_annee": 43,
+    "dossiers_cohorte": 162542
+   },
+   "contact et renseignement": {
+    "publiees": 1,
+    "closes": 0,
+    "actives_fin_annee": 2,
+    "dossiers_cohorte": 9821
+   },
+   "complément ou suivi": {
+    "publiees": 3,
+    "closes": 7,
+    "actives_fin_annee": 13,
+    "dossiers_cohorte": 10781
+   }
+  },
+  "2022": {
+   "dépôt d'une demande": {
+    "publiees": 75,
+    "closes": 58,
+    "actives_fin_annee": 209,
+    "dossiers_cohorte": 323522
+   },
+   "rendez-vous": {
+    "publiees": 2,
+    "closes": 15,
+    "actives_fin_annee": 30,
+    "dossiers_cohorte": 13077
+   },
+   "contact et renseignement": {
+    "publiees": 1,
+    "closes": 1,
+    "actives_fin_annee": 2,
+    "dossiers_cohorte": 78016
+   },
+   "complément ou suivi": {
+    "publiees": 1,
+    "closes": 2,
+    "actives_fin_annee": 12,
+    "dossiers_cohorte": 152
+   }
+  },
+  "2023": {
+   "dépôt d'une demande": {
+    "publiees": 44,
+    "closes": 65,
+    "actives_fin_annee": 188,
+    "dossiers_cohorte": 179686
+   },
+   "rendez-vous": {
+    "publiees": 3,
+    "closes": 4,
+    "actives_fin_annee": 29,
+    "dossiers_cohorte": 61160
+   },
+   "contact et renseignement": {
+    "publiees": 0,
+    "closes": 1,
+    "actives_fin_annee": 1,
+    "dossiers_cohorte": 0
+   },
+   "complément ou suivi": {
+    "publiees": 3,
+    "closes": 2,
+    "actives_fin_annee": 13,
+    "dossiers_cohorte": 14816
+   }
+  },
+  "2024": {
+   "dépôt d'une demande": {
+    "publiees": 54,
+    "closes": 30,
+    "actives_fin_annee": 212,
+    "dossiers_cohorte": 141152
+   },
+   "rendez-vous": {
+    "publiees": 4,
+    "closes": 1,
+    "actives_fin_annee": 32,
+    "dossiers_cohorte": 124979
+   },
+   "contact et renseignement": {
+    "publiees": 0,
+    "closes": 0,
+    "actives_fin_annee": 1,
+    "dossiers_cohorte": 0
+   },
+   "complément ou suivi": {
+    "publiees": 3,
+    "closes": 2,
+    "actives_fin_annee": 14,
+    "dossiers_cohorte": 22525
+   }
+  },
+  "2025": {
+   "dépôt d'une demande": {
+    "publiees": 53,
+    "closes": 23,
+    "actives_fin_annee": 242,
+    "dossiers_cohorte": 198342
+   },
+   "rendez-vous": {
+    "publiees": 21,
+    "closes": 5,
+    "actives_fin_annee": 48,
+    "dossiers_cohorte": 146867
+   },
+   "contact et renseignement": {
+    "publiees": 1,
+    "closes": 0,
+    "actives_fin_annee": 2,
+    "dossiers_cohorte": 3191
+   },
+   "complément ou suivi": {
+    "publiees": 56,
+    "closes": 1,
+    "actives_fin_annee": 69,
+    "dossiers_cohorte": 70415
+   }
+  },
+  "2026": {
+   "dépôt d'une demande": {
+    "publiees": 73,
+    "closes": 23,
+    "actives_fin_annee": 292,
+    "dossiers_cohorte": 34602
+   },
+   "rendez-vous": {
+    "publiees": 1,
+    "closes": 5,
+    "actives_fin_annee": 44,
+    "dossiers_cohorte": 3
+   },
+   "contact et renseignement": {
+    "publiees": 0,
+    "closes": 0,
+    "actives_fin_annee": 2,
+    "dossiers_cohorte": 0
+   },
+   "complément ou suivi": {
+    "publiees": 25,
+    "closes": 2,
+    "actives_fin_annee": 92,
+    "dossiers_cohorte": 3531
+   }
+  }
+ },
+ "titres_hors_anef": {
+  "demarches": 7,
+  "dossiers": 60662,
+  "annees": {
+   "2025": 2,
+   "2026": 3,
+   "2023": 1,
+   "2024": 1
+  }
+ },
+ "titres_citant_anef": {
+  "demarches": 31,
+  "dossiers": 132600,
+  "annees": {
+   "2025": 9,
+   "2026": 16,
+   "2023": 2,
+   "2024": 3,
+   "2020": 1
+  }
+ },
+ "niveau": {
+  "locale": [
+   892,
+   3463232
+  ],
+  "nationale": [
+   45,
+   2553
+  ],
+  "indeterminee": [
+   20,
+   42164
+  ]
+ },
+ "provenance": {
+  "zone": [
+   881,
+   3325686
+  ],
+  "zone_multi": [
+   0,
+   0
+  ],
+  "nom_organisme": [
+   76,
+   182263
+  ]
+ }
+}
