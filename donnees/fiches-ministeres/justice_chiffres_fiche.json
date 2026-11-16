@@ -54,6 +54,8 @@
 "gu_bas": "0,03",
 "gu_haut": "0,10",
 "g_couv": "98,6",
+"fs_bas": "6,79",
+"fs_haut": "10,70",
 "zone_brut": 580,
 "zone_brut_d": "79 439",
 "inter": 180,
