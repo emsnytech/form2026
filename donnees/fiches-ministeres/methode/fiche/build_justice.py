@@ -20,6 +20,9 @@ EXT = {
  "stats_plateforme": {"source": "https://demarche.numerique.gouv.fr/stats, relevé du 24/10/2026 (form2026-site/instances-ds.html)", "dossiers": 22679986},
 }
 
+# Coût évité par dossier pour l'administration (France Stratégie 2018) : bornes du simulateur de FORM 2026 (REF.ADMIN)
+_m = re.search(r"ADMIN:\{bas:([\d.]+),central:[\d.]+,haut:([\d.]+)\}", open("../../../simulateur-gains-dematerialisation.html", encoding="utf-8").read())
+ADMIN = {"bas": float(_m.group(1)), "haut": float(_m.group(2))}
 def n(x): return f"{x:,}".replace(",", " ")
 def p(x, d=1): return f"{x:.{d}f}".replace(".", ",")
 MOIS = "janvier février mars avril mai juin juillet août septembre octobre novembre décembre".split()
@@ -108,6 +111,7 @@ ds = U["_duree"]; K = {
  "calmin": p(100 / max(a["calage"] for a in DA), 0), "calmax": p(100 / min(a["calage"] for a in DA), 0),
  "g_bas": meur(GA["bas"]), "g_haut": meur(GA["haut"]), "ga_bas": meur(GA["admin_bas"]), "ga_haut": meur(GA["admin_haut"]), "gu_bas": meur(GA["usagers_bas"]), "gu_haut": meur(GA["usagers_haut"]),
  "g_couv": p(100 * X["gains_couverture"]["dossiers_couverts"] / X["gains_couverture"]["dossiers_fenetre"]),
+ "fs_bas": p(ADMIN["bas"], 2), "fs_haut": p(ADMIN["haut"], 2),
  "zone_brut": I["perimetre"]["zone_justice_brute"], "zone_brut_d": n(I["perimetre"]["dossiers_zone_brute"]),
  "inter": I["perimetre"]["exclues_plus_3_zones"], "inter_d": n(I["perimetre"]["dossiers_plus_3_zones"]), "inter_srias": I["perimetre"]["plus_3_zones_srias"],
  "excl_n": len(E["anomalies_exclues"]), "ccapex_d": n(by[76720]["dossiersCount"]), "sans_zone": E["perimetre"]["par_source"]["nom_organisme"], "incl_n": E["perimetre"]["par_source"]["inclusion"],

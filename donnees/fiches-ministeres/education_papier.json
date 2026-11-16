@@ -2,7 +2,7 @@
  "exemple_principal": {
   "cerfa": "16212*05",
   "cerfa_titre": "Demande d'autorisation d'instruction dans la famille",
-  "cerfa_url": "https://www.formulaires.service-public.fr/gf/cerfa_16212.do",
+  "cerfa_url": "https://www.formulaires.service-public.gouv.fr/cerfas/16212",
   "cerfa_administration": "Direction des services départementaux de l'éducation nationale (DSDEN)",
   "cerfa_n_champs": 9,
   "cerfa_n_champs_prerempli": 3,
