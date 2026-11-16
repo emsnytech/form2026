@@ -149,7 +149,7 @@ w(f"**Chapeau.** À côté de la plateforme, le ministère édite son propre dis
 w(row("Fonction", "Démarche Numérique", "SVE")); w(row("---", "---", "---"))
 for r_ in (("Éditeur", "Direction interministérielle du numérique (mentions légales)", "ministère de l'Intérieur, créé en novembre 2015 en application du décret n° 2015-1423 (mentions légales)"),
            ("Identification", "FranceConnect pour les particuliers, ProConnect pour les agents des administrations, ou compte avec mot de passe (page de connexion)",
-            "FranceConnect pour les particuliers ; SIREN pour une entreprise, RNA pour une association ; identité et adresse en champs structurés"),
+            "aucune connexion proposée à l'étape 1 (conditions générales, puis choix particulier / professionnel / association) ; SIREN pour une entreprise, RNA pour une association ; identité et adresse en champs structurés"),
            ("Contenu de la demande", "champs et pièces définis par le service pour chaque démarche (descriptif ouvert)",
             "objet repris de la rubrique, département, nature (information ou dépôt de dossier), champ libre « Votre demande », pièces jointes PDF ou JPG de 3 Mo au plus"),
            ("Raccordement d'un outil d'instruction", "API GraphQL ; jeton créé par un administrateur, en lecture ou en écriture, limité à ses démarches ; mutations de changement d'état (documentation de l'API)",
@@ -275,7 +275,7 @@ for t in (
     f"Démarches d'essai conservées ({n(CP['tests']['demarches'])}). Pièces comptées sur libellés distincts. Aucune donnée de contact, aucun département nommé.",
     "Règles et scripts détaillés : dépôt, `donnees/fiches-ministeres/methode/`.",
     "Sources : descriptif ouvert (data.gouv.fr) ; code du travail ; décrets n° 84-591 et n° 84-1110 ; arrêté du 27 avril 2021 ; instruction du 22 août 2023 et circulaire du 1er avril 2026 sur la DETR et la DSIL (Légifrance) ; INSEE ; tableau de bord public de ProConnect (export du 15 novembre 2026, versé au dépôt) ; « ProConnect – Présentation de la solution » (pad.numerique.gouv.fr, non daté, consulté le 15 novembre 2026), pour Passage2 (ministère de l'Intérieur) et Cerbère (ministère de la Transition écologique) ; « Charte des usages éthiques de l'IA au ministère de l'Intérieur », publiée par la CFDT Interco (mars 2026), pour MirAI, « portail interne » développé par la DTNUM et « exploitée sur des infrastructures maîtrisées par le ministère » ; documentation de Maarch Courrier 18.10 ; "
-    f"SVE et Démarche Numérique, {CONSULT} ; dépôts publics de la Bibliothèque numérique et de Turgot.",
+    f"SVE et Démarche Numérique, {CONSULT} (étape 1 de SVE : 16 novembre 2026) ; dépôts publics de la Bibliothèque numérique et de Turgot.",
 ): w(f"- {t}")
 w("")
 
