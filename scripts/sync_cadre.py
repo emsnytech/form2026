@@ -50,7 +50,7 @@ EXCEPTIONS = {
     "compteur-roi.html": "charge compteur-parametres.json, tiré du jeu « Utilisation du service », pas du descriptif",
     "explorer.html": "À TRAITER : l'explorateur est construit sur le descriptif ; son cadre reste à ajouter",
 }
-FICHES = {"fiches-ministeres/justice.html", "fiches-ministeres/education.html", "fiches-ministeres/index.html"}
+FICHES = {"fiches-ministeres/justice.html", "fiches-ministeres/education.html", "fiches-ministeres/interieur.html", "fiches-ministeres/index.html"}
 
 
 def pages_reperees():
@@ -90,7 +90,7 @@ def main():
             if not verifier:
                 p.write_text(n, encoding="utf-8")
     phrase = CENTRE.split(" Ces ordres")[0]   # partie commune aux fiches, qui ont leur propre lien vers /stats
-    for rel in ("fiches-ministeres/justice.html", "fiches-ministeres/education.html", "fiches-ministeres/index.html"):
+    for rel in sorted(FICHES):
         if phrase not in (RACINE / rel).read_text(encoding="utf-8"):
             ecarts.append(f"{rel} (phrase commune du cadre absente ou différente)")
     for rel in pages_reperees():
@@ -102,7 +102,7 @@ def main():
         print(("à mettre à jour : " if verifier else "écrit : ") + e)
     if verifier and ecarts:
         return 1
-    print(f"Cadre d'entrée : {len(PAGES)} page(s) produite(s), 3 fiches contrôlées, {'aucun écart' if not ecarts else str(len(ecarts)) + ' écart(s)'}.")
+    print(f"Cadre d'entrée : {len(PAGES)} page(s) produite(s), {len(FICHES)} fiches contrôlées, {'aucun écart' if not ecarts else str(len(ecarts)) + ' écart(s)'}.")
     return 0
 
 

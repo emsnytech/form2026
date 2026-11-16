@@ -30,6 +30,17 @@ Production de l'auteur à partir de données ouvertes de data.gouv.fr. Voir `don
 - `justice_siren_cours_appel.json` : SIREN des cours d'appel. Une juridiction est un établissement de l'unité légale de sa cour d'appel, ce qu'il faut savoir pour lire les rattachements.
 - `justice_chiffres_fiche.json` : chaque chiffre de la fiche et chaque source externe.
 
+## Fiche n° 3 : Intérieur
+
+- `interieur_maquette_chiffres.json` : corpus, dossiers et sensibilité du chiffre d'ensemble (avec et sans les médailles, sans les politiques d'autres ministères), versions nationales, vérification avant embauche.
+- `interieur_frais_evites.json` : frais évités sur 2021-2026, même méthode que la fiche n° 1, avec et sans les médailles du travail et agricoles, et le contrôle sur le jeu « Utilisation du service ».
+- `interieur_carte.json` : par code de département, démarches de préfecture en ligne, familles couvertes et dossiers (données de la carte « Appropriation »).
+- `interieur_familles_etape1.json`, `interieur_complements_etape1.json` : familles de politiques du corpus ; médailles par nature et par niveau, démarches de test, provenance.
+- `interieur_etrangers.json`, `interieur_qui_instruit.json`, `interieur_briques.json`, `interieur_verification_embauche.json` : démarches « étrangers » par fonction et par déposant ; qui instruit quoi ; démarches liées aux briques d'instruction ; champs et pièces des démarches de vérification avant embauche.
+- Sources versées dans `methode/sources/` : populations de référence 2023 de l'INSEE, quatre exports du tableau de bord public de ProConnect (15 novembre 2026), notes de source des circulaires DETR et DSIL, de la charte IA et de la documentation Maarch. Liens, dates et extraits cités seulement : aucun PDF.
+
+**Ce qui n'est pas publié pour l'Intérieur :** les sorties qui nomment des départements (`interieur.json`, `interieur_local_national.json`, `interieur_chronologies.json`, `interieur_variete.json`), parce que la fiche n'en nomme aucun hors de sa carte ; et la sortie ProConnect. `rejouer.sh` les reproduit dans `methode/out/`.
+
 **Ce qui n'est pas publié :** les sorties intermédiaires qui citent le titre de démarches sensibles (casier judiciaire, suites de plainte, mineurs), que la fiche ne donne qu'agrégées : inventaire détaillé, classement par usage, balayage des rendez-vous. Les scripts 09, 10, 11 et 17 sont publiés et les produisent : ils désignent ces démarches par leur numéro, sans fragment de titre.
 
 **Lecture des chiffres :** chaque fiche décrit les démarches publiées dans l'open data, ce qui ne recouvre pas toutes les démarches d'un ministère. L'open data ne retient que les démarches publiées, closes ou dépubliées, dont le paramètre `opendata` est activé, ayant au moins un dossier et dont l'adresse de site web ne contient ni « mail » ni « intra ». Les volumes sont donc des planchers. Les relevés en ligne changent chaque jour : la fiche en affiche la date.

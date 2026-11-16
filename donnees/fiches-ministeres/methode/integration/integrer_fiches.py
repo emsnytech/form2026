@@ -123,7 +123,14 @@ def kpis_justice():
     return [(K["total"], "démarches du corpus"), (K["dossiers"], "dossiers"), (f"{K['rh_pct']} %", "des démarches du corpus relèvent de la fonction RH")]
 
 
-KPIS = {"education": kpis_education, "justice": kpis_justice}
+def kpis_interieur():
+    S = json.load(open(source_json("interieur_maquette_chiffres.json"), encoding="utf-8"))["sensibilite"]["perimetre"]
+    G = json.load(open(source_json("interieur_frais_evites.json"), encoding="utf-8"))["perimetre"]["gains"]
+    return [(nf(S[0]), "démarches du corpus, première zone du descriptif ouvert"), (f"{m1(S[1])} M", f"dossiers, soit {str(S[2]).replace('.', ',')} % de ceux du fichier"),
+            (f"{m1(G['bas'])} à {m1(G['haut'])} M€", "de frais évités, administration et usagers")]
+
+
+KPIS = {"education": kpis_education, "justice": kpis_justice, "interieur": kpis_interieur}
 cartes = []
 for f in M["fiches"]:
     kp = "".join(f'<div class="k"><b>{v}</b><span>{l}</span></div>' for v, l in KPIS[f["slug"]]())

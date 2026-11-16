@@ -1,0 +1,540 @@
+{
+ "base": {
+  "demarches": 5882,
+  "dossiers": 3912287,
+  "part_du_perimetre_demarches": 66.5,
+  "part_du_perimetre_dossiers": 47.1
+ },
+ "instructeurs": {
+  "préfecture ou sous-préfecture": [
+   4053,
+   3099217
+  ],
+  "direction départementale ou régionale d'un autre ministère (DDT, DDETS, DREAL, DRIEAT...)": [
+   447,
+   129990
+  ],
+  "police, gendarmerie et leurs écoles": [
+   441,
+   69607
+  ],
+  "administration centrale de l'Intérieur": [
+   472,
+   491524
+  ],
+  "opérateurs (ANTS / France Titres, OFII, OFPRA...)": [
+   23,
+   13190
+  ],
+  "sécurité civile et collectivités (SDIS...)": [
+   51,
+   12551
+  ],
+  "autre": [
+   395,
+   96208
+  ]
+ },
+ "par_famille": {
+  "Médailles et distinctions": {
+   "demarches": 11,
+   "dossiers": 1128280,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     10,
+     1128219
+    ],
+    "direction départementale ou régionale d'un autre ministère (DDT, DDETS, DREAL, DRIEAT...)": [
+     1,
+     61
+    ]
+   }
+  },
+  "Étrangers : séjour, asile, nationalité": {
+   "demarches": 426,
+   "dossiers": 1109515,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     328,
+     1063612
+    ],
+    "direction départementale ou régionale d'un autre ministère (DDT, DDETS, DREAL, DRIEAT...)": [
+     28,
+     1544
+    ],
+    "administration centrale de l'Intérieur": [
+     36,
+     689
+    ],
+    "opérateurs (ANTS / France Titres, OFII, OFPRA...)": [
+     7,
+     1724
+    ],
+    "autre": [
+     27,
+     41946
+    ]
+   }
+  },
+  "Permis de conduire, aptitude à la conduite, éducation routière": {
+   "demarches": 227,
+   "dossiers": 502729,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     114,
+     109360
+    ],
+    "direction départementale ou régionale d'un autre ministère (DDT, DDETS, DREAL, DRIEAT...)": [
+     97,
+     62273
+    ],
+    "police, gendarmerie et leurs écoles": [
+     1,
+     1928
+    ],
+    "administration centrale de l'Intérieur": [
+     3,
+     328125
+    ],
+    "autre": [
+     12,
+     1043
+    ]
+   }
+  },
+  "Dotations et subventions": {
+   "demarches": 1724,
+   "dossiers": 194680,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     1503,
+     152782
+    ],
+    "direction départementale ou régionale d'un autre ministère (DDT, DDETS, DREAL, DRIEAT...)": [
+     105,
+     4259
+    ],
+    "police, gendarmerie et leurs écoles": [
+     1,
+     18
+    ],
+    "administration centrale de l'Intérieur": [
+     42,
+     32486
+    ],
+    "sécurité civile et collectivités (SDIS...)": [
+     3,
+     1497
+    ],
+    "autre": [
+     70,
+     3638
+    ]
+   }
+  },
+  "Étrangers : vérification d'un titre avant embauche": {
+   "demarches": 4,
+   "dossiers": 155242,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     4,
+     155242
+    ]
+   }
+  },
+  "Action sociale des agents": {
+   "demarches": 677,
+   "dossiers": 149983,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     445,
+     110879
+    ],
+    "administration centrale de l'Intérieur": [
+     147,
+     29325
+    ],
+    "autre": [
+     85,
+     9779
+    ]
+   }
+  },
+  "Autres, non classées": {
+   "demarches": 1240,
+   "dossiers": 141250,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     802,
+     80059
+    ],
+    "direction départementale ou régionale d'un autre ministère (DDT, DDETS, DREAL, DRIEAT...)": [
+     92,
+     7722
+    ],
+    "police, gendarmerie et leurs écoles": [
+     152,
+     22431
+    ],
+    "administration centrale de l'Intérieur": [
+     79,
+     11218
+    ],
+    "opérateurs (ANTS / France Titres, OFII, OFPRA...)": [
+     6,
+     1798
+    ],
+    "sécurité civile et collectivités (SDIS...)": [
+     7,
+     4466
+    ],
+    "autre": [
+     102,
+     13556
+    ]
+   }
+  },
+  "Réglementation et polices administratives": {
+   "demarches": 357,
+   "dossiers": 107450,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     182,
+     79973
+    ],
+    "direction départementale ou régionale d'un autre ministère (DDT, DDETS, DREAL, DRIEAT...)": [
+     16,
+     3318
+    ],
+    "police, gendarmerie et leurs écoles": [
+     69,
+     10566
+    ],
+    "administration centrale de l'Intérieur": [
+     72,
+     12623
+    ],
+    "sécurité civile et collectivités (SDIS...)": [
+     1,
+     650
+    ],
+    "autre": [
+     17,
+     320
+    ]
+   }
+  },
+  "Recrutement, concours, formation et gestion des agents": {
+   "demarches": 595,
+   "dossiers": 104939,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     205,
+     25992
+    ],
+    "direction départementale ou régionale d'un autre ministère (DDT, DDETS, DREAL, DRIEAT...)": [
+     60,
+     1979
+    ],
+    "police, gendarmerie et leurs écoles": [
+     215,
+     34154
+    ],
+    "administration centrale de l'Intérieur": [
+     64,
+     19209
+    ],
+    "sécurité civile et collectivités (SDIS...)": [
+     8,
+     1658
+    ],
+    "autre": [
+     43,
+     21947
+    ]
+   }
+  },
+  "Plaintes et signalements": {
+   "demarches": 4,
+   "dossiers": 64690,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     4,
+     64690
+    ]
+   }
+  },
+  "Élections": {
+   "demarches": 196,
+   "dossiers": 58925,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     171,
+     33635
+    ],
+    "direction départementale ou régionale d'un autre ministère (DDT, DDETS, DREAL, DRIEAT...)": [
+     1,
+     209
+    ],
+    "police, gendarmerie et leurs écoles": [
+     1,
+     78
+    ],
+    "administration centrale de l'Intérieur": [
+     1,
+     22175
+    ],
+    "autre": [
+     22,
+     2828
+    ]
+   }
+  },
+  "Logement et hébergement (accords collectifs, contingent, CCAPEX)": {
+   "demarches": 59,
+   "dossiers": 56880,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     23,
+     9919
+    ],
+    "direction départementale ou régionale d'un autre ministère (DDT, DDETS, DREAL, DRIEAT...)": [
+     20,
+     43289
+    ],
+    "police, gendarmerie et leurs écoles": [
+     2,
+     432
+    ],
+    "administration centrale de l'Intérieur": [
+     7,
+     2620
+    ],
+    "sécurité civile et collectivités (SDIS...)": [
+     1,
+     275
+    ],
+    "autre": [
+     6,
+     345
+    ]
+   }
+  },
+  "Transport de personnes et véhicules (taxis, VTC, contrôle technique, fourrière)": {
+   "demarches": 92,
+   "dossiers": 52354,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     70,
+     22601
+    ],
+    "direction départementale ou régionale d'un autre ministère (DDT, DDETS, DREAL, DRIEAT...)": [
+     11,
+     4059
+    ],
+    "administration centrale de l'Intérieur": [
+     8,
+     25080
+    ],
+    "autre": [
+     3,
+     614
+    ]
+   }
+  },
+  "Collectivités : contrôle de légalité, finances locales": {
+   "demarches": 174,
+   "dossiers": 41967,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     163,
+     36259
+    ],
+    "administration centrale de l'Intérieur": [
+     7,
+     5668
+    ],
+    "autre": [
+     4,
+     40
+    ]
+   }
+  },
+  "Contact et accueil": {
+   "demarches": 11,
+   "dossiers": 26206,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     6,
+     22645
+    ],
+    "direction départementale ou régionale d'un autre ministère (DDT, DDETS, DREAL, DRIEAT...)": [
+     1,
+     265
+    ],
+    "administration centrale de l'Intérieur": [
+     1,
+     1967
+    ],
+    "sécurité civile et collectivités (SDIS...)": [
+     3,
+     1329
+    ]
+   }
+  },
+  "Titres sécurisés : identité, passeport (ANTS)": {
+   "demarches": 13,
+   "dossiers": 9781,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     1,
+     12
+    ],
+    "opérateurs (ANTS / France Titres, OFII, OFPRA...)": [
+     10,
+     9668
+    ],
+    "autre": [
+     2,
+     101
+    ]
+   }
+  },
+  "Sécurité civile, secours, sapeurs-pompiers": {
+   "demarches": 72,
+   "dossiers": 7416,
+   "instructeurs": {
+    "préfecture ou sous-préfecture": [
+     22,
+     3338
+    ],
+    "direction départementale ou régionale d'un autre ministère (DDT, DDETS, DREAL, DRIEAT...)": [
+     15,
+     1012
+    ],
+    "administration centrale de l'Intérieur": [
+     5,
+     339
+    ],
+    "sécurité civile et collectivités (SDIS...)": [
+     28,
+     2676
+    ],
+    "autre": [
+     2,
+     51
+    ]
+   }
+  }
+ },
+ "prefectures_autres_zones": {
+  "demarches": 766,
+  "dossiers": 110123,
+  "comparaison_prefectures_en_zone_interieur": [
+   4053,
+   3099217
+  ],
+  "par_zone": [
+   [
+    "Ministère de la Transition écologique, de la Biodiversité, de la Forêt, de la Mer et de la Pêche",
+    288,
+    43087
+   ],
+   [
+    "Ministère de l’Agriculture, de l’Agro-alimentaire et de la Souveraineté Alimentaire",
+    162,
+    33158
+   ],
+   [
+    "Ministère du Travail, de la Santé, des Solidarités et des Familles",
+    94,
+    11927
+   ],
+   [
+    "Premier ministre",
+    68,
+    5162
+   ],
+   [
+    "Ministère de l’Action publique, de la Fonction publique et de la Simplification",
+    68,
+    10115
+   ],
+   [
+    "Ministère des Solidarités, de l’Autonomie et des personnes handicapées",
+    32,
+    2325
+   ],
+   [
+    "Collectivité territoriale",
+    28,
+    5942
+   ],
+   [
+    "Ministère de l’Aménagement du Territoire et de la Décentralisation",
+    22,
+    3477
+   ],
+   [
+    "Ministère de la Culture",
+    22,
+    780
+   ],
+   [
+    "Ministère de l’Éducation nationale, de l’Enseignement supérieur et de la Recherche",
+    18,
+    1572
+   ],
+   [
+    "Ministère de la Santé et de la Prévention",
+    8,
+    2029
+   ],
+   [
+    "Autorité indépendante",
+    8,
+    407
+   ],
+   [
+    "Ministère des Sports, de la Jeunesse et de la Vie associative",
+    6,
+    536
+   ],
+   [
+    "Ministère de l’Économie, des Finances et de la Souveraineté industrielle et numérique",
+    6,
+    646
+   ],
+   [
+    "Ministère de la Transition énergétique",
+    4,
+    1082
+   ],
+   [
+    "Ministère des Transports",
+    2,
+    76
+   ],
+   [
+    "Ministère des Armées",
+    2,
+    211
+   ],
+   [
+    "Ministère des Outre-mer",
+    1,
+    4
+   ],
+   [
+    "Ministère de l’Europe et des Affaires étrangères",
+    1,
+    37
+   ],
+   [
+    "Ministère de l’Enseignement supérieur et de la Recherche",
+    1,
+    18
+   ]
+  ]
+ }
+}

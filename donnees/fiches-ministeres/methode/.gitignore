@@ -2,4 +2,5 @@ out/
 data/*
 !data/nb_dossiers_deposes_par_mois.csv
 fiche/fiche-*.html
+fiche/relecture-*.html
 __pycache__/

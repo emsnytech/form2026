@@ -1,0 +1,315 @@
+{
+ "medailles": {
+  "agricole": {
+   "nationale": {
+    "demarches": 6,
+    "dossiers": 60194,
+    "numeros": [
+     72240,
+     15897,
+     8292,
+     11979,
+     11982,
+     15898
+    ]
+   },
+   "locale": {
+    "demarches": 10,
+    "dossiers": 301,
+    "numeros": [
+     129503,
+     25752,
+     16209,
+     34620,
+     21573,
+     8519
+    ]
+   },
+   "indeterminee": {
+    "demarches": 5,
+    "dossiers": 1949,
+    "numeros": [
+     17231,
+     3991,
+     4405,
+     4403,
+     4404
+    ]
+   }
+  },
+  "régionale, départementale et communale": {
+   "nationale": {
+    "demarches": 7,
+    "dossiers": 483540,
+    "numeros": [
+     72243,
+     15899,
+     11978,
+     8290,
+     15900,
+     11981
+    ]
+   },
+   "locale": {
+    "demarches": 4,
+    "dossiers": 418,
+    "numeros": [
+     5957,
+     38438,
+     7178,
+     60838
+    ]
+   }
+  },
+  "travail": {
+   "nationale": {
+    "demarches": 6,
+    "dossiers": 1362007,
+    "numeros": [
+     69348,
+     15894,
+     11980,
+     8291,
+     15895,
+     11983
+    ]
+   },
+   "locale": {
+    "demarches": 3,
+    "dossiers": 25118,
+    "numeros": [
+     20434,
+     14248,
+     34627
+    ]
+   }
+  },
+  "autres (sécurité intérieure, courage et dévouement, transports, jeunesse et sports, administration territoriale)": {
+   "locale": {
+    "demarches": 7,
+    "dossiers": 127,
+    "numeros": [
+     126182,
+     120712,
+     105308,
+     125179,
+     96606,
+     125587
+    ]
+   }
+  },
+  "cérémonies": {
+   "locale": {
+    "demarches": 2,
+    "dossiers": 84,
+    "numeros": [
+     46473,
+     46531
+    ]
+   }
+  }
+ },
+ "medailles_total": {
+  "demarches": 50,
+  "dossiers": 1933738
+ },
+ "tests": {
+  "demarches": 104,
+  "dossiers": 701,
+  "par_famille": {
+   "Autres, non classées": 63,
+   "Crises : déplacements sanitaires, motifs impérieux": 2,
+   "Médailles et distinctions": 8,
+   "Réglementation et polices administratives": 5,
+   "Recrutement, concours, formation et gestion des agents": 6,
+   "Étrangers : séjour, asile, nationalité": 4,
+   "Dotations et subventions": 10,
+   "Contact et accueil": 2,
+   "Transport de personnes et véhicules (taxis, VTC, contrôle technique, fourrière)": 1,
+   "Sécurité civile, secours, sapeurs-pompiers": 1,
+   "Permis de conduire, aptitude à la conduite, éducation routière": 2
+  }
+ },
+ "provenance_par_famille": {
+  "Action sociale des agents": {
+   "zone": [
+    765,
+    162171
+   ],
+   "nom_organisme": [
+    15,
+    2095
+   ]
+  },
+  "Autres, non classées": {
+   "zone": [
+    1626,
+    202348
+   ],
+   "nom_organisme": [
+    216,
+    6729
+   ]
+  },
+  "Collectivités : contrôle de légalité, finances locales": {
+   "zone": [
+    211,
+    65642
+   ],
+   "nom_organisme": [
+    6,
+    103
+   ]
+  },
+  "Contact et accueil": {
+   "zone": [
+    14,
+    29604
+   ],
+   "nom_organisme": [
+    2,
+    3
+   ]
+  },
+  "Crises : déplacements sanitaires, motifs impérieux": {
+   "zone": [
+    48,
+    91438
+   ],
+   "nom_organisme": [
+    5,
+    21
+   ]
+  },
+  "Dotations et subventions": {
+   "zone": [
+    2139,
+    225556
+   ],
+   "nom_organisme": [
+    292,
+    27383
+   ]
+  },
+  "Logement et hébergement (accords collectifs, contingent, CCAPEX)": {
+   "zone": [
+    69,
+    131126
+   ],
+   "nom_organisme": [
+    3,
+    13
+   ]
+  },
+  "Médailles et distinctions": {
+   "zone": [
+    44,
+    1933720
+   ],
+   "nom_organisme": [
+    6,
+    18
+   ]
+  },
+  "Permis de conduire, aptitude à la conduite, éducation routière": {
+   "zone": [
+    402,
+    1091175
+   ],
+   "nom_organisme": [
+    28,
+    5411
+   ]
+  },
+  "Plaintes et signalements": {
+   "zone": [
+    4,
+    64690
+   ],
+   "nom_organisme": [
+    0,
+    0
+   ]
+  },
+  "Recrutement, concours, formation et gestion des agents": {
+   "zone": [
+    792,
+    187172
+   ],
+   "nom_organisme": [
+    48,
+    1181
+   ]
+  },
+  "Réglementation et polices administratives": {
+   "zone": [
+    487,
+    183093
+   ],
+   "nom_organisme": [
+    64,
+    2223
+   ]
+  },
+  "Sécurité civile, secours, sapeurs-pompiers": {
+   "zone": [
+    89,
+    8646
+   ],
+   "nom_organisme": [
+    5,
+    10
+   ]
+  },
+  "Titres sécurisés : identité, passeport (ANTS)": {
+   "zone": [
+    16,
+    12562
+   ],
+   "nom_organisme": [
+    1,
+    1
+   ]
+  },
+  "Transport de personnes et véhicules (taxis, VTC, contrôle technique, fourrière)": {
+   "zone": [
+    192,
+    278921
+   ],
+   "nom_organisme": [
+    19,
+    1058
+   ]
+  },
+  "Élections": {
+   "zone": [
+    280,
+    78214
+   ],
+   "nom_organisme": [
+    3,
+    607
+   ]
+  },
+  "Étrangers : séjour, asile, nationalité": {
+   "zone": [
+    874,
+    2667917
+   ],
+   "nom_organisme": [
+    76,
+    182263
+   ]
+  },
+  "Étrangers : vérification d'un titre avant embauche": {
+   "zone": [
+    7,
+    657769
+   ],
+   "nom_organisme": [
+    0,
+    0
+   ]
+  }
+ }
+}

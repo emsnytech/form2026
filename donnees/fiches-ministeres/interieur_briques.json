@@ -1,0 +1,305 @@
+{
+ "fondations_et_fonds_de_dotation": {
+  "demarches": 89,
+  "dossiers": 15419,
+  "publiees": 65,
+  "niveaux": {
+   "nationale": 61,
+   "locale": 16,
+   "indeterminee": 12
+  },
+  "par_annee": {
+   "2022": 13,
+   "2023": 10,
+   "2024": 35,
+   "2025": 25,
+   "2026": 6
+  },
+  "principales": [
+   [
+    112393,
+    "2025-02-11",
+    "publiee",
+    3990,
+    "nationale"
+   ],
+   [
+    53931,
+    "2022-02-18",
+    "close",
+    2303,
+    "locale"
+   ],
+   [
+    112391,
+    "2025-02-11",
+    "publiee",
+    767,
+    "nationale"
+   ],
+   [
+    112411,
+    "2025-02-11",
+    "publiee",
+    741,
+    "nationale"
+   ],
+   [
+    108071,
+    "2024-12-11",
+    "publiee",
+    736,
+    "nationale"
+   ],
+   [
+    53929,
+    "2022-02-18",
+    "close",
+    719,
+    "locale"
+   ],
+   [
+    112374,
+    "2025-02-11",
+    "publiee",
+    695,
+    "nationale"
+   ],
+   [
+    112459,
+    "2025-02-11",
+    "publiee",
+    693,
+    "nationale"
+   ]
+  ]
+ },
+ "associations": {
+  "demarches": 81,
+  "dossiers": 9285,
+  "publiees": 49,
+  "niveaux": {
+   "locale": 63,
+   "indeterminee": 6,
+   "nationale": 12
+  },
+  "par_annee": {
+   "2018": 2,
+   "2019": 3,
+   "2020": 4,
+   "2021": 9,
+   "2022": 12,
+   "2023": 9,
+   "2024": 16,
+   "2025": 14,
+   "2026": 12
+  },
+  "principales": [
+   [
+    136475,
+    "2026-01-21",
+    "publiee",
+    1986,
+    "nationale"
+   ],
+   [
+    136476,
+    "2026-01-21",
+    "publiee",
+    1937,
+    "nationale"
+   ],
+   [
+    53940,
+    "2022-03-17",
+    "close",
+    1766,
+    "locale"
+   ],
+   [
+    132973,
+    "2025-12-22",
+    "publiee",
+    786,
+    "nationale"
+   ],
+   [
+    117832,
+    "2025-04-15",
+    "publiee",
+    390,
+    "nationale"
+   ],
+   [
+    124944,
+    "2025-08-05",
+    "publiee",
+    357,
+    "locale"
+   ],
+   [
+    136474,
+    "2026-01-21",
+    "publiee",
+    279,
+    "nationale"
+   ],
+   [
+    53939,
+    "2022-03-17",
+    "close",
+    209,
+    "locale"
+   ]
+  ]
+ },
+ "dotations_detr_dsil": {
+  "demarches": 654,
+  "dossiers": 172719,
+  "publiees": 170,
+  "niveaux": {
+   "locale": 630,
+   "nationale": 7,
+   "indeterminee": 17
+  },
+  "par_annee": {
+   "2019": 2,
+   "2020": 3,
+   "2021": 64,
+   "2022": 160,
+   "2023": 103,
+   "2024": 161,
+   "2025": 99,
+   "2026": 62
+  },
+  "principales": [
+   [
+    128030,
+    "2025-10-10",
+    "publiee",
+    26617,
+    "nationale"
+   ],
+   [
+    42113,
+    "2021-06-15",
+    "publiee",
+    3121,
+    "locale"
+   ],
+   [
+    19828,
+    "2021-01-07",
+    "publiee",
+    2485,
+    "locale"
+   ],
+   [
+    65869,
+    "2022-10-27",
+    "publiee",
+    2228,
+    "locale"
+   ],
+   [
+    66091,
+    "2022-11-03",
+    "publiee",
+    1847,
+    "locale"
+   ],
+   [
+    80236,
+    "2024-12-03",
+    "close",
+    1836,
+    "locale"
+   ],
+   [
+    65605,
+    "2023-01-10",
+    "publiee",
+    1725,
+    "locale"
+   ],
+   [
+    62006,
+    "2024-10-02",
+    "publiee",
+    1639,
+    "locale"
+   ]
+  ]
+ },
+ "medailles_nationales": {
+  "demarches": 19,
+  "dossiers": 1905741,
+  "publiees": 3,
+  "niveaux": {
+   "nationale": 19
+  },
+  "par_annee": {
+   "2018": 7,
+   "2019": 9,
+   "2023": 3
+  },
+  "principales": [
+   [
+    69348,
+    "2023-04-19",
+    "publiee",
+    801484,
+    "nationale"
+   ],
+   [
+    15894,
+    "2019-03-14",
+    "depubliee",
+    559710,
+    "nationale"
+   ],
+   [
+    72243,
+    "2023-04-19",
+    "publiee",
+    293690,
+    "nationale"
+   ],
+   [
+    15899,
+    "2019-03-14",
+    "depubliee",
+    188927,
+    "nationale"
+   ],
+   [
+    72240,
+    "2023-04-19",
+    "publiee",
+    32890,
+    "nationale"
+   ],
+   [
+    15897,
+    "2019-03-14",
+    "depubliee",
+    27158,
+    "nationale"
+   ],
+   [
+    11978,
+    "2019-03-20",
+    "close",
+    767,
+    "nationale"
+   ],
+   [
+    11980,
+    "2019-03-20",
+    "close",
+    749,
+    "nationale"
+   ]
+  ]
+ }
+}

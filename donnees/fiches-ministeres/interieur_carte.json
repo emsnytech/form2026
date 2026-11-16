@@ -1,0 +1,611 @@
+{
+ "regle": "préfecture ou sous-préfecture, rattachement du script 40",
+ "departements": {
+  "01": {
+   "familles_en_ligne": 5,
+   "en_ligne": 13,
+   "depuis_origine": 16,
+   "dossiers": 2592
+  },
+  "02": {
+   "familles_en_ligne": 6,
+   "en_ligne": 40,
+   "depuis_origine": 99,
+   "dossiers": 6259
+  },
+  "03": {
+   "familles_en_ligne": 3,
+   "en_ligne": 6,
+   "depuis_origine": 32,
+   "dossiers": 5003
+  },
+  "04": {
+   "familles_en_ligne": 3,
+   "en_ligne": 12,
+   "depuis_origine": 49,
+   "dossiers": 2779
+  },
+  "05": {
+   "familles_en_ligne": 3,
+   "en_ligne": 8,
+   "depuis_origine": 33,
+   "dossiers": 2392
+  },
+  "06": {
+   "familles_en_ligne": 6,
+   "en_ligne": 18,
+   "depuis_origine": 58,
+   "dossiers": 20320
+  },
+  "07": {
+   "familles_en_ligne": 4,
+   "en_ligne": 5,
+   "depuis_origine": 16,
+   "dossiers": 4266
+  },
+  "08": {
+   "familles_en_ligne": 2,
+   "en_ligne": 7,
+   "depuis_origine": 12,
+   "dossiers": 4194
+  },
+  "09": {
+   "familles_en_ligne": 4,
+   "en_ligne": 17,
+   "depuis_origine": 58,
+   "dossiers": 8702
+  },
+  "10": {
+   "familles_en_ligne": 6,
+   "en_ligne": 25,
+   "depuis_origine": 48,
+   "dossiers": 11238
+  },
+  "11": {
+   "familles_en_ligne": 5,
+   "en_ligne": 26,
+   "depuis_origine": 43,
+   "dossiers": 3504
+  },
+  "12": {
+   "familles_en_ligne": 4,
+   "en_ligne": 17,
+   "depuis_origine": 61,
+   "dossiers": 2835
+  },
+  "13": {
+   "familles_en_ligne": 7,
+   "en_ligne": 42,
+   "depuis_origine": 137,
+   "dossiers": 78814
+  },
+  "14": {
+   "familles_en_ligne": 5,
+   "en_ligne": 32,
+   "depuis_origine": 77,
+   "dossiers": 52331
+  },
+  "15": {
+   "familles_en_ligne": 4,
+   "en_ligne": 12,
+   "depuis_origine": 19,
+   "dossiers": 2088
+  },
+  "16": {
+   "familles_en_ligne": 2,
+   "en_ligne": 5,
+   "depuis_origine": 16,
+   "dossiers": 1442
+  },
+  "17": {
+   "familles_en_ligne": 3,
+   "en_ligne": 16,
+   "depuis_origine": 62,
+   "dossiers": 8106
+  },
+  "18": {
+   "familles_en_ligne": 3,
+   "en_ligne": 5,
+   "depuis_origine": 30,
+   "dossiers": 3076
+  },
+  "19": {
+   "familles_en_ligne": 4,
+   "en_ligne": 10,
+   "depuis_origine": 21,
+   "dossiers": 2683
+  },
+  "2A": {
+   "familles_en_ligne": 4,
+   "en_ligne": 8,
+   "depuis_origine": 21,
+   "dossiers": 2615
+  },
+  "2B": {
+   "familles_en_ligne": 5,
+   "en_ligne": 20,
+   "depuis_origine": 54,
+   "dossiers": 9216
+  },
+  "21": {
+   "familles_en_ligne": 2,
+   "en_ligne": 7,
+   "depuis_origine": 19,
+   "dossiers": 5640
+  },
+  "22": {
+   "familles_en_ligne": 3,
+   "en_ligne": 21,
+   "depuis_origine": 32,
+   "dossiers": 7424
+  },
+  "23": {
+   "familles_en_ligne": 4,
+   "en_ligne": 8,
+   "depuis_origine": 31,
+   "dossiers": 5605
+  },
+  "24": {
+   "familles_en_ligne": 4,
+   "en_ligne": 11,
+   "depuis_origine": 35,
+   "dossiers": 6389
+  },
+  "25": {
+   "familles_en_ligne": 6,
+   "en_ligne": 19,
+   "depuis_origine": 36,
+   "dossiers": 8590
+  },
+  "26": {
+   "familles_en_ligne": 4,
+   "en_ligne": 5,
+   "depuis_origine": 18,
+   "dossiers": 3251
+  },
+  "27": {
+   "familles_en_ligne": 3,
+   "en_ligne": 12,
+   "depuis_origine": 18,
+   "dossiers": 3903
+  },
+  "28": {
+   "familles_en_ligne": 4,
+   "en_ligne": 7,
+   "depuis_origine": 36,
+   "dossiers": 5849
+  },
+  "29": {
+   "familles_en_ligne": 4,
+   "en_ligne": 13,
+   "depuis_origine": 15,
+   "dossiers": 3046
+  },
+  "30": {
+   "familles_en_ligne": 4,
+   "en_ligne": 43,
+   "depuis_origine": 113,
+   "dossiers": 23679
+  },
+  "31": {
+   "familles_en_ligne": 5,
+   "en_ligne": 20,
+   "depuis_origine": 79,
+   "dossiers": 161079
+  },
+  "32": {
+   "familles_en_ligne": 3,
+   "en_ligne": 8,
+   "depuis_origine": 13,
+   "dossiers": 2678
+  },
+  "33": {
+   "familles_en_ligne": 5,
+   "en_ligne": 38,
+   "depuis_origine": 164,
+   "dossiers": 335493
+  },
+  "34": {
+   "familles_en_ligne": 6,
+   "en_ligne": 41,
+   "depuis_origine": 132,
+   "dossiers": 119052
+  },
+  "35": {
+   "familles_en_ligne": 6,
+   "en_ligne": 51,
+   "depuis_origine": 116,
+   "dossiers": 52227
+  },
+  "36": {
+   "familles_en_ligne": 4,
+   "en_ligne": 6,
+   "depuis_origine": 12,
+   "dossiers": 2289
+  },
+  "37": {
+   "familles_en_ligne": 5,
+   "en_ligne": 20,
+   "depuis_origine": 38,
+   "dossiers": 5196
+  },
+  "38": {
+   "familles_en_ligne": 5,
+   "en_ligne": 7,
+   "depuis_origine": 29,
+   "dossiers": 167307
+  },
+  "39": {
+   "familles_en_ligne": 3,
+   "en_ligne": 5,
+   "depuis_origine": 10,
+   "dossiers": 5243
+  },
+  "40": {
+   "familles_en_ligne": 5,
+   "en_ligne": 13,
+   "depuis_origine": 26,
+   "dossiers": 2309
+  },
+  "41": {
+   "familles_en_ligne": 5,
+   "en_ligne": 21,
+   "depuis_origine": 35,
+   "dossiers": 3194
+  },
+  "42": {
+   "familles_en_ligne": 5,
+   "en_ligne": 27,
+   "depuis_origine": 46,
+   "dossiers": 14949
+  },
+  "43": {
+   "familles_en_ligne": 5,
+   "en_ligne": 24,
+   "depuis_origine": 44,
+   "dossiers": 3343
+  },
+  "44": {
+   "familles_en_ligne": 6,
+   "en_ligne": 21,
+   "depuis_origine": 72,
+   "dossiers": 108551
+  },
+  "45": {
+   "familles_en_ligne": 6,
+   "en_ligne": 34,
+   "depuis_origine": 51,
+   "dossiers": 17555
+  },
+  "46": {
+   "familles_en_ligne": 4,
+   "en_ligne": 18,
+   "depuis_origine": 23,
+   "dossiers": 1322
+  },
+  "47": {
+   "familles_en_ligne": 3,
+   "en_ligne": 53,
+   "depuis_origine": 62,
+   "dossiers": 2181
+  },
+  "48": {
+   "familles_en_ligne": 2,
+   "en_ligne": 7,
+   "depuis_origine": 22,
+   "dossiers": 1773
+  },
+  "49": {
+   "familles_en_ligne": 6,
+   "en_ligne": 30,
+   "depuis_origine": 108,
+   "dossiers": 18430
+  },
+  "50": {
+   "familles_en_ligne": 5,
+   "en_ligne": 7,
+   "depuis_origine": 24,
+   "dossiers": 7540
+  },
+  "51": {
+   "familles_en_ligne": 5,
+   "en_ligne": 15,
+   "depuis_origine": 27,
+   "dossiers": 15779
+  },
+  "52": {
+   "familles_en_ligne": 6,
+   "en_ligne": 24,
+   "depuis_origine": 31,
+   "dossiers": 4211
+  },
+  "53": {
+   "familles_en_ligne": 4,
+   "en_ligne": 18,
+   "depuis_origine": 49,
+   "dossiers": 6575
+  },
+  "54": {
+   "familles_en_ligne": 4,
+   "en_ligne": 31,
+   "depuis_origine": 98,
+   "dossiers": 56110
+  },
+  "55": {
+   "familles_en_ligne": 2,
+   "en_ligne": 16,
+   "depuis_origine": 30,
+   "dossiers": 2920
+  },
+  "56": {
+   "familles_en_ligne": 4,
+   "en_ligne": 5,
+   "depuis_origine": 13,
+   "dossiers": 2773
+  },
+  "57": {
+   "familles_en_ligne": 5,
+   "en_ligne": 18,
+   "depuis_origine": 44,
+   "dossiers": 16561
+  },
+  "58": {
+   "familles_en_ligne": 4,
+   "en_ligne": 15,
+   "depuis_origine": 18,
+   "dossiers": 1513
+  },
+  "59": {
+   "familles_en_ligne": 6,
+   "en_ligne": 21,
+   "depuis_origine": 84,
+   "dossiers": 49871
+  },
+  "60": {
+   "familles_en_ligne": 6,
+   "en_ligne": 42,
+   "depuis_origine": 79,
+   "dossiers": 18096
+  },
+  "61": {
+   "familles_en_ligne": 5,
+   "en_ligne": 8,
+   "depuis_origine": 34,
+   "dossiers": 4332
+  },
+  "62": {
+   "familles_en_ligne": 6,
+   "en_ligne": 19,
+   "depuis_origine": 55,
+   "dossiers": 69747
+  },
+  "63": {
+   "familles_en_ligne": 4,
+   "en_ligne": 5,
+   "depuis_origine": 19,
+   "dossiers": 12876
+  },
+  "64": {
+   "familles_en_ligne": 4,
+   "en_ligne": 7,
+   "depuis_origine": 24,
+   "dossiers": 7103
+  },
+  "65": {
+   "familles_en_ligne": 3,
+   "en_ligne": 9,
+   "depuis_origine": 40,
+   "dossiers": 13751
+  },
+  "66": {
+   "familles_en_ligne": 4,
+   "en_ligne": 24,
+   "depuis_origine": 91,
+   "dossiers": 13981
+  },
+  "67": {
+   "familles_en_ligne": 6,
+   "en_ligne": 24,
+   "depuis_origine": 99,
+   "dossiers": 64114
+  },
+  "68": {
+   "familles_en_ligne": 3,
+   "en_ligne": 7,
+   "depuis_origine": 23,
+   "dossiers": 2745
+  },
+  "69": {
+   "familles_en_ligne": 5,
+   "en_ligne": 43,
+   "depuis_origine": 126,
+   "dossiers": 165224
+  },
+  "70": {
+   "familles_en_ligne": 3,
+   "en_ligne": 6,
+   "depuis_origine": 10,
+   "dossiers": 1623
+  },
+  "71": {
+   "familles_en_ligne": 4,
+   "en_ligne": 13,
+   "depuis_origine": 32,
+   "dossiers": 5864
+  },
+  "72": {
+   "familles_en_ligne": 7,
+   "en_ligne": 27,
+   "depuis_origine": 42,
+   "dossiers": 12841
+  },
+  "73": {
+   "familles_en_ligne": 4,
+   "en_ligne": 8,
+   "depuis_origine": 13,
+   "dossiers": 4494
+  },
+  "74": {
+   "familles_en_ligne": 3,
+   "en_ligne": 8,
+   "depuis_origine": 47,
+   "dossiers": 8616
+  },
+  "75": {
+   "familles_en_ligne": 7,
+   "en_ligne": 101,
+   "depuis_origine": 227,
+   "dossiers": 590398
+  },
+  "76": {
+   "familles_en_ligne": 6,
+   "en_ligne": 53,
+   "depuis_origine": 110,
+   "dossiers": 42030
+  },
+  "77": {
+   "familles_en_ligne": 6,
+   "en_ligne": 41,
+   "depuis_origine": 131,
+   "dossiers": 406101
+  },
+  "78": {
+   "familles_en_ligne": 5,
+   "en_ligne": 38,
+   "depuis_origine": 89,
+   "dossiers": 34822
+  },
+  "79": {
+   "familles_en_ligne": 5,
+   "en_ligne": 16,
+   "depuis_origine": 17,
+   "dossiers": 7121
+  },
+  "80": {
+   "familles_en_ligne": 6,
+   "en_ligne": 41,
+   "depuis_origine": 77,
+   "dossiers": 23099
+  },
+  "81": {
+   "familles_en_ligne": 4,
+   "en_ligne": 8,
+   "depuis_origine": 23,
+   "dossiers": 5339
+  },
+  "82": {
+   "familles_en_ligne": 4,
+   "en_ligne": 11,
+   "depuis_origine": 46,
+   "dossiers": 4515
+  },
+  "83": {
+   "familles_en_ligne": 6,
+   "en_ligne": 33,
+   "depuis_origine": 105,
+   "dossiers": 44491
+  },
+  "84": {
+   "familles_en_ligne": 3,
+   "en_ligne": 6,
+   "depuis_origine": 13,
+   "dossiers": 997
+  },
+  "85": {
+   "familles_en_ligne": 7,
+   "en_ligne": 13,
+   "depuis_origine": 49,
+   "dossiers": 6727
+  },
+  "86": {
+   "familles_en_ligne": 5,
+   "en_ligne": 13,
+   "depuis_origine": 26,
+   "dossiers": 13021
+  },
+  "87": {
+   "familles_en_ligne": 5,
+   "en_ligne": 20,
+   "depuis_origine": 52,
+   "dossiers": 5480
+  },
+  "88": {
+   "familles_en_ligne": 4,
+   "en_ligne": 9,
+   "depuis_origine": 52,
+   "dossiers": 3849
+  },
+  "89": {
+   "familles_en_ligne": 6,
+   "en_ligne": 20,
+   "depuis_origine": 65,
+   "dossiers": 9173
+  },
+  "90": {
+   "familles_en_ligne": 2,
+   "en_ligne": 9,
+   "depuis_origine": 18,
+   "dossiers": 760
+  },
+  "91": {
+   "familles_en_ligne": 6,
+   "en_ligne": 77,
+   "depuis_origine": 183,
+   "dossiers": 526742
+  },
+  "92": {
+   "familles_en_ligne": 5,
+   "en_ligne": 54,
+   "depuis_origine": 176,
+   "dossiers": 385540
+  },
+  "93": {
+   "familles_en_ligne": 6,
+   "en_ligne": 83,
+   "depuis_origine": 131,
+   "dossiers": 353009
+  },
+  "94": {
+   "familles_en_ligne": 5,
+   "en_ligne": 44,
+   "depuis_origine": 101,
+   "dossiers": 207537
+  },
+  "95": {
+   "familles_en_ligne": 7,
+   "en_ligne": 34,
+   "depuis_origine": 105,
+   "dossiers": 70231
+  },
+  "971": {
+   "familles_en_ligne": 4,
+   "en_ligne": 21,
+   "depuis_origine": 51,
+   "dossiers": 1977
+  },
+  "972": {
+   "familles_en_ligne": 4,
+   "en_ligne": 20,
+   "depuis_origine": 25,
+   "dossiers": 1568
+  },
+  "973": {
+   "familles_en_ligne": 1,
+   "en_ligne": 8,
+   "depuis_origine": 22,
+   "dossiers": 1205
+  },
+  "974": {
+   "familles_en_ligne": 4,
+   "en_ligne": 13,
+   "depuis_origine": 47,
+   "dossiers": 51177
+  },
+  "976": {
+   "familles_en_ligne": 5,
+   "en_ligne": 13,
+   "depuis_origine": 32,
+   "dossiers": 14586
+  }
+ }
+}
