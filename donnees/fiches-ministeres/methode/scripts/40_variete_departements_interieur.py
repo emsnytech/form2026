@@ -163,6 +163,19 @@ B["médailles"] = {"premiere_nationale": str(min(d(r["datePublication"]) for r i
                   "departements_locale_avant": len({r["dep"] for r in ME if r["niv"] == "locale" and r["dep"] and d(r["datePublication"]) <= min(d(x["datePublication"]) for x in men)}),
                   "locales": sum(r["niv"] == "locale" for r in ME), "dossiers_locaux": nd([r for r in ME if r["niv"] == "locale"])}
 out["B"] = B
+# arbitrage n° 28 : tableau « Pour des réglementations identiques » en avant / après, définition large (mots du titre),
+# la même que la variante du test B. Départements : versions locales, jusqu'à la date nationale pour les procédures devenues
+# nationales ; ouvertes à la veille de la version nationale ; dossiers par département des seules versions locales.
+for k, u in out["uniformes"].items():
+    loc = [r for r in SEL[k] if r["niv"] == "locale" and r["dep"]]
+    pdl = C.defaultdict(list)
+    for r in loc: pdl[r["dep"]].append(r)
+    u["locales"] = {"departements": len(pdl), "dossiers_par_departement": quart([nd(v) for v in pdl.values()]) if pdl else None,
+                    "departements_en_ligne": len({r["dep"] for r in loc if r["state"] == "publiee"})}
+    if k in B:
+        t = B[k]["variante_mots_du_titre"]
+        u["nationale"] = {"date": t["date_nationale"], "departements_locale_jusqu_a_la_date": t["departements_deja_une_locale"],
+                          "departements_locale_ouverte_la_veille": t["departements_locale_ouverte"]}
 # C. services propres
 INTERNE = re.compile(r"[ée]l[eè]ves?|\\bEGPX?\\b|gardiens de la paix|c[ée]r[ée]monie|accus[ée]s? (de )?r[ée]ception|incorporation|cong[ée] bonifi|promotion|scolarit|stagiaires?|\\bAMGN\\b|\\bIFCR\\b|mutation", re.I)
 PROP = {"police, gendarmerie et leurs écoles": "police et gendarmerie", "administration centrale de l'Intérieur": "administration centrale"}
@@ -241,6 +254,36 @@ out["detr"] = {"definition_section3": {"motif": UNI["DETR et DSIL"][0], "famille
                         "versions_locales_au_titre_identique_publiees_apres": sum(1 for r in cD if na(r["title"]).strip().startswith("demande de subvention au titre de la detr et de la dsil") and d(r["datePublication"]) > d(B["DETR et DSIL"]["premiere_version_nationale_toutes"]["date_nationale"]))}}
 BR37 = json.load(open("out/interieur_briques.json"))["dotations_detr_dsil"]
 out["detr"]["definition_section6_script37"] = {"motif": "DETR|DSIL|DSID|DPV|dotation d'équipement|dotation de soutien, toutes familles", "demarches": BR37["demarches"], "dossiers": BR37["dossiers"]}
+# (5) arbitrage n° 28 : procédures devenues nationales (NEPH, label, DETR et DSIL), définition large (mots du titre).
+# Règle : une famille est couverte en ligne si le département y a une démarche en ligne, ou s'il y avait publié, au plus tard à la
+# date nationale, une version locale (préfecture) d'une procédure remplacée par une démarche nationale aujourd'hui en ligne.
+NATL = {}
+for k in ("NEPH", "label des écoles de conduite", "DETR et DSIL"):
+    n_ = d(B[k]["date_nationale"]); nat = [r for r in SEL[k] if r["niv"] == "nationale"]
+    NATL[k] = {"date": n_, "nationale_en_ligne": any(r["state"] == "publiee" for r in nat)}
+SEL_ID = {k: {id(r) for r in SEL[k] if r["niv"] == "locale"} for k in NATL}
+def remplacees(v, veille=False):
+    f = set()
+    for k, x in NATL.items():
+        if not x["nationale_en_ligne"]: continue
+        for r in v:
+            if id(r) in SEL_ID[k] and d(r["datePublication"]) <= x["date"] and (not veille or fin(r) is None or fin(r) > x["date"]): f.add(r["pol"])
+    return f
+avant = {k: {r["pol"] for r in v if r["state"] == "publiee"} for k, v in parP.items()}
+apres_ = {k: avant[k] | remplacees(v) for k, v in parP.items()}
+veille_ = {k: avant[k] | remplacees(v, True) for k, v in parP.items()}
+dist = lambda D: dict(sorted(C.Counter(str(len(x)) for x in D.values()).items()))
+gagne = [k for k in DEPS if len(apres_[k]) > len(avant[k])]
+out["nationales"] = {"regle": "famille en ligne, ou version locale de préfecture publiée au plus tard à la date nationale d'une procédure remplacée par une démarche nationale en ligne",
+    "procedures": {k: {"date_nationale": str(x["date"]), "nationale_en_ligne": x["nationale_en_ligne"]} for k, x in NATL.items()},
+    "departements_gagnant_une_famille": len(gagne),
+    "departements_gagnant_par_famille": dict(C.Counter(f for k in DEPS for f in apres_[k] - avant[k])),
+    "avant": {"repartition": dist(avant), "mediane": S.median(len(x) for x in avant.values())},
+    "apres": {"repartition": dist(apres_), "mediane": S.median(len(x) for x in apres_.values())},
+    "variante_ouvertes_a_la_veille": {"departements_gagnant_une_famille": sum(1 for k in DEPS if len(veille_[k]) > len(avant[k])), "repartition": dist(veille_),
+                                      "mediane": S.median(len(x) for x in veille_.values())},
+    "familles_en_ligne_par_departement": {k: len(apres_[k]) for k in DEPS},
+    "spearman_population_familles_en_ligne": spearman([POP[k] for k in K], [len(apres_[k]) for k in K])}
 # (4) police et gendarmerie : base du script 36 (zone déclarée, depuis le 7 octobre 2022) pour l'incise
 json.dump(out, open("out/interieur_variete.json", "w"), ensure_ascii=False, indent=1, default=str)
 print(json.dumps(out, ensure_ascii=False, indent=1, default=str))

@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # Reconstruit les trois fiches depuis le fichier brut de l'open data, avec le seul code du dépôt, puis les publie dans l'arbre de travail.
-# Usage : donnees/fiches-ministeres/methode/rejouer.sh <brut.json>   (voir REJOUER.md)
+# Usage : donnees/fiches-ministeres/methode/rejouer.sh <brut.json> <brut du 1er novembre 2025>   (voir REJOUER.md)
 # Les relevés de pages vivantes (12, 15, 17, 22) ne sont pas relancés : leur dernier état daté publié sert d'entrée.
 set -euo pipefail
 BRUT="$(cd "$(dirname "${1:?chemin du fichier brut demarches.json}")" && pwd)/$(basename "$1")"
+PRECEDENT="$(cd "$(dirname "${2:?chemin du fichier brut du 1er novembre 2025 (20251101075502-demarches.json)}")" && pwd)/$(basename "$2")"
 cd "$(dirname "$0")"
 mkdir -p out data
 cp ../../gains/demarches_gains_v8.csv data/
@@ -29,12 +30,13 @@ python3 scripts/13_scan_rdv_cdad.py "$BRUT" out/scan_rdv_cdad.jsonl > /dev/null
 python3 fiche/build_fiche.py out education fiche/gabarit_fiche.html fiche/fiche-education.html > /dev/null
 python3 fiche/build_justice.py > /dev/null
 
-# Fiche n° 3 : Intérieur (scripts 30 à 44 ; sources versées dans sources/ : INSEE, ProConnect). Le script 39 écrit la maquette, que build_interieur.py met en page.
+# Fiche n° 3 : Intérieur (scripts 30 à 46 ; sources versées dans sources/ : INSEE, ProConnect). Le script 39 écrit la maquette, que build_interieur.py met en page.
 export FORM2026_RAW="$BRUT"
+export FORM2026_RAW_PRECEDENT="$PRECEDENT"
 python3 scripts/02_fiche_ministere.py scripts/config_interieur.json out/interieur.json > /dev/null
 for s in 30_classement 31_perimetre_familles 32_local_national 33_medailles_tests 34_etrangers_fonctions 35_verification_embauche \
          36_qui_instruit 37_briques_instruction 38_chiffres_maquette 40_variete_departements 41_chronologies 42_frais_evites \
-         43_proconnect 44_carte 39_maquette; do
+         43_proconnect 44_carte 45_versions_residuelles 46_paiement_subventions 39_maquette; do
   python3 "scripts/${s}_interieur.py" > /dev/null
 done
 python3 fiche/build_interieur.py > /dev/null

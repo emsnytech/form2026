@@ -4,10 +4,10 @@
 
 ## Reconstruire
 
-Il faut Python 3 avec `ijson`, et le fichier brut du jeu « [Descriptif des démarches publiées](https://www.data.gouv.fr/datasets/descriptif-des-demarches-publiees-sur-demarche-numerique-gouv-fr) » de data.gouv.fr (extraction du 21 octobre 2026, environ 730 Mo).
+Il faut Python 3 avec `ijson`, et le fichier brut du jeu « [Descriptif des démarches publiées](https://www.data.gouv.fr/datasets/descriptif-des-demarches-publiees-sur-demarche-numerique-gouv-fr) » de data.gouv.fr (extraction du 21 octobre 2026, environ 730 Mo). La fiche Intérieur relit aussi l'extraction du 1er novembre 2025 du même jeu (environ 390 Mo), pour les dossiers récents des versions locales restées en ligne (script 45).
 
 ```
-donnees/fiches-ministeres/methode/rejouer.sh <chemin du brut>
+donnees/fiches-ministeres/methode/rejouer.sh <chemin du brut> <chemin du brut du 1er novembre 2025>
 git diff
 ```
 
@@ -17,7 +17,7 @@ Pour republier sans reconstruire : `python3 integration/integrer_fiches.py`. C'e
 
 ## Fiche n° 3 : Intérieur
 
-`rejouer.sh` la reconstruit avec le même fichier brut : `02_fiche_ministere.py` sur `scripts/config_interieur.json`, puis les scripts 30 à 44 (familles dans `scripts/familles_interieur.json`, codes et noms des départements dans `scripts/departements.json`), le script 39 en dernier, qui écrit la maquette `out/maquette_interieur.md`. `fiche/build_interieur.py` la met en page sans ajouter de chiffre. Les scripts 35 et 41 relisent le fichier brut, dont `rejouer.sh` passe le chemin par la variable `FORM2026_RAW`.
+`rejouer.sh` la reconstruit avec le même fichier brut : `02_fiche_ministere.py` sur `scripts/config_interieur.json`, puis les scripts 30 à 46 (familles dans `scripts/familles_interieur.json`, codes et noms des départements dans `scripts/departements.json`), le script 39 en dernier, qui écrit la maquette `out/maquette_interieur.md`. `fiche/build_interieur.py` la met en page sans ajouter de chiffre. Les scripts 35, 41 et 46 relisent le fichier brut, dont `rejouer.sh` passe le chemin par la variable `FORM2026_RAW`. Le script 45 lit l'extraction du 1er novembre 2025, passée par `FORM2026_RAW_PRECEDENT`.
 
 Deux entrées ne viennent pas du descriptif ouvert ; elles sont versées dans `sources/` avec leur note :
 
