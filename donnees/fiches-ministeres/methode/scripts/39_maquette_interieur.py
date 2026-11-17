@@ -127,19 +127,29 @@ w(f"**Contrôle de taille.** Rapportées à la population (INSEE, populations de
 lg, et = AP["typologie"]["larges_6_7_familles"], AP["typologie"]["etroits_3_familles_ou_moins"]
 w(f"**Deux profils** (depuis l'origine, aucun département nommé). {n(lg[0])} départements couvrent six ou sept familles, avec {n(lg[2])} démarches en moyenne ; {n(et[0])} en couvrent trois ou moins, "
   f"avec {n(et[2])} démarches en moyenne, surtout des dotations.\n")
-w("**Pour des réglementations identiques.**\n")
-w(row("Réglementation (mots du titre)", "Départements ayant eu une démarche locale", "… ouvertes à la veille de la version nationale", "Aujourd'hui", "Dossiers par département, versions locales (quartiles)"))
-w(row("---", "---:", "---:", "---", "---"))
-for k, u in UNI.items():
-    lo, na_ = u["locales"], u.get("nationale"); q_ = lo["dossiers_par_departement"]
-    w(row(cap(k), n(na_["departements_locale_jusqu_a_la_date"] if na_ else lo["departements"]), n(na_["departements_locale_ouverte_la_veille"]) if na_ else "—",
-          f"démarche nationale depuis le {d(na_['date'])}" if na_ else f"{n(lo['departements_en_ligne'])} départements en ligne", f"{n(q_['q1'])} / {n(q_['mediane'])} / {n(q_['q3'])}"))
+NAT_ = {k: u for k, u in UNI.items() if u.get("nationale")}; LOC_ = {k: u for k, u in UNI.items() if not u.get("nationale")}
+NOMBRE = ["zéro", "une", "deux", "trois", "quatre", "cinq"]
+qq_ = lambda q_: f"{n(q_['q1'])} / {n(q_['mediane'])} / {n(q_['q3'])}"
+w(f"**Pour des réglementations identiques : {NOMBRE[len(NAT_)]} procédures devenues nationales, {NOMBRE[len(LOC_)]} restées départementales.**\n")
+w(f"*Devenues nationales : la version départementale a été remplacée par une démarche nationale.*\n")
+w(row("Procédure (mots du titre)", "Version nationale depuis le", "Départements ayant eu une version locale avant cette date", "… dont une ouverte la veille", "Dossiers par département, versions locales (quartiles)"))
+w(row("---", "---", "---:", "---:", "---"))
+for k, u in NAT_.items():
+    na_ = u["nationale"]
+    w(row(cap(k), d(na_["date"]), n(na_["departements_locale_jusqu_a_la_date"]), n(na_["departements_locale_ouverte_la_veille"]), qq_(u["locales"]["dossiers_par_departement"])))
+w("")
+w(f"*Restées départementales : chaque préfecture publie sa propre démarche.*\n")
+w(row("Procédure (mots du titre)", "Départements ayant publié une démarche", "… dont en ligne aujourd'hui", "Dossiers par département (quartiles)"))
+w(row("---", "---:", "---:", "---"))
+for k, u in LOC_.items():
+    lo = u["locales"]
+    w(row(cap(k), n(lo["departements"]), n(lo["departements_en_ligne"]), qq_(lo["dossiers_par_departement"])))
 w("")
 w("Pour le NEPH, le label des écoles de conduite et la DETR et la DSIL, les versions départementales ont été remplacées par une démarche nationale : "
   "leur faible présence en ligne aujourd'hui traduit ce remplacement, pas un recul de l'usage. Pour ces trois procédures, les départements sont comptés jusqu'à la date "
   "de la version nationale. Les mots du titre donnent la définition large, celle qui figure entre parenthèses dans le test de la section « Formulaires nationaux », "
   "dont la définition principale est la famille de titres. "
-  f"Pour la DETR et la DSIL, les démarches sont annuelles : la colonne « ouvertes à la veille » dépend du calendrier des campagnes, et {n(CD['temps2']['departements'])} départements "
+  f"Pour la DETR et la DSIL, les démarches sont annuelles : la colonne « dont une ouverte la veille » dépend du calendrier des campagnes, et {n(CD['temps2']['departements'])} départements "
   f"avaient le formulaire commun pour les campagnes 2024 et 2025. "
   f"Des versions locales restent en ligne malgré la démarche nationale (dossiers déposés depuis le {d(RSD)}) : pour le NEPH, {n(rN['versions'])} versions dans {n(rN['departements'])} départements "
   f"({n(rN['dossiers_recents'])} dossiers) ; pour le label, {n(rL['versions'])} versions dans {n(rL['departements'])} départements, dont {n(rL['publiees_au_plus_tard_a_la_date_nationale'][0])} publiées avant la version nationale "
