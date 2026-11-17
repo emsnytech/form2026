@@ -9,12 +9,12 @@ statiques : le navigateur ne charge aucun fichier (même principe que scripts/sy
   les plus récentes, trois au plus ; lien vers « Toutes les publications ».
 - Par où commencer : « commencer », profil par profil ; chaque ressource doit déjà porter ce profil.
 - Les outils et les données : les ressources par rubrique, sauf celles qui ont un « parent ».
-Après la date de fin d'un épinglage, --check signale l'écart : relancer le script.
+Après la date de fin d'un épinglage, --check avertit sans échouer (annotation GitHub) : relancer le script.
 
     python3 scripts/sync_accueil.py           # écrit index.html et publications.html
     python3 scripts/sync_accueil.py --check    # n'écrit rien, sort en erreur (1) si une page serait modifiée
 """
-import datetime as dt, html, json, sys
+import datetime as dt, html, json, os, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -28,7 +28,7 @@ CH = json.load(open(ROOT / "donnees/chiffres-accueil.json", encoding="utf-8"))
 RUB, ORDRE, PROF, TYPES = R["rubriques"], R["ordre_rubriques"], R["profils"], R["types"]
 RES = R["ressources"]; PAR_URL = {x["url"]: x for x in RES}
 SITE = "https://emsnytech.github.io/form2026/"
-AUJOURDHUI = dt.date.today().isoformat()
+AUJOURDHUI = os.environ.get("SYNC_ACCUEIL_DATE") or dt.date.today().isoformat()   # date imposée : contrôle d'un épinglage expiré
 e = html.escape
 MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
 def d(s): j = int(s[8:10]); return f"{j}{'er' if j == 1 else ''} {MOIS[int(s[5:7]) - 1]} {s[:4]}"
@@ -257,8 +257,16 @@ PAGES = [(ROOT / "index.html", page(f"FORM 2026 · {TITRE}", f"{SOUS}. Publicati
          (ROOT / "publications.html", page("FORM 2026 · Toutes les publications", "Les publications de FORM 2026, de la plus récente à la plus ancienne.", SITE + "publications.html", "situer", corps2))]
 ecarts = [p for p, t in PAGES if not p.exists() or p.read_text(encoding="utf-8") != t]
 if CHECK:
-    if ecarts: sys.exit("Accueil à reconstruire (python3 scripts/sync_accueil.py) : " + ", ".join(p.name for p in ecarts))
-    print("Accueil : à jour."); sys.exit(0)
+    if not ecarts: print("Accueil : à jour."); sys.exit(0)
+    # Un épinglage arrivé à échéance n'est pas une erreur : si les pages correspondent à l'état d'avant l'échéance,
+    # on avertit sans faire échouer la CI (les autres PR ne sont pas bloquées).
+    expires = sorted(x["a_la_une"] for x in RES if x.get("a_la_une") and x["a_la_une"] < AUJOURDHUI)
+    if expires and not os.environ.get("SYNC_ACCUEIL_DATE"):
+        r = subprocess.run([sys.executable, __file__, "--check"], env={**os.environ, "SYNC_ACCUEIL_DATE": expires[-1]}, capture_output=True, text=True)
+        if r.returncode == 0:
+            print(f"::warning title=Épinglage expiré::un épinglage « À la une » a pris fin le {expires[-1]} : relancer python3 scripts/sync_accueil.py")
+            print("Accueil : à jour, épinglage expiré (avertissement)."); sys.exit(0)
+    sys.exit("Accueil à reconstruire (python3 scripts/sync_accueil.py) : " + ", ".join(p.name for p in ecarts))
 for p, t in PAGES:
     if p in ecarts: p.write_text(t, encoding="utf-8")
 print("Accueil : " + (", ".join(p.name for p in ecarts) + " écrit(s)" if ecarts else "déjà à jour") + f" ; à la une : {', '.join(x['url'] for x in UNE)}")
