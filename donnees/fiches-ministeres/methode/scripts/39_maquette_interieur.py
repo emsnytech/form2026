@@ -1,6 +1,6 @@
 """Fiche Intérieur, étape 3 : maquette (texte et tableaux, avant mise en page). Fil directeur : arbitrage n° 23 ;
 relecture : arbitrage n° 24. Aucun chiffre n'est écrit à la main : tous viennent de out/interieur*.json (scripts 02, 31 à 38,
-40 à 43, 45 ; chronologies : arbitrages n° 25 et 26 ; frais évités, « Côté agents » : arbitrage n° 27). La phrase centrale du cadre d'entrée vient de scripts/sync_cadre.py du dépôt (CENTRE). Aucun département nommé.
+40 à 43, 45, 46 ; chronologies : arbitrages n° 25 et 26 ; frais évités, « Côté agents » : arbitrage n° 27). La phrase centrale du cadre d'entrée vient de scripts/sync_cadre.py du dépôt (CENTRE). Aucun département nommé.
 Sortie : out/maquette_interieur.md. Le script s'arrête si la sortie contient une adresse électronique, un numéro de téléphone
 ou un nom de département."""
 import json, re, ast, unicodedata
@@ -144,7 +144,7 @@ w("Pour le NEPH, le label des écoles de conduite et la DETR et la DSIL, les ver
   f"Des versions locales restent en ligne malgré la démarche nationale (dossiers déposés depuis le {d(RSD)}) : pour le NEPH, {n(rN['versions'])} versions dans {n(rN['departements'])} départements "
   f"({n(rN['dossiers_recents'])} dossiers) ; pour le label, {n(rL['versions'])} versions dans {n(rL['departements'])} départements, dont {n(rL['publiees_au_plus_tard_a_la_date_nationale'][0])} publiées avant la version nationale "
   f"({n(rL['dossiers_recents'])} dossiers) ; pour la DETR et la DSIL, {n(rD['versions'])} versions dans {n(rD['departements'])} départements, dont {n(rD['paiement_ou_versement'][0])} demandes de paiement "
-  f"ou de versement de subvention ({n(rD['dossiers_recents'])} dossiers, dont {n(rD['paiement_ou_versement'][2])} pour le paiement ou le versement).\n")
+  f"ou de versement de subvention ({n(rD['dossiers_recents'])} dossiers, dont {n(rD['paiement_ou_versement'][2])} pour le paiement ou le versement) ; cette phase de paiement reste locale (section « Formulaires nationaux »).\n")
 mf = UNI["police administrative : déclaration de manifestation sur la voie publique"]
 w(f"La déclaration de manifestation sur la voie publique figure sur la plateforme dans {n(mf['departements'])} départements ; SVE propose une rubrique nationale « Rassemblement et manifestations » "
   f"({CONSULT}). Une procédure peu visible sur la plateforme peut ainsi passer par l'autre canal.\n")
@@ -214,6 +214,16 @@ w(f"Les versions locales portent souvent un millésime ({n(DE['famille_de_titres
   f"Le signal retenu est une version locale créée après la version nationale. La date de publication du fichier est celle de la dernière publication : {n(rp['versions'])} des {n(dap['versions'])} versions « publiées après » "
   f"sont des démarches plus anciennes, republiées puis closes, et une est un essai. Sur la date de création, le NEPH compterait {n(SD['NEPH']['creation'][1])} départements au lieu de {n(ne['departements_deja_une_locale'])}, "
   f"sa version nationale ayant été créée en {SD['NEPH']['creation'][0][:4]} ; mais {n(SD['NEPH']['fermetures_locales_dans_les_6_mois_apres_publication'])} des {n(SD['NEPH']['fermetures_locales'])} fermetures locales suivent de moins de six mois sa publication de {d(ne['date_nationale'])[2:].strip()}, que la fiche retient.\n")
+PS = J("interieur_paiement_subventions"); pe = PS["en_ligne"]; pf = pe["departements_par_fonds"]; assert not PS["nationales"]
+pp = PS["premiere_publication_par_departement"]
+w(f"**Après la décision, le paiement reste local.** Une fois la subvention accordée, la collectivité en demande le versement (avance, acompte ou solde) sur justificatifs. "
+  f"Aucune démarche nationale de paiement ne figure dans le descriptif ouvert. {n(pe['departements'])} départements sur {ND} ont une démarche locale de paiement en ligne "
+  f"({n(pe['versions'])} versions, {n(pe['dossiers'])} dossiers) ; {n(PS['locales']['departements_depuis_l_origine'])} en ont publié une depuis {min(pp)}. "
+  f"Les fonds couverts varient d'un département à l'autre : fonds vert dans {n(pf['fonds vert'])} départements, DETR dans {n(pf['DETR'])}, DSIL dans {n(pf['DSIL'])}, DSID dans {n(pf['DSID'])}, "
+  f"FNADT dans {n(pf['FNADT'])}, DPV dans {n(pf['DPV'])}, DSEC dans {n(pf['DSEC'])} (titre et listes de choix du formulaire). "
+  f"{n(pe['departements_un_formulaire_pour_plusieurs_fonds'])} départements regroupent plusieurs fonds dans un même formulaire, et {n(pe['departements_avec_lien_vers_le_dossier_de_demande'])} "
+  "y demandent le lien vers le dossier de demande déposé sur la plateforme. Un formulaire national de paiement supposerait de choisir les fonds couverts, que les départements n'ont pas tous inclus. "
+  "Une préfecture sans démarche de paiement peut recevoir ces demandes par un autre canal.\n")
 mt_, mr_, ma_ = CM["travail"], CM["régionale, départementale et communale"], CM["agricole"]
 w(f"**Lecture.** Deux chemins mènent au national. Quelques départements, puis le formulaire national : le NEPH ({n(ne['departements_deja_une_locale'])} départements avaient une version locale), "
   f"la médaille d'honneur régionale, départementale et communale ({n(mr_['locales_creees_avant']['departements'])} département) et la médaille d'honneur agricole ({n(ma_['locales_creees_avant']['departements'])} département, plus {n(ma_['locales_creees_avant']['sans_departement'])} versions sans service identifié ; "
