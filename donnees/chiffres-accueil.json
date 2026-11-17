@@ -1,0 +1,39 @@
+{
+ "_commentaire": "Produit par scripts/chiffres_accueil.py ; lu par scripts/sync_accueil.py. Ne pas modifier à la main.",
+ "descriptif": {
+  "date": "2026-10-21",
+  "source": "Descriptif des démarches publiées (data.gouv.fr), extraction lue par les fiches ministères",
+  "demarches": 44350,
+  "dossiers": 19888006,
+  "par_etat": {
+   "publiee": {
+    "demarches": 13529,
+    "dossiers": 11780776
+   },
+   "close": {
+    "demarches": 30126,
+    "dossiers": 7009835
+   },
+   "depubliee": {
+    "demarches": 695,
+    "dossiers": 1097395
+   }
+  }
+ },
+ "gains": {
+  "date": "2026-09-28",
+  "source": "donnees/gains/demarches_gains_v8.csv, paramètres version 8",
+  "demarches": 34185,
+  "dossiers": 18220327,
+  "bas": 160526198,
+  "haut": 308824279
+ },
+ "charge": {
+  "source": "note/moins-de-charge-pour-l-usager-moins-de-couts-pour-l-etat.pdf, section 5 « Où se loge la charge »",
+  "donnees": "hackathon de la plateforme, 2024",
+  "deposes_le_jour_meme_pct": 81,
+  "differes_1_2_pieces_pct": 8,
+  "differes_5_pieces_pct": 29,
+  "part_des_differes_5_pieces": "les trois quarts"
+ }
+}

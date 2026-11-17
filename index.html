@@ -3,276 +3,172 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>FORM 2026 — Ne plus demander ce que l'État sait déjà</title>
-<meta name="description" content="Estimer les gains de la dématérialisation, apprécier un projet, cadrer une nouvelle démarche, comparer les outils, explorer les données demandées.">
+<title>FORM 2026 · Tout ce que l&#x27;on sait déjà des démarches administratives</title>
+<meta name="description" content="Ne plus demander ce que l&#x27;État sait déjà. Publications, outils et données sur les démarches administratives, à partir des seules sources publiques.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="FORM 2026">
-<meta property="og:title" content="FORM 2026 : ne plus demander ce que l'État sait déjà">
-<meta property="og:description" content="Estimer les gains de la dématérialisation, cadrer une nouvelle démarche, comparer les outils, explorer les données demandées.">
+<meta property="og:title" content="FORM 2026 · Tout ce que l&#x27;on sait déjà des démarches administratives">
+<meta property="og:description" content="Ne plus demander ce que l&#x27;État sait déjà. Publications, outils et données sur les démarches administratives, à partir des seules sources publiques.">
 <meta property="og:url" content="https://emsnytech.github.io/form2026/">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ink:#1e2022; --muted:#5c6066; --paper:#fbf9f5; --surface:#ffffff; --line:#e2dfd7;
-  --admin:#1d4ed8; --admin-soft:#eff6ff; --usager:#15803d; --usager-soft:#f0fdf4; --accent:#b45309; --warn:#b45309; --warn-soft:#fffbeb; --bad:#b91c1c; --min:#0e7490; --min-soft:#ecfeff;
-  box-sizing:border-box;
-  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
-    --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171; --min:#22d3ee; --min-soft:#164e63;
-  }
-}
-:root[data-theme="dark"]{
-  --ink:#f3f4f6; --muted:#9ca3af; --paper:#18181b; --surface:#27272a; --line:#3f3f46;
-  --admin:#60a5fa; --admin-soft:#1e3a8a; --usager:#4ade80; --usager-soft:#14532d; --accent:#f59e0b; --warn:#f59e0b; --warn-soft:#451a03; --bad:#f87171; --min:#22d3ee; --min-soft:#164e63;
-}
-*,*::before,*::after{box-sizing:inherit}
+:root{--ink:#1e2022;--muted:#5c6066;--paper:#fbf9f5;--surface:#ffffff;--line:#e2dfd7;
+ --admin:#1d4ed8;--admin-soft:#eff6ff;--usager:#15803d;--usager-soft:#f0fdf4;--accent:#b45309;--warn-soft:#fffbeb;--bad:#b91c1c;--min:#0e7490;--min-soft:#ecfeff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#f3f4f6;--muted:#a1a1aa;--paper:#18181b;--surface:#27272a;--line:#3f3f46;
+ --admin:#60a5fa;--admin-soft:#1e3a8a;--usager:#4ade80;--usager-soft:#14532d;--accent:#f59e0b;--warn-soft:#451a03;--bad:#f87171;--min:#22d3ee;--min-soft:#164e63}}
+:root[data-theme="dark"]{--ink:#f3f4f6;--muted:#a1a1aa;--paper:#18181b;--surface:#27272a;--line:#3f3f46;
+ --admin:#60a5fa;--admin-soft:#1e3a8a;--usager:#4ade80;--usager-soft:#14532d;--accent:#f59e0b;--warn-soft:#451a03;--bad:#f87171;--min:#22d3ee;--min-soft:#164e63}
+*,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
-a{color:var(--admin)}
-.wrap{max-width:1120px;margin:0 auto;padding:2.4rem 1.25rem 3rem}
+a{color:var(--admin)} a:focus-visible{outline:3px solid var(--admin);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:2rem 16px 3rem}
+@media (min-width:700px){.wrap{padding:2.4rem 1.25rem 3rem}}
 .topnav{margin:0 0 1.2rem;font-size:.95rem}
 .brand{font-weight:700;letter-spacing:.02em;color:var(--muted);font-size:.95rem;margin:0}
-h1,h2{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:800;line-height:1.15;margin:0}
-h1{font-size:clamp(2rem,4.6vw,3.1rem);max-width:22ch;margin-top:.5rem}
-h2{font-size:1.4rem;margin-bottom:1rem}
-.lede{font-size:1.12rem;color:var(--muted);max-width:62ch;margin:1rem 0 0}
-
-.figures{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:2rem}
-@media (max-width:760px){.figures{grid-template-columns:repeat(2,1fr)}}
-.fig{background:var(--surface);padding:1rem 1.1rem}
-.fig b{display:block;font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1.65rem;line-height:1.1}
+h1,h2,h3{font-weight:800;line-height:1.15;margin:0}
+h1{font-size:clamp(1.9rem,4.4vw,3rem);max-width:24ch;margin-top:.4rem}
+.sub{font-size:clamp(1.15rem,2.2vw,1.45rem);font-weight:700;color:var(--min);margin:.6rem 0 0}
+.lede{font-size:1.08rem;color:var(--muted);max-width:64ch;margin:.8rem 0 0}
+h2{font-size:1.4rem;margin-bottom:.9rem}
+section{margin-top:2.4rem}
+.entrees{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.3rem 0 0;padding:0;list-style:none}
+.entrees a{display:inline-block;padding:.45rem .9rem;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-weight:700;text-decoration:none}
+.entrees a:hover{border-color:var(--admin)}
+.une{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+@media (max-width:900px){.une{grid-template-columns:1fr}}
+.pub{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--min);border-radius:12px;padding:1.1rem 1.2rem;text-decoration:none;color:var(--ink)}
+.pub:hover{box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.pub .q{font-size:.82rem;font-weight:700;color:var(--min);text-transform:uppercase;letter-spacing:.05em}
+.pub h3{font-size:1.22rem;margin:.35rem 0 .4rem}
+.pub p{margin:0;color:var(--muted);font-size:.96rem;flex:1}
+.pub time{font-size:.85rem;color:var(--muted);margin-top:.7rem}
+.tout{margin:.8rem 0 0;font-weight:700}
+.figures{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+@media (max-width:760px){.figures{grid-template-columns:1fr}}
+.figures.deux{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:.8rem}
+@media (max-width:760px){.figures.deux{grid-template-columns:1fr}}
+.fig{background:var(--surface);padding:.9rem 1.1rem}
+.fig b{display:block;font-size:1.55rem;line-height:1.1}
 .fig span{font-size:.9rem;color:var(--muted)}
 .fig.a b{color:var(--admin)} .fig.u b{color:var(--usager)}
-
-section{margin-top:2.8rem}
-.doors{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-@media (max-width:900px){.doors{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:620px){.doors{grid-template-columns:1fr}}
-.une{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem 1.5rem;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--min);border-radius:12px;padding:1.1rem 1.3rem;margin:0 0 1.6rem;text-decoration:none;color:var(--ink);transition:transform .15s ease,box-shadow .15s ease}
-.une:hover,.une:focus-visible{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08);outline:none}
-.une .q{font-size:.85rem;font-weight:700;color:var(--min);text-transform:uppercase;letter-spacing:.05em}
-.une h3{font-size:1.3rem;margin:.3rem 0 .35rem;line-height:1.2}
-.une p{margin:0;color:var(--muted);font-size:.97rem}
-.une .chiffre{font:700 2rem/1 "IBM Plex Mono",ui-monospace,monospace;color:var(--min);text-align:right;white-space:nowrap}
-.une .chiffre small{display:block;font:600 .8rem/1.3 "Source Sans 3",system-ui,sans-serif;color:var(--muted);margin-top:.3rem}
-@media (max-width:620px){.une{grid-template-columns:1fr}.une .chiffre{text-align:left}}
-.door{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.3rem 1.3rem 1.2rem;text-decoration:none;color:var(--ink);border-top:6px solid var(--c,var(--admin));transition:transform .15s ease,box-shadow .15s ease}
-.door:hover,.door:focus-visible{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08);outline:none}
-.door .q{font-size:.85rem;font-weight:700;color:var(--c,var(--admin));text-transform:uppercase;letter-spacing:.05em}
-.door h3{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1.35rem;margin:.35rem 0 .5rem;line-height:1.2}
-.door p{margin:0;color:var(--muted);font-size:.97rem;flex:1}
-.door .go{margin-top:1rem;font-weight:700;color:var(--c,var(--admin))}
-.door .meta{margin-top:.35rem;font-size:.82rem;color:var(--muted)}
-
-.map{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
-@media (max-width:860px){.map{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:520px){.map{grid-template-columns:1fr}}
-.grp{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem}
-.grp h3{font-size:1rem;margin:0 0 .2rem}
-.grp p{margin:0 0 .6rem;font-size:.88rem;color:var(--muted)}
-.grp ul{list-style:none;margin:0;padding:0}
-.grp li{margin:.3rem 0}
-.grp a{text-decoration:none;font-weight:600}
-.grp a:hover{text-decoration:underline}
-.grp small{display:block;color:var(--muted);font-weight:400}
-
-.traj{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.note{font-size:.88rem;color:var(--muted);margin:.6rem 0 0}
+.profils{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.9rem}
+@media (max-width:1000px){.profils{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.profils{grid-template-columns:1fr}}
+.prof{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1rem 1.05rem}
+.prof h3{font-size:1.02rem;margin:0 0 .5rem}
+.prof ul,.rub ul{list-style:none;margin:0;padding:0}
+.prof li{margin:.45rem 0}
+.prof a,.rub a{font-weight:600;text-decoration:none}
+.prof a:hover,.rub a:hover{text-decoration:underline}
+.prof small,.rub small{display:block;color:var(--muted);font-size:.85rem;line-height:1.35}
+.catalogue{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+@media (max-width:980px){.catalogue{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.catalogue{grid-template-columns:1fr}}
+.rub{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:10px;padding:1rem 1.05rem;scroll-margin-top:1rem}
+.rub h3{font-size:1.15rem;color:var(--c)}
+.rub .st{margin:.1rem 0 .6rem;font-size:.88rem;color:var(--muted)}
+.rub li{margin:.5rem 0}
+.type{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 4px;margin-left:4px;vertical-align:1px}
+.traj{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
 @media (max-width:700px){.traj{grid-template-columns:1fr}}
-.step{padding:1.1rem 1.2rem;border-right:1px solid var(--line)}
-.step:last-child{border-right:0}
+.step{padding:.8rem 1rem;border-right:1px solid var(--line)} .step:last-child{border-right:0}
 @media (max-width:700px){.step{border-right:0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}}
-.step .k{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
-.step h3{font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1.2rem;margin:.2rem 0 .3rem}
-.step p{margin:0;font-size:.93rem;color:var(--muted)}
-.step.now{background:var(--paper)}
-
+.step .k{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.step b{display:block;font-size:1.05rem}
+.step p{margin:.15rem 0 0;font-size:.9rem;color:var(--muted)}
 .about{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:1.5rem}
 @media (max-width:760px){.about{grid-template-columns:1fr}}
 .about p{margin:.5rem 0}
-.note{font-size:.9rem;color:var(--muted)}
-.new{font-style:normal;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--min-soft);color:var(--min);border:1px solid var(--min);border-radius:4px;padding:1px 5px;margin-left:4px;vertical-align:1px}
-footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted)}
+.liste{list-style:none;margin:0;padding:0}
+.liste li{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--min);border-radius:10px;padding:.9rem 1.1rem;margin:0 0 .8rem}
+.liste time{font-size:.85rem;color:var(--muted)} .liste h2{font-size:1.15rem;margin:.2rem 0 .3rem} .liste p{margin:0;color:var(--muted)}
+footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted)}
 </style>
 </head>
 <body>
+<!-- Page produite par scripts/sync_accueil.py depuis ressources.json : ne pas modifier à la main. -->
 <div class="wrap">
   <p class="topnav" data-rubrique=""><!-- nav:début --><a href="index.html">FORM 2026</a> · <a href="index.html#mesurer">Mesurer</a> · <a href="index.html#concevoir">Concevoir</a> · <a href="index.html#situer">Situer</a> · <a href="index.html#donnees">Données</a><!-- nav:fin --></p>
   <header>
-    <p class="brand">FORM 2026 · Cartographie des démarches administratives</p>
-    <h1>Ne plus demander ce que l'État sait déjà</h1>
+    <p class="brand">FORM 2026</p>
+    <h1>Tout ce que l&#x27;on sait déjà des démarches administratives</h1>
+    <p class="sub">Ne plus demander ce que l&#x27;État sait déjà</p>
     <p class="lede">FORM recense ce que les démarches en ligne demandent aux usagers, identifie ce que l'administration détient déjà, et mesure ce que la simplification fait gagner, aux usagers comme aux administrations.</p>
+    <nav aria-label="Sur cette page"><ul class="entrees">
+      <li><a href="#une">À la une</a></li><li><a href="#commencer">Par où commencer</a></li><li><a href="#outils">Les outils et les données</a></li>
+    </ul></nav>
   </header>
 
-  <div class="figures" aria-label="Chiffres clés">
-    <div class="fig"><b>18,2 M</b><span>dossiers déposés depuis 2018 sur l'instance nationale, pour les 34 185 démarches analysées (au 28/09/2026)</span></div>
-    <div class="fig a"><b>161 à 309 M€</b><span>de gains cumulés, administration et usagers</span></div>
-    <div class="fig u"><b>4 sur 5</b><span>dossiers déposés le jour même : la saisie n'est plus le problème</span></div>
-    <div class="fig"><b>3 sur 4</b><span>dépôts tardifs viennent des démarches à 5 pièces justificatives ou plus</span></div>
-  </div>
-  <p class="note" style="margin-top:.6rem"><a href="compteur-roi.html">Voir ces chiffres mis à jour en continu, minute après minute →</a></p>
+  <section id="une" aria-labelledby="h-une">
+    <h2 id="h-une">À la une</h2>
+    <div class="une">
+      <a class="pub" href="collectivites/">
+        <span class="q">Situer</span>
+        <h3>Pour et par les collectivités</h3>
+        <p>Dotations, Fonds vert, démarches de l&#x27;État et des collectivités.</p>
+        <time datetime="2026-10-23">Publié le 23 octobre 2026</time>
+      </a>
+      <a class="pub" href="fiches-ministeres/interieur.html">
+        <span class="q">Situer · Fiches ministères</span>
+        <h3>Fiche Intérieur</h3>
+        <p>L&#x27;appropriation par les préfectures et la variété des usages.</p>
+        <time datetime="2026-11-16">Publié le 16 novembre 2026</time>
+      </a>
+      <a class="pub" href="indicateurs-services-en-ligne.html">
+        <span class="q">Situer</span>
+        <h3>Combien de personnes utilisent nos services publics en ligne ?</h3>
+        <p>Une grille commune d&#x27;indicateurs d&#x27;activité, confrontée à 40 services : ce qui est publié, ce qui manque.</p>
+        <time datetime="2026-11-09">Publié le 9 novembre 2026</time>
+      </a>
+    </div>
+    <p class="tout"><a href="publications.html">Toutes les publications (9) →</a></p>
+  </section>
 
-  <style>
-.agent-band{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.8rem 1.5rem;margin:1.4rem 0;padding:1rem 1.2rem;border:1px solid var(--line);border-left:5px solid var(--admin);border-radius:10px;background:var(--surface)}
-.agent-band p{margin:0;max-width:62ch}
-.agent-band b{display:block;font-size:1.1rem}
-.agent-band a.btn-agent{font-weight:700;text-decoration:none;padding:.55rem 1rem;border-radius:8px;background:var(--admin);color:#fff;white-space:nowrap}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .agent-band a.btn-agent{color:#18181b}}
-</style>
-<div class="agent-band">
-  <p><b>Vous êtes agent public et vous connaissez votre démarche ?</b>
-  Retrouvez-la, comprenez d'où viennent les gains annoncés, testez vos propres hypothèses et repartez avec trois actions concrètes.</p>
-  <a class="btn-agent" href="agent-public.html">Suivre le parcours en cinq étapes →</a>
-</div>
+  <section aria-labelledby="h-chiffres">
+    <h2 id="h-chiffres">En chiffres</h2>
+    <div class="figures">
+      <div class="fig"><b>44 350 démarches</b><span>dans le descriptif ouvert du 21 octobre 2026 : 13 529 publiées, 30 126 closes, 695 dépubliées</span></div>
+      <div class="fig"><b>19,9 M dossiers</b><span>déposés pour ces démarches, dont 11,8 M pour les démarches publiées</span></div>
+      <div class="fig a"><b>161 à 309 M€</b><span>de gains cumulés, administration et usagers, sur 34 185 démarches et 18,2 M dossiers (activité au 28 septembre 2026, paramètres version 8)</span></div>
+    </div>
+    <div class="figures deux">
+      <div class="fig u"><b>81 %</b><span>des dossiers sont déposés le jour même où ils sont commencés : la saisie n'est plus le problème</span></div>
+      <div class="fig"><b>Environ les trois quarts</b><span>des dépôts différés viennent des démarches à cinq pièces justificatives ou plus (29 % de dépôts différés, contre 8 % avec une ou deux pièces)</span></div>
+    </div>
+    <p class="note">Trois sources, nommées et datées : le descriptif ouvert, que lisent aussi les fiches ministères ; le calcul des gains, sur sa propre extraction ; <a href="note/">la note sur les gains</a> (section 5, données du hackathon de la plateforme, 2024). <a href="compteur-roi.html">Les mêmes paramètres de gains, mis à jour en continu : le compteur →</a></p>
+  </section>
 
-  <section aria-labelledby="h-doors">
-    <span id="mesurer"></span><span id="concevoir"></span>
-    <h2 id="h-doors">Que voulez-vous faire ?</h2>
-    <span id="situer"></span>
-    <!-- instances-ds : a la une -->
-    <a class="une" href="instances-ds.html">
-      <div>
-        <span class="q">Situer · <em class="new">Nouveau</em></span>
-        <h3>Une plateforme, plusieurs instances</h3>
-        <p>Les statistiques officielles ne comptent que l'instance de l'État. Le relevé consolidé des instances publiques du logiciel libre : national, Polynésie, ADULLACT, ministères sociaux, Armées, Nouvelle-Calédonie, Hauts-de-France.</p>
-      </div>
-      <div class="chiffre">23,8 M<small>dossiers, 7 instances</small></div>
-    </a>
-    <!-- collectivites : a la une -->
-    <a class="une" href="collectivites/">
-      <div>
-        <span class="q">À la une · Salon des maires 2026 <em class="new">Nouveau</em></span>
-        <h3>Démarche Numérique, pour et par les collectivités</h3>
-        <p>Dotations, Fonds vert, démarches de l'État et des collectivités : l'actualisation du bilan 2024 et un complément au bilan DGCL des dotations 2025, à partir des seules données publiques.</p>
-      </div>
-      <div class="chiffre">13,5 Md€<small>de subventions instruites<br>sur la plateforme depuis 2018</small></div>
-    </a>
-    <div class="doors">
-      <a class="door" href="simulateur-gains-dematerialisation.html" style="--c:var(--usager)">
-        <span class="q">Estimer</span>
-        <h3>Les gains de vos démarches en ligne</h3>
-        <p>Indiquez vos démarches, vos dossiers et vos agents : une fourchette de gains pour votre administration et pour vos usagers, avec toutes les hypothèses visibles.</p>
-        <span class="go">Ouvrir le simulateur →</span>
-        <span class="meta">2 minutes · aucune donnée transmise</span>
-      </a>
-      <!-- matrice-gains-ftap : porte -->
-      <a class="door" href="matrice-gains-ftap.html" style="--c:var(--admin)">
-        <span class="q">Apprécier <em class="new">Nouveau</em></span>
-        <h3>Un projet numérique avant de le financer</h3>
-        <p>Du canal de départ (courrier, courriel, PDF, en ligne) au niveau de traitement visé : ETP, frais évités, gains usagers et annexe FTAP calculés à partir de l'activité réelle, avec le taux de gains factualisés.</p>
-        <span class="go">Ouvrir la matrice →</span>
-        <span class="meta">5 minutes · classeur Excel téléchargeable</span>
-      </a>
-      <!-- fiches-ministeres : porte -->
-      <a class="door" href="fiches-ministeres/" style="--c:var(--min)">
-        <span class="q">Situer <em class="new">Nouveau</em></span>
-        <h3>L'usage de Démarche Numérique, par ministère et par thème</h3>
-        <p>Démarches publiées, dossiers déposés et frais évités depuis 2021, à partir de l'open data de la plateforme et, selon les fiches, d'autres sources datées. Les émetteurs sur une carte et les démarches construites plusieurs fois.</p>
-        <span class="go">Ouvrir les fiches →</span>
-        <span class="meta">Éducation nationale · Justice · Intérieur · Collectivités · autres publications à venir</span>
-      </a>
-      <a class="door" href="cadrage-dematerialisation.html" style="--c:var(--admin)">
-        <span class="q">Cadrer</span>
-        <h3>Une nouvelle démarche avant de la créer</h3>
-        <p>Base juridique, pièces justificatives, champs et sélecteurs : ce qu'il faut supprimer, remplacer par une donnée ou garder, et le pré-dossier d'accès aux API.</p>
-        <span class="go">Ouvrir la grille de cadrage →</span>
-        <span class="meta">10 à 15 minutes · fiche imprimable</span>
-      </a>
-      <a class="door" href="comparer-cadre-fonctionnel.html" style="--c:var(--accent)">
-        <span class="q">Comparer</span>
-        <h3>Le cadre fonctionnel de votre outil</h3>
-        <p>Choisissez votre outil (Google Forms, Microsoft Forms, Grist, LimeSurvey, Nextcloud Forms, digital workplaces…) : la grille se préremplit. Puis saisissez vos coûts pour obtenir le rapport gains / coûts.</p>
-        <span class="go">Comparer un outil</span>
-        <span class="meta">5 minutes · fiche imprimable</span>
-      </a>
-      <a class="door" href="atelier-lego.html" style="--c:var(--bad)">
-        <span class="q">Assembler</span>
-        <h3>Avez-vous vraiment besoin d'un développement spécifique ?</h3>
-        <p>Empilez les couches de service de votre projet sous Démarche Numérique, réglez la part déjà couverte, reliez les systèmes existants : le coût par dossier se calcule en direct.</p>
-        <span class="go">Ouvrir l'atelier →</span>
-        <span class="meta">5 minutes · aucune donnée transmise</span>
-      </a>
-      <a class="door" href="compteur-roi.html" style="--c:var(--usager)">
-        <span class="q">Mesurer</span>
-        <h3>Le compteur des gains, en continu</h3>
-        <p>Gains, coûts et ROI depuis le 1er janvier, minute après minute, sur les mêmes paramètres que le simulateur et la matrice.</p>
-        <span class="go">Ouvrir le compteur →</span>
-        <span class="meta">Mis à jour en continu</span>
-      </a>
-      <a class="door" href="agent-public.html" style="--c:var(--admin)">
-        <span class="q">Concevoir</span>
-        <h3>Le parcours en cinq étapes pour l'agent public</h3>
-        <p>Retrouver sa démarche, comprendre d'où viennent les gains annoncés, tester ses propres hypothèses, repartir avec trois actions concrètes.</p>
-        <span class="go">Suivre le parcours →</span>
-        <span class="meta">5 étapes</span>
-      </a>
+  <section id="commencer" aria-labelledby="h-commencer">
+    <h2 id="h-commencer">Par où commencer</h2>
+    <div class="profils">
+      <div class="prof"><h3>Agent public</h3><ul><li><a href="agent-public.html">Parcours agent public</a><small>Retrouver sa démarche, comprendre ses gains, mesurer, repartir avec trois actions.</small></li><li><a href="simulateur-gains-dematerialisation.html">Simulateur des gains</a><small>Une fourchette de gains pour votre administration et vos usagers, toutes hypothèses visibles.</small></li><li><a href="cadrage-dematerialisation.html">Cadrer une démarche</a><small>Base juridique, pièces, champs : ce qu&#x27;il faut supprimer, remplacer par une donnée ou garder.</small></li></ul></div>
+      <div class="prof"><h3>Financeur, comité</h3><ul><li><a href="matrice-gains-ftap.html">Apprécier un projet (matrice FTAP)</a><small>Du canal de départ au traitement visé : ETP, frais évités, gains usagers, annexe FTAP.</small></li><li><a href="atelier-lego.html">Atelier Lego</a><small>Avez-vous vraiment besoin d&#x27;un développement spécifique ? Le coût par dossier en direct.</small></li><li><a href="note/">La note sur les gains</a><small>Moins de charge pour l&#x27;usager, moins de coûts pour l&#x27;État : ce qu&#x27;apprennent 18 millions de dossiers.</small></li></ul></div>
+      <div class="prof"><h3>Décideur, contrôle</h3><ul><li><a href="fiches-ministeres/">Fiches ministères</a><small>Usage de la plateforme par ministère depuis 2021 : démarches, dossiers, frais évités. Sources précisées fiche par fiche.</small></li><li><a href="compteur-roi.html">Le compteur</a><small>Gains, coûts et ROI depuis le 1er janvier, minute après minute.</small></li><li><a href="indicateurs-services-en-ligne.html">Combien de personnes utilisent nos services publics en ligne ?</a><small>Une grille commune d&#x27;indicateurs d&#x27;activité, confrontée à 40 services : ce qui est publié, ce qui manque.</small></li></ul></div>
+      <div class="prof"><h3>Collectivité</h3><ul><li><a href="collectivites/">Pour et par les collectivités</a><small>Dotations, Fonds vert, démarches de l&#x27;État et des collectivités.</small></li><li><a href="collectivites/etat-demande.html">Ce que l&#x27;État demande aux collectivités</a><small>Les pièces demandées aux collectivités, et l&#x27;administration qui les détient déjà.</small></li><li><a href="instances-ds.html">Instances de la plateforme</a><small>Statistiques consolidées de toutes les instances publiques.</small></li></ul></div>
+      <div class="prof"><h3>Chercheur, journaliste</h3><ul><li><a href="donnees/">Données dérivées</a><small>Gains, délais, base juridique, hypothèses : tous les fichiers, sous Licence Ouverte.</small></li><li><a href="instances-ds.html">Instances de la plateforme</a><small>Statistiques consolidées de toutes les instances publiques.</small></li><li><a href="explorer.html#accueil">Méthodologie et sources</a><small>Comment tout est calculé, et à partir de quoi.</small></li></ul></div>
     </div>
   </section>
 
+  <section id="outils" aria-labelledby="h-outils">
+    <h2 id="h-outils">Les outils et les données</h2>
+    <div class="catalogue">
+      <div class="rub" id="mesurer" style="--c:var(--usager)"><h3>Mesurer</h3><p class="st">Ce que la démat fait gagner</p><ul><li><a href="simulateur-gains-dematerialisation.html">Simulateur des gains</a><span class="type">Outil</span><small>Une fourchette de gains pour votre administration et vos usagers, toutes hypothèses visibles.</small></li><li><a href="matrice-gains-ftap.html">Apprécier un projet (matrice FTAP)</a><span class="type">Outil</span><small>Du canal de départ au traitement visé : ETP, frais évités, gains usagers, annexe FTAP.</small></li><li><a href="compteur-roi.html">Le compteur</a><span class="type">Données</span><small>Gains, coûts et ROI depuis le 1er janvier, minute après minute.</small></li><li><a href="note/">La note sur les gains</a><span class="type">Méthode</span><small>Moins de charge pour l&#x27;usager, moins de coûts pour l&#x27;État : ce qu&#x27;apprennent 18 millions de dossiers.</small></li></ul></div>
+      <div class="rub" id="concevoir" style="--c:var(--admin)"><h3>Concevoir</h3><p class="st">Avant de créer ou de financer</p><ul><li><a href="cadrage-dematerialisation.html">Cadrer une démarche</a><span class="type">Outil</span><small>Base juridique, pièces, champs : ce qu&#x27;il faut supprimer, remplacer par une donnée ou garder.</small></li><li><a href="comparer-cadre-fonctionnel.html">Comparer un outil</a><span class="type">Outil</span><small>Google Forms, Grist, LimeSurvey, digital workplaces… et le rapport gains / coûts.</small></li><li><a href="atelier-lego.html">Atelier Lego</a><span class="type">Outil</span><small>Avez-vous vraiment besoin d&#x27;un développement spécifique ? Le coût par dossier en direct.</small></li><li><a href="agent-public.html">Parcours agent public</a><span class="type">Méthode</span><small>Retrouver sa démarche, comprendre ses gains, mesurer, repartir avec trois actions.</small></li></ul></div>
+      <div class="rub" id="situer" style="--c:var(--min)"><h3>Situer</h3><p class="st">Où en est-on, et pour qui</p><ul><li><a href="fiches-ministeres/">Fiches ministères</a><span class="type">Analyse</span><small>Usage de la plateforme par ministère depuis 2021 : démarches, dossiers, frais évités. Sources précisées fiche par fiche.</small></li><li><a href="collectivites/">Pour et par les collectivités</a><span class="type">Analyse</span><small>Dotations, Fonds vert, démarches de l&#x27;État et des collectivités.</small></li><li><a href="collectivites/etat-demande.html">Ce que l&#x27;État demande aux collectivités</a><span class="type">Analyse</span><small>Les pièces demandées aux collectivités, et l&#x27;administration qui les détient déjà.</small></li><li><a href="instances-ds.html">Instances de la plateforme</a><span class="type">Données</span><small>Statistiques consolidées de toutes les instances publiques.</small></li><li><a href="obligations-sva/">Procédures prévues par les textes</a><span class="type">Analyse</span><small>2 806 procédures, moins d&#x27;une sur dix outillée de façon vérifiable.</small></li><li><a href="indicateurs-services-en-ligne.html">Combien de personnes utilisent nos services publics en ligne ?</a><span class="type">Analyse</span><small>Une grille commune d&#x27;indicateurs d&#x27;activité, confrontée à 40 services : ce qui est publié, ce qui manque.</small></li></ul></div>
+      <div class="rub" id="donnees" style="--c:var(--accent)"><h3>Données</h3><p class="st">Explorer et vérifier</p><ul><li><a href="explorer.html#demarches">Démarches Démarche Numérique</a><span class="type">Données</span><small>Ce qui est demandé, démarche par démarche.</small></li><li><a href="explorer.html#pj">Pièces justificatives</a><span class="type">Données</span><small>Les plus demandées, et leurs alternatives à la source.</small></li><li><a href="explorer.html#donnees">Données et API</a><span class="type">Données</span><small>Ce qui existe déjà à la source.</small></li><li><a href="explorer.html#evenement">Événements de vie</a><span class="type">Données</span><small>Démarches regroupées par situation.</small></li><li><a href="explorer.html#cerfa">CERFA papier</a><span class="type">Données</span><small>Formulaires pas encore en ligne.</small></li><li><a href="explorer.html#dila">Démarches DILA</a><span class="type">Données</span><small>Fiches de service-public.fr.</small></li><li><a href="explorer.html#registre">Registre RGPD et couverture RIDA</a><span class="type">Méthode</span><small>Les obligations qui encadrent la collecte.</small></li><li><a href="donnees/">Données dérivées</a><span class="type">Données</span><small>Gains, délais, base juridique, hypothèses : tous les fichiers, sous Licence Ouverte.</small></li><li><a href="explorer.html#accueil">Méthodologie et sources</a><span class="type">Méthode</span><small>Comment tout est calculé, et à partir de quoi.</small></li></ul></div>
+    </div>
+  </section>
   <section aria-labelledby="h-traj">
     <h2 id="h-traj">La trajectoire : de la pièce à la réponse</h2>
     <div class="traj">
-      <div class="step now"><span class="k">Aujourd'hui</span><h3>La pièce</h3><p>L'usager cherche, numérise et dépose un document ; l'agent l'ouvre et le vérifie.</p></div>
-      <div class="step"><span class="k">Ensuite</span><h3>La donnée</h3><p>L'information est obtenue à la source, certifiée, sans rien demander à l'usager.</p></div>
-      <div class="step"><span class="k">À terme</span><h3>La réponse</h3><p>Seule la condition est vérifiée (« sous le plafond : oui »), l'administration ne reçoit que le nécessaire.</p></div>
-    </div>
-  </section>
-
-  <span id="donnees"></span>
-  <section id="explorer" aria-labelledby="h-map">
-    <h2 id="h-map">Explorer la cartographie</h2>
-    <div class="map">
-      <div class="grp">
-        <h3>Les démarches</h3>
-        <p>Ce qui est demandé, démarche par démarche.</p>
-        <ul>
-          <li><a href="explorer.html#demarches">Démarche Numérique</a><small>Démarches publiées sur la plateforme</small></li>
-          <li><a href="explorer.html#dila">Démarches DILA</a><small>Fiches de service-public.fr</small></li>
-          <li><a href="explorer.html#essentielles">Démarches essentielles</a><small>Les plus utilisées</small></li>
-          <li><a href="explorer.html#cerfa">CERFA papier</a><small>Formulaires pas encore en ligne</small></li>
-          <li><a href="explorer.html#toutes">Toutes les démarches</a></li>
-          <li><a href="fiches-ministeres/">Fiches ministères</a> <em class="new">Nouveau</em><small>Usage par ministère, 2021 → 2026</small></li>
-          <li><a href="collectivites/">Collectivités</a> <em class="new">Nouveau</em><small>Pour et par les collectivités, dotations et Fonds vert</small></li>
-          <li><a href="instances-ds.html">Instances de la plateforme</a> <em class="new">Nouveau</em><small>Statistiques consolidées, toutes instances publiques</small></li>
-          <li><a href="obligations-sva/">Procédures prévues par les textes</a> <em class="new">Nouveau</em><small>2 806 procédures, moins d'une sur dix outillée de façon vérifiable</small></li>
-          <li><a href="indicateurs-services-en-ligne.html">Services publics en ligne : qui publie son usage</a> <em class="new">Nouveau</em><small>40 services, ce qui est publié et ce qui manque</small></li>
-        </ul>
-      </div>
-      <div class="grp">
-        <h3>Ce qui est demandé</h3>
-        <p>Les mêmes informations, à travers toutes les démarches.</p>
-        <ul>
-          <li><a href="explorer.html#donnees">Données et API</a><small>Ce qui existe déjà à la source</small></li>
-          <li><a href="explorer.html#pj">Pièces justificatives</a><small>Les plus demandées, et leurs alternatives</small></li>
-          <li><a href="explorer.html#evenement">Événements de vie</a><small>Démarches regroupées par situation</small></li>
-        </ul>
-      </div>
-      <div class="grp">
-        <h3>Conformité</h3>
-        <p>Les obligations qui encadrent la collecte.</p>
-        <ul>
-          <li><a href="explorer.html#registre">Registre RGPD</a></li>
-          <li><a href="explorer.html#rida">Couverture RIDA</a><small>Rapprochement avec le référentiel de service-public.fr</small></li>
-        </ul>
-      </div>
-      <div class="grp">
-        <h3>Méthode</h3>
-        <p>Comment tout cela est calculé, et à partir de quoi.</p>
-        <ul>
-          <li><a href="explorer.html#accueil">Méthodologie</a></li>
-          <li><a href="explorer.html#accueil">Sources des démarches</a></li>
-          <li><a href="explorer.html#stats">Statistiques</a></li>
-          <li><a href="https://emsnytech.github.io/form2026/note/">Lire la note</a><small>Moins de charge pour l'usager, moins de coûts pour l'État : ce que la numérisation de 18 millions de dossiers nous apprend</small></li>
-          <li><a href="matrice-gains-ftap.html">La matrice des gains</a> <em class="new">Nouveau</em><small>Apprécier un projet : collecte × traitement, annexe FTAP</small></li>
-          <li><a href="compteur-roi.html">Le compteur</a><small>Gains, coûts et ROI depuis le 1er janvier</small></li>
-          <li><a href="https://emsnytech.github.io/form2026/donnees/">Données dérivées</a><small>Gains, délais, base juridique, retours d'usagers, hypothèses</small></li>
-        </ul>
-      </div>
+      <div class="step"><span class="k">Aujourd'hui</span><b>La pièce</b><p>L'usager cherche, numérise et dépose un document ; l'agent l'ouvre et le vérifie.</p></div>
+      <div class="step"><span class="k">Ensuite</span><b>La donnée</b><p>L'information est obtenue à la source, certifiée, sans rien demander à l'usager.</p></div>
+      <div class="step"><span class="k">À terme</span><b>La réponse</b><p>Seule la condition est vérifiée (« sous le plafond : oui ») ; l'administration ne reçoit que le nécessaire.</p></div>
     </div>
   </section>
 
@@ -289,7 +185,6 @@ footer{margin-top:2.8rem;border-top:1px solid var(--line);padding-top:1rem;font-
       </div>
     </div>
   </section>
-
   <footer>FORM 2026 · Philippe Vrignaud · Données ouvertes et code source publics</footer>
 </div>
 </body>
