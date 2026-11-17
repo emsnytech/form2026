@@ -1,6 +1,6 @@
 """Fiche Intérieur, étape 3 : maquette (texte et tableaux, avant mise en page). Fil directeur : arbitrage n° 23 ;
 relecture : arbitrage n° 24. Aucun chiffre n'est écrit à la main : tous viennent de out/interieur*.json (scripts 02, 31 à 38,
-40 à 43 ; chronologies : arbitrages n° 25 et 26 ; frais évités, « Côté agents » : arbitrage n° 27). La phrase centrale du cadre d'entrée vient de scripts/sync_cadre.py du dépôt (CENTRE). Aucun département nommé.
+40 à 43, 45 ; chronologies : arbitrages n° 25 et 26 ; frais évités, « Côté agents » : arbitrage n° 27). La phrase centrale du cadre d'entrée vient de scripts/sync_cadre.py du dépôt (CENTRE). Aucun département nommé.
 Sortie : out/maquette_interieur.md. Le script s'arrête si la sortie contient une adresse électronique, un numéro de téléphone
 ou un nom de département."""
 import json, re, ast, unicodedata
@@ -27,7 +27,7 @@ def p(x): return f"{x:.1f}".replace(".", ",") + " %"
 def pc(a, b): return p(100 * a / b)
 def v2(x): return f"{x:.2f}".replace(".", ",")
 MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']
-def d(s): return f"{int(s[8:10])} {MOIS[int(s[5:7]) - 1]} {s[:4]}"
+def d(s): return f"{int(s[8:10])}{'er' if int(s[8:10]) == 1 else ''} {MOIS[int(s[5:7]) - 1]} {s[:4]}"
 def row(*c): return "| " + " | ".join(map(str, c)) + " |"
 def cap(s): return s[0].upper() + s[1:]
 
@@ -45,6 +45,7 @@ A = VA["A"]; AP = A["prefectures"]; AD = A["directions_departementales"]; UNI = 
 TA = VA["taille"]; SC = VA["sans_champ"]; DE = VA["detr"]; ND = VA["regles"]["departements"]
 CH = J("interieur_chronologies"); CD = CH["detr"]; CM = CH["medailles"]; SD = CH["sensibilite_date_creation"]
 FE = J("interieur_frais_evites"); PC = J("interieur_proconnect")
+RS_ = J("interieur_residuelles"); RSD = RS_["fichier_precedent"]; rN, rL, rD = (RS_["procedures"][k] for k in ("NEPH", "label des écoles de conduite", "DETR et DSIL"))
 def ME(x): return f"{x/1e6:.1f}".replace(".", ",") + " M€"
 SIMU = "https://emsnytech.github.io/form2026/simulateur-gains-dematerialisation.html"
 ln_ = {x["titre_graine"]: x for x in LN["detail"]}
@@ -108,6 +109,10 @@ w(row("Familles couvertes", *[str(k) for k in range(1, 8)])); w(row("---", *["--
 w(row("Départements, démarches en ligne aujourd'hui", *[n(fcl.get(str(k), 0)) for k in range(1, 8)]))
 w(row("Départements, depuis l'origine", *[n(fc.get(str(k), 0)) for k in range(1, 8)]))
 w("")
+NT = VA["nationales"]; le3 = lambda r: sum(v for k_, v in r.items() if int(k_) <= 3)
+w(f"Les procédures devenues nationales (NEPH, label des écoles de conduite, DETR et DSIL) pèsent peu sur cette mesure : compter la démarche nationale en ligne pour les départements "
+  f"qui avaient numérisé la procédure ajouterait une famille à {n(NT['departements_gagnant_une_famille'])} départements sur {ND} ; {n(NT['apres']['repartition'].get('7', 0))} couvriraient toujours les sept familles, "
+  f"et {n(le3(NT['apres']['repartition']))} trois ou moins au lieu de {n(le3(NT['avant']['repartition']))}. La mesure reste celle des démarches en ligne aujourd'hui.\n")
 q = AP["demarches_par_departement"]; qd = AP["dossiers_par_departement"]
 w(row("Par département (préfecture et sous-préfectures)", "Premier quart", "Médiane", "Troisième quart")); w(row("---", "---:", "---:", "---:"))
 w(row("Démarches en ligne aujourd'hui", n(qo["q1"]), n(qo["mediane"]), n(qo["q3"])))
@@ -123,12 +128,23 @@ lg, et = AP["typologie"]["larges_6_7_familles"], AP["typologie"]["etroits_3_fami
 w(f"**Deux profils** (depuis l'origine, aucun département nommé). {n(lg[0])} départements couvrent six ou sept familles, avec {n(lg[2])} démarches en moyenne ; {n(et[0])} en couvrent trois ou moins, "
   f"avec {n(et[2])} démarches en moyenne, surtout des dotations.\n")
 w("**Pour des réglementations identiques.**\n")
-w(row("Réglementation (mots du titre)", "Départements", "… en ligne", "Dossiers par département (quartiles)"))
-w(row("---", "---:", "---:", "---"))
+w(row("Réglementation (mots du titre)", "Départements ayant eu une démarche locale", "… ouvertes à la veille de la version nationale", "Aujourd'hui", "Dossiers par département, versions locales (quartiles)"))
+w(row("---", "---:", "---:", "---", "---"))
 for k, u in UNI.items():
-    q_ = u["dossiers_par_departement"]
-    w(row(cap(k), n(u["departements"]), n(u["departements_en_ligne"]), f"{n(q_['q1'])} / {n(q_['mediane'])} / {n(q_['q3'])}"))
+    lo, na_ = u["locales"], u.get("nationale"); q_ = lo["dossiers_par_departement"]
+    w(row(cap(k), n(na_["departements_locale_jusqu_a_la_date"] if na_ else lo["departements"]), n(na_["departements_locale_ouverte_la_veille"]) if na_ else "—",
+          f"démarche nationale depuis le {d(na_['date'])}" if na_ else f"{n(lo['departements_en_ligne'])} départements en ligne", f"{n(q_['q1'])} / {n(q_['mediane'])} / {n(q_['q3'])}"))
 w("")
+w("Pour le NEPH, le label des écoles de conduite et la DETR et la DSIL, les versions départementales ont été remplacées par une démarche nationale : "
+  "leur faible présence en ligne aujourd'hui traduit ce remplacement, pas un recul de l'usage. Pour ces trois procédures, les départements sont comptés jusqu'à la date "
+  "de la version nationale. Les mots du titre donnent la définition large, celle qui figure entre parenthèses dans le test de la section « Formulaires nationaux », "
+  "dont la définition principale est la famille de titres. "
+  f"Pour la DETR et la DSIL, les démarches sont annuelles : la colonne « ouvertes à la veille » dépend du calendrier des campagnes, et {n(CD['temps2']['departements'])} départements "
+  f"avaient le formulaire commun pour les campagnes 2024 et 2025. "
+  f"Des versions locales restent en ligne malgré la démarche nationale (dossiers déposés depuis le {d(RSD)}) : pour le NEPH, {n(rN['versions'])} versions dans {n(rN['departements'])} départements "
+  f"({n(rN['dossiers_recents'])} dossiers) ; pour le label, {n(rL['versions'])} versions dans {n(rL['departements'])} départements, dont {n(rL['publiees_au_plus_tard_a_la_date_nationale'][0])} publiées avant la version nationale "
+  f"({n(rL['dossiers_recents'])} dossiers) ; pour la DETR et la DSIL, {n(rD['versions'])} versions dans {n(rD['departements'])} départements, dont {n(rD['paiement_ou_versement'][0])} demandes de paiement "
+  f"ou de versement de subvention ({n(rD['dossiers_recents'])} dossiers, dont {n(rD['paiement_ou_versement'][2])} pour le paiement ou le versement).\n")
 mf = UNI["police administrative : déclaration de manifestation sur la voie publique"]
 w(f"La déclaration de manifestation sur la voie publique figure sur la plateforme dans {n(mf['departements'])} départements ; SVE propose une rubrique nationale « Rassemblement et manifestations » "
   f"({CONSULT}). Une procédure peu visible sur la plateforme peut ainsi passer par l'autre canal.\n")
@@ -149,24 +165,29 @@ w(f"**Chapeau.** À côté de la plateforme, le ministère édite son propre dis
 w(row("Fonction", "Démarche Numérique", "SVE")); w(row("---", "---", "---"))
 for r_ in (("Éditeur", "Direction interministérielle du numérique (mentions légales)", "ministère de l'Intérieur, créé en novembre 2015 en application du décret n° 2015-1423 (mentions légales)"),
            ("Identification", "FranceConnect pour les particuliers, ProConnect pour les agents des administrations, ou compte avec mot de passe (page de connexion)",
-            "aucune connexion proposée à l'étape 1 (conditions générales, puis choix particulier / professionnel / association) ; SIREN pour une entreprise, RNA pour une association ; identité et adresse en champs structurés"),
+            "aucune connexion par FranceConnect ni par un autre fournisseur d'identité ; nom, prénoms, adresse et coordonnées saisis à la main, sans préremplissage ni vérification auprès d'un référentiel (seule l'adresse propose une recherche dans une liste) ; SIREN ou RNA saisis à la main pour une entreprise ou une association"),
            ("Contenu de la demande", "champs et pièces définis par le service pour chaque démarche (descriptif ouvert)",
             "objet repris de la rubrique, département, nature (information ou dépôt de dossier), champ libre « Votre demande », pièces jointes PDF ou JPG de 3 Mo au plus"),
            ("Raccordement d'un outil d'instruction", "API GraphQL ; jeton créé par un administrateur, en lecture ou en écriture, limité à ses démarches ; mutations de changement d'état (documentation de l'API)",
             "aucune API publique documentée trouvée"),
            ("Traitement côté service", "le dossier est instruit dans la plateforme, ou dans un outil branché par l'API",
-            "outil de gestion du courrier : selon la documentation de Maarch Courrier (version 18.10), « toutes les préfectures sont équipées de Maarch Courrier avec un paramétrage SVE »")):
+            "outil de gestion du courrier : selon la documentation de Maarch Courrier (version 18.10), « toutes les préfectures sont équipées de Maarch Courrier avec un paramétrage SVE »"),
+           ("Usage et délais", "dossiers par démarche publiés dans le descriptif ouvert ; temps de traitement publié sur la page de statistiques de chaque démarche, pas dans le descriptif ouvert (page consultée le 17 novembre 2026)",
+            "aucun volume ni délai de réponse publics"),
+           ("Accessibilité", "partiellement conforme au RGAA 4.1.2, audit interne d'avril 2025 (déclaration d'accessibilité du site, mise à jour le 15 avril 2025, consultée le 17 novembre 2026)",
+            "partiellement conforme au RGAA 4.1, audit du 4 mars 2022 (déclaration d'accessibilité du site de la saisine, mise à jour le 17 mai 2022, consultée le 17 novembre 2026)")):
     w(row(*r_))
 w("")
+w("Aucun chiffre public ne permet de comparer l'usage ou les délais des deux canaux.\n")
 w("**Phrase-clé, en constat.** Sur SVE, l'identité est saisie dans des champs structurés, mais le contenu de la demande passe par un champ libre et des pièces jointes : il n'en sort pas de données "
   "structurées réutilisables pour le « dites-le-nous une fois ». Sur la plateforme, le service définit lui-même les champs de la demande. Le [comparateur du cadre fonctionnel](https://emsnytech.github.io/form2026/comparer-cadre-fonctionnel.html) de FORM 2026 permet de vérifier, fonction par fonction, ce que couvre un outil.\n")
-w("Aucune source publique ne dit si les préfectures peuvent modifier les formulaires de SVE, et aucun volume de SVE n'est public : la fiche n'en dit rien.\n")
+w("Aucune source publique ne dit si les préfectures peuvent modifier les formulaires de SVE : la fiche n'en dit rien.\n")
 
 # 5 ------------------------------------------------------------------------------------------------------------------------
 w("## 5. Quand un formulaire national s'installe\n")
 w(f"**Chapeau.** Le passage du local au national est rare : sur {n(LN['familles_10_locales'])} familles de titres comptant au moins 10 versions locales, {LN['avec_nationale']} ont une version nationale, "
   f"dont {LN['avec_nationale_100']} d'au moins 100 dossiers (seuil ajouté après lecture). **Une question : un formulaire national suppose-t-il qu'une majorité de préfectures ait déjà numérisé la procédure ?**\n")
-w(row("Cas", "Version nationale", "Départements ayant déjà une version locale (définition large)", "Ce qui a suivi"))
+w(row("Cas", "Version nationale", "Départements ayant déjà une version locale : famille de titres (mots du titre)", "Ce qui a suivi"))
 w(row("---", "---", "---", "---"))
 ne, la, de = B["NEPH"], B["label des écoles de conduite"], B["DETR et DSIL"]
 dap = DE["famille_de_titres"]["publiees_apres_la_nationale"]
@@ -271,11 +292,11 @@ for t in (
     "Familles classées sur le titre ; vérification avant embauche à part, jamais ajoutée aux étrangers ; démarche n° 74335 rattachée à la vérification, n° 100682 laissée aux tiers.",
     f"Départements : d'après l'organisme, le service et le titre ; à défaut, champ département ({n(RT['par_source'].get('champ', 0))} démarches, dont {n(SC['demarches_retirees'])} de préfecture). Sans ces dernières, la médiane passe de {n(q['mediane'])} à "
     f"{n(SC['demarches_par_departement']['mediane'])} démarches et de {n(qo['mediane'])} à {n(SC['en_ligne_par_departement']['mediane'])} en ligne ; la répartition par familles couvertes change au plus de {ecart} départements par classe : l'écart est faible.",
-    "Réglementations uniformes : définitions par mots du titre, choisies après lecture. Population : INSEE, populations de référence 2023, fichier d'ensemble publié le 18 décembre 2025, versé au dépôt (il ne couvre pas un département d'outre-mer).",
+    f"Réglementations uniformes : définitions par mots du titre, choisies après lecture ; pour les procédures devenues nationales, départements comptés jusqu'à la date de la version nationale, dossiers des seules versions locales. Familles couvertes en ligne : démarches en ligne au {d(I['config']['date_extraction'])} ; l'effet des procédures devenues nationales est mesuré à part (script 40). Population : INSEE, populations de référence 2023, fichier d'ensemble publié le 18 décembre 2025, versé au dépôt (il ne couvre pas un département d'outre-mer).",
     f"Démarches d'essai conservées ({n(CP['tests']['demarches'])}). Pièces comptées sur libellés distincts. Aucune donnée de contact, aucun département nommé.",
     "Règles et scripts détaillés : dépôt, `donnees/fiches-ministeres/methode/`.",
     "Sources : descriptif ouvert (data.gouv.fr) ; code du travail ; décrets n° 84-591 et n° 84-1110 ; arrêté du 27 avril 2021 ; instruction du 22 août 2023 et circulaire du 1er avril 2026 sur la DETR et la DSIL (Légifrance) ; INSEE ; tableau de bord public de ProConnect (export du 15 novembre 2026, versé au dépôt) ; « ProConnect – Présentation de la solution » (pad.numerique.gouv.fr, non daté, consulté le 15 novembre 2026), pour Passage2 (ministère de l'Intérieur) et Cerbère (ministère de la Transition écologique) ; « Charte des usages éthiques de l'IA au ministère de l'Intérieur », publiée par la CFDT Interco (mars 2026), pour MirAI, « portail interne » développé par la DTNUM et « exploitée sur des infrastructures maîtrisées par le ministère » ; documentation de Maarch Courrier 18.10 ; "
-    f"SVE et Démarche Numérique, {CONSULT} (étape 1 de SVE : 16 novembre 2026) ; dépôts publics de la Bibliothèque numérique et de Turgot.",
+    f"SVE et Démarche Numérique, {CONSULT} (étape 1 de SVE : 16 novembre 2026 ; déclarations d'accessibilité et page de statistiques d'une démarche : 17 novembre 2026) ; dépôts publics de la Bibliothèque numérique et de Turgot.",
 ): w(f"- {t}")
 w("")
 
