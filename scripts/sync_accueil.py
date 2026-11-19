@@ -6,7 +6,7 @@ donnees/chiffres-accueil.json (produit par scripts/chiffres_accueil.py). Aucun c
 statiques : le navigateur ne charge aucun fichier (même principe que scripts/sync_nav.py, dont la barre est reprise).
 
 - Publications : les ressources « situer », et celles d'une autre rubrique marquées « publication » : true.
-- À la une : les publications épinglées (« a_la_une » : date de fin incluse, comparée à la date du jour), puis
+- À la une : les publications épinglées (la première à expirer en tête) (« a_la_une » : date de fin incluse, comparée à la date du jour), puis
   les plus récentes, trois au plus ; lien vers « Toutes les publications ».
 - Par où commencer : « commencer », profil par profil ; chaque ressource doit déjà porter ce profil.
 - Les outils et les données : les ressources par rubrique, sauf celles qui ont un « parent ».
@@ -49,7 +49,7 @@ for x in RES:
 
 PUB = sorted([x for x in RES if x["rubrique"] == "situer" or x.get("publication")], key=lambda x: (x["date"], x["url"]), reverse=True)
 epingle = lambda x: bool(x.get("a_la_une")) and AUJOURDHUI <= x["a_la_une"]
-UNE = ([x for x in PUB if epingle(x)] + [x for x in PUB if not epingle(x)])[:3]
+UNE = (sorted([x for x in PUB if epingle(x)], key=lambda x: x["a_la_une"]) + [x for x in PUB if not epingle(x)])[:3]   # épinglées : la première à expirer en tête
 
 STYLE = """
 :root{--ink:#1e2022;--muted:#5c6066;--paper:#fbf9f5;--surface:#ffffff;--line:#e2dfd7;
