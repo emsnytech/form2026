@@ -17,6 +17,7 @@ a{color:var(--admin)}
 .kicker{font-size:.85rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);margin:0 0 .3rem}
 h1{font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.15;margin:0;font-weight:800}
 .lede{color:var(--muted);max-width:66ch;margin:.6rem 0 0}
+.frame.ia{border-left-color:var(--admin);background:var(--admin-soft)}
 .frame{margin:1rem 0 0;padding:.7rem .9rem;border-left:4px solid var(--accent);background:var(--warn-soft);border-radius:0 8px 8px 0;font-size:.92rem}
 .ask{margin:1.3rem 0 0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem}
 textarea{width:100%;min-height:84px;resize:vertical;font:inherit;padding:.7rem .8rem;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
@@ -68,8 +69,9 @@ details{font-size:.9rem;margin-top:.3rem}details ul{margin:.3rem 0 0 1.1rem;padd
   <p class="topnav" data-rubrique="donnees"><!-- nav:début --><a href="index.html">FORM 2026</a> · <a href="index.html#mesurer">Mesurer</a> · <a href="index.html#concevoir">Concevoir</a> · <a href="index.html#situer">Situer</a> · <a href="index.html#donnees" aria-current="page">Données</a><!-- nav:fin --></p>
   <p class="kicker">FORM 2026 · démonstrateur</p>
   <h1>Dites ce que vous voulez faire, retrouvez la démarche</h1>
-  <p class="lede">Un démonstrateur de recherche en langage courant dans deux bases publiques réunies dans FORM&nbsp;: les démarches en ligne de Démarche Numérique et les fiches de service-public.gouv.fr. Il dit où déposer le dossier, ce qui vous sera demandé, et ce qu'il ne trouve pas. Une version avec assistant conversationnel est en test.</p>
+  <p class="lede">Un démonstrateur de recherche en langage courant dans deux bases publiques réunies dans FORM&nbsp;: les démarches en ligne de Démarche Numérique et les fiches de service-public.gouv.fr. Il dit où déposer le dossier, ce qui vous sera demandé, et ce qu'il ne trouve pas. <span id="lede-test">Une version avec assistant conversationnel est en test.</span></p>
   <p class="couv" id="couv"></p>
+  <div class="frame ia" id="avis-ia" hidden><strong>Version de démonstration avec assistant.</strong> L'assistant fonctionne pour l'instant avec Claude, le modèle d'Anthropic&nbsp;: il faut un compte Claude, et vos questions sont décomptées de ce compte. L'objectif est que chacun puisse choisir son moteur d'IA&nbsp;: l'index est ouvert et pourra être interrogé par n'importe quel assistant (Albert, Mistral, Claude…). La recherche simple et les exemples préparés ne font appel à aucune IA.</div>
   <!-- cadre:début -->
   <style>.cadre{margin:22px 0 0;padding:14px 18px;border-left:4px solid var(--accent,#b45309);background:var(--surface,transparent);border-radius:0 8px 8px 0;max-width:78ch}.cadre p{margin:0 0 10px;font-size:.98rem;line-height:1.55}.cadre p:last-child{margin:0}</style>
   <div class="cadre">
@@ -128,7 +130,7 @@ details{font-size:.9rem;margin-top:.3rem}details ul{margin:.3rem 0 0 1.1rem;padd
   </section>
 </div>
 
-<script>window.FORM_ASSISTANT_URL = "";  // adresse de la version avec assistant : vide tant que l'artefact n'est pas partagé</script>
+<script>window.FORM_ASSISTANT_URL = "https://claude.ai/artifact/LLfjE77eNYPjiykcDdcJza";  // version avec assistant (artefact Claude partagé)</script>
 <script>/*moteur:début*/
 // Moteur de recherche local (BM25) sur l'index FORM 2026 + DILA.
 // Utilisable dans la page et sous node pour les tests.
@@ -252,7 +254,7 @@ fetch("donnees/assistant/index.json").then((r) => r.json()).then((recs) => {
 
 (async () => {
   try { sample = await claude.use("sample"); } catch (e) { sample = null; }
-  if (sample) majQuota();
+  if (sample) { majQuota(); $("avis-ia").hidden = false; $("lede-test").hidden = true; document.title = "Trouver sa démarche — démonstrateur avec assistant · FORM 2026"; }
   if (!sample) { $("go").hidden = true; $("go").dataset.off = "1";
     $("quota").innerHTML = "Sur cette version, l'assistant conversationnel n'est pas branché : essayez les exemples à réponse préparée ou la recherche simple." + (window.FORM_ASSISTANT_URL ? ` La version avec assistant est <a href="${window.FORM_ASSISTANT_URL}">accessible ici</a> (compte Claude nécessaire).` : ""); }
 })();
