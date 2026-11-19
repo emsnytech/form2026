@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trouver sa démarche — démo d'assistant FORM 2026</title>
+<title>Trouver sa démarche — démonstrateur · FORM 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -59,6 +59,7 @@ details{font-size:.9rem;margin-top:.3rem}details ul{margin:.3rem 0 0 1.1rem;padd
 .method ul{margin:.2rem 0 0 1.1rem;padding:0}
 .empty{color:var(--muted);font-style:italic}
 .topnav{margin:0 0 1.2rem;font-size:.95rem}.topnav a{text-decoration:none;font-weight:600}
+.couv{margin:.5rem 0 0;font-weight:700;color:var(--muted);min-height:1.5em}
 .prep{font-size:.85rem;color:var(--accent);font-weight:700;margin:0 0 .4rem}
 </style>
 </head>
@@ -68,6 +69,7 @@ details{font-size:.9rem;margin-top:.3rem}details ul{margin:.3rem 0 0 1.1rem;padd
   <p class="kicker">FORM 2026 · démonstrateur</p>
   <h1>Dites ce que vous voulez faire, retrouvez la démarche</h1>
   <p class="lede">Un démonstrateur de recherche en langage courant dans deux bases publiques réunies dans FORM&nbsp;: les démarches en ligne de Démarche Numérique et les fiches de service-public.gouv.fr. Il dit où déposer le dossier, ce qui vous sera demandé, et ce qu'il ne trouve pas. Une version avec assistant conversationnel est en test.</p>
+  <p class="couv" id="couv"></p>
   <!-- cadre:début -->
   <style>.cadre{margin:22px 0 0;padding:14px 18px;border-left:4px solid var(--accent,#b45309);background:var(--surface,transparent);border-radius:0 8px 8px 0;max-width:78ch}.cadre p{margin:0 0 10px;font-size:.98rem;line-height:1.55}.cadre p:last-child{margin:0}</style>
   <div class="cadre">
@@ -242,6 +244,8 @@ fetch("donnees/assistant/index.json").then((r) => r.json()).then((recs) => {
   $("st").textContent = "Indexation…";
   setTimeout(() => {
     IX = Moteur.build(recs);
+    const ndn = recs.filter((r) => r.k === "dn").length, nsp = recs.length - ndn;
+    $("couv").textContent = `${fmt(ndn)} démarches en ligne et ${fmt(nsp)} fiches service-public indexées`;
     $("st").textContent = ""; $("simple").disabled = false; $("go").disabled = false;
   }, 30);
 }).catch(() => { $("st").textContent = "L'index n'a pas pu être chargé."; });
