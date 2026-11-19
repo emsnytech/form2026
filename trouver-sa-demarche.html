@@ -28,6 +28,13 @@ select{font:inherit;font-size:.95rem;padding:.35rem .5rem;border-radius:8px;bord
 button{font:inherit;font-weight:700;border-radius:10px;padding:.55rem 1rem;border:1px solid var(--admin);cursor:pointer}
 .primary{background:var(--admin);color:#fff}
 .ghost{background:transparent;color:var(--admin)}
+dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog h2{font-size:1.1rem;margin:0 0 .5rem;font-weight:800}
+dialog ul{margin:.4rem 0 0 1.1rem;padding:0;font-size:.95rem}dialog li{margin:.25rem 0}
+.dlg-actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+a.btn{display:inline-block;font-weight:700;border-radius:10px;padding:.55rem 1rem;border:1px solid var(--admin);text-decoration:none}
+a.btn.primary{color:#fff}
 button:disabled{opacity:.5;cursor:default}
 .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
 .chip{font-size:.88rem;font-weight:600;padding:.25rem .65rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
@@ -97,11 +104,27 @@ details{font-size:.9rem;margin-top:.3rem}details ul{margin:.3rem 0 0 1.1rem;padd
     <div class="row">
       <button type="submit" class="primary" id="go" disabled>Demander à l'assistant</button>
       <button type="button" class="ghost" id="simple" disabled>Recherche simple, sans IA</button>
+      <button type="button" class="ghost" id="ia" hidden>Essayer avec l'assistant (version de test)</button>
     </div>
     <div class="status" id="quota"></div>
     <div class="chips" id="ex"></div>
     <div class="status" id="st" role="status"></div>
   </form>
+
+  <dialog id="dlg-ia" aria-labelledby="dlg-ia-t">
+    <h2 id="dlg-ia-t">Avant d'ouvrir la version avec assistant</h2>
+    <p>C'est une version de test, publiée hors du site FORM, sur claude.ai.</p>
+    <ul>
+      <li>L'assistant fonctionne avec Claude, le modèle d'Anthropic&nbsp;: il faut un compte Claude, et vos questions sont décomptées de ce compte, selon les <a href="https://www.anthropic.com/legal/consumer-terms" target="_blank" rel="noopener">conditions d'utilisation d'Anthropic</a>.</li>
+      <li>Vos questions sont envoyées au modèle&nbsp;: n'y indiquez ni nom, ni numéro de dossier, ni coordonnées.</li>
+      <li>L'assistant oriente et peut se tromper&nbsp;: vérifiez toujours sur la fiche ou la démarche citée. Il ne dit pas si vous avez droit à une aide.</li>
+      <li>Le nombre de questions libres est limité par visite. La recherche simple et les exemples préparés restent disponibles sans IA, ici comme là-bas.</li>
+    </ul>
+    <div class="dlg-actions">
+      <a class="btn primary" id="ia-go" href="#" autofocus target="_blank" rel="noopener">J'ai compris, ouvrir l'assistant ↗</a>
+      <button type="button" class="ghost" id="ia-annuler">Annuler</button>
+    </div>
+  </dialog>
 
   <section class="answer" id="ans" aria-live="polite">
     <h2>Réponse de l'assistant</h2>
@@ -256,8 +279,15 @@ fetch("donnees/assistant/index.json").then((r) => r.json()).then((recs) => {
   try { sample = await claude.use("sample"); } catch (e) { sample = null; }
   if (sample) { majQuota(); $("avis-ia").hidden = false; $("lede-test").hidden = true; document.title = "Trouver sa démarche — démonstrateur avec assistant · FORM 2026"; }
   if (!sample) { $("go").hidden = true; $("go").dataset.off = "1";
-    $("quota").innerHTML = "Sur cette version, l'assistant conversationnel n'est pas branché : essayez les exemples à réponse préparée ou la recherche simple." + (window.FORM_ASSISTANT_URL ? ` La version avec assistant est <a href="${window.FORM_ASSISTANT_URL}">accessible ici</a> (compte Claude nécessaire).` : ""); }
+    $("quota").innerHTML = "Sur cette version, l'assistant conversationnel n'est pas branché : essayez les exemples à réponse préparée ou la recherche simple." + (window.FORM_ASSISTANT_URL ? ` La version avec assistant est <a href="${window.FORM_ASSISTANT_URL}" id="ia-lien">accessible ici</a> (compte Claude nécessaire).` : "");
+    if (window.FORM_ASSISTANT_URL) { $("ia").hidden = false; $("ia-go").href = window.FORM_ASSISTANT_URL; } }
 })();
+// Version avec assistant : les conditions d'utilisation s'affichent avant l'ouverture.
+function ouvrirAvisIA(ev) { if (ev) ev.preventDefault(); const d = $("dlg-ia"); if (d.showModal) d.showModal(); else window.open(window.FORM_ASSISTANT_URL, "_blank", "noopener"); }
+$("ia").addEventListener("click", ouvrirAvisIA);
+$("quota").addEventListener("click", (ev) => { if (ev.target.closest("#ia-lien")) ouvrirAvisIA(ev); });
+$("ia-annuler").addEventListener("click", () => $("dlg-ia").close());
+$("ia-go").addEventListener("click", () => $("dlg-ia").close());
 
 // ---------- outils donnés à l'assistant
 function compact(r) {
