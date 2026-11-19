@@ -1,0 +1,121 @@
+[
+{
+"q": "Mon club de foot cherche une subvention pour acheter du matériel",
+"pub": "association",
+"dep": "",
+"recherches": [
+"subvention association sportive matériel équipement",
+"aide équipement club sportif",
+"subvention association demande compte asso (fiches)"
+],
+"texte": "Pour une association, la porte d'entrée nationale est Le Compte Asso [[SP-R70935]] : il permet de transmettre une demande de subvention aux services partenaires. L'association s'y identifie avec son numéro RNA ou SIRET.\nLes aides à l'achat de matériel sportif sont le plus souvent locales. Exemple trouvé : le Conseil départemental du Val-de-Marne finance l'acquisition de matériel par les comités départementaux [[DN-117168]]. Ce formulaire demande notamment :\n- les statuts et le RIB de l'association\n- le dernier rapport financier\n- un descriptif du matériel et des devis\n- le contrat d'engagement républicain\nLe RNA et l'IBAN y sont préremplis.\nIndiquez votre département : je chercherai les aides de votre commune, de votre intercommunalité ou de votre département. L'éligibilité de votre club est à vérifier auprès du financeur.",
+"refs": [
+"SP-R70935",
+"DN-117168",
+"SP-R50795",
+"DN-36653"
+]
+},
+{
+"q": "Je veux organiser une brocante dans ma rue",
+"pub": "particulier",
+"dep": "",
+"recherches": [
+"vide-grenier brocante particulier vente au déballage",
+"vente au déballage déclaration préalable mairie",
+"occupation domaine public manifestation voie publique"
+],
+"texte": "Une brocante ou un vide-greniers relève de la vente au déballage : elle se déclare à l'avance au maire de la commune où elle a lieu. La fiche [[SP-F1813]] décrit les règles quand l'organisateur est une association.\nLe formulaire national est le cerfa 13939*01 [[SP-R18906]]. Les particuliers qui vendent attestent sur l'honneur ne pas avoir participé à deux autres ventes au déballage dans l'année [[SP-R10959]].\nQuelques communes ont mis cette déclaration en ligne, par exemple Pornic [[DN-65359]] (249 dossiers, une pièce d'identité demandée). Elle ne vaut que pour Pornic.\nJe ne trouve pas de démarche en ligne générale : pour votre rue, adressez-vous à votre mairie, qui vous dira aussi si une autorisation d'occupation de la voie publique est nécessaire.",
+"refs": [
+"SP-F1813",
+"SP-R18906",
+"SP-R10959",
+"DN-65359"
+]
+},
+{
+"q": "J'ai perdu ma carte d'identité",
+"pub": "particulier",
+"dep": "",
+"recherches": [
+"perte carte identité renouvellement",
+"pré-demande carte nationale identité ANTS (fiches)",
+"déclaration de perte pièce identité"
+],
+"texte": "Il faut refaire votre carte dans une mairie équipée ; la déclaration de perte se fait en même temps que la demande [[SP-F1344]]. Vous n'avez pas à déclarer la perte à la police ou à la gendarmerie [[SP-R13630]].\nPour gagner du temps :\n- faites la pré-demande en ligne sur le site de l'ANTS [[SP-R62483]]\n- remplissez la déclaration de perte, cerfa 14011*02 [[SP-R13630]]\n- achetez le timbre fiscal demandé en cas de perte [[SP-F33805]]\nAucune démarche de Démarche Numérique ne correspond : ce service relève de l'ANTS, présent ici seulement à travers les fiches service-public.",
+"refs": [
+"SP-F1344",
+"SP-R62483",
+"SP-R13630",
+"SP-F33805",
+"SP-F1153"
+]
+},
+{
+"q": "Je suis étudiant, je voudrais une bourse",
+"pub": "particulier",
+"dep": "",
+"recherches": [
+"bourse sur critères sociaux dossier social étudiant",
+"bourse enseignement supérieur demande (démarches en ligne)"
+],
+"texte": "La bourse sur critères sociaux se demande par le dossier social étudiant (DSE) : la fiche [[SP-F12216]] liste les documents à préparer, et [[SP-F12214]] présente les conditions. Un simulateur permet d'estimer votre droit [[SP-R18296]].\nCertains départements versent en plus leur propre bourse. Exemple : le Conseil départemental de l'Aube [[DN-138339]] (904 dossiers). Il demande notamment la notification définitive de la bourse nationale, un certificat de scolarité, un justificatif de domicile des parents dans l'Aube et un RIB, l'IBAN étant prérempli.\nIndiquez votre département pour que je cherche une bourse locale. Le montant et l'éligibilité sont à vérifier dans les fiches.",
+"refs": [
+"SP-F12216",
+"SP-F12214",
+"SP-R18296",
+"DN-138339"
+]
+},
+{
+"q": "Ma commune veut rénover l'école pour consommer moins d'énergie",
+"pub": "collectivite",
+"dep": "",
+"recherches": [
+"rénovation énergétique bâtiment scolaire école commune subvention",
+"DETR DSIL rénovation énergétique école",
+"fonds vert rénovation énergétique bâtiments publics"
+],
+"texte": "La démarche nationale est le Fonds vert, mesure « Rénovation énergétique des bâtiments publics locaux » [[DN-69071]], avec 13 168 dossiers déposés. Elle demande notamment :\n- une étude thermique\n- la délibération de l'organe délibérant\n- le plan de financement prévisionnel et les justificatifs des dépenses\n- un RIB\nLe SIRET de la commune et les données de l'annuaire de l'Éducation sont préremplis.\nUne fois la subvention attribuée, le versement se demande en préfecture, par exemple en Ille-et-Vilaine [[DN-148740]]. Indiquez votre département pour trouver la démarche de versement de votre préfecture et les dotations DETR ou DSIL.\nAttention : certaines démarches anciennes restent publiées, comme la DSIL 2021 du Finistère [[DN-37463]], dont la date limite de dépôt était le 30 avril 2021. Vérifiez que l'appel est ouvert.",
+"refs": [
+"DN-69071",
+"DN-148740",
+"DN-37463"
+]
+},
+{
+"q": "Je dois renouveler mon titre de séjour",
+"pub": "particulier",
+"dep": "93",
+"recherches": [
+"renouvellement titre de séjour · 93",
+"titre de séjour renouvellement ANEF (fiches)"
+],
+"texte": "En Seine-Saint-Denis, la préfecture propose une démarche par arrondissement, selon votre commune de domicile :\n- Le Raincy [[DN-112653]]\n- Saint-Denis [[DN-111266]]\n- Bobigny, vie privée et familiale [[DN-105874]] ou vie professionnelle [[DN-105853]]\nCes démarches servent à obtenir un rendez-vous. Préparez notamment votre passeport, votre titre de séjour en cours, un justificatif de domicile de moins de six mois et, si vous êtes hébergé, l'attestation de l'hébergeant.\nCertains titres se demandent directement sur l'ANEF, l'Administration numérique des étrangers en France [[SP-R59398]]. Vérifiez lequel s'applique à votre titre avant de prendre rendez-vous.",
+"refs": [
+"DN-112653",
+"DN-111266",
+"DN-105874",
+"DN-105853",
+"SP-R59398"
+]
+},
+{
+"q": "Je crée mon entreprise de menuiserie",
+"pub": "entreprise",
+"dep": "",
+"recherches": [
+"création entreprise immatriculation guichet unique formalités",
+"artisan immatriculation registre national des entreprises (fiches)",
+"déclarer création entreprise (fiches)"
+],
+"texte": "Depuis le 1er janvier 2023, la création d'une entreprise se déclare en ligne sur le guichet des formalités des entreprises [[SP-R61572]], qui remplace les centres de formalités.\nLa fiche dépend de la forme choisie :\n- micro-entreprise [[SP-F36746]]\n- entreprise individuelle [[SP-F36763]]\n- société [[SP-F35934]]\nLa menuiserie est une activité artisanale : la fiche [[SP-F23887]] présente les conditions pour s'immatriculer au Registre national des entreprises.\nAucune démarche de Démarche Numérique ne correspond : la création relève du guichet unique, présent ici seulement à travers les fiches service-public.",
+"refs": [
+"SP-R61572",
+"SP-F36746",
+"SP-F36763",
+"SP-F35934",
+"SP-F23887"
+]
+}
+]
