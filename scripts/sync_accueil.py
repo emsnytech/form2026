@@ -5,7 +5,8 @@ Sources : ressources.json (rubriques, profils, ressources, « commencer », date
 donnees/chiffres-accueil.json (produit par scripts/chiffres_accueil.py). Aucun chiffre n'est écrit à la main. Pages
 statiques : le navigateur ne charge aucun fichier (même principe que scripts/sync_nav.py, dont la barre est reprise).
 
-- À la une : les publications « situer » épinglées (« a_la_une » : date de fin incluse, comparée à la date du jour), puis
+- Publications : les ressources « situer », et celles d'une autre rubrique marquées « publication » : true.
+- À la une : les publications épinglées (« a_la_une » : date de fin incluse, comparée à la date du jour), puis
   les plus récentes, trois au plus ; lien vers « Toutes les publications ».
 - Par où commencer : « commencer », profil par profil ; chaque ressource doit déjà porter ce profil.
 - Les outils et les données : les ressources par rubrique, sauf celles qui ont un « parent ».
@@ -46,7 +47,7 @@ for x in RES:
     if not x.get("date") or x["rubrique"] not in RUB or x["type"] not in TYPES: sys.exit(f"ressource incomplète : {x['url']}")
     if x.get("parent") and x["parent"] not in PAR_URL: sys.exit(f"parent inconnu : {x['url']}")
 
-PUB = sorted([x for x in RES if x["rubrique"] == "situer"], key=lambda x: (x["date"], x["url"]), reverse=True)
+PUB = sorted([x for x in RES if x["rubrique"] == "situer" or x.get("publication")], key=lambda x: (x["date"], x["url"]), reverse=True)
 epingle = lambda x: bool(x.get("a_la_une")) and AUJOURDHUI <= x["a_la_une"]
 UNE = ([x for x in PUB if epingle(x)] + [x for x in PUB if not epingle(x)])[:3]
 
@@ -158,7 +159,7 @@ def page(titre, desc, url, rubrique, corps):
 
 def libelle_pub(x):
     p = PAR_URL.get(x.get("parent", ""))
-    return RUB["situer"]["verbe"] + (f" · {p['titre']}" if p else "")
+    return RUB[x["rubrique"]]["verbe"] + (f" · {p['titre']}" if p else "")
 
 DE, GA, CG = CH["descriptif"], CH["gains"], CH["charge"]; pe = DE["par_etat"]
 une = "\n".join(f"""      <a class="pub" href="{e(x['url'])}">
@@ -245,7 +246,7 @@ liste = "\n".join(f"""    <li><time datetime="{x['date']}">{d(x['date'])}</time>
 corps2 = f"""  <header>
     <p class="brand"><a href="index.html">FORM 2026</a></p>
     <h1>Toutes les publications</h1>
-    <p class="lede">Les publications du volet « {e(RUB['situer']['verbe'])} » ({e(RUB['situer']['sous_titre'])}), de la plus récente à la plus ancienne. Date : mise en ligne.</p>
+    <p class="lede">Les publications du volet « {e(RUB['situer']['verbe'])} » ({e(RUB['situer']['sous_titre'])}) et les outils signalés comme publications, de la plus récente à la plus ancienne. Date : mise en ligne.</p>
   </header>
   <section aria-label="Publications">
   <ul class="liste">
