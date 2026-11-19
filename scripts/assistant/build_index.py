@@ -1,0 +1,114 @@
+"""Construit l'index de la page trouver-sa-demarche.html à partir de FORM 2026 (DN) et des fiches DILA.
+
+Lit des sources hors dépôt (descriptions extraites de l'export du descriptif, slim du mois, fiches DILA) : exception
+prévue par la règle du README, décrite dans donnees/assistant/LISEZMOI_assistant.md. Depuis la racine du dépôt :
+    python3 scripts/assistant/build_index.py --form . --carto ~/Documents/cartographie --slim <slim du mois> --out donnees/assistant/index.json
+Le dernier contrôle vérifie que les références de exemples.json (à côté de --out) existent toujours ; sinon, sortie en erreur."""
+import json, glob, re, collections, html, sys
+import argparse, os
+ap=argparse.ArgumentParser(description=__doc__)
+ap.add_argument('--form', default=os.path.expanduser('~/Documents/form2026-site'), help='clone du dépôt FORM 2026')
+ap.add_argument('--carto', default=os.path.expanduser('~/Documents/cartographie'), help='dossier cartographie (dila/, Bdddemarchesfinoctobre/, assistant/)')
+ap.add_argument('--slim', default=None, help='fichier slim des démarches (défaut : <carto>/Bdddemarchesfinoctobre/slim_nov.jsonl)')
+ap.add_argument('--out', default=None, help='index produit (défaut : <carto>/assistant/index.json)')
+A=ap.parse_args()
+FORM=A.form; UP=A.carto
+SLIM=A.slim or UP+'/Bdddemarchesfinoctobre/slim_nov.jsonl'
+OUT=A.out or UP+'/assistant/index.json'
+# Référentiels embarqués dans explorer.html (manifeste des champs, moments de vie, fiches DILA codifiées)
+_ex=open(FORM+'/explorer.html',encoding='utf8').read()
+def embedded(name):
+    m=re.search(r'<script[^>]*id="%s"[^>]*>(.*?)</script>'%name,_ex,re.S)
+    return json.loads(m.group(1))
+sys.path.insert(0, FORM+'/scripts')
+try:
+    import retirer_contacts as _rc   # règle du dépôt FORM : aucune donnée de contact publiée
+except ImportError:
+    _rc = None
+def clean(s, n=None):
+    if not s: return ''
+    s=html.unescape(re.sub(r'<[^>]+>',' ',s))
+    s=re.sub(r'https?://\S+','',s)
+    s=re.sub(r'[\w.+-]+@[\w-]+\.[\w.]+','',s)          # pas d'adresses électroniques
+    s=re.sub(r'(?:\+33\s?|0)[1-9](?:[\s.-]?\d{2}){4}','',s)  # pas de téléphones
+    s=re.sub(r'\s+',' ',s).strip()
+    if _rc: s=_rc.masquer_tel(_rc.masquer(s))
+    if n and len(s)>n: s=s[:n].rsplit(' ',1)[0]+'…'
+    return s
+# --- FORM (sept.) : catégorie, champs, PJ, moments de vie
+D={}
+for f in sorted(glob.glob(FORM+'/app_demarches_*.json')):
+    for r in json.load(open(f)): D[r['demarche']]=r
+ev={e['demarche']:e['evenement'] for e in embedded('data-evenements')}
+man=embedded('data-champs-manifest'); types=man['types']
+shards={}
+for f in glob.glob(FORM+'/champs_shards/*.json'): shards.update(json.load(open(f)))
+PRE={'Siret':'SIRET (API Entreprise)','RNA':'RNA (associations)','Iban':'IBAN','QuotientFamilial':'Quotient familial (CAF)','EtudiantBoursier':'Statut boursier','AnnuaireEducation':'Annuaire Éducation','PreRempli':'Données préremplies','RNF':'RNF (fondations)'}
+# --- DN (3 nov.) : titres, organismes, descriptions des démarches publiées
+slim={}
+for l in open(SLIM):
+    a=json.loads(l); slim[a[0]]=a
+desc={}
+for l in open(UP+'/assistant/descriptions_publiees.jsonl'):
+    a=json.loads(l); desc[a[0]]=a
+recs=[]; skipped=collections.Counter()
+for num,a in desc.items():
+    s=slim.get(num)
+    if not s: skipped['sans_titre']+=1; continue
+    _,state,datepub,nd,siret,org,torg,dep,titre=s
+    fr=D.get(num,{})
+    cat=fr.get('categorie') or ('particulier' if a[3] else 'personne_morale')
+    if cat=='agent_public': skipped['agent_public']+=1; continue
+    if re.search(r'\b(test|essai|brouillon)\b',titre or '',re.I): skipped['test']+=1; continue
+    ch=shards.get(str(num),[])
+    pj=[]; pre=set()
+    for t,lib,obl,api in ch:
+        tn=types[t]
+        if tn=='PieceJustificative' and lib and len(pj)<8 and clean(lib,70) not in pj: pj.append(clean(lib,70))
+        if tn in PRE: pre.add(PRE[tn])
+    slug=(a[2] or '').rsplit('/',1)[-1]
+    national = torg in ('administration_centrale','operateur_d_etat') and not re.search(r'pr[ée]fecture|d[ée]partement|r[ée]gion|acad[ée]m|rectorat|\bDD|\bDR|DREAL|DRAAF|\bARS\b|\bCAF\b|CPAM|ville|mairie|commune',org or '',re.I)
+    recs.append({'k':'dn','id':'DN-%d'%num,'t':clean(titre,220),'d':clean(a[1],300),'o':clean(org,120),'dep':'' if national else (dep or ''),
+      'n':nd or 0,'cat':cat,'ev':ev.get(num,''),'u':slug,'ch':fr.get('nb_champs') or len(ch),'pj':pj,'pre':sorted(pre),
+      'fd':[x.strip() for x in (fr.get('fiches_dila') or '').split(';') if x.strip()],'fe':(a[5] or '')[:10]})
+print('DN',len(recs),dict(skipped))
+# --- DILA
+fiches=[json.loads(l) for l in open(UP+'/dila/dila_fiches.jsonl')]
+forms={}
+for l in open(UP+'/dila/dila_formulaires.jsonl'):
+    g=json.loads(l); forms.setdefault(g['fiche_id'],g)
+docs=collections.defaultdict(list)
+for l in open(UP+'/dila/dila_documents.jsonl'):
+    g=json.loads(l); docs[g['fiche_id']].append(clean(g['texte'],140))
+liens=collections.defaultdict(list)
+for l in open(UP+'/dila/dila_liens_demarches.jsonl'):
+    g=json.loads(l)
+    if not g['slug'].startswith('https'): liens[g['fiche_id']].append(g['slug'])
+dev={x['fiche_id']:x for x in embedded('data-dila')}
+SKIP={'Dossier','Recherche guidée','Outil de recherche','outilRechercheNG'}
+seen=set(); n0=len(recs)
+for f in fiches:
+    fid=f['fiche_id']
+    if fid in seen or not f['titre'] or f['type'] in SKIP or fid[0] not in 'FR': continue
+    seen.add(fid)
+    aud=f['audience'] or 'Particuliers'
+    base='particuliers' if 'Particuliers' in aud else ('professionnels-entreprises' if 'Professionnels' in aud else 'associations')
+    g=forms.get(fid,{}); x=dev.get(fid,{})
+    recs.append({'k':'sp','id':'SP-'+fid,'ty':f['type'],'t':clean(f['titre'],220),'d':clean(f['description'],420),'aud':aud,
+      'th':f['theme'] or '','ev':x.get('evenement') or '','u':'https://www.service-public.gouv.fr/%s/vosdroits/%s'%(base,fid),
+      'l':g.get('lien_web_url') or '','cerfa':g.get('numero_cerfa') or '','docs':list(dict.fromkeys(docs.get(fid,[])))[:10],'dn':liens.get(fid,[])[:5],
+      'm':x.get('modalite') or ''})
+print('SP',len(recs)-n0)
+with open(OUT,'w') as o:
+    o.write('[\n'+',\n'.join(json.dumps(r,ensure_ascii=False,separators=(',',':')) for r in recs)+'\n]\n')
+import os; print(os.path.getsize(OUT)/1e6,'Mo')
+# Contrôle : toutes les références citées par les réponses préparées existent encore dans l'index
+ex=os.path.join(os.path.dirname(OUT),'exemples.json')
+if os.path.exists(ex):
+    ids={r['id'] for r in recs}; manq=[]
+    for e in json.load(open(ex)):
+        refs=set(re.findall(r'\[\[([A-Z]{2}-[A-Za-z0-9]+)\]\]',e['texte']))|set(e['refs'])
+        manq+=[(e['q'],i) for i in refs if i not in ids]
+    if manq:
+        print('RÉFÉRENCES DISPARUES dans exemples.json :',manq); sys.exit(1)
+    print('exemples.json : toutes les références existent')

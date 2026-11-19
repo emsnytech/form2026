@@ -22,7 +22,7 @@ Site généré statiquement — publié via GitHub Pages.
 
 ## Règle : ce qui produit une page publiée vit dans le dépôt
 
-Une seule exception, écrite dans la méthode : les scripts qui lisent une source interne (voir `donnees/fiches-ministeres/methode/REJOUER.md`). Les fiches ministères se rejouent depuis ce dépôt avec `donnees/fiches-ministeres/methode/rejouer.sh`. Le compteur se met à jour par le workflow `maj-compteur.yml`, qui propose le résultat et ouvre une issue en cas d'échec ; sa page affiche le mois couvert et signale un retard. `scripts/update_demarches_catalog.py` lit encore un catalogue de travail hors dépôt ; il ne fait aucun commit, et son résultat passe par une PR.
+Une seule exception, écrite dans la méthode : les scripts qui lisent une source interne (voir `donnees/fiches-ministeres/methode/REJOUER.md`). Les fiches ministères se rejouent depuis ce dépôt avec `donnees/fiches-ministeres/methode/rejouer.sh`. Le compteur se met à jour par le workflow `maj-compteur.yml`, qui propose le résultat et ouvre une issue en cas d'échec ; sa page affiche le mois couvert et signale un retard. `scripts/update_demarches_catalog.py` lit encore un catalogue de travail hors dépôt ; il ne fait aucun commit, et son résultat passe par une PR. Les scripts de `scripts/assistant/` lisent l'export complet du descriptif et les fiches DILA, deux sources ouvertes trop volumineuses pour le dépôt ; leur méthode et leur ordre de lancement sont dans `donnees/assistant/LISEZMOI_assistant.md`.
 
 ## Cadre d'entrée
 
