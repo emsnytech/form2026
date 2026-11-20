@@ -119,3 +119,94 @@ def deduire(organisme, titre):
     if d_tit:
         return d_tit, f_tit, "titre", None
     return None, None, None, None
+
+
+# ---------- Affiner la portée « nationale » (consigne PR 70) : un organisme national (administration centrale ou opérateur)
+# ne rend pas nationale une démarche qui vise un établissement local ou un lieu précis.
+import json as _json
+from pathlib import Path as _Path
+
+# Au singulier seulement : un pluriel (« en lycées », « des écoles de conduite ») désigne un programme, pas un établissement.
+ETABLISSEMENTS = re.compile(r" (lycee|college|ecole|legta|lpa|eplefpa|cfa|greta|iut|universite|chu|"
+                            r"centre hospitalier|ehpad|musee|parc naturel|conservatoire|port) ")
+_MOTEUR = _Path(__file__).with_name("moteur.js")
+# Noms de communes qui sont aussi des mots courants : la liste NON_LIEUX du moteur, lue dans moteur.js (une seule source).
+_m = re.search(r'NON_LIEUX = new Set\(\((.*?)\)\.split', _MOTEUR.read_text(encoding="utf-8"), re.S)
+NON_LIEUX = set(" ".join(re.findall(r'"([^"]*)"', _m.group(1))).split()) if _m else set()
+_STOP = {"a", "au", "aux", "de", "des", "du", "la", "le", "les", "en", "et", "l", "d"}
+_MARQUEURS = [("j", "habite"), ("habite",), ("a",), ("pres", "de"), ("sur",), ("dans",)]
+_COMMUNES = None
+
+
+def charger_communes(chemin):
+    global _COMMUNES
+    d = _json.load(open(chemin, encoding="utf-8")); C = {k: i for i, k in enumerate(d["champs"])}
+    _COMMUNES = {}
+    for c in d["communes"]:
+        _COMMUNES.setdefault(c[C["nom_normalise"]], []).append((c[C["population"]], c[C["departement"]], c[C["nom"]]))
+    for v in _COMMUNES.values(): v.sort(reverse=True)
+
+
+_REGIONS = set("auvergne rhone alpes|bourgogne franche comte|centre val de loire|grand est|hauts de france|ile de france|nouvelle aquitaine|occitanie|pays de la loire|pays de loire|provence alpes cote d azur|region sud|normandie|bretagne".split("|"))
+
+
+def commune_dans(texte):
+    """(département, nom) d'une commune nommée après un marqueur de lieu ou en fin de texte, avec les garde-fous du moteur.
+    Un nom de département donne le département ; un nom de région est réservé et ne donne rien."""
+    if not _COMMUNES: return None
+    w = _n(texte).split()
+    reserve = set()
+    i = 0
+    while i < len(w):
+        for k in range(min(5, len(w) - i), 0, -1):
+            s = w[i:i + k]; art = s[0] in ("le", "la", "les", "l") and k > 1
+            if " ".join(s) in _REGIONS or (art and " ".join(s[1:]) in _REGIONS):
+                reserve.update(range(i, i + k)); i += k - 1; break
+        i += 1
+    def essai(i):
+        if i in reserve: return None
+        for k in range(min(5, len(w) - i), 0, -1):
+            nom = " ".join(w[i:i + k])
+            # Un nom de département (« pas de calais », « landes », « la reunion ») donne le département, avant toute
+            # commune homonyme ou plus courte (« Le Pas », « Landes » en Charente-Maritime, « La Réunion » en Lot-et-Garonne).
+            sans = " ".join(w[i + 1:i + k]) if w[i] in ("le", "la", "les", "l") else None
+            # « réunion » seul est un nom commun : seul « la Réunion » désigne le département.
+            if (nom in _NOM and nom != "reunion") or (sans in _NOM and sans != "reunion" or (sans == "reunion" and w[i] == "la")):
+                c = _NOM.get(nom) or _NOM[sans]; return c, DEPARTEMENTS.get(c, nom)
+            sans_art = nom.split(" ", 1)[1] if nom.split(" ", 1)[0] in ("le", "la", "les", "l") and " " in nom else ""
+            if any(j in reserve for j in range(i, i + k)): continue
+            if nom in _COMMUNES and nom not in NON_LIEUX and sans_art not in NON_LIEUX and nom not in _STOP and len(nom) >= 3:
+                return _COMMUNES[nom][0][1], _COMMUNES[nom][0][2]
+        return None
+    for m in _MARQUEURS:
+        for i in range(len(w) - len(m)):
+            if tuple(w[i:i + len(m)]) == m:
+                r = essai(i + len(m))
+                if r: return r
+    for k in range(min(5, len(w)), 0, -1):
+        r = essai(len(w) - k)
+        if r: return r
+    return None
+
+
+def titre_technique(titre):
+    """Mot qui ressemble à un identifiant interne (« 4BNaap12 », « 4ppfde72 ») : au moins 7 caractères, deux chiffres et deux
+    minuscules, chiffres et lettres alternés. Ne vise ni les codes en majuscules (« PREF976 », « NFE1EA0140 »), ni « 13h30 »."""
+    for tok in re.split(r"[^A-Za-z0-9]+", titre or ""):
+        if (len(tok) >= 7 and len(re.findall(r"\d", tok)) >= 2 and len(re.findall(r"[a-z]", tok)) >= 2
+                and re.search(r"\d[A-Za-z]+\d|[a-z]\d+[a-z]", tok)):
+            return tok
+    return None
+
+
+def affiner_nationale(organisme, titre):
+    """Pour une démarche d'organisme national : (portée, département, règle). Règle 1, établissement local ; règle 2, lieu
+    nommé dans le titre ; sinon elle reste nationale."""
+    if ETABLISSEMENTS.search(_n(organisme)) or ETABLISSEMENTS.search(_n(titre)):
+        d = deduire(organisme, titre)[0] or (commune_dans(titre) or commune_dans(organisme) or (None,))[0]
+        return ("dep", d, "établissement") if d else ("inc", "", "établissement")
+    d, forme = _dans(titre, titre=True)
+    if d: return "dep", d, "lieu dans le titre"
+    c = commune_dans(titre)
+    if c: return "dep", c[0], "lieu dans le titre"
+    return "nat", "", None

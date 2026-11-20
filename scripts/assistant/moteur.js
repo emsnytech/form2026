@@ -59,7 +59,15 @@
   const NON_LIEUX = new Set(("ligne son dun charge place plan cours vue campagne ars contre ecole mars ville villes y avril frais grand vers " +
     "relevant lance centres simple maire change degre vert fins celle celles cultures port long routier parent jury issus lue moyen lies " +
     "corps armes champs rue sens bar eu ham mer orange marche pont mont val salles bourg loire bretagne saone azur mai aide aides plus pres " +
-    "nord sud est ouest centre beaucoup").split(" "));
+    "nord sud est ouest centre beaucoup " +
+    // relevés dans les titres de démarches (règle « lieu dans le titre ») : mots courants qui sont aussi des communes
+    "aire aires courtes maille plaisance bonne bonnes salon maisons segur sus hommes gilles bio jardin pia job titre table " +
+    "marsa tarentaise cerbere courant ports services region formation formations reunion").split(" "));
+  // Noms de département (normalisés) : à leur place, aucune commune homonyme ou plus courte n'est reconnue (« dans les Landes »
+  // n'est pas Landes en Charente-Maritime, « le Pas-de-Calais » n'est pas Le Pas en Mayenne). Article initial ignoré.
+  // Noms de région : réservés aussi (« Centre-Val de Loire » ne désigne ni la Loire ni une commune).
+  const NOMS_REGIONS = new Set("auvergne rhone alpes|bourgogne franche comte|centre val de loire|grand est|hauts de france|ile de france|nouvelle aquitaine|occitanie|pays de la loire|pays de loire|provence alpes cote d azur|region sud|normandie|bretagne".split("|"));
+  const NOMS_DEPARTEMENTS = new Set("ain|aisne|allier|alpes de haute provence|hautes alpes|alpes maritimes|ardeche|ardennes|ariege|aube|aude|aveyron|bouches du rhone|calvados|cantal|charente|charente maritime|cher|correze|corse du sud|haute corse|cote d or|cotes d armor|creuse|dordogne|doubs|drome|eure|eure et loir|finistere|gard|haute garonne|gers|gironde|herault|ille et vilaine|indre|indre et loire|isere|jura|landes|loir et cher|loire|haute loire|loire atlantique|loiret|lot|lot et garonne|lozere|maine et loire|manche|marne|haute marne|mayenne|meurthe et moselle|meuse|morbihan|moselle|nievre|nord|oise|orne|pas de calais|puy de dome|pyrenees atlantiques|hautes pyrenees|pyrenees orientales|bas rhin|haut rhin|rhone|haute saone|saone et loire|sarthe|savoie|haute savoie|seine maritime|seine et marne|yvelines|deux sevres|somme|tarn|tarn et garonne|var|vaucluse|vendee|vienne|haute vienne|vosges|yonne|territoire de belfort|essonne|hauts de seine|seine saint denis|val de marne|val d oise|guadeloupe|martinique|guyane|la reunion|mayotte".split("|"));
   const MARQUEURS = [["j", "habite"], ["habite"], ["a"], ["pres", "de"], ["sur"], ["dans"]];
   let COMMUNES = null;
   function chargerCommunes(d) {
@@ -73,10 +81,18 @@
   function lieux(q) {
     const w = norm(q).split(" ").filter(Boolean), out = [], pris = new Set();
     if (!COMMUNES || !w.length) return { lieux: out, mots: new Set() };
+    // Les mots d'un nom de département sont réservés : ni commune homonyme, ni commune contenue (« Calais » dans « Pas-de-Calais »).
+    for (let i = 0; i < w.length; i++) for (let n = Math.min(5, w.length - i); n >= 1; n--) {
+      const s = w.slice(i, i + n), art = ["le", "la", "les", "l"].includes(s[0]) && n > 1;
+      const reserve = (x) => NOMS_DEPARTEMENTS.has(x) || NOMS_REGIONS.has(x);
+      if (reserve(s.join(" ")) || (art && reserve(s.slice(1).join(" ")))) { for (let k = i; k < i + n; k++) pris.add(k); i += n - 1; break; }
+    }
     const essai = (i, prio) => {
+      if (pris.has(i)) return;
       for (let n = Math.min(5, w.length - i); n >= 1; n--) {
         const nom = w.slice(i, i + n).join(" ");
-        if (COMMUNES.has(nom) && !NON_LIEUX.has(nom) && !STOP.has(nom) && nom.length >= 3 && !pris.has(i)) {
+        const sansArticle = /^(le|la|les|l) /.test(nom) ? nom.replace(/^\S+ /, "") : "";
+        if (COMMUNES.has(nom) && !NON_LIEUX.has(nom) && !NON_LIEUX.has(sansArticle) && !STOP.has(nom) && nom.length >= 3 && ![...Array(n).keys()].some((k) => pris.has(i + k))) {
           for (let k = i; k < i + n; k++) pris.add(k);
           out.push({ prio, pos: i, mots: w.slice(i, i + n), candidats: COMMUNES.get(nom).slice(0, 2) }); return;
         }
@@ -167,6 +183,7 @@
       if (r.k === "dn") { s *= 1 + 0.12 * Math.log10(1 + r.n); if (dep && r.dep === dep) s *= 1.15; else if (depLieu && r.dep === depLieu) s *= 1.3;
         else if (!dep && !depLieu && (r.po ? r.po !== "nat" : !!r.dep)) s *= 0.8;   // territoire inconnu : une démarche locale (département connu ou non) passe après
         if (r.dp && r.dp >= ilYaUnAn) s *= 1.15;
+        if (r.tc) s *= 0.7;   // titre qui ressemble à un identifiant interne (« Bilan_4BNaap12_… ») : rétrogradé, quelle que soit la portée
         const yrs = (r.t.match(/20[12]\d/g) || []).map(Number); if (yrs.length && Math.max(...yrs) < ANNEE - 1) s *= 0.6; }
       else if (/Téléservice|Formulaire|formulaireNG/.test(r.ty)) s *= 1.1;
       out.push([s, i]);

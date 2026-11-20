@@ -42,5 +42,10 @@ console.log('\n=== Situations de référence');
   const cibles=R.filter(r=>r.k==='dn'&&r.po==='nat'&&/commerc/i.test(r.t)&&/endommag|d[ée]grad|d[ée]g[âa]t|violences urbaines/i.test(r.t)).map(r=>r.id);
   if(!cibles.length){ console.log('ATTENTE R4 démarche de l\'État pour les commerces endommagés : absente de l\'index actuel (à revoir une fois l\'index rafraîchi)'); attente++; }
   else { const t3=top(q,{},3); verifie('R4 démarche de l\'État pour les commerces endommagés dans les 3 premiers', ids(t3).some(i=>cibles.includes(i)), ids(t3).join(' ')); } }
+{ // R5 : références à figer après validation par l'auteur (proposées dans la PR 70) ; en attente tant qu'elles ne le sont pas.
+  const q="Mon club de foot a besoin d'argent pour acheter des équipements.", t3=top(q,{},3);
+  const PROPOSEES=['SP-F3180','SP-R45189','SP-R70935','SP-R50795'];
+  const local=t3.filter(r=>r.k==='dn'&&(r.po!=='nat'||/club/i.test(r.t)));
+  console.log(`ATTENTE R5 club de foot, sans département — 3 premiers : ${ids(t3).join(' ')} ; démarches d'un club ou d'un lieu : ${local.length} ; références proposées en tête : ${PROPOSEES.some(i=>ids(t3)[0]===i)?'oui':'non'} (références à figer)`); attente++; }
 console.log(`\n${echecs?echecs+' échec(s)':'Toutes les situations de référence passent'}${attente?', '+attente+' en attente':''}.`);
 if(echecs) process.exit(1);
