@@ -76,6 +76,24 @@ details{font-size:.9rem;margin-top:.3rem}details ul{margin:.3rem 0 0 1.1rem;padd
 .perso{font-size:.85rem;color:var(--muted);margin:.4rem 0 0}
 .retire{font-size:.78rem;color:var(--accent);font-weight:600;margin-top:.25rem}
 .prep{font-size:.85rem;color:var(--accent);font-weight:700;margin:0 0 .4rem}
+.sources{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.6rem;align-items:center;margin:.8rem 0}
+.sc-col{display:flex;flex-direction:column;gap:.4rem}
+.sc-h{font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 .2rem}
+.sc-group{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.4rem}
+.sc-tag{font-size:.75rem;color:var(--muted)}
+.sc-box{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:6px;padding:.4rem .55rem;font-size:.85rem;line-height:1.3}
+.sc-box b{display:block}
+.sc-box span{color:var(--muted)}
+.sc-box.adm{border-left-color:var(--admin)}
+.sc-box.usa{border-left-color:var(--usager)}
+.sc-box.acc{border-left-color:var(--accent)}
+.sc-box.out{border-left-color:var(--ink)}
+.sc-arrow{font-size:1.4rem;color:var(--muted)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:640px){
+  .sources{grid-template-columns:1fr}
+  .sc-arrow{transform:rotate(90deg);justify-self:center}
+}
 .topnav{margin:0 0 1.2rem;font-size:.95rem}.topnav a{text-decoration:none;font-weight:600}
 .couv{margin:.5rem 0 0;font-weight:700;color:var(--muted);min-height:1.5em}
 input#cp{font:inherit;font-size:.95rem;padding:.35rem .5rem;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:6.5rem}
@@ -107,6 +125,7 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
     <p><b>Quelles démarches sont retenues, et pour quel territoire.</b> Les démarches publiées à la date de l'extraction, hors démarches réservées aux agents publics et intitulés de test. Une démarche porte le département de son organisme ; celles des administrations centrales et des opérateurs de l'État, hors services territoriaux, sont traitées comme nationales et proposées quel que soit le département choisi.</p>
   </div>
   <!-- cadre:fin -->
+  <div class="frame" id="cadre">Corpus&nbsp;: chargement…</div>
 
   <form class="ask" id="f">
     <label for="q" class="sel" style="margin-bottom:.35rem">Votre situation, avec vos mots</label>
@@ -332,6 +351,44 @@ fetch("donnees/assistant/index.json").then((r) => r.json()).then((recs) => {
   setTimeout(() => {
     IX = Moteur.build(recs);
     const ndn = recs.filter((r) => r.k === "dn").length, nsp = recs.length - ndn;
+    // Cadre « Ce que la démo couvre » : schéma des sources. nfs, le nombre de structures France services, n'est connu
+    // que si la page les a chargées ; sans lui, le libellé seul.
+    window.majCadre = (nfs) => { $("cadre").innerHTML = `<p><strong>Ce que la démo couvre&nbsp;:</strong> elle relie, pour chaque recherche, les démarches en ligne publiées par l'administration et les lieux où s'adresser près de chez vous.</p>
+<figure class="sources" aria-labelledby="sources-titre">
+  <figcaption id="sources-titre" class="sr-only">Schéma des sources de données de la démo</figcaption>
+  <div class="sc-col">
+    <h2 class="sc-h">Sources ouvertes</h2>
+    <div class="sc-group">
+      <span class="sc-tag">Les démarches</span>
+      <div class="sc-box adm"><b>Démarche Numérique</b><span>${fmt(ndn)} démarches en ligne publiées (open data)</span></div>
+      <div class="sc-box adm"><b>service-public.gouv.fr</b><span>${fmt(nsp)} fiches et ressources (DILA)</span></div>
+    </div>
+    <div class="sc-group">
+      <span class="sc-tag">Les lieux</span>
+      <div class="sc-box usa"><b>API Géo</b><span>du code postal à la commune</span></div>
+      <div class="sc-box usa"><b>Annuaire de l'administration</b><span>guichets, horaires, contacts officiels (DILA, interrogé en direct)</span></div>
+      <div class="sc-box usa"><b>France services</b><span>${nfs ? fmt(nfs) + " structures" : "structures labellisées"} (ANCT)</span></div>
+    </div>
+  </div>
+  <div class="sc-arrow" aria-hidden="true">→</div>
+  <div class="sc-col">
+    <h2 class="sc-h">Traitement FORM</h2>
+    <div class="sc-box acc"><b>Nettoyage</b><span>démarches de test, réservées aux agents ou fermées écartées ; contacts personnels masqués</span></div>
+    <div class="sc-box acc"><b>Portée</b><span>nationale, départementale ou locale à vérifier</span></div>
+    <div class="sc-box acc"><b>Moteur de recherche</b><span>vos mots traduits en vocabulaire administratif</span></div>
+  </div>
+  <div class="sc-arrow" aria-hidden="true">→</div>
+  <div class="sc-col">
+    <h2 class="sc-h">Ce que vous obtenez</h2>
+    <div class="sc-box out"><b>La démarche en ligne</b><span>et ce qu'elle demande</span></div>
+    <div class="sc-box out"><b>La fiche officielle</b><span>pour comprendre vos droits</span></div>
+    <div class="sc-box out"><b>Où aller</b><span>le bon guichet, ses horaires, son téléphone</span></div>
+    <div class="sc-box out"><b>France services</b><span>la plus proche, pour être accompagné</span></div>
+  </div>
+</figure>
+<p class="sc-limites"><strong>Ce qui manque encore&nbsp;:</strong> les démarches des autres sites publics, celles qui restent sur papier ou par courriel, et celles qu'aucune fiche ne présente. La démo n'est pas l'ensemble des démarches administratives.<br>
+<strong>La suite du projet&nbsp;:</strong> indexer les services publics en ligne, d'abord ceux de l'État et de ses opérateurs, puis ceux des collectivités.</p>`; };
+    majCadre(window.NFS || 0);
     $("couv").textContent = `${fmt(ndn)} démarches en ligne et ${fmt(nsp)} fiches service-public indexées`;
     $("st").textContent = ""; $("simple").disabled = false; $("go").disabled = false;
   }, 30);
@@ -674,7 +731,9 @@ $("reset").addEventListener("click", () => { history = []; $("thread").innerHTML
   }
 
   // ---------- 3. France services la plus proche
-  const chargerFS = () => memo("fs", () => json("donnees/assistant/france_services.json"));
+  // Une fois la liste chargée, le cadre « Ce que la démo couvre » du gabarit affiche le nombre de structures.
+  const chargerFS = () => memo("fs", () => json("donnees/assistant/france_services.json").then((d) => {
+    window.NFS = d.structures.length; if (typeof window.majCadre === "function") window.majCadre(window.NFS); return d; }));
   function km(a, b, c, d) {
     const R = 6371, r = Math.PI / 180, x = Math.sin((c - a) * r / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin((d - b) * r / 2) ** 2;
     return 2 * R * Math.asin(Math.sqrt(x));

@@ -141,7 +141,9 @@
   }
 
   // ---------- 3. France services la plus proche
-  const chargerFS = () => memo("fs", () => json("donnees/assistant/france_services.json"));
+  // Une fois la liste chargée, le cadre « Ce que la démo couvre » du gabarit affiche le nombre de structures.
+  const chargerFS = () => memo("fs", () => json("donnees/assistant/france_services.json").then((d) => {
+    window.NFS = d.structures.length; if (typeof window.majCadre === "function") window.majCadre(window.NFS); return d; }));
   function km(a, b, c, d) {
     const R = 6371, r = Math.PI / 180, x = Math.sin((c - a) * r / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin((d - b) * r / 2) ** 2;
     return 2 * R * Math.asin(Math.sqrt(x));

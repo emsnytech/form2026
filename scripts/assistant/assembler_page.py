@@ -10,8 +10,8 @@ scripts/sync_nav.py). Les tests (test_moteur.js) portent donc sur le code exact 
     python3 scripts/assistant/assembler_page.py --depuis <cartographie>/assistant/page.html
 
 --depuis repart du gabarit de l'auteur (page.html, hors du dépôt, comme les sources de build_index.py) et lui applique les
-adaptations FORM listées dans ADAPTATIONS : barre de navigation, ligne des volumes, cadre d'entrée (rempli ensuite par
-scripts/sync_cadre.py), chemins des données, lien vers la version avec assistant et fenêtre de ses conditions, code postal
+adaptations FORM listées dans ADAPTATIONS : en-tête du gabarit retiré, barre de navigation, ligne des volumes, cadre
+d'entrée (rempli ensuite par scripts/sync_cadre.py) placé avant le cadre « Ce que la démo couvre » du gabarit, chemins des données, lien vers la version avec assistant et fenêtre de ses conditions, code postal
 et « Où aller ». Chaque
 adaptation doit trouver sa place exactement une fois, sinon rien n'est écrit : le gabarit a changé et la liste est à revoir.
 """
@@ -75,11 +75,14 @@ LIEN = '<a href="${window.FORM_ASSISTANT_URL}">accessible ici</a> (compte Claude
 
 # (motif, remplacement) : motif est une expression régulière qui doit trouver exactement une place dans le gabarit.
 ADAPTATIONS = [
+    # En-tête du gabarit, propre à la copie de travail : il n'a rien à faire dans la page publiée.
+    (r"<!-- Source du gabarit de la page FORM[^\n]*-->\n", lambda m: ""),
     (r"(button:disabled\{[^\n]*\n)", lambda m: m[1] + CSS_DIALOGUE),
     (r"\n</style>", lambda m: "\n" + CSS_FORM.rstrip("\n") + "\n</style>"),
     (r'(<div class="wrap">\n)', lambda m: m[1] + NAV),
     (r'(  <p class="lede">.*?</p>\n)', lambda m: m[1] + '  <p class="couv" id="couv"></p>\n'),
-    (r'  <div class="frame" id="cadre">[^\n]*</div>\n', lambda m: "  <!-- cadre:début -->\n  <!-- cadre:fin -->\n"),
+    # Le cadre d'entrée commun aux pages FORM (sync_cadre.py) précède le cadre « Ce que la démo couvre » du gabarit.
+    (r'  <div class="frame" id="cadre">[^\n]*</div>\n', lambda m: "  <!-- cadre:début -->\n  <!-- cadre:fin -->\n" + m[0]),
     (r'      <label class="sel">Département (<select id="dep">.*?</select>)</label>\n    </div>\n',
      lambda m: '      <label class="sel">Votre code postal <input id="cp" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="ex. 94120"></label>\n'
      '      <select id="commune" aria-label="Votre commune" hidden></select>\n      <span class="cp-etat" id="cp-etat" role="status"></span>\n'
@@ -95,7 +98,7 @@ ADAPTATIONS = [
      lambda m: f'<script>window.FORM_ASSISTANT_URL = "{ASSISTANT_URL}";  // version avec assistant (artefact Claude partagé)</script>\n<script>{DEBUT}\n{FIN}</script>'),
     (r'fetch\("exemples\.json"\)', lambda m: 'fetch("donnees/assistant/exemples.json")'),
     (r'fetch\("index\.json"\)', lambda m: 'fetch("donnees/assistant/index.json")'),
-    (r'\$\("cadre"\)\.innerHTML = `[^`]*`;', lambda m: '$("couv").textContent = `${fmt(ndn)} démarches en ligne et ${fmt(nsp)} fiches service-public indexées`;'),
+    (r'(\n( *)majCadre\(window\.NFS \|\| 0\);)', lambda m: m[1] + "\n" + m[2] + '$("couv").textContent = `${fmt(ndn)} démarches en ligne et ${fmt(nsp)} fiches service-public indexées`;'),
     (re.escape(LIEN) + r"\}\)\(\);\n",
      lambda m: LIEN.replace('}">accessible', '}" id="ia-lien">accessible').replace(' }\n', '\n')
      + '    if (window.FORM_ASSISTANT_URL) { $("ia").hidden = false; $("ia-go").href = window.FORM_ASSISTANT_URL; } }\n})();\n' + JS_AVIS),
