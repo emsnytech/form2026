@@ -1,0 +1,66 @@
+{
+  "objet": "Calendrier des saisons pour « À la une » : une démarche dont le titre contient un des mots, pendant un des mois, devient candidate avec l'étiquette « De saison ». Mots cherchés sans accents ni casse, comme mots entiers ou expressions. Calendrier à compléter par l'éditeur.",
+  "saisons": [
+    {
+      "id": "declaration-revenus",
+      "libelle": "Déclaration de revenus",
+      "mois": [
+        4,
+        5,
+        6
+      ],
+      "mots": [
+        "declaration de revenus",
+        "declaration des revenus",
+        "impot sur le revenu"
+      ]
+    },
+    {
+      "id": "cheque-energie",
+      "libelle": "Chèque énergie",
+      "mois": [
+        3,
+        4,
+        5
+      ],
+      "mots": [
+        "cheque energie"
+      ]
+    },
+    {
+      "id": "treve-hivernale",
+      "libelle": "Trêve hivernale",
+      "mois": [
+        11,
+        12,
+        1,
+        2,
+        3
+      ],
+      "mots": [
+        "impaye d energie",
+        "impaye de loyer",
+        "impayes de loyer",
+        "treve hivernale",
+        "fonds de solidarite pour le logement"
+      ]
+    },
+    {
+      "id": "rentree",
+      "libelle": "Rentrée scolaire et bourses",
+      "mois": [
+        8,
+        9
+      ],
+      "mots": [
+        "rentree scolaire",
+        "allocation de rentree",
+        "bourse de college",
+        "bourse de lycee",
+        "bourses de college",
+        "bourses de lycee",
+        "transport scolaire"
+      ]
+    }
+  ]
+}

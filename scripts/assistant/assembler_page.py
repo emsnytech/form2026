@@ -9,11 +9,14 @@ scripts/sync_nav.py). Les tests (test_moteur.js) portent donc sur le code exact 
     python3 scripts/assistant/assembler_page.py --check   # n'écrit rien, sort en erreur (1) si la page diffère
     python3 scripts/assistant/assembler_page.py --depuis <cartographie>/assistant/page.html
 
---depuis repart du gabarit de l'auteur (page.html, hors du dépôt, comme les sources de build_index.py) et lui applique les
-adaptations FORM listées dans ADAPTATIONS : en-tête du gabarit retiré, barre de navigation, ligne des volumes, cadre
-d'entrée (rempli ensuite par scripts/sync_cadre.py) placé avant le cadre « Ce que la démo couvre » du gabarit, chemins des données, lien vers la version avec assistant et fenêtre de ses conditions, code postal
-et « Où aller ». Chaque
-adaptation doit trouver sa place exactement une fois, sinon rien n'est écrit : le gabarit a changé et la liste est à revoir.
+--depuis repart du gabarit de l'auteur (page.html, hors du dépôt, comme les sources de build_index.py) et en produit :
+- la page FORM, avec les adaptations listées dans ADAPTATIONS (en-tête du gabarit retiré, chemins des données et des pages
+  du site, lien vers la version avec assistant et fenêtre de ses conditions, « Où aller ») ;
+- la page « Comment ça marche » (page_comment.py), dont sync_cadre.py remplit le cadre d'entrée ;
+- la version avec assistant, écrite dans ~/Documents/cartographie/assistant/version_ia.html (ADAPTATIONS_IA), que
+  l'éditeur republie lui-même sur claude.ai ; elle charge ses données à côté d'elle.
+Chaque adaptation doit trouver sa place exactement une fois, sinon rien n'est écrit : le gabarit a changé et la liste est à revoir.
+--check vérifie aussi que la page « Comment ça marche » est à jour.
 """
 import re, subprocess, sys
 from pathlib import Path
@@ -25,100 +28,63 @@ DEBUT, FIN = "/*moteur:début*/", "/*moteur:fin*/"
 MODULES = [(MOTEUR, DEBUT, FIN), (Path(__file__).with_name("ou_aller.js"), "/*ou_aller:début*/", "/*ou_aller:fin*/")]
 ASSISTANT_URL = "https://claude.ai/artifact/LLfjE77eNYPjiykcDdcJza"
 
-CSS_DIALOGUE = """dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;background:var(--surface);color:var(--ink)}
+VERSION_IA = Path.home() / "Documents" / "cartographie" / "assistant" / "version_ia.html"
+
+CSS_DIALOGUE = """dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line2);border-radius:14px;padding:20px 22px;background:var(--fond);color:var(--ink)}
 dialog::backdrop{background:rgba(0,0,0,.45)}
-dialog h2{font-size:1.1rem;margin:0 0 .5rem;font-weight:800}
-dialog ul{margin:.4rem 0 0 1.1rem;padding:0;font-size:.95rem}dialog li{margin:.25rem 0}
-.dlg-actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
-a.btn{display:inline-block;font-weight:700;border-radius:10px;padding:.55rem 1rem;border:1px solid var(--admin);text-decoration:none}
-a.btn.primary{color:#fff}
+dialog h2{font-size:20px;margin:0 0 8px;font-weight:600}
+dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
+.dlg-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.dlg-actions a.btn-lien{color:#fff}
+.ghost{min-height:48px;padding:0 20px;font-size:16px;border:1px solid var(--line2);border-radius:10px;background:var(--fond);color:var(--ink)}
 """
-CSS_FORM = """.topnav{margin:0 0 1.2rem;font-size:.95rem}.topnav a{text-decoration:none;font-weight:600}
-.couv{margin:.5rem 0 0;font-weight:700;color:var(--muted);min-height:1.5em}
-input#cp{font:inherit;font-size:.95rem;padding:.35rem .5rem;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:6.5rem}
-input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
-.cp-etat{font-size:.9rem;font-weight:700;color:var(--usager)}
-.perso-cp{font-size:.85rem;color:var(--muted);margin:.4rem 0 0}
-.ou{margin-top:.7rem;padding:.6rem .8rem;border-left:4px solid var(--usager);background:var(--usager-soft);border-radius:0 8px 8px 0;font-size:.93rem}
-.ou p{margin:.3rem 0}.ou-t{font-weight:800;margin-bottom:.2rem}
-.ou-s{margin:.45rem 0 .2rem}.ou-s+.ou-s{border-top:1px dashed var(--line);padding-top:.45rem}
-.ou-h,.ou-c{margin:.15rem 0}.ou .links{margin-top:.25rem}
-.ou-src{font-size:.8rem;color:var(--muted)}.ou-src a.signaler{color:var(--muted);font-weight:400}
-.fs-fort{margin-top:1rem}
-.ou-inc{margin:.5rem 0 0;font-size:.88rem;font-weight:700;color:var(--accent)}
-.pastilles{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:0 0 .7rem}
-.pastille{font-size:.9rem;padding:.25rem .7rem;border-radius:999px;background:var(--usager-soft);color:var(--usager);border:1px solid var(--usager)}
-.pastille-fixe{display:inline-block;font-weight:700}
-.liees{margin:.55rem 0 0 1rem;padding:.4rem .7rem;border-left:3px solid var(--line);font-size:.9rem}
-.liees-t{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
-.liees ul{margin:.2rem 0 0;padding:0;list-style:none}.liees li{margin:.2rem 0}
-.liees-l{display:inline-block;min-width:11rem;font-size:.8rem;font-weight:700;color:var(--muted)}
-.regroupes{margin:.5rem 0 0;font-size:.9rem}.regroupes summary{cursor:pointer;font-weight:700;color:var(--admin)}.regroupes ul{margin:.3rem 0 0 1.1rem;padding:0}
-.lien-changer{background:none;border:0;padding:0;font:inherit;font-size:.9rem;color:var(--admin);text-decoration:underline;cursor:pointer}
-.cp-res{font:inherit;font-size:.9rem;padding:.25rem .5rem;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:7.5rem}
-#ccas-ou{margin:0 0 .8rem}
-.fs-pied{margin-top:1rem;font-size:.93rem;color:var(--ink)}.fs-pied summary{cursor:pointer}.fs-pied .ou-s{margin-left:1rem}
-"""
-NAV = '  <p class="topnav" data-rubrique="donnees"><!-- nav:début --><!-- nav:fin --></p>\n'
-DIALOGUE = """  <dialog id="dlg-ia" aria-labelledby="dlg-ia-t">
-    <h2 id="dlg-ia-t">Avant d'ouvrir la version avec assistant</h2>
-    <p>C'est une version de test, publiée hors du site FORM, sur claude.ai.</p>
-    <ul>
-      <li>L'assistant fonctionne avec Claude, le modèle d'Anthropic&nbsp;: il faut un compte Claude, et vos questions sont décomptées de ce compte, selon les <a href="https://www.anthropic.com/legal/consumer-terms" target="_blank" rel="noopener">conditions d'utilisation d'Anthropic</a>.</li>
-      <li>Vos questions sont envoyées au modèle&nbsp;: n'y indiquez ni nom, ni numéro de dossier, ni coordonnées.</li>
-      <li>L'assistant oriente et peut se tromper&nbsp;: vérifiez toujours sur la fiche ou la démarche citée. Il ne dit pas si vous avez droit à une aide.</li>
-      <li>Le nombre de questions libres est limité par visite. La recherche simple et les exemples préparés restent disponibles sans IA, ici comme là-bas.</li>
-    </ul>
-    <div class="dlg-actions">
-      <a class="btn primary" id="ia-go" href="#" autofocus target="_blank" rel="noopener">J'ai compris, ouvrir l'assistant ↗</a>
-      <button type="button" class="ghost" id="ia-annuler">Annuler</button>
-    </div>
-  </dialog>
+DIALOGUE = """<dialog id="dlg-ia" aria-labelledby="dlg-ia-t">
+  <h2 id="dlg-ia-t">Avant d'ouvrir la version avec assistant</h2>
+  <p>C'est une version de test, publiée hors du site FORM, sur claude.ai.</p>
+  <ul>
+    <li>L'assistant fonctionne avec Claude, le modèle d'Anthropic&nbsp;: il faut un compte Claude, et vos questions sont décomptées de ce compte, selon les <a href="https://www.anthropic.com/legal/consumer-terms" target="_blank" rel="noopener">conditions d'utilisation d'Anthropic</a>.</li>
+    <li>Vos questions sont envoyées au modèle&nbsp;: n'y indiquez ni nom, ni numéro de dossier, ni coordonnées.</li>
+    <li>L'assistant oriente et peut se tromper&nbsp;: vérifiez toujours sur la fiche ou la démarche citée. Il ne dit pas si vous avez droit à une aide.</li>
+    <li>Le nombre de questions libres est limité par visite. La recherche simple et les exemples préparés restent disponibles sans IA, ici comme là-bas.</li>
+  </ul>
+  <div class="dlg-actions">
+    <a class="btn-lien" id="ia-go" href="#" autofocus target="_blank" rel="noopener">J'ai compris, ouvrir l'assistant</a>
+    <button type="button" class="ghost" id="ia-annuler">Annuler</button>
+  </div>
+</dialog>
 """
 JS_AVIS = """// Version avec assistant : les conditions d'utilisation s'affichent avant l'ouverture.
-function ouvrirAvisIA(ev) { if (ev) ev.preventDefault(); const d = $("dlg-ia"); if (d.showModal) d.showModal(); else window.open(window.FORM_ASSISTANT_URL, "_blank", "noopener"); }
-$("ia").addEventListener("click", ouvrirAvisIA);
-$("quota").addEventListener("click", (ev) => { if (ev.target.closest("#ia-lien")) ouvrirAvisIA(ev); });
+$("ia-go").href = window.FORM_ASSISTANT_URL;
+document.addEventListener("click", (ev) => { if (!ev.target.closest("#ia")) return; ev.preventDefault(); const d = $("dlg-ia"); if (d.showModal) d.showModal(); else window.open(window.FORM_ASSISTANT_URL, "_blank", "noopener"); });
 $("ia-annuler").addEventListener("click", () => $("dlg-ia").close());
 $("ia-go").addEventListener("click", () => $("dlg-ia").close());
 """
-LIEN = '<a href="${window.FORM_ASSISTANT_URL}">accessible ici</a> (compte Claude nécessaire).` : ""); }\n'
+CONFIG_FORM = ('<script>window.FORM_ASSISTANT_URL = "' + ASSISTANT_URL + '";  // version avec assistant (artefact Claude partagé)\n'
+               'window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-demarche-comment.html"; window.FORM_ACCUEIL_URL = "./";</script>\n')
 
 # (motif, remplacement) : motif est une expression régulière qui doit trouver exactement une place dans le gabarit.
-ADAPTATIONS = [
-    # En-tête du gabarit, propre à la copie de travail : il n'a rien à faire dans la page publiée.
+COMMUNES = [
+    # En-tête du gabarit, propre à la copie de travail : il n'a rien à faire dans les pages assemblées.
     (r"<!-- Source du gabarit de la page FORM[^\n]*-->\n", lambda m: ""),
-    (r"(button:disabled\{[^\n]*\n)", lambda m: m[1] + CSS_DIALOGUE),
-    (r"\n</style>", lambda m: "\n" + CSS_FORM.rstrip("\n") + "\n</style>"),
-    (r'(<div class="wrap">\n)', lambda m: m[1] + NAV),
-    (r'(  <p class="lede">.*?</p>\n)', lambda m: m[1] + '  <p class="couv" id="couv"></p>\n'),
-    # Le cadre d'entrée commun aux pages FORM (sync_cadre.py) précède le cadre « Ce que la démo couvre » du gabarit.
-    (r'  <div class="frame" id="cadre">[^\n]*</div>\n', lambda m: "  <!-- cadre:début -->\n  <!-- cadre:fin -->\n" + m[0]),
-    (r'      <label class="sel">Département (<select id="dep">.*?</select>)</label>\n    </div>\n',
-     lambda m: '      <label class="sel">Votre code postal <input id="cp" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="ex. 94120"></label>\n'
-     '      <select id="commune" aria-label="Votre commune" hidden></select>\n      <span class="cp-etat" id="cp-etat" role="status"></span>\n'
-     f'      <label class="sel">ou choisissez un département {m[1]}</label>\n    </div>\n'
-     '    <p class="perso-cp">Votre code postal sert uniquement à trouver votre commune (API Géo de l\'État). Rien d\'autre n\'est envoyé.</p>\n'),
-    (r'(  +<button type="button" class="ghost" id="simple"[^\n]*\n)',
-     lambda m: m[1] + '      <button type="button" class="ghost" id="ia" hidden>Essayer avec l\'assistant (version de test)</button>\n'),
-    (r'(<form class="ask" id="f">.*?\n  </form>\n)', lambda m: m[1] + "\n" + DIALOGUE),
-    (r'(\n      <li><strong>Données&nbsp;:</strong>)', lambda m: "\n      <li><strong>Où aller&nbsp;:</strong> votre code postal donne votre commune (API Géo de l'État). Le service local compétent pour votre commune vient de l'Annuaire de l'administration (DILA), interrogé avec le seul code de la commune&nbsp;; la France services la plus proche, de la liste des structures labellisées (ANCT). Les téléphones et adresses électroniques affichés sont ceux que ces deux sources publient pour chaque service.</li>"
-     "\n      <li><strong>La suite du projet&nbsp;:</strong> indexer les services publics en ligne, d'abord ceux de l'État et de ses opérateurs, puis ceux des collectivités.</li>" + m[1]),
+    # « Où aller », après le script du gabarit.
     (r"(</script>\n)(</body>)", lambda m: m[1] + "<script>/*ou_aller:début*/\n/*ou_aller:fin*/</script>\n" + m[2]),
-    (r"<script>/\*MOTEUR\*/</script>",
-     lambda m: f'<script>window.FORM_ASSISTANT_URL = "{ASSISTANT_URL}";  // version avec assistant (artefact Claude partagé)</script>\n<script>{DEBUT}\n{FIN}</script>'),
-    (r'fetch\("exemples\.json"\)', lambda m: 'fetch("donnees/assistant/exemples.json")'),
-    (r'fetch\("index\.json"\)', lambda m: 'fetch("donnees/assistant/index.json")'),
-    (r'(\n( *)majCadre\(window\.NFS \|\| 0\);)', lambda m: m[1] + "\n" + m[2] + '$("couv").textContent = `${fmt(ndn)} démarches en ligne et ${fmt(nsp)} fiches service-public indexées`;'),
-    (re.escape(LIEN) + r"\}\)\(\);\n",
-     lambda m: LIEN.replace('}">accessible', '}" id="ia-lien">accessible').replace(' }\n', '\n')
-     + '    if (window.FORM_ASSISTANT_URL) { $("ia").hidden = false; $("ia-go").href = window.FORM_ASSISTANT_URL; } }\n})();\n' + JS_AVIS),
+]
+# Page FORM : chemins des données et des pages du site, lien vers la version avec assistant et fenêtre de ses conditions.
+ADAPTATIONS = COMMUNES + [
+    (r"\n</style>", lambda m: "\n" + CSS_DIALOGUE.rstrip("\n") + "\n</style>"),
+    (r"\n</main>\n", lambda m: "\n</main>\n" + DIALOGUE),
+    (r"<script>/\*MOTEUR\*/</script>", lambda m: CONFIG_FORM + f"<script>{DEBUT}\n{FIN}</script>"),
+    (r"(\n)(</script>\n<script>/\*ou_aller)", lambda m: m[1] + JS_AVIS + m[2]),
+]
+# Version avec assistant (artefact claude.ai) : données servies à côté de la page, pages FORM par leur adresse publique.
+ADAPTATIONS_IA = COMMUNES + [
+    (r"<script>/\*MOTEUR\*/</script>", lambda m: f"<script>{DEBUT}\n{FIN}</script>"),
 ]
 
 
-def adapter(gabarit):
+def adapter(gabarit, adaptations=None):
     t = gabarit
-    for motif, rempl in ADAPTATIONS:
+    for motif, rempl in (ADAPTATIONS if adaptations is None else adaptations):
         n = len(re.findall(motif, t, flags=re.S))
         if n != 1:
             sys.exit(f"gabarit : l'adaptation « {motif[:60]} » trouve {n} place(s) au lieu d'une ; rien n'est écrit")
@@ -137,14 +103,22 @@ def avec_moteur(t):
 
 if "--depuis" in sys.argv:
     source = Path(sys.argv[sys.argv.index("--depuis") + 1]).expanduser()
-    PAGE.write_text(avec_moteur(adapter(source.read_text(encoding="utf-8"))), encoding="utf-8")
+    gabarit = source.read_text(encoding="utf-8")
+    PAGE.write_text(avec_moteur(adapter(gabarit)), encoding="utf-8")
+    subprocess.run([sys.executable, str(Path(__file__).with_name("page_comment.py"))], cwd=RACINE, check=True, capture_output=True)
     for script in ("sync_nav.py", "sync_cadre.py"):
         subprocess.run([sys.executable, str(RACINE / "scripts" / script)], cwd=RACINE, check=True, capture_output=True)
-    print(f"écrit : {PAGE.name}, depuis {source}")
+    print(f"écrit : {PAGE.name} et trouver-sa-demarche-comment.html, depuis {source}")
+    # Version avec assistant : même gabarit, hors du dépôt, republiée à la main sur claude.ai par l'éditeur.
+    if VERSION_IA.parent.is_dir():
+        VERSION_IA.write_text(avec_moteur(adapter(gabarit, ADAPTATIONS_IA)), encoding="utf-8")
+        print(f"écrit : {VERSION_IA}")
     sys.exit(0)
 
 t = PAGE.read_text(encoding="utf-8")
 n = avec_moteur(t)
+if "--check" in sys.argv and subprocess.run([sys.executable, str(Path(__file__).with_name("page_comment.py")), "--check"], cwd=RACINE).returncode:
+    sys.exit(1)
 if n == t:
     print("Moteur et « Où aller » de la page : à jour.")
 elif "--check" in sys.argv:
