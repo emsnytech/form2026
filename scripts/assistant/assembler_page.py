@@ -45,6 +45,7 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
 .ou-h,.ou-c{margin:.15rem 0}.ou .links{margin-top:.25rem}
 .ou-src{font-size:.8rem;color:var(--muted)}.ou-src a.signaler{color:var(--muted);font-weight:400}
 .fs-fort{margin-top:1rem}
+.ou-inc{margin:.5rem 0 0;font-size:.88rem;font-weight:700;color:var(--accent)}
 .fs-pied{margin-top:1rem;font-size:.93rem;color:var(--ink)}.fs-pied summary{cursor:pointer}.fs-pied .ou-s{margin-left:1rem}
 """
 NAV = '  <p class="topnav" data-rubrique="donnees"><!-- nav:début --><!-- nav:fin --></p>\n'

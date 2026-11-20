@@ -102,6 +102,8 @@
       s.url_service_public ? `<a href="${esc(s.url_service_public)}" target="_blank" rel="noopener">Fiche officielle du service ↗</a>` : ""].filter(Boolean).join("");
     return `<div class="ou-s"><strong>${esc(s.nom)}</strong>${adr ? `<div>${esc(adr)}</div>` : ""}${blocHoraires(horairesAnnuaire(s.plage_ouverture))}${contacts(tels, mails, "Annuaire de l'administration (DILA)", s.url_service_public)}<div class="links">${liens}</div></div>`;
   }
+  // Portée d'une démarche en ligne (champ « po » de l'index) ; un index plus ancien, sans ce champ, confond nationale et inconnue.
+  const portee = (r) => r.po || (r.dep ? "dep" : "nat");
   // Une démarche en ligne n'a de guichet local que si elle relève du département de l'usager : une démarche nationale
   // ou d'un autre département n'est pas reçue par le service de sa commune.
   const duDepartement = (r, c) => r.k === "dn" && !!r.dep && r.dep === c.dep;
@@ -149,10 +151,10 @@
   async function franceServices(liste) {
     let el = $("fs-aide");
     if (!el) { el = document.createElement("div"); el.id = "fs-aide"; $("cards").after(el); }
-    // « Aucune démarche en ligne pertinente » : aucune démarche en ligne, nationale ou du département de l'usager, parmi
-    // les 5 premiers résultats. Sans département connu, toute démarche en ligne compte.
+    // « Aucune démarche en ligne pertinente » : parmi les 5 premiers résultats, aucune démarche nationale (po « nat ») ni du
+    // département de l'usager (sans département connu : d'aucun département). Une démarche de département inconnu ne compte pas.
     const dep = COMMUNE ? COMMUNE.dep : $("dep").value;
-    const enLigne = liste.slice(0, 5).some((r) => r && r.k === "dn" && (!r.dep || !dep || r.dep === dep));
+    const enLigne = liste.slice(0, 5).some((r) => r && r.k === "dn" && (portee(r) === "nat" || (portee(r) === "dep" && (!dep || r.dep === dep))));
     el.className = enLigne ? "fs-pied" : "ou fs-fort"; el.innerHTML = "";
     if (!$("res") || $("res").hidden) return;
     const c = COMMUNE;
@@ -176,11 +178,23 @@
   }
 
   // ---------- Branchement sur l'affichage des résultats
+  // Démarche locale de département inconnu : pas d'encadré, une mention ; la carte du gabarit dit « national ou non
+  // localisé » pour les deux cas, la page précise lequel.
+  function portee_carte(el, r) {
+    if (r.k !== "dn" || r.dep) return;
+    const meta = el.querySelector(".top .meta");
+    if (meta) meta.textContent = meta.textContent.replace("national ou non localisé", portee(r) === "inc" ? "département inconnu" : "national");
+    if (portee(r) === "inc" && !el.querySelector(".ou-inc")) {
+      const p = document.createElement("p"); p.className = "ou-inc"; p.textContent = "Démarche locale : vérifiez qu'elle concerne votre commune."; el.appendChild(p);
+    }
+  }
   function decorer() {
     if (typeof IX === "undefined" || !IX) return;
     const deja = new Set();
     for (const el of document.querySelectorAll("#cards .card")) {
-      const i = IX.byId.get(el.id.slice(2)); if (i !== undefined) encadre(el, IX.recs[i], COMMUNE, deja);
+      const i = IX.byId.get(el.id.slice(2)); if (i === undefined) continue;
+      portee_carte(el, IX.recs[i]);
+      if (portee(IX.recs[i]) !== "inc") encadre(el, IX.recs[i], COMMUNE, deja);
     }
     franceServices(LISTE);
   }

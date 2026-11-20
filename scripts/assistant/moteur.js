@@ -72,7 +72,7 @@
       if (source && r.k !== source) continue;
       if (r.k === "dn") {
         if (pub && PUBLIC_DN[pub] && !PUBLIC_DN[pub].includes(r.cat)) continue;
-        if (dep && r.dep && r.dep !== dep) continue;
+        if (dep && r.dep && r.dep !== dep) continue; // garde les démarches nationales (« nat ») et de département inconnu (« inc »)
         if (ouvertes && r.fe && r.fe < today) continue;
       } else {
         if (pub && PUBLIC_SP[pub] && !(r.aud || "").includes(PUBLIC_SP[pub])) continue;
@@ -85,7 +85,11 @@
       out.push([s, i]);
     }
     out.sort((a, b) => b[0] - a[0]);
-    return out.slice(0, k).map(([s, i]) => ({ score: +s.toFixed(2), r: ix.recs[i] }));
+    // Département choisi : les démarches locales dont le département est inconnu (po « inc ») restent parmi les
+    // résultats retenus, mais placées après les démarches nationales et celles du département.
+    const top = out.slice(0, k);
+    if (dep) top.sort((a, b) => (ix.recs[a[1]].po === "inc") - (ix.recs[b[1]].po === "inc") || b[0] - a[0]);
+    return top.map(([s, i]) => ({ score: +s.toFixed(2), r: ix.recs[i] }));
   }
   const api = { build, search, norm, toks };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
