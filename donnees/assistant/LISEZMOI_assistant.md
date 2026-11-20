@@ -51,6 +51,8 @@ Les deux scripts lisent des sources hors du dépôt, l'export complet du descrip
     python3 scripts/assistant/assembler_page.py
     node scripts/assistant/test_moteur.js
 
+La page elle-même repart du gabarit de l'auteur, `<cartographie>/assistant/page.html` : `python3 scripts/assistant/assembler_page.py --depuis <cartographie>/assistant/page.html` lui applique les adaptations FORM (navigation, volumes indexés, cadre d'entrée, chemins des données, bouton et conditions de la version avec assistant), puis y recopie le moteur. Si le gabarit a changé au point qu'une adaptation ne trouve plus sa place, rien n'est écrit.
+
 `<cartographie>` est le dossier de travail qui contient `dila/` (fiches DILA déjà découpées en `dila_*.jsonl`) et `assistant/`. Le « slim du mois » est l'extrait compact du descriptif : une ligne par démarche, avec numéro, état, date de publication, dossiers, SIRET, organisme, type d'organisme, département et titre. Le dernier contrôle de `build_index.py` vérifie que toutes les références de `exemples.json` existent encore. S'il échoue, l'index ne se publie pas : les exemples sont à revoir par l'auteur.
 
 L'index publié le 19 novembre 2026 a été reconstruit à l'identique par ces commandes, à partir de l'export du 3 novembre 2026.
