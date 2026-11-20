@@ -57,6 +57,15 @@ for l in open(UP+'/assistant/descriptions_publiees.jsonl'):
 # Portée d'une démarche en ligne (champ « po ») : « nat » (administration centrale ou opérateur national, hors services
 # territoriaux), « dep » (département de l'organisme, ou déduit de son nom ou du titre par departements.py), « inc » (locale,
 # département inconnu).
+# Démarches de recette : titre qui commence par un marqueur entre crochets ou parenthèses, ou suivi d'un tiret ([Qualif],
+# [Préprod], [Recette], [Test], [Démo], [Formation], [Copie], [Brouillon], « Recette - »…), ou qui contient le mot isolé
+# « préprod ». Jamais « recette », « qualification » ou « formation » hors de ces marqueurs. Une démarche de plus de 10
+# dossiers n'est pas écartée : elle est signalée (une vraie démarche peut porter un tel marqueur).
+_MARQ=r"(qualif|qualification|pr[ée][- ]?prod|recette|test|d[ée]mo|formation|copie|brouillon)"
+RECETTE_DEBUT=re.compile(r"^\s*(?:[\[(]\s*"+_MARQ+r"\s*[\])]|"+_MARQ+r"\s*[-–—]\s)",re.I)
+PREPROD=re.compile(r"(?<![\w])pr[ée][- ]?prod(?![\w])",re.I)
+norm_marqueur=lambda k: re.sub(r"[ée]","e",k.lower()).replace(" ","-").replace("pre-prod","preprod")
+recettes=collections.defaultdict(list); recettes_gardees=[]
 recs=[]; skipped=collections.Counter(); portee=collections.Counter(); deduits=[]; formes=collections.Counter(); ecarts=[]
 # Communes de donnees/assistant/communes.json (dans le dépôt) : lieu nommé dans le titre d'une démarche d'organisme national.
 charger_communes(os.path.join(FORM,'donnees','assistant','communes.json'))
@@ -69,6 +78,11 @@ for num,a in desc.items():
     cat=fr.get('categorie') or ('particulier' if a[3] else 'personne_morale')
     if cat=='agent_public': skipped['agent_public']+=1; continue
     if re.search(r'\b(test|essai|brouillon)\b',titre or '',re.I): skipped['test']+=1; continue
+    m=RECETTE_DEBUT.match(titre or ''); pp=PREPROD.search(titre or '')
+    if m or pp:
+        k=norm_marqueur((m.group(1) or m.group(2)) if m else pp.group(0))
+        if (nd or 0)>10: recettes_gardees.append({'id':'DN-%d'%num,'marqueur':k,'dossiers':nd,'titre':titre})
+        else: skipped['recette']+=1; recettes[k].append({'id':'DN-%d'%num,'dossiers':nd or 0,'titre':titre}); continue
     ch=shards.get(str(num),[])
     pj=[]; pre=set()
     for t,lib,obl,api in ch:
@@ -94,10 +108,11 @@ for num,a in desc.items():
       'fd':[x.strip() for x in (fr.get('fiches_dila') or '').split(';') if x.strip()],'fe':(a[5] or '')[:10]})
     if titre_technique(titre): recs[-1]['tc']=1; techniques.append({'id':'DN-%d'%num,'n':nd or 0,'portee':po,'titre':titre,'code':titre_technique(titre)})
 print('DN',len(recs),dict(skipped))
+print('démarches de recette écartées :',{k:len(v) for k,v in recettes.items()},'; gardées et signalées (plus de 10 dossiers) :',len(recettes_gardees))
 print('portée des démarches en ligne :',dict(portee),'; départements déduits :',len(deduits),dict(formes),'; organisme et titre divergents :',len(ecarts))
 print('portée nationale affinée :',{k:len(v) for k,v in affines.items()},'; titres techniques :',len(techniques))
 if A.rapport:
-    json.dump({'affines':affines,'techniques':techniques,'portee':dict(portee),'formes':dict(formes),'exemples':random.Random(20261120).sample(deduits,min(15,len(deduits))),'ecarts':ecarts,'deduits':deduits},
+    json.dump({'recettes':recettes,'recettes_gardees':recettes_gardees,'affines':affines,'techniques':techniques,'portee':dict(portee),'formes':dict(formes),'exemples':random.Random(20261120).sample(deduits,min(15,len(deduits))),'ecarts':ecarts,'deduits':deduits},
               open(A.rapport,'w'),ensure_ascii=False,indent=1)
 # --- DILA
 fiches=[json.loads(l) for l in open(UP+'/dila/dila_fiches.jsonl')]
