@@ -31,8 +31,12 @@ console.log('\n=== Situations de référence');
   const t=top(q,{},5), L=M.lieux?M.lieux(q):{lieux:[]};
   verifie('R1 DN-13583 en 1re position', t[0]&&t[0].id==='DN-13583', ids(t).join(' '));
   verifie('R1 département 38 proposé', !!(L.lieux[0]&&L.lieux[0].dep==='38'), L.lieux.map(l=>l.nom+' ('+l.dep+')').join(', ')||'aucun lieu'); }
-{ const q="Je suis agriculteur, existe-t-il une aide d'urgence ?", t3=top(q,{dep:'37'},3), t5=top(q,{dep:'37'},5);
-  verifie('R2 Plan CASI du 37 dans les 3 premiers', ids(t3).some(i=>i==='DN-157661'||i==='DN-159382'), ids(t3).join(' '));
+// Une situation dont les références attendues ne sont plus dans l'index (démarches fermées depuis) passe « en attente » avec
+// son motif, au lieu d'échouer : les références sont alors à revoir par l'auteur, jamais remplacées par le script.
+const presentes=(l)=>l.filter(i=>ix.byId.has(i));
+{ const q="Je suis agriculteur, existe-t-il une aide d'urgence ?", t3=top(q,{dep:'37'},3), t5=top(q,{dep:'37'},5), REF=['DN-157661','DN-159382'];
+  if(!presentes(REF).length){ console.log(`ATTENTE R2 Plan CASI du 37 : ${REF.join(' et ')} ne sont plus dans l'index (démarches fermées) ; 3 premiers : ${ids(t3).join(' ')} — références à revoir`); attente++; }
+  else verifie('R2 Plan CASI du 37 dans les 3 premiers', ids(t3).some(i=>REF.includes(i)), ids(t3).join(' '));
   verifie('R2 aucune aide aux victimes de violences conjugales dans les 5 premiers', !t5.some(r=>/violences? conjugal/i.test(r.t)), ids(t5).join(' ')); }
 { const q="Je n'arrive plus à payer ma facture d'électricité, j'habite Rezé, près de Nantes. Ai-je droit à une aide ?", t3=top(q,{},3), t5=top(q,{},5);
   verifie('R3 DN-50108 dans les 3 premiers', ids(t3).includes('DN-50108'), ids(t3).join(' '));
@@ -40,7 +44,7 @@ console.log('\n=== Situations de référence');
   verifie('R3 ni déchetterie, ni broyeur, ni récupérateur d\'eau dans les 5 premiers', !t5.some(r=>/d[ée]chett|broyeur|r[ée]cup[ée]rateur/i.test(r.t)), t5.map(r=>r.t.slice(0,30)).join(' / ')); }
 { const q="Ma vitrine a été cassée pendant les manifestations, quelle aide ?";
   const cibles=R.filter(r=>r.k==='dn'&&r.po==='nat'&&/commerc/i.test(r.t)&&/endommag|d[ée]grad|d[ée]g[âa]t|violences urbaines/i.test(r.t)).map(r=>r.id);
-  if(!cibles.length){ console.log('ATTENTE R4 démarche de l\'État pour les commerces endommagés : absente de l\'index actuel (à revoir une fois l\'index rafraîchi)'); attente++; }
+  if(!cibles.length){ console.log('ATTENTE R4 démarche de l\'État pour les commerces endommagés : absente de l\'index (aucune démarche de ce type dans le descriptif publié, export du 20 novembre 2026)'); attente++; }
   else { const t3=top(q,{},3); verifie('R4 démarche de l\'État pour les commerces endommagés dans les 3 premiers', ids(t3).some(i=>cibles.includes(i)), ids(t3).join(' ')); } }
 { // R5 : références à figer après validation par l'auteur (proposées dans la PR 70) ; en attente tant qu'elles ne le sont pas.
   const q="Mon club de foot a besoin d'argent pour acheter des équipements.", t3=top(q,{},3);
