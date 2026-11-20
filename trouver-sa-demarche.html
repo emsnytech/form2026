@@ -767,8 +767,20 @@ function afficherResultats(liste, q, origine, principalDonne) {
   // Pas de démarche en ligne en tête : la fiche officielle la plus pertinente, en « Comprendre », remontée en premier.
   const comprendre = ligne ? (estFiche(principal) ? null : (lieeAuPrincipal || fiches[0] || null))
     : (estFiche(principal) ? principal : (fiches[0] || null));
-  // « Aussi pour vous » : une fiche qui a un simulateur ou une démarche en ligne, et qui passe le seuil de pertinence ; sinon, pas de carte.
-  const aussi = fiches.find((f) => f !== principal && f !== comprendre && resDe(f).some((x) => /imulateur|Téléservice|selNG/i.test(x.ty)) && P.pertinente(f.id)) || null;
+  // « Aussi pour vous » : une fiche qui a un simulateur ou une démarche en ligne, et qui est soit citée par la fiche
+  // « Comprendre » (ses fiches liées, champ « fl ») et en rapport avec la question (au moins le quart du meilleur score,
+  // et un terme de la question, synonymes compris, dans son titre), soit au-dessus du seuil de pertinence ; sinon, pas de carte.
+  const utile = (f) => f !== principal && f !== comprendre && resDe(f).some((x) => /imulateur|Téléservice|selNG/i.test(x.ty));
+  const lieesComprendre = comprendre ? (comprendre.fl || []).map(rec).filter((f) => f && utile(f)) : [];
+  let aussi = null;
+  if (lieesComprendre.length) {
+    const tous = Moteur.search(IX, q, { ...opt, k: Infinity }), meilleur = tous.length ? tous[0].score : 0;
+    const score = new Map(tous.map((x) => [x.r.id, x.score]));
+    const groupes = [...(Moteur.analyse ? Moteur.analyse(q).termes.values() : [])];
+    const auTitre = (f) => { const m = new Set(Moteur.toks(f.t)); return groupes.some((g) => [...g].some((s) => m.has(s))); };
+    aussi = lieesComprendre.find((f) => (score.get(f.id) || 0) >= meilleur / 4 && auTitre(f)) || null;
+  }
+  aussi = aussi || fiches.find((f) => utile(f) && P.pertinente(f.id)) || null;
   carteDemarche(ligne ? principal : null); carteAussi(aussi); carteComprendre(comprendre);
   if (ligne) $("carte-ou").after($("carte-comprendre")); else $("carte-demarche").before($("carte-comprendre"));
   if (!ligne) { $("rep-manque").innerHTML = avecSignaler(MESSAGES.manque); $("rep-manque").hidden = false; }
