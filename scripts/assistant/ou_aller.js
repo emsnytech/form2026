@@ -34,8 +34,13 @@
 
   // ---------- 1. Code postal → commune
   const cp = $("cp"), choix = $("commune"), etat = $("cp-etat");
+  // Le bloc « Préciser le public ou le lieu » s'ouvre tout seul quand un lieu est proposé ou qu'un filtre est actif.
+  function ouvrirFiltres() { const f = $("filtres"); if (f) f.open = true; }
+  ["pub", "dep"].forEach((id) => $(id).addEventListener("change", () => { if ($(id).value) ouvrirFiltres(); }));
+  // Un département ou un code postal choisi remplace une région choisie.
+  $("dep").addEventListener("change", () => { if ($("dep").value) Moteur.region = null; });
   function poser(c) {
-    COMMUNE = c;
+    COMMUNE = c; if (c) { Moteur.region = null; ouvrirFiltres(); }
     if (c) { $("dep").value = c.dep; etat.textContent = `${c.nom} (${c.dep})`; } else etat.textContent = "";
     decorer();
   }
@@ -215,7 +220,21 @@
     if (!el) { el = document.createElement("div"); el.id = "lieu-pastille"; el.className = "pastilles"; $("cards").before(el); }
     el.innerHTML = "";
     if (COMMUNE || !$("res") || $("res").hidden || !Moteur.lieux) return;
-    const L = Moteur.lieux($("q").value).lieux[0];
+    const A = Moteur.lieux($("q").value), L = A.lieux[0];
+    // Région choisie (clic sur « Bretagne ? ») : la pastille dit que les résultats sont limités, et permet de retirer le filtre.
+    if (Moteur.region) {
+      el.innerHTML = `<span class="meta">Résultats limités à la région</span> <span class="pastille pastille-fixe">${esc(Moteur.region.nom)}</span> · <button type="button" class="lien-changer" id="region-retirer">retirer</button>`;
+      $("region-retirer").addEventListener("click", () => { Moteur.region = null; if (ORIGINE === "simple") $("simple").click(); else decorer(); });
+      ouvrirFiltres(); return;
+    }
+    // Région reconnue dans la phrase, sans commune ni département : pastille « Bretagne ? » ; un clic filtre sur ses départements.
+    if (!L && A.regions && A.regions[0] && !$("dep").value) {
+      const Rg = A.regions[0];
+      el.innerHTML = `<span class="meta">Région repérée dans votre question&nbsp;:</span> <button type="button" class="pastille" id="region-choisir">${esc(Rg.nom)}&nbsp;?</button>`;
+      $("region-choisir").addEventListener("click", () => { Moteur.region = { nom: Rg.nom, deps: Rg.deps }; if (ORIGINE === "simple") $("simple").click(); else decorer(); });
+      ouvrirFiltres(); return;
+    }
+    if (L) ouvrirFiltres();
     if (!L) {
       // Ni code postal, ni département, ni lieu reconnu : les démarches d'un département sont rétrogradées (×0,8 dans le
       // moteur) ; la page invite à préciser la commune.
@@ -241,7 +260,7 @@
       poser({ nom: g.nom, code: g.code, dep: g.codeDepartement, epci: g.codeEpci || "", lon: g.centre.coordinates[0], lat: g.centre.coordinates[1] });
       if (ORIGINE === "simple") $("simple").click();
     }));
-    const ch = $("lieu-changer"); if (ch) ch.addEventListener("click", () => { cp.focus(); cp.scrollIntoView({ behavior: "smooth", block: "center" }); });
+    const ch = $("lieu-changer"); if (ch) ch.addEventListener("click", () => { ouvrirFiltres(); cp.focus(); cp.scrollIntoView({ behavior: "smooth", block: "center" }); });
   }
 
   // ---------- Diversité : les démarches d'un même organisme au-delà de deux, regroupées sous la 2e par le moteur

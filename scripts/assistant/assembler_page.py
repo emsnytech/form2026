@@ -48,6 +48,7 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
 .ou-inc{margin:.5rem 0 0;font-size:.88rem;font-weight:700;color:var(--accent)}
 .pastilles{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:0 0 .7rem}
 .pastille{font-size:.9rem;padding:.25rem .7rem;border-radius:999px;background:var(--usager-soft);color:var(--usager);border:1px solid var(--usager)}
+.pastille-fixe{display:inline-block;font-weight:700}
 .liees{margin:.55rem 0 0 1rem;padding:.4rem .7rem;border-left:3px solid var(--line);font-size:.9rem}
 .liees-t{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
 .liees ul{margin:.2rem 0 0;padding:0;list-style:none}.liees li{margin:.2rem 0}

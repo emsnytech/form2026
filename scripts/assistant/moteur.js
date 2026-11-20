@@ -69,6 +69,39 @@
   const NOMS_REGIONS = new Set("auvergne rhone alpes|bourgogne franche comte|centre val de loire|grand est|hauts de france|ile de france|nouvelle aquitaine|occitanie|pays de la loire|pays de loire|provence alpes cote d azur|region sud|normandie|bretagne".split("|"));
   const NOMS_DEPARTEMENTS = new Set("ain|aisne|allier|alpes de haute provence|hautes alpes|alpes maritimes|ardeche|ardennes|ariege|aube|aude|aveyron|bouches du rhone|calvados|cantal|charente|charente maritime|cher|correze|corse du sud|haute corse|cote d or|cotes d armor|creuse|dordogne|doubs|drome|eure|eure et loir|finistere|gard|haute garonne|gers|gironde|herault|ille et vilaine|indre|indre et loire|isere|jura|landes|loir et cher|loire|haute loire|loire atlantique|loiret|lot|lot et garonne|lozere|maine et loire|manche|marne|haute marne|mayenne|meurthe et moselle|meuse|morbihan|moselle|nievre|nord|oise|orne|pas de calais|puy de dome|pyrenees atlantiques|hautes pyrenees|pyrenees orientales|bas rhin|haut rhin|rhone|haute saone|saone et loire|sarthe|savoie|haute savoie|seine maritime|seine et marne|yvelines|deux sevres|somme|tarn|tarn et garonne|var|vaucluse|vendee|vienne|haute vienne|vosges|yonne|territoire de belfort|essonne|hauts de seine|seine saint denis|val de marne|val d oise|guadeloupe|martinique|guyane|la reunion|mayotte".split("|"));
   const MARQUEURS = [["j", "habite"], ["habite"], ["a"], ["pres", "de"], ["sur"], ["dans"]];
+  // Régions (18) : nom normalisé et formes courantes → libellé et départements. Reconnues après « en », « dans la région »,
+  // « région » ; la page propose alors une pastille, et un clic filtre sur tous les départements de la région.
+  const REGIONS = [
+    ["Auvergne-Rhône-Alpes", ["auvergne rhone alpes"], "01,03,07,15,26,38,42,43,63,69,73,74"],
+    ["Bourgogne-Franche-Comté", ["bourgogne franche comte"], "21,25,39,58,70,71,89,90"],
+    ["Bretagne", ["bretagne"], "22,29,35,56"],
+    ["Centre-Val de Loire", ["centre val de loire"], "18,28,36,37,41,45"],
+    ["Corse", ["corse"], "2A,2B"],
+    ["Grand Est", ["grand est"], "08,10,51,52,54,55,57,67,68,88"],
+    ["Hauts-de-France", ["hauts de france"], "02,59,60,62,80"],
+    ["Île-de-France", ["ile de france", "idf"], "75,77,78,91,92,93,94,95"],
+    ["Normandie", ["normandie"], "14,27,50,61,76"],
+    ["Nouvelle-Aquitaine", ["nouvelle aquitaine"], "16,17,19,23,24,33,40,47,64,79,86,87"],
+    ["Occitanie", ["occitanie"], "09,11,12,30,31,32,34,46,48,65,66,81,82"],
+    ["Pays de la Loire", ["pays de la loire"], "44,49,53,72,85"],
+    ["Provence-Alpes-Côte d'Azur", ["provence alpes cote d azur", "paca", "sud"], "04,05,06,13,83,84"],
+    ["Guadeloupe", ["guadeloupe"], "971"], ["Martinique", ["martinique"], "972"], ["Guyane", ["guyane"], "973"],
+    ["La Réunion", ["la reunion", "reunion"], "974"], ["Mayotte", ["mayotte"], "976"],
+  ].map(([nom, formes, deps]) => ({ nom, formes, deps: deps.split(",") }));   // codes séparés par des virgules (une suite de codes à deux chiffres ressemblerait à un numéro de téléphone)
+  const MARQUEURS_REGION = [["dans", "la", "region"], ["en", "region"], ["region"], ["en"], ["a", "la"]];
+  function regions(w) {
+    const out = [];
+    MARQUEURS_REGION.forEach((m) => { for (let i = 0; i + m.length < w.length; i++) if (m.every((x, j) => w[i + j] === x)) {
+      const reste = w.slice(i + m.length, i + m.length + 5).join(" ") + " ";
+      for (const R of REGIONS) for (const f of R.formes) {
+        // « sud » seul n'est une région qu'après « région » (« Région Sud ») ; « La Réunion » demande « à la » ou « en ».
+        if (f === "sud" && m[m.length - 1] !== "region") continue;
+        if (m[0] === "a" && f !== "reunion") continue;
+        if (reste.startsWith(f + " ") && !out.some((o) => o.nom === R.nom)) out.push({ nom: R.nom, deps: R.deps, mots: [...m, ...f.split(" ")] });
+      }
+    } });
+    return out;
+  }
   let COMMUNES = null;
   function chargerCommunes(d) {
     COMMUNES = new Map(); const C = Object.fromEntries(d.champs.map((k, i) => [k, i]));
@@ -80,7 +113,7 @@
   }
   function lieux(q) {
     const w = norm(q).split(" ").filter(Boolean), out = [], pris = new Set();
-    if (!COMMUNES || !w.length) return { lieux: out, mots: new Set() };
+    if (!COMMUNES || !w.length) return { lieux: out, regions: [], mots: new Set() };
     // Les mots d'un nom de département sont réservés : ni commune homonyme, ni commune contenue (« Calais » dans « Pas-de-Calais »).
     for (let i = 0; i < w.length; i++) for (let n = Math.min(5, w.length - i); n >= 1; n--) {
       const s = w.slice(i, i + n), art = ["le", "la", "les", "l"].includes(s[0]) && n > 1;
@@ -104,8 +137,9 @@
     } });
     for (let n = Math.min(5, w.length); n >= 1; n--) { const i = w.length - n; if (!pris.has(i)) { const avant = out.length; essai(i, MARQUEURS.length); if (out.length > avant) break; } }
     out.sort((a, b) => a.prio - b.prio || a.pos - b.pos);
-    const mots = new Set(out.flatMap((l) => [...l.mots, ...(l.marqueur || [])]));
-    return { lieux: out.map((l) => ({ ...l.candidats[0], candidats: l.candidats, mots: l.mots })), mots };
+    const R = regions(w);
+    const mots = new Set([...out.flatMap((l) => [...l.mots, ...(l.marqueur || [])]), ...R.flatMap((r) => r.mots.filter((x) => !STOP.has(x)))]);
+    return { lieux: out.map((l) => ({ ...l.candidats[0], candidats: l.candidats, mots: l.mots })), regions: R, mots };
   }
 
   // Analyse d'une question : termes significatifs (racine → racines retenues, synonymes et expressions compris), hors
@@ -168,12 +202,15 @@
     // Lieu reconnu dans la question, sans département choisi : il est seulement proposé (aucun filtre), mais les démarches
     // de son département passent devant : un lieu nommé dans la question en dit plus qu'un sélecteur laissé vide.
     const depLieu = dep ? "" : ((COMMUNES && lieux(q).lieux[0]) || {}).dep || "";
+    // Région choisie par l'usager (pastille « Bretagne ? ») : filtre sur ses départements, sans département choisi.
+    const depsRegion = !dep && api.region ? api.region.deps : null;
     for (const [i, s0] of sc) {
       const r = ix.recs[i];
       if (source && r.k !== source) continue;
       if (r.k === "dn") {
         if (pub && PUBLIC_DN[pub] && !PUBLIC_DN[pub].includes(r.cat)) continue;
         if (dep && r.dep && r.dep !== dep) continue; // garde les démarches nationales (« nat ») et de département inconnu (« inc »)
+        if (depsRegion && r.dep && !depsRegion.includes(r.dep)) continue;
         if (ouvertes && r.fe && r.fe < today) continue;
       } else {
         if (pub && PUBLIC_SP[pub] && !(r.aud || "").includes(PUBLIC_SP[pub])) continue;
@@ -181,7 +218,8 @@
       }
       let s = s0 * (0.5 + 0.5 * hit.get(i) / qt.length); // récompense la couverture de la requête
       if (r.k === "dn") { s *= 1 + 0.12 * Math.log10(1 + r.n); if (dep && r.dep === dep) s *= 1.15; else if (depLieu && r.dep === depLieu) s *= 1.3;
-        else if (!dep && !depLieu && (r.po ? r.po !== "nat" : !!r.dep)) s *= 0.8;   // territoire inconnu : une démarche locale (département connu ou non) passe après
+        else if (depsRegion && r.dep && depsRegion.includes(r.dep)) s *= 1.15;
+        else if (!dep && !depLieu && !depsRegion && (r.po ? r.po !== "nat" : !!r.dep)) s *= 0.8;   // territoire inconnu : une démarche locale (département connu ou non) passe après
         if (r.dp && r.dp >= ilYaUnAn) s *= 1.15;
         if (r.tc) s *= 0.7;   // titre qui ressemble à un identifiant interne (« Bilan_4BNaap12_… ») : rétrogradé, quelle que soit la portée
         const yrs = (r.t.match(/20[12]\d/g) || []).map(Number); if (yrs.length && Math.max(...yrs) < ANNEE - 1) s *= 0.6; }
@@ -234,6 +272,6 @@
     return { meilleur, termes: termes.size, rare: rare && rare[0], score: (id) => score.get(id) || 0, couverture, plusRare,
       pertinente: (id) => termes.size > 0 && (score.get(id) || 0) >= 0.5 * meilleur && (couverture(id) >= 2 || plusRare(id)) };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, regroupements: new Map() };
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
