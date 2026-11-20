@@ -51,5 +51,12 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const PROPOSEES=['SP-F3180','SP-R45189','SP-R70935','SP-R50795'];
   const local=t3.filter(r=>r.k==='dn'&&(r.po!=='nat'||/club/i.test(r.t)));
   console.log(`ATTENTE R5 club de foot, sans département — 3 premiers : ${ids(t3).join(' ')} ; démarches d'un club ou d'un lieu : ${local.length} ; références proposées en tête : ${PROPOSEES.some(i=>ids(t3)[0]===i)?'oui':'non'} (références à figer)`); attente++; }
+{ // Région dans la phrase, et aucun lieu reconnu à tort sur les 30 questions de référence (PR 67).
+  const L=M.lieux("Je veux créer une association en Bretagne");
+  verifie('Région : « en Bretagne » propose Bretagne', !!(L.regions&&L.regions[0]&&L.regions[0].nom==='Bretagne'), (L.regions||[]).map(r=>r.nom).join(', ')||'aucune');
+  const ex=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','exemples.json'),'utf8'));
+  const Q30=[...ex.map(e=>e.q),...Q.map(x=>x[0]),'renouveler mon titre de séjour','allocation logement caf','brocante dans ma rue',"carte d'identité"];
+  const atort=Q30.filter(q=>{const l=M.lieux(q); return l.lieux.length||(l.regions||[]).length;});
+  verifie('Aucun lieu ni région reconnu à tort sur les questions de référence', !atort.length, atort.join(' | ')||`${Q30.length} questions, aucun lieu`); }
 console.log(`\n${echecs?echecs+' échec(s)':'Toutes les situations de référence passent'}${attente?', '+attente+' en attente':''}.`);
 if(echecs) process.exit(1);
