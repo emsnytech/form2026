@@ -7,7 +7,7 @@ Le dernier contrôle vérifie que les références de exemples.json (à côté d
 import json, glob, re, collections, html, sys
 import argparse, os, random
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from departements import deduire
+from departements import deduire, affiner_nationale, titre_technique, charger_communes
 ap=argparse.ArgumentParser(description=__doc__)
 ap.add_argument('--form', default=os.path.expanduser('~/Documents/form2026-site'), help='clone du dépôt FORM 2026')
 ap.add_argument('--carto', default=os.path.expanduser('~/Documents/cartographie'), help='dossier cartographie (dila/, Bdddemarchesfinoctobre/, assistant/)')
@@ -58,6 +58,9 @@ for l in open(UP+'/assistant/descriptions_publiees.jsonl'):
 # territoriaux), « dep » (département de l'organisme, ou déduit de son nom ou du titre par departements.py), « inc » (locale,
 # département inconnu).
 recs=[]; skipped=collections.Counter(); portee=collections.Counter(); deduits=[]; formes=collections.Counter(); ecarts=[]
+# Communes de donnees/assistant/communes.json (dans le dépôt) : lieu nommé dans le titre d'une démarche d'organisme national.
+charger_communes(os.path.join(FORM,'donnees','assistant','communes.json'))
+affines=collections.defaultdict(list); techniques=[]
 for num,a in desc.items():
     s=slim.get(num)
     if not s: skipped['sans_titre']+=1; continue
@@ -74,7 +77,9 @@ for num,a in desc.items():
         if tn in PRE: pre.add(PRE[tn])
     slug=(a[2] or '').rsplit('/',1)[-1]
     national = torg in ('administration_centrale','operateur_d_etat') and not re.search(r'pr[ée]fecture|d[ée]partement|r[ée]gion|acad[ée]m|rectorat|\bDD|\bDR|DREAL|DRAAF|\bARS\b|\bCAF\b|CPAM|ville|mairie|commune',org or '',re.I)
-    if national: po,dep='nat',''
+    if national:
+        po,dep,regle=affiner_nationale(org,titre)
+        if regle: affines[regle].append({'id':'DN-%d'%num,'portee':po,'dep':dep or '','organisme':org,'titre':titre})
     elif dep: po='dep'
     else:
         d,forme,source,autre=deduire(org,titre)
@@ -84,13 +89,15 @@ for num,a in desc.items():
             if autre: ecarts.append({'id':'DN-%d'%num,'organisme':org,'titre':titre,'dep_retenu':d,'dep_ecarte':autre,'source':source})
         else: po,dep='inc',''
     portee[po]+=1
-    recs.append({'k':'dn','id':'DN-%d'%num,'t':clean(titre,220),'d':clean(a[1],300),'o':clean(org,120),'dep':dep,'po':po,
+    recs.append({'k':'dn','id':'DN-%d'%num,'t':clean(titre,220),'d':clean(a[1],300),'o':clean(org,120),'dep':dep,'po':po,'dp':(datepub or '')[:10],
       'n':nd or 0,'cat':cat,'ev':ev.get(num,''),'u':slug,'ch':fr.get('nb_champs') or len(ch),'pj':pj,'pre':sorted(pre),
       'fd':[x.strip() for x in (fr.get('fiches_dila') or '').split(';') if x.strip()],'fe':(a[5] or '')[:10]})
+    if titre_technique(titre): recs[-1]['tc']=1; techniques.append({'id':'DN-%d'%num,'n':nd or 0,'portee':po,'titre':titre,'code':titre_technique(titre)})
 print('DN',len(recs),dict(skipped))
 print('portée des démarches en ligne :',dict(portee),'; départements déduits :',len(deduits),dict(formes),'; organisme et titre divergents :',len(ecarts))
+print('portée nationale affinée :',{k:len(v) for k,v in affines.items()},'; titres techniques :',len(techniques))
 if A.rapport:
-    json.dump({'portee':dict(portee),'formes':dict(formes),'exemples':random.Random(20261120).sample(deduits,min(15,len(deduits))),'ecarts':ecarts,'deduits':deduits},
+    json.dump({'affines':affines,'techniques':techniques,'portee':dict(portee),'formes':dict(formes),'exemples':random.Random(20261120).sample(deduits,min(15,len(deduits))),'ecarts':ecarts,'deduits':deduits},
               open(A.rapport,'w'),ensure_ascii=False,indent=1)
 # --- DILA
 fiches=[json.loads(l) for l in open(UP+'/dila/dila_fiches.jsonl')]
@@ -118,7 +125,26 @@ for f in fiches:
       'th':f['theme'] or '','ev':x.get('evenement') or '','u':'https://www.service-public.gouv.fr/%s/vosdroits/%s'%(base,fid),
       'l':g.get('lien_web_url') or '','cerfa':g.get('numero_cerfa') or '','docs':list(dict.fromkeys(docs.get(fid,[])))[:10],'dn':liens.get(fid,[])[:5],
       'm':x.get('modalite') or ''})
-print('SP',len(recs)-n0)
+# Ressources citées par chaque fiche (F…), lues dans les fichiers XML bruts de la DILA : services en ligne, formulaires,
+# simulateurs (<ServiceEnLigne ID="R…">), puis fiches liées (<LienInterne LienPublication="F…">). Seules celles présentes
+# dans l'index sont gardées, dans leur ordre d'apparition.
+ids_sp={r['id'] for r in recs if r['k']=='sp'}
+xml={}
+for d in ('extracted_part','extracted_pro','extracted_asso'):
+    for f in glob.glob(UP+'/dila/raw/'+d+'/F*.xml'): xml.setdefault(os.path.basename(f)[:-4], []).append(f)
+n_res=0
+for r in recs:
+    if r['k']!='sp' or not r['id'].startswith('SP-F'): continue
+    res,fl=[],[]
+    for f in xml.get(r['id'][3:],[]):
+        x=open(f,encoding='utf-8',errors='ignore').read()
+        res+=['SP-'+i for i in re.findall(r'<ServiceEnLigne\b[^>]*\bID="(R\d+)"',x)]
+        fl+=['SP-'+i for i in re.findall(r'<LienInterne\b[^>]*\bLienPublication="(F\d+)"',x)]
+    res=[i for i in dict.fromkeys(res) if i in ids_sp][:6]; fl=[i for i in dict.fromkeys(fl) if i in ids_sp and i!=r['id']][:6]
+    if res: r['res']=res
+    if fl: r['fl']=fl
+    n_res+=bool(res or fl)
+print('SP',len(recs)-n0,'; fiches avec ressources ou fiches liées :',n_res)
 with open(OUT,'w') as o:
     o.write('[\n'+',\n'.join(json.dumps(r,ensure_ascii=False,separators=(',',':')) for r in recs)+'\n]\n')
 import os; print(os.path.getsize(OUT)/1e6,'Mo')

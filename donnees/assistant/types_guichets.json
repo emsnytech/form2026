@@ -1,5 +1,5 @@
 {
-  "objet": "Correspondance entre une démarche ou une fiche et le type de service local de l'Annuaire de l'administration (DILA) qui la reçoit. Sans correspondance, pas d'encadré « Où aller ». Les indices sont cherchés, comme mots entiers, sans accents ni casse, dans l'organisme d'une démarche en ligne, et dans le titre et le thème d'une fiche service-public.",
+  "objet": "Correspondance entre une démarche ou une fiche et le type de service local de l'Annuaire de l'administration (DILA) qui la reçoit. Sans correspondance, pas d'encadré « Où aller ». Les indices sont cherchés, comme mots entiers, sans accents ni casse, dans l'organisme d'une démarche en ligne, et dans le titre et le thème d'une fiche service-public. Les règles s'appliquent dans l'ordre : la première qui correspond l'emporte.",
   "regles": [
     {
       "libelle": "Préfecture",

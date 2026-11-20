@@ -107,6 +107,16 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
 .ou-src{font-size:.8rem;color:var(--muted)}.ou-src a.signaler{color:var(--muted);font-weight:400}
 .fs-fort{margin-top:1rem}
 .ou-inc{margin:.5rem 0 0;font-size:.88rem;font-weight:700;color:var(--accent)}
+.pastilles{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:0 0 .7rem}
+.pastille{font-size:.9rem;padding:.25rem .7rem;border-radius:999px;background:var(--usager-soft);color:var(--usager);border:1px solid var(--usager)}
+.liees{margin:.55rem 0 0 1rem;padding:.4rem .7rem;border-left:3px solid var(--line);font-size:.9rem}
+.liees-t{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+.liees ul{margin:.2rem 0 0;padding:0;list-style:none}.liees li{margin:.2rem 0}
+.liees-l{display:inline-block;min-width:11rem;font-size:.8rem;font-weight:700;color:var(--muted)}
+.regroupes{margin:.5rem 0 0;font-size:.9rem}.regroupes summary{cursor:pointer;font-weight:700;color:var(--admin)}.regroupes ul{margin:.3rem 0 0 1.1rem;padding:0}
+.lien-changer{background:none;border:0;padding:0;font:inherit;font-size:.9rem;color:var(--admin);text-decoration:underline;cursor:pointer}
+.cp-res{font:inherit;font-size:.9rem;padding:.25rem .5rem;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:7.5rem}
+#ccas-ou{margin:0 0 .8rem}
 .fs-pied{margin-top:1rem;font-size:.93rem;color:var(--ink)}.fs-pied summary{cursor:pointer}.fs-pied .ou-s{margin-left:1rem}
 </style>
 </head>
@@ -216,11 +226,38 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
     perdu: ["perte"], perdue: ["perte"], vole: ["vol"], volee: ["vol"], retraite: ["retraite"], deces: ["deces"], mariage: ["mariage"], chasse: ["chasse", "tir"],
     // rue ↔ voie, voie publique, route, chaussée (dans les deux sens)
     rue: ["voie", "route", "chaussee"], voie: ["rue"], route: ["rue"], chaussee: ["rue"],
+    // Langage courant → langage administratif (consigne « améliorations du moteur »), par groupes.
+    dette: ["impaye", "paiement"],                                                                   // impayés
+    electricite: ["energie"], gaz: ["energie"], chauffage: ["energie"], fioul: ["energie"],          // énergie
+    agriculteur: ["agricole", "exploitation", "agriculture", "filiere"], exploitant: ["agricole", "exploitation", "agriculture", "filiere"],
+    eleveur: ["agricole", "exploitation", "agriculture", "filiere"], viticulteur: ["agricole", "exploitation", "agriculture", "filiere"],
+    maraicher: ["agricole", "exploitation", "agriculture", "filiere"],                               // agriculture
+    // Crises : « calamité » et l'expression « fonds d'urgence » (jeton _fonds_d_urgence), jamais « urgence » seul, qui
+    // ferait remonter les fonds de relogement d'urgence.
+    secheresse: ["calamite", "_fonds_d_urgence"], gel: ["calamite", "_fonds_d_urgence"], grele: ["calamite", "_fonds_d_urgence"],
+    inondation: ["calamite", "_fonds_d_urgence"], tempete: ["calamite", "_fonds_d_urgence"], intemperies: ["calamite", "_fonds_d_urgence"], // crises
+    degradation: ["degradation", "dommage", "indemnisation"], pillage: ["degradation", "dommage", "indemnisation"],
+    vandalisme: ["degradation", "dommage", "indemnisation"], emeute: ["degradation", "dommage", "indemnisation"],
+    emeutes: ["degradation", "dommage", "indemnisation"], manifestation: ["degradation", "dommage", "indemnisation"],
+    manifestations: ["degradation", "dommage", "indemnisation"],                                     // dégradations
   };
+  // Expressions de plusieurs mots, reconnues avant le découpage en mots (sur le texte normalisé).
+  const EXPRESSIONS = [
+    [["n arrive plus a payer", "arrive plus a payer", "ne peux plus payer", "ne peut plus payer", "ne pouvons plus payer", "retard de paiement",
+      "facture impayee", "factures impayees"], ["impaye", "paiement"]],
+    [["fonds d urgence"], ["calamite", "_fonds_d_urgence"]],
+    [["vitrine cassee", "vitrine brisee"], ["degradation", "dommage", "indemnisation"]],
+    [["verifier le titre de sejour", "verifier son titre de sejour", "verifier un titre de sejour", "verifier les titres de sejour",
+      "salarie etranger", "salaries etrangers", "embaucher un etranger", "embaucher un salarie etranger", "embaucher des etrangers"],
+     ["verification", "prealable", "embauche", "autorisation", "travail"]],
+  ].flatMap(([formes, vers]) => formes.map((f) => [f, vers]));
   function norm(s) {
     return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
   }
+  // Jetons d'expression : indexés quand l'expression figure dans un texte, cherchés par les synonymes (« _… », sans racinisation).
+  const JETONS_EXPRESSION = [["fonds d urgence", "_fonds_d_urgence"]];
   function stem(w) {
+    if (w[0] === "_") return w;
     if (w.length > 4) w = w.replace(/(s|x)$/, "");
     return w.length > 6 ? w.slice(0, 6) : w;
   }
@@ -229,14 +266,78 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
     for (const w of norm(s).split(" ")) if (w.length > 1 && !STOP.has(w)) out.push(stem(w));
     return out;
   }
-  function queryToks(s) {
-    const out = [];
-    for (const w of norm(s).split(" ")) {
-      if (w.length < 2 || STOP.has(w)) continue;
-      out.push(stem(w));
-      for (const x of SYN[w] || []) out.push(stem(x));
+  // ---------- Lieux dans la question
+  // Communes (donnees/assistant/communes.json), chargées par la page ou les tests avec chargerCommunes(). Un lieu n'est
+  // reconnu qu'après un marqueur (« à », « j'habite », « près de », « sur », « dans ») ou en fin de phrase, et jamais pour
+  // un nom de commune qui est aussi un mot courant (liste NON_LIEUX, tirée des noms de communes fréquents dans l'index).
+  const NON_LIEUX = new Set(("ligne son dun charge place plan cours vue campagne ars contre ecole mars ville villes y avril frais grand vers " +
+    "relevant lance centres simple maire change degre vert fins celle celles cultures port long routier parent jury issus lue moyen lies " +
+    "corps armes champs rue sens bar eu ham mer orange marche pont mont val salles bourg loire bretagne saone azur mai aide aides plus pres " +
+    "nord sud est ouest centre beaucoup " +
+    // relevés dans les titres de démarches (règle « lieu dans le titre ») : mots courants qui sont aussi des communes
+    "aire aires courtes maille plaisance bonne bonnes salon maisons segur sus hommes gilles bio jardin pia job titre table " +
+    "marsa tarentaise cerbere courant ports services region formation formations reunion").split(" "));
+  // Noms de département (normalisés) : à leur place, aucune commune homonyme ou plus courte n'est reconnue (« dans les Landes »
+  // n'est pas Landes en Charente-Maritime, « le Pas-de-Calais » n'est pas Le Pas en Mayenne). Article initial ignoré.
+  // Noms de région : réservés aussi (« Centre-Val de Loire » ne désigne ni la Loire ni une commune).
+  const NOMS_REGIONS = new Set("auvergne rhone alpes|bourgogne franche comte|centre val de loire|grand est|hauts de france|ile de france|nouvelle aquitaine|occitanie|pays de la loire|pays de loire|provence alpes cote d azur|region sud|normandie|bretagne".split("|"));
+  const NOMS_DEPARTEMENTS = new Set("ain|aisne|allier|alpes de haute provence|hautes alpes|alpes maritimes|ardeche|ardennes|ariege|aube|aude|aveyron|bouches du rhone|calvados|cantal|charente|charente maritime|cher|correze|corse du sud|haute corse|cote d or|cotes d armor|creuse|dordogne|doubs|drome|eure|eure et loir|finistere|gard|haute garonne|gers|gironde|herault|ille et vilaine|indre|indre et loire|isere|jura|landes|loir et cher|loire|haute loire|loire atlantique|loiret|lot|lot et garonne|lozere|maine et loire|manche|marne|haute marne|mayenne|meurthe et moselle|meuse|morbihan|moselle|nievre|nord|oise|orne|pas de calais|puy de dome|pyrenees atlantiques|hautes pyrenees|pyrenees orientales|bas rhin|haut rhin|rhone|haute saone|saone et loire|sarthe|savoie|haute savoie|seine maritime|seine et marne|yvelines|deux sevres|somme|tarn|tarn et garonne|var|vaucluse|vendee|vienne|haute vienne|vosges|yonne|territoire de belfort|essonne|hauts de seine|seine saint denis|val de marne|val d oise|guadeloupe|martinique|guyane|la reunion|mayotte".split("|"));
+  const MARQUEURS = [["j", "habite"], ["habite"], ["a"], ["pres", "de"], ["sur"], ["dans"]];
+  let COMMUNES = null;
+  function chargerCommunes(d) {
+    COMMUNES = new Map(); const C = Object.fromEntries(d.champs.map((k, i) => [k, i]));
+    for (const c of d.communes) {
+      const n = c[C.nom_normalise]; if (!COMMUNES.has(n)) COMMUNES.set(n, []);
+      COMMUNES.get(n).push({ nom: c[C.nom], code: c[C.code], dep: c[C.departement], pop: c[C.population] });
     }
-    return [...new Set(out)];
+    for (const l of COMMUNES.values()) l.sort((a, b) => b.pop - a.pop);
+  }
+  function lieux(q) {
+    const w = norm(q).split(" ").filter(Boolean), out = [], pris = new Set();
+    if (!COMMUNES || !w.length) return { lieux: out, mots: new Set() };
+    // Les mots d'un nom de département sont réservés : ni commune homonyme, ni commune contenue (« Calais » dans « Pas-de-Calais »).
+    for (let i = 0; i < w.length; i++) for (let n = Math.min(5, w.length - i); n >= 1; n--) {
+      const s = w.slice(i, i + n), art = ["le", "la", "les", "l"].includes(s[0]) && n > 1;
+      const reserve = (x) => NOMS_DEPARTEMENTS.has(x) || NOMS_REGIONS.has(x);
+      if (reserve(s.join(" ")) || (art && reserve(s.slice(1).join(" ")))) { for (let k = i; k < i + n; k++) pris.add(k); i += n - 1; break; }
+    }
+    const essai = (i, prio) => {
+      if (pris.has(i)) return;
+      for (let n = Math.min(5, w.length - i); n >= 1; n--) {
+        const nom = w.slice(i, i + n).join(" ");
+        const sansArticle = /^(le|la|les|l) /.test(nom) ? nom.replace(/^\S+ /, "") : "";
+        if (COMMUNES.has(nom) && !NON_LIEUX.has(nom) && !NON_LIEUX.has(sansArticle) && !STOP.has(nom) && nom.length >= 3 && ![...Array(n).keys()].some((k) => pris.has(i + k))) {
+          for (let k = i; k < i + n; k++) pris.add(k);
+          out.push({ prio, pos: i, mots: w.slice(i, i + n), candidats: COMMUNES.get(nom).slice(0, 2) }); return;
+        }
+      }
+    };
+    MARQUEURS.forEach((m, prio) => { for (let i = 0; i + m.length < w.length; i++) if (m.every((x, j) => w[i + j] === x)) {
+      const avant = out.length; essai(i + m.length, prio);
+      if (out.length > avant) out[out.length - 1].marqueur = m;   // « j'habite », « près de » : ils ne servent qu'à introduire le lieu
+    } });
+    for (let n = Math.min(5, w.length); n >= 1; n--) { const i = w.length - n; if (!pris.has(i)) { const avant = out.length; essai(i, MARQUEURS.length); if (out.length > avant) break; } }
+    out.sort((a, b) => a.prio - b.prio || a.pos - b.pos);
+    const mots = new Set(out.flatMap((l) => [...l.mots, ...(l.marqueur || [])]));
+    return { lieux: out.map((l) => ({ ...l.candidats[0], candidats: l.candidats, mots: l.mots })), mots };
+  }
+
+  // Analyse d'une question : termes significatifs (racine → racines retenues, synonymes et expressions compris), hors
+  // mots vides et hors mots reconnus comme lieu.
+  function analyse(s) {
+    let n = " " + norm(s) + " ";
+    const termes = new Map(), L = lieux(s);
+    // Une expression reconnue compte pour un terme ; plusieurs expressions de même sens, pour un seul.
+    for (const [f, vers] of EXPRESSIONS) if (n.includes(" " + f + " ")) termes.set("« " + vers.join(" ") + " »", new Set(vers.map(stem)));
+    for (const w of n.trim().split(" ")) {
+      if (w.length < 2 || STOP.has(w) || L.mots.has(w)) continue;
+      const t = stem(w); if (!termes.has(t)) termes.set(t, new Set([t]));
+      for (const x of SYN[w] || []) termes.get(t).add(stem(x));
+    }
+    return { termes, lieux: L.lieux };
+  }
+  function queryToks(s) {
+    return [...new Set([...analyse(s).termes.values()].flatMap((g) => [...g]))];
   }
   const ANNEE = new Date().getFullYear();
   const EV_LABEL = (ev) => (ev && ev !== "hors_perimetre" ? ev.replace(/_/g, " ") : "");
@@ -245,7 +346,10 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
     const inv = new Map(); const len = new Float32Array(recs.length); let tot = 0;
     recs.forEach((r, i) => {
       const tf = new Map();
-      const add = (s, w) => { for (const t of toks(s)) tf.set(t, (tf.get(t) || 0) + w); };
+      const add = (s, w) => {
+        for (const t of toks(s)) tf.set(t, (tf.get(t) || 0) + w);
+        if (s) { const n = " " + norm(s) + " "; for (const [e, j] of JETONS_EXPRESSION) if (n.includes(" " + e + " ")) tf.set(j, (tf.get(j) || 0) + w); }
+      };
       add(r.t, 3); add(r.d, 1); add(EV_LABEL(r.ev), 1.5);
       if (r.k === "dn") { add(r.o, 0.6); add((r.pj || []).join(" "), 0.4); }
       else { add(r.th, 0.8); add((r.docs || []).join(" "), 0.3); }
@@ -273,6 +377,11 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
       }
     }
     const today = new Date().toISOString().slice(0, 10), out = [];
+    // Démarche récente : publiée dans les 12 derniers mois (champ « dp » de l'index, date de publication du descriptif).
+    const ilYaUnAn = new Date(Date.now() - 365 * 864e5).toISOString().slice(0, 10);
+    // Lieu reconnu dans la question, sans département choisi : il est seulement proposé (aucun filtre), mais les démarches
+    // de son département passent devant : un lieu nommé dans la question en dit plus qu'un sélecteur laissé vide.
+    const depLieu = dep ? "" : ((COMMUNES && lieux(q).lieux[0]) || {}).dep || "";
     for (const [i, s0] of sc) {
       const r = ix.recs[i];
       if (source && r.k !== source) continue;
@@ -285,17 +394,35 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
         if (pub === "collectivite") continue;
       }
       let s = s0 * (0.5 + 0.5 * hit.get(i) / qt.length); // récompense la couverture de la requête
-      if (r.k === "dn") { s *= 1 + 0.12 * Math.log10(1 + r.n); if (dep && r.dep === dep) s *= 1.15;
+      if (r.k === "dn") { s *= 1 + 0.12 * Math.log10(1 + r.n); if (dep && r.dep === dep) s *= 1.15; else if (depLieu && r.dep === depLieu) s *= 1.3;
+        else if (!dep && !depLieu && (r.po ? r.po !== "nat" : !!r.dep)) s *= 0.8;   // territoire inconnu : une démarche locale (département connu ou non) passe après
+        if (r.dp && r.dp >= ilYaUnAn) s *= 1.15;
+        if (r.tc) s *= 0.7;   // titre qui ressemble à un identifiant interne (« Bilan_4BNaap12_… ») : rétrogradé, quelle que soit la portée
         const yrs = (r.t.match(/20[12]\d/g) || []).map(Number); if (yrs.length && Math.max(...yrs) < ANNEE - 1) s *= 0.6; }
       else if (/Téléservice|Formulaire|formulaireNG/.test(r.ty)) s *= 1.1;
       out.push([s, i]);
     }
     out.sort((a, b) => b[0] - a[0]);
+    // Diversité : au plus deux démarches en ligne d'un même organisme parmi les résultats ; les suivantes ne disparaissent
+    // pas, elles sont regroupées sous la 2e (champ « autres » du résultat, et Moteur.regroupements pour la page). Pas de
+    // regroupement quand la recherche est filtrée sur une source.
+    const parOrg = new Map(), deuxieme = new Map(), autres = new Map(), gardes = [];
+    for (const x of out) {
+      const r = ix.recs[x[1]], o = !source && r.k === "dn" ? norm(r.o) : "";
+      if (o) {
+        const n = (parOrg.get(o) || 0) + 1; parOrg.set(o, n);
+        if (n === 2) deuxieme.set(o, x[1]);
+        if (n > 2) { const d = deuxieme.get(o); if (!autres.has(d)) autres.set(d, []); autres.get(d).push(r); continue; }
+      }
+      gardes.push(x);
+    }
+    out.splice(0, out.length, ...gardes);
     // Département choisi : les démarches locales dont le département est inconnu (po « inc ») restent parmi les
     // résultats retenus, mais placées après les démarches nationales et celles du département.
     const top = out.slice(0, k);
     if (dep) top.sort((a, b) => (ix.recs[a[1]].po === "inc") - (ix.recs[b[1]].po === "inc") || b[0] - a[0]);
-    return top.map(([s, i]) => ({ score: +s.toFixed(2), r: ix.recs[i] }));
+    api.regroupements = new Map(top.filter(([, i]) => autres.has(i)).map(([, i]) => [ix.recs[i].id, autres.get(i)]));
+    return top.map(([s, i]) => autres.has(i) ? { score: +s.toFixed(2), r: ix.recs[i], autres: autres.get(i) } : { score: +s.toFixed(2), r: ix.recs[i] });
   }
   // Pertinence d'un résultat pour une question, au sens de la règle France services de la page FORM (ne change ni le
   // classement ni l'affichage) : score d'au moins la moitié du meilleur score de la recherche, et soit au moins deux termes
@@ -303,12 +430,7 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
   // termes présents dans l'index ; c'est aussi le cas d'une question à un seul terme). Un terme est la racine d'un mot hors
   // mots vides ; un synonyme ajouté par le moteur compte comme le terme d'origine.
   function pertinence(ix, q, opt = {}) {
-    const termes = new Map();
-    for (const w of norm(q).split(" ")) {
-      if (w.length < 2 || STOP.has(w)) continue;
-      const t = stem(w); if (!termes.has(t)) termes.set(t, new Set([t]));
-      for (const x of SYN[w] || []) termes.get(t).add(stem(x));
-    }
+    const termes = analyse(q).termes;
     const res = termes.size ? search(ix, q, { ...opt, k: Infinity }) : [];
     const meilleur = res.reduce((m, x) => Math.max(m, x.score), 0), score = new Map(res.map((x) => [x.r.id, x.score]));
     const postings = new Map();
@@ -320,12 +442,13 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
     const couverture = (id) => { const i = ix.byId.get(id); let n = 0; for (const g of termes.values()) if (couvre(g, i)) n++; return n; };
     const N = ix.recs.length, idf = (t) => { const p = ix.inv.get(t); return p ? Math.log(1 + (N - p.length / 2 + 0.5) / (p.length / 2 + 0.5)) : -1; };
     let rare = null;
-    for (const [t, g] of termes) if (idf(t) >= 0 && (!rare || idf(t) > idf(rare[0]))) rare = [t, g];
+    const idfG = (g) => Math.max(...[...g].map(idf));
+    for (const [t, g] of termes) if (idfG(g) >= 0 && (!rare || idfG(g) > idfG(rare[1]))) rare = [t, g];
     const plusRare = (id) => !!rare && couvre(rare[1], ix.byId.get(id));
     return { meilleur, termes: termes.size, rare: rare && rare[0], score: (id) => score.get(id) || 0, couverture, plusRare,
       pertinente: (id) => termes.size > 0 && (score.get(id) || 0) >= 0.5 * meilleur && (couverture(id) >= 2 || plusRare(id)) };
   }
-  const api = { build, search, norm, toks, pertinence };
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, regroupements: new Map() };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -619,6 +742,8 @@ $("reset").addEventListener("click", () => { history = []; $("thread").innerHTML
   const carte = (lat, lon) => `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=17/${lat}/${lon}`;
 
   fetch("donnees/assistant/types_guichets.json").then((r) => r.json()).then((t) => { TABLE = t; decorer(); }).catch(() => {});
+  // Communes, pour que le moteur reconnaisse un lieu dans la question (Moteur.lieux) et que la page le propose.
+  fetch("donnees/assistant/communes.json").then((r) => r.json()).then((d) => { Moteur.chargerCommunes(d); decorer(); }).catch(() => {});
 
   // ---------- 1. Code postal → commune
   const cp = $("cp"), choix = $("commune"), etat = $("cp-etat");
@@ -797,12 +922,103 @@ $("reset").addEventListener("click", () => { history = []; $("thread").innerHTML
       const p = document.createElement("p"); p.className = "ou-inc"; p.textContent = "Démarche locale : vérifiez qu'elle concerne votre commune."; el.appendChild(p);
     }
   }
+  // ---------- Lieu reconnu dans la question : proposé, jamais imposé. Un code postal saisi prime.
+  function pastille() {
+    let el = $("lieu-pastille");
+    if (!el) { el = document.createElement("div"); el.id = "lieu-pastille"; el.className = "pastilles"; $("cards").before(el); }
+    el.innerHTML = "";
+    if (COMMUNE || !$("res") || $("res").hidden || !Moteur.lieux) return;
+    const L = Moteur.lieux($("q").value).lieux[0];
+    if (!L) {
+      // Ni code postal, ni département, ni lieu reconnu : les démarches d'un département sont rétrogradées (×0,8 dans le
+      // moteur) ; la page invite à préciser la commune.
+      if (!$("dep").value) {
+        el.innerHTML = `<span class="meta">Précisez votre commune pour voir les démarches de votre territoire&nbsp;:</span> `
+          + `<input id="cp-res" class="cp-res" inputmode="numeric" maxlength="5" placeholder="code postal" aria-label="Votre code postal">`;
+        const c2 = $("cp-res");
+        c2.addEventListener("input", () => { cp.value = c2.value.replace(/\D/g, "").slice(0, 5); cp.dispatchEvent(new Event("input"));
+          if (cp.value.length === 5 && ORIGINE === "simple") setTimeout(() => { if (COMMUNE) $("simple").click(); }, 1500); });
+      }
+      return;
+    }
+    // Lieu reconnu, sans département choisi : le moteur favorise déjà les démarches de son département (×1,3) ; la pastille le dit.
+    const adapte = !$("dep").value;
+    const boutons = L.candidats.map((c, i) => `<button type="button" class="pastille" data-i="${i}">${esc(c.nom)} (${esc(c.dep)})${adapte && !i ? "" : "&nbsp;?"}</button>`);
+    el.innerHTML = adapte
+      ? `<span class="meta">Résultats adaptés à</span> ${boutons[0]}${boutons.length > 1 ? ` <span class="meta">ou</span> ${boutons.slice(1).join(" ")}` : ""} · <button type="button" class="lien-changer" id="lieu-changer">changer</button>`
+      : `<span class="meta">Lieu repéré dans votre question&nbsp;:</span> ${boutons.join(" ")}`;
+    el.querySelectorAll("button.pastille").forEach((b) => b.addEventListener("click", async () => {
+      const c = L.candidats[+b.dataset.i];
+      let g; try { g = await json(`${GEO}/${encodeURIComponent(c.code)}?fields=nom,code,codeDepartement,codeEpci,centre&format=json`); } catch (e) { return; }
+      cp.value = ""; choix.hidden = true;
+      poser({ nom: g.nom, code: g.code, dep: g.codeDepartement, epci: g.codeEpci || "", lon: g.centre.coordinates[0], lat: g.centre.coordinates[1] });
+      if (ORIGINE === "simple") $("simple").click();
+    }));
+    const ch = $("lieu-changer"); if (ch) ch.addEventListener("click", () => { cp.focus(); cp.scrollIntoView({ behavior: "smooth", block: "center" }); });
+  }
+
+  // ---------- Diversité : les démarches d'un même organisme au-delà de deux, regroupées sous la 2e par le moteur
+  // (Moteur.regroupements), s'affichent sous elle, dépliables. Seulement pour la recherche simple, dont la liste vient
+  // directement du moteur.
+  function regroupes(el, r) {
+    el.querySelectorAll(".regroupes").forEach((x) => x.remove());
+    const l = ORIGINE === "simple" && Moteur.regroupements && Moteur.regroupements.get(r.id); if (!l || !l.length) return;
+    const d = document.createElement("details"); d.className = "regroupes";
+    d.innerHTML = `<summary>+ ${l.length} autre${l.length > 1 ? "s" : ""} démarche${l.length > 1 ? "s" : ""} de ${esc(r.o)}</summary><ul>`
+      + l.map((x) => `<li><a href="${esc(dnUrl(x))}" target="_blank" rel="noopener">${esc(x.t)} ↗</a> <span class="meta">${esc(x.dep || "")}</span></li>`).join("") + `</ul>`;
+    const ou = el.querySelector(".ou, .liees"); if (ou) el.insertBefore(d, ou); else el.appendChild(d);
+  }
+
+  // ---------- CCAS : une fois par page, dans un encadré « Où aller », si (1) le public est particulier ou non précisé,
+  // (2) la question ou le premier résultat relève des impayés, de l'énergie, de l'eau, d'une aide financière ou sociale,
+  // d'un secours ou de la précarité (« logement » ou « facture » seuls ne suffisent pas), (3) une commune est connue.
+  const THEMES_CCAS = /(^| )(impaye|impayes|energi|energie|electr|electricite|gaz|chauffage|fioul|eau|aide financiere|aides financieres|aide sociale|aides sociales|action sociale|secours|precarite|precaire)( |$)/;
+  async function ccas(liste) {
+    let el = $("ccas-ou");
+    if (!el) { el = document.createElement("div"); el.id = "ccas-ou"; $("cards").before(el); }
+    el.className = ""; el.innerHTML = "";
+    const c = COMMUNE, pub = $("pub").value, q = $("q").value;
+    if (!c || (pub && pub !== "particulier") || !$("res") || $("res").hidden) return;
+    const termes = Moteur.analyse ? [...Moteur.analyse(q).termes.values()].flatMap((g) => [...g]).join(" ") : "";
+    const N = Moteur.norm, premier = liste[0] ? N(liste[0].t + " " + (liste[0].th || "")) : "";
+    if (![N(q) + " " + termes, premier].some((s) => THEMES_CCAS.test(s))) return;
+    let l; try { l = await services(c.code, ["ccas"]); } catch (e) { return; }
+    if (COMMUNE !== c || !l.length) return;
+    el.className = "ou";
+    el.innerHTML = `<div class="ou-t">Où aller pour ${esc(c.nom)} · aide sociale de votre commune</div>${l.map(htmlService).join("")}<p class="ou-src">Centre communal d'action sociale compétent pour votre commune selon l'Annuaire, interrogé avec le seul code de la commune.</p>`;
+  }
+
+
+
+  // ---------- Ressources liées à une fiche service-public : services en ligne, formulaires, simulateurs (champ « res »),
+  // fiches liées (« fl ») et démarches en ligne rattachées (« dn »). Sous la carte, en retrait : elles ne comptent pas
+  // parmi les résultats.
+  const LIBELLE = (r) => r.k === "dn" ? "Démarche en ligne" : /^SP-F/.test(r.id) ? "Fiche liée"
+    : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne" : /imulateur/i.test(r.ty) ? "Simulateur"
+    : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : /odèle|lettre/i.test(r.ty) ? "Modèle de document" : "Ressource";
+  let PAR_SLUG = null;
+  function liees(el, r) {
+    el.querySelectorAll(".liees").forEach((x) => x.remove());
+    if (r.k !== "sp") return;
+    if (!PAR_SLUG) { PAR_SLUG = new Map(); for (const x of IX.recs) if (x.k === "dn") PAR_SLUG.set(x.u, x); }
+    const rec = (id) => { const i = IX.byId.get(id); return i === undefined ? null : IX.recs[i]; };
+    const res = [...(r.res || []), ...(r.fl || [])].map(rec).filter(Boolean).slice(0, 3);
+    const dn = (r.dn || []).map((s) => PAR_SLUG.get(s)).filter(Boolean).slice(0, 3);
+    if (!res.length && !dn.length) return;
+    const lien = (x) => x.k === "dn" ? dnUrl(x) : (/^SP-R/.test(x.id) && x.l) ? x.l : x.u;
+    const div = document.createElement("div"); div.className = "liees";
+    div.innerHTML = `<div class="liees-t">Ressources liées à cette fiche</div><ul>` + [...res, ...dn].map((x) =>
+      `<li><span class="liees-l">${LIBELLE(x)}</span> <a href="${esc(lien(x))}" target="_blank" rel="noopener">${esc(x.t)} ↗</a></li>`).join("") + `</ul>`;
+    const ou = el.querySelector(".ou"); if (ou) el.insertBefore(div, ou); else el.appendChild(div);
+  }
+
   function decorer() {
     if (typeof IX === "undefined" || !IX) return;
+    pastille(); ccas(LISTE);
     const deja = new Set();
     for (const el of document.querySelectorAll("#cards .card")) {
       const i = IX.byId.get(el.id.slice(2)); if (i === undefined) continue;
-      portee_carte(el, IX.recs[i]);
+      portee_carte(el, IX.recs[i]); liees(el, IX.recs[i]); regroupes(el, IX.recs[i]);
       if (portee(IX.recs[i]) !== "inc") encadre(el, IX.recs[i], COMMUNE, deja);
     }
     franceServices(LISTE);

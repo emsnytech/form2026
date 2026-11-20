@@ -29,6 +29,8 @@
   const carte = (lat, lon) => `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=17/${lat}/${lon}`;
 
   fetch("donnees/assistant/types_guichets.json").then((r) => r.json()).then((t) => { TABLE = t; decorer(); }).catch(() => {});
+  // Communes, pour que le moteur reconnaisse un lieu dans la question (Moteur.lieux) et que la page le propose.
+  fetch("donnees/assistant/communes.json").then((r) => r.json()).then((d) => { Moteur.chargerCommunes(d); decorer(); }).catch(() => {});
 
   // ---------- 1. Code postal → commune
   const cp = $("cp"), choix = $("commune"), etat = $("cp-etat");
@@ -207,12 +209,103 @@
       const p = document.createElement("p"); p.className = "ou-inc"; p.textContent = "Démarche locale : vérifiez qu'elle concerne votre commune."; el.appendChild(p);
     }
   }
+  // ---------- Lieu reconnu dans la question : proposé, jamais imposé. Un code postal saisi prime.
+  function pastille() {
+    let el = $("lieu-pastille");
+    if (!el) { el = document.createElement("div"); el.id = "lieu-pastille"; el.className = "pastilles"; $("cards").before(el); }
+    el.innerHTML = "";
+    if (COMMUNE || !$("res") || $("res").hidden || !Moteur.lieux) return;
+    const L = Moteur.lieux($("q").value).lieux[0];
+    if (!L) {
+      // Ni code postal, ni département, ni lieu reconnu : les démarches d'un département sont rétrogradées (×0,8 dans le
+      // moteur) ; la page invite à préciser la commune.
+      if (!$("dep").value) {
+        el.innerHTML = `<span class="meta">Précisez votre commune pour voir les démarches de votre territoire&nbsp;:</span> `
+          + `<input id="cp-res" class="cp-res" inputmode="numeric" maxlength="5" placeholder="code postal" aria-label="Votre code postal">`;
+        const c2 = $("cp-res");
+        c2.addEventListener("input", () => { cp.value = c2.value.replace(/\D/g, "").slice(0, 5); cp.dispatchEvent(new Event("input"));
+          if (cp.value.length === 5 && ORIGINE === "simple") setTimeout(() => { if (COMMUNE) $("simple").click(); }, 1500); });
+      }
+      return;
+    }
+    // Lieu reconnu, sans département choisi : le moteur favorise déjà les démarches de son département (×1,3) ; la pastille le dit.
+    const adapte = !$("dep").value;
+    const boutons = L.candidats.map((c, i) => `<button type="button" class="pastille" data-i="${i}">${esc(c.nom)} (${esc(c.dep)})${adapte && !i ? "" : "&nbsp;?"}</button>`);
+    el.innerHTML = adapte
+      ? `<span class="meta">Résultats adaptés à</span> ${boutons[0]}${boutons.length > 1 ? ` <span class="meta">ou</span> ${boutons.slice(1).join(" ")}` : ""} · <button type="button" class="lien-changer" id="lieu-changer">changer</button>`
+      : `<span class="meta">Lieu repéré dans votre question&nbsp;:</span> ${boutons.join(" ")}`;
+    el.querySelectorAll("button.pastille").forEach((b) => b.addEventListener("click", async () => {
+      const c = L.candidats[+b.dataset.i];
+      let g; try { g = await json(`${GEO}/${encodeURIComponent(c.code)}?fields=nom,code,codeDepartement,codeEpci,centre&format=json`); } catch (e) { return; }
+      cp.value = ""; choix.hidden = true;
+      poser({ nom: g.nom, code: g.code, dep: g.codeDepartement, epci: g.codeEpci || "", lon: g.centre.coordinates[0], lat: g.centre.coordinates[1] });
+      if (ORIGINE === "simple") $("simple").click();
+    }));
+    const ch = $("lieu-changer"); if (ch) ch.addEventListener("click", () => { cp.focus(); cp.scrollIntoView({ behavior: "smooth", block: "center" }); });
+  }
+
+  // ---------- Diversité : les démarches d'un même organisme au-delà de deux, regroupées sous la 2e par le moteur
+  // (Moteur.regroupements), s'affichent sous elle, dépliables. Seulement pour la recherche simple, dont la liste vient
+  // directement du moteur.
+  function regroupes(el, r) {
+    el.querySelectorAll(".regroupes").forEach((x) => x.remove());
+    const l = ORIGINE === "simple" && Moteur.regroupements && Moteur.regroupements.get(r.id); if (!l || !l.length) return;
+    const d = document.createElement("details"); d.className = "regroupes";
+    d.innerHTML = `<summary>+ ${l.length} autre${l.length > 1 ? "s" : ""} démarche${l.length > 1 ? "s" : ""} de ${esc(r.o)}</summary><ul>`
+      + l.map((x) => `<li><a href="${esc(dnUrl(x))}" target="_blank" rel="noopener">${esc(x.t)} ↗</a> <span class="meta">${esc(x.dep || "")}</span></li>`).join("") + `</ul>`;
+    const ou = el.querySelector(".ou, .liees"); if (ou) el.insertBefore(d, ou); else el.appendChild(d);
+  }
+
+  // ---------- CCAS : une fois par page, dans un encadré « Où aller », si (1) le public est particulier ou non précisé,
+  // (2) la question ou le premier résultat relève des impayés, de l'énergie, de l'eau, d'une aide financière ou sociale,
+  // d'un secours ou de la précarité (« logement » ou « facture » seuls ne suffisent pas), (3) une commune est connue.
+  const THEMES_CCAS = /(^| )(impaye|impayes|energi|energie|electr|electricite|gaz|chauffage|fioul|eau|aide financiere|aides financieres|aide sociale|aides sociales|action sociale|secours|precarite|precaire)( |$)/;
+  async function ccas(liste) {
+    let el = $("ccas-ou");
+    if (!el) { el = document.createElement("div"); el.id = "ccas-ou"; $("cards").before(el); }
+    el.className = ""; el.innerHTML = "";
+    const c = COMMUNE, pub = $("pub").value, q = $("q").value;
+    if (!c || (pub && pub !== "particulier") || !$("res") || $("res").hidden) return;
+    const termes = Moteur.analyse ? [...Moteur.analyse(q).termes.values()].flatMap((g) => [...g]).join(" ") : "";
+    const N = Moteur.norm, premier = liste[0] ? N(liste[0].t + " " + (liste[0].th || "")) : "";
+    if (![N(q) + " " + termes, premier].some((s) => THEMES_CCAS.test(s))) return;
+    let l; try { l = await services(c.code, ["ccas"]); } catch (e) { return; }
+    if (COMMUNE !== c || !l.length) return;
+    el.className = "ou";
+    el.innerHTML = `<div class="ou-t">Où aller pour ${esc(c.nom)} · aide sociale de votre commune</div>${l.map(htmlService).join("")}<p class="ou-src">Centre communal d'action sociale compétent pour votre commune selon l'Annuaire, interrogé avec le seul code de la commune.</p>`;
+  }
+
+
+
+  // ---------- Ressources liées à une fiche service-public : services en ligne, formulaires, simulateurs (champ « res »),
+  // fiches liées (« fl ») et démarches en ligne rattachées (« dn »). Sous la carte, en retrait : elles ne comptent pas
+  // parmi les résultats.
+  const LIBELLE = (r) => r.k === "dn" ? "Démarche en ligne" : /^SP-F/.test(r.id) ? "Fiche liée"
+    : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne" : /imulateur/i.test(r.ty) ? "Simulateur"
+    : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : /odèle|lettre/i.test(r.ty) ? "Modèle de document" : "Ressource";
+  let PAR_SLUG = null;
+  function liees(el, r) {
+    el.querySelectorAll(".liees").forEach((x) => x.remove());
+    if (r.k !== "sp") return;
+    if (!PAR_SLUG) { PAR_SLUG = new Map(); for (const x of IX.recs) if (x.k === "dn") PAR_SLUG.set(x.u, x); }
+    const rec = (id) => { const i = IX.byId.get(id); return i === undefined ? null : IX.recs[i]; };
+    const res = [...(r.res || []), ...(r.fl || [])].map(rec).filter(Boolean).slice(0, 3);
+    const dn = (r.dn || []).map((s) => PAR_SLUG.get(s)).filter(Boolean).slice(0, 3);
+    if (!res.length && !dn.length) return;
+    const lien = (x) => x.k === "dn" ? dnUrl(x) : (/^SP-R/.test(x.id) && x.l) ? x.l : x.u;
+    const div = document.createElement("div"); div.className = "liees";
+    div.innerHTML = `<div class="liees-t">Ressources liées à cette fiche</div><ul>` + [...res, ...dn].map((x) =>
+      `<li><span class="liees-l">${LIBELLE(x)}</span> <a href="${esc(lien(x))}" target="_blank" rel="noopener">${esc(x.t)} ↗</a></li>`).join("") + `</ul>`;
+    const ou = el.querySelector(".ou"); if (ou) el.insertBefore(div, ou); else el.appendChild(div);
+  }
+
   function decorer() {
     if (typeof IX === "undefined" || !IX) return;
+    pastille(); ccas(LISTE);
     const deja = new Set();
     for (const el of document.querySelectorAll("#cards .card")) {
       const i = IX.byId.get(el.id.slice(2)); if (i === undefined) continue;
-      portee_carte(el, IX.recs[i]);
+      portee_carte(el, IX.recs[i]); liees(el, IX.recs[i]); regroupes(el, IX.recs[i]);
       if (portee(IX.recs[i]) !== "inc") encadre(el, IX.recs[i], COMMUNE, deja);
     }
     franceServices(LISTE);
