@@ -34,6 +34,8 @@ Toute page qui publie des chiffres tirés du descriptif ouvert des démarches po
 
 `scripts/retirer_contacts.py --check` le contrôle sur tous les fichiers suivis, à chaque PR. Tout générateur de données publiées appelle `masquer_donnees()`. Seuls le domaine réservé `exemple.invalid` et la tranche fictive 01 99 00 sont admis, pour les jeux de test des scripts. Un document binaire ajouté au dépôt n'est pas lu par ce contrôle : à vérifier à la main.
 
+Exception : les contacts institutionnels issus de l'Annuaire de l'administration (DILA) et de la liste France services (ANCT), affichés comme points de contact publics des services, avec leur source. Ils apparaissent dans l'encadré « Où aller » de `trouver-sa-demarche.html` : l'Annuaire y est interrogé en direct, rien n'est stocké ; la liste France services est copiée dans `donnees/assistant/france_services.json`, seul fichier exclu du contrôle (liste `EXCEPTIONS` de `scripts/retirer_contacts.py`).
+
 ## Historique git
 
 Le 5 novembre 2026, un titre de démarche touchant des mineurs a été retiré de `justice_hors_opendata.json`. L'historique n'a pas été purgé : ce titre n'identifie personne, la page de la démarche est publique, et une réécriture casserait les liens de commits sans retirer l'information du monde.

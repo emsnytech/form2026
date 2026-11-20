@@ -10,6 +10,8 @@
     handicap: ["handicap", "mdph"], logement: ["logement"], ecole: ["scolaire", "scolarisation", "ecole"], fac: ["universite", "etudes"],
     etranger: ["etranger", "sejour"], cree: ["creation"], creer: ["creation"], monter: ["creation"], adapter: ["adaptation", "amenagement"],
     perdu: ["perte"], perdue: ["perte"], vole: ["vol"], volee: ["vol"], retraite: ["retraite"], deces: ["deces"], mariage: ["mariage"], chasse: ["chasse", "tir"],
+    // rue ↔ voie, voie publique, route, chaussée (dans les deux sens)
+    rue: ["voie", "route", "chaussee"], voie: ["rue"], route: ["rue"], chaussee: ["rue"],
   };
   function norm(s) {
     return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
@@ -72,7 +74,7 @@
       if (source && r.k !== source) continue;
       if (r.k === "dn") {
         if (pub && PUBLIC_DN[pub] && !PUBLIC_DN[pub].includes(r.cat)) continue;
-        if (dep && r.dep && r.dep !== dep) continue;
+        if (dep && r.dep && r.dep !== dep) continue; // garde les démarches nationales (« nat ») et de département inconnu (« inc »)
         if (ouvertes && r.fe && r.fe < today) continue;
       } else {
         if (pub && PUBLIC_SP[pub] && !(r.aud || "").includes(PUBLIC_SP[pub])) continue;
@@ -85,8 +87,40 @@
       out.push([s, i]);
     }
     out.sort((a, b) => b[0] - a[0]);
-    return out.slice(0, k).map(([s, i]) => ({ score: +s.toFixed(2), r: ix.recs[i] }));
+    // Département choisi : les démarches locales dont le département est inconnu (po « inc ») restent parmi les
+    // résultats retenus, mais placées après les démarches nationales et celles du département.
+    const top = out.slice(0, k);
+    if (dep) top.sort((a, b) => (ix.recs[a[1]].po === "inc") - (ix.recs[b[1]].po === "inc") || b[0] - a[0]);
+    return top.map(([s, i]) => ({ score: +s.toFixed(2), r: ix.recs[i] }));
   }
-  const api = { build, search, norm, toks };
+  // Pertinence d'un résultat pour une question, au sens de la règle France services de la page FORM (ne change ni le
+  // classement ni l'affichage) : score d'au moins la moitié du meilleur score de la recherche, et soit au moins deux termes
+  // significatifs distincts de la question repris, soit le terme le plus rare de la question (IDF la plus élevée parmi les
+  // termes présents dans l'index ; c'est aussi le cas d'une question à un seul terme). Un terme est la racine d'un mot hors
+  // mots vides ; un synonyme ajouté par le moteur compte comme le terme d'origine.
+  function pertinence(ix, q, opt = {}) {
+    const termes = new Map();
+    for (const w of norm(q).split(" ")) {
+      if (w.length < 2 || STOP.has(w)) continue;
+      const t = stem(w); if (!termes.has(t)) termes.set(t, new Set([t]));
+      for (const x of SYN[w] || []) termes.get(t).add(stem(x));
+    }
+    const res = termes.size ? search(ix, q, { ...opt, k: Infinity }) : [];
+    const meilleur = res.reduce((m, x) => Math.max(m, x.score), 0), score = new Map(res.map((x) => [x.r.id, x.score]));
+    const postings = new Map();
+    const contient = (t, i) => {
+      if (!postings.has(t)) { const p = ix.inv.get(t) || [], s = new Set(); for (let j = 0; j < p.length; j += 2) s.add(p[j]); postings.set(t, s); }
+      return postings.get(t).has(i);
+    };
+    const couvre = (g, i) => [...g].some((t) => contient(t, i));
+    const couverture = (id) => { const i = ix.byId.get(id); let n = 0; for (const g of termes.values()) if (couvre(g, i)) n++; return n; };
+    const N = ix.recs.length, idf = (t) => { const p = ix.inv.get(t); return p ? Math.log(1 + (N - p.length / 2 + 0.5) / (p.length / 2 + 0.5)) : -1; };
+    let rare = null;
+    for (const [t, g] of termes) if (idf(t) >= 0 && (!rare || idf(t) > idf(rare[0]))) rare = [t, g];
+    const plusRare = (id) => !!rare && couvre(rare[1], ix.byId.get(id));
+    return { meilleur, termes: termes.size, rare: rare && rare[0], score: (id) => score.get(id) || 0, couverture, plusRare,
+      pertinente: (id) => termes.size > 0 && (score.get(id) || 0) >= 0.5 * meilleur && (couverture(id) >= 2 || plusRare(id)) };
+  }
+  const api = { build, search, norm, toks, pertinence };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

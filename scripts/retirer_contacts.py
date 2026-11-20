@@ -8,6 +8,10 @@ Ce site analyse ce que les démarches demandent. Il n'est pas un annuaire de con
 
 N'imprime jamais une adresse ni un numéro : seulement des fichiers et des comptes. Le remplacement se fait dans le texte brut,
 pour ne rien changer d'autre au fichier. Tout générateur qui écrit des données publiées appelle masquer_donnees().
+
+Exception : les fichiers d'EXCEPTIONS portent les points de contact publics officiels de services (Annuaire de
+l'administration de la DILA, liste France services de l'ANCT), affichés comme tels. Ils ne sont ni contrôlés ni modifiés ;
+la liste est explicite, chemin par chemin, et tout le reste du dépôt reste contrôlé.
 """
 import json
 import re
@@ -33,6 +37,10 @@ TELEPHONE = re.compile(
 # Tranche réservée par l'Arcep aux numéros fictifs : admise pour les jeux de test.
 def _fictif(s):
     return re.sub(r"\D", "", s).startswith("019900")
+# Chemin → raison. Ajouter un chemin ici est une décision de l'auteur, documentée dans le README (« Données de contact »).
+EXCEPTIONS = {
+    "donnees/assistant/france_services.json": "liste des structures labellisées France services (ANCT, licence ouverte) : contacts publics des structures",
+}
 SUFFIXES_BINAIRES = {".png", ".jpg", ".jpeg", ".gif", ".ico", ".webp", ".woff", ".woff2", ".pdf", ".xlsx", ".docx", ".gz", ".zip", ".pptx"}
 
 
@@ -65,7 +73,7 @@ def fichiers_suivis():
     sortie = subprocess.run(["git", "ls-files", "-z"], cwd=RACINE, capture_output=True, text=True, check=True).stdout
     for rel in sortie.split("\0"):
         p = RACINE / rel
-        if rel and p.is_file() and p.suffix.lower() not in SUFFIXES_BINAIRES:
+        if rel and rel not in EXCEPTIONS and p.is_file() and p.suffix.lower() not in SUFFIXES_BINAIRES:
             yield p
 
 

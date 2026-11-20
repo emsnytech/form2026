@@ -1,0 +1,99 @@
+{
+  "objet": "Correspondance entre une démarche ou une fiche et le type de service local de l'Annuaire de l'administration (DILA) qui la reçoit. Sans correspondance, pas d'encadré « Où aller ». Les indices sont cherchés, comme mots entiers, sans accents ni casse, dans l'organisme d'une démarche en ligne, et dans le titre et le thème d'une fiche service-public.",
+  "regles": [
+    {
+      "libelle": "Préfecture",
+      "indices": [
+        "préfecture",
+        "sous-préfecture",
+        "titre de séjour"
+      ],
+      "types": [
+        "prefecture",
+        "sous_pref",
+        "paris_ppp"
+      ]
+    },
+    {
+      "libelle": "Caf",
+      "indices": [
+        "caf",
+        "caisse d'allocations familiales"
+      ],
+      "types": [
+        "caf"
+      ]
+    },
+    {
+      "libelle": "Assurance maladie",
+      "indices": [
+        "cpam",
+        "assurance maladie"
+      ],
+      "types": [
+        "cpam"
+      ]
+    },
+    {
+      "libelle": "Mairie",
+      "indices": [
+        "mairie",
+        "ville de",
+        "état civil"
+      ],
+      "types": [
+        "mairie"
+      ]
+    },
+    {
+      "libelle": "Impôts",
+      "indices": [
+        "impôts",
+        "finances publiques"
+      ],
+      "types": [
+        "sip",
+        "sie"
+      ]
+    },
+    {
+      "libelle": "France Travail",
+      "indices": [
+        "france travail"
+      ],
+      "types": [
+        "france_travail"
+      ]
+    },
+    {
+      "libelle": "MDPH",
+      "indices": [
+        "mdph",
+        "handicap"
+      ],
+      "types": [
+        "maison_handicapees"
+      ]
+    },
+    {
+      "libelle": "Gendarmerie ou police",
+      "indices": [
+        "plainte",
+        "gendarmerie",
+        "police"
+      ],
+      "types": [
+        "gendarmerie_departementale",
+        "commissariat_police"
+      ]
+    }
+  ],
+  "titres_identite": {
+    "objet": "Toutes les mairies ne prennent pas les demandes de carte d'identité et de passeport : pour une fiche service-public du thème « Papiers - Citoyenneté - Élections » qui en parle, l'encadré renvoie à la fiche, sans afficher la mairie de la commune.",
+    "indices": [
+      "carte d'identité",
+      "passeport"
+    ],
+    "theme": "Papiers - Citoyenneté - Élections"
+  }
+}
