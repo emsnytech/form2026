@@ -3,15 +3,15 @@
  "date": "2026-11-20",
  "retenues": [
   {
-   "cle": "plan casi",
-   "titre": "Fonds d'urgence sécheresse pour les agriculteurs (Plan CASI)",
-   "organisme": "16 démarches départementales",
-   "portee": "15 départements",
+   "cle": "secheresse 2026",
+   "titre": "Sécheresse 2026 : aides et dérogations pour les agriculteurs",
+   "organisme": "23 démarches ouvertes",
+   "portee": "19 départements",
    "etiquette": "Urgent",
-   "dossiers": 2661,
+   "dossiers": 2744,
    "publiee": "2026-11-19",
    "echeance": null,
-   "variantes": 16,
+   "variantes": 23,
    "ids": [
     "DN-161112",
     "DN-161446",
@@ -21,16 +21,23 @@
     "DN-161236",
     "DN-160443",
     "DN-161296",
+    "DN-160768",
     "DN-160095",
     "DN-155797",
     "DN-160424",
     "DN-161081",
     "DN-161297",
+    "DN-160087",
+    "DN-160611",
     "DN-161656",
+    "DN-159642",
+    "DN-159453",
+    "DN-161597",
+    "DN-158136",
     "DN-161922",
     "DN-161451"
    ],
-   "requete": "plan casi"
+   "requete": "sécheresse aide agriculteur dérogation"
   },
   {
    "cle": "pertes fonds aleas inondations tempete nils forte temperatures estivales",
@@ -48,72 +55,10 @@
    "requete": "Pertes de fonds Aléas 2026 - inondations, tempête Nils, forte températures estivales"
   },
   {
-   "cle": "ddt58 secheresse reconnaissance cas force majeure campagne pac",
-   "titre": "DDT58 - sécheresse 2026 - demande de reconnaissance de cas de force majeure - campagne PAC 2026",
-   "organisme": "Direction départementale des territoires (DDT) - Nièvre",
-   "portee": "Nièvre (58)",
-   "etiquette": "Crise",
-   "dossiers": 9,
-   "publiee": "2026-10-27",
-   "echeance": null,
-   "variantes": 1,
-   "ids": [
-    "DN-160087"
-   ],
-   "requete": "DDT58 - sécheresse 2026 - demande de reconnaissance de cas de force majeure - campagne PAC 2026"
-  },
-  {
-   "cle": "prelevement agricole secheresse secteur pontarlier alentours",
-   "titre": "Prélèvement agricole sécheresse 2026 - secteur Pontarlier et alentours - département du Doubs",
-   "organisme": "Direction départementale des territoires du Doubs (DDT)",
-   "portee": "Doubs (25)",
-   "etiquette": "Crise",
-   "dossiers": 1,
-   "publiee": "2026-11-04",
-   "echeance": null,
-   "variantes": 1,
-   "ids": [
-    "DN-159642"
-   ],
-   "requete": "Prélèvement agricole sécheresse 2026 - secteur Pontarlier et alentours - département du Doubs"
-  },
-  {
-   "cle": "derogation titre force majeure cultures hiver implantees aout ou debut septembre campagne pac",
-   "titre": "Demande de dérogation au titre de la force majeure sur cultures d'hiver implantées en août ou début septembre 2026 - campagne PAC 2027",
-   "organisme": "Direction départementale des territoires de la Vienne, préfécture de la Vienne, ministère en charge de l'agriculture",
-   "portee": "Vienne (86)",
-   "etiquette": "Crise",
-   "dossiers": 1,
-   "publiee": "2026-11-18",
-   "echeance": null,
-   "variantes": 1,
-   "ids": [
-    "DN-159453"
-   ],
-   "requete": "Demande de dérogation au titre de la force majeure sur cultures d'hiver implantées en août ou début septembre 2026 - campagne PAC 2027"
-  },
-  {
-   "cle": "bilan volumes irrigation suite derogation secheresse",
-   "titre": "BILAN DES VOLUMES D'IRRIGATION SUITE A DÉROGATION SÉCHERESSE",
-   "organisme": "DIRECTION DEPARTEMENTALE DES TERRITOIRES YVELINES (DDT)",
-   "portee": "Yvelines (78)",
-   "etiquette": "Crise",
-   "dossiers": 1,
-   "publiee": "2026-11-19",
-   "echeance": null,
-   "variantes": 1,
-   "ids": [
-    "DN-158136"
-   ],
-   "requete": "BILAN DES VOLUMES D'IRRIGATION SUITE A DÉROGATION SÉCHERESSE"
-  }
- ],
- "suivantes": [
-  {
    "cle": "intemperies octobre indemnisation degats subis collectivites territoriales leurs groupements",
    "titre": "Intempéries 19 et 20 octobre 2026 dans le Gard - Demande d'indemnisation des dégâts subis par les collectivités territoriales et leurs groupements",
    "organisme": "MINISTERE DE L'INTERIEUR",
-   "portee": "Paris (75)",
+   "portee": "Gard (30)",
    "etiquette": "Crise",
    "dossiers": 1,
    "publiee": "2026-10-28",
@@ -168,7 +113,9 @@
     "DN-70401"
    ],
    "requete": "Demande de copie d’acte d’état civil consulaire"
-  },
+  }
+ ],
+ "suivantes": [
   {
    "cle": "aide entreprises btp utilisant gazole non routier gnr btp periode octobre",
    "titre": "Aide aux entreprises du BTP utilisant du Gazole Non Routier (GNR-BTP) - période d'octobre 2026",
@@ -198,6 +145,66 @@
     "DN-60985"
    ],
    "requete": "HELP « aide aux entreprises en difficultés » Rhône-Alpes"
+  },
+  {
+   "cle": "action clasac billets parc asterix saison",
+   "titre": "Action CLASAC : BILLETS POUR LE PARC ASTERIX SAISON 2026-2027",
+   "organisme": "MINISTERE DE L'INTERIEUR",
+   "portee": "nationale",
+   "etiquette": "Nouveau",
+   "dossiers": 780,
+   "publiee": "2026-11-04",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-159584"
+   ],
+   "requete": "Action CLASAC : BILLETS POUR LE PARC ASTERIX SAISON 2026-2027"
+  },
+  {
+   "cle": "procedure declaration autorisation renouvellement modification demandes videoprotection",
+   "titre": "Procédure de déclaration d'autorisation, de renouvellement et de modification des demandes de vidéoprotection",
+   "organisme": "Ministere de l'Intérieur",
+   "portee": "nationale",
+   "etiquette": "Nouveau",
+   "dossiers": 765,
+   "publiee": "2026-11-06",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-160412"
+   ],
+   "requete": "Procédure de déclaration d'autorisation, de renouvellement et de modification des demandes de vidéoprotection"
+  },
+  {
+   "cle": "dossier candidature reconnaissance valorisation engagement etudiant lyon universite",
+   "titre": "Dossier de candidature : Reconnaissance et Valorisation de l'Engagement Etudiant - Lyon 1 Université",
+   "organisme": "d'un excellent organisme",
+   "portee": "Rhône (69)",
+   "etiquette": "Nouveau",
+   "dossiers": 448,
+   "publiee": "2026-10-23",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-144170"
+   ],
+   "requete": "Dossier de candidature : Reconnaissance et Valorisation de l'Engagement Etudiant - Lyon 1 Université"
+  },
+  {
+   "cle": "cnam intec validation acquis professionnels personnels vapp",
+   "titre": "Cnam Intec : Formulaire de Validation des Acquis Professionnels et Personnels (VAPP) 2026-2027",
+   "organisme": "Cnam -Intec",
+   "portee": "Paris (75)",
+   "etiquette": "Nouveau",
+   "dossiers": 432,
+   "publiee": "2026-11-09",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-140637"
+   ],
+   "requete": "Cnam Intec : Formulaire de Validation des Acquis Professionnels et Personnels (VAPP) 2026-2027"
   }
  ],
  "source": "Démarches publiées depuis moins de 30 jours, et démarches de saison (saisons.json) ; descriptif de Démarche Numérique",

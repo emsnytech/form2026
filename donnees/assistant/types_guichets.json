@@ -6,7 +6,9 @@
       "indices": [
         "préfecture",
         "sous-préfecture",
-        "titre de séjour"
+        "titre de séjour",
+        "immigration",
+        "bureau des étrangers"
       ],
       "types": [
         "prefecture",

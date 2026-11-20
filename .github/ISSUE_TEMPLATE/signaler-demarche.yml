@@ -1,0 +1,25 @@
+name: Signaler une démarche
+description: Une démarche en ligne que « Trouver sa démarche » ne propose pas encore.
+title: "Démarche à ajouter : "
+labels: ["demarche-a-ajouter"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci. **N'indiquez aucune donnée personnelle** (nom, numéro de dossier, adresse, téléphone) : seuls le nom de la démarche, l'organisme et le lien sont utiles.
+  - type: input
+    id: demarche
+    attributes:
+      label: Nom de la démarche
+    validations:
+      required: true
+  - type: input
+    id: organisme
+    attributes:
+      label: Organisme qui la propose
+      description: Par exemple la préfecture, la caisse d'allocations familiales, la mairie.
+  - type: input
+    id: lien
+    attributes:
+      label: Lien vers la démarche
+      description: L'adresse de la page où l'on fait la démarche en ligne.

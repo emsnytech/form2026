@@ -18,7 +18,9 @@ RACINE = Path(__file__).resolve().parents[2]
 D = RACINE / "donnees" / "assistant"
 PAGE = RACINE / "trouver-sa-demarche-comment.html"
 DEPOT = "https://github.com/emsnytech/form2026"
-NOTE_PROJET = None  # adresse de la note de projet, à fournir par l'éditeur : sans elle, la page n'affiche pas de lien
+# Note de projet : pièce jointe d'une release GitHub du dépôt (le PDF n'est pas versionné). Le lien répond une fois la
+# release publiée par l'éditeur.
+NOTE_PROJET = DEPOT + "/releases/download/trouver-sa-demarche-fiche-projet/Trouver_sa_demarche_fiche_projet.pdf"
 MOIS = "janvier février mars avril mai juin juillet août septembre octobre novembre décembre".split()
 
 
@@ -90,7 +92,6 @@ def page():
     meta, nfs, aides, vers_dn = chiffres()
     ndn, nsp, date = meta["demarches_en_ligne"], meta["fiches"], date_fr(meta["date_export"])
     avenir = '<span class="sr-only"> (en cours d\'intégration)</span>'
-    note = (f' La <a href="{NOTE_PROJET}">note de projet</a> présente la démarche d\'ensemble.' if NOTE_PROJET else "")
     return f"""<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -189,6 +190,7 @@ def page():
     <li>L'assistant fonctionne avec Claude, le modèle d'Anthropic&nbsp;: il faut un compte Claude, et vos questions sont décomptées de ce compte, selon les <a href="https://www.anthropic.com/legal/consumer-terms" target="_blank" rel="noopener">conditions d'utilisation d'Anthropic</a>.</li>
     <li>Vos questions sont envoyées au modèle&nbsp;: n'y indiquez ni nom, ni numéro de dossier, ni coordonnées.</li>
     <li>L'assistant oriente et peut se tromper&nbsp;: vérifiez toujours sur la fiche ou la démarche citée. Il ne dit pas si vous avez droit à une aide.</li>
+    <li>Sur claude.ai, la page ne peut appeler aucun service extérieur&nbsp;: la commune est reconnue dans votre question, «&nbsp;Où aller&nbsp;» donne les France services les plus proches et un lien vers l'Annuaire de l'administration pour votre commune, sans code postal.</li>
     <li>Le nombre de questions libres est limité par visite. La recherche simple et les exemples préparés restent disponibles sans IA, ici comme là-bas.</li>
   </ul>
   <p class="avert"><strong>Avertissement.</strong> Ce démonstrateur est expérimental et fourni à titre d'information. Ses réponses ne sont ni un conseil juridique ni une décision administrative&nbsp;: vérifiez-les auprès de la source officielle citée. L'éditeur du démonstrateur ne saurait être tenu responsable de l'usage qui est fait des réponses, ni du traitement des questions par le fournisseur d'IA.</p>
@@ -197,14 +199,16 @@ def page():
   <ul>
     <li>Décrivez votre situation sans donnée personnelle&nbsp;: ni nom, ni numéro (sécurité sociale, titre de séjour, IBAN, téléphone), ni adresse précise, ni information de santé. Une commune suffit&nbsp;: n'indiquez ni votre adresse ni votre nom. Les numéros et adresses électroniques reconnus sont retirés avant l'envoi.</li>
     <li>La recherche simple se fait entièrement dans votre navigateur&nbsp;: votre question n'est envoyée nulle part.</li>
-    <li>Votre code postal sert uniquement à trouver votre commune (API Géo de l'État). Rien d'autre n'est envoyé. Quand votre question nomme une seule commune, son code sert de la même façon à trouver «&nbsp;Où aller&nbsp;».</li>
+    <li>Votre code postal sert uniquement à trouver votre commune (API Géo de l'État). Rien d'autre n'est envoyé. Quand votre question nomme une seule commune, elle sert de la même façon à trouver «&nbsp;Où aller&nbsp;»&nbsp;: seul le code de la commune est envoyé, jamais le texte de votre question.</li>
     <li>Seuls le code postal (API Géo) et le code de la commune (Annuaire de l'administration) quittent le navigateur.</li>
     <li>Dans la version avec assistant, vos questions sont traitées par Anthropic sous votre compte Claude&nbsp;; FORM 2026 ne les reçoit ni ne les conserve.</li>
   </ul>
 
   <h2 id="contribuer">Contribuer</h2>
-  <p>Le démonstrateur est ouvert&nbsp;: le code, l'index et les listes de l'accueil sont publiés dans le dépôt du projet. Une démarche mal classée, un guichet erroné, une démarche de saison oubliée, une situation que la recherche ne comprend pas&nbsp;: signalez-le, ou proposez une correction.{note}</p>
+  <p>Le démonstrateur est ouvert&nbsp;: le code, l'index et les listes de l'accueil sont publiés dans le dépôt du projet. Une démarche mal classée, un guichet erroné, une démarche de saison oubliée, une situation que la recherche ne comprend pas&nbsp;: signalez-le, ou proposez une correction.</p>
   <p><a class="btn-lien" href="{DEPOT}/issues" target="_blank" rel="noopener">Signaler ou proposer une correction</a></p>
+  <p><a href="{NOTE_PROJET}">Note de projet (PDF)</a></p>
+  <p>Une démarche en ligne manque&nbsp;? <a href="{DEPOT}/issues/new?template=signaler-demarche.yml" target="_blank" rel="noopener">Signalez-la</a>&nbsp;: nom de la démarche, organisme et lien suffisent.</p>
   <p>Pour un service, le contact affiché sous un guichet a son propre lien «&nbsp;Signaler une erreur&nbsp;», vers la source officielle qui le publie.</p>
 </main>
 

@@ -29,6 +29,11 @@ MODULES = [(MOTEUR, DEBUT, FIN), (Path(__file__).with_name("ou_aller.js"), "/*ou
 ASSISTANT_URL = "https://claude.ai/artifact/LLfjE77eNYPjiykcDdcJza"
 
 VERSION_IA = Path.home() / "Documents" / "cartographie" / "assistant" / "version_ia.html"
+# Dossier de publication de la version avec assistant : la page et les fichiers qu'elle charge, à côté d'elle, sous les
+# noms qu'elle attend (window.FORM_DATA vide). L'éditeur publie depuis ce dossier.
+ARTEFACT = VERSION_IA.parent / "artefact"
+FICHIERS_IA = ["index.json", "index_meta.json", "exemples.json", "plus_demandees.json", "a_la_une.json", "types_guichets.json",
+               "communes.json", "france_services.json"]
 
 CSS_DIALOGUE = """dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line2);border-radius:14px;padding:20px 22px;background:var(--fond);color:var(--ink)}
 dialog::backdrop{background:rgba(0,0,0,.45)}
@@ -78,7 +83,8 @@ ADAPTATIONS = COMMUNES + [
 ]
 # Version avec assistant (artefact claude.ai) : données servies à côté de la page, pages FORM par leur adresse publique.
 ADAPTATIONS_IA = COMMUNES + [
-    (r"<script>/\*MOTEUR\*/</script>", lambda m: f"<script>{DEBUT}\n{FIN}</script>"),
+    # Les artefacts claude.ai ne peuvent appeler aucune API extérieure : ni API Géo ni Annuaire (ou_aller.js, FORM_SANS_API).
+    (r"<script>/\*MOTEUR\*/</script>", lambda m: f"<script>window.FORM_SANS_API = true;</script>\n<script>{DEBUT}\n{FIN}</script>"),
 ]
 
 
@@ -113,6 +119,16 @@ if "--depuis" in sys.argv:
     if VERSION_IA.parent.is_dir():
         VERSION_IA.write_text(avec_moteur(adapter(gabarit, ADAPTATIONS_IA)), encoding="utf-8")
         print(f"écrit : {VERSION_IA}")
+        import shutil
+        ARTEFACT.mkdir(exist_ok=True)
+        shutil.copyfile(VERSION_IA, ARTEFACT / "version_ia.html")
+        lignes = [f"version_ia.html\t{(ARTEFACT / 'version_ia.html').stat().st_size}"]
+        for f in FICHIERS_IA:
+            shutil.copyfile(RACINE / "donnees" / "assistant" / f, ARTEFACT / f)
+            lignes.append(f"{f}\t{(ARTEFACT / f).stat().st_size}")
+        (ARTEFACT / "LISEZMOI.txt").write_text("Version avec assistant : la page (version_ia.html) et les fichiers qu'elle charge, à placer à côté\n"
+            "d'elle sous ces noms. Produit par scripts/assistant/assembler_page.py --depuis. Taille en octets :\n\n" + "\n".join(lignes) + "\n", encoding="utf-8")
+        print(f"écrit : {ARTEFACT}/ ({len(FICHIERS_IA) + 1} fichiers)")
     sys.exit(0)
 
 t = PAGE.read_text(encoding="utf-8")

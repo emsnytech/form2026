@@ -23,7 +23,7 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parents[2]
 D = RACINE / "donnees" / "assistant"
 sys.path.insert(0, str(Path(__file__).parent))
-from departements import DEPARTEMENTS, REGIONS  # noqa: E402
+from departements import DEPARTEMENTS, REGIONS, _dans  # noqa: E402
 
 
 def n_(s):
@@ -47,6 +47,26 @@ PROGRAMMES = [
     ("pass culture", "Demander le crédit du pass Culture", [["pass", "culture"]]),
     ("medaille honneur travail", "Demander la médaille d'honneur du travail", [["medaille", "honneur", "travail"]]),
 ]
+
+
+# Crises : les démarches d'une même crise forment une seule ligne de « À la une », qui lance une recherche sur le thème.
+# (clé, libellé, requête, listes de mots dont une doit être entièrement présente dans le titre). À compléter par l'éditeur.
+CRISES = [
+    ("secheresse 2026", "Sécheresse 2026 : aides et dérogations pour les agriculteurs", "sécheresse aide agriculteur dérogation",
+     # le fonds de réarmement agricole relève du Plan CASI (Climat, Adaptation, Sécheresse, Incendie)
+     [["secheresse"], ["casi"], ["force", "majeure"], ["irrigation"], ["fonds", "rearmement"]]),
+]
+
+
+def crise(titre):
+    mots = set(n_(titre).split())
+    return next(((k, lib, req) for k, lib, req, regles in CRISES if any(all(m in mots for m in r) for r in regles)), None)
+
+
+def departement_affiche(r):
+    """Département à afficher : celui que le titre nomme quand il contredit celui de l'organisme (règle de la PR 73)."""
+    d_tit = _dans(r["t"], titre=True)[0]
+    return d_tit if d_tit and d_tit != r.get("dep") else r.get("dep") or ""
 
 
 def programme(titre):
@@ -182,24 +202,37 @@ process.stdin.on('data',d=>s+=d).on('end',()=>{ const out={}; for (const q of JS
         etiq = "Urgent" if URGENT.search(t) else "Crise" if CRISE.search(t) else "De saison" if s else "Nouveau"
         candidats.append((r, etiq))
     lignes = collections.defaultdict(list)
-    for r, e in candidats: lignes[cle_variante(r["t"])].append((r, e))
+    for r, e in candidats:
+        c = crise(r["t"])
+        lignes[c[0] if c else cle_variante(r["t"])].append((r, e))
     rang = {"Urgent": 0, "Crise": 1, "De saison": 2, "Nouveau": 3}
     une = []
     for k, l in lignes.items():
         l.sort(key=lambda x: -x[0]["n"]); r, e = l[0]
-        deps = sorted({x[0]["dep"] for x in l if x[0].get("dep")})
+        deps = sorted({departement_affiche(x[0]) for x in l} - {""})
         etiq = min((x[1] for x in l), key=lambda x: rang[x])
-        portee = ("nationale" if r.get("po") == "nat" else f"{DEPARTEMENTS.get(r['dep'], r['dep'])} ({r['dep']})" if r.get("dep") else "locale") if len(deps) <= 1 else \
-                 (f"plus de {len(deps) // 10 * 10} départements" if len(deps) >= 20 else f"{len(deps)} départements")
+        d1 = departement_affiche(r)
+        portee = ("nationale" if r.get("po") == "nat" and not d1 else f"{DEPARTEMENTS.get(d1, d1)} ({d1})" if d1 else "locale") if len(deps) <= 1 else f"{len(deps)} départements"
         echeance = min((x[0].get("fe") or "9999") for x in l)
-        pg = programme(r["t"])
-        une.append({"cle": k, "titre": pg[1] if pg and len(l) > 1 else r["t"], "organisme": r["o"] if len(l) == 1 else f"{len(l)} démarches départementales", "portee": portee, "etiquette": ed["etiquette"].get(k, etiq),
+        pg = programme(r["t"]); cr = next((c for c in CRISES if c[0] == k), None)
+        ouvertes = sum(1 for x in l if not x[0].get("fe") or x[0]["fe"] >= meta["date_export"])
+        titre = cr[1] if cr else pg[1] if pg and len(l) > 1 else r["t"]
+        organisme = r["o"] if len(l) == 1 else f"{ouvertes} démarche{'s' if ouvertes > 1 else ''} ouverte{'s' if ouvertes > 1 else ''}" if cr else f"{len(l)} démarches départementales"
+        une.append({"cle": k, "titre": titre, "organisme": organisme, "portee": portee, "etiquette": ed["etiquette"].get(k, etiq),
                     "dossiers": sum(x[0]["n"] for x in l), "publiee": max((x[0].get("dp") or "") for x in l), "echeance": None if echeance == "9999" else echeance,
-                    "variantes": len(l), "ids": [x[0]["id"] for x in l[:50]], "requete": r["t"] if len(l) == 1 else k})
+                    "variantes": len(l), "ids": [x[0]["id"] for x in l[:50]], "requete": cr[2] if cr else r["t"] if len(l) == 1 else k})
     une = [u for u in une if u["cle"] not in ed["exclu"]]
     une.sort(key=lambda u: (rang[u["etiquette"]], -u["dossiers"], u["echeance"] or "9999"))
     epingles = [u for m in ed["epingle"] for u in une if all(w in u["cle"] for w in n_(m).split())]
     ordre = epingles + [u for u in une if u not in epingles]
+    # Au plus deux lignes « Crise » : la place reste aux autres sujets (les suivantes restent listées pour l'éditeur).
+    n_crise, garde, reste = 0, [], []
+    for u in ordre:
+        if u["etiquette"] == "Crise" and u not in epingles:
+            n_crise += 1
+            if n_crise > 2: reste.append(u); continue
+        garde.append(u)
+    ordre = garde + reste
     au = {"objet": "Accueil, « À la une » : proposé par la mise à jour, validé par l'éditeur. editeur.epingle (mots du titre), editeur.exclu (clés), editeur.etiquette ({clé: étiquette}).",
           "date": meta["date_export"], "retenues": ordre[:6], "suivantes": ordre[6:12],
           "source": "Démarches publiées depuis moins de 30 jours, et démarches de saison (saisons.json) ; descriptif de Démarche Numérique",

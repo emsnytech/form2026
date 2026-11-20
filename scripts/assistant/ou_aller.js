@@ -2,7 +2,9 @@
 // France services la plus proche (liste ANCT), réunis dans la carte « Où aller » de la réponse. assembler_page.py le
 // recopie dans la page FORM et dans la version avec assistant, après le script du gabarit, dont il emploie $, esc, IX,
 // DATA, ajouterLien, rechercheSimple et afficherResultats.
-// Seuls le code postal (API Géo) et le code de la commune (Annuaire) quittent le navigateur.
+// Seuls le code postal (API Géo) et le code de la commune (Annuaire) quittent le navigateur. Dans la version avec
+// assistant sur claude.ai (window.FORM_SANS_API), aucune API extérieure n'est appelée : la commune vient de la question
+// (communes.json), le code postal est masqué, et « Où aller » renvoie vers la recherche de l'Annuaire pour la commune.
 (function () {
   const GEO = "https://geo.api.gouv.fr/communes";
   const AN = "https://api-lannuaire.service-public.gouv.fr/api/explore/v2.1/catalog/datasets/";
@@ -17,6 +19,9 @@
   const relancer = () => { if (origine() === "simple") rechercheSimple(); else decorer(); };
   const reponseAffichee = () => !$("vue-reponse").hidden;
   const cache = new Map();
+  const SANS_API = !!window.FORM_SANS_API;
+  // Centre de chaque commune (communes.json) : la France services la plus proche se calcule sans appel à une API.
+  const CENTRES = new Map();
 
   const norm = (s) => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’`]/g, "'").replace(/\s+/g, " ");
   const motEntier = (txt, idx) => new RegExp("(^|[^a-z0-9])" + norm(idx).replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "($|[^a-z0-9])").test(txt);
@@ -28,10 +33,16 @@
 
   fetch(DATA + "types_guichets.json").then((r) => r.json()).then((t) => { TABLE = t; decorer(); }).catch(() => {});
   // Communes, pour que le moteur reconnaisse un lieu dans la question (Moteur.lieux) et que la page le propose.
-  fetch(DATA + "communes.json").then((r) => r.json()).then((d) => { Moteur.chargerCommunes(d); decorer(); }).catch(() => {});
+  fetch(DATA + "communes.json").then((r) => r.json()).then((d) => {
+    Moteur.chargerCommunes(d);
+    const C = Object.fromEntries(d.champs.map((k, i) => [k, i]));
+    if (C.lat !== undefined) for (const c of d.communes) if (c[C.lat] !== null) CENTRES.set(c[C.code], [c[C.lat], c[C.lon]]);
+    decorer();
+  }).catch(() => {});
 
   // ---------- 1. Code postal → commune
   const cp = $("cp"), choix = $("commune"), etat = $("cp-etat");
+  if (SANS_API) { cp.closest("label").hidden = true; choix.hidden = true; document.querySelectorAll(".perso-cp").forEach((e) => (e.hidden = true)); }
   // Le bloc « Préciser le public ou le lieu » s'ouvre tout seul quand un lieu est proposé ou qu'un filtre est actif.
   function ouvrirFiltres() { const f = $("filtres"); if (f) f.open = true; }
   ["pub", "dep"].forEach((id) => $(id).addEventListener("change", () => { if ($(id).value) ouvrirFiltres(); }));
@@ -124,6 +135,13 @@
   // Une démarche en ligne n'a de guichet local que si elle relève du département de l'usager : une démarche nationale
   // ou d'un autre département n'est pas reçue par le service de sa commune.
   const duDepartement = (r, c) => r.k === "dn" && !!r.dep && r.dep === c.dep;
+  // Sans API : lien vers la recherche officielle de l'Annuaire pour la commune (résultats classés par distance).
+  function lienAnnuaire(c, quoi) {
+    const u = `https://lannuaire.service-public.gouv.fr/recherche?whoWhat=${encodeURIComponent(quoi || "")}&where=${encodeURIComponent(c.nom + " (" + c.dep + ")")}`;
+    ajouterLien(`Annuaire de l'administration : ${quoi ? quoi + ", " : ""}${c.nom}`, u, "Annuaire de l'administration (DILA)");
+    return `<p><a href="${esc(u)}" target="_blank" rel="noopener">Trouver le guichet compétent sur l'Annuaire de l'administration</a>${quoi ? ` <span class="meta">(${esc(quoi)}, ${esc(c.nom)})</span>` : ""}</p>`;
+  }
+
   // ---------- 2 bis. Service local : la première des cartes en tête de réponse (votre démarche, aussi pour vous,
   // comprendre ; window.CARTES_TETE, donné par le gabarit) qui a un guichet dans la table. Une démarche en ligne n'en a que si elle relève du département de l'usager.
   async function serviceLocal(el, c) {
@@ -136,6 +154,7 @@
       el.innerHTML = `<div class="ou-t">Où déposer la demande</div><p>Toutes les mairies ne prennent pas les demandes de carte d'identité et de passeport : la fiche explique comment trouver une mairie équipée près de chez vous.</p>`;
       majOu(); return;
     }
+    if (SANS_API) { el.innerHTML = lienAnnuaire(c, g.libelle); majOu(); return; }
     // Le type de la table ne sert qu'à choisir le guichet : la carte affiche le nom que renvoie l'Annuaire.
     el.innerHTML = `<p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`; majOu();
     let l;
@@ -212,6 +231,7 @@
     const termes = Moteur.analyse ? [...Moteur.analyse(q).termes.values()].flatMap((g) => [...g]).join(" ") : "";
     const N = Moteur.norm, premier = LISTE[0] ? N(LISTE[0].t + " " + (LISTE[0].th || "")) : "";
     if (![N(q) + " " + termes, premier].some((s) => THEMES_CCAS.test(s))) return;
+    if (SANS_API) { el.innerHTML = `<div class="ou-t">Aide sociale de votre commune</div>` + lienAnnuaire(c, "CCAS"); majOu(); return; }
     let l; try { l = await services(c.code, ["ccas"]); } catch (e) { return; }
     if (COMMUNE !== c || !l.length) return;
     el.innerHTML = `<div class="ou-t">Aide sociale de votre commune</div>${l.map(htmlService).join("")}<p class="ou-src">Centre communal d'action sociale compétent pour votre commune selon l'Annuaire, interrogé avec le seul code de la commune.</p>`;
@@ -255,7 +275,9 @@
     if (!L) {
       // Ni code postal, ni département, ni lieu reconnu : les démarches d'un département sont rétrogradées (×0,8 dans le
       // moteur) ; la page invite à préciser la commune.
-      if (!$("dep").value) {
+      if (!$("dep").value && SANS_API) {
+        el.innerHTML = `<span class="meta">Précisez votre commune dans votre question (par exemple «&nbsp;j'habite à Rezé&nbsp;») pour voir les démarches de votre territoire et où aller.</span>`;
+      } else if (!$("dep").value) {
         el.innerHTML = `<label class="meta" for="cp-res">Précisez votre commune pour voir les démarches de votre territoire et où aller&nbsp;:</label> `
           + `<input id="cp-res" class="cp-res" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="code postal">`;
         const c2 = $("cp-res");
@@ -283,10 +305,12 @@
       geo(L.candidats[0]).then((c) => { if (c && !COMMUNE) { c.devine = true; poser(c, true); } });
     }
   }
-  const geo = (c) => json(`${GEO}/${encodeURIComponent(c.code)}?fields=nom,code,codeDepartement,codeEpci,centre&format=json`)
+  const geo = (c) => CENTRES.has(c.code)
+    ? Promise.resolve({ nom: c.nom, code: c.code, dep: c.dep, epci: "", lat: CENTRES.get(c.code)[0], lon: CENTRES.get(c.code)[1] })
+    : SANS_API ? Promise.resolve(null) : json(`${GEO}/${encodeURIComponent(c.code)}?fields=nom,code,codeDepartement,codeEpci,centre&format=json`)
     .then((g) => ({ nom: g.nom, code: g.code, dep: g.codeDepartement, epci: g.codeEpci || "", lon: g.centre.coordinates[0], lat: g.centre.coordinates[1] })).catch(() => null);
   // « changer » : retour au champ, bloc « Préciser le public ou le lieu » ouvert, sur le code postal.
-  function vueAccueilFiltres() { $("vue-reponse").hidden = true; $("vue-accueil").hidden = false; ouvrirFiltres(); cp.focus(); cp.scrollIntoView({ block: "center" }); }
+  function vueAccueilFiltres() { $("vue-reponse").hidden = true; $("vue-accueil").hidden = false; ouvrirFiltres(); const f = SANS_API ? $("dep") : cp; f.focus(); f.scrollIntoView({ block: "center" }); }
 
   function decorer() {
     if (typeof IX === "undefined" || !IX || !reponseAffichee()) return;
