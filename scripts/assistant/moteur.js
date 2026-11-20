@@ -18,8 +18,10 @@
     agriculteur: ["agricole", "exploitation", "agriculture", "filiere"], exploitant: ["agricole", "exploitation", "agriculture", "filiere"],
     eleveur: ["agricole", "exploitation", "agriculture", "filiere"], viticulteur: ["agricole", "exploitation", "agriculture", "filiere"],
     maraicher: ["agricole", "exploitation", "agriculture", "filiere"],                               // agriculture
-    secheresse: ["calamite", "urgence", "fonds"], gel: ["calamite", "urgence", "fonds"], grele: ["calamite", "urgence", "fonds"],
-    inondation: ["calamite", "urgence", "fonds"], tempete: ["calamite", "urgence", "fonds"], intemperies: ["calamite", "urgence", "fonds"], // crises
+    // Crises : « calamité » et l'expression « fonds d'urgence » (jeton _fonds_d_urgence), jamais « urgence » seul, qui
+    // ferait remonter les fonds de relogement d'urgence.
+    secheresse: ["calamite", "_fonds_d_urgence"], gel: ["calamite", "_fonds_d_urgence"], grele: ["calamite", "_fonds_d_urgence"],
+    inondation: ["calamite", "_fonds_d_urgence"], tempete: ["calamite", "_fonds_d_urgence"], intemperies: ["calamite", "_fonds_d_urgence"], // crises
     degradation: ["degradation", "dommage", "indemnisation"], pillage: ["degradation", "dommage", "indemnisation"],
     vandalisme: ["degradation", "dommage", "indemnisation"], emeute: ["degradation", "dommage", "indemnisation"],
     emeutes: ["degradation", "dommage", "indemnisation"], manifestation: ["degradation", "dommage", "indemnisation"],
@@ -29,7 +31,7 @@
   const EXPRESSIONS = [
     [["n arrive plus a payer", "arrive plus a payer", "ne peux plus payer", "ne peut plus payer", "ne pouvons plus payer", "retard de paiement",
       "facture impayee", "factures impayees"], ["impaye", "paiement"]],
-    [["fonds d urgence"], ["calamite", "urgence", "fonds"]],
+    [["fonds d urgence"], ["calamite", "_fonds_d_urgence"]],
     [["vitrine cassee", "vitrine brisee"], ["degradation", "dommage", "indemnisation"]],
     [["verifier le titre de sejour", "verifier son titre de sejour", "verifier un titre de sejour", "verifier les titres de sejour",
       "salarie etranger", "salaries etrangers", "embaucher un etranger", "embaucher un salarie etranger", "embaucher des etrangers"],
@@ -38,7 +40,10 @@
   function norm(s) {
     return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
   }
+  // Jetons d'expression : indexés quand l'expression figure dans un texte, cherchés par les synonymes (« _… », sans racinisation).
+  const JETONS_EXPRESSION = [["fonds d urgence", "_fonds_d_urgence"]];
   function stem(w) {
+    if (w[0] === "_") return w;
     if (w.length > 4) w = w.replace(/(s|x)$/, "");
     return w.length > 6 ? w.slice(0, 6) : w;
   }
@@ -111,7 +116,10 @@
     const inv = new Map(); const len = new Float32Array(recs.length); let tot = 0;
     recs.forEach((r, i) => {
       const tf = new Map();
-      const add = (s, w) => { for (const t of toks(s)) tf.set(t, (tf.get(t) || 0) + w); };
+      const add = (s, w) => {
+        for (const t of toks(s)) tf.set(t, (tf.get(t) || 0) + w);
+        if (s) { const n = " " + norm(s) + " "; for (const [e, j] of JETONS_EXPRESSION) if (n.includes(" " + e + " ")) tf.set(j, (tf.get(j) || 0) + w); }
+      };
       add(r.t, 3); add(r.d, 1); add(EV_LABEL(r.ev), 1.5);
       if (r.k === "dn") { add(r.o, 0.6); add((r.pj || []).join(" "), 0.4); }
       else { add(r.th, 0.8); add((r.docs || []).join(" "), 0.3); }
@@ -157,26 +165,33 @@
       }
       let s = s0 * (0.5 + 0.5 * hit.get(i) / qt.length); // récompense la couverture de la requête
       if (r.k === "dn") { s *= 1 + 0.12 * Math.log10(1 + r.n); if (dep && r.dep === dep) s *= 1.15; else if (depLieu && r.dep === depLieu) s *= 1.3;
+        else if (!dep && !depLieu && (r.po ? r.po !== "nat" : !!r.dep)) s *= 0.8;   // territoire inconnu : une démarche locale (département connu ou non) passe après
         if (r.dp && r.dp >= ilYaUnAn) s *= 1.15;
         const yrs = (r.t.match(/20[12]\d/g) || []).map(Number); if (yrs.length && Math.max(...yrs) < ANNEE - 1) s *= 0.6; }
       else if (/Téléservice|Formulaire|formulaireNG/.test(r.ty)) s *= 1.1;
       out.push([s, i]);
     }
     out.sort((a, b) => b[0] - a[0]);
-    // Diversité : au plus deux démarches en ligne d'un même organisme avant les autres résultats ; les suivantes passent
-    // après (quatre variantes d'un même guichet ne doivent pas masquer une fiche ou une démarche d'une autre source).
-    const parOrg = new Map(), gardes = [], reportes = [];
+    // Diversité : au plus deux démarches en ligne d'un même organisme parmi les résultats ; les suivantes ne disparaissent
+    // pas, elles sont regroupées sous la 2e (champ « autres » du résultat, et Moteur.regroupements pour la page). Pas de
+    // regroupement quand la recherche est filtrée sur une source.
+    const parOrg = new Map(), deuxieme = new Map(), autres = new Map(), gardes = [];
     for (const x of out) {
-      const r = ix.recs[x[1]], o = r.k === "dn" ? norm(r.o) : "";
-      if (o) { parOrg.set(o, (parOrg.get(o) || 0) + 1); if (parOrg.get(o) > 2) { reportes.push(x); continue; } }
+      const r = ix.recs[x[1]], o = !source && r.k === "dn" ? norm(r.o) : "";
+      if (o) {
+        const n = (parOrg.get(o) || 0) + 1; parOrg.set(o, n);
+        if (n === 2) deuxieme.set(o, x[1]);
+        if (n > 2) { const d = deuxieme.get(o); if (!autres.has(d)) autres.set(d, []); autres.get(d).push(r); continue; }
+      }
       gardes.push(x);
     }
-    out.splice(0, out.length, ...gardes, ...reportes);
+    out.splice(0, out.length, ...gardes);
     // Département choisi : les démarches locales dont le département est inconnu (po « inc ») restent parmi les
     // résultats retenus, mais placées après les démarches nationales et celles du département.
     const top = out.slice(0, k);
     if (dep) top.sort((a, b) => (ix.recs[a[1]].po === "inc") - (ix.recs[b[1]].po === "inc") || b[0] - a[0]);
-    return top.map(([s, i]) => ({ score: +s.toFixed(2), r: ix.recs[i] }));
+    api.regroupements = new Map(top.filter(([, i]) => autres.has(i)).map(([, i]) => [ix.recs[i].id, autres.get(i)]));
+    return top.map(([s, i]) => autres.has(i) ? { score: +s.toFixed(2), r: ix.recs[i], autres: autres.get(i) } : { score: +s.toFixed(2), r: ix.recs[i] });
   }
   // Pertinence d'un résultat pour une question, au sens de la règle France services de la page FORM (ne change ni le
   // classement ni l'affichage) : score d'au moins la moitié du meilleur score de la recherche, et soit au moins deux termes
@@ -202,6 +217,6 @@
     return { meilleur, termes: termes.size, rare: rare && rare[0], score: (id) => score.get(id) || 0, couverture, plusRare,
       pertinente: (id) => termes.size > 0 && (score.get(id) || 0) >= 0.5 * meilleur && (couverture(id) >= 2 || plusRare(id)) };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse };
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, regroupements: new Map() };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
