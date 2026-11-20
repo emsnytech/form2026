@@ -69,6 +69,13 @@ _NOMS = "(" + _alt(list(DEPARTEMENTS.values()) + ["Réunion"]) + ")"
 RE_MARQUEUR = re.compile(r"(?:^| )(?<!sous )(?:" + "|".join(MARQUEURS) + r") " + _ARTICLE + _NOMS + " "
                          + r"| sous prefecture (?:du |de la |de l |des )" + _NOMS + " ")
 _REG = {_n(k).strip(): v for k, v in REGIONS.items()}
+# Nom de département précédé de « en », « dans le / la / l' / les » ou « département du / de la / de l' / des » (titre seulement).
+# Les noms ambigus (aussi mots courants, rivières ou villes) ne valent qu'après « dans le / la / l' » ou « département de… ».
+AMBIGUS = {"nord", "var", "cher", "ain", "lot", "eure", "gers", "orne", "aube", "oise", "loire", "marne", "somme", "gard", "doubs",
+           "vienne", "indre", "allier", "paris"}
+_NOMS_EN = "(" + _alt(list(DEPARTEMENTS.values())) + ")"
+RE_EN_DANS = re.compile(r" (en|dans les|dans le|dans la|dans l|departement du|departement de la|departement de l|departement des|departement de) "
+                        + _NOMS_EN + " ")
 _OM = {"guyane": "973", "martinique": "972", "mayotte": "976", "la reunion": "974", "reunion": "974", "guadeloupe": "971"}
 
 
@@ -95,6 +102,12 @@ def _dans(texte, titre=False):
     m = RE_MARQUEUR.search(n)
     if m:
         return _NOM[m.group(1) or m.group(2)], "marqueur et nom"
+    if titre:
+        for m in RE_EN_DANS.finditer(n):
+            mq, nom = m.group(1), m.group(2)
+            if nom in AMBIGUS and not (mq in ("dans le", "dans la", "dans l") or mq.startswith("departement")):
+                continue
+            return _NOM[nom], "département après « en » ou « dans »"
     return None, None
 
 
