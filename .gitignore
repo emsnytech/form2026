@@ -1,2 +1,5 @@
 .DS_Store
 Claude outputs/
+
+# Caches de Python, produits en lançant les scripts
+__pycache__/
