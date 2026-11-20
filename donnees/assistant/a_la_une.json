@@ -1,0 +1,219 @@
+{
+ "objet": "Accueil, « À la une » : proposé par la mise à jour, validé par l'éditeur. editeur.epingle (mots du titre), editeur.exclu (clés), editeur.etiquette ({clé: étiquette}).",
+ "date": "2026-11-20",
+ "retenues": [
+  {
+   "cle": "secheresse 2026",
+   "titre": "Sécheresse 2026 : aides et dérogations pour les agriculteurs",
+   "organisme": "23 démarches ouvertes",
+   "portee": "19 départements",
+   "etiquette": "Urgent",
+   "dossiers": 2744,
+   "publiee": "2026-11-19",
+   "echeance": null,
+   "variantes": 23,
+   "ids": [
+    "DN-161112",
+    "DN-161446",
+    "DN-161748",
+    "DN-159473",
+    "DN-161484",
+    "DN-161236",
+    "DN-160443",
+    "DN-161296",
+    "DN-160768",
+    "DN-160095",
+    "DN-155797",
+    "DN-160424",
+    "DN-161081",
+    "DN-161297",
+    "DN-160087",
+    "DN-160611",
+    "DN-161656",
+    "DN-159642",
+    "DN-159453",
+    "DN-161597",
+    "DN-158136",
+    "DN-161922",
+    "DN-161451"
+   ],
+   "requete": "sécheresse aide agriculteur dérogation"
+  },
+  {
+   "cle": "pertes fonds aleas inondations tempete nils forte temperatures estivales",
+   "titre": "Pertes de fonds Aléas 2026 - inondations, tempête Nils, forte températures estivales",
+   "organisme": "SEA, DDT, Préfecture de Lot-et-Garonne, ministère en charge de l'agriculture",
+   "portee": "Lot-et-Garonne (47)",
+   "etiquette": "Crise",
+   "dossiers": 219,
+   "publiee": "2026-11-01",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-149664"
+   ],
+   "requete": "Pertes de fonds Aléas 2026 - inondations, tempête Nils, forte températures estivales"
+  },
+  {
+   "cle": "intemperies octobre indemnisation degats subis collectivites territoriales leurs groupements",
+   "titre": "Intempéries 19 et 20 octobre 2026 dans le Gard - Demande d'indemnisation des dégâts subis par les collectivités territoriales et leurs groupements",
+   "organisme": "MINISTERE DE L'INTERIEUR",
+   "portee": "Gard (30)",
+   "etiquette": "Crise",
+   "dossiers": 1,
+   "publiee": "2026-10-28",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-160342"
+   ],
+   "requete": "Intempéries 19 et 20 octobre 2026 dans le Gard - Demande d'indemnisation des dégâts subis par les collectivités territoriales et leurs groupements"
+  },
+  {
+   "cle": "aide paiement impaye energie menages",
+   "titre": "Aide au paiement d'un impayé d'énergie (ménages)",
+   "organisme": "Nantes Métropole",
+   "portee": "Loire-Atlantique (44)",
+   "etiquette": "De saison",
+   "dossiers": 1149,
+   "publiee": "2022-01-28",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-50108"
+   ],
+   "requete": "Aide au paiement d'un impayé d'énergie (ménages)"
+  },
+  {
+   "cle": "copie dacte detat civil consulaire",
+   "titre": "Demande de copie d’acte d’état civil consulaire",
+   "organisme": "Ministère de l'Europe et des affaires étrangères",
+   "portee": "nationale",
+   "etiquette": "Nouveau",
+   "dossiers": 9291,
+   "publiee": "2026-11-13",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-70401"
+   ],
+   "requete": "Demande de copie d’acte d’état civil consulaire"
+  },
+  {
+   "cle": "aide entreprises btp utilisant gazole non routier gnr btp periode octobre",
+   "titre": "Aide aux entreprises du BTP utilisant du Gazole Non Routier (GNR-BTP) - période d'octobre 2026",
+   "organisme": ".",
+   "portee": "Paris (75)",
+   "etiquette": "Nouveau",
+   "dossiers": 1821,
+   "publiee": "2026-11-02",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-160135"
+   ],
+   "requete": "Aide aux entreprises du BTP utilisant du Gazole Non Routier (GNR-BTP) - période d'octobre 2026"
+  }
+ ],
+ "suivantes": [
+  {
+   "cle": "help aide entreprises difficultes alpes",
+   "titre": "HELP « aide aux entreprises en difficultés » Rhône-Alpes",
+   "organisme": "Urssaf Rhône-Alpes",
+   "portee": "Rhône (69)",
+   "etiquette": "Nouveau",
+   "dossiers": 1239,
+   "publiee": "2026-10-26",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-60985"
+   ],
+   "requete": "HELP « aide aux entreprises en difficultés » Rhône-Alpes"
+  },
+  {
+   "cle": "procedure declaration autorisation renouvellement modification demandes videoprotection",
+   "titre": "Procédure de déclaration d'autorisation, de renouvellement et de modification des demandes de vidéoprotection",
+   "organisme": "Ministere de l'Intérieur",
+   "portee": "nationale",
+   "etiquette": "Nouveau",
+   "dossiers": 765,
+   "publiee": "2026-11-06",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-160412"
+   ],
+   "requete": "Procédure de déclaration d'autorisation, de renouvellement et de modification des demandes de vidéoprotection"
+  },
+  {
+   "cle": "dossier candidature reconnaissance valorisation engagement etudiant lyon universite",
+   "titre": "Dossier de candidature : Reconnaissance et Valorisation de l'Engagement Etudiant - Lyon 1 Université",
+   "organisme": "d'un excellent organisme",
+   "portee": "Rhône (69)",
+   "etiquette": "Nouveau",
+   "dossiers": 448,
+   "publiee": "2026-10-23",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-144170"
+   ],
+   "requete": "Dossier de candidature : Reconnaissance et Valorisation de l'Engagement Etudiant - Lyon 1 Université"
+  },
+  {
+   "cle": "cnam intec validation acquis professionnels personnels vapp",
+   "titre": "Cnam Intec : Formulaire de Validation des Acquis Professionnels et Personnels (VAPP) 2026-2027",
+   "organisme": "Cnam -Intec",
+   "portee": "Paris (75)",
+   "etiquette": "Nouveau",
+   "dossiers": 432,
+   "publiee": "2026-11-09",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-140637"
+   ],
+   "requete": "Cnam Intec : Formulaire de Validation des Acquis Professionnels et Personnels (VAPP) 2026-2027"
+  },
+  {
+   "cle": "inscription webinaire presentation fonds daide creation plateformes sociales",
+   "titre": "Inscription au webinaire de présentation du fonds d’aide à la création pour les plateformes sociales du 16/11/2026",
+   "organisme": "CNC",
+   "portee": "nationale",
+   "etiquette": "Nouveau",
+   "dossiers": 421,
+   "publiee": "2026-11-03",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-160783"
+   ],
+   "requete": "Inscription au webinaire de présentation du fonds d’aide à la création pour les plateformes sociales du 16/11/2026"
+  },
+  {
+   "cle": "actions clas bons achats multi enseignes",
+   "titre": "Préfecture du Val-de-Marne - Actions 2026 de la CLAS 94 - Bons d'achats multi-enseignes",
+   "organisme": "Préfecture du Val-de-Marne",
+   "portee": "Val-de-Marne (94)",
+   "etiquette": "Nouveau",
+   "dossiers": 420,
+   "publiee": "2026-11-17",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-148491"
+   ],
+   "requete": "Préfecture du Val-de-Marne - Actions 2026 de la CLAS 94 - Bons d'achats multi-enseignes"
+  }
+ ],
+ "source": "Démarches publiées depuis moins de 30 jours, et démarches de saison (saisons.json) ; descriptif de Démarche Numérique",
+ "editeur": {
+  "epingle": [],
+  "exclu": [
+   "action clasac billets parc asterix saison",
+   "aide paiement impaye energie professionnels"
+  ],
+  "etiquette": {}
+ }
+}

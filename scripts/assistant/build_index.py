@@ -13,6 +13,7 @@ ap.add_argument('--form', default=os.path.expanduser('~/Documents/form2026-site'
 ap.add_argument('--carto', default=os.path.expanduser('~/Documents/cartographie'), help='dossier cartographie (dila/, Bdddemarchesfinoctobre/, assistant/)')
 ap.add_argument('--slim', default=None, help='fichier slim des démarches (défaut : <carto>/Bdddemarchesfinoctobre/slim_nov.jsonl)')
 ap.add_argument('--out', default=None, help='index produit (défaut : <carto>/assistant/index.json)')
+ap.add_argument('--date-export', default=None, help="date de l'export du descriptif (AAAA-MM-JJ) ; défaut : lue dans le nom du slim (slim_AAAAMMJJ.jsonl)")
 ap.add_argument('--rapport', default=None, help='écrit ici (JSON) le détail des départements déduits, pour relecture')
 A=ap.parse_args()
 FORM=A.form; UP=A.carto
@@ -168,6 +169,11 @@ print('SP',len(recs)-n0,'; fiches avec ressources ou fiches liées :',n_res)
 with open(OUT,'w') as o:
     o.write('[\n'+',\n'.join(json.dumps(r,ensure_ascii=False,separators=(',',':')) for r in recs)+'\n]\n')
 import os; print(os.path.getsize(OUT)/1e6,'Mo')
+# Métadonnées de l'index, lues par la page (ligne des volumes, « Comment j'ai cherché ») : date de l'export, nombres.
+_m=re.search(r'(\d{4})(\d{2})(\d{2})', os.path.basename(SLIM))
+date_export=A.date_export or (f"{_m.group(1)}-{_m.group(2)}-{_m.group(3)}" if _m else '')
+json.dump({'date_export':date_export,'demarches_en_ligne':sum(1 for r in recs if r['k']=='dn'),'fiches':sum(1 for r in recs if r['k']=='sp')},
+          open(os.path.join(os.path.dirname(OUT),'index_meta.json'),'w'),ensure_ascii=False)
 # Contrôle : toutes les références citées par les réponses préparées existent encore dans l'index
 ex=os.path.join(os.path.dirname(OUT),'exemples.json')
 if os.path.exists(ex):

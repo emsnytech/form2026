@@ -1,7 +1,7 @@
 // Moteur de recherche local (BM25) sur l'index FORM 2026 + DILA.
 // Utilisable dans la page et sous node pour les tests.
 (function (root) {
-  const STOP = new Set(("a au aux avec ce ces dans de des du elle en et eux il je la le les leur lui ma mais me meme mes moi mon ne nos notre nous on ou par pas pour qu que qui sa se ses son sur ta te tes toi ton tu un une vos votre vous c d j l m n s t y ete etre avoir ai as avons avez ont suis es est sommes etes sont faire fait comment quoi quel quelle quels quelles dois doit veux veut voudrais souhaite souhaiterais besoin peux peut faut il ya y-a cela ca cet cette tout tous toute toutes plus moins tres aussi si alors donc car comme chez sans sous entre vers apres avant depuis lors quand ou bien mon ma mes demande demarche demarches").split(" "));
+  const STOP = new Set(("a au aux avec ce ces dans de des du elle en et eux il je la le les leur lui ma mais me meme mes moi mon ne nos notre nous on ou par pas pour qu que qui sa se ses son sur ta te tes toi ton tu un une vos votre vous c d j l m n s t y ete etre avoir ai as avons avez ont suis es est sommes etes sont faire fait comment quoi quel quelle quels quelles dois doit veux veut voudrais souhaite souhaiterais besoin peux peut faut il ya y-a cela ca cet cette tout tous toute toutes plus moins tres aussi si alors donc car comme chez sans sous entre vers apres avant depuis lors quand ou bien mon ma mes demande demarche demarches habite habiter habitons habitez").split(" "));
   const SYN = {
     bebe: ["naissance"], enfant: ["enfant"], boulot: ["emploi"], travail: ["emploi", "travail"], chomage: ["emploi", "chomage"],
     demenage: ["demenagement", "adresse"], demenager: ["demenagement", "adresse"], aide: ["aide", "subvention", "allocation"],
@@ -36,6 +36,10 @@
     [["verifier le titre de sejour", "verifier son titre de sejour", "verifier un titre de sejour", "verifier les titres de sejour",
       "salarie etranger", "salaries etrangers", "embaucher un etranger", "embaucher un salarie etranger", "embaucher des etrangers"],
      ["verification", "prealable", "embauche", "autorisation", "travail"]],
+    // Renouveler son titre de séjour : la démarche se fait auprès du bureau des étrangers, souvent sur rendez-vous.
+    [["renouveler mon titre de sejour", "renouveler son titre de sejour", "renouveler le titre de sejour", "renouveler ma carte de sejour",
+      "renouvellement de mon titre de sejour", "renouvellement du titre de sejour", "renouvellement de titre de sejour"],
+     ["renouvellement", "etrangers", "rendez"]],
   ].flatMap(([formes, vers]) => formes.map((f) => [f, vers]));
   function norm(s) {
     return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
@@ -183,6 +187,9 @@
     association: ["association", "mixte", "personne_morale", "indetermine"], collectivite: ["collectivite", "personne_morale", "indetermine"] };
   const PUBLIC_SP = { particulier: "Particuliers", entreprise: "Professionnels", association: "Associations", collectivite: null };
 
+  // Publics particuliers repérés dans le titre d'une fiche : [motif sur le titre normalisé, entouré d'espaces].
+  // Le même motif, trouvé dans la question, annule la rétrogradation.
+  const PUBLICS_PARTICULIERS = [/ etudiant(e|s|es)? | etude(s)? /, / stagiaire(s)? /, / au pair /, / saisonnier(s)? /].map((re) => [re]);
   function search(ix, q, opt = {}) {
     const { pub = "", dep = "", source = "", k = 10, ouvertes = true } = opt;
     const qt = queryToks(q); if (!qt.length) return [];
@@ -223,7 +230,13 @@
         if (r.dp && r.dp >= ilYaUnAn) s *= 1.15;
         if (r.tc) s *= 0.7;   // titre qui ressemble à un identifiant interne (« Bilan_4BNaap12_… ») : rétrogradé, quelle que soit la portée
         const yrs = (r.t.match(/20[12]\d/g) || []).map(Number); if (yrs.length && Math.max(...yrs) < ANNEE - 1) s *= 0.6; }
-      else if (/Téléservice|Formulaire|formulaireNG/.test(r.ty)) s *= 1.1;
+      else {
+        if (/Téléservice|Formulaire|formulaireNG/.test(r.ty)) s *= 1.1;
+        // Fiche réservée à un public particulier (« Étudiant étranger… », « … stagiaire ») que la question ne nomme pas :
+        // rétrogradée, pour que la fiche générale passe devant.
+        const pp = PUBLICS_PARTICULIERS.find(([re]) => re.test(" " + norm(r.t) + " "));
+        if (pp && !pp[0].test(" " + norm(q) + " ")) s *= 0.7;
+      }
       out.push([s, i]);
     }
     out.sort((a, b) => b[0] - a[0]);
@@ -272,6 +285,43 @@
     return { meilleur, termes: termes.size, rare: rare && rare[0], score: (id) => score.get(id) || 0, couverture, plusRare,
       pertinente: (id) => termes.size > 0 && (score.get(id) || 0) >= 0.5 * meilleur && (couverture(id) >= 2 || plusRare(id)) };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, regroupements: new Map(), region: null, REGIONS };
+  // ---------- Réponse de la page : liste affichée et « Votre démarche »
+  // Démarche réservée aux professionnels (accompagnants, travailleurs sociaux) d'après son titre ou sa description, ou
+  // variante « … - Employeur » d'une démarche.
+  const RESERVEE_PROS = /\(professionnels?\)|r[ée]serv[ée]e?s? aux (professionnels|travailleurs sociaux)|professionnels dipl[oô]m[ée]s du travail social/i, VARIANTE_EMPLOYEUR = /\s[-–]\s*employeurs?\s*$/i;
+  // Département connu : choisi, sinon celui du lieu reconnu dans la question quand ses candidats l'ont tous.
+  function departementConnu(q, dep) {
+    if (dep) return dep;
+    const c = COMMUNES ? ((lieux(q).lieux[0] || {}).candidats || []) : [];
+    return c.length && c.every((x) => x.dep === c[0].dep) ? c[0].dep : "";
+  }
+  // « Votre démarche » : le premier résultat, sauf (1) une démarche en ligne d'un autre département que le département
+  // connu, ou de département inconnu quand une autre convient, (2) pour un particulier ou un public non précisé, une démarche réservée aux professionnels. Les écartées restent
+  // dans la liste (« Autres pistes »).
+  function principalDe(liste, q, opt = {}) {
+    const { pub = "", dep = "" } = opt, d = departementConnu(q, dep);
+    const ailleurs = (r) => !!d && r.k === "dn" && !!r.dep && r.dep !== d;
+    const pro = (r) => (!pub || pub === "particulier") && (RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t));
+    // Département connu : une démarche locale de département inconnu (po « inc ») passe après celles du département,
+    // nationales et fiches.
+    const inc = (r) => !!d && r.k === "dn" && r.po === "inc";
+    return liste.find((r) => !ailleurs(r) && !inc(r) && !pro(r)) || liste.find((r) => !ailleurs(r) && !pro(r))
+      || liste.find((r) => !ailleurs(r)) || liste[0] || null;
+  }
+  // Recherche simple de la page : les k premiers résultats, puis, si un département est connu sans être choisi, les 3
+  // premières démarches en ligne de ce département (au moins la moitié du meilleur score), puis les 3 premières fiches service-public. Rend la liste et
+  // « Votre démarche ».
+  function choisir(ix, q, opt = {}) {
+    const { pub = "", dep = "", k = 20 } = opt, base = { pub, dep };
+    const res = search(ix, q, { ...base, k }), liste = res.map((x) => x.r), reg = api.regroupements;
+    const ajoute = (l) => { for (const x of l) if (!liste.includes(x.r)) liste.push(x.r); };
+    const d = departementConnu(q, dep), meilleur = res.length ? res[0].score : 0;
+    // Démarches du département : seulement celles dont le score atteint la moitié du meilleur score de la recherche.
+    if (d && !dep) ajoute(search(ix, q, { ...base, dep: d, source: "dn", k: 3 }).filter((x) => x.score >= meilleur / 2));
+    ajoute(search(ix, q, { ...base, source: "sp", k: 3 }));
+    api.regroupements = reg;   // les regroupements par organisme sont ceux de la première recherche
+    return { liste, principal: principalDe(liste, q, opt), departement: d };
+  }
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

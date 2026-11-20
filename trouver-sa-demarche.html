@@ -4,149 +4,161 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trouver sa démarche — démonstrateur · FORM 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1e2022;--muted:#5c6066;--paper:#fbf9f5;--surface:#fff;--line:#e2dfd7;--admin:#1d4ed8;--admin-soft:#eff6ff;--usager:#15803d;--usager-soft:#f0fdf4;--accent:#b45309;--warn-soft:#fffbeb}
-@media (prefers-color-scheme: dark){:root{--ink:#f3f4f6;--muted:#9ca3af;--paper:#18181b;--surface:#27272a;--line:#3f3f46;--admin:#60a5fa;--admin-soft:#1e3a8a;--usager:#4ade80;--usager-soft:#14532d;--accent:#f59e0b;--warn-soft:#451a03}}
+:root{--accent:#0B5D52;--accent-fonce:#08463E;--ink:#1A1A1A;--muted:#555A60;--line:#E5E5E5;--line2:#D4D4D8;--fond:#FFFFFF;--doux:#F4F4F5;
+  --urgent-fond:#FDF0E7;--urgent:#8A3B12;--saison-fond:#EAF1F8;--saison:#1F4D7A;--focus:#0B5D52}
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
-a{color:var(--admin)}
-.wrap{max-width:920px;margin:0 auto;padding:1.8rem 1.1rem 3rem}
-.kicker{font-size:.85rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);margin:0 0 .3rem}
-h1{font-size:clamp(1.6rem,3.6vw,2.2rem);line-height:1.15;margin:0;font-weight:800}
-.lede{color:var(--muted);max-width:66ch;margin:.6rem 0 0}
-.frame.ia{border-left-color:var(--admin);background:var(--admin-soft)}
-.frame{margin:1rem 0 0;padding:.7rem .9rem;border-left:4px solid var(--accent);background:var(--warn-soft);border-radius:0 8px 8px 0;font-size:.92rem}
-.ask{margin:1.3rem 0 0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1rem}
-textarea{width:100%;min-height:84px;resize:vertical;font:inherit;padding:.7rem .8rem;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
-textarea:focus,select:focus,button:focus-visible{outline:2px solid var(--admin);outline-offset:1px}
-.row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.7rem}
-label.sel{font-size:.9rem;color:var(--muted);display:flex;gap:.35rem;align-items:center}
-select{font:inherit;font-size:.95rem;padding:.35rem .5rem;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);max-width:14rem}
-button{font:inherit;font-weight:700;border-radius:10px;padding:.55rem 1rem;border:1px solid var(--admin);cursor:pointer}
-.primary{background:var(--admin);color:#fff}
-.ghost{background:transparent;color:var(--admin)}
-button:disabled{opacity:.5;cursor:default}
-dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;background:var(--surface);color:var(--ink)}
-dialog::backdrop{background:rgba(0,0,0,.45)}
-dialog h2{font-size:1.1rem;margin:0 0 .5rem;font-weight:800}
-dialog ul{margin:.4rem 0 0 1.1rem;padding:0;font-size:.95rem}dialog li{margin:.25rem 0}
-.dlg-actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
-a.btn{display:inline-block;font-weight:700;border-radius:10px;padding:.55rem 1rem;border:1px solid var(--admin);text-decoration:none}
-a.btn.primary{color:#fff}
-.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
-.chip{font-size:.88rem;font-weight:600;padding:.25rem .65rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
-.status{font-size:.9rem;color:var(--muted);margin-top:.6rem;min-height:1.3em}
-.answer{margin-top:1.2rem;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--usager);border-radius:12px;padding:1rem 1.1rem;display:none}
-.answer h2,.results h2{font-size:1.05rem;margin:0 0 .5rem;font-weight:800}
-.answer p{margin:.4rem 0}.answer ul{margin:.3rem 0 .3rem 1.1rem;padding:0}
-.ref{display:inline-block;font-size:.78rem;font-weight:700;padding:0 .4rem;border-radius:6px;text-decoration:none;vertical-align:1px}
-.ref.dn{background:var(--admin-soft);color:var(--admin)}.ref.sp{background:var(--usager-soft);color:var(--usager)}
-.trace{font-size:.82rem;color:var(--muted);margin-top:.6rem;border-top:1px dashed var(--line);padding-top:.5rem}
-.followup{display:none;margin-top:.8rem}
-.followup textarea{min-height:52px}
-.results{margin-top:1.4rem}
-.cards{display:grid;gap:.75rem}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;scroll-margin-top:1rem}
-.card.flash{outline:3px solid var(--accent)}
-.card .top{display:flex;gap:.5rem;align-items:baseline;flex-wrap:wrap}
-.badge{font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;padding:.1rem .45rem;border-radius:6px}
-.badge.dn{background:var(--admin-soft);color:var(--admin)}.badge.sp{background:var(--usager-soft);color:var(--usager)}
-.card h3{font-size:1.02rem;margin:.25rem 0 .15rem;line-height:1.3}
-.meta{font-size:.88rem;color:var(--muted)}
-.card p.d{margin:.35rem 0;font-size:.95rem}
-.facts{display:flex;flex-wrap:wrap;gap:.35rem;margin:.4rem 0}
-.fact{font-size:.82rem;padding:.1rem .5rem;border-radius:6px;border:1px solid var(--line)}
-.fact.pre{border-color:var(--usager);color:var(--usager)}
-details{font-size:.9rem;margin-top:.3rem}details ul{margin:.3rem 0 0 1.1rem;padding:0}
-.links{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:.45rem;font-weight:700;font-size:.93rem}
-.method{margin-top:2.2rem;font-size:.9rem;color:var(--muted);border-top:1px solid var(--line);padding-top:1rem}
-.method h2{font-size:1rem;color:var(--ink);margin:.2rem 0 .4rem}
-.method ul{margin:.2rem 0 0 1.1rem;padding:0}
-.empty{color:var(--muted);font-style:italic}
-.msg{margin:.7rem 0;padding:.65rem .85rem;border-radius:12px}
-.msg p{margin:.3rem 0}.msg ul{margin:.3rem 0 .3rem 1.1rem;padding:0}
-.msg.u{background:var(--admin-soft);margin-left:18%;font-weight:600}
-.msg.a{background:var(--paper);border:1px solid var(--line)}
-.msg .who{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:.2rem}
-.choix{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0 .1rem}
-.choix button{font-size:.9rem;padding:.3rem .75rem;border-radius:999px;background:var(--surface,#fff);color:var(--admin);border:1px solid var(--admin)}
-.perso{font-size:.85rem;color:var(--muted);margin:.4rem 0 0}
-.retire{font-size:.78rem;color:var(--accent);font-weight:600;margin-top:.25rem}
-.prep{font-size:.85rem;color:var(--accent);font-weight:700;margin:0 0 .4rem}
-.q-label{display:block;font-weight:700;margin:0 0 .15rem}
-.q-aide{font-size:.9rem;color:var(--muted);margin:0 0 .45rem}
-.filtres{margin-top:.6rem}.filtres summary{cursor:pointer;font-size:.92rem;font-weight:700;color:var(--admin)}.filtres .row{margin-top:.4rem}
-.sources{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:.6rem;align-items:center;margin:.8rem 0}
-.sc-col{display:flex;flex-direction:column;gap:.4rem}
-.sc-h{font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 .2rem}
-.sc-group{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.4rem}
-.sc-tag{font-size:.75rem;color:var(--muted)}
-.sc-box{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:6px;padding:.4rem .55rem;font-size:.85rem;line-height:1.3}
-.sc-box b{display:block}
-.sc-box span{color:var(--muted)}
-.sc-box.adm{border-left-color:var(--admin)}
-.sc-box.usa{border-left-color:var(--usager)}
-.sc-box.acc{border-left-color:var(--accent)}
-.sc-box.out{border-left-color:var(--ink)}
-.sc-arrow{font-size:1.4rem;color:var(--muted)}
+[hidden]{display:none!important}
+html{background:var(--fond)}
+body{margin:0;background:var(--fond);color:var(--ink);font:16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent)}a:hover{color:var(--accent-fonce)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-@media (max-width:640px){
-  .sources{grid-template-columns:1fr}
-  .sc-arrow{transform:rotate(90deg);justify-self:center}
+button{font:inherit;cursor:pointer}
+.l{max-width:1120px;margin:0 auto;padding:0 24px}
+/* En-tête et pied */
+.tete{border-bottom:1px solid var(--line)}
+.tete .l{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
+.marque{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.marque a.nom{font-weight:600;font-size:17px;color:var(--ink);text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.badge-demo{font-size:13px;color:var(--muted);border:1px solid var(--line2);border-radius:999px;padding:2px 10px;text-decoration:none}
+.tete nav{display:flex;gap:4px 20px;flex-wrap:wrap;font-size:15px}
+.tete nav a{min-height:44px;display:inline-flex;align-items:center}
+.pied{border-top:1px solid var(--line);margin-top:56px}
+.pied .l{display:flex;gap:8px 24px;flex-wrap:wrap;padding-top:20px;padding-bottom:28px;font-size:13px;color:var(--muted)}
+/* Accueil */
+#vue-accueil{padding:64px 0 24px}
+.question{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{margin:0;font-size:clamp(30px,5vw,44px);line-height:1.15;font-weight:600;letter-spacing:-.01em}
+.q-label{font-size:17px;font-weight:500}
+.q-aide{margin:0;font-size:15px;color:var(--muted)}
+.saisie{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
+#q{flex:1 1 420px;min-width:0;min-height:56px;padding:14px 18px;font:inherit;font-size:17px;line-height:1.4;border:2px solid var(--ink);border-radius:10px;background:var(--fond);color:var(--ink);resize:vertical}
+.btn{min-height:56px;padding:0 28px;font-size:17px;font-weight:600;color:#fff;background:var(--accent);border:0;border-radius:10px}
+.btn:hover{background:var(--accent-fonce)}.btn:disabled{opacity:.55;cursor:default}
+.lien{background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;font-size:15px;min-height:44px}
+.perso,.avis-ia{margin:0;font-size:14px;color:var(--muted)}
+.filtres summary{font-size:15px;font-weight:500;color:var(--accent);display:list-item;padding:10px 0;cursor:pointer}
+.row{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:6px}
+label.sel{font-size:15px;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+select{font:inherit;font-size:15px;min-height:44px;padding:0 10px;border-radius:8px;border:1px solid var(--line2);background:var(--fond);color:var(--ink);max-width:16rem}
+.ligne-stats{margin:0;font-size:14px;color:var(--muted)}
+.status{font-size:14px;color:var(--muted)}.status:empty{display:none}
+.exemples summary{font-size:14px;color:var(--muted);cursor:pointer;display:list-item;padding:10px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:44px;padding:0 14px;font-size:14px;border:1px solid var(--line2);border-radius:999px;background:var(--fond);color:var(--ink)}
+.colonnes{margin-top:64px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px}
+.colonnes h2{margin:0 0 8px;font-size:20px;font-weight:600}
+.sur-titre{margin:14px 0 2px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.ligne{display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;padding:14px 0;border:0;border-top:1px solid var(--line);background:none;text-align:left;color:var(--ink)}
+.ligne:last-of-type{border-bottom:1px solid var(--line)}
+.ligne .t{display:flex;flex-direction:column;gap:2px}.ligne .t1{font-size:17px;font-weight:500}.ligne .t2{font-size:14px;color:var(--muted)}
+.ligne .f{color:var(--muted)}
+.etiq{display:inline-block;font-size:12px;font-weight:600;border-radius:4px;padding:2px 8px;margin-right:8px;background:var(--doux);color:var(--ink)}
+.etiq.urgent,.etiq.crise{background:var(--urgent-fond);color:var(--urgent)}.etiq.saison{background:var(--saison-fond);color:var(--saison)}
+.source-col{margin:10px 0 0;font-size:13px;color:var(--muted)}
+/* Réponse */
+#vue-reponse{max-width:760px;margin:0 auto;padding:36px 24px 0;display:flex;flex-direction:column;gap:22px}
+.bulle{align-self:flex-end;max-width:560px;background:var(--doux);border-radius:14px 14px 4px 14px;padding:14px 18px;font-size:17px}
+.retire{font-size:13px;color:var(--urgent);margin-top:4px}
+.texte-ia{font-size:18px;line-height:1.6}.texte-ia p{margin:0 0 .5em}.texte-ia ul{margin:.2em 0 .5em 1.2em;padding:0}
+.prep{font-size:14px;color:var(--muted);margin:0 0 6px}
+.extrait{margin:0;font-size:16px;color:var(--muted)}
+.choix{display:flex;flex-direction:column;gap:10px}.choix p{margin:0;font-size:15px;font-weight:500}
+.choix .boutons{display:flex;gap:8px;flex-wrap:wrap}
+.choix button{min-height:44px;padding:0 18px;font-size:15px;border:1px solid var(--ink);border-radius:999px;background:var(--fond);color:var(--ink)}
+.choix button:disabled{opacity:.5}
+.carte{border:1px solid var(--line2);border-radius:12px;padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.carte h2,.comprendre h2{margin:0;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.carte .titre{margin:0;font-size:20px;font-weight:600;line-height:1.35}
+.carte .titre.p{font-size:18px}
+.carte .org{margin:0;font-size:15px;color:var(--muted)}
+.carte .prep2{margin:0;font-size:15px}
+.carte .avert{margin:0;font-size:14px;font-weight:600;color:var(--urgent)}
+.carte .liens{display:flex;gap:8px 20px;flex-wrap:wrap;font-size:15px}
+.btn-lien{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;font-size:17px;font-weight:600;color:#fff;background:var(--accent);border-radius:10px;text-decoration:none;align-self:flex-start}
+.btn-lien:hover{color:#fff;background:var(--accent-fonce)}
+.comprendre{display:flex;flex-direction:column;gap:6px;padding:0 4px}.comprendre a{font-size:17px}.comprendre span{font-size:14px;color:var(--muted)}
+details.pli{border-top:1px solid var(--line);padding-top:6px}
+details.pli>summary{font-size:16px;font-weight:500;display:list-item;padding:10px 0;cursor:pointer}
+.pistes{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.pistes li{display:flex;flex-direction:column;gap:2px}.pistes .meta{font-size:14px;color:var(--muted)}
+.pistes details{font-size:14px}.pistes details ul{margin:4px 0 0 1.1em;padding:0}
+.cherche{margin-top:8px;display:flex;flex-direction:column;gap:8px;font-size:15px;color:#3F4349}
+#ff{display:flex;gap:8px;flex-wrap:wrap}
+#fq{flex:1 1 360px;min-width:0;min-height:52px;padding:0 16px;font:inherit;font-size:16px;border:2px solid var(--ink);border-radius:10px}
+#ff .btn{min-height:52px;padding:0 22px;font-size:16px}
+.liens-rep{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:8px}
+.liens-rep h2{margin:0;font-size:14px;font-weight:600}
+.liens-rep ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.liens-rep p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+.vide{color:var(--muted);font-style:italic}
+.autrement{display:flex;flex-direction:column;gap:10px;font-size:17px}.autrement p{margin:0}
+.manque{margin:0;font-size:15px;color:#3F4349}
+/* « Où aller » et pastilles (ou_aller.js) */
+input#cp,.cp-res{font:inherit;font-size:15px;min-height:44px;padding:0 10px;border-radius:8px;border:1px solid var(--line2);background:var(--fond);color:var(--ink);width:7.5rem}
+.cp-etat{font-size:15px;font-weight:600;color:var(--accent)}
+.perso-cp{font-size:14px;color:var(--muted);margin:6px 0 0}
+.pastilles{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:15px}
+.pastilles:empty{display:none}
+.meta{color:var(--muted);font-size:14px}
+.pastille{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;font-size:15px;border-radius:999px;background:#E6F0EE;color:var(--accent-fonce);border:1px solid var(--accent)}
+.pastille-fixe{font-weight:600;min-height:36px}
+.lien-changer{background:none;border:0;padding:0 4px;min-height:44px;font:inherit;font-size:15px;color:var(--accent);text-decoration:underline}
+.ou-t{font-weight:600;margin:4px 0 2px}
+.ou-s{margin:8px 0 4px;font-size:15px}.ou-s+.ou-s{border-top:1px dashed var(--line2);padding-top:8px}
+.ou-h,.ou-c{margin:3px 0}.ou-s .links{display:flex;gap:6px 18px;flex-wrap:wrap;margin-top:4px}
+.ou-s summary,.fs-pied summary{cursor:pointer;min-height:44px;padding:10px 0}
+.ou-src{font-size:13px;color:var(--muted);margin:4px 0}.ou-src a.signaler{color:var(--muted)}
+#ou-service:not(:empty)+#ccas-ou:not(:empty),#ccas-ou:not(:empty)+#fs-aide:not(:empty),#ou-service:not(:empty)~#fs-aide:not(:empty){border-top:1px solid var(--line);padding-top:10px;margin-top:6px}
+@media (max-width:720px){
+  .l{padding:0 16px}
+  #vue-accueil{padding-top:32px}
+  .colonnes{grid-template-columns:1fr;gap:32px;margin-top:40px}
+  .btn{width:100%}
+  #vue-reponse{padding:20px 16px 0}
+  .bulle{max-width:300px;font-size:15px}
+  .texte-ia{font-size:16px}
+  .carte{padding:16px}
+  .btn-lien{align-self:stretch;justify-content:center}
 }
-.topnav{margin:0 0 1.2rem;font-size:.95rem}.topnav a{text-decoration:none;font-weight:600}
-.couv{margin:.5rem 0 0;font-weight:700;color:var(--muted);min-height:1.5em}
-input#cp{font:inherit;font-size:.95rem;padding:.35rem .5rem;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:6.5rem}
-input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
-.cp-etat{font-size:.9rem;font-weight:700;color:var(--usager)}
-.perso-cp{font-size:.85rem;color:var(--muted);margin:.4rem 0 0}
-.ou{margin-top:.7rem;padding:.6rem .8rem;border-left:4px solid var(--usager);background:var(--usager-soft);border-radius:0 8px 8px 0;font-size:.93rem}
-.ou p{margin:.3rem 0}.ou-t{font-weight:800;margin-bottom:.2rem}
-.ou-s{margin:.45rem 0 .2rem}.ou-s+.ou-s{border-top:1px dashed var(--line);padding-top:.45rem}
-.ou-h,.ou-c{margin:.15rem 0}.ou .links{margin-top:.25rem}
-.ou-src{font-size:.8rem;color:var(--muted)}.ou-src a.signaler{color:var(--muted);font-weight:400}
-.fs-fort{margin-top:1rem}
-.ou-inc{margin:.5rem 0 0;font-size:.88rem;font-weight:700;color:var(--accent)}
-.pastilles{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:0 0 .7rem}
-.pastille{font-size:.9rem;padding:.25rem .7rem;border-radius:999px;background:var(--usager-soft);color:var(--usager);border:1px solid var(--usager)}
-.pastille-fixe{display:inline-block;font-weight:700}
-.liees{margin:.55rem 0 0 1rem;padding:.4rem .7rem;border-left:3px solid var(--line);font-size:.9rem}
-.liees-t{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
-.liees ul{margin:.2rem 0 0;padding:0;list-style:none}.liees li{margin:.2rem 0}
-.liees-l{display:inline-block;min-width:11rem;font-size:.8rem;font-weight:700;color:var(--muted)}
-.regroupes{margin:.5rem 0 0;font-size:.9rem}.regroupes summary{cursor:pointer;font-weight:700;color:var(--admin)}.regroupes ul{margin:.3rem 0 0 1.1rem;padding:0}
-.lien-changer{background:none;border:0;padding:0;font:inherit;font-size:.9rem;color:var(--admin);text-decoration:underline;cursor:pointer}
-.cp-res{font:inherit;font-size:.9rem;padding:.25rem .5rem;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:7.5rem}
-#ccas-ou{margin:0 0 .8rem}
-.fs-pied{margin-top:1rem;font-size:.93rem;color:var(--ink)}.fs-pied summary{cursor:pointer}.fs-pied .ou-s{margin-left:1rem}
+dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line2);border-radius:14px;padding:20px 22px;background:var(--fond);color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog h2{font-size:20px;margin:0 0 8px;font-weight:600}
+dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
+.dlg-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.dlg-actions a.btn-lien{color:#fff}
+.ghost{min-height:48px;padding:0 20px;font-size:16px;border:1px solid var(--line2);border-radius:10px;background:var(--fond);color:var(--ink)}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <p class="topnav" data-rubrique="donnees"><!-- nav:début --><a href="index.html">FORM 2026</a> · <a href="index.html#mesurer">Mesurer</a> · <a href="index.html#concevoir">Concevoir</a> · <a href="index.html#situer">Situer</a> · <a href="index.html#donnees" aria-current="page">Données</a><!-- nav:fin --></p>
-  <p class="kicker">FORM 2026 · démonstrateur</p>
-  <h1>Dites ce que vous voulez faire, retrouvez la démarche</h1>
-  <p class="lede">Un démonstrateur de recherche en langage courant dans deux bases publiques réunies dans FORM&nbsp;: les démarches en ligne de Démarche Numérique et les fiches de service-public.gouv.fr. Il dit où déposer le dossier, ce qui vous sera demandé, et ce qu'il ne trouve pas. <span id="lede-test">Une version avec assistant conversationnel est en test.</span></p>
-  <p class="couv" id="couv"></p>
-  <div class="frame ia" id="avis-ia" hidden><strong>Version de démonstration avec assistant.</strong> L'assistant fonctionne pour l'instant avec Claude, le modèle d'Anthropic. Il faut un compte Claude&nbsp;: vos questions sont traitées par Anthropic sous votre propre compte, selon ses conditions d'utilisation et vos réglages de confidentialité, exactement comme si vous posiez la question directement à Claude. FORM 2026 ne reçoit ni ne conserve vos questions. L'objectif est que chacun puisse choisir son moteur d'IA&nbsp;: l'index est ouvert et pourra être interrogé par n'importe quel assistant (Albert, Mistral, Claude…). La recherche simple et les exemples préparés ne font appel à aucune IA.<br><strong>Avertissement.</strong> Ce démonstrateur est expérimental et fourni à titre d'information. Ses réponses ne sont ni un conseil juridique ni une décision administrative&nbsp;: vérifiez-les auprès de la source officielle citée. L'éditeur du démonstrateur ne saurait être tenu responsable de l'usage qui est fait des réponses, ni du traitement des questions par le fournisseur d'IA.</div>
-  <!-- cadre:début -->
-  <style>.cadre{margin:22px 0 0;padding:14px 18px;border-left:4px solid var(--accent,#b45309);background:var(--surface,transparent);border-radius:0 8px 8px 0;max-width:78ch}.cadre p{margin:0 0 10px;font-size:.98rem;line-height:1.55}.cadre p:last-child{margin:0}</style>
-  <div class="cadre">
-    <p><b>Ce que cette page décrit.</b> Elle cherche parmi les démarches publiées dans le descriptif ouvert de la plateforme, et non parmi l'ensemble des démarches en ligne de la plateforme. À l'échelle de la plateforme, environ un dossier sur huit ne figure pas dans ce descriptif, en moyenne sur l'ensemble de l'historique de la plateforme, et environ un quart des démarches, cette seconde part comprenant une forte proportion de démarches n'ayant jamais reçu de dossier. Ces ordres de grandeur s'obtiennent en retranchant le fichier ouvert du <a href="https://demarche.numerique.gouv.fr/stats" target="_blank" rel="noopener">compteur public de la plateforme</a>, relevé le 24 octobre 2026. Les absences s'expliquent par les règles de publication inscrites dans le code de la plateforme (paramètre de publication désactivé par le service, absence de dossier, adresse de site web contenant « mail » ou « intra »), et par la suppression de démarches. Les démarches proposées et les nombres de dossiers affichés portent donc sur un corpus publié. Les fiches de service-public.gouv.fr viennent d'une autre source ouverte, citée plus bas. Ce n'est pas l'ensemble des démarches administratives. N'y figurent pas les démarches qui ne sont ni décrites simplement ni accessibles en ligne : celles des autres sites publics, celles qui restent sur papier ou par courriel, celles qu'aucune fiche ne présente.</p>
-    <p><b>Quelles démarches sont retenues, et pour quel territoire.</b> Les démarches publiées à la date de l'extraction, hors démarches réservées aux agents publics et intitulés de test. Une démarche porte le département de son organisme ; celles des administrations centrales et des opérateurs de l'État, hors services territoriaux, sont traitées comme nationales et proposées quel que soit le département choisi.</p>
+<header class="tete"><div class="l">
+  <div class="marque">
+    <a class="nom" href="#" id="lien-accueil">Trouver sa démarche</a>
+    <a class="badge-demo" id="badge-demo" href="https://emsnytech.github.io/form2026/">Démonstrateur FORM 2026</a>
   </div>
-  <!-- cadre:fin -->
-  <div class="frame" id="cadre">Corpus&nbsp;: chargement…</div>
+  <nav aria-label="Liens du démonstrateur">
+    <a href="#" id="lien-nouvelle" hidden>Nouvelle recherche</a>
+    <a href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html" class="lien-comment">Comment ça marche</a>
+    <a href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html#contribuer" class="lien-comment" data-ancre="contribuer">Contribuer</a>
+  </nav>
+</div></header>
 
-  <form class="ask" id="f">
-    <label for="q" class="q-label">Votre situation, avec vos mots.</label>
-    <p class="q-aide" id="q-aide">Pour des réponses plus précises, indiquez où vous habitez, ou où se situe votre projet&nbsp;: une commune, un département ou une région suffit, pas besoin d'adresse.</p>
-    <textarea id="q" aria-describedby="q-aide q-perso" placeholder="Ex. : Je n'arrive plus à payer ma facture d'électricité, j'habite à Rezé."></textarea>
-    <p class="perso" id="q-perso" hidden>Décrivez votre situation sans donnée personnelle&nbsp;: ni nom, ni numéro (sécurité sociale, titre de séjour, IBAN, téléphone), ni adresse précise, ni information de santé. Une commune suffit&nbsp;: n'indiquez ni votre adresse ni votre nom. Les numéros et adresses électroniques reconnus sont retirés avant l'envoi.</p>
-    <details class="filtres" id="filtres"><summary>Préciser le public ou le lieu</summary>
+<main>
+<section id="vue-accueil" class="l" aria-labelledby="titre-accueil">
+  <div class="question">
+    <h1 id="titre-accueil">Que voulez-vous faire&nbsp;?</h1>
+    <form class="ask" id="f">
+      <label for="q" class="q-label">Votre situation, avec vos mots.</label>
+      <p class="q-aide" id="q-aide">Pour des réponses plus précises, indiquez où vous habitez, ou où se situe votre projet&nbsp;: une commune, un département ou une région suffit, pas besoin d'adresse.</p>
+      <div class="saisie">
+        <textarea id="q" rows="1" aria-describedby="q-aide q-perso" placeholder="Ex. : Je n'arrive plus à payer ma facture d'électricité, j'habite à Rezé."></textarea>
+        <button type="submit" class="btn" id="chercher" disabled>Chercher</button>
+      </div>
+      <p class="perso" id="q-perso" hidden>Décrivez votre situation sans donnée personnelle&nbsp;: ni nom, ni numéro (sécurité sociale, titre de séjour, IBAN, téléphone), ni adresse précise, ni information de santé. Une commune suffit&nbsp;: n'indiquez ni votre adresse ni votre nom. Les numéros et adresses électroniques reconnus sont retirés avant l'envoi.</p>
+      <p class="avis-ia" id="avis-ia" hidden>Version de test avec assistant&nbsp;: vos questions sont traitées par Claude (Anthropic) sous votre compte, et les réponses sont à vérifier auprès de l'organisme cité. <a class="lien-comment" data-ancre="ia" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html#ia">En savoir plus</a></p>
+      <p id="ligne-simple" hidden><button type="button" class="lien" id="simple">Recherche simple, sans IA</button></p>
+      <details class="filtres" id="filtres"><summary>Préciser le public ou le lieu</summary>
     <div class="row">
       <label class="sel">Vous êtes
         <select id="pub">
@@ -162,67 +174,74 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
       <label class="sel">ou choisissez un département <select id="dep"><option value="">— non précisé —</option></select></label>
     </div>
     <p class="perso-cp">Votre code postal sert uniquement à trouver votre commune (API Géo de l'État). Rien d'autre n'est envoyé.</p>
-    </details>
-    <div class="row">
-      <button type="submit" class="primary" id="go" disabled>Demander à l'assistant</button>
-      <button type="button" class="ghost" id="simple" disabled>Recherche simple, sans IA</button>
-      <button type="button" class="ghost" id="ia" hidden>Essayer avec l'assistant (version de test)</button>
-    </div>
-    <div class="status" id="quota"></div>
-    <div class="chips" id="ex"></div>
-    <div class="status" id="st" role="status"></div>
-  </form>
-
-  <dialog id="dlg-ia" aria-labelledby="dlg-ia-t">
-    <h2 id="dlg-ia-t">Avant d'ouvrir la version avec assistant</h2>
-    <p>C'est une version de test, publiée hors du site FORM, sur claude.ai.</p>
-    <ul>
-      <li>L'assistant fonctionne avec Claude, le modèle d'Anthropic&nbsp;: il faut un compte Claude, et vos questions sont décomptées de ce compte, selon les <a href="https://www.anthropic.com/legal/consumer-terms" target="_blank" rel="noopener">conditions d'utilisation d'Anthropic</a>.</li>
-      <li>Vos questions sont envoyées au modèle&nbsp;: n'y indiquez ni nom, ni numéro de dossier, ni coordonnées.</li>
-      <li>L'assistant oriente et peut se tromper&nbsp;: vérifiez toujours sur la fiche ou la démarche citée. Il ne dit pas si vous avez droit à une aide.</li>
-      <li>Le nombre de questions libres est limité par visite. La recherche simple et les exemples préparés restent disponibles sans IA, ici comme là-bas.</li>
-    </ul>
-    <div class="dlg-actions">
-      <a class="btn primary" id="ia-go" href="#" autofocus target="_blank" rel="noopener">J'ai compris, ouvrir l'assistant ↗</a>
-      <button type="button" class="ghost" id="ia-annuler">Annuler</button>
-    </div>
-  </dialog>
-
-  <section class="answer" id="ans" aria-live="polite">
-    <h2>Conversation</h2>
-    <div id="thread"></div>
-    <div class="trace" id="trace"></div>
-    <form class="followup" id="ff">
-      <p class="perso" hidden>Sans donnée personnelle&nbsp;: les numéros et adresses électroniques reconnus sont retirés avant l'envoi.</p>
-      <textarea id="fq" placeholder="Répondez ou précisez : votre département, votre situation, ce que vous cherchez exactement…"></textarea>
-      <div class="row"><button class="primary" id="fgo">Envoyer</button><button type="button" class="ghost" id="reset">Nouvelle conversation</button></div>
+      </details>
+      <p class="ligne-stats" id="ligne-stats">Démonstrateur expérimental · <a class="lien-comment" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html">Comment ça marche</a></p>
+      <p class="ligne-stats" id="ligne-ia" hidden></p>
+      <div class="status" id="quota"></div>
+      <div class="status" id="st" role="status"></div>
+      <details class="exemples" id="exemples" hidden><summary>Exemples de questions, avec une réponse préparée sans IA</summary><div class="chips" id="ex"></div></details>
     </form>
-  </section>
+  </div>
 
-  <section class="results" id="res" hidden>
-    <h2 id="resTitle">Sources</h2>
-    <div class="cards" id="cards"></div>
-  </section>
+  <div class="colonnes" id="colonnes" hidden>
+    <section aria-labelledby="h-demandees" id="col-demandees"><h2 id="h-demandees">Les plus demandées</h2><div id="liste-demandees"></div><p class="source-col" id="source-demandees"></p></section>
+    <section aria-labelledby="h-une" id="col-une"><h2 id="h-une">À la une</h2><div id="liste-une"></div><p class="source-col">Démarches récentes ou de saison, proposées automatiquement (urgence, échéance, saison) puis validées par l'éditeur.</p></section>
+  </div>
+</section>
 
-  <section class="method">
-    <h2>Comment ça marche, et ce que ce n'est pas</h2>
-    <ul>
-      <li><strong>Recherche&nbsp;:</strong> un moteur local (BM25, dans votre navigateur) interroge l'index. L'assistant (Claude) reformule votre situation en vocabulaire administratif, lance plusieurs recherches, ouvre le détail des résultats et rédige une réponse. Chaque élément cité renvoie à sa source&nbsp;; aucune adresse n'est inventée.</li>
-      <li><strong>Ce qui est propre à FORM&nbsp;:</strong> pour une démarche en ligne, le nombre de champs, les pièces justificatives demandées, les données préremplies (SIRET, RNA, IBAN, quotient familial…) et le volume de dossiers déposés&nbsp;; le rattachement aux moments de vie&nbsp;; le lien entre fiche service-public et formulaire en ligne quand il existe.</li>
-      <li><strong>Limites&nbsp;:</strong> le corpus ne couvre que ce qui est publié en open data. Les téléservices des autres sites publics (impots.gouv, CAF, ANTS…) n'y figurent que lorsqu'une fiche service-public y renvoie, et les démarches encore sur papier ou par courriel n'y sont pas. Une démarche locale n'est pertinente que pour son territoire. L'assistant oriente&nbsp;; il ne dit pas si vous avez droit à une aide.</li>
-      <li><strong>Où aller&nbsp;:</strong> votre code postal donne votre commune (API Géo de l'État). Le service local compétent pour votre commune vient de l'Annuaire de l'administration (DILA), interrogé avec le seul code de la commune&nbsp;; la France services la plus proche, de la liste des structures labellisées (ANCT). Les téléphones et adresses électroniques affichés sont ceux que ces deux sources publient pour chaque service.</li>
-      <li><strong>La suite du projet&nbsp;:</strong> indexer les services publics en ligne, d'abord ceux de l'État et de ses opérateurs, puis ceux des collectivités.</li>
-      <li><strong>Données&nbsp;:</strong> descriptif des démarches publiées sur demarche.numerique.gouv.fr (data.gouv.fr, extraction du 20&nbsp;novembre&nbsp;2026), base FORM&nbsp;2026 (champs et pièces justificatives, codification des publics et moments de vie), fiches de service-public.gouv.fr (DILA, licence ouverte). Les adresses électroniques et numéros de téléphone sont retirés de l'index.</li>
-    </ul>
-  </section>
-</div>
+<section id="vue-reponse" hidden aria-labelledby="titre-reponse">
+  <h1 class="sr-only" id="titre-reponse" tabindex="-1">Réponse à votre question</h1>
+  <div id="fil"></div>
+  <div id="rep-pastille"></div>
+  <div id="rep-texte"></div>
+  <div id="rep-choix" class="choix"></div>
+  <div id="rep-autrement" class="autrement" hidden></div>
+  <section class="carte" id="carte-demarche" aria-labelledby="h-demarche" hidden></section>
+  <section class="carte" id="carte-aussi" aria-labelledby="h-aussi" hidden></section>
+  <section class="carte" id="carte-ou" aria-labelledby="h-ou" hidden></section>
+  <section class="comprendre" id="carte-comprendre" aria-labelledby="h-comprendre" hidden></section>
+  <details class="pli" id="autres" hidden><summary id="autres-titre">Autres pistes</summary><ul class="pistes" id="autres-liste"></ul></details>
+  <details class="pli" id="cherche"><summary>Comment j'ai cherché</summary><div class="cherche" id="cherche-corps"></div></details>
+  <form id="ff">
+    <label for="fq" class="sr-only">Préciser ma situation</label>
+    <input id="fq" type="text" placeholder="Préciser ma situation…">
+    <button type="submit" class="btn" id="fgo">Envoyer</button>
+  </form>
+  <p class="manque" id="rep-manque" hidden></p>
+  <p class="perso" id="ff-perso" hidden>Sans donnée personnelle&nbsp;: les numéros et adresses électroniques reconnus sont retirés avant l'envoi.</p>
+  <section class="liens-rep" aria-labelledby="h-liens"><h2 id="h-liens">Liens de cette réponse</h2><ol id="liens-liste"></ol>
+    <p>Cette page oriente&nbsp;: elle ne dit pas si vous avez droit à une aide. La décision appartient à l'organisme cité.</p></section>
+</section>
+</main>
+<dialog id="dlg-ia" aria-labelledby="dlg-ia-t">
+  <h2 id="dlg-ia-t">Avant d'ouvrir la version avec assistant</h2>
+  <p>C'est une version de test, publiée hors du site FORM, sur claude.ai.</p>
+  <ul>
+    <li>L'assistant fonctionne avec Claude, le modèle d'Anthropic&nbsp;: il faut un compte Claude, et vos questions sont décomptées de ce compte, selon les <a href="https://www.anthropic.com/legal/consumer-terms" target="_blank" rel="noopener">conditions d'utilisation d'Anthropic</a>.</li>
+    <li>Vos questions sont envoyées au modèle&nbsp;: n'y indiquez ni nom, ni numéro de dossier, ni coordonnées.</li>
+    <li>L'assistant oriente et peut se tromper&nbsp;: vérifiez toujours sur la fiche ou la démarche citée. Il ne dit pas si vous avez droit à une aide.</li>
+    <li>Le nombre de questions libres est limité par visite. La recherche simple et les exemples préparés restent disponibles sans IA, ici comme là-bas.</li>
+  </ul>
+  <div class="dlg-actions">
+    <a class="btn-lien" id="ia-go" href="#" autofocus target="_blank" rel="noopener">J'ai compris, ouvrir l'assistant</a>
+    <button type="button" class="ghost" id="ia-annuler">Annuler</button>
+  </div>
+</dialog>
 
-<script>window.FORM_ASSISTANT_URL = "https://claude.ai/artifact/LLfjE77eNYPjiykcDdcJza";  // version avec assistant (artefact Claude partagé)</script>
+<footer class="pied"><div class="l">
+  <span>Démonstrateur indépendant, non officiel. Vérifiez toujours auprès de l'organisme cité.</span>
+  <a class="lien-comment" data-ancre="sources" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html#sources">Sources et limites</a>
+  <a class="lien-comment" data-ancre="donnees" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html#donnees">Données personnelles</a>
+  <a id="lien-form" href="https://emsnytech.github.io/form2026/">FORM 2026</a>
+</div></footer>
+
+<script>window.FORM_ASSISTANT_URL = "https://claude.ai/artifact/LLfjE77eNYPjiykcDdcJza";  // version avec assistant (artefact Claude partagé)
+window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-demarche-comment.html"; window.FORM_ACCUEIL_URL = "./";</script>
 <script>/*moteur:début*/
 // Moteur de recherche local (BM25) sur l'index FORM 2026 + DILA.
 // Utilisable dans la page et sous node pour les tests.
 (function (root) {
-  const STOP = new Set(("a au aux avec ce ces dans de des du elle en et eux il je la le les leur lui ma mais me meme mes moi mon ne nos notre nous on ou par pas pour qu que qui sa se ses son sur ta te tes toi ton tu un une vos votre vous c d j l m n s t y ete etre avoir ai as avons avez ont suis es est sommes etes sont faire fait comment quoi quel quelle quels quelles dois doit veux veut voudrais souhaite souhaiterais besoin peux peut faut il ya y-a cela ca cet cette tout tous toute toutes plus moins tres aussi si alors donc car comme chez sans sous entre vers apres avant depuis lors quand ou bien mon ma mes demande demarche demarches").split(" "));
+  const STOP = new Set(("a au aux avec ce ces dans de des du elle en et eux il je la le les leur lui ma mais me meme mes moi mon ne nos notre nous on ou par pas pour qu que qui sa se ses son sur ta te tes toi ton tu un une vos votre vous c d j l m n s t y ete etre avoir ai as avons avez ont suis es est sommes etes sont faire fait comment quoi quel quelle quels quelles dois doit veux veut voudrais souhaite souhaiterais besoin peux peut faut il ya y-a cela ca cet cette tout tous toute toutes plus moins tres aussi si alors donc car comme chez sans sous entre vers apres avant depuis lors quand ou bien mon ma mes demande demarche demarches habite habiter habitons habitez").split(" "));
   const SYN = {
     bebe: ["naissance"], enfant: ["enfant"], boulot: ["emploi"], travail: ["emploi", "travail"], chomage: ["emploi", "chomage"],
     demenage: ["demenagement", "adresse"], demenager: ["demenagement", "adresse"], aide: ["aide", "subvention", "allocation"],
@@ -257,6 +276,10 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
     [["verifier le titre de sejour", "verifier son titre de sejour", "verifier un titre de sejour", "verifier les titres de sejour",
       "salarie etranger", "salaries etrangers", "embaucher un etranger", "embaucher un salarie etranger", "embaucher des etrangers"],
      ["verification", "prealable", "embauche", "autorisation", "travail"]],
+    // Renouveler son titre de séjour : la démarche se fait auprès du bureau des étrangers, souvent sur rendez-vous.
+    [["renouveler mon titre de sejour", "renouveler son titre de sejour", "renouveler le titre de sejour", "renouveler ma carte de sejour",
+      "renouvellement de mon titre de sejour", "renouvellement du titre de sejour", "renouvellement de titre de sejour"],
+     ["renouvellement", "etrangers", "rendez"]],
   ].flatMap(([formes, vers]) => formes.map((f) => [f, vers]));
   function norm(s) {
     return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
@@ -404,6 +427,9 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
     association: ["association", "mixte", "personne_morale", "indetermine"], collectivite: ["collectivite", "personne_morale", "indetermine"] };
   const PUBLIC_SP = { particulier: "Particuliers", entreprise: "Professionnels", association: "Associations", collectivite: null };
 
+  // Publics particuliers repérés dans le titre d'une fiche : [motif sur le titre normalisé, entouré d'espaces].
+  // Le même motif, trouvé dans la question, annule la rétrogradation.
+  const PUBLICS_PARTICULIERS = [/ etudiant(e|s|es)? | etude(s)? /, / stagiaire(s)? /, / au pair /, / saisonnier(s)? /].map((re) => [re]);
   function search(ix, q, opt = {}) {
     const { pub = "", dep = "", source = "", k = 10, ouvertes = true } = opt;
     const qt = queryToks(q); if (!qt.length) return [];
@@ -444,7 +470,13 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
         if (r.dp && r.dp >= ilYaUnAn) s *= 1.15;
         if (r.tc) s *= 0.7;   // titre qui ressemble à un identifiant interne (« Bilan_4BNaap12_… ») : rétrogradé, quelle que soit la portée
         const yrs = (r.t.match(/20[12]\d/g) || []).map(Number); if (yrs.length && Math.max(...yrs) < ANNEE - 1) s *= 0.6; }
-      else if (/Téléservice|Formulaire|formulaireNG/.test(r.ty)) s *= 1.1;
+      else {
+        if (/Téléservice|Formulaire|formulaireNG/.test(r.ty)) s *= 1.1;
+        // Fiche réservée à un public particulier (« Étudiant étranger… », « … stagiaire ») que la question ne nomme pas :
+        // rétrogradée, pour que la fiche générale passe devant.
+        const pp = PUBLICS_PARTICULIERS.find(([re]) => re.test(" " + norm(r.t) + " "));
+        if (pp && !pp[0].test(" " + norm(q) + " ")) s *= 0.7;
+      }
       out.push([s, i]);
     }
     out.sort((a, b) => b[0] - a[0]);
@@ -493,90 +525,313 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
     return { meilleur, termes: termes.size, rare: rare && rare[0], score: (id) => score.get(id) || 0, couverture, plusRare,
       pertinente: (id) => termes.size > 0 && (score.get(id) || 0) >= 0.5 * meilleur && (couverture(id) >= 2 || plusRare(id)) };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, regroupements: new Map(), region: null, REGIONS };
+  // ---------- Réponse de la page : liste affichée et « Votre démarche »
+  // Démarche réservée aux professionnels (accompagnants, travailleurs sociaux) d'après son titre ou sa description, ou
+  // variante « … - Employeur » d'une démarche.
+  const RESERVEE_PROS = /\(professionnels?\)|r[ée]serv[ée]e?s? aux (professionnels|travailleurs sociaux)|professionnels dipl[oô]m[ée]s du travail social/i, VARIANTE_EMPLOYEUR = /\s[-–]\s*employeurs?\s*$/i;
+  // Département connu : choisi, sinon celui du lieu reconnu dans la question quand ses candidats l'ont tous.
+  function departementConnu(q, dep) {
+    if (dep) return dep;
+    const c = COMMUNES ? ((lieux(q).lieux[0] || {}).candidats || []) : [];
+    return c.length && c.every((x) => x.dep === c[0].dep) ? c[0].dep : "";
+  }
+  // « Votre démarche » : le premier résultat, sauf (1) une démarche en ligne d'un autre département que le département
+  // connu, ou de département inconnu quand une autre convient, (2) pour un particulier ou un public non précisé, une démarche réservée aux professionnels. Les écartées restent
+  // dans la liste (« Autres pistes »).
+  function principalDe(liste, q, opt = {}) {
+    const { pub = "", dep = "" } = opt, d = departementConnu(q, dep);
+    const ailleurs = (r) => !!d && r.k === "dn" && !!r.dep && r.dep !== d;
+    const pro = (r) => (!pub || pub === "particulier") && (RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t));
+    // Département connu : une démarche locale de département inconnu (po « inc ») passe après celles du département,
+    // nationales et fiches.
+    const inc = (r) => !!d && r.k === "dn" && r.po === "inc";
+    return liste.find((r) => !ailleurs(r) && !inc(r) && !pro(r)) || liste.find((r) => !ailleurs(r) && !pro(r))
+      || liste.find((r) => !ailleurs(r)) || liste[0] || null;
+  }
+  // Recherche simple de la page : les k premiers résultats, puis, si un département est connu sans être choisi, les 3
+  // premières démarches en ligne de ce département (au moins la moitié du meilleur score), puis les 3 premières fiches service-public. Rend la liste et
+  // « Votre démarche ».
+  function choisir(ix, q, opt = {}) {
+    const { pub = "", dep = "", k = 20 } = opt, base = { pub, dep };
+    const res = search(ix, q, { ...base, k }), liste = res.map((x) => x.r), reg = api.regroupements;
+    const ajoute = (l) => { for (const x of l) if (!liste.includes(x.r)) liste.push(x.r); };
+    const d = departementConnu(q, dep), meilleur = res.length ? res[0].score : 0;
+    // Démarches du département : seulement celles dont le score atteint la moitié du meilleur score de la recherche.
+    if (d && !dep) ajoute(search(ix, q, { ...base, dep: d, source: "dn", k: 3 }).filter((x) => x.score >= meilleur / 2));
+    ajoute(search(ix, q, { ...base, source: "sp", k: 3 }));
+    api.regroupements = reg;   // les regroupements par organisme sont ceux de la première recherche
+    return { liste, principal: principalDe(liste, q, opt), departement: d };
+  }
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
 <script>
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+// Chemins : la page FORM range ses données sous donnees/assistant/ (window.FORM_DATA) ; la version avec assistant les sert à côté.
+const DATA = window.FORM_DATA || "";
+// Page « Comment ça marche » et accueil FORM : adresses publiques, remplacées par des adresses relatives sur le site FORM.
+if (window.FORM_COMMENT_URL) document.querySelectorAll("a.lien-comment").forEach((a) => { a.href = window.FORM_COMMENT_URL + (a.dataset.ancre ? "#" + a.dataset.ancre : ""); });
+if (window.FORM_ACCUEIL_URL) { $("badge-demo").href = window.FORM_ACCUEIL_URL; $("lien-form").href = window.FORM_ACCUEIL_URL; }
+// Signaler une démarche qui manque : formulaire d'issue du dépôt (nom de la démarche, organisme, lien ; aucune donnée personnelle).
+const SIGNALER_URL = "https://github.com/emsnytech/form2026/issues/new?template=signaler-demarche.yml";
+// Messages de la page à l'usager. test_moteur.js les contrôle : jamais de formule d'échec en tête, aucun mot de spécialiste.
+const MESSAGES = {
+  manque: "Cette démarche n'existe peut-être pas encore en ligne. Si vous en connaissez une, signalez-la.",
+  autrement: "Essayez de décrire votre situation autrement, par exemple ce que vous voulez obtenir ou à qui vous voulez vous adresser.",
+  chargement: "La liste des démarches n'a pas pu être chargée. Réessayez dans un moment.",
+  attente: "Chargement en cours, un instant…",
+};
+const avecSignaler = (m) => esc(m).replace("signalez-la", `<a href="${SIGNALER_URL}" target="_blank" rel="noopener">signalez-la</a>`);
 const DEPS = "01 Ain|02 Aisne|03 Allier|04 Alpes-de-Haute-Provence|05 Hautes-Alpes|06 Alpes-Maritimes|07 Ardèche|08 Ardennes|09 Ariège|10 Aube|11 Aude|12 Aveyron|13 Bouches-du-Rhône|14 Calvados|15 Cantal|16 Charente|17 Charente-Maritime|18 Cher|19 Corrèze|2A Corse-du-Sud|2B Haute-Corse|21 Côte-d'Or|22 Côtes-d'Armor|23 Creuse|24 Dordogne|25 Doubs|26 Drôme|27 Eure|28 Eure-et-Loir|29 Finistère|30 Gard|31 Haute-Garonne|32 Gers|33 Gironde|34 Hérault|35 Ille-et-Vilaine|36 Indre|37 Indre-et-Loire|38 Isère|39 Jura|40 Landes|41 Loir-et-Cher|42 Loire|43 Haute-Loire|44 Loire-Atlantique|45 Loiret|46 Lot|47 Lot-et-Garonne|48 Lozère|49 Maine-et-Loire|50 Manche|51 Marne|52 Haute-Marne|53 Mayenne|54 Meurthe-et-Moselle|55 Meuse|56 Morbihan|57 Moselle|58 Nièvre|59 Nord|60 Oise|61 Orne|62 Pas-de-Calais|63 Puy-de-Dôme|64 Pyrénées-Atlantiques|65 Hautes-Pyrénées|66 Pyrénées-Orientales|67 Bas-Rhin|68 Haut-Rhin|69 Rhône|70 Haute-Saône|71 Saône-et-Loire|72 Sarthe|73 Savoie|74 Haute-Savoie|75 Paris|76 Seine-Maritime|77 Seine-et-Marne|78 Yvelines|79 Deux-Sèvres|80 Somme|81 Tarn|82 Tarn-et-Garonne|83 Var|84 Vaucluse|85 Vendée|86 Vienne|87 Haute-Vienne|88 Vosges|89 Yonne|90 Territoire de Belfort|91 Essonne|92 Hauts-de-Seine|93 Seine-Saint-Denis|94 Val-de-Marne|95 Val-d'Oise|971 Guadeloupe|972 Martinique|973 Guyane|974 La Réunion|976 Mayotte".split("|");
 const DEPNAME = {}; for (const d of DEPS) { const i = d.indexOf(" "); DEPNAME[d.slice(0, i)] = d.slice(i + 1); }
 $("dep").insertAdjacentHTML("beforeend", DEPS.map((d) => `<option value="${d.split(" ")[0]}">${esc(d)}</option>`).join(""));
-let EXEMPLES = [];
-fetch("donnees/assistant/exemples.json").then((r) => r.json()).then((e) => { EXEMPLES = e;
-  $("ex").innerHTML = `<span class="sel" style="width:100%">Exemples à réponse préparée (instantanés, sans appel à l'IA)&nbsp;:</span>` + EXEMPLES.map((x, i) => `<button type="button" class="chip" data-i="${i}">${esc(x.q)}</button>`).join("");
-}).catch(() => {});
-$("ex").addEventListener("click", (ev) => { const b = ev.target.closest(".chip"); if (!b) return; const e = EXEMPLES[+b.dataset.i]; $("q").value = e.q; $("pub").value = e.pub; $("dep").value = e.dep; if (e.pub || e.dep) $("filtres").open = true; showPrepared(e); });
 
-let IX = null, sample = null, history = [], cited = new Map(), seen = new Map(), busy = false, ctrl = null;
+let IX = null, META = null, sample = null, history = [], cited = new Map(), seen = new Map(), busy = false, ctrl = null, traceLines = [];
 const PUBLAB = { particulier: "particulier", entreprise: "entreprise", association: "association", collectivite: "collectivité", personne_morale: "personne morale", mixte: "plusieurs publics", indetermine: "public non précisé" };
 const dnUrl = (r) => /^https?:/.test(r.u) ? r.u : "https://demarche.numerique.gouv.fr/commencer/" + encodeURIComponent(r.u);
 const fmt = (n) => Number(n || 0).toLocaleString("fr-FR");
+const rec = (id) => { const i = IX && IX.byId.get(id); return i === undefined || i === null ? null : IX.recs[i]; };
+const dateFr = (iso) => iso ? new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }).replace(/^1 /, "1er ") : "";
 
-fetch("donnees/assistant/index.json").then((r) => r.json()).then((recs) => {
-  $("st").textContent = "Indexation…";
+// ---------- Volumes (ligne sous le champ) : index_meta.json, sinon l'index une fois chargé.
+function majStats(ndn, nsp) {
+  $("ligne-stats").innerHTML = `Démonstrateur expérimental · ${fmt(ndn)} démarches en ligne et ${fmt(nsp)} fiches officielles · <a class="lien-comment" href="${esc(document.querySelector("a.lien-comment").href.split("#")[0])}">Comment ça marche</a>`;
+}
+fetch(DATA + "index_meta.json").then((r) => r.json()).then((m) => { META = m; majStats(m.demarches_en_ligne, m.fiches); }).catch(() => {});
+
+// ---------- Exemples à réponse préparée (sans IA)
+let EXEMPLES = [];
+fetch(DATA + "exemples.json").then((r) => r.json()).then((e) => { EXEMPLES = e;
+  $("ex").innerHTML = EXEMPLES.map((x, i) => `<button type="button" class="chip" data-i="${i}">${esc(x.q)}</button>`).join(""); $("exemples").hidden = false;
+}).catch(() => {});
+$("ex").addEventListener("click", (ev) => { const b = ev.target.closest(".chip"); if (!b) return; const e = EXEMPLES[+b.dataset.i]; $("q").value = e.q; $("pub").value = e.pub; $("dep").value = e.dep; if (e.pub || e.dep) $("filtres").open = true; showPrepared(e); });
+
+// ---------- Colonnes de l'accueil : « Les plus demandées » et « À la une » (un clic lance la recherche)
+const ETIQ = { "Urgent": "urgent", "Crise": "crise", "De saison": "saison", "Nouveau": "nouveau" };
+function ligne(titre, sous, requete, avant) {
+  return `<button type="button" class="ligne" data-requete="${esc(requete)}"><span class="t">${avant || ""}<span class="t1">${esc(titre)}</span><span class="t2">${esc(sous)}</span></span><span class="f" aria-hidden="true">→</span></button>`;
+}
+Promise.all([fetch(DATA + "plus_demandees.json").then((r) => r.json()).catch(() => null), fetch(DATA + "a_la_une.json").then((r) => r.json()).catch(() => null)]).then(([pd, une]) => {
+  if (pd) {
+    $("liste-demandees").innerHTML = `<p class="sur-titre">Démarches nationales</p>` + pd.nationales.map((x) => ligne(x.titre, x.organisme + " · service-public.gouv.fr", x.requete)).join("")
+      + `<p class="sur-titre">Sur Démarche Numérique</p>` + pd.demarche_numerique.map((x) => ligne(x.titre, `${x.organisme} · plus de ${x.dossiers_arrondis} dossiers`, x.requete)).join("");
+    $("source-demandees").textContent = "Hors démarches saisonnières (déclaration de revenus, rentrée…), qui passent « À la une » au bon moment. Sources : " + pd.source + ".";
+  } else $("col-demandees").hidden = true;
+  if (une) $("liste-une").innerHTML = une.retenues.map((x) => ligne(x.titre, x.organisme, x.requete,
+      `<span><span class="etiq ${ETIQ[x.etiquette] || ""}">${esc(x.etiquette)}</span><span class="t2">${x.publiee ? "Publiée le " + esc(dateFr(x.publiee)) + " · " : ""}${esc(x.portee)}</span></span>`)).join("");
+  else $("col-une").hidden = true;
+  $("colonnes").hidden = !pd && !une;
+});
+$("colonnes").addEventListener("click", (ev) => { const b = ev.target.closest(".ligne"); if (!b) return; $("q").value = b.dataset.requete; rechercheSimple(); });
+
+// ---------- Index
+fetch(DATA + "index.json").then((r) => r.json()).then((recs) => {
+  $("st").textContent = MESSAGES.attente;
   setTimeout(() => {
     IX = Moteur.build(recs);
-    const ndn = recs.filter((r) => r.k === "dn").length, nsp = recs.length - ndn;
-    // Cadre « Ce que la démo couvre » : schéma des sources. nfs, le nombre de structures France services, n'est connu
-    // que si la page les a chargées ; sans lui, le libellé seul.
-    window.majCadre = (nfs) => { $("cadre").innerHTML = `<p><strong>Ce que la démo couvre&nbsp;:</strong> elle relie, pour chaque recherche, les démarches en ligne publiées par l'administration et les lieux où s'adresser près de chez vous.</p>
-<figure class="sources" aria-labelledby="sources-titre">
-  <figcaption id="sources-titre" class="sr-only">Schéma des sources de données de la démo</figcaption>
-  <div class="sc-col">
-    <h2 class="sc-h">Sources ouvertes</h2>
-    <div class="sc-group">
-      <span class="sc-tag">Les démarches</span>
-      <div class="sc-box adm"><b>Démarche Numérique</b><span>${fmt(ndn)} démarches en ligne publiées (open data)</span></div>
-      <div class="sc-box adm"><b>service-public.gouv.fr</b><span>${fmt(nsp)} fiches et ressources (DILA)</span></div>
-    </div>
-    <div class="sc-group">
-      <span class="sc-tag">Les lieux</span>
-      <div class="sc-box usa"><b>API Géo</b><span>du code postal à la commune</span></div>
-      <div class="sc-box usa"><b>Annuaire de l'administration</b><span>guichets, horaires, contacts officiels (DILA, interrogé en direct)</span></div>
-      <div class="sc-box usa"><b>France services</b><span>${nfs ? fmt(nfs) + " structures" : "structures labellisées"} (ANCT)</span></div>
-    </div>
-  </div>
-  <div class="sc-arrow" aria-hidden="true">→</div>
-  <div class="sc-col">
-    <h2 class="sc-h">Traitement FORM</h2>
-    <div class="sc-box acc"><b>Nettoyage</b><span>démarches de test, réservées aux agents ou fermées écartées ; contacts personnels masqués</span></div>
-    <div class="sc-box acc"><b>Portée</b><span>nationale, départementale ou locale à vérifier</span></div>
-    <div class="sc-box acc"><b>Moteur de recherche</b><span>vos mots traduits en vocabulaire administratif</span></div>
-  </div>
-  <div class="sc-arrow" aria-hidden="true">→</div>
-  <div class="sc-col">
-    <h2 class="sc-h">Ce que vous obtenez</h2>
-    <div class="sc-box out"><b>La démarche en ligne</b><span>et ce qu'elle demande</span></div>
-    <div class="sc-box out"><b>La fiche officielle</b><span>pour comprendre vos droits</span></div>
-    <div class="sc-box out"><b>Où aller</b><span>le bon guichet, ses horaires, son téléphone</span></div>
-    <div class="sc-box out"><b>France services</b><span>la plus proche, pour être accompagné</span></div>
-  </div>
-</figure>
-<p class="sc-limites"><strong>Ce qui manque encore&nbsp;:</strong> les démarches des autres sites publics, celles qui restent sur papier ou par courriel, et celles qu'aucune fiche ne présente. La démo n'est pas l'ensemble des démarches administratives.<br>
-<strong>La suite du projet&nbsp;:</strong> indexer les services publics en ligne, d'abord ceux de l'État et de ses opérateurs, puis ceux des collectivités.</p>`; };
-    majCadre(window.NFS || 0);
-    $("couv").textContent = `${fmt(ndn)} démarches en ligne et ${fmt(nsp)} fiches service-public indexées`;
-    $("st").textContent = ""; $("simple").disabled = false; $("go").disabled = false;
+    if (!META) { const ndn = recs.filter((r) => r.k === "dn").length; majStats(ndn, recs.length - ndn); }
+    $("st").textContent = ""; $("chercher").disabled = false;
   }, 30);
-}).catch(() => { $("st").textContent = "L'index n'a pas pu être chargé."; });
+}).catch(() => { $("st").textContent = MESSAGES.chargement; });
 
+// ---------- Assistant (version avec IA seulement)
 (async () => {
   try { sample = await claude.use("sample"); } catch (e) { sample = null; }
-  if (sample) { majQuota(); $("avis-ia").hidden = false; document.querySelectorAll(".perso").forEach((e) => (e.hidden = false)); $("lede-test").hidden = true; document.title = "Trouver sa démarche — démonstrateur avec assistant · FORM 2026"; }
-  if (!sample) { $("go").hidden = true; $("go").dataset.off = "1";
-    $("quota").innerHTML = "Sur cette version, l'assistant conversationnel n'est pas branché : essayez les exemples à réponse préparée ou la recherche simple." + (window.FORM_ASSISTANT_URL ? ` La version avec assistant est <a href="${window.FORM_ASSISTANT_URL}" id="ia-lien">accessible ici</a> (compte Claude nécessaire).` : "");
-    if (window.FORM_ASSISTANT_URL) { $("ia").hidden = false; $("ia-go").href = window.FORM_ASSISTANT_URL; } }
+  if (sample) {
+    majQuota(); $("avis-ia").hidden = false; $("q-perso").hidden = false; $("ff-perso").hidden = false; $("ligne-simple").hidden = false;
+    document.title = "Trouver sa démarche — démonstrateur avec assistant · FORM 2026";
+  } else {
+    $("ff").hidden = true;
+    if (window.FORM_ASSISTANT_URL) { $("ligne-ia").hidden = false; $("ligne-ia").innerHTML = `<button type="button" class="lien" id="ia">Essayer la version avec assistant (version de test)</button>`; }
+  }
 })();
-// Version avec assistant : les conditions d'utilisation s'affichent avant l'ouverture.
-function ouvrirAvisIA(ev) { if (ev) ev.preventDefault(); const d = $("dlg-ia"); if (d.showModal) d.showModal(); else window.open(window.FORM_ASSISTANT_URL, "_blank", "noopener"); }
-$("ia").addEventListener("click", ouvrirAvisIA);
-$("quota").addEventListener("click", (ev) => { if (ev.target.closest("#ia-lien")) ouvrirAvisIA(ev); });
-$("ia-annuler").addEventListener("click", () => $("dlg-ia").close());
-$("ia-go").addEventListener("click", () => $("dlg-ia").close());
 
-// ---------- outils donnés à l'assistant
+// ---------- Vues
+function vueReponse() { $("vue-accueil").hidden = true; $("vue-reponse").hidden = false; $("lien-nouvelle").hidden = false; window.scrollTo(0, 0); $("titre-reponse").focus({ preventScroll: true }); }
+function vueAccueil() {
+  if (ctrl) { try { ctrl.abort(); } catch (x) {} }
+  history = []; $("vue-reponse").hidden = true; $("vue-accueil").hidden = false; $("lien-nouvelle").hidden = true; $("q").value = ""; $("q").focus();
+}
+$("lien-nouvelle").addEventListener("click", (ev) => { ev.preventDefault(); vueAccueil(); });
+$("lien-accueil").addEventListener("click", (ev) => { ev.preventDefault(); vueAccueil(); });
+
+// ---------- Réponse : cartes, autres pistes, « Comment j'ai cherché », liens
+let LIENS = [];
+function ajouterLien(titre, url, source) { if (!url || LIENS.some((l) => l.url === url)) return; LIENS.push({ titre, url, source }); afficherLiens(); }
+function afficherLiens() { $("liens-liste").innerHTML = LIENS.map((l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.titre)}</a> — ${esc(l.source)}</li>`).join(""); }
+const LIB_RES = (r) => /imulateur/i.test(r.ty) ? "Savoir si j'y ai droit (simulateur)" : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne"
+  : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : r.t;
+// Type d'une ressource service-public, en langage courant.
+const typeLib = (r) => /Téléservice|selNG/i.test(r.ty) ? "Démarche en ligne" : /imulateur/i.test(r.ty) ? "Simulateur" : /ormulaire/i.test(r.ty) ? "Formulaire"
+  : /echerche/i.test(r.ty) ? "Outil de recherche" : /odèle|lettre/i.test(r.ty) ? "Modèle de lettre" : "Fiche officielle";
+const lienSp = (r) => (/^SP-R/.test(r.id) && r.l) ? r.l : r.u;
+const estFiche = (r) => r && r.k === "sp" && /^SP-F/.test(r.id);
+const resDe = (f) => (f.res || []).map(rec).filter(Boolean);
+function carteDemarche(r) {
+  const el = $("carte-demarche"); if (!r) { el.hidden = true; return; }
+  let h = `<h2 id="h-demarche">Votre démarche</h2><p class="titre">${esc(r.t)}</p>`;
+  if (r.k === "dn") {
+    const lieu = r.dep ? r.dep + " " + (DEPNAME[r.dep] || "") : r.po === "nat" ? "nationale" : "";
+    h += `<p class="org">${esc(r.o)}${lieu ? " · " + esc(lieu) : ""} · en ligne sur Démarche Numérique</p>`;
+    if (r.po === "inc") h += `<p class="avert">Démarche locale&nbsp;: vérifiez qu'elle concerne votre commune.</p>`;
+    if ((r.pj || []).length) h += `<p class="prep2">À préparer&nbsp;: ${esc(r.pj.slice(0, 5).join(" ; "))}${r.pj.length > 5 ? "…" : "."}</p>`;
+    if ((r.pre || []).length) h += `<p class="org">Prérempli&nbsp;: ${esc(r.pre.join(", "))}</p>`;
+    h += `<a class="btn-lien" href="${esc(dnUrl(r))}" target="_blank" rel="noopener">Faire la démarche</a>`;
+    ajouterLien(r.t, dnUrl(r), "Démarche Numérique");
+  } else {
+    const ts = resDe(r).find((x) => /Téléservice|selNG/i.test(x.ty));
+    const cible = ts ? lienSp(ts) : r.l || r.u;
+    h += `<p class="org">${esc(typeLib(r))} · service-public.gouv.fr</p>`;
+    if ((r.docs || []).length) h += `<p class="prep2">À préparer&nbsp;: ${esc(r.docs.slice(0, 5).join(" ; "))}${r.docs.length > 5 ? "…" : "."}</p>`;
+    h += `<a class="btn-lien" href="${esc(cible)}" target="_blank" rel="noopener">${ts || r.l ? "Faire la démarche" : "Lire la fiche"}</a>`;
+    ajouterLien(ts ? ts.t : r.t, cible, "service-public.gouv.fr");
+  }
+  el.innerHTML = h; el.hidden = false;
+}
+function carteAussi(f) {
+  const el = $("carte-aussi"); if (!f) { el.hidden = true; return; }
+  const rs = resDe(f).filter((x) => /imulateur|Téléservice|selNG/i.test(x.ty)).slice(0, 2);
+  el.innerHTML = `<h2 id="h-aussi">Aussi pour vous</h2><p class="titre p">${esc(f.t)}</p><p class="org">${esc((f.d || "").split(/(?<=\.)\s/)[0])} · service-public.gouv.fr</p>`
+    + `<div class="liens">${(rs.length ? rs : [f]).map((x) => `<a href="${esc(lienSp(x))}" target="_blank" rel="noopener">${esc(rs.length ? LIB_RES(x) : "Lire la fiche")}</a>`).join("")}</div>`;
+  el.hidden = false;
+  ajouterLien(f.t, f.u, "service-public.gouv.fr"); rs.forEach((x) => ajouterLien(x.t, lienSp(x), "service-public.gouv.fr"));
+}
+function carteComprendre(f) {
+  const el = $("carte-comprendre"); if (!f) { el.hidden = true; return; }
+  el.innerHTML = `<h2 id="h-comprendre">Comprendre</h2><a href="${esc(f.u)}" target="_blank" rel="noopener">${esc(f.t)}</a><span>Fiche officielle · service-public.gouv.fr</span>`;
+  el.hidden = false; ajouterLien(f.t, f.u, "service-public.gouv.fr");
+}
+function autresPistes(reste) {
+  const n = reste.reduce((s, r) => s + 1 + ((Moteur.regroupements && Moteur.regroupements.get(r.id)) || []).length, 0);
+  $("autres").hidden = !reste.length; $("autres-titre").textContent = `Autres pistes (${n})`;
+  $("autres-liste").innerHTML = reste.map((r) => {
+    const g = (ORIGINE === "simple" && Moteur.regroupements && Moteur.regroupements.get(r.id)) || [];
+    const lien = r.k === "dn" ? dnUrl(r) : lienSp(r);
+    const meta = r.k === "dn" ? `Démarche en ligne · ${r.o}${r.dep ? " · " + r.dep : r.po === "nat" ? " · nationale" : " · département inconnu"}` : `${typeLib(r)} · service-public.gouv.fr`;
+    return `<li><a href="${esc(lien)}" target="_blank" rel="noopener">${esc(r.t)}</a><span class="meta">${esc(meta)}${r.po === "inc" ? " · démarche locale, vérifiez qu'elle concerne votre commune" : ""}</span>`
+      + (g.length ? `<details><summary>+ ${g.length} autre${g.length > 1 ? "s" : ""} démarche${g.length > 1 ? "s" : ""} de ${esc(r.o)}</summary><ul>${g.map((x) => `<li><a href="${esc(dnUrl(x))}" target="_blank" rel="noopener">${esc(x.t)}</a> ${esc(x.dep || "")}</li>`).join("")}</ul></details>` : "") + `</li>`;
+  }).join("");
+}
+function commentCherche(q) {
+  // Mots retenus, tels que vous les avez écrits ; expressions reconnues ; nombre de termes voisins ajoutés (synonymes).
+  const A = Moteur.analyse ? Moteur.analyse(q) : { termes: new Map() };
+  const motsQ = q.split(/[^A-Za-zÀ-ÿ0-9'’-]+/).flatMap((w) => w.split(/['’]/)).filter(Boolean);
+  const retenus = [], expressions = []; let voisins = 0;
+  for (const [cle, g] of A.termes) {
+    if (cle[0] === "«") { expressions.push(cle); continue; }
+    const w = motsQ.find((m) => Moteur.toks(m)[0] === cle); if (w && !retenus.includes(w.toLowerCase())) retenus.push(w.toLowerCase());
+    voisins += g.size - 1;
+  }
+  const traduits = [retenus.length ? retenus.join(", ") : "", expressions.length ? "expression" + (expressions.length > 1 ? "s" : "") + " reconnue" + (expressions.length > 1 ? "s" : "") + " " + expressions.join(", ") : "",
+    voisins ? `${voisins} terme${voisins > 1 ? "s" : ""} voisin${voisins > 1 ? "s" : ""} du vocabulaire administratif ajouté${voisins > 1 ? "s" : ""}` : ""].filter(Boolean);
+  const L = Moteur.lieux ? Moteur.lieux(q) : { lieux: [], regions: [] };
+  const c0 = L.lieux[0] && L.lieux[0].candidats[0];
+  const lieu = window.LIEU_CONNU || (c0 ? `${c0.nom} (${c0.dep})` : (L.regions && L.regions[0] ? L.regions[0].nom : ""));
+  const ndn = META ? META.demarches_en_ligne : IX.recs.filter((r) => r.k === "dn").length, nsp = META ? META.fiches : IX.recs.length - ndn;
+  $("cherche-corps").innerHTML = [
+    traduits.length ? `<span><b>Vos mots, traduits&nbsp;:</b> ${esc(traduits.join(" ; "))}</span>` : "",
+    `<span><b>Lieu reconnu&nbsp;:</b> ${esc(lieu || "aucun")}</span>`,
+    `<span><b>Sources consultées&nbsp;:</b> ${fmt(ndn)} démarches de Démarche Numérique, ${fmt(nsp)} fiches de service-public.gouv.fr${window.LIEU_CONNU ? ", Annuaire de l'administration" : ""}</span>`,
+    META && META.date_export ? `<span><b>Index du&nbsp;:</b> ${esc(dateFr(META.date_export))}</span>` : "",
+    traceLines.length ? `<span><b>Recherches de l'assistant&nbsp;:</b> ${esc(traceLines.join(" · "))}</span>` : "",
+  ].join("");
+}
+// Origine de la liste : « simple » (moteur) ou « citee » (réponse préparée, assistant) ; lue aussi par « Où aller ».
+let ORIGINE = "simple", QCOUR = "";
+window.majCherche = () => { if (IX && QCOUR) commentCherche(QCOUR); };
+// Une réponse « en ligne » : démarche de Démarche Numérique, démarche en ligne ou formulaire de service-public, ou fiche
+// qui renvoie à une démarche en ligne.
+const enLigne = (r) => !!r && (r.k === "dn" || /Téléservice|selNG|ormulaire/i.test(r.ty) || (estFiche(r) && resDe(r).some((x) => /Téléservice|selNG/i.test(x.ty))));
+function afficherResultats(liste, q, origine, principalDonne) {
+  ORIGINE = window.ORIGINE_RESULTATS = origine; QCOUR = q; LIENS = []; afficherLiens();
+  const opt = { pub: $("pub").value, dep: $("dep").value };
+  // « Votre démarche » : Moteur.principalDe (ni démarche d'un autre département que le lieu connu, ni, pour un
+  // particulier, démarche réservée aux professionnels) ; la recherche simple la reçoit de Moteur.choisir.
+  const principal = principalDonne !== undefined ? principalDonne : Moteur.principalDe(liste, q, opt);
+  // Rien de pertinent (recherche simple) : aucune carte, une invitation à reformuler, avec des exemples.
+  // Seuil de pertinence de la règle France services (Moteur.pertinence : moitié du meilleur score, et deux termes de la
+  // question repris ou le terme le plus rare) ; il décide aussi de la carte « Aussi pour vous ».
+  const P = liste.length ? Moteur.pertinence(IX, q, opt) : null;
+  const rien = !liste.length || (origine === "simple" && !liste.some((r) => P.pertinente(r.id)));
+  $("rep-autrement").hidden = !rien; $("rep-manque").hidden = true;
+  if (rien) {
+    $("rep-autrement").innerHTML = `<p>${esc(MESSAGES.autrement)}</p><div class="chips">${EXEMPLES.slice(0, 3).map((x, i) => `<button type="button" class="chip" data-i="${i}">${esc(x.q)}</button>`).join("")}</div>`;
+    carteDemarche(null); carteAussi(null); carteComprendre(null); window.CARTES_TETE = []; autresPistes([]);
+    commentCherche(q); vueReponse(); return;
+  }
+  const fiches = liste.filter(estFiche);
+  const ligne = enLigne(principal);
+  const lieeAuPrincipal = principal && principal.k === "dn" ? (principal.fd || []).map((f) => rec("SP-" + f)).find(Boolean) : null;
+  // Pas de démarche en ligne en tête : la fiche officielle la plus pertinente, en « Comprendre », remontée en premier.
+  const comprendre = ligne ? (estFiche(principal) ? null : (lieeAuPrincipal || fiches[0] || null))
+    : (estFiche(principal) ? principal : (fiches[0] || null));
+  // « Aussi pour vous » : une fiche qui a un simulateur ou une démarche en ligne, et qui est soit citée par la fiche
+  // « Comprendre » (ses fiches liées, champ « fl ») et en rapport avec la question (au moins le quart du meilleur score,
+  // et un terme de la question, synonymes compris, dans son titre), soit au-dessus du seuil de pertinence ; sinon, pas de carte.
+  const utile = (f) => f !== principal && f !== comprendre && resDe(f).some((x) => /imulateur|Téléservice|selNG/i.test(x.ty));
+  const lieesComprendre = comprendre ? (comprendre.fl || []).map(rec).filter((f) => f && utile(f)) : [];
+  let aussi = null;
+  if (lieesComprendre.length) {
+    const tous = Moteur.search(IX, q, { ...opt, k: Infinity }), meilleur = tous.length ? tous[0].score : 0;
+    const score = new Map(tous.map((x) => [x.r.id, x.score]));
+    const groupes = [...(Moteur.analyse ? Moteur.analyse(q).termes.values() : [])];
+    const auTitre = (f) => { const m = new Set(Moteur.toks(f.t)); return groupes.some((g) => [...g].some((s) => m.has(s))); };
+    aussi = lieesComprendre.find((f) => (score.get(f.id) || 0) >= meilleur / 4 && auTitre(f)) || null;
+  }
+  aussi = aussi || fiches.find((f) => utile(f) && P.pertinente(f.id)) || null;
+  carteDemarche(ligne ? principal : null); carteAussi(aussi); carteComprendre(comprendre);
+  if (ligne) $("carte-ou").after($("carte-comprendre")); else $("carte-demarche").before($("carte-comprendre"));
+  if (!ligne) { $("rep-manque").innerHTML = avecSignaler(MESSAGES.manque); $("rep-manque").hidden = false; }
+  window.CARTES_TETE = [ligne ? principal : comprendre, aussi, ligne ? comprendre : principal].filter(Boolean);  // « Où aller » cherche le guichet de ces cartes
+  // Sans démarche en ligne en tête, le premier résultat (modèle de lettre, outil…) reste dans « Autres pistes ».
+  autresPistes(liste.filter((r) => (r !== principal || !ligne) && r !== aussi && r !== comprendre));
+  commentCherche(q);
+  vueReponse();
+}
+$("rep-autrement").addEventListener("click", (ev) => { const b = ev.target.closest(".chip"); if (!b) return; const e = EXEMPLES[+b.dataset.i]; $("q").value = e.q; $("pub").value = e.pub; $("dep").value = e.dep; showPrepared(e); });
+window.ajouterLien = ajouterLien; window.afficherResultats = afficherResultats;
+
+function poserQuestion(q, html) { $("fil").innerHTML = `<div class="bulle">${esc(q)}${html || ""}</div>`; }
+
+// ---------- Recherche simple (sans IA) : mêmes cartes, pastilles et liens ; une phrase tirée de la fiche, jamais inventée.
+function rechercheSimple() {
+  const q = $("q").value.trim(); if (!q || !IX) return;
+  traceLines = []; poserQuestion(q);
+  // Moteur.choisir : les 20 premiers résultats, les 3 premières démarches du département reconnu, les 3 premières fiches
+  // service-public, et « Votre démarche ».
+  const C = Moteur.choisir(IX, q, { pub: $("pub").value, dep: $("dep").value, k: 20 }), res = C.liste;
+  $("rep-choix").innerHTML = $("pub").value ? "" : `<p>Pour vous orienter&nbsp;: vous êtes…</p><div class="boutons">${[["particulier", "un particulier"], ["entreprise", "une entreprise"], ["association", "une association"], ["collectivite", "une collectivité"]].map(([v, l]) => `<button type="button" data-pub="${v}">${l}</button>`).join("")}</div>`;
+  afficherResultats(res, q, "simple", C.principal);
+  const f = $("rep-autrement").hidden ? res.find(estFiche) : null;
+  // Une phrase de la fiche officielle, seulement à côté d'une démarche en ligne (sinon la fiche est déjà en tête).
+  $("rep-texte").innerHTML = f && f.d && !$("carte-demarche").hidden && f !== C.principal ? `<p class="extrait">Selon la fiche officielle «&nbsp;${esc(f.t)}&nbsp;»&nbsp;: ${esc(f.d.split(/(?<=\.)\s/)[0])}</p>` : "";
+}
+$("rep-choix").addEventListener("click", (ev) => {
+  const b = ev.target.closest("button"); if (!b || b.disabled) return;
+  if (b.dataset.pub) { $("pub").value = b.dataset.pub; $("filtres").open = true; rechercheSimple(); return; }
+  if (sample && !busy) ask(b.dataset.v, false);
+});
+$("simple").addEventListener("click", rechercheSimple);
+$("f").addEventListener("submit", (ev) => { ev.preventDefault(); const q = $("q").value.trim(); if (!q) return; if (sample) ask(q, true); else rechercheSimple(); });
+$("q").addEventListener("keydown", (ev) => { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); $("f").requestSubmit(); } });
+
+// ---------- Réponses préparées (sans IA)
+function showPrepared(e) {
+  if (!IX) { $("st").textContent = MESSAGES.attente; return; }
+  if (ctrl) { try { ctrl.abort(); } catch (x) {} }
+  cited = new Map(); seen = new Map(); traceLines = e.recherches.slice();
+  history = [{ role: "user", content: consigne(e.q) }, { role: "assistant", content: e.texte }];
+  poserQuestion(e.q);
+  const r = renderText(e.texte);
+  $("rep-texte").innerHTML = `<div class="texte-ia"><p class="prep">Réponse préparée à l'avance avec les mêmes outils de recherche ; aucun appel à l'IA.${sample ? " Vous pouvez poursuivre la conversation avec l'assistant." : ""}</p>${r.html}</div>`;
+  $("rep-choix").innerHTML = "";
+  const recs = [...new Set([...cited.keys(), ...e.refs])].map(rec).filter(Boolean);
+  afficherResultats(recs, e.q, "citee");
+}
+
+// ---------- Outils donnés à l'assistant
 function compact(r) {
   const o = { ref: r.id, source: r.k === "dn" ? "démarche en ligne (Démarche Numérique)" : "fiche service-public.gouv.fr (" + r.ty + ")", titre: r.t, extrait: (r.d || "").slice(0, 170) };
   if (r.k === "dn") { o.organisme = r.o; o.departement = r.dep ? r.dep + " " + (DEPNAME[r.dep] || "") : "national ou non précisé"; o.public = PUBLAB[r.cat] || r.cat; o.dossiers_deposes = r.n; if (r.fe) o.date_fermeture = r.fe; }
@@ -590,39 +845,18 @@ function details(r) {
 const TOOLS = [
   { name: "rechercher", description: "Cherche dans l'index FORM 2026 (démarches en ligne Démarche Numérique + fiches service-public.gouv.fr). Formule la requête avec les mots qu'emploierait l'administration (ex. « subvention fonctionnement association sportive », « vente au déballage déclaration préalable »). Renvoie au plus 8 résultats.",
     inputSchema: { type: "object", properties: { requete: { type: "string" }, public: { type: "string", enum: ["", "particulier", "entreprise", "association", "collectivite"] }, departement: { type: "string", description: "code du département (ex. 94, 2A, 974) ou vide" }, source: { type: "string", enum: ["", "dn", "sp"], description: "dn = démarches en ligne seulement, sp = fiches service-public seulement, vide = les deux" } }, required: ["requete"] },
-    execute: (a) => { const res = Moteur.search(IX, a.requete || "", { pub: a.public || "", dep: a.departement || "", source: a.source || "", k: 8 }); log("🔎 " + (a.requete || "") + (a.departement ? " · " + a.departement : "") + (a.source ? " · " + a.source : "") + " → " + res.length); res.forEach((x) => seen.set(x.r.id, x.r)); return res.map((x) => compact(x.r)); } },
+    execute: (a) => { const res = Moteur.search(IX, a.requete || "", { pub: a.public || "", dep: a.departement || "", source: a.source || "", k: 8 }); log((a.requete || "") + (a.departement ? " · " + a.departement : "") + (a.source ? " · " + a.source : "") + " → " + res.length); res.forEach((x) => seen.set(x.r.id, x.r)); return res.map((x) => compact(x.r)); } },
   { name: "details", description: "Donne le détail d'un résultat par sa référence : pièces justificatives, données préremplies, nombre de champs, documents à fournir, liens entre fiche et démarche en ligne.",
     inputSchema: { type: "object", properties: { ref: { type: "string" } }, required: ["ref"] },
-    execute: (a) => { const i = IX.byId.get(a.ref); if (i === undefined) throw new Error("référence inconnue"); const r = IX.recs[i]; seen.set(r.id, r); log("📄 " + r.id); return details(r); } },
+    execute: (a) => { const r = rec(a.ref); if (!r) throw new Error("référence inconnue"); seen.set(r.id, r); log("détail " + r.id); return details(r); } },
 ];
-let traceLines = [];
-function log(s) { traceLines.push(s); $("trace").textContent = "Recherches de l'assistant : " + traceLines.join("   "); }
+function log(s) { traceLines.push(s); }
 
 const MAX_LIBRES = 12;
 function used() { try { return +(sessionStorage.getItem("form-assistant-n") || 0); } catch (e) { return window.__n || 0; } }
 function use1() { const n = used() + 1; try { sessionStorage.setItem("form-assistant-n", n); } catch (e) { window.__n = n; } majQuota(); }
-function majQuota() { if (!sample) return; const r = Math.max(0, MAX_LIBRES - used()); $("quota").textContent = sample ? `Messages à l'assistant pour cette visite : ${r} sur ${MAX_LIBRES}.` : ""; if (!r) { $("go").disabled = true; $("fgo").disabled = true; $("go").dataset.off = "1"; $("quota").textContent = "Vous avez utilisé les " + MAX_LIBRES + " messages à l'assistant de cette visite. Les exemples et la recherche simple restent disponibles."; } }
-function addMsg(who, html) {
-  const d = document.createElement("div"); d.className = "msg " + who;
-  d.innerHTML = `<div class="who">${who === "u" ? "Vous" : "Assistant"}</div><div class="body">${html}</div>`;
-  $("thread").appendChild(d); return d.querySelector(".body");
-}
-function lastChoixOff() { document.querySelectorAll("#thread .choix button").forEach((b) => (b.disabled = true)); }
+function majQuota() { if (!sample) return; const r = Math.max(0, MAX_LIBRES - used()); $("quota").textContent = `Messages à l'assistant pour cette visite : ${r} sur ${MAX_LIBRES}.`; if (!r) { $("fgo").disabled = true; $("quota").textContent = "Vous avez utilisé les " + MAX_LIBRES + " messages à l'assistant de cette visite. La recherche simple et les exemples restent disponibles."; } }
 function citedOrder(text) { const ids = [...new Set((text.match(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g) || []).map((s) => s.slice(2, -2)))]; return ids.concat([...cited.keys()].filter((i) => !ids.includes(i))); }
-function showPrepared(e) {
-  if (!IX) { $("st").textContent = "Index en cours de chargement…"; return; }
-  if (ctrl) { try { ctrl.abort(); } catch (x) {} }
-  cited = new Map(); seen = new Map(); $("thread").innerHTML = "";
-  history = [{ role: "user", content: consigne(e.q) }, { role: "assistant", content: e.texte }];
-  $("ans").style.display = "block"; $("ff").style.display = sample && used() < MAX_LIBRES ? "block" : "none";
-  addMsg("u", esc(e.q));
-  addMsg("a", `<p class="prep">Réponse préparée à l'avance avec les mêmes outils de recherche ; aucun appel à l'IA.${sample ? " Vous pouvez poursuivre la conversation avec l'assistant." : ""}</p>` + renderText(e.texte));
-  $("trace").textContent = "Recherches effectuées : " + e.recherches.map((r) => "🔎 " + r).join("   ");
-  const recs = [...new Set([...cited.keys(), ...e.refs])].map((id) => IX.recs[IX.byId.get(id)]).filter(Boolean);
-  showCards(recs, `Sources citées (${recs.length})`);
-  $("st").textContent = "";
-  $("ans").scrollIntoView({ behavior: "smooth", block: "start" });
-}
 
 // Retire les données personnelles reconnues avant tout envoi à l'IA (règles inspirées de scripts/retirer_contacts.py de FORM 2026).
 const MASQUES = [
@@ -642,15 +876,21 @@ function consigne(q) {
 RÈGLES
 - Tu ne t'appuies QUE sur les résultats des outils « rechercher » et « details ». Tu n'inventes ni démarche, ni lien, ni condition, ni montant.
 - Lance 2 à 4 recherches avec des formulations différentes, dans le vocabulaire de l'administration, puis ouvre avec « details » les 1 à 3 résultats les plus pertinents.
-- Distingue la fiche service-public (pour comprendre ses droits et la procédure) de la démarche en ligne (pour déposer un dossier). Si une démarche en ligne correspond, dis-le en premier.
-- Une démarche en ligne locale ne vaut que pour son territoire. Si le département de la personne n'est pas connu et que les démarches trouvées sont locales, dis-le et demande-lui son département à la fin.
-- Quand tu as le détail, indique les pièces à préparer et ce qui sera prérempli (SIRET, RNA, IBAN, quotient familial…). Ne recopie pas de longue liste : 3 à 5 pièces au plus.
+- Distingue la fiche service-public (pour comprendre ses droits et la procédure) de la démarche en ligne (pour déposer un dossier).
+- COMMENCE TOUJOURS PAR CE QUI AIDE, dans cet ordre de préférence :
+  1. une démarche en ligne : « Vous pouvez faire votre demande en ligne auprès de [organisme]. », en la citant en premier (la page l'affiche comme « Votre démarche ») ;
+  2. sinon, la façon dont la démarche se fait : « Cette démarche se fait auprès de [guichet] », « sur rendez-vous », « par courrier », d'après la fiche officielle ;
+  3. sinon, une personne à qui s'adresser : « Le plus simple est d'en parler à un conseiller : une France services peut vous aider. », suivi d'une question de précision.
+- Ne commence jamais par « je ne trouve pas », « aucun résultat », « je n'ai pas » ni par une excuse.
+- Ce qui manque, seulement si c'est utile, en une phrase à la fin et en langage courant : « Cette démarche n'existe peut-être pas encore en ligne. Si vous en connaissez une, signalez-la : elle sera ajoutée. »
+- N'écris jamais ces mots dans ta réponse : corpus, index, base de données, enregistrement, téléservice, dématérialisé, usager.
+- Une démarche en ligne locale ne vaut que pour son territoire. Si le département de la personne n'est pas connu et que les démarches trouvées sont locales, dis-le.
+- La page affiche elle-même les pièces à préparer, les liens et les guichets : ne les recopie pas.
 - Ne te prononce jamais sur l'éligibilité ; dis « à vérifier dans la fiche » ou « auprès du service ».
-- Si rien ne correspond, dis-le franchement : « Je ne trouve pas de démarche en ligne pour cela dans ce corpus. » Propose alors la fiche service-public la plus proche, ou un accueil France services. Cela fait partie de la démonstration.
-- Cite chaque démarche ou fiche par sa référence entre doubles crochets, exactement comme renvoyée : [[DN-12345]] ou [[SP-F1234]].
+- Cite chaque démarche ou fiche par sa référence entre doubles crochets, exactement comme renvoyée : [[DN-12345]] ou [[SP-F1234]] ; la page les remplace par leur titre. N'écris jamais une référence hors des doubles crochets.
 - C'est une conversation : la personne peut préciser sa situation au fil des échanges. Tiens compte de tout ce qu'elle a déjà dit, et relance des recherches quand une précision change la réponse.
-- Quand une information manquante changerait vraiment la réponse (département, statut : particulier, entreprise, association ou collectivité, nature exacte du projet), donne d'abord ce que tu as trouvé, puis termine par UNE seule question courte. Mets alors sur la toute dernière ligne 2 à 4 réponses possibles, au format exact : « Choix : réponse 1 | réponse 2 | réponse 3 ». Pas de question si la réponse est déjà claire.
-- Réponds en français simple, à la deuxième personne du pluriel, en 170 mots au plus. Mise en forme : phrases courtes, éventuellement une liste avec des tirets. Pas de titres.
+- Quand une information manquante changerait vraiment la réponse (département, statut : particulier, entreprise, association ou collectivité, nature exacte du projet, montant), termine par UNE seule question courte. Mets alors sur la toute dernière ligne 2 à 4 réponses possibles, au format exact : « Choix : réponse 1 | réponse 2 | réponse 3 ». Pas de question si la réponse est déjà claire.
+- Réponds en français simple, en vouvoyant, en phrases courtes, en TROIS PHRASES AU PLUS, sans liste ni titre : l'action d'abord.
 
 CONTEXTE DONNÉ PAR LA PERSONNE
 - Public : ${pub || "non précisé"}
@@ -660,106 +900,71 @@ QUESTION
 ${q}`;
 }
 
+// Texte de l'assistant : références en liens, « Choix : » en pastilles (rendues à part).
 function renderText(t) {
   let h = esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-  h = h.replace(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g, (m, id) => { const k = id.startsWith("DN") ? "dn" : "sp"; cited.set(id, true); return `<a class="ref ${k}" href="#c-${id}" data-ref="${id}">${id}</a>`; });
-  const out = []; let inList = false;
-  let choix = "";
+  h = h.replace(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g, (m, id) => { cited.set(id, true); const r = rec(id); return r ? `<a href="${esc(r.k === "dn" ? dnUrl(r) : r.u)}" target="_blank" rel="noopener">${esc(r.t)}</a>` : ""; });
+  const out = []; let inList = false, choix = [], question = "";
   for (const line of h.split(/\n+/)) {
     const l = line.trim(); if (!l) continue;
     const mc = l.match(/^Choix\s*:\s*(.+)$/i);
-    if (mc) { const opts = mc[1].split("|").map((s) => s.trim()).filter(Boolean).slice(0, 4); choix = `<div class="choix">${opts.map((o) => `<button type="button" data-v="${o}">${o}</button>`).join("")}</div>`; continue; }
+    if (mc) { choix = mc[1].split("|").map((s) => s.trim()).filter(Boolean).slice(0, 4); continue; }
     if (/^[-•*]\s+/.test(l)) { if (!inList) { out.push("<ul>"); inList = true; } out.push("<li>" + l.replace(/^[-•*]\s+/, "") + "</li>"); }
     else { if (inList) { out.push("</ul>"); inList = false; } out.push("<p>" + l + "</p>"); }
   }
   if (inList) out.push("</ul>");
-  return out.join("") + choix;
+  return { html: out.join(""), choix };
 }
-
-function card(r) {
-  const id = "c-" + r.id;
-  if (r.k === "dn") {
-    const loc = r.dep ? r.dep + " " + (DEPNAME[r.dep] || "") : "national ou non localisé";
-    const facts = [`${fmt(r.n)} dossiers déposés`, `${r.ch} champs`, `${r.pj.length >= 8 ? "8+" : r.pj.length} pièces justificatives`].map((f) => `<span class="fact">${esc(f)}</span>`).join("")
-      + r.pre.map((p) => `<span class="fact pre">prérempli&nbsp;: ${esc(p)}</span>`).join("");
-    const pj = r.pj.length ? `<details><summary>Pièces demandées</summary><ul>${r.pj.map((p) => `<li>${esc(p)}</li>`).join("")}</ul></details>` : "";
-    const fd = r.fd.map((f) => `<a href="https://www.service-public.gouv.fr/particuliers/vosdroits/${esc(f)}">Fiche service-public ${esc(f)}</a>`).join("");
-    return `<article class="card" id="${id}"><div class="top"><span class="badge dn">Démarche en ligne</span><span class="meta">${esc(r.id)} · ${esc(PUBLAB[r.cat] || r.cat)} · ${esc(loc)}${r.fe ? " · ferme le " + esc(r.fe) : ""}</span></div>
-      <h3>${esc(r.t)}</h3><div class="meta">${esc(r.o)}</div>${r.d ? `<p class="d">${esc(r.d)}</p>` : ""}<div class="facts">${facts}</div>${pj}
-      <div class="links"><a href="${esc(dnUrl(r))}">Ouvrir la démarche ↗</a>${fd}</div></article>`;
-  }
-  const docs = r.docs.length ? `<details><summary>Documents à fournir</summary><ul>${r.docs.map((p) => `<li>${esc(p)}</li>`).join("")}</ul></details>` : "";
-  const lien = r.l ? `<a href="${esc(r.l)}">${/Téléservice/.test(r.ty) ? "Accéder au téléservice" : r.cerfa ? "Formulaire cerfa " + esc(r.cerfa) : "Accéder à la ressource"} ↗</a>` : "";
-  const dn = r.dn.map((s) => `<a href="https://demarche.numerique.gouv.fr/commencer/${esc(s)}">Démarche en ligne liée ↗</a>`).join("");
-  return `<article class="card" id="${id}"><div class="top"><span class="badge sp">Service-public</span><span class="meta">${esc(r.id)} · ${esc(r.ty)} · ${esc((r.aud || "").replace(/;/g, ", "))}</span></div>
-    <h3>${esc(r.t)}</h3>${r.th ? `<div class="meta">${esc(r.th)}</div>` : ""}${r.d ? `<p class="d">${esc(r.d)}</p>` : ""}${docs}
-    <div class="links"><a href="${esc(r.u)}">Lire la fiche ↗</a>${lien}${dn}</div></article>`;
+function afficherChoix(choix) {
+  $("rep-choix").innerHTML = choix.length ? `<div class="boutons">${choix.map((o) => `<button type="button" data-v="${o}">${o}</button>`).join("")}</div>` : "";
 }
-function showCards(list, title) {
-  $("res").hidden = !list.length && !title;
-  $("resTitle").textContent = title;
-  $("cards").innerHTML = list.length ? list.map(card).join("") : `<p class="empty">Aucun résultat dans ce corpus.</p>`;
-}
-
-$("cards").addEventListener("click", () => {});
-document.addEventListener("click", (ev) => {
-  const a = ev.target.closest("a.ref"); if (!a) return; ev.preventDefault();
-  const el = document.getElementById("c-" + a.dataset.ref); if (!el) return;
-  el.scrollIntoView({ behavior: "smooth", block: "start" }); el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 1500);
-});
-
-$("simple").addEventListener("click", () => {
-  const q = $("q").value.trim(); if (!q || !IX) return;
-  $("ans").style.display = "none";
-  const res = Moteur.search(IX, q, { pub: $("pub").value, dep: $("dep").value, k: 12 });
-  showCards(res.map((x) => x.r), `Recherche simple : ${res.length} résultats les plus proches des mots employés`);
-  $("st").textContent = "La recherche simple ne comprend que les mots : l'assistant, lui, reformule la situation.";
-});
 
 async function ask(text, first) {
   if (busy || !sample || !IX) return;
   if (used() >= MAX_LIBRES) { majQuota(); return; }
   use1();
-  busy = true; $("go").disabled = true; $("fgo").disabled = true;
-  if (first) { history = []; cited = new Map(); seen = new Map(); traceLines = []; $("trace").textContent = ""; $("thread").innerHTML = ""; }
+  busy = true; $("chercher").disabled = true; $("fgo").disabled = true;
+  if (first) { history = []; cited = new Map(); seen = new Map(); traceLines = []; }
   const m = masquer(text); text = m.texte;
   history.push({ role: "user", content: first ? consigne(text) : text + `\n(Contexte des sélecteurs : public ${$("pub").value || "non précisé"}, département ${$("dep").value ? $("dep").value + " " + DEPNAME[$("dep").value] : "non précisé"}. Mêmes règles qu'au premier message.)` });
-  lastChoixOff();
-  $("ans").style.display = "block"; addMsg("u", esc(text) + (m.n ? `<div class="retire">${m.n} donnée${m.n > 1 ? "s" : ""} personnelle${m.n > 1 ? "s" : ""} retirée${m.n > 1 ? "s" : ""} avant l'envoi.</div>` : ""));
-  const bubble = addMsg("a", `<p class="empty">L'assistant cherche…</p>`); $("ff").style.display = "none";
-  bubble.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  $("st").textContent = "";
+  const retire = m.n ? `<div class="retire">${m.n} donnée${m.n > 1 ? "s" : ""} personnelle${m.n > 1 ? "s" : ""} retirée${m.n > 1 ? "s" : ""} avant l'envoi.</div>` : "";
+  if (first) { poserQuestion(text, retire); vueReponse(); } else $("fil").insertAdjacentHTML("beforeend", `<div class="bulle">${esc(text)}${retire}</div>`);
+  $("rep-texte").innerHTML = `<p class="vide">L'assistant cherche…</p>`; afficherChoix([]);
   ctrl = new AbortController();
   try {
     const out = await sample(history, { tools: TOOLS, modelTier: "default", cache: false, signal: ctrl.signal,
-      onText: ({ text }) => { if (text && text !== "Thinking...") bubble.innerHTML = renderText(text); } });
+      onText: ({ text }) => { if (text && text !== "Thinking...") $("rep-texte").innerHTML = `<div class="texte-ia">${renderText(text).html}</div>`; } });
     history.push({ role: "assistant", content: out.text });
-    bubble.innerHTML = renderText(out.text);
-    const citedRecs = citedOrder(out.text).map((id) => IX.recs[IX.byId.get(id)]).filter(Boolean);
-    const others = [...seen.values()].filter((r) => !cited.has(r.id)).slice(0, 6);
-    showCards(citedRecs.concat(others), citedRecs.length ? `Sources citées (${citedRecs.length})` + (others.length ? ` et autres résultats examinés (${others.length})` : "") : "Résultats examinés par l'assistant");
-    $("ff").style.display = used() < MAX_LIBRES ? "block" : "none"; $("fq").focus({ preventScroll: true });
+    const r = renderText(out.text);
+    const citedRecs = citedOrder(out.text).map(rec).filter(Boolean);
+    const others = [...seen.values()].filter((x) => !cited.has(x.id)).slice(0, 6);
+    afficherResultats(citedRecs.concat(others), text, "citee");
+    $("rep-texte").innerHTML = `<div class="texte-ia">${r.html}</div>`; afficherChoix(r.choix);
   } catch (e) {
     history.pop();
     const msg = e && e.code === "not_granted" ? "L'assistant n'est pas autorisé sur cette page. La recherche simple reste disponible."
       : e && e.code === "rate_limited" ? "Trop de demandes en peu de temps : réessayez dans un moment."
       : "L'assistant n'a pas pu répondre (" + esc((e && (e.message || e.code)) || "erreur") + ").";
-    bubble.innerHTML = `<p class="empty">${msg}</p>`; $("ff").style.display = "block";
-    if (e && e.code === "not_granted") { $("go").dataset.off = "1"; }
+    $("rep-texte").innerHTML = `<p class="vide">${msg}</p>`;
   } finally {
-    busy = false; if (!$("go").dataset.off) $("go").disabled = false; $("fgo").disabled = false;
+    busy = false; $("chercher").disabled = false; if (used() < MAX_LIBRES) $("fgo").disabled = false;
   }
 }
-$("f").addEventListener("submit", (ev) => { ev.preventDefault(); const q = $("q").value.trim(); if (q) ask(q, true); });
-$("ff").addEventListener("submit", (ev) => { ev.preventDefault(); const q = $("fq").value.trim(); if (!q) return; $("fq").value = ""; ask(q, false); });
-$("thread").addEventListener("click", (ev) => { const b = ev.target.closest(".choix button"); if (!b || b.disabled || busy) return; if (!sample) return; ask(b.dataset.v, false); });
-$("reset").addEventListener("click", () => { history = []; $("thread").innerHTML = ""; $("trace").textContent = ""; $("ans").style.display = "none"; $("res").hidden = true; $("q").value = ""; $("q").focus(); });
+$("ff").addEventListener("submit", (ev) => { ev.preventDefault(); const q = $("fq").value.trim(); if (!q) return; $("fq").value = ""; if (sample) ask(q, false); else { $("q").value = q; rechercheSimple(); } });
+// Version avec assistant : les conditions d'utilisation s'affichent avant l'ouverture.
+$("ia-go").href = window.FORM_ASSISTANT_URL;
+document.addEventListener("click", (ev) => { if (!ev.target.closest("#ia")) return; ev.preventDefault(); const d = $("dlg-ia"); if (d.showModal) d.showModal(); else window.open(window.FORM_ASSISTANT_URL, "_blank", "noopener"); });
+$("ia-annuler").addEventListener("click", () => $("dlg-ia").close());
+$("ia-go").addEventListener("click", () => $("dlg-ia").close());
 </script>
 <script>/*ou_aller:début*/
 // « Où aller » : code postal → commune (API Géo), service local compétent (Annuaire de l'administration, DILA),
-// France services la plus proche (liste ANCT). Propre à la page FORM : assembler_page.py le recopie dans la page,
-// après le script du gabarit, dont il emploie $, esc, IX et showCards.
-// Seuls le code postal (API Géo) et le code de la commune (Annuaire) quittent le navigateur.
+// France services la plus proche (liste ANCT), réunis dans la carte « Où aller » de la réponse. assembler_page.py le
+// recopie dans la page FORM et dans la version avec assistant, après le script du gabarit, dont il emploie $, esc, IX,
+// DATA, ajouterLien, rechercheSimple et afficherResultats.
+// Seuls le code postal (API Géo) et le code de la commune (Annuaire) quittent le navigateur. Dans la version avec
+// assistant sur claude.ai (window.FORM_SANS_API), aucune API extérieure n'est appelée : la commune vient de la question
+// (communes.json), le code postal est masqué, et « Où aller » renvoie vers la recherche de l'Annuaire pour la commune.
 (function () {
   const GEO = "https://geo.api.gouv.fr/communes";
   const AN = "https://api-lannuaire.service-public.gouv.fr/api/explore/v2.1/catalog/datasets/";
@@ -767,16 +972,16 @@ $("reset").addEventListener("click", () => { history = []; $("thread").innerHTML
   const SEMAINE = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
   const PLM = new Set(["75056", "69123", "13055"]); // Paris, Lyon, Marseille : l'arrondissement est retenu
   let COMMUNE = null, TABLE = null, FS = null, LISTE = [];
-  // Origine de la liste affichée : « simple » (recherche simple, classement brut du moteur) ou « citee » (réponse préparée
-  // ou conversation : démarches déjà retenues par l'assistant). Repérée en phase de capture, avant les gestionnaires du
-  // gabarit qui affichent les résultats.
-  let ORIGINE = "simple";
-  document.addEventListener("click", (ev) => {
-    if (ev.target.closest("#simple")) ORIGINE = "simple";
-    else if (ev.target.closest("#ex .chip, #thread .choix button")) ORIGINE = "citee";
-  }, true);
-  document.addEventListener("submit", (ev) => { if (ev.target.closest("#f, #ff")) ORIGINE = "citee"; }, true);
+  // Origine de la liste affichée, donnée par le gabarit : « simple » (recherche simple, classement brut du moteur) ou
+  // « citee » (réponse préparée ou conversation : démarches déjà retenues par l'assistant).
+  const origine = () => window.ORIGINE_RESULTATS || "simple";
+  // Une précision de lieu relance la recherche simple ; une réponse citée garde sa liste et se redécore.
+  const relancer = () => { if (origine() === "simple") rechercheSimple(); else decorer(); };
+  const reponseAffichee = () => !$("vue-reponse").hidden;
   const cache = new Map();
+  const SANS_API = !!window.FORM_SANS_API;
+  // Centre de chaque commune (communes.json) : la France services la plus proche se calcule sans appel à une API.
+  const CENTRES = new Map();
 
   const norm = (s) => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’`]/g, "'").replace(/\s+/g, " ");
   const motEntier = (txt, idx) => new RegExp("(^|[^a-z0-9])" + norm(idx).replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "($|[^a-z0-9])").test(txt);
@@ -786,19 +991,27 @@ $("reset").addEventListener("click", () => { history = []; $("thread").innerHTML
   const lit = (v) => { if (typeof v !== "string") return v || []; try { return JSON.parse(v); } catch (e) { return v; } };
   const carte = (lat, lon) => `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=17/${lat}/${lon}`;
 
-  fetch("donnees/assistant/types_guichets.json").then((r) => r.json()).then((t) => { TABLE = t; decorer(); }).catch(() => {});
+  fetch(DATA + "types_guichets.json").then((r) => r.json()).then((t) => { TABLE = t; decorer(); }).catch(() => {});
   // Communes, pour que le moteur reconnaisse un lieu dans la question (Moteur.lieux) et que la page le propose.
-  fetch("donnees/assistant/communes.json").then((r) => r.json()).then((d) => { Moteur.chargerCommunes(d); decorer(); }).catch(() => {});
+  fetch(DATA + "communes.json").then((r) => r.json()).then((d) => {
+    Moteur.chargerCommunes(d);
+    const C = Object.fromEntries(d.champs.map((k, i) => [k, i]));
+    if (C.lat !== undefined) for (const c of d.communes) if (c[C.lat] !== null) CENTRES.set(c[C.code], [c[C.lat], c[C.lon]]);
+    decorer();
+  }).catch(() => {});
 
   // ---------- 1. Code postal → commune
   const cp = $("cp"), choix = $("commune"), etat = $("cp-etat");
+  if (SANS_API) { cp.closest("label").hidden = true; choix.hidden = true; document.querySelectorAll(".perso-cp").forEach((e) => (e.hidden = true)); }
   // Le bloc « Préciser le public ou le lieu » s'ouvre tout seul quand un lieu est proposé ou qu'un filtre est actif.
   function ouvrirFiltres() { const f = $("filtres"); if (f) f.open = true; }
   ["pub", "dep"].forEach((id) => $(id).addEventListener("change", () => { if ($(id).value) ouvrirFiltres(); }));
   // Un département ou un code postal choisi remplace une région choisie.
   $("dep").addEventListener("change", () => { if ($("dep").value) Moteur.region = null; });
-  function poser(c) {
-    COMMUNE = c; if (c) { Moteur.region = null; ouvrirFiltres(); }
+  // Lieu retenu pour « Où aller » : la commune posée ; « Comment j'ai cherché » le cite.
+  function poser(c, sansFiltre) {
+    COMMUNE = c; window.LIEU_CONNU = c ? `${c.nom} (${c.dep})` : ""; if (c && !sansFiltre) { Moteur.region = null; ouvrirFiltres(); }
+    if (c && sansFiltre) { decorer(); return; }
     if (c) { $("dep").value = c.dep; etat.textContent = `${c.nom} (${c.dep})`; } else etat.textContent = "";
     decorer();
   }
@@ -874,6 +1087,7 @@ $("reset").addEventListener("click", () => { history = []; $("thread").innerHTML
     const mails = (s.adresse_courriel || "").split(/[;,\s]+/).filter((m) => m.includes("@"));
     const liens = [a.latitude && a.longitude ? `<a href="${carte(a.latitude, a.longitude)}" target="_blank" rel="noopener">Voir sur la carte ↗</a>` : "",
       s.url_service_public ? `<a href="${esc(s.url_service_public)}" target="_blank" rel="noopener">Fiche officielle du service ↗</a>` : ""].filter(Boolean).join("");
+    if (s.url_service_public) ajouterLien(s.nom, s.url_service_public, "Annuaire de l'administration (DILA)");
     return `<div class="ou-s"><strong>${esc(s.nom)}</strong>${adr ? `<div>${esc(adr)}</div>` : ""}${blocHoraires(horairesAnnuaire(s.plage_ouverture))}${contacts(tels, mails, "Annuaire de l'administration (DILA)", s.url_service_public)}<div class="links">${liens}</div></div>`;
   }
   // Portée d'une démarche en ligne (champ « po » de l'index) ; un index plus ancien, sans ce champ, confond nationale et inconnue.
@@ -881,33 +1095,38 @@ $("reset").addEventListener("click", () => { history = []; $("thread").innerHTML
   // Une démarche en ligne n'a de guichet local que si elle relève du département de l'usager : une démarche nationale
   // ou d'un autre département n'est pas reçue par le service de sa commune.
   const duDepartement = (r, c) => r.k === "dn" && !!r.dep && r.dep === c.dep;
-  async function encadre(el, r, c, deja) {
+  // Sans API : lien vers la recherche officielle de l'Annuaire pour la commune (résultats classés par distance).
+  function lienAnnuaire(c, quoi) {
+    const u = `https://lannuaire.service-public.gouv.fr/recherche?whoWhat=${encodeURIComponent(quoi || "")}&where=${encodeURIComponent(c.nom + " (" + c.dep + ")")}`;
+    ajouterLien(`Annuaire de l'administration : ${quoi ? quoi + ", " : ""}${c.nom}`, u, "Annuaire de l'administration (DILA)");
+    return `<p><a href="${esc(u)}" target="_blank" rel="noopener">Trouver le guichet compétent sur l'Annuaire de l'administration</a>${quoi ? ` <span class="meta">(${esc(quoi)}, ${esc(c.nom)})</span>` : ""}</p>`;
+  }
+
+  // ---------- 2 bis. Service local : la première des cartes en tête de réponse (votre démarche, aussi pour vous,
+  // comprendre ; window.CARTES_TETE, donné par le gabarit) qui a un guichet dans la table. Une démarche en ligne n'en a que si elle relève du département de l'usager.
+  async function serviceLocal(el, c) {
+    el.innerHTML = "";
+    if (!c || !TABLE) return;
+    const r = (window.CARTES_TETE || LISTE.slice(0, 3)).find((x) => x && portee(x) !== "inc" && regle(x) && (x.k !== "dn" || duDepartement(x, c)));
+    if (!r) return;
     const g = regle(r);
-    el.querySelectorAll(".ou").forEach((x) => x.remove());
-    if (!g || !c) return;
-    if (r.k === "dn" && !duDepartement(r, c)) return;
-    // Même service déjà affiché plus haut : replié, pour ne pas répéter l'encadré sous chaque résultat.
-    const cle = g.identite ? "identite" : g.libelle, replie = deja.has(cle); deja.add(cle);
-    const box = document.createElement("div"); box.className = "ou"; el.appendChild(box);
     if (g.identite) {
-      const texte = "Toutes les mairies ne prennent pas les demandes de carte d'identité et de passeport : la fiche explique comment trouver une mairie équipée près de chez vous.";
-      box.innerHTML = replie ? `<details><summary><b>Où déposer la demande</b> (comme plus haut)</summary><p>${texte}</p></details>` : `<div class="ou-t">Où déposer la demande</div><p>${texte}</p>`;
-      return;
+      el.innerHTML = `<div class="ou-t">Où déposer la demande</div><p>Toutes les mairies ne prennent pas les demandes de carte d'identité et de passeport : la fiche explique comment trouver une mairie équipée près de chez vous.</p>`;
+      majOu(); return;
     }
-    // Le type de la table ne sert qu'à choisir le guichet : l'encadré affiche le nom que renvoie l'Annuaire.
-    box.innerHTML = `<div class="ou-t">Où aller pour ${esc(c.nom)}</div><p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`;
+    if (SANS_API) { el.innerHTML = lienAnnuaire(c, g.libelle); majOu(); return; }
+    // Le type de la table ne sert qu'à choisir le guichet : la carte affiche le nom que renvoie l'Annuaire.
+    el.innerHTML = `<p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`; majOu();
     let l;
-    try { l = await services(c.code, g.types); } catch (e) { box.querySelector(".ou-src").textContent = "L'Annuaire de l'administration ne répond pas pour l'instant."; return; }
+    try { l = await services(c.code, g.types); } catch (e) { el.innerHTML = `<p class="ou-src">L'Annuaire de l'administration ne répond pas pour l'instant.</p>`; return; }
     if (COMMUNE !== c) return;
-    if (!l.length) { box.remove(); return; }
-    const corps = `${l.map(htmlService).join("")}<p class="ou-src">Service compétent pour votre commune selon l'Annuaire, interrogé avec le seul code de la commune.</p>`;
-    box.innerHTML = replie ? `<details><summary><b>Où aller&nbsp;: ${esc(l.map((s) => s.nom).join(", "))}</b> (comme plus haut)</summary>${corps}</details>`
-      : `<div class="ou-t">Où aller pour ${esc(c.nom)}</div>${corps}`;
+    el.innerHTML = l.length ? `${l.map(htmlService).join("")}<p class="ou-src">Service compétent pour votre commune selon l'Annuaire, interrogé avec le seul code de la commune.</p>` : "";
+    majOu();
   }
 
   // ---------- 3. France services la plus proche
   // Une fois la liste chargée, le cadre « Ce que la démo couvre » du gabarit affiche le nombre de structures.
-  const chargerFS = () => memo("fs", () => json("donnees/assistant/france_services.json").then((d) => {
+  const chargerFS = () => memo("fs", () => json(DATA + "france_services.json").then((d) => {
     window.NFS = d.structures.length; if (typeof window.majCadre === "function") window.majCadre(window.NFS); return d; }));
   function km(a, b, c, d) {
     const R = 6371, r = Math.PI / 180, x = Math.sin((c - a) * r / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin((d - b) * r / 2) ** 2;
@@ -917,6 +1136,7 @@ $("reset").addEventListener("click", () => { history = []; $("thread").innerHTML
     const v = (k) => f[C[k]];
     const sem = Object.fromEntries(FS.jours.map((j, i) => [j, (v("horaires")[i] || "").replace(/ - /g, "–").replace(/ \/ /g, ", ")]));
     const nature = /itin|bus/i.test(v("format")) ? " · structure itinérante" : "";
+    if (v("fiche")) ajouterLien(v("nom"), v("fiche"), "France services (ANCT)");
     const adr = [v("adresse"), v("complement"), v("code_postal") + " " + v("commune")].filter(Boolean).join(", ");
     return `<div class="ou-s"><strong>${esc(v("nom"))}</strong> <span class="meta">à ${d.toLocaleString("fr-FR", { maximumFractionDigits: 1 })} km${nature}</span><div>${esc(adr)}</div>${blocHoraires(sem)}`
       + (v("rdv") === "Oui" ? `<div class="meta">Prise de rendez-vous possible.</div>` : "")
@@ -924,27 +1144,25 @@ $("reset").addEventListener("click", () => { history = []; $("thread").innerHTML
       + `<div class="links"><a href="${carte(v("lat"), v("lon"))}" target="_blank" rel="noopener">Voir sur la carte ↗</a>`
       + (v("fiche") ? `<a href="${esc(v("fiche"))}" target="_blank" rel="noopener">Fiche officielle ↗</a>` : "") + `</div></div>`;
   }
-  async function franceServices(liste) {
-    let el = $("fs-aide");
-    if (!el) { el = document.createElement("div"); el.id = "fs-aide"; $("cards").after(el); }
+  async function franceServices(el) {
     // Public : encadré ou ligne pour un particulier ou un public non précisé ; ligne seulement pour une entreprise ;
     // rien pour une collectivité ou une association.
     const pub = $("pub").value;
-    if (pub === "collectivite" || pub === "association") { el.className = ""; el.innerHTML = ""; return; }
+    el.className = ""; el.innerHTML = "";
+    if (pub === "collectivite" || pub === "association") return;
     // « Aucune démarche en ligne pertinente » : parmi les 5 premiers résultats, aucune démarche nationale (po « nat ») ni du
     // département de l'usager (sans département connu : d'aucun département) qui soit pertinente pour la question, au sens
     // de Moteur.pertinence (moitié du meilleur score, deux termes de la question repris). Une démarche de département
     // inconnu ne compte pas. Le seuil sert à cette règle seulement : il ne change ni le classement ni l'affichage.
     const dep = COMMUNE ? COMMUNE.dep : $("dep").value;
     // Le seuil de pertinence ne vaut que pour la recherche simple : une démarche citée par l'assistant est déjà retenue.
-    const P = ORIGINE === "simple" ? Moteur.pertinence(IX, $("q").value, { pub, dep }) : { pertinente: () => true };
-    const enLigne = pub === "entreprise" || liste.slice(0, 5).some((r) => r && r.k === "dn" && (portee(r) === "nat" || (portee(r) === "dep" && (!dep || r.dep === dep))) && P.pertinente(r.id));
-    el.className = enLigne ? "fs-pied" : "ou fs-fort"; el.innerHTML = "";
-    if (!$("res") || $("res").hidden) return;
+    const P = origine() === "simple" ? Moteur.pertinence(IX, $("q").value, { pub, dep }) : { pertinente: () => true };
+    const enLigne = pub === "entreprise" || LISTE.slice(0, 5).some((r) => r && r.k === "dn" && (portee(r) === "nat" || (portee(r) === "dep" && (!dep || r.dep === dep))) && P.pertinente(r.id));
+    el.className = enLigne ? "fs-pied" : "fs-fort";
     const c = COMMUNE;
     if (!c) {
-      if (!enLigne) el.innerHTML = `<div class="ou-t">Une France services peut vous aider à faire cette démarche</div><p>Indiquez votre code postal pour trouver la plus proche, ou consultez la <a href="https://www.france-services.gouv.fr/" target="_blank" rel="noopener">carte des France services ↗</a>.</p>`;
-      return;
+      if (!enLigne) el.innerHTML = `<div class="ou-t">Une France services peut vous aider à faire cette démarche</div><p>Indiquez votre code postal pour trouver la plus proche, ou consultez la <a href="https://www.france-services.gouv.fr/" target="_blank" rel="noopener">carte des France services</a>.</p>`;
+      majOu(); return;
     }
     try { FS = await chargerFS(); } catch (e) { return; }
     if (COMMUNE !== c) return;
@@ -952,56 +1170,82 @@ $("reset").addEventListener("click", () => { history = []; $("thread").innerHTML
     const proches = FS.structures.map((f) => [km(c.lat, c.lon, f[C.lat], f[C.lon]), f]).sort((a, b) => a[0] - b[0]).slice(0, 3);
     if (!proches.length) return;
     const src = `<p class="ou-src">Source&nbsp;: liste des structures labellisées France services (ANCT, data.gouv.fr${FS.date ? ", " + esc(FS.date.split("-").reverse().join("/")) : ""}). Distance à vol d'oiseau depuis le centre de ${esc(c.nom)}.</p>`;
-    const suivantes = proches.slice(1).map(([d, f]) => htmlFS(f, C, d)).join("");
+    const [d, f] = proches[0], premiere = htmlFS(f, C, d);
+    const suivantes = proches.slice(1).map(([d2, f2]) => htmlFS(f2, C, d2)).join("");
     if (enLigne) {
-      const [d, f] = proches[0];
-      el.innerHTML = `<details><summary><b>Besoin d'aide pour faire la démarche&nbsp;?</b> La France services la plus proche&nbsp;: ${esc(f[C.nom])}, à ${d.toLocaleString("fr-FR", { maximumFractionDigits: 1 })} km.</summary>${htmlFS(f, C, d)}${suivantes}${src}</details>`;
+      el.innerHTML = `<details><summary><b>Besoin d'aide pour faire la démarche&nbsp;?</b> La France services la plus proche&nbsp;: ${esc(f[C.nom])}, à ${d.toLocaleString("fr-FR", { maximumFractionDigits: 1 })} km.</summary>${premiere}${suivantes}${src}</details>`;
     } else {
-      el.innerHTML = `<div class="ou-t">Une France services peut vous aider à faire cette démarche</div>${htmlFS(proches[0][1], C, proches[0][0])}<details><summary>Les deux suivantes</summary>${suivantes}</details>${src}`;
+      el.innerHTML = `<div class="ou-t">Une France services peut vous aider à faire cette démarche</div>${premiere}<details><summary>Les deux suivantes</summary>${suivantes}</details>${src}`;
     }
+    majOu();
   }
 
-  // ---------- Branchement sur l'affichage des résultats
-  // Démarche locale de département inconnu : pas d'encadré, une mention ; la carte du gabarit dit « national ou non
-  // localisé » pour les deux cas, la page précise lequel.
-  function portee_carte(el, r) {
-    if (r.k !== "dn" || r.dep) return;
-    const meta = el.querySelector(".top .meta");
-    if (meta) meta.textContent = meta.textContent.replace("national ou non localisé", portee(r) === "inc" ? "département inconnu" : "national");
-    if (portee(r) === "inc" && !el.querySelector(".ou-inc")) {
-      const p = document.createElement("p"); p.className = "ou-inc"; p.textContent = "Démarche locale : vérifiez qu'elle concerne votre commune."; el.appendChild(p);
-    }
-  }
-  // ---------- Lieu reconnu dans la question : proposé, jamais imposé. Un code postal saisi prime.
-  function pastille() {
-    let el = $("lieu-pastille");
-    if (!el) { el = document.createElement("div"); el.id = "lieu-pastille"; el.className = "pastilles"; $("cards").before(el); }
+  // ---------- CCAS : une fois par réponse, si (1) le public est particulier ou non précisé, (2) la question ou le premier
+  // résultat relève des impayés, de l'énergie, de l'eau, d'une aide financière ou sociale, d'un secours ou de la précarité
+  // (« logement » ou « facture » seuls ne suffisent pas), (3) une commune est connue.
+  const THEMES_CCAS = /(^| )(impaye|impayes|energi|energie|electr|electricite|gaz|chauffage|fioul|eau|aide financiere|aides financieres|aide sociale|aides sociales|action sociale|secours|precarite|precaire)( |$)/;
+  async function ccas(el) {
     el.innerHTML = "";
-    if (COMMUNE || !$("res") || $("res").hidden || !Moteur.lieux) return;
+    const c = COMMUNE, pub = $("pub").value, q = $("q").value;
+    if (!c || (pub && pub !== "particulier")) return;
+    const termes = Moteur.analyse ? [...Moteur.analyse(q).termes.values()].flatMap((g) => [...g]).join(" ") : "";
+    const N = Moteur.norm, premier = LISTE[0] ? N(LISTE[0].t + " " + (LISTE[0].th || "")) : "";
+    if (![N(q) + " " + termes, premier].some((s) => THEMES_CCAS.test(s))) return;
+    if (SANS_API) { el.innerHTML = `<div class="ou-t">Aide sociale de votre commune</div>` + lienAnnuaire(c, "CCAS"); majOu(); return; }
+    let l; try { l = await services(c.code, ["ccas"]); } catch (e) { return; }
+    if (COMMUNE !== c || !l.length) return;
+    el.innerHTML = `<div class="ou-t">Aide sociale de votre commune</div>${l.map(htmlService).join("")}<p class="ou-src">Centre communal d'action sociale compétent pour votre commune selon l'Annuaire, interrogé avec le seul code de la commune.</p>`;
+    majOu();
+  }
+
+  // ---------- Carte « Où aller » : service local, CCAS, France services ; masquée si aucune des trois n'a de contenu.
+  function carteOu() {
+    const el = $("carte-ou");
+    if (!$("ou-service")) el.innerHTML = `<h2 id="h-ou">Où aller</h2><p class="org" id="ou-pour"></p><div id="ou-service"></div><div id="ccas-ou"></div><div id="fs-aide"></div>`;
+    $("ou-pour").textContent = COMMUNE ? `Pour ${COMMUNE.nom} (${COMMUNE.dep})` : "";
+    return el;
+  }
+  function majOu() { const el = $("carte-ou"); el.hidden = !["ou-service", "ccas-ou", "fs-aide"].some((id) => $(id) && $(id).innerHTML.trim()); }
+
+  // ---------- Pastille de lieu, sous la question. Un lieu reconnu dans la phrase est proposé, jamais imposé comme filtre ;
+  // s'il désigne une seule commune, il sert à « Où aller ». Un code postal saisi prime.
+  function pastille() {
+    const el = $("rep-pastille"); el.className = "pastilles"; el.innerHTML = "";
+    if (!reponseAffichee() || !Moteur.lieux) return;
+    const changer = ` · <button type="button" class="lien-changer" id="lieu-changer">changer</button>`;
+    const brancherChanger = () => { const ch = $("lieu-changer"); if (ch) ch.addEventListener("click", () => { ouvrirFiltres(); vueAccueilFiltres(); }); };
+    if (COMMUNE && !COMMUNE.devine) {
+      el.innerHTML = `<span class="meta">Résultats adaptés à</span> <span class="pastille pastille-fixe">${esc(COMMUNE.nom)} (${esc(COMMUNE.dep)})</span>${changer}`;
+      brancherChanger(); return;
+    }
     const A = Moteur.lieux($("q").value), L = A.lieux[0];
     // Région choisie (clic sur « Bretagne ? ») : la pastille dit que les résultats sont limités, et permet de retirer le filtre.
     if (Moteur.region) {
       el.innerHTML = `<span class="meta">Résultats limités à la région</span> <span class="pastille pastille-fixe">${esc(Moteur.region.nom)}</span> · <button type="button" class="lien-changer" id="region-retirer">retirer</button>`;
-      $("region-retirer").addEventListener("click", () => { Moteur.region = null; if (ORIGINE === "simple") $("simple").click(); else decorer(); });
-      ouvrirFiltres(); return;
+      $("region-retirer").addEventListener("click", () => { Moteur.region = null; relancer(); });
+      return;
     }
     // Région reconnue dans la phrase, sans commune ni département : pastille « Bretagne ? » ; un clic filtre sur ses départements.
     if (!L && A.regions && A.regions[0] && !$("dep").value) {
       const Rg = A.regions[0];
       el.innerHTML = `<span class="meta">Région repérée dans votre question&nbsp;:</span> <button type="button" class="pastille" id="region-choisir">${esc(Rg.nom)}&nbsp;?</button>`;
-      $("region-choisir").addEventListener("click", () => { Moteur.region = { nom: Rg.nom, deps: Rg.deps }; if (ORIGINE === "simple") $("simple").click(); else decorer(); });
-      ouvrirFiltres(); return;
+      $("region-choisir").addEventListener("click", () => { Moteur.region = { nom: Rg.nom, deps: Rg.deps }; relancer(); });
+      return;
     }
-    if (L) ouvrirFiltres();
     if (!L) {
       // Ni code postal, ni département, ni lieu reconnu : les démarches d'un département sont rétrogradées (×0,8 dans le
       // moteur) ; la page invite à préciser la commune.
-      if (!$("dep").value) {
-        el.innerHTML = `<span class="meta">Précisez votre commune pour voir les démarches de votre territoire&nbsp;:</span> `
-          + `<input id="cp-res" class="cp-res" inputmode="numeric" maxlength="5" placeholder="code postal" aria-label="Votre code postal">`;
+      if (!$("dep").value && SANS_API) {
+        el.innerHTML = `<span class="meta">Précisez votre commune dans votre question (par exemple «&nbsp;j'habite à Rezé&nbsp;») pour voir les démarches de votre territoire et où aller.</span>`;
+      } else if (!$("dep").value) {
+        el.innerHTML = `<label class="meta" for="cp-res">Précisez votre commune pour voir les démarches de votre territoire et où aller&nbsp;:</label> `
+          + `<input id="cp-res" class="cp-res" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="code postal">`;
         const c2 = $("cp-res");
         c2.addEventListener("input", () => { cp.value = c2.value.replace(/\D/g, "").slice(0, 5); cp.dispatchEvent(new Event("input"));
-          if (cp.value.length === 5 && ORIGINE === "simple") setTimeout(() => { if (COMMUNE) $("simple").click(); }, 1500); });
+          if (cp.value.length === 5) setTimeout(() => { if (COMMUNE) relancer(); }, 1500); });
+      } else if (COMMUNE === null) {
+        el.innerHTML = `<span class="meta">Département choisi&nbsp;:</span> <span class="pastille pastille-fixe">${esc($("dep").value)} ${esc(DEPNAME[$("dep").value] || "")}</span>${changer}`;
+        brancherChanger();
       }
       return;
     }
@@ -1009,86 +1253,37 @@ $("reset").addEventListener("click", () => { history = []; $("thread").innerHTML
     const adapte = !$("dep").value;
     const boutons = L.candidats.map((c, i) => `<button type="button" class="pastille" data-i="${i}">${esc(c.nom)} (${esc(c.dep)})${adapte && !i ? "" : "&nbsp;?"}</button>`);
     el.innerHTML = adapte
-      ? `<span class="meta">Résultats adaptés à</span> ${boutons[0]}${boutons.length > 1 ? ` <span class="meta">ou</span> ${boutons.slice(1).join(" ")}` : ""} · <button type="button" class="lien-changer" id="lieu-changer">changer</button>`
+      ? `<span class="meta">Résultats adaptés à</span> ${boutons[0]}${boutons.length > 1 ? ` <span class="meta">ou</span> ${boutons.slice(1).join(" ")}` : ""}${changer}`
       : `<span class="meta">Lieu repéré dans votre question&nbsp;:</span> ${boutons.join(" ")}`;
     el.querySelectorAll("button.pastille").forEach((b) => b.addEventListener("click", async () => {
-      const c = L.candidats[+b.dataset.i];
-      let g; try { g = await json(`${GEO}/${encodeURIComponent(c.code)}?fields=nom,code,codeDepartement,codeEpci,centre&format=json`); } catch (e) { return; }
-      cp.value = ""; choix.hidden = true;
-      poser({ nom: g.nom, code: g.code, dep: g.codeDepartement, epci: g.codeEpci || "", lon: g.centre.coordinates[0], lat: g.centre.coordinates[1] });
-      if (ORIGINE === "simple") $("simple").click();
+      const c = await geo(L.candidats[+b.dataset.i]); if (!c) return;
+      cp.value = ""; choix.hidden = true; poser(c); relancer();
     }));
-    const ch = $("lieu-changer"); if (ch) ch.addEventListener("click", () => { ouvrirFiltres(); cp.focus(); cp.scrollIntoView({ behavior: "smooth", block: "center" }); });
+    brancherChanger();
+    // Une seule commune reconnue, sans code postal ni département choisi : elle sert à « Où aller », sans filtrer les résultats.
+    if (adapte && L.candidats.length === 1 && (!COMMUNE || COMMUNE.devine) && (!COMMUNE || COMMUNE.code !== L.candidats[0].code)) {
+      geo(L.candidats[0]).then((c) => { if (c && !COMMUNE) { c.devine = true; poser(c, true); } });
+    }
   }
-
-  // ---------- Diversité : les démarches d'un même organisme au-delà de deux, regroupées sous la 2e par le moteur
-  // (Moteur.regroupements), s'affichent sous elle, dépliables. Seulement pour la recherche simple, dont la liste vient
-  // directement du moteur.
-  function regroupes(el, r) {
-    el.querySelectorAll(".regroupes").forEach((x) => x.remove());
-    const l = ORIGINE === "simple" && Moteur.regroupements && Moteur.regroupements.get(r.id); if (!l || !l.length) return;
-    const d = document.createElement("details"); d.className = "regroupes";
-    d.innerHTML = `<summary>+ ${l.length} autre${l.length > 1 ? "s" : ""} démarche${l.length > 1 ? "s" : ""} de ${esc(r.o)}</summary><ul>`
-      + l.map((x) => `<li><a href="${esc(dnUrl(x))}" target="_blank" rel="noopener">${esc(x.t)} ↗</a> <span class="meta">${esc(x.dep || "")}</span></li>`).join("") + `</ul>`;
-    const ou = el.querySelector(".ou, .liees"); if (ou) el.insertBefore(d, ou); else el.appendChild(d);
-  }
-
-  // ---------- CCAS : une fois par page, dans un encadré « Où aller », si (1) le public est particulier ou non précisé,
-  // (2) la question ou le premier résultat relève des impayés, de l'énergie, de l'eau, d'une aide financière ou sociale,
-  // d'un secours ou de la précarité (« logement » ou « facture » seuls ne suffisent pas), (3) une commune est connue.
-  const THEMES_CCAS = /(^| )(impaye|impayes|energi|energie|electr|electricite|gaz|chauffage|fioul|eau|aide financiere|aides financieres|aide sociale|aides sociales|action sociale|secours|precarite|precaire)( |$)/;
-  async function ccas(liste) {
-    let el = $("ccas-ou");
-    if (!el) { el = document.createElement("div"); el.id = "ccas-ou"; $("cards").before(el); }
-    el.className = ""; el.innerHTML = "";
-    const c = COMMUNE, pub = $("pub").value, q = $("q").value;
-    if (!c || (pub && pub !== "particulier") || !$("res") || $("res").hidden) return;
-    const termes = Moteur.analyse ? [...Moteur.analyse(q).termes.values()].flatMap((g) => [...g]).join(" ") : "";
-    const N = Moteur.norm, premier = liste[0] ? N(liste[0].t + " " + (liste[0].th || "")) : "";
-    if (![N(q) + " " + termes, premier].some((s) => THEMES_CCAS.test(s))) return;
-    let l; try { l = await services(c.code, ["ccas"]); } catch (e) { return; }
-    if (COMMUNE !== c || !l.length) return;
-    el.className = "ou";
-    el.innerHTML = `<div class="ou-t">Où aller pour ${esc(c.nom)} · aide sociale de votre commune</div>${l.map(htmlService).join("")}<p class="ou-src">Centre communal d'action sociale compétent pour votre commune selon l'Annuaire, interrogé avec le seul code de la commune.</p>`;
-  }
-
-
-
-  // ---------- Ressources liées à une fiche service-public : services en ligne, formulaires, simulateurs (champ « res »),
-  // fiches liées (« fl ») et démarches en ligne rattachées (« dn »). Sous la carte, en retrait : elles ne comptent pas
-  // parmi les résultats.
-  const LIBELLE = (r) => r.k === "dn" ? "Démarche en ligne" : /^SP-F/.test(r.id) ? "Fiche liée"
-    : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne" : /imulateur/i.test(r.ty) ? "Simulateur"
-    : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : /odèle|lettre/i.test(r.ty) ? "Modèle de document" : "Ressource";
-  let PAR_SLUG = null;
-  function liees(el, r) {
-    el.querySelectorAll(".liees").forEach((x) => x.remove());
-    if (r.k !== "sp") return;
-    if (!PAR_SLUG) { PAR_SLUG = new Map(); for (const x of IX.recs) if (x.k === "dn") PAR_SLUG.set(x.u, x); }
-    const rec = (id) => { const i = IX.byId.get(id); return i === undefined ? null : IX.recs[i]; };
-    const res = [...(r.res || []), ...(r.fl || [])].map(rec).filter(Boolean).slice(0, 3);
-    const dn = (r.dn || []).map((s) => PAR_SLUG.get(s)).filter(Boolean).slice(0, 3);
-    if (!res.length && !dn.length) return;
-    const lien = (x) => x.k === "dn" ? dnUrl(x) : (/^SP-R/.test(x.id) && x.l) ? x.l : x.u;
-    const div = document.createElement("div"); div.className = "liees";
-    div.innerHTML = `<div class="liees-t">Ressources liées à cette fiche</div><ul>` + [...res, ...dn].map((x) =>
-      `<li><span class="liees-l">${LIBELLE(x)}</span> <a href="${esc(lien(x))}" target="_blank" rel="noopener">${esc(x.t)} ↗</a></li>`).join("") + `</ul>`;
-    const ou = el.querySelector(".ou"); if (ou) el.insertBefore(div, ou); else el.appendChild(div);
-  }
+  const geo = (c) => CENTRES.has(c.code)
+    ? Promise.resolve({ nom: c.nom, code: c.code, dep: c.dep, epci: "", lat: CENTRES.get(c.code)[0], lon: CENTRES.get(c.code)[1] })
+    : SANS_API ? Promise.resolve(null) : json(`${GEO}/${encodeURIComponent(c.code)}?fields=nom,code,codeDepartement,codeEpci,centre&format=json`)
+    .then((g) => ({ nom: g.nom, code: g.code, dep: g.codeDepartement, epci: g.codeEpci || "", lon: g.centre.coordinates[0], lat: g.centre.coordinates[1] })).catch(() => null);
+  // « changer » : retour au champ, bloc « Préciser le public ou le lieu » ouvert, sur le code postal.
+  function vueAccueilFiltres() { $("vue-reponse").hidden = true; $("vue-accueil").hidden = false; ouvrirFiltres(); const f = SANS_API ? $("dep") : cp; f.focus(); f.scrollIntoView({ block: "center" }); }
 
   function decorer() {
-    if (typeof IX === "undefined" || !IX) return;
-    pastille(); ccas(LISTE);
-    const deja = new Set();
-    for (const el of document.querySelectorAll("#cards .card")) {
-      const i = IX.byId.get(el.id.slice(2)); if (i === undefined) continue;
-      portee_carte(el, IX.recs[i]); liees(el, IX.recs[i]); regroupes(el, IX.recs[i]);
-      if (portee(IX.recs[i]) !== "inc") encadre(el, IX.recs[i], COMMUNE, deja);
-    }
-    franceServices(LISTE);
+    if (typeof IX === "undefined" || !IX || !reponseAffichee()) return;
+    pastille(); carteOu();
+    serviceLocal($("ou-service"), COMMUNE); ccas($("ccas-ou")); franceServices($("fs-aide")); majOu();
+    if (window.majCherche) window.majCherche();
   }
-  const afficher = showCards;
-  showCards = function (list, title) { afficher(list, title); LISTE = list || []; decorer(); };
+  const afficher = afficherResultats;
+  afficherResultats = function (liste, q, o) {
+    // Une commune devinée dans une question précédente ne vaut pas pour la suivante.
+    if (COMMUNE && COMMUNE.devine) { COMMUNE = null; window.LIEU_CONNU = ""; }
+    LISTE = liste || []; afficher(liste, q, o); decorer();
+  };
 })();
 /*ou_aller:fin*/</script>
 </body>

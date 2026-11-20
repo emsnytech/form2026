@@ -38,8 +38,8 @@ PAGES = {
         "fin": " Les nombres de démarches et de dossiers donnés ci-dessous portent donc sur un corpus publié. Les montants de subventions viennent d'autres sources ouvertes, citées dans la méthode.",
         "rattachement": "<b>Comment les démarches sont rattachées aux collectivités.</b> Deux ensembles sont distingués. « Par les collectivités » : les démarches dont le service a déclaré le type d'organisme « collectivité territoriale », c'est-à-dire un rattachement par l'employeur. « Pour les collectivités » : les démarches d'autres organismes dont le titre désigne les collectivités ou une dotation, c'est-à-dire un rattachement par l'objet. Le second ensemble est un plancher, une démarche pouvant s'adresser aux collectivités sans le dire dans son titre.",
     },
-    "trouver-sa-demarche.html": {
-        "decrit": "<b>Ce que cette page décrit.</b> Elle cherche parmi les démarches publiées dans le descriptif ouvert de la plateforme, et non parmi l'ensemble des démarches en ligne de la plateforme. ",
+    "trouver-sa-demarche-comment.html": {
+        "decrit": "<b>Ce que « Trouver sa démarche » couvre.</b> La recherche porte sur les démarches publiées dans le descriptif ouvert de la plateforme, et non sur l'ensemble des démarches en ligne de la plateforme. ",
         "fin": " Les démarches proposées et les nombres de dossiers affichés portent donc sur un corpus publié. Les fiches de service-public.gouv.fr viennent d'une autre source ouverte, citée plus bas. Ce n'est pas l'ensemble des démarches administratives. N'y figurent pas les démarches qui ne sont ni décrites simplement ni accessibles en ligne : celles des autres sites publics, celles qui restent sur papier ou par courriel, celles qu'aucune fiche ne présente.",
         "rattachement": "<b>Quelles démarches sont retenues, et pour quel territoire.</b> Les démarches publiées à la date de l'extraction, hors démarches réservées aux agents publics et intitulés de test. Une démarche porte le département de son organisme ; celles des administrations centrales et des opérateurs de l'État, hors services territoriaux, sont traitées comme nationales et proposées quel que soit le département choisi.",
     },
@@ -53,6 +53,7 @@ CHARGE = re.compile(r"fetch\(['\"][^'\"]*(donnees/|app_|champs_shards|\.json)|<s
 EXCEPTIONS = {
     "index.html": "page d'accueil : cite le descriptif parmi les sources du site, sans en tirer de chiffre",
     "compteur-roi.html": "charge compteur-parametres.json, tiré du jeu « Utilisation du service », pas du descriptif",
+    "trouver-sa-demarche.html": "page de recherche : son cadre d'entrée est sur trouver-sa-demarche-comment.html, reliée depuis l'en-tête et le pied de page",
     "explorer.html": "À TRAITER : l'explorateur est construit sur le descriptif ; son cadre reste à ajouter",
 }
 FICHES = {"fiches-ministeres/justice.html", "fiches-ministeres/education.html", "fiches-ministeres/interieur.html", "fiches-ministeres/index.html"}

@@ -1,0 +1,251 @@
+{
+ "objet": "Accueil, « Les plus demandées ». Corrigeable à la main : editeur.epingle (mots du titre, dans l'ordre voulu), editeur.exclu (clés à écarter).",
+ "date": "2026-11-20",
+ "nationales": [
+  {
+   "titre": "Obtenir une attestation de droits",
+   "organisme": "Assurance maladie",
+   "requete": "attestation de droits assurance maladie"
+  },
+  {
+   "titre": "Déclarer ses ressources pour la prime d'activité",
+   "organisme": "Caf, MSA",
+   "requete": "déclaration trimestrielle de ressources prime d'activité"
+  },
+  {
+   "titre": "Payer une amende",
+   "organisme": "Agence nationale de traitement automatisé des infractions (ANTAI)",
+   "requete": "payer une amende"
+  }
+ ],
+ "demarche_numerique": [
+  {
+   "cle": "medaille honneur travail",
+   "titre": "Demander la médaille d'honneur du travail",
+   "organisme": "3 démarches départementales",
+   "dossiers": 812440,
+   "dossiers_arrondis": "800 000",
+   "variantes": 3,
+   "ids": [
+    "DN-69348",
+    "DN-17231",
+    "DN-118359"
+   ],
+   "requete": "Demander la médaille d'honneur du travail"
+  },
+  {
+   "cle": "verification prealable embauche",
+   "titre": "Vérifier le titre de séjour d'un futur salarié",
+   "organisme": "5 démarches départementales",
+   "dossiers": 529640,
+   "dossiers_arrondis": "500 000",
+   "variantes": 5,
+   "ids": [
+    "DN-29111",
+    "DN-13583",
+    "DN-55067",
+    "DN-104225",
+    "DN-157165"
+   ],
+   "requete": "Vérifier le titre de séjour d'un futur salarié"
+  },
+  {
+   "cle": "pass culture",
+   "titre": "Demander le crédit du pass Culture",
+   "organisme": "Ministère de la Culture",
+   "dossiers": 300841,
+   "dossiers_arrondis": "300 000",
+   "variantes": 7,
+   "ids": [
+    "DN-47480",
+    "DN-47380",
+    "DN-76135",
+    "DN-81184",
+    "DN-76442",
+    "DN-94271",
+    "DN-126208"
+   ],
+   "requete": "Demander le crédit du pass Culture"
+  }
+ ],
+ "source": "Observatoire de la qualité des démarches en ligne (DINUM) ; volumes du descriptif de Démarche Numérique",
+ "candidates_nationales": [
+  {
+   "nom": "Mon espace santé",
+   "ministere": "Ministère de la Santé, des Familles, de l'Autonomie et des Personnes handicapées (MSFAPH_25-10-SL)",
+   "administration": "DNS",
+   "volume": 428000000,
+   "volume_arrondi": "400 000 000",
+   "usagers": "Particulier, Autres",
+   "fiche_proposee": "SP-R60692",
+   "fiche_titre": "Mon espace santé"
+  },
+  {
+   "nom": "Rechercher des offres d’emploi (France Travail)",
+   "ministere": "Ministère du Travail et des Solidarités (MTS_25-10-SL)",
+   "administration": "FRANCE TRAVAIL",
+   "volume": 242851419,
+   "volume_arrondi": "200 000 000",
+   "usagers": "Particulier",
+   "fiche_proposee": "SP-R31528",
+   "fiche_titre": "Rechercher une offre d'emploi sur France Travail"
+  },
+  {
+   "nom": "Obtenir une attestation de droits (Ameli)",
+   "ministere": "Ministère de la Santé, des Familles, de l'Autonomie et des Personnes handicapées (MSFAPH_25-10-SL)",
+   "administration": "CNAM",
+   "volume": 60759228,
+   "volume_arrondi": "60 000 000",
+   "usagers": "Particulier",
+   "fiche_proposee": "SP-F10662",
+   "fiche_titre": "Comment obtenir une attestation de droits (attestation Vitale) ?"
+  },
+  {
+   "nom": "Attestation de paiement d'indemnités journalières",
+   "ministere": "Ministère de la Santé, des Familles, de l'Autonomie et des Personnes handicapées (MSFAPH_25-10-SL)",
+   "administration": "CNAM",
+   "volume": 46010250,
+   "volume_arrondi": "40 000 000",
+   "usagers": "Particulier",
+   "fiche_proposee": "SP-R49830",
+   "fiche_titre": "Attestation de paiement d'indemnités journalières"
+  },
+  {
+   "nom": "Mes Points Permis",
+   "ministere": "Ministère de l'Intérieur (MI_25-10-SL)",
+   "administration": "DSR",
+   "volume": 37000000,
+   "volume_arrondi": "30 000 000",
+   "usagers": "Particulier",
+   "fiche_proposee": "SP-F11863",
+   "fiche_titre": "Permis de conduire : peut-on perdre tous les points en une seule fois ?"
+  },
+  {
+   "nom": "Renouvellement mensuel de la situation de demandeur d’emploi (France Travail)",
+   "ministere": "Ministère du Travail et des Solidarités (MTS_25-10-SL)",
+   "administration": "FRANCE TRAVAIL",
+   "volume": 35455961,
+   "volume_arrondi": "30 000 000",
+   "usagers": "Particulier",
+   "fiche_proposee": "SP-F1637",
+   "fiche_titre": "Actualisation mensuelle France Travail (anciennement Pôle emploi)"
+  },
+  {
+   "nom": "Consulter les résultats de son examen de permis de conduire",
+   "ministere": "Ministère de l'Intérieur (MI_25-10-SL)",
+   "administration": "DSR",
+   "volume": 27000000,
+   "volume_arrondi": "20 000 000",
+   "usagers": "Particulier",
+   "fiche_proposee": "SP-R39502",
+   "fiche_titre": "Consulter en ligne le résultat de votre examen du permis de conduire"
+  },
+  {
+   "nom": "Mon estimation retraite",
+   "ministere": "Ministère du Travail et des Solidarités (MTS_25-10-SL)",
+   "administration": "GIP UR",
+   "volume": 23690000,
+   "volume_arrondi": "20 000 000",
+   "usagers": "Particulier",
+   "fiche_proposee": "SP-R64411",
+   "fiche_titre": "Estimer le montant de votre retraite"
+  },
+  {
+   "nom": "Mes paiements - historique (paiements retraite info-retraite / suivi de mes paiements retraite)",
+   "ministere": "Ministère du Travail et des Solidarités (MTS_25-10-SL)",
+   "administration": "GIP UR",
+   "volume": 23120000,
+   "volume_arrondi": "20 000 000",
+   "usagers": "Particulier",
+   "fiche_proposee": "SP-R64393",
+   "fiche_titre": "Parcours Info Retraite - Expatriation"
+  },
+  {
+   "nom": "Ma carrière (Je consulte mon relevé de carrière)",
+   "ministere": "Ministère du Travail et des Solidarités (MTS_25-10-SL)",
+   "administration": "GIP UR",
+   "volume": 21290000,
+   "volume_arrondi": "20 000 000",
+   "usagers": "Particulier",
+   "fiche_proposee": "SP-F18797",
+   "fiche_titre": "Commissions et comité consultatifs dans la fonction publique"
+  }
+ ],
+ "candidates_demarche_numerique": [
+  {
+   "cle": "medaille honneur travail",
+   "titre": "Demander la médaille d'honneur du travail",
+   "organisme": "3 démarches départementales",
+   "dossiers": 812440,
+   "variantes": 3
+  },
+  {
+   "cle": "verification prealable embauche",
+   "titre": "Vérifier le titre de séjour d'un futur salarié",
+   "organisme": "5 démarches départementales",
+   "dossiers": 529640,
+   "variantes": 5
+  },
+  {
+   "cle": "consultation domaine version mai",
+   "titre": "Consultation du Domaine (version de mai 2020)",
+   "organisme": "Direction de l'immobilier de l'État",
+   "dossiers": 528294,
+   "variantes": 2
+  },
+  {
+   "cle": "caf prestations familiales cmg attestation mensuelle micro creche",
+   "titre": "CAF - PRESTATIONS FAMILIALES - CMG : ATTESTATION MENSUELLE MICRO-CRECHE",
+   "organisme": "61 démarches départementales",
+   "dossiers": 482386,
+   "variantes": 61
+  },
+  {
+   "cle": "pass culture",
+   "titre": "Demander le crédit du pass Culture",
+   "organisme": "Ministère de la Culture",
+   "dossiers": 300841,
+   "variantes": 7
+  },
+  {
+   "cle": "medaille honneur ou communale collectivites",
+   "titre": "Médaille d'honneur Régionale, Départementale ou Communale - Collectivités",
+   "organisme": "Préfecture de département",
+   "dossiers": 295446,
+   "variantes": 1
+  },
+  {
+   "cle": "communication reactivation neph national dossierpermisdeconduire",
+   "titre": "Communication/réactivation du NEPH national (dossierpermisdeconduire)",
+   "organisme": "Ministère de l'Intérieur",
+   "dossiers": 290676,
+   "variantes": 1
+  },
+  {
+   "cle": "cd92 renouvellement titre amethyste v1",
+   "titre": "CD92 - Demande de renouvellement de titre améthyste (v1.5)",
+   "organisme": "Conseil Départemental des Hauts-de-Seine",
+   "dossiers": 215998,
+   "variantes": 1
+  },
+  {
+   "cle": "caf prestations familiales cmg attestation mensuelle garde domicile",
+   "titre": "CAF - PRESTATIONS FAMILIALES - CMG : ATTESTATION MENSUELLE GARDE A DOMICILE",
+   "organisme": "62 démarches départementales",
+   "dossiers": 153124,
+   "variantes": 62
+  },
+  {
+   "cle": "pref33 authentification titres sejour cartes identite europeennes",
+   "titre": "PREF33 - Authentification des titres de séjour et cartes d'identité européennes",
+   "organisme": "Préfecture de la Gironde",
+   "dossiers": 141018,
+   "variantes": 1
+  }
+ ],
+ "editeur": {
+  "epingle": [],
+  "exclu": [],
+  "etiquette": {}
+ }
+}
