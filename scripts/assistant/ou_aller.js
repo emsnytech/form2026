@@ -152,9 +152,12 @@
     let el = $("fs-aide");
     if (!el) { el = document.createElement("div"); el.id = "fs-aide"; $("cards").after(el); }
     // « Aucune démarche en ligne pertinente » : parmi les 5 premiers résultats, aucune démarche nationale (po « nat ») ni du
-    // département de l'usager (sans département connu : d'aucun département). Une démarche de département inconnu ne compte pas.
+    // département de l'usager (sans département connu : d'aucun département) qui soit pertinente pour la question, au sens
+    // de Moteur.pertinence (moitié du meilleur score, deux termes de la question repris). Une démarche de département
+    // inconnu ne compte pas. Le seuil sert à cette règle seulement : il ne change ni le classement ni l'affichage.
     const dep = COMMUNE ? COMMUNE.dep : $("dep").value;
-    const enLigne = liste.slice(0, 5).some((r) => r && r.k === "dn" && (portee(r) === "nat" || (portee(r) === "dep" && (!dep || r.dep === dep))));
+    const P = Moteur.pertinence(IX, $("q").value, { pub: $("pub").value, dep });
+    const enLigne = liste.slice(0, 5).some((r) => r && r.k === "dn" && (portee(r) === "nat" || (portee(r) === "dep" && (!dep || r.dep === dep))) && P.pertinente(r.id));
     el.className = enLigne ? "fs-pied" : "ou fs-fort"; el.innerHTML = "";
     if (!$("res") || $("res").hidden) return;
     const c = COMMUNE;

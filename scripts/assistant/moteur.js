@@ -91,6 +91,29 @@
     if (dep) top.sort((a, b) => (ix.recs[a[1]].po === "inc") - (ix.recs[b[1]].po === "inc") || b[0] - a[0]);
     return top.map(([s, i]) => ({ score: +s.toFixed(2), r: ix.recs[i] }));
   }
-  const api = { build, search, norm, toks };
+  // Pertinence d'un résultat pour une question, au sens de la règle France services de la page FORM (ne change ni le
+  // classement ni l'affichage) : score d'au moins la moitié du meilleur score de la recherche, et au moins deux termes
+  // significatifs distincts de la question repris (un seul si la question n'en a qu'un). Un terme est la racine d'un mot
+  // hors mots vides ; un synonyme ajouté par le moteur compte comme le terme d'origine.
+  function pertinence(ix, q, opt = {}) {
+    const termes = new Map();
+    for (const w of norm(q).split(" ")) {
+      if (w.length < 2 || STOP.has(w)) continue;
+      const t = stem(w); if (!termes.has(t)) termes.set(t, new Set([t]));
+      for (const x of SYN[w] || []) termes.get(t).add(stem(x));
+    }
+    const res = termes.size ? search(ix, q, { ...opt, k: Infinity }) : [];
+    const meilleur = res.reduce((m, x) => Math.max(m, x.score), 0), score = new Map(res.map((x) => [x.r.id, x.score]));
+    const postings = new Map();
+    const contient = (t, i) => {
+      if (!postings.has(t)) { const p = ix.inv.get(t) || [], s = new Set(); for (let j = 0; j < p.length; j += 2) s.add(p[j]); postings.set(t, s); }
+      return postings.get(t).has(i);
+    };
+    const couverture = (id) => { const i = ix.byId.get(id); let n = 0; for (const g of termes.values()) if ([...g].some((t) => contient(t, i))) n++; return n; };
+    const requis = Math.min(2, termes.size);
+    return { meilleur, termes: termes.size, score: (id) => score.get(id) || 0, couverture,
+      pertinente: (id) => termes.size > 0 && (score.get(id) || 0) >= 0.5 * meilleur && couverture(id) >= requis };
+  }
+  const api = { build, search, norm, toks, pertinence };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

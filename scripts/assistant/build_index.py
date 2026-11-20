@@ -5,12 +5,15 @@ prévue par la règle du README, décrite dans donnees/assistant/LISEZMOI_assist
     python3 scripts/assistant/build_index.py --form . --carto ~/Documents/cartographie --slim <slim du mois> --out donnees/assistant/index.json
 Le dernier contrôle vérifie que les références de exemples.json (à côté de --out) existent toujours ; sinon, sortie en erreur."""
 import json, glob, re, collections, html, sys
-import argparse, os
+import argparse, os, random
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from departements import deduire
 ap=argparse.ArgumentParser(description=__doc__)
 ap.add_argument('--form', default=os.path.expanduser('~/Documents/form2026-site'), help='clone du dépôt FORM 2026')
 ap.add_argument('--carto', default=os.path.expanduser('~/Documents/cartographie'), help='dossier cartographie (dila/, Bdddemarchesfinoctobre/, assistant/)')
 ap.add_argument('--slim', default=None, help='fichier slim des démarches (défaut : <carto>/Bdddemarchesfinoctobre/slim_nov.jsonl)')
 ap.add_argument('--out', default=None, help='index produit (défaut : <carto>/assistant/index.json)')
+ap.add_argument('--rapport', default=None, help='écrit ici (JSON) le détail des départements déduits, pour relecture')
 A=ap.parse_args()
 FORM=A.form; UP=A.carto
 SLIM=A.slim or UP+'/Bdddemarchesfinoctobre/slim_nov.jsonl'
@@ -52,10 +55,9 @@ desc={}
 for l in open(UP+'/assistant/descriptions_publiees.jsonl'):
     a=json.loads(l); desc[a[0]]=a
 # Portée d'une démarche en ligne (champ « po ») : « nat » (administration centrale ou opérateur national, hors services
-# territoriaux), « dep » (département connu, ou déduit d'un code en tête du titre), « inc » (locale, département inconnu).
-CODE_TITRE=re.compile(r'^(0[1-9]|[1-8]\d|9[0-5]|2A|2B|97[1-6])\s*[-–]')
-DEPS_VALIDES={'%02d'%i for i in range(1,96) if i!=20}|{'2A','2B','971','972','973','974','976'}
-recs=[]; skipped=collections.Counter(); portee=collections.Counter(); deduits=[]
+# territoriaux), « dep » (département de l'organisme, ou déduit de son nom ou du titre par departements.py), « inc » (locale,
+# département inconnu).
+recs=[]; skipped=collections.Counter(); portee=collections.Counter(); deduits=[]; formes=collections.Counter(); ecarts=[]
 for num,a in desc.items():
     s=slim.get(num)
     if not s: skipped['sans_titre']+=1; continue
@@ -72,17 +74,24 @@ for num,a in desc.items():
         if tn in PRE: pre.add(PRE[tn])
     slug=(a[2] or '').rsplit('/',1)[-1]
     national = torg in ('administration_centrale','operateur_d_etat') and not re.search(r'pr[ée]fecture|d[ée]partement|r[ée]gion|acad[ée]m|rectorat|\bDD|\bDR|DREAL|DRAAF|\bARS\b|\bCAF\b|CPAM|ville|mairie|commune',org or '',re.I)
-    m=CODE_TITRE.match((titre or '').strip())
     if national: po,dep='nat',''
     elif dep: po='dep'
-    elif m and m.group(1) in DEPS_VALIDES: po,dep='dep',m.group(1); deduits.append((num,dep,titre,org))
-    else: po,dep='inc',''
+    else:
+        d,forme,source,autre=deduire(org,titre)
+        if d:
+            po,dep='dep',d; formes[forme+' ('+source+')']+=1
+            deduits.append({'id':'DN-%d'%num,'dep':d,'forme':forme,'source':source,'organisme':org,'titre':titre})
+            if autre: ecarts.append({'id':'DN-%d'%num,'organisme':org,'titre':titre,'dep_organisme':d,'dep_titre':autre})
+        else: po,dep='inc',''
     portee[po]+=1
     recs.append({'k':'dn','id':'DN-%d'%num,'t':clean(titre,220),'d':clean(a[1],300),'o':clean(org,120),'dep':dep,'po':po,
       'n':nd or 0,'cat':cat,'ev':ev.get(num,''),'u':slug,'ch':fr.get('nb_champs') or len(ch),'pj':pj,'pre':sorted(pre),
       'fd':[x.strip() for x in (fr.get('fiches_dila') or '').split(';') if x.strip()],'fe':(a[5] or '')[:10]})
 print('DN',len(recs),dict(skipped))
-print('portée des démarches en ligne :',dict(portee),'; département déduit du titre :',len(deduits))
+print('portée des démarches en ligne :',dict(portee),'; départements déduits :',len(deduits),dict(formes),'; organisme et titre divergents :',len(ecarts))
+if A.rapport:
+    json.dump({'portee':dict(portee),'formes':dict(formes),'exemples':random.Random(20261120).sample(deduits,min(15,len(deduits))),'ecarts':ecarts,'deduits':deduits},
+              open(A.rapport,'w'),ensure_ascii=False,indent=1)
 # --- DILA
 fiches=[json.loads(l) for l in open(UP+'/dila/dila_fiches.jsonl')]
 forms={}
