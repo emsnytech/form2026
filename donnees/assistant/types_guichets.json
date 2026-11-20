@@ -1,5 +1,5 @@
 {
-  "objet": "Correspondance entre une démarche ou une fiche et le type de service local de l'Annuaire de l'administration (DILA) qui la reçoit. Sans correspondance, pas d'encadré « Où aller ». Les indices sont cherchés, comme mots entiers, sans accents ni casse, dans l'organisme d'une démarche en ligne, et dans le titre et le thème d'une fiche service-public.",
+  "objet": "Correspondance entre une démarche ou une fiche et le type de service local de l'Annuaire de l'administration (DILA) qui la reçoit. Sans correspondance, pas d'encadré « Où aller ». Les indices sont cherchés, comme mots entiers, sans accents ni casse, dans l'organisme d'une démarche en ligne, et dans le titre et le thème d'une fiche service-public. Une règle marquée « titre_dn » cherche aussi ses indices dans le titre d'une démarche en ligne (CCAS : impayés, énergie, logement, aide sociale). Les règles s'appliquent dans l'ordre : la première qui correspond l'emporte.",
   "regles": [
     {
       "libelle": "Préfecture",
@@ -86,6 +86,27 @@
         "gendarmerie_departementale",
         "commissariat_police"
       ]
+    },
+    {
+      "libelle": "CCAS",
+      "indices": [
+        "impayé",
+        "impayés",
+        "facture",
+        "factures",
+        "énergie",
+        "électricité",
+        "chèque énergie",
+        "logement",
+        "aide sociale",
+        "action sociale",
+        "fonds de solidarité pour le logement",
+        "ccas"
+      ],
+      "types": [
+        "ccas"
+      ],
+      "titre_dn": true
     }
   ],
   "titres_identite": {

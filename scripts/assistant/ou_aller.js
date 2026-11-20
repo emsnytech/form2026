@@ -29,6 +29,8 @@
   const carte = (lat, lon) => `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=17/${lat}/${lon}`;
 
   fetch("donnees/assistant/types_guichets.json").then((r) => r.json()).then((t) => { TABLE = t; decorer(); }).catch(() => {});
+  // Communes, pour que le moteur reconnaisse un lieu dans la question (Moteur.lieux) et que la page le propose.
+  fetch("donnees/assistant/communes.json").then((r) => r.json()).then((d) => { Moteur.chargerCommunes(d); decorer(); }).catch(() => {});
 
   // ---------- 1. Code postal → commune
   const cp = $("cp"), choix = $("commune"), etat = $("cp-etat");
@@ -62,8 +64,10 @@
     if (!TABLE) return null;
     const ti = TABLE.titres_identite;
     if (r.k === "sp" && r.th === ti.theme && ti.indices.some((i) => motEntier(norm(r.t), i))) return { identite: true };
-    const txt = norm(r.k === "dn" ? r.o : r.t + " " + (r.th || ""));
-    return TABLE.regles.find((g) => g.indices.some((i) => motEntier(txt, i))) || null;
+    const txt = norm(r.k === "dn" ? r.o : r.t + " " + (r.th || "")), titre = norm(r.t);
+    // Une règle « titre_dn » (CCAS) cherche aussi ses indices dans le titre d'une démarche en ligne, pas seulement dans
+    // son organisme : c'est le sujet de la démarche (impayé, énergie, logement) qui désigne le CCAS.
+    return TABLE.regles.find((g) => g.indices.some((i) => motEntier(txt, i) || (g.titre_dn && r.k === "dn" && motEntier(titre, i)))) || null;
   }
   function services(insee, types) {
     return memo(insee + "|" + types.join(","), async () => {
@@ -207,12 +211,53 @@
       const p = document.createElement("p"); p.className = "ou-inc"; p.textContent = "Démarche locale : vérifiez qu'elle concerne votre commune."; el.appendChild(p);
     }
   }
+  // ---------- Lieu reconnu dans la question : proposé, jamais imposé. Un code postal saisi prime.
+  function pastille() {
+    let el = $("lieu-pastille");
+    if (!el) { el = document.createElement("div"); el.id = "lieu-pastille"; el.className = "pastilles"; $("cards").before(el); }
+    el.innerHTML = "";
+    if (COMMUNE || !$("res") || $("res").hidden || !Moteur.lieux) return;
+    const L = Moteur.lieux($("q").value).lieux[0]; if (!L) return;
+    el.innerHTML = `<span class="meta">Lieu repéré dans votre question&nbsp;:</span> ` + L.candidats.map((c, i) =>
+      `<button type="button" class="pastille" data-i="${i}">${esc(c.nom)} (${esc(c.dep)})&nbsp;?</button>`).join(" ");
+    el.querySelectorAll("button").forEach((b) => b.addEventListener("click", async () => {
+      const c = L.candidats[+b.dataset.i];
+      let g; try { g = await json(`${GEO}/${encodeURIComponent(c.code)}?fields=nom,code,codeDepartement,codeEpci,centre&format=json`); } catch (e) { return; }
+      cp.value = ""; choix.hidden = true;
+      poser({ nom: g.nom, code: g.code, dep: g.codeDepartement, epci: g.codeEpci || "", lon: g.centre.coordinates[0], lat: g.centre.coordinates[1] });
+      if (ORIGINE === "simple") $("simple").click();
+    }));
+  }
+
+  // ---------- Ressources liées à une fiche service-public : services en ligne, formulaires, simulateurs (champ « res »),
+  // fiches liées (« fl ») et démarches en ligne rattachées (« dn »). Sous la carte, en retrait : elles ne comptent pas
+  // parmi les résultats.
+  const LIBELLE = (r) => r.k === "dn" ? "Démarche en ligne" : /^SP-F/.test(r.id) ? "Fiche liée"
+    : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne" : /imulateur/i.test(r.ty) ? "Simulateur"
+    : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : /odèle|lettre/i.test(r.ty) ? "Modèle de document" : "Ressource";
+  let PAR_SLUG = null;
+  function liees(el, r) {
+    el.querySelectorAll(".liees").forEach((x) => x.remove());
+    if (r.k !== "sp") return;
+    if (!PAR_SLUG) { PAR_SLUG = new Map(); for (const x of IX.recs) if (x.k === "dn") PAR_SLUG.set(x.u, x); }
+    const rec = (id) => { const i = IX.byId.get(id); return i === undefined ? null : IX.recs[i]; };
+    const res = [...(r.res || []), ...(r.fl || [])].map(rec).filter(Boolean).slice(0, 3);
+    const dn = (r.dn || []).map((s) => PAR_SLUG.get(s)).filter(Boolean).slice(0, 3);
+    if (!res.length && !dn.length) return;
+    const lien = (x) => x.k === "dn" ? dnUrl(x) : (/^SP-R/.test(x.id) && x.l) ? x.l : x.u;
+    const div = document.createElement("div"); div.className = "liees";
+    div.innerHTML = `<div class="liees-t">Ressources liées à cette fiche</div><ul>` + [...res, ...dn].map((x) =>
+      `<li><span class="liees-l">${LIBELLE(x)}</span> <a href="${esc(lien(x))}" target="_blank" rel="noopener">${esc(x.t)} ↗</a></li>`).join("") + `</ul>`;
+    const ou = el.querySelector(".ou"); if (ou) el.insertBefore(div, ou); else el.appendChild(div);
+  }
+
   function decorer() {
     if (typeof IX === "undefined" || !IX) return;
+    pastille();
     const deja = new Set();
     for (const el of document.querySelectorAll("#cards .card")) {
       const i = IX.byId.get(el.id.slice(2)); if (i === undefined) continue;
-      portee_carte(el, IX.recs[i]);
+      portee_carte(el, IX.recs[i]); liees(el, IX.recs[i]);
       if (portee(IX.recs[i]) !== "inc") encadre(el, IX.recs[i], COMMUNE, deja);
     }
     franceServices(LISTE);
