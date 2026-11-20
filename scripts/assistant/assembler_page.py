@@ -6,18 +6,105 @@ scripts/sync_nav.py). Les tests (test_moteur.js) portent donc sur le code exact 
 
     python3 scripts/assistant/assembler_page.py           # écrit la page si le moteur a changé
     python3 scripts/assistant/assembler_page.py --check   # n'écrit rien, sort en erreur (1) si la page diffère
+    python3 scripts/assistant/assembler_page.py --depuis <cartographie>/assistant/page.html
+
+--depuis repart du gabarit de l'auteur (page.html, hors du dépôt, comme les sources de build_index.py) et lui applique les
+adaptations FORM listées dans ADAPTATIONS : barre de navigation, ligne des volumes, cadre d'entrée (rempli ensuite par
+scripts/sync_cadre.py), chemins des données, lien vers la version avec assistant et fenêtre de ses conditions. Chaque
+adaptation doit trouver sa place exactement une fois, sinon rien n'est écrit : le gabarit a changé et la liste est à revoir.
 """
-import re, sys
+import re, subprocess, sys
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parents[2]
 PAGE, MOTEUR = RACINE / "trouver-sa-demarche.html", Path(__file__).with_name("moteur.js")
 DEBUT, FIN = "/*moteur:début*/", "/*moteur:fin*/"
+ASSISTANT_URL = "https://claude.ai/artifact/LLfjE77eNYPjiykcDdcJza"
+
+CSS_DIALOGUE = """dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog h2{font-size:1.1rem;margin:0 0 .5rem;font-weight:800}
+dialog ul{margin:.4rem 0 0 1.1rem;padding:0;font-size:.95rem}dialog li{margin:.25rem 0}
+.dlg-actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+a.btn{display:inline-block;font-weight:700;border-radius:10px;padding:.55rem 1rem;border:1px solid var(--admin);text-decoration:none}
+a.btn.primary{color:#fff}
+"""
+CSS_FORM = """.topnav{margin:0 0 1.2rem;font-size:.95rem}.topnav a{text-decoration:none;font-weight:600}
+.couv{margin:.5rem 0 0;font-weight:700;color:var(--muted);min-height:1.5em}
+"""
+NAV = '  <p class="topnav" data-rubrique="donnees"><!-- nav:début --><!-- nav:fin --></p>\n'
+DIALOGUE = """  <dialog id="dlg-ia" aria-labelledby="dlg-ia-t">
+    <h2 id="dlg-ia-t">Avant d'ouvrir la version avec assistant</h2>
+    <p>C'est une version de test, publiée hors du site FORM, sur claude.ai.</p>
+    <ul>
+      <li>L'assistant fonctionne avec Claude, le modèle d'Anthropic&nbsp;: il faut un compte Claude, et vos questions sont décomptées de ce compte, selon les <a href="https://www.anthropic.com/legal/consumer-terms" target="_blank" rel="noopener">conditions d'utilisation d'Anthropic</a>.</li>
+      <li>Vos questions sont envoyées au modèle&nbsp;: n'y indiquez ni nom, ni numéro de dossier, ni coordonnées.</li>
+      <li>L'assistant oriente et peut se tromper&nbsp;: vérifiez toujours sur la fiche ou la démarche citée. Il ne dit pas si vous avez droit à une aide.</li>
+      <li>Le nombre de questions libres est limité par visite. La recherche simple et les exemples préparés restent disponibles sans IA, ici comme là-bas.</li>
+    </ul>
+    <div class="dlg-actions">
+      <a class="btn primary" id="ia-go" href="#" autofocus target="_blank" rel="noopener">J'ai compris, ouvrir l'assistant ↗</a>
+      <button type="button" class="ghost" id="ia-annuler">Annuler</button>
+    </div>
+  </dialog>
+"""
+JS_AVIS = """// Version avec assistant : les conditions d'utilisation s'affichent avant l'ouverture.
+function ouvrirAvisIA(ev) { if (ev) ev.preventDefault(); const d = $("dlg-ia"); if (d.showModal) d.showModal(); else window.open(window.FORM_ASSISTANT_URL, "_blank", "noopener"); }
+$("ia").addEventListener("click", ouvrirAvisIA);
+$("quota").addEventListener("click", (ev) => { if (ev.target.closest("#ia-lien")) ouvrirAvisIA(ev); });
+$("ia-annuler").addEventListener("click", () => $("dlg-ia").close());
+$("ia-go").addEventListener("click", () => $("dlg-ia").close());
+"""
+LIEN = '<a href="${window.FORM_ASSISTANT_URL}">accessible ici</a> (compte Claude nécessaire).` : ""); }\n'
+
+# (motif, remplacement) : motif est une expression régulière qui doit trouver exactement une place dans le gabarit.
+ADAPTATIONS = [
+    (r"(button:disabled\{[^\n]*\n)", lambda m: m[1] + CSS_DIALOGUE),
+    (r"\n</style>", lambda m: "\n" + CSS_FORM.rstrip("\n") + "\n</style>"),
+    (r'(<div class="wrap">\n)', lambda m: m[1] + NAV),
+    (r'(  <p class="lede">.*?</p>\n)', lambda m: m[1] + '  <p class="couv" id="couv"></p>\n'),
+    (r'  <div class="frame" id="cadre">[^\n]*</div>\n', lambda m: "  <!-- cadre:début -->\n  <!-- cadre:fin -->\n"),
+    (r'(  +<button type="button" class="ghost" id="simple"[^\n]*\n)',
+     lambda m: m[1] + '      <button type="button" class="ghost" id="ia" hidden>Essayer avec l\'assistant (version de test)</button>\n'),
+    (r'(<form class="ask" id="f">.*?\n  </form>\n)', lambda m: m[1] + "\n" + DIALOGUE),
+    (r'(\n      <li><strong>Données&nbsp;:</strong>)', lambda m: "\n      <li><strong>La suite du projet&nbsp;:</strong> indexer les services publics en ligne, d'abord ceux de l'État et de ses opérateurs, puis ceux des collectivités.</li>" + m[1]),
+    (r"<script>/\*MOTEUR\*/</script>",
+     lambda m: f'<script>window.FORM_ASSISTANT_URL = "{ASSISTANT_URL}";  // version avec assistant (artefact Claude partagé)</script>\n<script>{DEBUT}\n{FIN}</script>'),
+    (r'fetch\("exemples\.json"\)', lambda m: 'fetch("donnees/assistant/exemples.json")'),
+    (r'fetch\("index\.json"\)', lambda m: 'fetch("donnees/assistant/index.json")'),
+    (r'\$\("cadre"\)\.innerHTML = `[^`]*`;', lambda m: '$("couv").textContent = `${fmt(ndn)} démarches en ligne et ${fmt(nsp)} fiches service-public indexées`;'),
+    (re.escape(LIEN) + r"\}\)\(\);\n",
+     lambda m: LIEN.replace('}">accessible', '}" id="ia-lien">accessible').replace(' }\n', '\n')
+     + '    if (window.FORM_ASSISTANT_URL) { $("ia").hidden = false; $("ia-go").href = window.FORM_ASSISTANT_URL; } }\n})();\n' + JS_AVIS),
+]
+
+
+def adapter(gabarit):
+    t = gabarit
+    for motif, rempl in ADAPTATIONS:
+        n = len(re.findall(motif, t, flags=re.S))
+        if n != 1:
+            sys.exit(f"gabarit : l'adaptation « {motif[:60]} » trouve {n} place(s) au lieu d'une ; rien n'est écrit")
+        t = re.sub(motif, rempl, t, count=1, flags=re.S)
+    return t
+
+
+def avec_moteur(t):
+    if DEBUT not in t or FIN not in t:
+        sys.exit(f"{PAGE.name} : marqueurs {DEBUT} … {FIN} absents")
+    return re.sub(re.escape(DEBUT) + ".*?" + re.escape(FIN), lambda m: DEBUT + "\n" + MOTEUR.read_text(encoding="utf-8").rstrip("\n") + "\n" + FIN, t, count=1, flags=re.S)
+
+
+if "--depuis" in sys.argv:
+    source = Path(sys.argv[sys.argv.index("--depuis") + 1]).expanduser()
+    PAGE.write_text(avec_moteur(adapter(source.read_text(encoding="utf-8"))), encoding="utf-8")
+    for script in ("sync_nav.py", "sync_cadre.py"):
+        subprocess.run([sys.executable, str(RACINE / "scripts" / script)], cwd=RACINE, check=True, capture_output=True)
+    print(f"écrit : {PAGE.name}, depuis {source}")
+    sys.exit(0)
 
 t = PAGE.read_text(encoding="utf-8")
-if DEBUT not in t or FIN not in t:
-    sys.exit(f"{PAGE.name} : marqueurs {DEBUT} … {FIN} absents")
-n = re.sub(re.escape(DEBUT) + ".*?" + re.escape(FIN), lambda m: DEBUT + "\n" + MOTEUR.read_text(encoding="utf-8").rstrip("\n") + "\n" + FIN, t, count=1, flags=re.S)
+n = avec_moteur(t)
 if n == t:
     print("Moteur de la page : à jour.")
 elif "--check" in sys.argv:

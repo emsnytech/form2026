@@ -28,6 +28,7 @@ select{font:inherit;font-size:.95rem;padding:.35rem .5rem;border-radius:8px;bord
 button{font:inherit;font-weight:700;border-radius:10px;padding:.55rem 1rem;border:1px solid var(--admin);cursor:pointer}
 .primary{background:var(--admin);color:#fff}
 .ghost{background:transparent;color:var(--admin)}
+button:disabled{opacity:.5;cursor:default}
 dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;background:var(--surface);color:var(--ink)}
 dialog::backdrop{background:rgba(0,0,0,.45)}
 dialog h2{font-size:1.1rem;margin:0 0 .5rem;font-weight:800}
@@ -35,7 +36,6 @@ dialog ul{margin:.4rem 0 0 1.1rem;padding:0;font-size:.95rem}dialog li{margin:.2
 .dlg-actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
 a.btn{display:inline-block;font-weight:700;border-radius:10px;padding:.55rem 1rem;border:1px solid var(--admin);text-decoration:none}
 a.btn.primary{color:#fff}
-button:disabled{opacity:.5;cursor:default}
 .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
 .chip{font-size:.88rem;font-weight:600;padding:.25rem .65rem;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
 .status{font-size:.9rem;color:var(--muted);margin-top:.6rem;min-height:1.3em}
@@ -66,9 +66,18 @@ details{font-size:.9rem;margin-top:.3rem}details ul{margin:.3rem 0 0 1.1rem;padd
 .method h2{font-size:1rem;color:var(--ink);margin:.2rem 0 .4rem}
 .method ul{margin:.2rem 0 0 1.1rem;padding:0}
 .empty{color:var(--muted);font-style:italic}
+.msg{margin:.7rem 0;padding:.65rem .85rem;border-radius:12px}
+.msg p{margin:.3rem 0}.msg ul{margin:.3rem 0 .3rem 1.1rem;padding:0}
+.msg.u{background:var(--admin-soft);margin-left:18%;font-weight:600}
+.msg.a{background:var(--paper);border:1px solid var(--line)}
+.msg .who{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:.2rem}
+.choix{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0 .1rem}
+.choix button{font-size:.9rem;padding:.3rem .75rem;border-radius:999px;background:var(--surface,#fff);color:var(--admin);border:1px solid var(--admin)}
+.perso{font-size:.85rem;color:var(--muted);margin:.4rem 0 0}
+.retire{font-size:.78rem;color:var(--accent);font-weight:600;margin-top:.25rem}
+.prep{font-size:.85rem;color:var(--accent);font-weight:700;margin:0 0 .4rem}
 .topnav{margin:0 0 1.2rem;font-size:.95rem}.topnav a{text-decoration:none;font-weight:600}
 .couv{margin:.5rem 0 0;font-weight:700;color:var(--muted);min-height:1.5em}
-.prep{font-size:.85rem;color:var(--accent);font-weight:700;margin:0 0 .4rem}
 </style>
 </head>
 <body>
@@ -78,7 +87,7 @@ details{font-size:.9rem;margin-top:.3rem}details ul{margin:.3rem 0 0 1.1rem;padd
   <h1>Dites ce que vous voulez faire, retrouvez la démarche</h1>
   <p class="lede">Un démonstrateur de recherche en langage courant dans deux bases publiques réunies dans FORM&nbsp;: les démarches en ligne de Démarche Numérique et les fiches de service-public.gouv.fr. Il dit où déposer le dossier, ce qui vous sera demandé, et ce qu'il ne trouve pas. <span id="lede-test">Une version avec assistant conversationnel est en test.</span></p>
   <p class="couv" id="couv"></p>
-  <div class="frame ia" id="avis-ia" hidden><strong>Version de démonstration avec assistant.</strong> L'assistant fonctionne pour l'instant avec Claude, le modèle d'Anthropic&nbsp;: il faut un compte Claude, et vos questions sont décomptées de ce compte. L'objectif est que chacun puisse choisir son moteur d'IA&nbsp;: l'index est ouvert et pourra être interrogé par n'importe quel assistant (Albert, Mistral, Claude…). La recherche simple et les exemples préparés ne font appel à aucune IA.</div>
+  <div class="frame ia" id="avis-ia" hidden><strong>Version de démonstration avec assistant.</strong> L'assistant fonctionne pour l'instant avec Claude, le modèle d'Anthropic. Il faut un compte Claude&nbsp;: vos questions sont traitées par Anthropic sous votre propre compte, selon ses conditions d'utilisation et vos réglages de confidentialité, exactement comme si vous posiez la question directement à Claude. FORM 2026 ne reçoit ni ne conserve vos questions. L'objectif est que chacun puisse choisir son moteur d'IA&nbsp;: l'index est ouvert et pourra être interrogé par n'importe quel assistant (Albert, Mistral, Claude…). La recherche simple et les exemples préparés ne font appel à aucune IA.<br><strong>Avertissement.</strong> Ce démonstrateur est expérimental et fourni à titre d'information. Ses réponses ne sont ni un conseil juridique ni une décision administrative&nbsp;: vérifiez-les auprès de la source officielle citée. L'éditeur du démonstrateur ne saurait être tenu responsable de l'usage qui est fait des réponses, ni du traitement des questions par le fournisseur d'IA.</div>
   <!-- cadre:début -->
   <style>.cadre{margin:22px 0 0;padding:14px 18px;border-left:4px solid var(--accent,#b45309);background:var(--surface,transparent);border-radius:0 8px 8px 0;max-width:78ch}.cadre p{margin:0 0 10px;font-size:.98rem;line-height:1.55}.cadre p:last-child{margin:0}</style>
   <div class="cadre">
@@ -90,6 +99,7 @@ details{font-size:.9rem;margin-top:.3rem}details ul{margin:.3rem 0 0 1.1rem;padd
   <form class="ask" id="f">
     <label for="q" class="sel" style="margin-bottom:.35rem">Votre situation, avec vos mots</label>
     <textarea id="q" placeholder="Exemple : je suis président d'un club de foot et je cherche une aide pour acheter du matériel"></textarea>
+    <p class="perso" hidden>Décrivez votre situation sans donnée personnelle&nbsp;: ni nom, ni numéro (sécurité sociale, titre de séjour, IBAN, téléphone), ni adresse précise, ni information de santé. Les numéros et adresses électroniques reconnus sont retirés avant l'envoi.</p>
     <div class="row">
       <label class="sel">Vous êtes
         <select id="pub">
@@ -127,12 +137,13 @@ details{font-size:.9rem;margin-top:.3rem}details ul{margin:.3rem 0 0 1.1rem;padd
   </dialog>
 
   <section class="answer" id="ans" aria-live="polite">
-    <h2>Réponse de l'assistant</h2>
-    <div id="ansText"></div>
+    <h2>Conversation</h2>
+    <div id="thread"></div>
     <div class="trace" id="trace"></div>
     <form class="followup" id="ff">
-      <textarea id="fq" placeholder="Préciser ou poser une autre question (ex. : je suis dans le Val-de-Marne)"></textarea>
-      <div class="row"><button class="primary" id="fgo">Envoyer</button><button type="button" class="ghost" id="reset">Nouvelle question</button></div>
+      <p class="perso" hidden>Sans donnée personnelle&nbsp;: les numéros et adresses électroniques reconnus sont retirés avant l'envoi.</p>
+      <textarea id="fq" placeholder="Répondez ou précisez : votre département, votre situation, ce que vous cherchez exactement…"></textarea>
+      <div class="row"><button class="primary" id="fgo">Envoyer</button><button type="button" class="ghost" id="reset">Nouvelle conversation</button></div>
     </form>
   </section>
 
@@ -277,7 +288,7 @@ fetch("donnees/assistant/index.json").then((r) => r.json()).then((recs) => {
 
 (async () => {
   try { sample = await claude.use("sample"); } catch (e) { sample = null; }
-  if (sample) { majQuota(); $("avis-ia").hidden = false; $("lede-test").hidden = true; document.title = "Trouver sa démarche — démonstrateur avec assistant · FORM 2026"; }
+  if (sample) { majQuota(); $("avis-ia").hidden = false; document.querySelectorAll(".perso").forEach((e) => (e.hidden = false)); $("lede-test").hidden = true; document.title = "Trouver sa démarche — démonstrateur avec assistant · FORM 2026"; }
   if (!sample) { $("go").hidden = true; $("go").dataset.off = "1";
     $("quota").innerHTML = "Sur cette version, l'assistant conversationnel n'est pas branché : essayez les exemples à réponse préparée ou la recherche simple." + (window.FORM_ASSISTANT_URL ? ` La version avec assistant est <a href="${window.FORM_ASSISTANT_URL}" id="ia-lien">accessible ici</a> (compte Claude nécessaire).` : "");
     if (window.FORM_ASSISTANT_URL) { $("ia").hidden = false; $("ia-go").href = window.FORM_ASSISTANT_URL; } }
@@ -311,22 +322,42 @@ const TOOLS = [
 let traceLines = [];
 function log(s) { traceLines.push(s); $("trace").textContent = "Recherches de l'assistant : " + traceLines.join("   "); }
 
-const MAX_LIBRES = 5;
+const MAX_LIBRES = 12;
 function used() { try { return +(sessionStorage.getItem("form-assistant-n") || 0); } catch (e) { return window.__n || 0; } }
 function use1() { const n = used() + 1; try { sessionStorage.setItem("form-assistant-n", n); } catch (e) { window.__n = n; } majQuota(); }
-function majQuota() { if (!sample) return; const r = Math.max(0, MAX_LIBRES - used()); $("quota").textContent = sample ? `Questions libres à l'assistant pour cette visite : ${r} sur ${MAX_LIBRES}.` : ""; if (!r) { $("go").disabled = true; $("fgo").disabled = true; $("go").dataset.off = "1"; $("quota").textContent = "Vous avez utilisé les " + MAX_LIBRES + " questions libres de cette visite. Les exemples et la recherche simple restent disponibles."; } }
+function majQuota() { if (!sample) return; const r = Math.max(0, MAX_LIBRES - used()); $("quota").textContent = sample ? `Messages à l'assistant pour cette visite : ${r} sur ${MAX_LIBRES}.` : ""; if (!r) { $("go").disabled = true; $("fgo").disabled = true; $("go").dataset.off = "1"; $("quota").textContent = "Vous avez utilisé les " + MAX_LIBRES + " messages à l'assistant de cette visite. Les exemples et la recherche simple restent disponibles."; } }
+function addMsg(who, html) {
+  const d = document.createElement("div"); d.className = "msg " + who;
+  d.innerHTML = `<div class="who">${who === "u" ? "Vous" : "Assistant"}</div><div class="body">${html}</div>`;
+  $("thread").appendChild(d); return d.querySelector(".body");
+}
+function lastChoixOff() { document.querySelectorAll("#thread .choix button").forEach((b) => (b.disabled = true)); }
+function citedOrder(text) { const ids = [...new Set((text.match(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g) || []).map((s) => s.slice(2, -2)))]; return ids.concat([...cited.keys()].filter((i) => !ids.includes(i))); }
 function showPrepared(e) {
   if (!IX) { $("st").textContent = "Index en cours de chargement…"; return; }
   if (ctrl) { try { ctrl.abort(); } catch (x) {} }
-  history = []; cited = new Map(); seen = new Map();
-  $("ans").style.display = "block"; $("ff").style.display = "none";
-  $("ansText").innerHTML = `<p class="prep">Réponse préparée à l'avance avec les mêmes outils de recherche ; aucun appel à l'IA.</p>` + renderText(e.texte);
+  cited = new Map(); seen = new Map(); $("thread").innerHTML = "";
+  history = [{ role: "user", content: consigne(e.q) }, { role: "assistant", content: e.texte }];
+  $("ans").style.display = "block"; $("ff").style.display = sample && used() < MAX_LIBRES ? "block" : "none";
+  addMsg("u", esc(e.q));
+  addMsg("a", `<p class="prep">Réponse préparée à l'avance avec les mêmes outils de recherche ; aucun appel à l'IA.${sample ? " Vous pouvez poursuivre la conversation avec l'assistant." : ""}</p>` + renderText(e.texte));
   $("trace").textContent = "Recherches effectuées : " + e.recherches.map((r) => "🔎 " + r).join("   ");
   const recs = [...new Set([...cited.keys(), ...e.refs])].map((id) => IX.recs[IX.byId.get(id)]).filter(Boolean);
   showCards(recs, `Sources citées (${recs.length})`);
   $("st").textContent = "";
   $("ans").scrollIntoView({ behavior: "smooth", block: "start" });
 }
+
+// Retire les données personnelles reconnues avant tout envoi à l'IA (règles inspirées de scripts/retirer_contacts.py de FORM 2026).
+const MASQUES = [
+  [/[\w.%+'-]+@[\w-]+(?:\.[\w-]+)*\.[A-Za-z]{2,}/g, "[adresse électronique retirée]"],
+  [/\b[A-Z]{2}\d{2}(?:[ ]?[0-9A-Z]{4}){3,7}(?:[ ]?[0-9A-Z]{1,3})?\b/g, "[IBAN retiré]"],
+  [/\b[12][ .]?\d{2}[ .]?(?:0[1-9]|1[0-2]|[2-9]\d)[ .]?(?:\d{2}|2A|2B)[ .]?\d{3}[ .]?\d{3}(?:[ .]?\d{2})?\b/gi, "[numéro de sécurité sociale retiré]"],
+  [/(?:\+|00)\s?33\s?(?:\(0\)\s?)?[1-9](?:[ .-]?\d{2}){4}|\b0[1-9](?:[ .-]?\d{2}){4}\b/g, "[téléphone retiré]"],
+  [/\b(né|née|naissance)(\s+(?:le|du|en)?\s*)\d{1,2}[\/.-]\d{1,2}[\/.-](?:19|20)?\d{2}\b/gi, "$1$2[date de naissance retirée]"],
+  [/\b\d{9,}\b/g, "[numéro retiré]"],
+];
+function masquer(t) { let n = 0; for (const [re, rep] of MASQUES) t = t.replace(re, (...m) => { n++; return typeof rep === "string" ? rep.replace("$1", m[1] || "").replace("$2", m[2] || "") : rep; }); return { texte: t, n }; }
 
 function consigne(q) {
   const pub = $("pub").value, dep = $("dep").value;
@@ -341,6 +372,8 @@ RÈGLES
 - Ne te prononce jamais sur l'éligibilité ; dis « à vérifier dans la fiche » ou « auprès du service ».
 - Si rien ne correspond, dis-le franchement : « Je ne trouve pas de démarche en ligne pour cela dans ce corpus. » Propose alors la fiche service-public la plus proche, ou un accueil France services. Cela fait partie de la démonstration.
 - Cite chaque démarche ou fiche par sa référence entre doubles crochets, exactement comme renvoyée : [[DN-12345]] ou [[SP-F1234]].
+- C'est une conversation : la personne peut préciser sa situation au fil des échanges. Tiens compte de tout ce qu'elle a déjà dit, et relance des recherches quand une précision change la réponse.
+- Quand une information manquante changerait vraiment la réponse (département, statut : particulier, entreprise, association ou collectivité, nature exacte du projet), donne d'abord ce que tu as trouvé, puis termine par UNE seule question courte. Mets alors sur la toute dernière ligne 2 à 4 réponses possibles, au format exact : « Choix : réponse 1 | réponse 2 | réponse 3 ». Pas de question si la réponse est déjà claire.
 - Réponds en français simple, à la deuxième personne du pluriel, en 170 mots au plus. Mise en forme : phrases courtes, éventuellement une liste avec des tirets. Pas de titres.
 
 CONTEXTE DONNÉ PAR LA PERSONNE
@@ -355,13 +388,16 @@ function renderText(t) {
   let h = esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   h = h.replace(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g, (m, id) => { const k = id.startsWith("DN") ? "dn" : "sp"; cited.set(id, true); return `<a class="ref ${k}" href="#c-${id}" data-ref="${id}">${id}</a>`; });
   const out = []; let inList = false;
+  let choix = "";
   for (const line of h.split(/\n+/)) {
     const l = line.trim(); if (!l) continue;
+    const mc = l.match(/^Choix\s*:\s*(.+)$/i);
+    if (mc) { const opts = mc[1].split("|").map((s) => s.trim()).filter(Boolean).slice(0, 4); choix = `<div class="choix">${opts.map((o) => `<button type="button" data-v="${o}">${o}</button>`).join("")}</div>`; continue; }
     if (/^[-•*]\s+/.test(l)) { if (!inList) { out.push("<ul>"); inList = true; } out.push("<li>" + l.replace(/^[-•*]\s+/, "") + "</li>"); }
     else { if (inList) { out.push("</ul>"); inList = false; } out.push("<p>" + l + "</p>"); }
   }
   if (inList) out.push("</ul>");
-  return out.join("");
+  return out.join("") + choix;
 }
 
 function card(r) {
@@ -409,26 +445,30 @@ async function ask(text, first) {
   if (used() >= MAX_LIBRES) { majQuota(); return; }
   use1();
   busy = true; $("go").disabled = true; $("fgo").disabled = true;
-  if (first) { history = []; cited = new Map(); seen = new Map(); traceLines = []; $("trace").textContent = ""; }
-  history.push({ role: "user", content: first ? consigne(text) : text + (($("dep").value || $("pub").value) ? `\n(Contexte : public ${$("pub").value || "non précisé"}, département ${$("dep").value || "non précisé"}.) Mêmes règles qu'au premier message.` : "\n(Mêmes règles qu'au premier message.)") });
-  $("ans").style.display = "block"; $("ansText").innerHTML = `<p class="empty">L'assistant cherche…</p>`; $("ff").style.display = "none";
+  if (first) { history = []; cited = new Map(); seen = new Map(); traceLines = []; $("trace").textContent = ""; $("thread").innerHTML = ""; }
+  const m = masquer(text); text = m.texte;
+  history.push({ role: "user", content: first ? consigne(text) : text + `\n(Contexte des sélecteurs : public ${$("pub").value || "non précisé"}, département ${$("dep").value ? $("dep").value + " " + DEPNAME[$("dep").value] : "non précisé"}. Mêmes règles qu'au premier message.)` });
+  lastChoixOff();
+  $("ans").style.display = "block"; addMsg("u", esc(text) + (m.n ? `<div class="retire">${m.n} donnée${m.n > 1 ? "s" : ""} personnelle${m.n > 1 ? "s" : ""} retirée${m.n > 1 ? "s" : ""} avant l'envoi.</div>` : ""));
+  const bubble = addMsg("a", `<p class="empty">L'assistant cherche…</p>`); $("ff").style.display = "none";
+  bubble.scrollIntoView({ behavior: "smooth", block: "nearest" });
   $("st").textContent = "";
   ctrl = new AbortController();
   try {
     const out = await sample(history, { tools: TOOLS, modelTier: "default", cache: false, signal: ctrl.signal,
-      onText: ({ text }) => { if (text && text !== "Thinking...") $("ansText").innerHTML = renderText(text); } });
+      onText: ({ text }) => { if (text && text !== "Thinking...") bubble.innerHTML = renderText(text); } });
     history.push({ role: "assistant", content: out.text });
-    $("ansText").innerHTML = renderText(out.text);
-    const citedRecs = [...cited.keys()].map((id) => IX.recs[IX.byId.get(id)]).filter(Boolean);
+    bubble.innerHTML = renderText(out.text);
+    const citedRecs = citedOrder(out.text).map((id) => IX.recs[IX.byId.get(id)]).filter(Boolean);
     const others = [...seen.values()].filter((r) => !cited.has(r.id)).slice(0, 6);
     showCards(citedRecs.concat(others), citedRecs.length ? `Sources citées (${citedRecs.length})` + (others.length ? ` et autres résultats examinés (${others.length})` : "") : "Résultats examinés par l'assistant");
-    $("ff").style.display = "block";
+    $("ff").style.display = used() < MAX_LIBRES ? "block" : "none"; $("fq").focus({ preventScroll: true });
   } catch (e) {
     history.pop();
     const msg = e && e.code === "not_granted" ? "L'assistant n'est pas autorisé sur cette page. La recherche simple reste disponible."
       : e && e.code === "rate_limited" ? "Trop de demandes en peu de temps : réessayez dans un moment."
       : "L'assistant n'a pas pu répondre (" + esc((e && (e.message || e.code)) || "erreur") + ").";
-    $("ansText").innerHTML = `<p class="empty">${msg}</p>`;
+    bubble.innerHTML = `<p class="empty">${msg}</p>`; $("ff").style.display = "block";
     if (e && e.code === "not_granted") { $("go").dataset.off = "1"; }
   } finally {
     busy = false; if (!$("go").dataset.off) $("go").disabled = false; $("fgo").disabled = false;
@@ -436,7 +476,8 @@ async function ask(text, first) {
 }
 $("f").addEventListener("submit", (ev) => { ev.preventDefault(); const q = $("q").value.trim(); if (q) ask(q, true); });
 $("ff").addEventListener("submit", (ev) => { ev.preventDefault(); const q = $("fq").value.trim(); if (!q) return; $("fq").value = ""; ask(q, false); });
-$("reset").addEventListener("click", () => { history = []; $("ans").style.display = "none"; $("res").hidden = true; $("q").value = ""; $("q").focus(); });
+$("thread").addEventListener("click", (ev) => { const b = ev.target.closest(".choix button"); if (!b || b.disabled || busy) return; if (!sample) return; ask(b.dataset.v, false); });
+$("reset").addEventListener("click", () => { history = []; $("thread").innerHTML = ""; $("trace").textContent = ""; $("ans").style.display = "none"; $("res").hidden = true; $("q").value = ""; $("q").focus(); });
 </script>
 </body>
 </html>
