@@ -43,7 +43,7 @@ input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
 .ou p{margin:.3rem 0}.ou-t{font-weight:800;margin-bottom:.2rem}
 .ou-s{margin:.45rem 0 .2rem}.ou-s+.ou-s{border-top:1px dashed var(--line);padding-top:.45rem}
 .ou-h,.ou-c{margin:.15rem 0}.ou .links{margin-top:.25rem}
-.ou-src{font-size:.8rem;color:var(--muted)}
+.ou-src{font-size:.8rem;color:var(--muted)}.ou-src a.signaler{color:var(--muted);font-weight:400}
 .fs-fort{margin-top:1rem}
 .fs-pied{margin-top:1rem;font-size:.93rem;color:var(--ink)}.fs-pied summary{cursor:pointer}.fs-pied .ou-s{margin-left:1rem}
 """

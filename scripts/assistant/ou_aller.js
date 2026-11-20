@@ -85,11 +85,13 @@
   }
   const lienTel = (t) => { const m = t.match(/^([+\d][\d .]*\d)(.*)$/); return m ? `<a href="tel:${esc(m[1].replace(/[^\d+]/g, ""))}">${esc(m[1])}</a>${esc(m[2])}` : esc(t); };
   const lienMail = (m) => `<a href="mailto:${esc(m)}">${esc(m)}</a>`;
-  function contacts(tels, mails) {
+  // Les contacts affichés viennent de deux sources officielles seulement, toujours nommées sous le contact.
+  function contacts(tels, mails, source, fiche) {
     const l = [];
     if (tels.length) l.push("Tél.&nbsp;: " + tels.map(lienTel).join(", "));
     if (mails.length) l.push("Courriel&nbsp;: " + mails.map(lienMail).join(", "));
-    return l.length ? `<div class="ou-c">${l.join(" · ")}</div>` : "";
+    const signaler = fiche ? ` · <a class="signaler" href="${esc(fiche)}" target="_blank" rel="noopener">Signaler une erreur</a>` : "";
+    return (l.length ? `<div class="ou-c">${l.join(" · ")}</div>` : "") + `<div class="ou-src">Source&nbsp;: ${source}${signaler}</div>`;
   }
   function htmlService(s) {
     const a = lit(s.adresse)[0] || {};
@@ -98,7 +100,7 @@
     const mails = (s.adresse_courriel || "").split(/[;,\s]+/).filter((m) => m.includes("@"));
     const liens = [a.latitude && a.longitude ? `<a href="${carte(a.latitude, a.longitude)}" target="_blank" rel="noopener">Voir sur la carte ↗</a>` : "",
       s.url_service_public ? `<a href="${esc(s.url_service_public)}" target="_blank" rel="noopener">Fiche officielle du service ↗</a>` : ""].filter(Boolean).join("");
-    return `<div class="ou-s"><strong>${esc(s.nom)}</strong>${adr ? `<div>${esc(adr)}</div>` : ""}${blocHoraires(horairesAnnuaire(s.plage_ouverture))}${contacts(tels, mails)}<div class="links">${liens}</div></div>`;
+    return `<div class="ou-s"><strong>${esc(s.nom)}</strong>${adr ? `<div>${esc(adr)}</div>` : ""}${blocHoraires(horairesAnnuaire(s.plage_ouverture))}${contacts(tels, mails, "Annuaire de l'administration (DILA)", s.url_service_public)}<div class="links">${liens}</div></div>`;
   }
   // Une démarche en ligne n'a de guichet local que si elle relève du département de l'usager : une démarche nationale
   // ou d'un autre département n'est pas reçue par le service de sa commune.
@@ -116,14 +118,15 @@
       box.innerHTML = replie ? `<details><summary><b>Où déposer la demande</b> (comme plus haut)</summary><p>${texte}</p></details>` : `<div class="ou-t">Où déposer la demande</div><p>${texte}</p>`;
       return;
     }
-    box.innerHTML = `<div class="ou-t">Où aller · ${esc(g.libelle)} pour ${esc(c.nom)}</div><p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`;
+    // Le type de la table ne sert qu'à choisir le guichet : l'encadré affiche le nom que renvoie l'Annuaire.
+    box.innerHTML = `<div class="ou-t">Où aller pour ${esc(c.nom)}</div><p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`;
     let l;
     try { l = await services(c.code, g.types); } catch (e) { box.querySelector(".ou-src").textContent = "L'Annuaire de l'administration ne répond pas pour l'instant."; return; }
     if (COMMUNE !== c) return;
     if (!l.length) { box.remove(); return; }
-    const corps = `${l.map(htmlService).join("")}<p class="ou-src">Service compétent pour votre commune selon l'Annuaire de l'administration (DILA), interrogé avec le seul code de la commune.</p>`;
-    box.innerHTML = replie ? `<details><summary><b>Où aller · ${esc(g.libelle)} pour ${esc(c.nom)}</b> (même service que plus haut)</summary>${corps}</details>`
-      : `<div class="ou-t">Où aller · ${esc(g.libelle)} pour ${esc(c.nom)}</div>${corps}`;
+    const corps = `${l.map(htmlService).join("")}<p class="ou-src">Service compétent pour votre commune selon l'Annuaire, interrogé avec le seul code de la commune.</p>`;
+    box.innerHTML = replie ? `<details><summary><b>Où aller&nbsp;: ${esc(l.map((s) => s.nom).join(", "))}</b> (comme plus haut)</summary>${corps}</details>`
+      : `<div class="ou-t">Où aller pour ${esc(c.nom)}</div>${corps}`;
   }
 
   // ---------- 3. France services la plus proche
@@ -138,16 +141,18 @@
     const nature = /itin|bus/i.test(v("format")) ? " · structure itinérante" : "";
     const adr = [v("adresse"), v("complement"), v("code_postal") + " " + v("commune")].filter(Boolean).join(", ");
     return `<div class="ou-s"><strong>${esc(v("nom"))}</strong> <span class="meta">à ${d.toLocaleString("fr-FR", { maximumFractionDigits: 1 })} km${nature}</span><div>${esc(adr)}</div>${blocHoraires(sem)}`
-      + contacts(v("telephone") ? [v("telephone")] : [], (v("courriel") || "").split(/[;,\s]+/).filter((m) => m.includes("@")))
       + (v("rdv") === "Oui" ? `<div class="meta">Prise de rendez-vous possible.</div>` : "")
-      + `<div class="links"><a href="${carte(v("lat"), v("lon"))}" target="_blank" rel="noopener">Voir sur la carte ↗</a></div></div>`;
+      + contacts(v("telephone") ? [v("telephone")] : [], (v("courriel") || "").split(/[;,\s]+/).filter((m) => m.includes("@")), "France services (ANCT)", v("fiche"))
+      + `<div class="links"><a href="${carte(v("lat"), v("lon"))}" target="_blank" rel="noopener">Voir sur la carte ↗</a>`
+      + (v("fiche") ? `<a href="${esc(v("fiche"))}" target="_blank" rel="noopener">Fiche officielle ↗</a>` : "") + `</div></div>`;
   }
   async function franceServices(liste) {
     let el = $("fs-aide");
     if (!el) { el = document.createElement("div"); el.id = "fs-aide"; $("cards").after(el); }
-    // « Aucune démarche en ligne pertinente » : aucune démarche en ligne du département de l'usager parmi les résultats
-    // (sans commune connue : aucune démarche en ligne du tout).
-    const enLigne = COMMUNE ? liste.some((r) => r && duDepartement(r, COMMUNE)) : liste.some((r) => r && r.k === "dn");
+    // « Aucune démarche en ligne pertinente » : aucune démarche en ligne, nationale ou du département de l'usager, parmi
+    // les 5 premiers résultats. Sans département connu, toute démarche en ligne compte.
+    const dep = COMMUNE ? COMMUNE.dep : $("dep").value;
+    const enLigne = liste.slice(0, 5).some((r) => r && r.k === "dn" && (!r.dep || !dep || r.dep === dep));
     el.className = enLigne ? "fs-pied" : "ou fs-fort"; el.innerHTML = "";
     if (!$("res") || $("res").hidden) return;
     const c = COMMUNE;
