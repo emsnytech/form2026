@@ -29,7 +29,13 @@ REGIONS = ("auvergnerhonealpes.fr", "bourgognefranchecomte.fr", "bretagne.bzh", 
            "grandest.fr", "hautsdefrance.fr", "iledefrance.fr", "normandie.fr", "nouvelle-aquitaine.fr", "laregion.fr",
            "paysdelaloire.fr", "maregionsud.fr", "isula.corsica", "regionguadeloupe.fr", "regionreunion.com", "ctguyane.fr",
            "collectivitedemartinique.mq")
-PUBLICS = {"commune": "collectivités", "epci": "collectivités", "department": "collectivités", "region": "collectivités",
+# Codes INSEE des régions, pour découper le relevé sous le plafond de l'API.
+REGIONS_INSEE = ["01", "02", "03", "04", "06", "11", "24", "27", "28", "32", "44", "52", "53", "75", "76", "84", "93", "94"]
+PUBLICS = {"Commune": "collectivités", "Intercommunalité / Pays": "collectivités", "Département": "collectivités", "Région": "collectivités",
+           "Collectivité d’outre-mer à statut particulier": "collectivités", "Etablissement public dont services de l'Etat": "établissements publics",
+           "Entreprise publique locale (Sem, Spl, SemOp)": "entreprises publiques locales", "Association": "associations",
+           "Entreprise privée": "entreprises", "Particulier": "particuliers", "Agriculteur": "entreprises (agriculteurs)",
+           "commune": "collectivités", "epci": "collectivités", "department": "collectivités", "region": "collectivités",
            "special": "collectivités", "public-org": "établissements publics", "public-cies": "entreprises publiques",
            "association": "associations", "private-sector": "entreprises", "farmer": "entreprises (agriculteurs)",
            "private-person": "particuliers", "researcher": "recherche"}
@@ -54,6 +60,18 @@ def requete(url, jeton=None, donnees=None, entetes=None):
             raise
 
 
+def annonce_du_site():
+    """Nombre d'« aides publiées et toujours ouvertes aux candidatures » des statistiques publiques du site, ou None."""
+    try:
+        req = urllib.request.Request(API + "/stats/", headers={"User-Agent": AGENT})
+        t = urllib.request.urlopen(req, timeout=60).read().decode("utf-8", "ignore")
+    except Exception:
+        return None
+    t = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", t))
+    m = re.search(r"toujours ouvertes aux candidatures\s*([\d\s\u00a0\u202f]+)", t)
+    return int(re.sub(r"\D", "", m.group(1))) if m and re.sub(r"\D", "", m.group(1)) else None
+
+
 def jeton_bearer():
     v = os.environ.get("AIDES_TERRITOIRES_TOKEN", "").strip()
     if not v:
@@ -71,17 +89,40 @@ def jeton_bearer():
     return r["token"]
 
 
-def releve(jeton):
-    """Toutes les aides actuellement publiées (/api/aids/), page par page."""
-    aides, url = [], API + "/api/aids/?itemsPerPage=100&page=1"
+def pages(jeton, url):
+    """Une liste de l'API, page par page. Deux formats rencontrés : celui de la documentation (hydra:member) et celui que
+    l'API renvoie en 1.8.4 (count, next, results)."""
+    out = []
     while url:
-        r = requete(url, jeton)
-        aides += r.get("hydra:member") or r.get("member") or []
-        suiv = (r.get("hydra:view") or r.get("view") or {}).get("hydra:next") or (r.get("view") or {}).get("next")
+        r = requete(url, jeton, entetes={"Accept": "application/json"})
+        out += r.get("results") or r.get("hydra:member") or r.get("member") or []
+        suiv = r.get("next") or (r.get("hydra:view") or r.get("view") or {}).get("hydra:next")
         url = urllib.parse.urljoin(API, suiv) if suiv else None
-        print(f"\r{len(aides)} aides relevées", end="", file=sys.stderr); time.sleep(0.2)
+        time.sleep(0.2)
+    return out
+
+
+def releve(jeton):
+    """Toutes les aides publiées et ouvertes (/api/aids/). L'API plafonne une liste à 3 000 aides (30 pages de 100) :
+    le relevé est complété par une liste par public visé et une liste par région du périmètre, chacune sous le plafond,
+    réunies par identifiant."""
+    par_id = {}
+    base = pages(jeton, API + "/api/aids/?itemsPerPage=100&page=1")
+    for a in base: par_id[a.get("id") or a.get("@id")] = a
+    publics = pages(jeton, API + "/api/aids/audiences/?itemsPerPage=100")
+    for p in publics:
+        s = p.get("slug") or p.get("id")
+        for a in pages(jeton, API + "/api/aids/?itemsPerPage=100&page=1&organization_type_slugs[]=" + urllib.parse.quote(str(s))):
+            par_id.setdefault(a.get("id") or a.get("@id"), a)
+        print(f"\r{len(par_id)} aides distinctes relevées", end="", file=sys.stderr)
+    apres_publics = len(par_id)
+    for code in REGIONS_INSEE:
+        for a in pages(jeton, API + "/api/aids/?itemsPerPage=100&page=1&perimeter_codes[]=" + code):
+            par_id.setdefault(a.get("id") or a.get("@id"), a)
+        print(f"\r{len(par_id)} aides distinctes relevées", end="", file=sys.stderr)
     print(file=sys.stderr)
-    return aides
+    releve.base, releve.publics, releve.apres_publics = len(base), [p.get("name") for p in publics], apres_publics
+    return list(par_id.values())
 
 
 def domaine(u):
@@ -115,11 +156,23 @@ def nom(x):
     return str(x or "")
 
 
+# Noms de champs : réponse réelle de l'API 1.8.4, puis ceux de sa documentation.
+def champ(a, *noms):
+    for n in noms:
+        if a.get(n) not in (None, "", []): return a[n]
+    return None
+
+
+financeurs = lambda a: [nom(f) for f in (champ(a, "financers", "aid_financers") or []) if nom(f)]
+publics_de = lambda a: [nom(p) for p in (champ(a, "targeted_audiences", "aid_audiences") or []) if nom(p)]
+date_limite = lambda a: str(champ(a, "submission_deadline", "date_submission_deadline") or "")[:10]
+
+
 def echelle(a):
     """Échelle du périmètre, d'après son nom et ses codes (champs perimeter_code, region_code de l'API 1.8.4)."""
     p = a.get("perimeter") or {}
     n = (nom(p) or "").strip()
-    sc = (p.get("scale") if isinstance(p, dict) else None) or ""
+    sc = a.get("perimeter_scale") or (p.get("scale") if isinstance(p, dict) else None) or ""
     code, reg = str(a.get("perimeter_code") or ""), str(a.get("region_code") or "")
     if sc: return str(sc)
     if re.fullmatch(r"(?i)europe|union europ[ée]enne", n): return "européen"
@@ -165,13 +218,22 @@ def pct(n, d):
 
 def rapport(aides, slugs_index, publies, aujourd_hui):
     total = len(aides)
-    ouvertes = [a for a in aides if not a.get("date_submission_deadline") or str(a["date_submission_deadline"])[:10] >= aujourd_hui]
-    maj = max((str(a.get("time_update") or "")[:10] for a in aides), default="")
+    ouvertes = [a for a in aides if not date_limite(a) or date_limite(a) >= aujourd_hui]
+    maj = max((str(champ(a, "date_updated", "time_update", "date_created", "time_create") or "")[:10] for a in aides), default="")
     L = []
     L.append("# Aides-territoires comme source de démarches de dépôt : audit\n")
     L.append(f"Produit par `scripts/assistant/audit_aides_territoires.py` le {aujourd_hui}. Source : [Aides-territoires (ANCT)](https://aides-territoires.beta.gouv.fr/), "
              f"API, Licence Ouverte v2.0 ; dernière mise à jour des aides relevées : {maj or 'inconnue'}. Aucun ajout à l'index ni à la page : rapport seulement.\n")
     L.append("## Volumes\n")
+    if getattr(releve, "base", None) is not None:
+        L.append(f"- L'API plafonne une liste à 3 000 aides : la liste générale en a rendu {releve.base}. Le relevé est complété par une liste "
+                 f"par public visé ({releve.apres_publics} aides distinctes), puis une liste par région du périmètre, chacune sous le plafond, "
+                 f"réunies par identifiant. Publics proposés par l'API : {', '.join(releve.publics)} ; ni association, ni entreprise privée, "
+                 f"ni particulier.")
+        n = annonce_du_site()
+        if n:
+            L.append(f"- Le site annonce, dans ses statistiques publiques, {n} « aides publiées et toujours ouvertes aux candidatures » "
+                     f"(lu le {aujourd_hui}) ; l'écart avec le relevé n'est pas expliqué (définition de « ouverte », périmètre).")
     L.append(f"- Aides publiées relevées (`/api/aids/`) : {total}.")
     L.append(f"- Dont ouvertes (sans date limite de dépôt, ou date limite non passée au {aujourd_hui}) : {len(ouvertes)}. **Le reste du rapport porte sur les aides ouvertes.**\n")
     # Champs
@@ -208,9 +270,9 @@ def rapport(aides, slugs_index, publies, aujourd_hui):
     L.append(f"Liens de dépôt vers demarche.numerique.gouv.fr ou demarches-simplifiees.fr : {len(ldn)}. Rapprochement par l'adresse `/commencer/<slug>`.\n")
     L.append(tableau(["Cas", "Aides"], sl.most_common()) + "\n")
     # Porteurs et publics
-    port = collections.Counter(propre(nom(f), 80) for a in ouvertes for f in (a.get("aid_financers") or []) if nom(f))
-    pubs = collections.Counter(nom(p) for a in ouvertes for p in (a.get("aid_audiences") or []))
-    grp = collections.Counter(g for a in ouvertes for g in {PUBLICS.get(nom(p), nom(p) or "non précisé") for p in (a.get("aid_audiences") or [])} or ["non précisé"])
+    port = collections.Counter(propre(f, 80) for a in ouvertes for f in financeurs(a))
+    pubs = collections.Counter(p for a in ouvertes for p in publics_de(a))
+    grp = collections.Counter(g for a in ouvertes for g in ({PUBLICS.get(p, p) for p in publics_de(a)} or {"non précisé"}))
     L.append("## Porteurs (financeurs)\n")
     L.append(f"{len(port)} porteurs distincts. Les 30 premiers :\n")
     L.append(tableau(["Porteur", "Aides"], port.most_common(30)) + "\n")
@@ -218,11 +280,11 @@ def rapport(aides, slugs_index, publies, aujourd_hui):
     L.append("Une aide peut viser plusieurs publics.\n")
     L.append(tableau(["Public", "Aides"], grp.most_common()) + "\n")
     L.append("Détail par valeur de l'API :\n")
-    L.append(tableau(["Valeur `aid_audiences`", "Aides"], pubs.most_common()) + "\n")
+    L.append(tableau(["Valeur de l'API (`targeted_audiences`)", "Aides"], pubs.most_common()) + "\n")
     # Territoire
     ech = collections.Counter(echelle(a) for a in ouvertes)
     L.append("## Répartition territoriale\n")
-    L.append("Échelle déduite du périmètre (nom, `perimeter_code`, `region_code`).\n")
+    L.append("Échelle donnée par l'API (`perimeter_scale`) ; à défaut, déduite du périmètre (nom, `perimeter_code`, `region_code`).\n")
     L.append(tableau(["Échelle", "Aides"], ech.most_common()) + "\n")
     # Licences
     lic = collections.Counter(a.get("import_share_licence") or "non précisée (Licence Ouverte v2.0 du site)" for a in ouvertes)
@@ -244,8 +306,8 @@ def rapport(aides, slugs_index, publies, aujourd_hui):
     ex = random.Random(20261120).sample(hors, min(20, len(hors)))
     L.append("## 20 exemples tirés au hasard, dépôt hors Démarche Numérique\n")
     L.append(tableau(["Titre", "Porteur", "Public", "Périmètre", "Domaine du lien"],
-                     [[propre(a.get("name"), 110), propre(", ".join(nom(f) for f in (a.get("aid_financers") or [])), 70) or "—",
-                       ", ".join(sorted({PUBLICS.get(nom(p), nom(p)) for p in (a.get("aid_audiences") or [])})) or "—",
+                     [[propre(a.get("name"), 110), propre(", ".join(financeurs(a)), 70) or "—",
+                       ", ".join(sorted({PUBLICS.get(p, p) for p in publics_de(a)})) or "—",
                        propre(nom(a.get("perimeter")), 50) or "—", domaine(a["application_url"])] for a in ex]) + "\n")
     return "\n".join(L)
 
