@@ -751,8 +751,10 @@ function afficherResultats(liste, q, origine, principalDonne) {
   // particulier, démarche réservée aux professionnels) ; la recherche simple la reçoit de Moteur.choisir.
   const principal = principalDonne !== undefined ? principalDonne : Moteur.principalDe(liste, q, opt);
   // Rien de pertinent (recherche simple) : aucune carte, une invitation à reformuler, avec des exemples.
-  const P = origine === "simple" && liste.length ? Moteur.pertinence(IX, q, opt) : null;
-  const rien = !liste.length || (P && !liste.some((r) => P.pertinente(r.id)));
+  // Seuil de pertinence de la règle France services (Moteur.pertinence : moitié du meilleur score, et deux termes de la
+  // question repris ou le terme le plus rare) ; il décide aussi de la carte « Aussi pour vous ».
+  const P = liste.length ? Moteur.pertinence(IX, q, opt) : null;
+  const rien = !liste.length || (origine === "simple" && !liste.some((r) => P.pertinente(r.id)));
   $("rep-autrement").hidden = !rien; $("rep-manque").hidden = true;
   if (rien) {
     $("rep-autrement").innerHTML = `<p>${esc(MESSAGES.autrement)}</p><div class="chips">${EXEMPLES.slice(0, 3).map((x, i) => `<button type="button" class="chip" data-i="${i}">${esc(x.q)}</button>`).join("")}</div>`;
@@ -765,7 +767,8 @@ function afficherResultats(liste, q, origine, principalDonne) {
   // Pas de démarche en ligne en tête : la fiche officielle la plus pertinente, en « Comprendre », remontée en premier.
   const comprendre = ligne ? (estFiche(principal) ? null : (lieeAuPrincipal || fiches[0] || null))
     : (estFiche(principal) ? principal : (fiches[0] || null));
-  const aussi = fiches.find((f) => f !== principal && f !== comprendre && resDe(f).some((x) => /imulateur|Téléservice|selNG/i.test(x.ty))) || null;
+  // « Aussi pour vous » : une fiche qui a un simulateur ou une démarche en ligne, et qui passe le seuil de pertinence ; sinon, pas de carte.
+  const aussi = fiches.find((f) => f !== principal && f !== comprendre && resDe(f).some((x) => /imulateur|Téléservice|selNG/i.test(x.ty)) && P.pertinente(f.id)) || null;
   carteDemarche(ligne ? principal : null); carteAussi(aussi); carteComprendre(comprendre);
   if (ligne) $("carte-ou").after($("carte-comprendre")); else $("carte-demarche").before($("carte-comprendre"));
   if (!ligne) { $("rep-manque").innerHTML = avecSignaler(MESSAGES.manque); $("rep-manque").hidden = false; }

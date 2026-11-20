@@ -189,7 +189,8 @@ process.stdin.on('data',d=>s+=d).on('end',()=>{ const out={}; for (const q of JS
           "editeur": ed}
     pd_chemin.write_text(json.dumps(pd, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
-    # ---------- À la une
+    # ---------- À la une (champs de l'éditeur de a_la_une.json, pas ceux de plus_demandees.json)
+    ed = lire_editeur(D / "a_la_une.json")
     seuil = (date - datetime.timedelta(days=30)).isoformat()
     URGENT = re.compile(r"\burgence|\burgent")
     CRISE = re.compile(r"\bcrise|calamite|secheresse|inondation|intemperie|degradation|emeute|\bcasi\b|force majeure|grele|tempete")
@@ -236,7 +237,7 @@ process.stdin.on('data',d=>s+=d).on('end',()=>{ const out={}; for (const q of JS
     au = {"objet": "Accueil, « À la une » : proposé par la mise à jour, validé par l'éditeur. editeur.epingle (mots du titre), editeur.exclu (clés), editeur.etiquette ({clé: étiquette}).",
           "date": meta["date_export"], "retenues": ordre[:6], "suivantes": ordre[6:12],
           "source": "Démarches publiées depuis moins de 30 jours, et démarches de saison (saisons.json) ; descriptif de Démarche Numérique",
-          "editeur": lire_editeur(D / "a_la_une.json")}
+          "editeur": ed}
     (D / "a_la_une.json").write_text(json.dumps(au, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(f"plus_demandees.json : {len(choisis_dn)} sur Démarche Numérique, {len(cand_nat)} candidates nationales ; a_la_une.json : {len(une)} lignes candidates")
 
