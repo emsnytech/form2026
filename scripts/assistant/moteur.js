@@ -10,6 +10,8 @@
     handicap: ["handicap", "mdph"], logement: ["logement"], ecole: ["scolaire", "scolarisation", "ecole"], fac: ["universite", "etudes"],
     etranger: ["etranger", "sejour"], cree: ["creation"], creer: ["creation"], monter: ["creation"], adapter: ["adaptation", "amenagement"],
     perdu: ["perte"], perdue: ["perte"], vole: ["vol"], volee: ["vol"], retraite: ["retraite"], deces: ["deces"], mariage: ["mariage"], chasse: ["chasse", "tir"],
+    // rue ↔ voie, voie publique, route, chaussée (dans les deux sens)
+    rue: ["voie", "route", "chaussee"], voie: ["rue"], route: ["rue"], chaussee: ["rue"],
   };
   function norm(s) {
     return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
@@ -92,9 +94,10 @@
     return top.map(([s, i]) => ({ score: +s.toFixed(2), r: ix.recs[i] }));
   }
   // Pertinence d'un résultat pour une question, au sens de la règle France services de la page FORM (ne change ni le
-  // classement ni l'affichage) : score d'au moins la moitié du meilleur score de la recherche, et au moins deux termes
-  // significatifs distincts de la question repris (un seul si la question n'en a qu'un). Un terme est la racine d'un mot
-  // hors mots vides ; un synonyme ajouté par le moteur compte comme le terme d'origine.
+  // classement ni l'affichage) : score d'au moins la moitié du meilleur score de la recherche, et soit au moins deux termes
+  // significatifs distincts de la question repris, soit le terme le plus rare de la question (IDF la plus élevée parmi les
+  // termes présents dans l'index ; c'est aussi le cas d'une question à un seul terme). Un terme est la racine d'un mot hors
+  // mots vides ; un synonyme ajouté par le moteur compte comme le terme d'origine.
   function pertinence(ix, q, opt = {}) {
     const termes = new Map();
     for (const w of norm(q).split(" ")) {
@@ -109,10 +112,14 @@
       if (!postings.has(t)) { const p = ix.inv.get(t) || [], s = new Set(); for (let j = 0; j < p.length; j += 2) s.add(p[j]); postings.set(t, s); }
       return postings.get(t).has(i);
     };
-    const couverture = (id) => { const i = ix.byId.get(id); let n = 0; for (const g of termes.values()) if ([...g].some((t) => contient(t, i))) n++; return n; };
-    const requis = Math.min(2, termes.size);
-    return { meilleur, termes: termes.size, score: (id) => score.get(id) || 0, couverture,
-      pertinente: (id) => termes.size > 0 && (score.get(id) || 0) >= 0.5 * meilleur && couverture(id) >= requis };
+    const couvre = (g, i) => [...g].some((t) => contient(t, i));
+    const couverture = (id) => { const i = ix.byId.get(id); let n = 0; for (const g of termes.values()) if (couvre(g, i)) n++; return n; };
+    const N = ix.recs.length, idf = (t) => { const p = ix.inv.get(t); return p ? Math.log(1 + (N - p.length / 2 + 0.5) / (p.length / 2 + 0.5)) : -1; };
+    let rare = null;
+    for (const [t, g] of termes) if (idf(t) >= 0 && (!rare || idf(t) > idf(rare[0]))) rare = [t, g];
+    const plusRare = (id) => !!rare && couvre(rare[1], ix.byId.get(id));
+    return { meilleur, termes: termes.size, rare: rare && rare[0], score: (id) => score.get(id) || 0, couverture, plusRare,
+      pertinente: (id) => termes.size > 0 && (score.get(id) || 0) >= 0.5 * meilleur && (couverture(id) >= 2 || plusRare(id)) };
   }
   const api = { build, search, norm, toks, pertinence };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;

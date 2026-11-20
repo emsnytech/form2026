@@ -81,7 +81,7 @@ for num,a in desc.items():
         if d:
             po,dep='dep',d; formes[forme+' ('+source+')']+=1
             deduits.append({'id':'DN-%d'%num,'dep':d,'forme':forme,'source':source,'organisme':org,'titre':titre})
-            if autre: ecarts.append({'id':'DN-%d'%num,'organisme':org,'titre':titre,'dep_organisme':d,'dep_titre':autre})
+            if autre: ecarts.append({'id':'DN-%d'%num,'organisme':org,'titre':titre,'dep_retenu':d,'dep_ecarte':autre,'source':source})
         else: po,dep='inc',''
     portee[po]+=1
     recs.append({'k':'dn','id':'DN-%d'%num,'t':clean(titre,220),'d':clean(a[1],300),'o':clean(org,120),'dep':dep,'po':po,

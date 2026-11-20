@@ -98,12 +98,24 @@ def _dans(texte, titre=False):
     return None, None
 
 
+# Formes qui désignent un organisme avec son département (marqueur administratif ou sigle) : seules celles-ci, lues dans
+# le titre, priment sur le département tiré de l'organisme porteur. Un code en tête du titre ne désigne pas d'organisme.
+FORMES_ORGANISME = {"préfecture de police", "préfecture de région", "collectivité d'outre-mer", "sigle et code", "marqueur et nom"}
+
+
 def deduire(organisme, titre):
-    """Renvoie (département, forme, source, département du titre s'il diffère de celui de l'organisme)."""
+    """Renvoie (département retenu, forme, source, autre département écarté s'il y a désaccord).
+
+    D'abord l'organisme, puis le titre. En cas de désaccord, le titre prime quand il désigne explicitement un organisme
+    avec son département (« CAF DE L'AIN » sous l'organisme porteur « CAF DU PAS DE CALAIS ») ; sinon l'organisme l'emporte."""
     d_org, f_org = _dans(organisme)
     d_tit, f_tit = _dans(titre, titre=True)
+    if d_org and d_tit and d_tit != d_org:
+        if f_tit in FORMES_ORGANISME:
+            return d_tit, f_tit, "titre (prime sur l'organisme)", d_org
+        return d_org, f_org, "organisme", d_tit
     if d_org:
-        return d_org, f_org, "organisme", (d_tit if d_tit and d_tit != d_org else None)
+        return d_org, f_org, "organisme", None
     if d_tit:
         return d_tit, f_tit, "titre", None
     return None, None, None, None

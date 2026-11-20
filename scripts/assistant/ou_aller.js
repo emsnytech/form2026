@@ -9,6 +9,15 @@
   const SEMAINE = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
   const PLM = new Set(["75056", "69123", "13055"]); // Paris, Lyon, Marseille : l'arrondissement est retenu
   let COMMUNE = null, TABLE = null, FS = null, LISTE = [];
+  // Origine de la liste affichée : « simple » (recherche simple, classement brut du moteur) ou « citee » (réponse préparée
+  // ou conversation : démarches déjà retenues par l'assistant). Repérée en phase de capture, avant les gestionnaires du
+  // gabarit qui affichent les résultats.
+  let ORIGINE = "simple";
+  document.addEventListener("click", (ev) => {
+    if (ev.target.closest("#simple")) ORIGINE = "simple";
+    else if (ev.target.closest("#ex .chip, #thread .choix button")) ORIGINE = "citee";
+  }, true);
+  document.addEventListener("submit", (ev) => { if (ev.target.closest("#f, #ff")) ORIGINE = "citee"; }, true);
   const cache = new Map();
 
   const norm = (s) => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’`]/g, "'").replace(/\s+/g, " ");
@@ -151,13 +160,18 @@
   async function franceServices(liste) {
     let el = $("fs-aide");
     if (!el) { el = document.createElement("div"); el.id = "fs-aide"; $("cards").after(el); }
+    // Public : encadré ou ligne pour un particulier ou un public non précisé ; ligne seulement pour une entreprise ;
+    // rien pour une collectivité ou une association.
+    const pub = $("pub").value;
+    if (pub === "collectivite" || pub === "association") { el.className = ""; el.innerHTML = ""; return; }
     // « Aucune démarche en ligne pertinente » : parmi les 5 premiers résultats, aucune démarche nationale (po « nat ») ni du
     // département de l'usager (sans département connu : d'aucun département) qui soit pertinente pour la question, au sens
     // de Moteur.pertinence (moitié du meilleur score, deux termes de la question repris). Une démarche de département
     // inconnu ne compte pas. Le seuil sert à cette règle seulement : il ne change ni le classement ni l'affichage.
     const dep = COMMUNE ? COMMUNE.dep : $("dep").value;
-    const P = Moteur.pertinence(IX, $("q").value, { pub: $("pub").value, dep });
-    const enLigne = liste.slice(0, 5).some((r) => r && r.k === "dn" && (portee(r) === "nat" || (portee(r) === "dep" && (!dep || r.dep === dep))) && P.pertinente(r.id));
+    // Le seuil de pertinence ne vaut que pour la recherche simple : une démarche citée par l'assistant est déjà retenue.
+    const P = ORIGINE === "simple" ? Moteur.pertinence(IX, $("q").value, { pub, dep }) : { pertinente: () => true };
+    const enLigne = pub === "entreprise" || liste.slice(0, 5).some((r) => r && r.k === "dn" && (portee(r) === "nat" || (portee(r) === "dep" && (!dep || r.dep === dep))) && P.pertinente(r.id));
     el.className = enLigne ? "fs-pied" : "ou fs-fort"; el.innerHTML = "";
     if (!$("res") || $("res").hidden) return;
     const c = COMMUNE;
