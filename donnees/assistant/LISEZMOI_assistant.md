@@ -7,6 +7,8 @@ Données de la page `trouver-sa-demarche.html`. Production de l'auteur à partir
 - `index.json` : une ligne par démarche en ligne ou par fiche, dans laquelle cherche le moteur de la page (`scripts/assistant/moteur.js`).
   - Démarches en ligne (`"k":"dn"`) : titre, extrait de description, organisme, département, public, nombre de dossiers, nombre de champs, pièces justificatives, données préremplies, moment de vie, fiches service-public liées.
   - Fiches et ressources de service-public.gouv.fr (`"k":"sp"`) : type, titre, description, public, thème, documents à fournir, numéro CERFA, démarches en ligne liées.
+- `types_guichets.json` : la table de correspondance de l'encadré « Où aller » (voir plus bas).
+- `france_services.json` : les structures labellisées France services, avec leurs horaires, téléphones et courriels (voir plus bas).
 - `exemples.json` : les sept réponses préparées, chacune avec ses recherches et ses références (`DN-…`, `SP-…`). Leur texte a été vérifié contre l'index ; il ne se réécrit pas lors d'une mise à jour.
 
 ## Sources et dates
@@ -34,6 +36,16 @@ Une démarche porte le département de son organisme et n'est proposée que pour
 
 Le moteur tourne dans le navigateur, sans appel à un service extérieur. C'est un classement BM25 : les mots sont normalisés et réduits à leurs six premières lettres, et quelques mots courants des usagers sont traduits dans le vocabulaire de l'administration. Il applique les filtres de public et de département et écarte les démarches dont la date de fermeture est passée. Il favorise les démarches qui ont reçu beaucoup de dossiers et rétrograde celles dont le titre ne porte que des années anciennes.
 
+## Où aller
+
+Propre à la page FORM (`scripts/assistant/ou_aller.js`, recopié dans la page par `assembler_page.py`).
+
+- **Code postal → commune** : API Géo de l'État (`geo.api.gouv.fr`), appelée avec le seul code postal. À Paris, Lyon et Marseille, l'arrondissement est retenu. Le département de la commune règle le filtre du moteur ; le sélecteur de département reste disponible.
+- **Service local compétent** : Annuaire de l'administration (DILA), interrogé en direct avec le seul code de la commune : jeu des compétences géographiques (commune et type de service → identifiant), puis jeu des services (nom, adresse, horaires, téléphones, courriel, coordonnées, fiche officielle). Rien n'est stocké.
+- **Quand l'encadré s'affiche** : la commune est connue, et la démarche ou la fiche correspond à une règle de `types_guichets.json` (indices cherchés comme mots entiers dans l'organisme d'une démarche en ligne, dans le titre et le thème d'une fiche). Une démarche en ligne n'a d'encadré que si elle relève du département de la commune. Sans correspondance, pas d'encadré. À Paris, la ligne « Préfecture » renvoie à la Préfecture de police (`paris_ppp`), l'Annuaire n'y ayant pas de type `prefecture`. Pour les cartes d'identité et passeports (fiches du thème « Papiers - Citoyenneté - Élections »), l'encadré renvoie à la fiche, sans afficher la mairie : toutes ne prennent pas ces demandes.
+- **France services** : `france_services.json`, produit par `scripts/assistant/france_services.py` depuis la liste des structures labellisées de l'ANCT (data.gouv.fr, licence ouverte). La page calcule la plus proche du centre de la commune, à vol d'oiseau, et les deux suivantes. Encadré « Une France services peut vous aider » quand aucune démarche en ligne du département de l'usager ne figure parmi les résultats (sans commune connue : aucune démarche en ligne), ligne « Besoin d'aide pour faire la démarche ? » sinon.
+- **Contacts** : les téléphones et courriels affichés sont ceux que l'Annuaire et l'ANCT publient pour chaque service. `france_services.json` est le seul fichier du dépôt exclu du contrôle des contacts (voir le README, « Données de contact »).
+
 ## Limites
 
 - Le corpus ne couvre que les démarches publiées dans le descriptif ouvert et les fiches de service-public.gouv.fr. Il ne contient ni les téléservices des autres sites publics, sauf quand une fiche y renvoie, ni les démarches restées sur papier ou par courriel.
@@ -48,6 +60,7 @@ Les deux scripts lisent des sources hors du dépôt, l'export complet du descrip
 
     python3 scripts/assistant/extraire_descriptions.py <export du descriptif>.json <cartographie>/assistant/descriptions_publiees.jsonl
     python3 scripts/assistant/build_index.py --form . --carto <cartographie> --slim <slim du mois> --out donnees/assistant/index.json
+    python3 scripts/assistant/france_services.py
     python3 scripts/assistant/assembler_page.py
     node scripts/assistant/test_moteur.js
 

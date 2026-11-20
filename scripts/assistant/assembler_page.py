@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Recopie scripts/assistant/moteur.js dans trouver-sa-demarche.html, entre les marqueurs /*moteur:début*/ et /*moteur:fin*/.
+"""Recopie scripts/assistant/moteur.js et ou_aller.js dans trouver-sa-demarche.html, chacun entre ses marqueurs
+(/*moteur:début*/ … /*moteur:fin*/, /*ou_aller:début*/ … /*ou_aller:fin*/).
 
 moteur.js est la source unique du moteur : la page n'en porte qu'une copie, produite par ce script (même principe que
 scripts/sync_nav.py). Les tests (test_moteur.js) portent donc sur le code exact que la page exécute.
@@ -10,7 +11,8 @@ scripts/sync_nav.py). Les tests (test_moteur.js) portent donc sur le code exact 
 
 --depuis repart du gabarit de l'auteur (page.html, hors du dépôt, comme les sources de build_index.py) et lui applique les
 adaptations FORM listées dans ADAPTATIONS : barre de navigation, ligne des volumes, cadre d'entrée (rempli ensuite par
-scripts/sync_cadre.py), chemins des données, lien vers la version avec assistant et fenêtre de ses conditions. Chaque
+scripts/sync_cadre.py), chemins des données, lien vers la version avec assistant et fenêtre de ses conditions, code postal
+et « Où aller ». Chaque
 adaptation doit trouver sa place exactement une fois, sinon rien n'est écrit : le gabarit a changé et la liste est à revoir.
 """
 import re, subprocess, sys
@@ -19,6 +21,8 @@ from pathlib import Path
 RACINE = Path(__file__).resolve().parents[2]
 PAGE, MOTEUR = RACINE / "trouver-sa-demarche.html", Path(__file__).with_name("moteur.js")
 DEBUT, FIN = "/*moteur:début*/", "/*moteur:fin*/"
+# Modules recopiés dans la page, chacun entre ses marqueurs : le moteur, et « Où aller », propre à FORM.
+MODULES = [(MOTEUR, DEBUT, FIN), (Path(__file__).with_name("ou_aller.js"), "/*ou_aller:début*/", "/*ou_aller:fin*/")]
 ASSISTANT_URL = "https://claude.ai/artifact/LLfjE77eNYPjiykcDdcJza"
 
 CSS_DIALOGUE = """dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;background:var(--surface);color:var(--ink)}
@@ -31,6 +35,17 @@ a.btn.primary{color:#fff}
 """
 CSS_FORM = """.topnav{margin:0 0 1.2rem;font-size:.95rem}.topnav a{text-decoration:none;font-weight:600}
 .couv{margin:.5rem 0 0;font-weight:700;color:var(--muted);min-height:1.5em}
+input#cp{font:inherit;font-size:.95rem;padding:.35rem .5rem;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);width:6.5rem}
+input#cp:focus{outline:2px solid var(--admin);outline-offset:1px}
+.cp-etat{font-size:.9rem;font-weight:700;color:var(--usager)}
+.perso-cp{font-size:.85rem;color:var(--muted);margin:.4rem 0 0}
+.ou{margin-top:.7rem;padding:.6rem .8rem;border-left:4px solid var(--usager);background:var(--usager-soft);border-radius:0 8px 8px 0;font-size:.93rem}
+.ou p{margin:.3rem 0}.ou-t{font-weight:800;margin-bottom:.2rem}
+.ou-s{margin:.45rem 0 .2rem}.ou-s+.ou-s{border-top:1px dashed var(--line);padding-top:.45rem}
+.ou-h,.ou-c{margin:.15rem 0}.ou .links{margin-top:.25rem}
+.ou-src{font-size:.8rem;color:var(--muted)}
+.fs-fort{margin-top:1rem}
+.fs-pied{margin-top:1rem;font-size:.93rem;color:var(--ink)}.fs-pied summary{cursor:pointer}.fs-pied .ou-s{margin-left:1rem}
 """
 NAV = '  <p class="topnav" data-rubrique="donnees"><!-- nav:début --><!-- nav:fin --></p>\n'
 DIALOGUE = """  <dialog id="dlg-ia" aria-labelledby="dlg-ia-t">
@@ -64,10 +79,17 @@ ADAPTATIONS = [
     (r'(<div class="wrap">\n)', lambda m: m[1] + NAV),
     (r'(  <p class="lede">.*?</p>\n)', lambda m: m[1] + '  <p class="couv" id="couv"></p>\n'),
     (r'  <div class="frame" id="cadre">[^\n]*</div>\n', lambda m: "  <!-- cadre:début -->\n  <!-- cadre:fin -->\n"),
+    (r'      <label class="sel">Département (<select id="dep">.*?</select>)</label>\n    </div>\n',
+     lambda m: '      <label class="sel">Votre code postal <input id="cp" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="ex. 94120"></label>\n'
+     '      <select id="commune" aria-label="Votre commune" hidden></select>\n      <span class="cp-etat" id="cp-etat" role="status"></span>\n'
+     f'      <label class="sel">ou choisissez un département {m[1]}</label>\n    </div>\n'
+     '    <p class="perso-cp">Votre code postal sert uniquement à trouver votre commune (API Géo de l\'État). Rien d\'autre n\'est envoyé.</p>\n'),
     (r'(  +<button type="button" class="ghost" id="simple"[^\n]*\n)',
      lambda m: m[1] + '      <button type="button" class="ghost" id="ia" hidden>Essayer avec l\'assistant (version de test)</button>\n'),
     (r'(<form class="ask" id="f">.*?\n  </form>\n)', lambda m: m[1] + "\n" + DIALOGUE),
-    (r'(\n      <li><strong>Données&nbsp;:</strong>)', lambda m: "\n      <li><strong>La suite du projet&nbsp;:</strong> indexer les services publics en ligne, d'abord ceux de l'État et de ses opérateurs, puis ceux des collectivités.</li>" + m[1]),
+    (r'(\n      <li><strong>Données&nbsp;:</strong>)', lambda m: "\n      <li><strong>Où aller&nbsp;:</strong> votre code postal donne votre commune (API Géo de l'État). Le service local compétent pour votre commune vient de l'Annuaire de l'administration (DILA), interrogé avec le seul code de la commune&nbsp;; la France services la plus proche, de la liste des structures labellisées (ANCT). Les téléphones et adresses électroniques affichés sont ceux que ces deux sources publient pour chaque service.</li>"
+     "\n      <li><strong>La suite du projet&nbsp;:</strong> indexer les services publics en ligne, d'abord ceux de l'État et de ses opérateurs, puis ceux des collectivités.</li>" + m[1]),
+    (r"(</script>\n)(</body>)", lambda m: m[1] + "<script>/*ou_aller:début*/\n/*ou_aller:fin*/</script>\n" + m[2]),
     (r"<script>/\*MOTEUR\*/</script>",
      lambda m: f'<script>window.FORM_ASSISTANT_URL = "{ASSISTANT_URL}";  // version avec assistant (artefact Claude partagé)</script>\n<script>{DEBUT}\n{FIN}</script>'),
     (r'fetch\("exemples\.json"\)', lambda m: 'fetch("donnees/assistant/exemples.json")'),
@@ -90,9 +112,12 @@ def adapter(gabarit):
 
 
 def avec_moteur(t):
-    if DEBUT not in t or FIN not in t:
-        sys.exit(f"{PAGE.name} : marqueurs {DEBUT} … {FIN} absents")
-    return re.sub(re.escape(DEBUT) + ".*?" + re.escape(FIN), lambda m: DEBUT + "\n" + MOTEUR.read_text(encoding="utf-8").rstrip("\n") + "\n" + FIN, t, count=1, flags=re.S)
+    for source, debut, fin in MODULES:
+        if debut not in t or fin not in t:
+            sys.exit(f"{PAGE.name} : marqueurs {debut} … {fin} absents")
+        code = source.read_text(encoding="utf-8").rstrip("\n")
+        t = re.sub(re.escape(debut) + ".*?" + re.escape(fin), lambda m: debut + "\n" + code + "\n" + fin, t, count=1, flags=re.S)
+    return t
 
 
 if "--depuis" in sys.argv:
@@ -106,8 +131,8 @@ if "--depuis" in sys.argv:
 t = PAGE.read_text(encoding="utf-8")
 n = avec_moteur(t)
 if n == t:
-    print("Moteur de la page : à jour.")
+    print("Moteur et « Où aller » de la page : à jour.")
 elif "--check" in sys.argv:
-    print(f"{PAGE.name} : le moteur diffère de scripts/assistant/moteur.js (lancer scripts/assistant/assembler_page.py)"); sys.exit(1)
+    print(f"{PAGE.name} : le moteur ou « Où aller » diffère de scripts/assistant/ (lancer scripts/assistant/assembler_page.py)"); sys.exit(1)
 else:
     PAGE.write_text(n, encoding="utf-8"); print(f"écrit : {PAGE.name}")
