@@ -7,7 +7,7 @@ Le dernier contrôle vérifie que les références de exemples.json (à côté d
 import json, glob, re, collections, html, sys
 import argparse, os, random
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from departements import deduire, affiner_nationale, titre_technique, charger_communes
+from departements import deduire, affiner_nationale, titre_technique, charger_communes, _dans as dep_dans_texte
 ap=argparse.ArgumentParser(description=__doc__)
 ap.add_argument('--form', default=os.path.expanduser('~/Documents/form2026-site'), help='clone du dépôt FORM 2026')
 ap.add_argument('--carto', default=os.path.expanduser('~/Documents/cartographie'), help='dossier cartographie (dila/, Bdddemarchesfinoctobre/, assistant/)')
@@ -69,7 +69,7 @@ recettes=collections.defaultdict(list); recettes_gardees=[]
 recs=[]; skipped=collections.Counter(); portee=collections.Counter(); deduits=[]; formes=collections.Counter(); ecarts=[]
 # Communes de donnees/assistant/communes.json (dans le dépôt) : lieu nommé dans le titre d'une démarche d'organisme national.
 charger_communes(os.path.join(FORM,'donnees','assistant','communes.json'))
-affines=collections.defaultdict(list); techniques=[]
+affines=collections.defaultdict(list); techniques=[]; declares_divergents=[]
 for num,a in desc.items():
     s=slim.get(num)
     if not s: skipped['sans_titre']+=1; continue
@@ -94,7 +94,12 @@ for num,a in desc.items():
     if national:
         po,dep,regle=affiner_nationale(org,titre)
         if regle: affines[regle].append({'id':'DN-%d'%num,'portee':po,'dep':dep or '','organisme':org,'titre':titre})
-    elif dep: po='dep'
+    elif dep:
+        po='dep'
+        # Département déclaré, mais le titre en nomme un autre après « en » ou « dans » : listé, jamais modifié (chantier des
+        # départements déclarés douteux).
+        d2,f2=dep_dans_texte(titre,titre=True)
+        if d2 and f2.startswith('département après') and d2!=dep: declares_divergents.append({'id':'DN-%d'%num,'dep_declare':dep,'dep_titre':d2,'organisme':org,'titre':titre})
     else:
         d,forme,source,autre=deduire(org,titre)
         if d:
@@ -110,9 +115,9 @@ for num,a in desc.items():
 print('DN',len(recs),dict(skipped))
 print('démarches de recette écartées :',{k:len(v) for k,v in recettes.items()},'; gardées et signalées (plus de 10 dossiers) :',len(recettes_gardees))
 print('portée des démarches en ligne :',dict(portee),'; départements déduits :',len(deduits),dict(formes),'; organisme et titre divergents :',len(ecarts))
-print('portée nationale affinée :',{k:len(v) for k,v in affines.items()},'; titres techniques :',len(techniques))
+print('portée nationale affinée :',{k:len(v) for k,v in affines.items()},'; titres techniques :',len(techniques),'; département déclaré différent de celui du titre (« en / dans ») :',len(declares_divergents))
 if A.rapport:
-    json.dump({'recettes':recettes,'recettes_gardees':recettes_gardees,'affines':affines,'techniques':techniques,'portee':dict(portee),'formes':dict(formes),'exemples':random.Random(20261120).sample(deduits,min(15,len(deduits))),'ecarts':ecarts,'deduits':deduits},
+    json.dump({'declares_divergents':declares_divergents,'recettes':recettes,'recettes_gardees':recettes_gardees,'affines':affines,'techniques':techniques,'portee':dict(portee),'formes':dict(formes),'exemples':random.Random(20261120).sample(deduits,min(15,len(deduits))),'ecarts':ecarts,'deduits':deduits},
               open(A.rapport,'w'),ensure_ascii=False,indent=1)
 # --- DILA
 fiches=[json.loads(l) for l in open(UP+'/dila/dila_fiches.jsonl')]

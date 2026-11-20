@@ -36,12 +36,13 @@ console.log('\n=== Situations de référence');
 const presentes=(l)=>l.filter(i=>ix.byId.has(i));
 { // R2 en critère : pour le 37, au moins une démarche ouverte dont le titre contient « CASI » ou « fonds d'urgence » dans les
   // 3 premiers, et aucune aide aux victimes de violences conjugales dans les 5 premiers. Sans démarche ouverte de ce type
-  // proposable pour le 37 (département 37, nationale ou de département inconnu), R2 passe « en attente ».
+  // du 37 ou nationale, R2 passe « en attente », avec son motif.
   const q="Je suis agriculteur, existe-t-il une aide d'urgence ?", t3=top(q,{dep:'37'},3), t5=top(q,{dep:'37'},5);
   const CASI=(r)=>r.k==='dn'&&/\bCASI\b|fonds d.urgence/i.test(r.t);
-  const ouvertes=R.filter(r=>CASI(r)&&(!r.dep||r.dep==='37'));
-  if(!ouvertes.length){ console.log("ATTENTE R2 aucune démarche ouverte « CASI » ou « fonds d'urgence » proposable pour le 37"); attente++; }
-  else verifie(`R2 une démarche ouverte « CASI » ou « fonds d'urgence » dans les 3 premiers (${ouvertes.length} candidate(s) : ${ids(ouvertes).slice(0,5).join(' ')})`, t3.some(CASI), ids(t3).join(' '));
+  // Seules comptent les démarches ouvertes du 37 ou nationales, jamais celles de département inconnu.
+  const ouvertes=R.filter(r=>CASI(r)&&(r.dep==='37'||r.po==='nat'));
+  if(!ouvertes.length){ console.log("ATTENTE R2 aucune démarche ouverte « CASI » ou « fonds d'urgence » du 37 ou nationale dans l'index (motif : démarches du 37 fermées)"); attente++; }
+  else verifie(`R2 une démarche ouverte « CASI » ou « fonds d'urgence » du 37 ou nationale dans les 3 premiers (${ouvertes.length} candidate(s) : ${ids(ouvertes).slice(0,5).join(' ')})`, t3.some(r=>CASI(r)&&(r.dep==='37'||r.po==='nat')), ids(t3).join(' '));
   verifie('R2 aucune aide aux victimes de violences conjugales dans les 5 premiers', !t5.some(r=>/violences? conjugal/i.test(r.t)), ids(t5).join(' ')); }
 { const q="Je n'arrive plus à payer ma facture d'électricité, j'habite Rezé, près de Nantes. Ai-je droit à une aide ?", t3=top(q,{},3), t5=top(q,{},5);
   verifie('R3 DN-50108 dans les 3 premiers', ids(t3).includes('DN-50108'), ids(t3).join(' '));
