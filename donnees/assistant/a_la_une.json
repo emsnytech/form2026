@@ -37,7 +37,8 @@
     "DN-161922",
     "DN-161451"
    ],
-   "requete": "sécheresse aide agriculteur dérogation"
+   "requete": "sécheresse aide agriculteur dérogation",
+   "question_lieu": "Dans quel département se trouve votre exploitation ?"
   },
   {
    "cle": "pertes fonds aleas inondations tempete nils forte temperatures estivales",
@@ -52,7 +53,8 @@
    "ids": [
     "DN-149664"
    ],
-   "requete": "Pertes de fonds Aléas 2026 - inondations, tempête Nils, forte températures estivales"
+   "requete": "Pertes de fonds Aléas 2026 - inondations, tempête Nils, forte températures estivales",
+   "question_lieu": "Dans quel département habitez-vous ?"
   },
   {
    "cle": "intemperies octobre indemnisation degats subis collectivites territoriales leurs groupements",
@@ -67,7 +69,8 @@
    "ids": [
     "DN-160342"
    ],
-   "requete": "Intempéries 19 et 20 octobre 2026 dans le Gard - Demande d'indemnisation des dégâts subis par les collectivités territoriales et leurs groupements"
+   "requete": "Intempéries 19 et 20 octobre 2026 dans le Gard - Demande d'indemnisation des dégâts subis par les collectivités territoriales et leurs groupements",
+   "question_lieu": "Dans quel département habitez-vous ?"
   },
   {
    "cle": "aide paiement impaye energie menages",
@@ -82,7 +85,8 @@
    "ids": [
     "DN-50108"
    ],
-   "requete": "Aide au paiement d'un impayé d'énergie (ménages)"
+   "requete": "Aide au paiement d'un impayé d'énergie (ménages)",
+   "question_lieu": "Dans quel département habitez-vous ?"
   },
   {
    "cle": "copie dacte detat civil consulaire",
@@ -97,7 +101,8 @@
    "ids": [
     "DN-70401"
    ],
-   "requete": "Demande de copie d’acte d’état civil consulaire"
+   "requete": "Demande de copie d’acte d’état civil consulaire",
+   "question_lieu": "Dans quel département habitez-vous ?"
   },
   {
    "cle": "aide entreprises btp utilisant gazole non routier gnr btp periode octobre",
@@ -112,7 +117,8 @@
    "ids": [
     "DN-160135"
    ],
-   "requete": "Aide aux entreprises du BTP utilisant du Gazole Non Routier (GNR-BTP) - période d'octobre 2026"
+   "requete": "Aide aux entreprises du BTP utilisant du Gazole Non Routier (GNR-BTP) - période d'octobre 2026",
+   "question_lieu": "Dans quel département habitez-vous ?"
   }
  ],
  "suivantes": [
@@ -129,7 +135,8 @@
    "ids": [
     "DN-60985"
    ],
-   "requete": "HELP « aide aux entreprises en difficultés » Rhône-Alpes"
+   "requete": "HELP « aide aux entreprises en difficultés » Rhône-Alpes",
+   "question_lieu": "Dans quel département habitez-vous ?"
   },
   {
    "cle": "procedure declaration autorisation renouvellement modification demandes videoprotection",
@@ -144,7 +151,8 @@
    "ids": [
     "DN-160412"
    ],
-   "requete": "Procédure de déclaration d'autorisation, de renouvellement et de modification des demandes de vidéoprotection"
+   "requete": "Procédure de déclaration d'autorisation, de renouvellement et de modification des demandes de vidéoprotection",
+   "question_lieu": "Dans quel département habitez-vous ?"
   },
   {
    "cle": "dossier candidature reconnaissance valorisation engagement etudiant lyon universite",
@@ -159,7 +167,8 @@
    "ids": [
     "DN-144170"
    ],
-   "requete": "Dossier de candidature : Reconnaissance et Valorisation de l'Engagement Etudiant - Lyon 1 Université"
+   "requete": "Dossier de candidature : Reconnaissance et Valorisation de l'Engagement Etudiant - Lyon 1 Université",
+   "question_lieu": "Dans quel département habitez-vous ?"
   },
   {
    "cle": "cnam intec validation acquis professionnels personnels vapp",
@@ -174,7 +183,8 @@
    "ids": [
     "DN-140637"
    ],
-   "requete": "Cnam Intec : Formulaire de Validation des Acquis Professionnels et Personnels (VAPP) 2026-2027"
+   "requete": "Cnam Intec : Formulaire de Validation des Acquis Professionnels et Personnels (VAPP) 2026-2027",
+   "question_lieu": "Dans quel département habitez-vous ?"
   },
   {
    "cle": "inscription webinaire presentation fonds daide creation plateformes sociales",
@@ -189,7 +199,8 @@
    "ids": [
     "DN-160783"
    ],
-   "requete": "Inscription au webinaire de présentation du fonds d’aide à la création pour les plateformes sociales du 16/11/2026"
+   "requete": "Inscription au webinaire de présentation du fonds d’aide à la création pour les plateformes sociales du 16/11/2026",
+   "question_lieu": "Dans quel département habitez-vous ?"
   },
   {
    "cle": "actions clas bons achats multi enseignes",
@@ -204,7 +215,8 @@
    "ids": [
     "DN-148491"
    ],
-   "requete": "Préfecture du Val-de-Marne - Actions 2026 de la CLAS 94 - Bons d'achats multi-enseignes"
+   "requete": "Préfecture du Val-de-Marne - Actions 2026 de la CLAS 94 - Bons d'achats multi-enseignes",
+   "question_lieu": "Dans quel département habitez-vous ?"
   }
  ],
  "source": "Démarches publiées depuis moins de 30 jours, et démarches de saison (saisons.json) ; descriptif de Démarche Numérique",

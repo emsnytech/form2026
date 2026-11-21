@@ -308,9 +308,28 @@
     return liste.find((r) => !ailleurs(r) && !inc(r) && !pro(r)) || liste.find((r) => !ailleurs(r) && !pro(r))
       || liste.find((r) => !ailleurs(r)) || liste[0] || null;
   }
+  // ---------- Fiabilité : la page n'affirme une démarche que lorsqu'elle est sûre (PR « fiabilité »).
+  const porteeDe = (r) => r.k !== "dn" ? "nat" : r.po || (r.dep ? "dep" : "nat");
+  // Un terme significatif de la question (synonymes et expressions compris) figure dans le titre.
+  function termeAuTitre(q, r) {
+    const titre = new Set(toks(r.t)), n = " " + norm(r.t) + " ";
+    for (const [e, j] of JETONS_EXPRESSION) if (n.includes(" " + e + " ")) titre.add(j);
+    return [...analyse(q).termes.values()].some((g) => [...g].some((s) => titre.has(s)));
+  }
+  // Démarche sûre : pertinente (Moteur.pertinence) et un terme de la question dans son titre ; nationale (ou fiche
+  // service-public), ou du département connu ; pas réservée aux professionnels pour un particulier.
+  function sure(r, q, opt = {}, P = null) {
+    const { pub = "", dep = "" } = opt, d = departementConnu(q, dep);
+    if (!r || !(P || opt.P).pertinente(r.id) || !termeAuTitre(q, r)) return false;
+    const po = porteeDe(r);
+    if (po !== "nat" && !(po === "dep" && d && r.dep === d)) return false;
+    if ((!pub || pub === "particulier") && (RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t))) return false;
+    return true;
+  }
   // Recherche simple de la page : les k premiers résultats, puis, si un département est connu sans être choisi, les 3
-  // premières démarches en ligne de ce département (au moins la moitié du meilleur score), puis les 3 premières fiches service-public. Rend la liste et
-  // « Votre démarche ».
+  // premières démarches en ligne de ce département (au moins la moitié du meilleur score), puis les 3 premières fiches
+  // service-public. Rend la liste, « Votre démarche » (seulement si elle est sûre), sinon les « Démarches possibles »,
+  // et s'il faut demander le lieu d'abord (meilleurs résultats locaux, aucun territoire connu).
   function choisir(ix, q, opt = {}) {
     const { pub = "", dep = "", k = 20 } = opt, base = { pub, dep };
     const res = search(ix, q, { ...base, k }), liste = res.map((x) => x.r), reg = api.regroupements;
@@ -319,9 +338,33 @@
     // Démarches du département : seulement celles dont le score atteint la moitié du meilleur score de la recherche.
     if (d && !dep) ajoute(search(ix, q, { ...base, dep: d, source: "dn", k: 3 }).filter((x) => x.score >= meilleur / 2));
     ajoute(search(ix, q, { ...base, source: "sp", k: 3 }));
+    const P = pertinence(ix, q, base);
     api.regroupements = reg;   // les regroupements par organisme sont ceux de la première recherche
-    return { liste, principal: principalDe(liste, q, opt), departement: d };
+    // Ordre de préférence de principalDe : ni autre département, ni département inconnu quand le territoire est connu,
+    // ni démarche réservée aux professionnels ; parmi les 5 premiers, la première sûre.
+    const ailleurs = (r) => !!d && r.k === "dn" && !!r.dep && r.dep !== d;
+    const ordre = liste.filter((r) => !ailleurs(r));
+    const principal = ordre.slice(0, 5).find((r) => sure(r, q, opt, P)) || null;
+    const possibles = principal ? [] : ordre.filter((r) => r.k === "dn" || !/^SP-F/.test(r.id)).slice(0, 3);
+    const locale = (r) => r.k === "dn" && porteeDe(r) !== "nat";
+    const demanderLieu = !d && res.slice(0, 3).filter((x) => locale(x.r)).length >= 2;
+    return { liste, principal, possibles, departement: d, demanderLieu, P };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, regroupements: new Map(), region: null, REGIONS };
+  // Réponse d'une ligne de l'accueil (« Les plus demandées », « À la une ») : construite à partir de ses ids, jamais par
+  // une recherche sur un texte. Une démarche nationale (ou une fiche) est la réponse ; des variantes locales demandent
+  // d'abord le département, puis donnent celle du département, ou disent qu'il n'y en a pas.
+  function reponseLigne(ix, item, opt = {}) {
+    const { dep = "" } = opt, rec = (id) => { const i = ix.byId.get(id); return i === undefined ? null : ix.recs[i]; };
+    const recs = (item.ids || []).map(rec).filter(Boolean);
+    const fd = recs.flatMap((r) => (r.fd || []).filter((f) => /^F/.test(f)).map((f) => rec("SP-" + f))).filter(Boolean);
+    const fiche = (item.fiche && rec(item.fiche)) || fd[0] || null;
+    const nat = recs.filter((r) => porteeDe(r) === "nat"), locales = recs.filter((r) => porteeDe(r) !== "nat");
+    if (nat.length) return { principal: nat[0], possibles: nat.slice(1, 3), fiche, question: "", message: "", recs };
+    if (!dep) return { principal: null, possibles: locales, fiche, question: item.question_lieu || "Dans quel département habitez-vous ?", message: "", recs };
+    const v = locales.find((r) => r.dep === dep);
+    if (v) return { principal: v, possibles: [], fiche, question: "", message: "", recs };
+    return { principal: null, possibles: [], fiche, question: "", message: "Pas de démarche en ligne pour ce département : voici la fiche officielle et le guichet.", recs };
+  }
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, termeAuTitre, reponseLigne, regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

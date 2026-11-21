@@ -95,6 +95,12 @@ details.pli>summary{font-size:16px;font-weight:500;display:list-item;padding:10p
 .vide{color:var(--muted);font-style:italic}
 .autrement{display:flex;flex-direction:column;gap:10px;font-size:17px}.autrement p{margin:0}
 .manque{margin:0;font-size:15px;color:#3F4349}
+.possibles .avert-v{margin:0;font-size:15px;font-weight:600;color:var(--urgent)}
+.possibles ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.possibles li{display:flex;flex-direction:column;gap:2px}.possibles li a{font-size:17px}
+.possibles .terr{font-weight:600;color:var(--ink)}
+.question-lieu{display:flex;flex-direction:column;gap:8px;padding:14px 16px;border:2px solid var(--accent);border-radius:12px;width:100%}
+.question-lieu b{font-size:17px}.question-lieu .row{margin:0}
 /* « Où aller » et pastilles (ou_aller.js) */
 input#cp,.cp-res{font:inherit;font-size:15px;min-height:44px;padding:0 10px;border-radius:8px;border:1px solid var(--line2);background:var(--fond);color:var(--ink);width:7.5rem}
 .cp-etat{font-size:15px;font-weight:600;color:var(--accent)}
@@ -193,10 +199,11 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
   <h1 class="sr-only" id="titre-reponse" tabindex="-1">Réponse à votre question</h1>
   <div id="fil"></div>
   <div id="rep-pastille"></div>
-  <div id="rep-texte"></div>
   <div id="rep-choix" class="choix"></div>
+  <div id="rep-texte"></div>
   <div id="rep-autrement" class="autrement" hidden></div>
   <section class="carte" id="carte-demarche" aria-labelledby="h-demarche" hidden></section>
+  <section class="carte possibles" id="carte-possibles" aria-labelledby="h-possibles" hidden></section>
   <section class="carte" id="carte-aussi" aria-labelledby="h-aussi" hidden></section>
   <section class="carte" id="carte-ou" aria-labelledby="h-ou" hidden></section>
   <section class="comprendre" id="carte-comprendre" aria-labelledby="h-comprendre" hidden></section>
@@ -548,9 +555,28 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     return liste.find((r) => !ailleurs(r) && !inc(r) && !pro(r)) || liste.find((r) => !ailleurs(r) && !pro(r))
       || liste.find((r) => !ailleurs(r)) || liste[0] || null;
   }
+  // ---------- Fiabilité : la page n'affirme une démarche que lorsqu'elle est sûre (PR « fiabilité »).
+  const porteeDe = (r) => r.k !== "dn" ? "nat" : r.po || (r.dep ? "dep" : "nat");
+  // Un terme significatif de la question (synonymes et expressions compris) figure dans le titre.
+  function termeAuTitre(q, r) {
+    const titre = new Set(toks(r.t)), n = " " + norm(r.t) + " ";
+    for (const [e, j] of JETONS_EXPRESSION) if (n.includes(" " + e + " ")) titre.add(j);
+    return [...analyse(q).termes.values()].some((g) => [...g].some((s) => titre.has(s)));
+  }
+  // Démarche sûre : pertinente (Moteur.pertinence) et un terme de la question dans son titre ; nationale (ou fiche
+  // service-public), ou du département connu ; pas réservée aux professionnels pour un particulier.
+  function sure(r, q, opt = {}, P = null) {
+    const { pub = "", dep = "" } = opt, d = departementConnu(q, dep);
+    if (!r || !(P || opt.P).pertinente(r.id) || !termeAuTitre(q, r)) return false;
+    const po = porteeDe(r);
+    if (po !== "nat" && !(po === "dep" && d && r.dep === d)) return false;
+    if ((!pub || pub === "particulier") && (RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t))) return false;
+    return true;
+  }
   // Recherche simple de la page : les k premiers résultats, puis, si un département est connu sans être choisi, les 3
-  // premières démarches en ligne de ce département (au moins la moitié du meilleur score), puis les 3 premières fiches service-public. Rend la liste et
-  // « Votre démarche ».
+  // premières démarches en ligne de ce département (au moins la moitié du meilleur score), puis les 3 premières fiches
+  // service-public. Rend la liste, « Votre démarche » (seulement si elle est sûre), sinon les « Démarches possibles »,
+  // et s'il faut demander le lieu d'abord (meilleurs résultats locaux, aucun territoire connu).
   function choisir(ix, q, opt = {}) {
     const { pub = "", dep = "", k = 20 } = opt, base = { pub, dep };
     const res = search(ix, q, { ...base, k }), liste = res.map((x) => x.r), reg = api.regroupements;
@@ -559,10 +585,34 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     // Démarches du département : seulement celles dont le score atteint la moitié du meilleur score de la recherche.
     if (d && !dep) ajoute(search(ix, q, { ...base, dep: d, source: "dn", k: 3 }).filter((x) => x.score >= meilleur / 2));
     ajoute(search(ix, q, { ...base, source: "sp", k: 3 }));
+    const P = pertinence(ix, q, base);
     api.regroupements = reg;   // les regroupements par organisme sont ceux de la première recherche
-    return { liste, principal: principalDe(liste, q, opt), departement: d };
+    // Ordre de préférence de principalDe : ni autre département, ni département inconnu quand le territoire est connu,
+    // ni démarche réservée aux professionnels ; parmi les 5 premiers, la première sûre.
+    const ailleurs = (r) => !!d && r.k === "dn" && !!r.dep && r.dep !== d;
+    const ordre = liste.filter((r) => !ailleurs(r));
+    const principal = ordre.slice(0, 5).find((r) => sure(r, q, opt, P)) || null;
+    const possibles = principal ? [] : ordre.filter((r) => r.k === "dn" || !/^SP-F/.test(r.id)).slice(0, 3);
+    const locale = (r) => r.k === "dn" && porteeDe(r) !== "nat";
+    const demanderLieu = !d && res.slice(0, 3).filter((x) => locale(x.r)).length >= 2;
+    return { liste, principal, possibles, departement: d, demanderLieu, P };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, regroupements: new Map(), region: null, REGIONS };
+  // Réponse d'une ligne de l'accueil (« Les plus demandées », « À la une ») : construite à partir de ses ids, jamais par
+  // une recherche sur un texte. Une démarche nationale (ou une fiche) est la réponse ; des variantes locales demandent
+  // d'abord le département, puis donnent celle du département, ou disent qu'il n'y en a pas.
+  function reponseLigne(ix, item, opt = {}) {
+    const { dep = "" } = opt, rec = (id) => { const i = ix.byId.get(id); return i === undefined ? null : ix.recs[i]; };
+    const recs = (item.ids || []).map(rec).filter(Boolean);
+    const fd = recs.flatMap((r) => (r.fd || []).filter((f) => /^F/.test(f)).map((f) => rec("SP-" + f))).filter(Boolean);
+    const fiche = (item.fiche && rec(item.fiche)) || fd[0] || null;
+    const nat = recs.filter((r) => porteeDe(r) === "nat"), locales = recs.filter((r) => porteeDe(r) !== "nat");
+    if (nat.length) return { principal: nat[0], possibles: nat.slice(1, 3), fiche, question: "", message: "", recs };
+    if (!dep) return { principal: null, possibles: locales, fiche, question: item.question_lieu || "Dans quel département habitez-vous ?", message: "", recs };
+    const v = locales.find((r) => r.dep === dep);
+    if (v) return { principal: v, possibles: [], fiche, question: "", message: "", recs };
+    return { principal: null, possibles: [], fiche, question: "", message: "Pas de démarche en ligne pour ce département : voici la fiche officielle et le guichet.", recs };
+  }
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, termeAuTitre, reponseLigne, regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -608,23 +658,35 @@ fetch(DATA + "exemples.json").then((r) => r.json()).then((e) => { EXEMPLES = e;
 }).catch(() => {});
 $("ex").addEventListener("click", (ev) => { const b = ev.target.closest(".chip"); if (!b) return; const e = EXEMPLES[+b.dataset.i]; $("q").value = e.q; $("pub").value = e.pub; $("dep").value = e.dep; if (e.pub || e.dep) $("filtres").open = true; showPrepared(e); });
 
-// ---------- Colonnes de l'accueil : « Les plus demandées » et « À la une » (un clic lance la recherche)
+// ---------- Colonnes de l'accueil : « Les plus demandées » et « À la une ». Un clic affiche la réponse construite à
+// partir des démarches de la ligne (champ « ids »), jamais une recherche sur un texte (Moteur.reponseLigne).
 const ETIQ = { "Urgent": "urgent", "Crise": "crise", "De saison": "saison", "Nouveau": "nouveau" };
-function ligne(titre, sous, requete, avant) {
-  return `<button type="button" class="ligne" data-requete="${esc(requete)}"><span class="t">${avant || ""}<span class="t1">${esc(titre)}</span><span class="t2">${esc(sous)}</span></span><span class="f" aria-hidden="true">→</span></button>`;
+const LIGNES = [];
+function ligne(titre, sous, item, avant) {
+  LIGNES.push(item);
+  return `<button type="button" class="ligne" data-i="${LIGNES.length - 1}"><span class="t">${avant || ""}<span class="t1">${esc(titre)}</span><span class="t2">${esc(sous)}</span></span><span class="f" aria-hidden="true">→</span></button>`;
 }
 Promise.all([fetch(DATA + "plus_demandees.json").then((r) => r.json()).catch(() => null), fetch(DATA + "a_la_une.json").then((r) => r.json()).catch(() => null)]).then(([pd, une]) => {
   if (pd) {
-    $("liste-demandees").innerHTML = `<p class="sur-titre">Démarches nationales</p>` + pd.nationales.map((x) => ligne(x.titre, x.organisme + " · service-public.gouv.fr", x.requete)).join("")
-      + `<p class="sur-titre">Sur Démarche Numérique</p>` + pd.demarche_numerique.map((x) => ligne(x.titre, `${x.organisme} · plus de ${x.dossiers_arrondis} dossiers`, x.requete)).join("");
+    $("liste-demandees").innerHTML = `<p class="sur-titre">Démarches nationales</p>` + pd.nationales.map((x) => ligne(x.titre, x.organisme + " · service-public.gouv.fr", x)).join("")
+      + `<p class="sur-titre">Sur Démarche Numérique</p>` + pd.demarche_numerique.map((x) => ligne(x.titre, `${x.organisme} · plus de ${x.dossiers_arrondis} dossiers`, x)).join("");
     $("source-demandees").textContent = "Hors démarches saisonnières (déclaration de revenus, rentrée…), qui passent « À la une » au bon moment. Sources : " + pd.source + ".";
   } else $("col-demandees").hidden = true;
-  if (une) $("liste-une").innerHTML = une.retenues.map((x) => ligne(x.titre, x.organisme, x.requete,
+  if (une) $("liste-une").innerHTML = une.retenues.map((x) => ligne(x.titre, x.organisme, x,
       `<span><span class="etiq ${ETIQ[x.etiquette] || ""}">${esc(x.etiquette)}</span><span class="t2">${x.publiee ? "Publiée le " + esc(dateFr(x.publiee)) + " · " : ""}${esc(x.portee)}</span></span>`)).join("");
   else $("col-une").hidden = true;
   $("colonnes").hidden = !pd && !une;
 });
-$("colonnes").addEventListener("click", (ev) => { const b = ev.target.closest(".ligne"); if (!b) return; $("q").value = b.dataset.requete; rechercheSimple(); });
+$("colonnes").addEventListener("click", (ev) => { const b = ev.target.closest(".ligne"); if (!b || !IX) return; ouvrirLigne(LIGNES[+b.dataset.i]); });
+function ouvrirLigne(item) {
+  traceLines = []; poserQuestion(item.titre); $("rep-choix").innerHTML = ""; $("rep-texte").innerHTML = "";
+  window.relancerReponse = () => ouvrirLigne(item);
+  const R = Moteur.reponseLigne(IX, item, { dep: $("dep").value });
+  window.DEMANDER_LIEU = R.question;
+  const liste = [R.principal, ...R.possibles, ...R.recs].filter((r, i, l) => r && l.indexOf(r) === i);
+  afficherResultats(liste, item.titre, "ligne", R.principal, { possibles: R.possibles, fiche: R.fiche });
+  if (R.message) $("rep-texte").innerHTML = `<p class="extrait">${esc(R.message)}</p>`;
+}
 
 // ---------- Index
 fetch(DATA + "index.json").then((r) => r.json()).then((recs) => {
@@ -744,49 +806,64 @@ window.majCherche = () => { if (IX && QCOUR) commentCherche(QCOUR); };
 // Une réponse « en ligne » : démarche de Démarche Numérique, démarche en ligne ou formulaire de service-public, ou fiche
 // qui renvoie à une démarche en ligne.
 const enLigne = (r) => !!r && (r.k === "dn" || /Téléservice|selNG|ormulaire/i.test(r.ty) || (estFiche(r) && resDe(r).some((x) => /Téléservice|selNG/i.test(x.ty))));
-function afficherResultats(liste, q, origine, principalDonne) {
+// Territoire d'une démarche, toujours visible dans « Démarches possibles ».
+const territoire = (r) => r.k !== "dn" ? "nationale" : r.dep ? `${DEPNAME[r.dep] || r.dep} (${r.dep})` : r.po === "nat" ? "nationale" : "département inconnu";
+function cartePossibles(l) {
+  const el = $("carte-possibles"); if (!l.length) { el.hidden = true; return; }
+  el.innerHTML = `<h2 id="h-possibles">Démarches possibles</h2><p class="avert-v">À vérifier&nbsp;: ces démarches peuvent ne pas correspondre à votre situation.</p><ul>`
+    + l.map((r) => { const u = r.k === "dn" ? dnUrl(r) : lienSp(r); ajouterLien(r.t, u, r.k === "dn" ? "Démarche Numérique" : "service-public.gouv.fr");
+      return `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(r.t)}</a><span class="meta"><span class="terr">${esc(territoire(r))}</span> · ${esc(r.k === "dn" ? r.o : typeLib(r) + " · service-public.gouv.fr")}</span></li>`; }).join("") + `</ul>`;
+  el.hidden = false;
+}
+// extra : { possibles, fiche } — recherche simple (Moteur.choisir) ou ligne de l'accueil (Moteur.reponseLigne).
+function afficherResultats(liste, q, origine, principalDonne, extra = {}) {
   ORIGINE = window.ORIGINE_RESULTATS = origine; QCOUR = q; LIENS = []; afficherLiens();
+  if (origine !== "simple" && origine !== "ligne") { window.DEMANDER_LIEU = ""; window.relancerReponse = null; }
   const opt = { pub: $("pub").value, dep: $("dep").value };
-  // « Votre démarche » : Moteur.principalDe (ni démarche d'un autre département que le lieu connu, ni, pour un
-  // particulier, démarche réservée aux professionnels) ; la recherche simple la reçoit de Moteur.choisir.
+  // « Votre démarche » : donnée par Moteur.choisir (seulement si elle est sûre) ou par la ligne de l'accueil ; pour une
+  // réponse citée (assistant, réponse préparée), Moteur.principalDe.
   const principal = principalDonne !== undefined ? principalDonne : Moteur.principalDe(liste, q, opt);
+  const possibles = (extra.possibles || []).filter((r) => r !== principal);
   // Rien de pertinent (recherche simple) : aucune carte, une invitation à reformuler, avec des exemples.
   // Seuil de pertinence de la règle France services (Moteur.pertinence : moitié du meilleur score, et deux termes de la
-  // question repris ou le terme le plus rare) ; il décide aussi de la carte « Aussi pour vous ».
-  const P = liste.length ? Moteur.pertinence(IX, q, opt) : null;
+  // question repris ou le terme le plus rare) ; il décide aussi des cartes « Comprendre » et « Aussi pour vous ».
+  const P = liste.length && origine !== "ligne" ? Moteur.pertinence(IX, q, opt) : null;
   const rien = !liste.length || (origine === "simple" && !liste.some((r) => P.pertinente(r.id)));
   $("rep-autrement").hidden = !rien; $("rep-manque").hidden = true;
   if (rien) {
     $("rep-autrement").innerHTML = `<p>${esc(MESSAGES.autrement)}</p><div class="chips">${EXEMPLES.slice(0, 3).map((x, i) => `<button type="button" class="chip" data-i="${i}">${esc(x.q)}</button>`).join("")}</div>`;
-    carteDemarche(null); carteAussi(null); carteComprendre(null); window.CARTES_TETE = []; autresPistes([]);
+    carteDemarche(null); cartePossibles([]); carteAussi(null); carteComprendre(null); window.CARTES_TETE = []; autresPistes([]);
     commentCherche(q); vueReponse(); return;
   }
-  const fiches = liste.filter(estFiche);
+  // Une fiche n'est proposée (« Comprendre », phrase citée) que si elle passe le seuil et porte un terme de la question
+  // dans son titre ; pour une ligne de l'accueil, la fiche est celle du fichier ou de la démarche.
+  const ficheSure = (f) => origine === "ligne" || origine !== "simple" || (P.pertinente(f.id) && Moteur.termeAuTitre(q, f));
+  const fiches = liste.filter((f) => estFiche(f) && ficheSure(f));
   const ligne = enLigne(principal);
   const lieeAuPrincipal = principal && principal.k === "dn" ? (principal.fd || []).map((f) => rec("SP-" + f)).find(Boolean) : null;
   // Pas de démarche en ligne en tête : la fiche officielle la plus pertinente, en « Comprendre », remontée en premier.
-  const comprendre = ligne ? (estFiche(principal) ? null : (lieeAuPrincipal || fiches[0] || null))
+  const comprendre = origine === "ligne" ? (extra.fiche || null)
+    : ligne ? (estFiche(principal) ? null : (lieeAuPrincipal || fiches[0] || null))
     : (estFiche(principal) ? principal : (fiches[0] || null));
   // « Aussi pour vous » : une fiche qui a un simulateur ou une démarche en ligne, et qui est soit citée par la fiche
   // « Comprendre » (ses fiches liées, champ « fl ») et en rapport avec la question (au moins le quart du meilleur score,
   // et un terme de la question, synonymes compris, dans son titre), soit au-dessus du seuil de pertinence ; sinon, pas de carte.
   const utile = (f) => f !== principal && f !== comprendre && resDe(f).some((x) => /imulateur|Téléservice|selNG/i.test(x.ty));
-  const lieesComprendre = comprendre ? (comprendre.fl || []).map(rec).filter((f) => f && utile(f)) : [];
+  const lieesComprendre = comprendre && P ? (comprendre.fl || []).map(rec).filter((f) => f && utile(f)) : [];
   let aussi = null;
   if (lieesComprendre.length) {
     const tous = Moteur.search(IX, q, { ...opt, k: Infinity }), meilleur = tous.length ? tous[0].score : 0;
     const score = new Map(tous.map((x) => [x.r.id, x.score]));
-    const groupes = [...(Moteur.analyse ? Moteur.analyse(q).termes.values() : [])];
-    const auTitre = (f) => { const m = new Set(Moteur.toks(f.t)); return groupes.some((g) => [...g].some((s) => m.has(s))); };
-    aussi = lieesComprendre.find((f) => (score.get(f.id) || 0) >= meilleur / 4 && auTitre(f)) || null;
+    aussi = lieesComprendre.find((f) => (score.get(f.id) || 0) >= meilleur / 4 && Moteur.termeAuTitre(q, f)) || null;
   }
-  aussi = aussi || fiches.find((f) => utile(f) && P.pertinente(f.id)) || null;
-  carteDemarche(ligne ? principal : null); carteAussi(aussi); carteComprendre(comprendre);
-  if (ligne) $("carte-ou").after($("carte-comprendre")); else $("carte-demarche").before($("carte-comprendre"));
-  if (!ligne) { $("rep-manque").innerHTML = avecSignaler(MESSAGES.manque); $("rep-manque").hidden = false; }
-  window.CARTES_TETE = [ligne ? principal : comprendre, aussi, ligne ? comprendre : principal].filter(Boolean);  // « Où aller » cherche le guichet de ces cartes
+  aussi = aussi || (P ? fiches.find((f) => utile(f) && P.pertinente(f.id)) : null) || null;
+  carteDemarche(ligne ? principal : null); cartePossibles(ligne ? [] : possibles); carteAussi(aussi); carteComprendre(comprendre);
+  // Sans démarche sûre en tête : « Démarches possibles » d'abord (s'il y en a), puis la fiche officielle.
+  if (ligne) $("carte-ou").after($("carte-comprendre")); else $("carte-possibles").after($("carte-comprendre"));
+  if (!ligne && !possibles.some((r) => r.k === "dn") && origine !== "ligne") { $("rep-manque").innerHTML = avecSignaler(MESSAGES.manque); $("rep-manque").hidden = false; }
+  window.CARTES_TETE = [ligne ? principal : comprendre, aussi, ligne ? comprendre : principal, ...possibles].filter(Boolean);  // « Où aller » cherche le guichet de ces cartes
   // Sans démarche en ligne en tête, le premier résultat (modèle de lettre, outil…) reste dans « Autres pistes ».
-  autresPistes(liste.filter((r) => (r !== principal || !ligne) && r !== aussi && r !== comprendre));
+  autresPistes(liste.filter((r) => (r !== principal || !ligne) && r !== aussi && r !== comprendre && !possibles.includes(r)));
   commentCherche(q);
   vueReponse();
 }
@@ -802,10 +879,14 @@ function rechercheSimple() {
   // Moteur.choisir : les 20 premiers résultats, les 3 premières démarches du département reconnu, les 3 premières fiches
   // service-public, et « Votre démarche ».
   const C = Moteur.choisir(IX, q, { pub: $("pub").value, dep: $("dep").value, k: 20 }), res = C.liste;
+  window.relancerReponse = rechercheSimple;
+  // Meilleurs résultats locaux, aucun territoire connu : la page demande le lieu d'abord (pastille, ou_aller.js).
+  window.DEMANDER_LIEU = C.demanderLieu ? "Ces démarches dépendent de votre département. Où habitez-vous ?" : "";
   $("rep-choix").innerHTML = $("pub").value ? "" : `<p>Pour vous orienter&nbsp;: vous êtes…</p><div class="boutons">${[["particulier", "un particulier"], ["entreprise", "une entreprise"], ["association", "une association"], ["collectivite", "une collectivité"]].map(([v, l]) => `<button type="button" data-pub="${v}">${l}</button>`).join("")}</div>`;
-  afficherResultats(res, q, "simple", C.principal);
-  const f = $("rep-autrement").hidden ? res.find(estFiche) : null;
-  // Une phrase de la fiche officielle, seulement à côté d'une démarche en ligne (sinon la fiche est déjà en tête).
+  afficherResultats(res, q, "simple", C.principal, { possibles: C.possibles });
+  // « Selon la fiche officielle… » : seulement à côté d'une démarche sûre, et si la fiche passe le seuil et porte un terme
+  // de la question dans son titre ; jamais une fiche hors sujet.
+  const f = $("rep-autrement").hidden ? res.find((r) => estFiche(r) && C.P.pertinente(r.id) && Moteur.termeAuTitre(q, r)) : null;
   $("rep-texte").innerHTML = f && f.d && !$("carte-demarche").hidden && f !== C.principal ? `<p class="extrait">Selon la fiche officielle «&nbsp;${esc(f.t)}&nbsp;»&nbsp;: ${esc(f.d.split(/(?<=\.)\s/)[0])}</p>` : "";
 }
 $("rep-choix").addEventListener("click", (ev) => {
@@ -976,7 +1057,8 @@ $("ia-go").addEventListener("click", () => $("dlg-ia").close());
   // « citee » (réponse préparée ou conversation : démarches déjà retenues par l'assistant).
   const origine = () => window.ORIGINE_RESULTATS || "simple";
   // Une précision de lieu relance la recherche simple ; une réponse citée garde sa liste et se redécore.
-  const relancer = () => { if (origine() === "simple") rechercheSimple(); else decorer(); };
+  // La page donne la réponse à rejouer (recherche simple, ligne de l'accueil) dans window.relancerReponse.
+  const relancer = () => { if (typeof window.relancerReponse === "function") window.relancerReponse(); else decorer(); };
   const reponseAffichee = () => !$("vue-reponse").hidden;
   const cache = new Map();
   const SANS_API = !!window.FORM_SANS_API;
@@ -1214,6 +1296,23 @@ $("ia-go").addEventListener("click", () => $("dlg-ia").close());
     if (!reponseAffichee() || !Moteur.lieux) return;
     const changer = ` · <button type="button" class="lien-changer" id="lieu-changer">changer</button>`;
     const brancherChanger = () => { const ch = $("lieu-changer"); if (ch) ch.addEventListener("click", () => { ouvrirFiltres(); vueAccueilFiltres(); }); };
+    // Démarches locales sans territoire connu (window.DEMANDER_LIEU, donné par la page) : la question du lieu d'abord.
+    if (window.DEMANDER_LIEU && !$("dep").value && (!COMMUNE || COMMUNE.devine)) {
+      el.className = "";
+      if (SANS_API) {
+        el.innerHTML = `<div class="question-lieu"><label for="dep-res"><b>${esc(window.DEMANDER_LIEU)}</b></label><select id="dep-res">${$("dep").innerHTML}</select></div>`;
+        $("dep-res").value = "";
+        $("dep-res").addEventListener("change", () => { $("dep").value = $("dep-res").value; if ($("dep").value) relancer(); });
+      } else {
+        el.innerHTML = `<div class="question-lieu"><label for="cp-res"><b>${esc(window.DEMANDER_LIEU)}</b></label><div class="row"><input id="cp-res" class="cp-res" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="code postal"> <span class="meta">ou</span> <select id="dep-res" aria-label="Votre département">${$("dep").innerHTML}</select></div></div>`;
+        $("dep-res").value = "";
+        $("dep-res").addEventListener("change", () => { $("dep").value = $("dep-res").value; if ($("dep").value) relancer(); });
+        const c2 = $("cp-res");
+        c2.addEventListener("input", () => { cp.value = c2.value.replace(/\D/g, "").slice(0, 5); cp.dispatchEvent(new Event("input"));
+          if (cp.value.length === 5) setTimeout(() => { if (COMMUNE) relancer(); }, 1500); });
+      }
+      return;
+    }
     if (COMMUNE && !COMMUNE.devine) {
       el.innerHTML = `<span class="meta">Résultats adaptés à</span> <span class="pastille pastille-fixe">${esc(COMMUNE.nom)} (${esc(COMMUNE.dep)})</span>${changer}`;
       brancherChanger(); return;
@@ -1279,10 +1378,10 @@ $("ia-go").addEventListener("click", () => $("dlg-ia").close());
     if (window.majCherche) window.majCherche();
   }
   const afficher = afficherResultats;
-  afficherResultats = function (liste, q, o) {
+  afficherResultats = function (liste, q, ...suite) {
     // Une commune devinée dans une question précédente ne vaut pas pour la suivante.
     if (COMMUNE && COMMUNE.devine) { COMMUNE = null; window.LIEU_CONNU = ""; }
-    LISTE = liste || []; afficher(liste, q, o); decorer();
+    LISTE = liste || []; afficher(liste, q, ...suite); decorer();
   };
 })();
 /*ou_aller:fin*/</script>
