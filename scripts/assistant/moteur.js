@@ -1,7 +1,7 @@
 // Moteur de recherche local (BM25) sur l'index FORM 2026 + DILA.
 // Utilisable dans la page et sous node pour les tests.
 (function (root) {
-  const STOP = new Set(("a au aux avec ce ces dans de des du elle en et eux il je la le les leur lui ma mais me meme mes moi mon ne nos notre nous on ou par pas pour qu que qui sa se ses son sur ta te tes toi ton tu un une vos votre vous c d j l m n s t y ete etre avoir ai as avons avez ont suis es est sommes etes sont faire fait comment quoi quel quelle quels quelles dois doit veux veut voudrais souhaite souhaiterais besoin peux peut faut il ya y-a cela ca cet cette tout tous toute toutes plus moins tres aussi si alors donc car comme chez sans sous entre vers apres avant depuis lors quand ou bien mon ma mes demande demarche demarches habite habiter habitons habitez").split(" "));
+  const STOP = new Set(("a au aux avec ce ces dans de des du elle en et eux il je la le les leur lui ma mais me meme mes moi mon ne nos notre nous on ou par pas pour qu que qui sa se ses son sur ta te tes toi ton tu un une vos votre vous c d j l m n s t y ete etre avoir ai as avons avez ont suis es est sommes etes sont faire fait comment quoi quel quelle quels quelles dois doit veux veut voudrais souhaite souhaiterais besoin peux peut faut il ya y-a cela ca cet cette tout tous toute toutes plus moins tres aussi si alors donc car comme chez sans sous entre vers apres avant depuis lors quand ou bien mon ma mes demande demarche demarches demander habite habiter habitons habitez").split(" "));
   const SYN = {
     bebe: ["naissance"], enfant: ["enfant"], boulot: ["emploi"], travail: ["emploi", "travail"], chomage: ["emploi", "chomage"],
     demenage: ["demenagement", "adresse"], demenager: ["demenagement", "adresse"], aide: ["aide", "subvention", "allocation"],
@@ -148,11 +148,13 @@
 
   // Analyse d'une question : termes significatifs (racine → racines retenues, synonymes et expressions compris), hors
   // mots vides et hors mots reconnus comme lieu.
+  // Groupes de termes nés d'une expression reconnue (Moteur.analyse) : la règle « démarche sûre » les compte double.
+  const EXPR_GROUPES = new WeakSet();
   function analyse(s) {
     let n = " " + norm(s) + " ";
     const termes = new Map(), L = lieux(s);
     // Une expression reconnue compte pour un terme ; plusieurs expressions de même sens, pour un seul.
-    for (const [f, vers] of EXPRESSIONS) if (n.includes(" " + f + " ")) termes.set("« " + vers.join(" ") + " »", new Set(vers.map(stem)));
+    for (const [f, vers] of EXPRESSIONS) if (n.includes(" " + f + " ")) { const g = new Set(vers.map(stem)); EXPR_GROUPES.add(g); termes.set("« " + vers.join(" ") + " »", g); }
     for (const w of n.trim().split(" ")) {
       if (w.length < 2 || STOP.has(w) || L.mots.has(w)) continue;
       const t = stem(w); if (!termes.has(t)) termes.set(t, new Set([t]));
@@ -308,9 +310,77 @@
     return liste.find((r) => !ailleurs(r) && !inc(r) && !pro(r)) || liste.find((r) => !ailleurs(r) && !pro(r))
       || liste.find((r) => !ailleurs(r)) || liste[0] || null;
   }
+  // ---------- Fiabilité : la page n'affirme une démarche que lorsqu'elle est sûre (PR « fiabilité »).
+  // Codes des départements, dans l'ordre de NOMS_DEPARTEMENTS (01 à 19, 2A, 2B, 21 à 95, outre-mer).
+  const CODES_DEP = [...Array.from({ length: 19 }, (_, i) => String(i + 1).padStart(2, "0")), "2A", "2B",
+    ...Array.from({ length: 75 }, (_, i) => String(i + 21)), "971", "972", "973", "974", "976"];
+  const DEP_PAR_NOM = new Map([...NOMS_DEPARTEMENTS].map((n, i) => [n, CODES_DEP[i]]));
+  // Ressource service-public locale : un lien vers une démarche de la plateforme (« …/commencer/… ») et un département
+  // nommé dans le titre (« Demande de médaille d'honneur du travail Hautes-Alpes ») ; sinon nationale.
+  function depRessource(r) {
+    if (r._dep !== undefined) return r._dep;
+    let d = "";
+    if (r.k === "sp" && /\/commencer\//.test(r.l || "")) {
+      const n = " " + norm(r.t) + " ";
+      const nom = [...DEP_PAR_NOM.keys()].sort((a, b) => b.length - a.length).find((x) => n.includes(" " + x + " "));
+      if (nom) d = DEP_PAR_NOM.get(nom);
+    }
+    return (r._dep = d);
+  }
+  const porteeDe = (r) => r.k !== "dn" ? (depRessource(r) ? "dep" : "nat") : r.po || (r.dep ? "dep" : "nat");
+  const depDe = (r) => r.k === "dn" ? r.dep : depRessource(r);
+  // Termes significatifs de la question (groupes de synonymes et expressions, Moteur.analyse) présents dans un titre.
+  function termesAuTitre(q, r) {
+    const titre = new Set(toks(r.t)), n = " " + norm(r.t) + " ";
+    for (const [e, j] of JETONS_EXPRESSION) if (n.includes(" " + e + " ")) titre.add(j);
+    const groupes = [...analyse(q).termes.values()];
+    return { groupes, presents: groupes.filter((g) => [...g].some((s) => titre.has(s))) };
+  }
+  // Au moins un terme de la question dans le titre (règle des cartes « Comprendre » et « Aussi pour vous »).
+  function termeAuTitre(q, r) { return termesAuTitre(q, r).presents.length > 0; }
+  // Rareté d'un terme : IDF la plus élevée de ses formes présentes dans l'index (0 si aucune).
+  function idfGroupe(ix, g) {
+    const N = ix.recs.length;
+    return Math.max(0, ...[...g].map((s) => { const p = ix.inv.get(s); return p ? Math.log(1 + (N - p.length / 2 + 0.5) / (p.length / 2 + 0.5)) : 0; }));
+  }
+  // Condition sur le titre d'une démarche sûre (api.REGLE_TITRE). Retenue : « d » — termes absents de l'index ignorés, une
+  // expression reconnue comptant pour deux ; tous les termes si la question en a trois ou moins, sinon au moins deux dont
+  // le plus rare. Variantes essayées dans la PR 76 (gardées pour comparaison) : « un » (un terme), « a » (deux termes dont
+  // le plus rare), « b » (60 % des termes), « c » (tous jusqu'à trois termes, sinon 60 %).
+  function titreSur(ix, q, r) {
+    const { groupes, presents } = termesAuTitre(q, r), n = groupes.length, k = presents.length;
+    if (!n) return false;
+    switch (api.REGLE_TITRE) {
+      case "a": { const rare = groupes.reduce((m, g) => idfGroupe(ix, g) > idfGroupe(ix, m) ? g : m, groupes[0]);
+        return (k >= 2 || n === 1) && presents.includes(rare); }
+      case "b": return k / n >= 0.6;
+      case "c": return n <= 3 ? k === n : k / n >= 0.6;
+      case "d": {
+        // Termes absents de l'index ignorés ; une expression reconnue compte pour deux termes.
+        const sig = groupes.filter((g) => idfGroupe(ix, g) > 0), poids = (g) => EXPR_GROUPES.has(g) ? 2 : 1;
+        if (!sig.length) return false;
+        const total = sig.reduce((s, g) => s + poids(g), 0), au = sig.filter((g) => presents.includes(g)), couverts = au.reduce((s, g) => s + poids(g), 0);
+        if (total <= 3) return couverts === total;
+        const rare = sig.reduce((m, g) => idfGroupe(ix, g) > idfGroupe(ix, m) ? g : m, sig[0]);
+        return couverts >= 2 && au.includes(rare);
+      }
+      default: return k > 0;
+    }
+  }
+  // Démarche sûre : pertinente (Moteur.pertinence) et un terme de la question dans son titre ; nationale (ou fiche
+  // service-public), ou du département connu ; pas réservée aux professionnels pour un particulier.
+  function sure(r, q, opt = {}, P = null) {
+    const { pub = "", dep = "" } = opt, d = departementConnu(q, dep);
+    if (!r || !(P || opt.P).pertinente(r.id) || !titreSur(opt.ix, q, r)) return false;
+    const po = porteeDe(r);
+    if (po !== "nat" && !(po === "dep" && d && depDe(r) === d)) return false;
+    if ((!pub || pub === "particulier") && (RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t))) return false;
+    return true;
+  }
   // Recherche simple de la page : les k premiers résultats, puis, si un département est connu sans être choisi, les 3
-  // premières démarches en ligne de ce département (au moins la moitié du meilleur score), puis les 3 premières fiches service-public. Rend la liste et
-  // « Votre démarche ».
+  // premières démarches en ligne de ce département (au moins la moitié du meilleur score), puis les 3 premières fiches
+  // service-public. Rend la liste, « Votre démarche » (seulement si elle est sûre), sinon les « Démarches possibles »,
+  // et s'il faut demander le lieu d'abord (meilleurs résultats locaux, aucun territoire connu).
   function choisir(ix, q, opt = {}) {
     const { pub = "", dep = "", k = 20 } = opt, base = { pub, dep };
     const res = search(ix, q, { ...base, k }), liste = res.map((x) => x.r), reg = api.regroupements;
@@ -319,9 +389,35 @@
     // Démarches du département : seulement celles dont le score atteint la moitié du meilleur score de la recherche.
     if (d && !dep) ajoute(search(ix, q, { ...base, dep: d, source: "dn", k: 3 }).filter((x) => x.score >= meilleur / 2));
     ajoute(search(ix, q, { ...base, source: "sp", k: 3 }));
+    const P = pertinence(ix, q, base);
     api.regroupements = reg;   // les regroupements par organisme sont ceux de la première recherche
-    return { liste, principal: principalDe(liste, q, opt), departement: d };
+    // Ordre de préférence de principalDe : ni autre département, ni département inconnu quand le territoire est connu,
+    // ni démarche réservée aux professionnels ; parmi les 5 premiers, la première sûre.
+    const ailleurs = (r) => !!d && r.k === "dn" && !!r.dep && r.dep !== d;
+    const ordre = liste.filter((r) => !ailleurs(r));
+    const principal = ordre.slice(0, 5).find((r) => sure(r, q, { ...opt, ix }, P)) || null;
+    const possibles = principal ? [] : ordre.filter((r) => r.k === "dn" || !/^SP-F/.test(r.id)).slice(0, 3);
+    const locale = (r) => r.k === "dn" && porteeDe(r) !== "nat";
+    // Lieu d'abord : seulement sans démarche sûre, quand les meilleurs résultats sont locaux ; avec une démarche nationale
+    // sûre, le lieu reste proposé plus bas, pour « Où aller ».
+    const demanderLieu = !principal && !d && res.slice(0, 3).filter((x) => locale(x.r)).length >= 2;
+    return { liste, principal, possibles, departement: d, demanderLieu, P };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, regroupements: new Map(), region: null, REGIONS };
+  // Réponse d'une ligne de l'accueil (« Les plus demandées », « À la une ») : construite à partir de ses ids, jamais par
+  // une recherche sur un texte. Une démarche nationale (ou une fiche) est la réponse ; des variantes locales demandent
+  // d'abord le département, puis donnent celle du département, ou disent qu'il n'y en a pas.
+  function reponseLigne(ix, item, opt = {}) {
+    const { dep = "" } = opt, rec = (id) => { const i = ix.byId.get(id); return i === undefined ? null : ix.recs[i]; };
+    const recs = (item.ids || []).map(rec).filter(Boolean);
+    const fd = recs.flatMap((r) => (r.fd || []).filter((f) => /^F/.test(f)).map((f) => rec("SP-" + f))).filter(Boolean);
+    const fiche = (item.fiche && rec(item.fiche)) || fd[0] || null;
+    const nat = recs.filter((r) => porteeDe(r) === "nat"), locales = recs.filter((r) => porteeDe(r) !== "nat");
+    if (nat.length) return { principal: nat[0], possibles: nat.slice(1, 3), fiche, question: "", message: "", recs };
+    if (!dep) return { principal: null, possibles: locales, fiche, question: item.question_lieu || "Dans quel département habitez-vous ?", message: "", recs };
+    const v = locales.find((r) => r.dep === dep);
+    if (v) return { principal: v, possibles: [], fiche, question: "", message: "", recs };
+    return { principal: null, possibles: [], fiche, question: "", message: "Pas de démarche en ligne pour ce département : voici la fiche officielle et le guichet.", recs };
+  }
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, termeAuTitre, termesAuTitre, reponseLigne, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

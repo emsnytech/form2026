@@ -16,7 +16,8 @@
   // « citee » (réponse préparée ou conversation : démarches déjà retenues par l'assistant).
   const origine = () => window.ORIGINE_RESULTATS || "simple";
   // Une précision de lieu relance la recherche simple ; une réponse citée garde sa liste et se redécore.
-  const relancer = () => { if (origine() === "simple") rechercheSimple(); else decorer(); };
+  // La page donne la réponse à rejouer (recherche simple, ligne de l'accueil) dans window.relancerReponse.
+  const relancer = () => { if (typeof window.relancerReponse === "function") window.relancerReponse(); else decorer(); };
   const reponseAffichee = () => !$("vue-reponse").hidden;
   const cache = new Map();
   const SANS_API = !!window.FORM_SANS_API;
@@ -254,6 +255,23 @@
     if (!reponseAffichee() || !Moteur.lieux) return;
     const changer = ` · <button type="button" class="lien-changer" id="lieu-changer">changer</button>`;
     const brancherChanger = () => { const ch = $("lieu-changer"); if (ch) ch.addEventListener("click", () => { ouvrirFiltres(); vueAccueilFiltres(); }); };
+    // Démarches locales sans territoire connu (window.DEMANDER_LIEU, donné par la page) : la question du lieu d'abord.
+    if (window.DEMANDER_LIEU && !$("dep").value && (!COMMUNE || COMMUNE.devine)) {
+      el.className = "";
+      if (SANS_API) {
+        el.innerHTML = `<div class="question-lieu"><label for="dep-res"><b>${esc(window.DEMANDER_LIEU)}</b></label><select id="dep-res">${$("dep").innerHTML}</select></div>`;
+        $("dep-res").value = "";
+        $("dep-res").addEventListener("change", () => { $("dep").value = $("dep-res").value; if ($("dep").value) relancer(); });
+      } else {
+        el.innerHTML = `<div class="question-lieu"><label for="cp-res"><b>${esc(window.DEMANDER_LIEU)}</b></label><div class="row"><input id="cp-res" class="cp-res" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="code postal"> <span class="meta">ou</span> <select id="dep-res" aria-label="Votre département">${$("dep").innerHTML}</select></div></div>`;
+        $("dep-res").value = "";
+        $("dep-res").addEventListener("change", () => { $("dep").value = $("dep-res").value; if ($("dep").value) relancer(); });
+        const c2 = $("cp-res");
+        c2.addEventListener("input", () => { cp.value = c2.value.replace(/\D/g, "").slice(0, 5); cp.dispatchEvent(new Event("input"));
+          if (cp.value.length === 5) setTimeout(() => { if (COMMUNE) relancer(); }, 1500); });
+      }
+      return;
+    }
     if (COMMUNE && !COMMUNE.devine) {
       el.innerHTML = `<span class="meta">Résultats adaptés à</span> <span class="pastille pastille-fixe">${esc(COMMUNE.nom)} (${esc(COMMUNE.dep)})</span>${changer}`;
       brancherChanger(); return;
@@ -319,9 +337,9 @@
     if (window.majCherche) window.majCherche();
   }
   const afficher = afficherResultats;
-  afficherResultats = function (liste, q, o) {
+  afficherResultats = function (liste, q, ...suite) {
     // Une commune devinée dans une question précédente ne vaut pas pour la suivante.
     if (COMMUNE && COMMUNE.devine) { COMMUNE = null; window.LIEU_CONNU = ""; }
-    LISTE = liste || []; afficher(liste, q, o); decorer();
+    LISTE = liste || []; afficher(liste, q, ...suite); decorer();
   };
 })();

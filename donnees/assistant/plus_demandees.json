@@ -1,37 +1,50 @@
 {
- "objet": "Accueil, « Les plus demandées ». Corrigeable à la main : editeur.epingle (mots du titre, dans l'ordre voulu), editeur.exclu (clés à écarter).",
+ "objet": "Accueil, « Les plus demandées ». Corrigeable à la main : editeur.epingle (mots du titre, dans l'ordre voulu), editeur.exclu (clés à écarter) ; pour chaque ligne, ids (ses démarches), fiche (fiche service-public) et question_lieu (question posée quand ses démarches sont locales).",
  "date": "2026-11-20",
  "nationales": [
   {
    "titre": "Obtenir une attestation de droits",
    "organisme": "Assurance maladie",
-   "requete": "attestation de droits assurance maladie"
+   "requete": "attestation de droits assurance maladie",
+   "ids": [
+    "SP-R49811"
+   ],
+   "fiche": "SP-F10662"
   },
   {
-   "titre": "Déclarer ses ressources pour la prime d'activité",
+   "titre": "Demander la prime d'activité",
    "organisme": "Caf, MSA",
-   "requete": "déclaration trimestrielle de ressources prime d'activité"
+   "requete": "prime d'activité",
+   "precision": "Demande et déclaration trimestrielle dans votre espace Caf ou MSA",
+   "ids": [
+    "SP-R42724"
+   ],
+   "fiche": "SP-F2882"
   },
   {
    "titre": "Payer une amende",
    "organisme": "Agence nationale de traitement automatisé des infractions (ANTAI)",
-   "requete": "payer une amende"
+   "requete": "payer une amende",
+   "ids": [
+    "SP-R11026"
+   ],
+   "fiche": "SP-F18509"
   }
  ],
  "demarche_numerique": [
   {
    "cle": "medaille honneur travail",
    "titre": "Demander la médaille d'honneur du travail",
-   "organisme": "3 démarches départementales",
-   "dossiers": 812440,
+   "organisme": "2 démarches départementales",
+   "dossiers": 810527,
    "dossiers_arrondis": "800 000",
-   "variantes": 3,
+   "variantes": 2,
    "ids": [
     "DN-69348",
-    "DN-17231",
     "DN-118359"
    ],
-   "requete": "Demander la médaille d'honneur du travail"
+   "requete": "Demander la médaille d'honneur du travail",
+   "question_lieu": "Dans quel département travaillez-vous ?"
   },
   {
    "cle": "verification prealable embauche",
@@ -47,7 +60,8 @@
     "DN-104225",
     "DN-157165"
    ],
-   "requete": "Vérifier le titre de séjour d'un futur salarié"
+   "requete": "Vérifier le titre de séjour d'un futur salarié",
+   "question_lieu": "Dans quel département se trouve l'établissement qui embauche ?"
   },
   {
    "cle": "pass culture",
@@ -65,7 +79,8 @@
     "DN-94271",
     "DN-126208"
    ],
-   "requete": "Demander le crédit du pass Culture"
+   "requete": "Demander le crédit du pass Culture",
+   "question_lieu": "Dans quel département habitez-vous ?"
   }
  ],
  "source": "Observatoire de la qualité des démarches en ligne (DINUM) ; volumes du descriptif de Démarche Numérique",
@@ -175,9 +190,9 @@
   {
    "cle": "medaille honneur travail",
    "titre": "Demander la médaille d'honneur du travail",
-   "organisme": "3 démarches départementales",
-   "dossiers": 812440,
-   "variantes": 3
+   "organisme": "2 démarches départementales",
+   "dossiers": 810527,
+   "variantes": 2
   },
   {
    "cle": "verification prealable embauche",

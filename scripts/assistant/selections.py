@@ -45,8 +45,15 @@ PROGRAMMES = [
     ("verification prealable embauche", "Vérifier le titre de séjour d'un futur salarié",
      [["verification", "embauche"], ["authentification", "titre", "sejour", "embauche"]]),
     ("pass culture", "Demander le crédit du pass Culture", [["pass", "culture"]]),
-    ("medaille honneur travail", "Demander la médaille d'honneur du travail", [["medaille", "honneur", "travail"]]),
+    ("medaille honneur travail", "Demander la médaille d'honneur du travail", [["medaille", "honneur", "travail"]], ["agricole"]),
 ]
+# Question de lieu d'une ligne dont les démarches sont locales (champ « question_lieu », corrigeable à la main : une
+# valeur déjà présente dans le fichier est gardée). Par défaut : « Dans quel département habitez-vous ? ».
+QUESTIONS_LIEU = {
+    "medaille honneur travail": "Dans quel département travaillez-vous ?",
+    "verification prealable embauche": "Dans quel département se trouve l'établissement qui embauche ?",
+    "secheresse 2026": "Dans quel département se trouve votre exploitation ?",
+}
 
 
 # Crises : les démarches d'une même crise forment une seule ligne de « À la une », qui lance une recherche sur le thème.
@@ -71,7 +78,8 @@ def departement_affiche(r):
 
 def programme(titre):
     mots = set(n_(titre).split())
-    return next(((k, lib) for k, lib, regles in PROGRAMMES if any(all(m in mots for m in r) for r in regles)), None)
+    # (clé, libellé, règles[, mots qui excluent : la médaille d'honneur agricole est une autre démarche])
+    return next(((p[0], p[1]) for p in PROGRAMMES if any(all(m in mots for m in r) for r in p[2]) and not (len(p) > 3 and mots & set(p[3]))), None)
 
 
 def cle_variante(titre):
@@ -174,16 +182,31 @@ process.stdin.on('data',d=>s+=d).on('end',()=>{ const out={}; for (const q of JS
                              "volume": o["volume"], "volume_arrondi": arrondi(o["volume"]), "usagers": o.get("Categories Usagers", ""),
                              "fiche_proposee": f["id"] if f else None, "fiche_titre": f["t"] if f else None})
     # Première version, donnée par l'éditeur (consigne du 20 novembre 2026), tant qu'il n'a rien épinglé d'autre.
-    nat_defaut = [{"titre": "Obtenir une attestation de droits", "organisme": "Assurance maladie", "requete": "attestation de droits assurance maladie"},
-                  {"titre": "Déclarer ses ressources pour la prime d'activité", "organisme": "Caf, MSA", "requete": "déclaration trimestrielle de ressources prime d'activité"},
-                  {"titre": "Payer une amende", "organisme": "Agence nationale de traitement automatisé des infractions (ANTAI)", "requete": "payer une amende"}]
+    # « ids » : les démarches de la ligne (un clic affiche leur réponse, sans recherche sur un texte) ; « fiche » : la fiche
+    # service-public à proposer en « Comprendre ». Choisis à la main dans l'index, à valider par l'éditeur.
+    nat_defaut = [{"titre": "Obtenir une attestation de droits", "organisme": "Assurance maladie", "requete": "attestation de droits assurance maladie",
+                   "ids": ["SP-R49811"], "fiche": "SP-F10662"},
+                  {"titre": "Demander la prime d'activité", "organisme": "Caf, MSA", "requete": "prime d'activité",
+                   "precision": "Demande et déclaration trimestrielle dans votre espace Caf ou MSA", "ids": ["SP-R42724"], "fiche": "SP-F2882"},
+                  {"titre": "Payer une amende", "organisme": "Agence nationale de traitement automatisé des infractions (ANTAI)", "requete": "payer une amende",
+                   "ids": ["SP-R11026"], "fiche": "SP-F18509"}]
+    avant = {}
+    try:
+        _p = json.loads(pd_chemin.read_text(encoding="utf-8"))
+        avant = {x.get("cle") or x.get("titre"): x for x in _p.get("nationales", []) + _p.get("demarche_numerique", [])}
+    except Exception:
+        pass
+    for x in nat_defaut:   # une ligne nationale corrigée à la main garde ses ids, sa fiche et sa question
+        for k in ("ids", "fiche", "question_lieu", "precision"):
+            if k in avant.get(x["titre"], {}): x[k] = avant[x["titre"]][k]
     dn_defaut = ["medaille honneur travail", "verification prealable embauche", "pass culture"]
     choisis_dn = []
     for mot in (ed["epingle"] or dn_defaut):
         c = next((c for c in cand_dn if all(w in c["cle"] for w in n_(mot).split()) and c["cle"] not in ed["exclu"]), None)
         if c and c not in choisis_dn: choisis_dn.append(c)
-    pd = {"objet": "Accueil, « Les plus demandées ». Corrigeable à la main : editeur.epingle (mots du titre, dans l'ordre voulu), editeur.exclu (clés à écarter).",
-          "date": meta["date_export"], "nationales": nat_defaut, "demarche_numerique": [{k: v for k, v in c.items() if k != "pro"} for c in choisis_dn[:3]],
+    pd = {"objet": "Accueil, « Les plus demandées ». Corrigeable à la main : editeur.epingle (mots du titre, dans l'ordre voulu), editeur.exclu (clés à écarter) ; pour chaque ligne, ids (ses démarches), fiche (fiche service-public) et question_lieu (question posée quand ses démarches sont locales).",
+          "date": meta["date_export"], "nationales": nat_defaut,
+          "demarche_numerique": [{**{k: v for k, v in c.items() if k != "pro"}, "question_lieu": avant.get(c["cle"], {}).get("question_lieu") or QUESTIONS_LIEU.get(c["cle"], "Dans quel département habitez-vous ?")} for c in choisis_dn[:3]],
           "source": "Observatoire de la qualité des démarches en ligne (DINUM) ; volumes du descriptif de Démarche Numérique",
           "candidates_nationales": cand_nat[:10], "candidates_demarche_numerique": [{k: c[k] for k in ("cle", "titre", "organisme", "dossiers", "variantes")} for c in cand_dn if not c["pro"]][:10],
           "editeur": ed}
@@ -234,6 +257,12 @@ process.stdin.on('data',d=>s+=d).on('end',()=>{ const out={}; for (const q of JS
             if n_crise > 2: reste.append(u); continue
         garde.append(u)
     ordre = garde + reste
+    try:
+        q_avant = {u["cle"]: u.get("question_lieu") for u in json.loads((D / "a_la_une.json").read_text(encoding="utf-8")).get("retenues", []) + json.loads((D / "a_la_une.json").read_text(encoding="utf-8")).get("suivantes", [])}
+    except Exception:
+        q_avant = {}
+    for u in ordre:
+        u["question_lieu"] = q_avant.get(u["cle"]) or QUESTIONS_LIEU.get(u["cle"], "Dans quel département habitez-vous ?")
     au = {"objet": "Accueil, « À la une » : proposé par la mise à jour, validé par l'éditeur. editeur.epingle (mots du titre), editeur.exclu (clés), editeur.etiquette ({clé: étiquette}).",
           "date": meta["date_export"], "retenues": ordre[:6], "suivantes": ordre[6:12],
           "source": "Démarches publiées depuis moins de 30 jours, et démarches de saison (saisons.json) ; descriptif de Démarche Numérique",

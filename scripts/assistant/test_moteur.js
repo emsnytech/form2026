@@ -74,6 +74,37 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const Q30=[...ex.map(e=>e.q),...Q.map(x=>x[0]),'renouveler mon titre de séjour','allocation logement caf','brocante dans ma rue',"carte d'identité"];
   const atort=Q30.filter(q=>{const l=M.lieux(q); return l.lieux.length||(l.regions||[]).length;});
   verifie('Aucun lieu ni région reconnu à tort sur les questions de référence', !atort.length, atort.join(' | ')||`${Q30.length} questions, aucun lieu`); }
+{ // Fiabilité (PR « fiabilité ») : lignes de l'accueil construites depuis leurs ids ; aucune démarche affirmée sans être sûre.
+  const D_=path.join(__dirname,'..','..','donnees','assistant');
+  const pd=JSON.parse(fs.readFileSync(path.join(D_,'plus_demandees.json'),'utf8')), une=JSON.parse(fs.readFileSync(path.join(D_,'a_la_une.json'),'utf8'));
+  const lignes=[...pd.nationales,...pd.demarche_numerique,...une.retenues];
+  const trouve=(mots)=>lignes.find(x=>mots.every(m=>M.norm(x.titre).includes(m)));
+  const med=trouve(['medaille','honneur','travail']);
+  if(!med){ console.log("ATTENTE A1 ligne « médaille d'honneur du travail » absente de l'accueil"); attente++; }
+  else { const R0=M.reponseLigne(ix,med,{});
+    verifie('A1 médaille du travail sans territoire : la page demande le département, aucune « Votre démarche »', !!R0.question&&!R0.principal, `question « ${R0.question} » ; Votre démarche : ${R0.principal?R0.principal.id:'aucune'}`);
+    verifie('A1 aucune fiche sur l\'autorisation de travail', !(R0.fiche&&/autorisation de travail/i.test(R0.fiche.t)), R0.fiche?R0.fiche.id+' '+R0.fiche.t:'pas de fiche');
+    const R75=M.reponseLigne(ix,med,{dep:'75'}), v75=R0.recs.find(r=>r.dep==='75');
+    verifie('A1 avec le 75 : la démarche du 75 si elle existe', v75?(R75.principal===v75):(!R75.principal&&!!R75.message), R75.principal?R75.principal.id+' '+R75.principal.t:R75.message); }
+  const emb=trouve(['titre','sejour','salarie']);
+  if(!emb){ console.log("ATTENTE A2 ligne « vérifier le titre de séjour d'un futur salarié » absente de l'accueil"); attente++; }
+  else { const R38=M.reponseLigne(ix,emb,{dep:'38'}); verifie('A2 vérification du titre de séjour avec le 38 : DN-13583 en « Votre démarche »', R38.principal&&R38.principal.id==='DN-13583', R38.principal?R38.principal.id:'aucune'); }
+  const hors=[];
+  for(const x of lignes){ const deps=[...new Set(['', ...(x.ids||[]).map(i=>{const k=ix.byId.get(i);return k===undefined?'':ix.recs[k].dep||'';})])];
+    for(const d of deps){ const R=M.reponseLigne(ix,x,{dep:d}); for(const r of [R.principal,...R.possibles].filter(Boolean)) if(!(x.ids||[]).includes(r.id)) hors.push(x.titre+' / '+(d||'sans territoire')+' : '+r.id); } }
+  verifie(`A3 chaque ligne de l'accueil (${lignes.length}) ne montre que ses propres démarches`, !hors.length&&lignes.every(x=>(x.ids||[]).length), hors.slice(0,5).join(' | ')||'toutes les lignes ont des ids');
+  const F=M.choisir(ix,"Demander la médaille d'honneur du travail",{});
+  verifie('F1 « médaille d\'honneur du travail » en recherche simple, sans territoire : aucune démarche locale en « Votre démarche »', !F.principal||F.principal.k!=='dn'||(F.principal.po||'')==='nat', F.principal?F.principal.id+' '+(F.principal.dep||F.principal.po)+' '+F.principal.t:'pas de « Votre démarche » ; démarches possibles : '+F.possibles.map(r=>r.id+' ('+(r.dep||r.po||'')+')').join(' ')); }
+{ // Règle « démarche sûre » retenue (PR 76, variante d) : ni démarche hors sujet affirmée, ni démarche juste perdue.
+  const P=(q,o={})=>M.choisir(ix,q,o).principal;
+  const ko=[];
+  const f1=P("Demander la médaille d'honneur du travail"); if(f1&&f1.id==='DN-69676') ko.push('F1 : médaille des chemins de fer');
+  const r4=P("Ma vitrine a été cassée pendant les manifestations, quelle aide ?"); if(r4&&r4.id==='SP-F760') ko.push('R4 : fiche sur les demandeurs d\'emploi');
+  const r5=P("Mon club de foot a besoin d'argent pour acheter des équipements."); if(r5&&r5.id==='DN-78683') ko.push('R5 : compte-rendu de subvention');
+  const r1=P("Je tiens un restaurant à Grenoble et je veux embaucher un salarié étranger. Dois-je vérifier son titre de séjour, et comment ?"); if(!r1||r1.id!=='DN-13583') ko.push('R1 perd DN-13583');
+  verifie('Démarche sûre : F1, R4, R5 sans démarche hors sujet ; R1, R3, R6 gardent la leur (R3 et R6 ci-dessus)', !ko.length, ko.join(' | ')||`F1 : ${f1?f1.id:'Démarches possibles'} ; R4 : ${r4?r4.id:'Démarches possibles'} ; R5 : ${r5?r5.id:'Démarches possibles'}`);
+  const t11=M.choisir(ix,"aide pour adapter mon logement handicap",{});
+  verifie('Lieu : pas de question de lieu au-dessus d\'une démarche nationale sûre (T11)', !(t11.principal&&t11.demanderLieu), t11.principal?t11.principal.id:'pas de démarche sûre'); }
 { // Ton des réponses (PR 75) : réponses préparées et messages de la recherche simple. Jamais de formule d'échec en tête,
   // aucun mot de spécialiste, trois phrases au plus pour une réponse préparée ; la consigne de l'assistant ne propose plus
   // de commencer par un échec.
