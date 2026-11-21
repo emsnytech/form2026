@@ -12,12 +12,12 @@
    "fiche": "SP-F10662"
   },
   {
-   "titre": "Déclarer ses ressources pour la prime d'activité",
+   "titre": "Demander la prime d'activité",
    "organisme": "Caf, MSA",
-   "requete": "déclaration trimestrielle de ressources prime d'activité",
+   "requete": "prime d'activité",
+   "precision": "Demande et déclaration trimestrielle dans votre espace Caf ou MSA",
    "ids": [
-    "SP-R42724",
-    "SP-R42726"
+    "SP-R42724"
    ],
    "fiche": "SP-F2882"
   },

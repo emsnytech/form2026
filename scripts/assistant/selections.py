@@ -186,8 +186,8 @@ process.stdin.on('data',d=>s+=d).on('end',()=>{ const out={}; for (const q of JS
     # service-public à proposer en « Comprendre ». Choisis à la main dans l'index, à valider par l'éditeur.
     nat_defaut = [{"titre": "Obtenir une attestation de droits", "organisme": "Assurance maladie", "requete": "attestation de droits assurance maladie",
                    "ids": ["SP-R49811"], "fiche": "SP-F10662"},
-                  {"titre": "Déclarer ses ressources pour la prime d'activité", "organisme": "Caf, MSA", "requete": "déclaration trimestrielle de ressources prime d'activité",
-                   "ids": ["SP-R42724", "SP-R42726"], "fiche": "SP-F2882"},
+                  {"titre": "Demander la prime d'activité", "organisme": "Caf, MSA", "requete": "prime d'activité",
+                   "precision": "Demande et déclaration trimestrielle dans votre espace Caf ou MSA", "ids": ["SP-R42724"], "fiche": "SP-F2882"},
                   {"titre": "Payer une amende", "organisme": "Agence nationale de traitement automatisé des infractions (ANTAI)", "requete": "payer une amende",
                    "ids": ["SP-R11026"], "fiche": "SP-F18509"}]
     avant = {}
@@ -197,7 +197,7 @@ process.stdin.on('data',d=>s+=d).on('end',()=>{ const out={}; for (const q of JS
     except Exception:
         pass
     for x in nat_defaut:   # une ligne nationale corrigée à la main garde ses ids, sa fiche et sa question
-        for k in ("ids", "fiche", "question_lieu"):
+        for k in ("ids", "fiche", "question_lieu", "precision"):
             if k in avant.get(x["titre"], {}): x[k] = avant[x["titre"]][k]
     dn_defaut = ["medaille honneur travail", "verification prealable embauche", "pass culture"]
     choisis_dn = []

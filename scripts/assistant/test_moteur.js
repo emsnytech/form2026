@@ -95,6 +95,16 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie(`A3 chaque ligne de l'accueil (${lignes.length}) ne montre que ses propres démarches`, !hors.length&&lignes.every(x=>(x.ids||[]).length), hors.slice(0,5).join(' | ')||'toutes les lignes ont des ids');
   const F=M.choisir(ix,"Demander la médaille d'honneur du travail",{});
   verifie('F1 « médaille d\'honneur du travail » en recherche simple, sans territoire : aucune démarche locale en « Votre démarche »', !F.principal||F.principal.k!=='dn'||(F.principal.po||'')==='nat', F.principal?F.principal.id+' '+(F.principal.dep||F.principal.po)+' '+F.principal.t:'pas de « Votre démarche » ; démarches possibles : '+F.possibles.map(r=>r.id+' ('+(r.dep||r.po||'')+')').join(' ')); }
+{ // Règle « démarche sûre » retenue (PR 76, variante d) : ni démarche hors sujet affirmée, ni démarche juste perdue.
+  const P=(q,o={})=>M.choisir(ix,q,o).principal;
+  const ko=[];
+  const f1=P("Demander la médaille d'honneur du travail"); if(f1&&f1.id==='DN-69676') ko.push('F1 : médaille des chemins de fer');
+  const r4=P("Ma vitrine a été cassée pendant les manifestations, quelle aide ?"); if(r4&&r4.id==='SP-F760') ko.push('R4 : fiche sur les demandeurs d\'emploi');
+  const r5=P("Mon club de foot a besoin d'argent pour acheter des équipements."); if(r5&&r5.id==='DN-78683') ko.push('R5 : compte-rendu de subvention');
+  const r1=P("Je tiens un restaurant à Grenoble et je veux embaucher un salarié étranger. Dois-je vérifier son titre de séjour, et comment ?"); if(!r1||r1.id!=='DN-13583') ko.push('R1 perd DN-13583');
+  verifie('Démarche sûre : F1, R4, R5 sans démarche hors sujet ; R1, R3, R6 gardent la leur (R3 et R6 ci-dessus)', !ko.length, ko.join(' | ')||`F1 : ${f1?f1.id:'Démarches possibles'} ; R4 : ${r4?r4.id:'Démarches possibles'} ; R5 : ${r5?r5.id:'Démarches possibles'}`);
+  const t11=M.choisir(ix,"aide pour adapter mon logement handicap",{});
+  verifie('Lieu : pas de question de lieu au-dessus d\'une démarche nationale sûre (T11)', !(t11.principal&&t11.demanderLieu), t11.principal?t11.principal.id:'pas de démarche sûre'); }
 { // Ton des réponses (PR 75) : réponses préparées et messages de la recherche simple. Jamais de formule d'échec en tête,
   // aucun mot de spécialiste, trois phrases au plus pour une réponse préparée ; la consigne de l'assistant ne propose plus
   // de commencer par un échec.
