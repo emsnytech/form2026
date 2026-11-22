@@ -37,7 +37,7 @@ h1{margin:0;font-size:clamp(30px,5vw,44px);line-height:1.15;font-weight:600;lett
 .q-label{font-size:17px;font-weight:500}
 .q-aide{margin:0;font-size:15px;color:var(--muted)}
 .saisie{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
-#q{flex:1 1 420px;min-width:0;min-height:56px;padding:14px 18px;font:inherit;font-size:17px;line-height:1.4;border:2px solid var(--ink);border-radius:10px;background:var(--fond);color:var(--ink);resize:vertical}
+#q{flex:1 1 420px;min-width:0;min-height:80px;padding:14px 18px;font:inherit;font-size:17px;line-height:1.4;border:2px solid var(--ink);border-radius:10px;background:var(--fond);color:var(--ink);resize:vertical}
 .btn{min-height:56px;padding:0 28px;font-size:17px;font-weight:600;color:#fff;background:var(--accent);border:0;border-radius:10px}
 .btn:hover{background:var(--accent-fonce)}.btn:disabled{opacity:.55;cursor:default}
 .lien{background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;font-size:15px;min-height:44px}
@@ -178,7 +178,7 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
       <label for="q" class="q-label">Votre situation, avec vos mots.</label>
       <p class="q-aide" id="q-aide">Pour des réponses plus précises, indiquez où vous habitez, ou où se situe votre projet&nbsp;: une commune, un département ou une région suffit, pas besoin d'adresse.</p>
       <div class="saisie">
-        <textarea id="q" rows="1" aria-describedby="q-aide q-perso" placeholder="Ex. : Je n'arrive plus à payer ma facture d'électricité, j'habite à Rezé."></textarea>
+        <textarea id="q" rows="2" aria-describedby="q-aide q-perso" placeholder="Ex. : Je n'arrive plus à payer ma facture d'électricité, j'habite à Rezé."></textarea>
         <button type="submit" class="btn" id="chercher" disabled>Chercher</button>
       </div>
       <p class="perso" id="q-perso" hidden>Décrivez votre situation sans donnée personnelle&nbsp;: ni nom, ni numéro (sécurité sociale, titre de séjour, IBAN, téléphone), ni adresse précise, ni information de santé. Une commune suffit&nbsp;: n'indiquez ni votre adresse ni votre nom. Les numéros et adresses électroniques reconnus sont retirés avant l'envoi.</p>
@@ -1203,6 +1203,8 @@ $("ia-go").href = window.FORM_ASSISTANT_URL;
 document.addEventListener("click", (ev) => { if (!ev.target.closest("#ia")) return; ev.preventDefault(); const d = $("dlg-ia"); if (d.showModal) d.showModal(); else window.open(window.FORM_ASSISTANT_URL, "_blank", "noopener"); });
 $("ia-annuler").addEventListener("click", () => $("dlg-ia").close());
 $("ia-go").addEventListener("click", () => $("dlg-ia").close());
+// Fermeture (bouton, Annuler ou Échap) : le focus revient au bouton qui a ouvert la fenêtre.
+$("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(); });
 </script>
 <script>/*ou_aller:début*/
 // « Où aller » : code postal → commune (API Géo), service local compétent (Annuaire de l'administration, DILA),
