@@ -23,16 +23,21 @@
     secheresse: ["calamite", "_fonds_d_urgence"], gel: ["calamite", "_fonds_d_urgence"], grele: ["calamite", "_fonds_d_urgence"],
     inondation: ["calamite", "_fonds_d_urgence"], tempete: ["calamite", "_fonds_d_urgence"], intemperies: ["calamite", "_fonds_d_urgence"], // crises
     degradation: ["degradation", "dommage", "indemnisation"], pillage: ["degradation", "dommage", "indemnisation"],
-    vandalisme: ["degradation", "dommage", "indemnisation"], emeute: ["degradation", "dommage", "indemnisation"],
-    emeutes: ["degradation", "dommage", "indemnisation"], manifestation: ["degradation", "dommage", "indemnisation"],
+    vandalisme: ["degradation", "dommage", "indemnisation"], emeute: ["degradation", "dommage", "indemnisation", "_troubles_urbains"],
+    emeutes: ["degradation", "dommage", "indemnisation", "_troubles_urbains"], manifestation: ["degradation", "dommage", "indemnisation"],
     manifestations: ["degradation", "dommage", "indemnisation"],                                     // dégradations
+    // restaurant ↔ commerce ; « bar » jamais seul (voir EXPRESSIONS : bar restaurant, bar-tabac, café-bar).
+    restaurant: ["commerce"], restaurants: ["commerce"],
   };
   // Expressions de plusieurs mots, reconnues avant le découpage en mots (sur le texte normalisé).
   const EXPRESSIONS = [
     [["n arrive plus a payer", "arrive plus a payer", "ne peux plus payer", "ne peut plus payer", "ne pouvons plus payer", "retard de paiement",
       "facture impayee", "factures impayees"], ["impaye", "paiement"]],
     [["fonds d urgence"], ["calamite", "_fonds_d_urgence"]],
-    [["vitrine cassee", "vitrine brisee"], ["degradation", "dommage", "indemnisation"]],
+    [["vitrine cassee", "vitrine brisee", "vitrine a ete cassee", "vitrines cassees", "vitre cassee"], ["degradation", "dommage", "indemnisation"]],
+    // émeutes ↔ troubles urbains (jeton _troubles_urbains, voir JETONS_EXPRESSION)
+    [["troubles urbains"], ["_troubles_urbains", "emeute", "degradation", "dommage", "indemnisation"]],
+    [["bar restaurant", "bar tabac", "cafe bar"], ["commerce", "restaurant"]],
     [["verifier le titre de sejour", "verifier son titre de sejour", "verifier un titre de sejour", "verifier les titres de sejour",
       "salarie etranger", "salaries etrangers", "embaucher un etranger", "embaucher un salarie etranger", "embaucher des etrangers"],
      ["verification", "prealable", "embauche", "autorisation", "travail"]],
@@ -45,7 +50,7 @@
     return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
   }
   // Jetons d'expression : indexés quand l'expression figure dans un texte, cherchés par les synonymes (« _… », sans racinisation).
-  const JETONS_EXPRESSION = [["fonds d urgence", "_fonds_d_urgence"]];
+  const JETONS_EXPRESSION = [["fonds d urgence", "_fonds_d_urgence"], ["troubles urbains", "_troubles_urbains"]];
   function stem(w) {
     if (w[0] === "_") return w;
     if (w.length > 4) w = w.replace(/(s|x)$/, "");
@@ -418,6 +423,6 @@
     if (v) return { principal: v, possibles: [], fiche, question: "", message: "", recs };
     return { principal: null, possibles: [], fiche, question: "", message: "Pas de démarche en ligne pour ce département : voici la fiche officielle et le guichet.", recs };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, termeAuTitre, termesAuTitre, reponseLigne, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

@@ -1,12 +1,14 @@
 """Extrait, en flux, les descriptions des démarches publiées de l'export complet du descriptif (data.gouv.fr).
 
-    python3 scripts/assistant/extraire_descriptions.py <export>.json <cartographie>/assistant/descriptions_publiees.jsonl
+    python3 scripts/assistant/extraire_descriptions.py <export>.json[.gz] <cartographie>/assistant/descriptions_publiees.jsonl
+
+L'export peut être lu tel qu'il est publié, compressé (.gz) : inutile de le décompresser avant.
 """
-import json,sys
+import gzip,json,sys
 src,dst=sys.argv[1],sys.argv[2]
 dec=json.JSONDecoder(); buf=''; n=k=0
 out=open(dst,'w')
-with open(src,encoding='utf-8') as f:
+with (gzip.open(src,'rt',encoding='utf-8') if src.endswith('.gz') else open(src,encoding='utf-8')) as f:
     buf=f.read(1<<20).lstrip()
     assert buf[0]=='['; buf=buf[1:]
     eof=False

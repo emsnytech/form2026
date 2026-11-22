@@ -13,8 +13,8 @@ ces fichiers (`epingle`, `exclu`, `etiquette`) sont gardés d'une mise à jour �
   départementales regroupées (même titre une fois retirés les noms et codes de département, de région, de préfecture, les
   années), hors démarches réservées aux entreprises.
 - **À la une** : démarches publiées depuis moins de 30 jours à la date de l'export, et démarches de saison ; classées par
-  urgence (crise, fonds d'urgence, calamité, sécheresse, inondation, intempéries, dégradations, émeutes), puis par dossiers
-  déposés, puis par échéance proche ; variantes départementales regroupées en une ligne.
+  urgence (crise, fonds d'urgence, calamité, sécheresse, inondation, intempéries, dégradations, émeutes, troubles urbains,
+  dommages subis), puis par dossiers déposés, puis par échéance proche ; variantes départementales regroupées en une ligne.
 """
 import argparse, collections, datetime, json, re, subprocess, sys, unicodedata, zipfile
 import xml.etree.ElementTree as ET
@@ -216,7 +216,7 @@ process.stdin.on('data',d=>s+=d).on('end',()=>{ const out={}; for (const q of JS
     ed = lire_editeur(D / "a_la_une.json")
     seuil = (date - datetime.timedelta(days=30)).isoformat()
     URGENT = re.compile(r"\burgence|\burgent")
-    CRISE = re.compile(r"\bcrise|calamite|secheresse|inondation|intemperie|degradation|emeute|\bcasi\b|force majeure|grele|tempete")
+    CRISE = re.compile(r"\bcrise|calamite|secheresse|inondation|intemperie|degradation|emeute|\bcasi\b|force majeure|grele|tempete|troubles urbains|dommages subis")
     candidats = []
     for r in dn:
         s = de_saison(r["t"], saisons_du_mois(saisons, date.month))
