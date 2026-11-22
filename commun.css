@@ -1,0 +1,17 @@
+/* Style commun du site FORM 2026 : les boutons.
+   Un lien <a href> (navigation) ou un <button> (action), stylé en bouton.
+   « bouton » : bouton principal, fond plein, un seul par page.
+   « bouton secondaire » : contour, sans fond.
+   Couleur : celle des boutons principaux du site (#1d4ed8, texte blanc, contraste 6,7:1 ; contour clair au moins 8,2:1 sur les fonds sombres).
+   Une page peut prendre sa propre couleur en redéfinissant --bouton-fond, --bouton-fond-survol et --bouton-contour sur body. */
+:root{--bouton-fond:#1d4ed8;--bouton-fond-survol:#1e3a8a;--bouton-contour:#1d4ed8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bouton-contour:#93c5fd}}
+:root[data-theme="dark"]{--bouton-contour:#93c5fd}
+.bouton{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.5rem 1.25rem;
+  border:2px solid var(--bouton-fond);border-radius:10px;background:var(--bouton-fond);color:#fff;
+  font:inherit;font-weight:700;line-height:1.2;text-align:center;text-decoration:none;cursor:pointer}
+.bouton:hover{background:var(--bouton-fond-survol);border-color:var(--bouton-fond-survol);color:#fff;text-decoration:none}
+.bouton:focus-visible{outline:3px solid var(--bouton-contour);outline-offset:3px;border-radius:10px}
+.bouton.secondaire{background:transparent;border-color:var(--bouton-contour);color:var(--bouton-contour)}
+.bouton.secondaire:hover{background:transparent;color:var(--bouton-contour);text-decoration:underline}
+.bouton-note{display:block;margin:.35rem 0 0;font-size:.85rem;line-height:1.35}

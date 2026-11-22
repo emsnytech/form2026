@@ -7,6 +7,7 @@
 <!-- Nom du répertoire : seule source du titre, du sous-titre et du nom court (onglet, liens). assembler_page.py remplace
      Où faire sa démarche ?, Le répertoire des démarches administratives en ligne et des guichets où les faire. et Où faire sa démarche — FORM 2026 dans les pages ; page_comment.py relit ce bloc dans la page assemblée. -->
 <script type="application/json" id="nom-repertoire">{"titre": "Où faire sa démarche ?", "sous_titre": "Le répertoire des démarches administratives en ligne et des guichets où les faire.", "nom_court": "Où faire sa démarche — FORM 2026"}</script>
+<link rel="stylesheet" href="commun.css">
 <style>
 :root{--accent:#0B5D52;--accent-fonce:#08463E;--ink:#1A1A1A;--muted:#555A60;--line:#E5E5E5;--line2:#D4D4D8;--fond:#FFFFFF;--doux:#F4F4F5;
   --urgent-fond:#FDF0E7;--urgent:#8A3B12;--saison-fond:#EAF1F8;--saison:#1F4D7A;--focus:#0B5D52}
@@ -36,7 +37,7 @@ h1{margin:0;font-size:clamp(30px,5vw,44px);line-height:1.15;font-weight:600;lett
 .q-label{font-size:17px;font-weight:500}
 .q-aide{margin:0;font-size:15px;color:var(--muted)}
 .saisie{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
-#q{flex:1 1 420px;min-width:0;min-height:56px;padding:14px 18px;font:inherit;font-size:17px;line-height:1.4;border:2px solid var(--ink);border-radius:10px;background:var(--fond);color:var(--ink);resize:vertical}
+#q{flex:1 1 420px;min-width:0;min-height:80px;padding:14px 18px;font:inherit;font-size:17px;line-height:1.4;border:2px solid var(--ink);border-radius:10px;background:var(--fond);color:var(--ink);resize:vertical}
 .btn{min-height:56px;padding:0 28px;font-size:17px;font-weight:600;color:#fff;background:var(--accent);border:0;border-radius:10px}
 .btn:hover{background:var(--accent-fonce)}.btn:disabled{opacity:.55;cursor:default}
 .lien{background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;font-size:15px;min-height:44px}
@@ -46,6 +47,10 @@ h1{margin:0;font-size:clamp(30px,5vw,44px);line-height:1.15;font-weight:600;lett
 label.sel{font-size:15px;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 select{font:inherit;font-size:15px;min-height:44px;padding:0 10px;border-radius:8px;border:1px solid var(--line2);background:var(--fond);color:var(--ink);max-width:16rem}
 .ligne-stats{margin:0;font-size:14px;color:var(--muted)}
+.promesse{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}.promesse .ligne-stats{flex:1 1 22rem}.ligne-ia{margin:0}
+/* Boutons : style commun du site (commun.css), dans la couleur du répertoire. */
+body{--bouton-fond:var(--accent);--bouton-fond-survol:var(--accent-fonce);--bouton-contour:var(--accent)}
+.ligne-ia .bouton{font-size:15px}
 .sous-titre{margin:0;font-size:15px;color:var(--muted)}
 /* Parcourir le répertoire par département */
 .parcourir-lien{margin:40px 0 0;font-size:16px}.parcourir-lien a{display:inline-flex;align-items:center;min-height:44px;font-weight:500}
@@ -173,7 +178,7 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
       <label for="q" class="q-label">Votre situation, avec vos mots.</label>
       <p class="q-aide" id="q-aide">Pour des réponses plus précises, indiquez où vous habitez, ou où se situe votre projet&nbsp;: une commune, un département ou une région suffit, pas besoin d'adresse.</p>
       <div class="saisie">
-        <textarea id="q" rows="1" aria-describedby="q-aide q-perso" placeholder="Ex. : Je n'arrive plus à payer ma facture d'électricité, j'habite à Rezé."></textarea>
+        <textarea id="q" rows="2" aria-describedby="q-aide q-perso" placeholder="Ex. : Je n'arrive plus à payer ma facture d'électricité, j'habite à Rezé."></textarea>
         <button type="submit" class="btn" id="chercher" disabled>Chercher</button>
       </div>
       <p class="perso" id="q-perso" hidden>Décrivez votre situation sans donnée personnelle&nbsp;: ni nom, ni numéro (sécurité sociale, titre de séjour, IBAN, téléphone), ni adresse précise, ni information de santé. Une commune suffit&nbsp;: n'indiquez ni votre adresse ni votre nom. Les numéros et adresses électroniques reconnus sont retirés avant l'envoi.</p>
@@ -196,8 +201,10 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
     </div>
     <p class="perso-cp">Votre code postal sert uniquement à trouver votre commune (API Géo de l'État). Rien d'autre n'est envoyé.</p>
       </details>
+      <div class="promesse">
       <p class="ligne-stats" id="ligne-stats">Le répertoire recense les démarches en ligne et les fiches officielles, et vous dit où les faire. Il ne remplace ni l'organisme qui décide, ni un conseiller. · <a class="lien-comment" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html">Comment ça marche</a></p>
-      <p class="ligne-stats" id="ligne-ia" hidden></p>
+      <p class="ligne-ia" id="ligne-ia" hidden></p>
+      </div>
       <div class="status" id="quota"></div>
       <div class="status" id="st" role="status"></div>
       <details class="exemples" id="exemples" hidden><summary>Exemples de questions, avec une réponse préparée sans IA</summary><div class="chips" id="ex"></div></details>
@@ -803,7 +810,7 @@ fetch(DATA + "index.json").then((r) => r.json()).then((recs) => {
     document.title = "Où faire sa démarche — FORM 2026 · version avec assistant";
   } else {
     $("ff").hidden = true;
-    if (window.FORM_ASSISTANT_URL) { $("ligne-ia").hidden = false; $("ligne-ia").innerHTML = `<button type="button" class="lien" id="ia">Essayer la version avec assistant (version de test)</button>`; }
+    if (window.FORM_ASSISTANT_URL) { $("ligne-ia").hidden = false; $("ligne-ia").innerHTML = `<button type="button" class="bouton secondaire" id="ia">Essayer avec un assistant d'IA (test)</button>`; }
   }
 })();
 
@@ -1196,6 +1203,8 @@ $("ia-go").href = window.FORM_ASSISTANT_URL;
 document.addEventListener("click", (ev) => { if (!ev.target.closest("#ia")) return; ev.preventDefault(); const d = $("dlg-ia"); if (d.showModal) d.showModal(); else window.open(window.FORM_ASSISTANT_URL, "_blank", "noopener"); });
 $("ia-annuler").addEventListener("click", () => $("dlg-ia").close());
 $("ia-go").addEventListener("click", () => $("dlg-ia").close());
+// Fermeture (bouton, Annuler ou Échap) : le focus revient au bouton qui a ouvert la fenêtre.
+$("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(); });
 </script>
 <script>/*ou_aller:début*/
 // « Où aller » : code postal → commune (API Géo), service local compétent (Annuaire de l'administration, DILA),

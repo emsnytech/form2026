@@ -66,6 +66,8 @@ $("ia-go").href = window.FORM_ASSISTANT_URL;
 document.addEventListener("click", (ev) => { if (!ev.target.closest("#ia")) return; ev.preventDefault(); const d = $("dlg-ia"); if (d.showModal) d.showModal(); else window.open(window.FORM_ASSISTANT_URL, "_blank", "noopener"); });
 $("ia-annuler").addEventListener("click", () => $("dlg-ia").close());
 $("ia-go").addEventListener("click", () => $("dlg-ia").close());
+// Fermeture (bouton, Annuler ou Échap) : le focus revient au bouton qui a ouvert la fenêtre.
+$("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(); });
 """
 CONFIG_FORM = ('<script>window.FORM_ASSISTANT_URL = "' + ASSISTANT_URL + '";  // version avec assistant (artefact Claude partagé)\n'
                'window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-demarche-comment.html"; window.FORM_ACCUEIL_URL = "./";</script>\n')
@@ -79,6 +81,8 @@ COMMUNES = [
 ]
 # Page FORM : chemins des données et des pages du site, lien vers la version avec assistant et fenêtre de ses conditions.
 ADAPTATIONS = COMMUNES + [
+    # Style commun du site (boutons) : servi par le site, absent de la version avec assistant, qui n'a pas de bouton vers elle-même.
+    (r"\n<style>", lambda m: '\n<link rel="stylesheet" href="commun.css">\n<style>'),
     (r"\n</style>", lambda m: "\n" + CSS_DIALOGUE.rstrip("\n") + "\n</style>"),
     (r"\n</main>\n", lambda m: "\n</main>\n" + DIALOGUE),
     (r"<script>/\*MOTEUR\*/</script>", lambda m: CONFIG_FORM + f"<script>{DEBUT}\n{FIN}</script>"),

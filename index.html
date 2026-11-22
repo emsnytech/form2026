@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="commun.css">
 <style>
 :root{--ink:#1e2022;--muted:#5c6066;--paper:#fbf9f5;--surface:#ffffff;--line:#e2dfd7;
  --admin:#1d4ed8;--admin-soft:#eff6ff;--usager:#15803d;--usager-soft:#f0fdf4;--accent:#b45309;--warn-soft:#fffbeb;--bad:#b91c1c;--min:#0e7490;--min-soft:#ecfeff}
@@ -41,7 +42,8 @@ section{margin-top:2.4rem}
 .une{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
 @media (max-width:900px){.une{grid-template-columns:1fr}}
 .pub{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--min);border-radius:12px;padding:1.1rem 1.2rem;text-decoration:none;color:var(--ink)}
-.pub:hover{box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.pub:hover{box-shadow:0 6px 18px rgba(0,0,0,.08)} .pub.outil:hover{box-shadow:none}
+.pub .action,.liste .action{margin:.8rem 0 0;flex:none;color:var(--muted)} .pub .action .bouton{width:100%}
 .pub .q{font-size:.82rem;font-weight:700;color:var(--min);text-transform:uppercase;letter-spacing:.05em}
 .pub h3{font-size:1.22rem;margin:.35rem 0 .4rem}
 .pub p{margin:0;color:var(--muted);font-size:.96rem;flex:1}
@@ -113,12 +115,13 @@ footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-
         <p>Dotations, Fonds vert, démarches de l&#x27;État et des collectivités.</p>
         <time datetime="2026-10-23">Publié le 23 octobre 2026</time>
       </a>
-      <a class="pub" href="trouver-sa-demarche.html">
+      <div class="pub outil">
         <span class="q">Données</span>
         <h3>Où faire sa démarche — FORM 2026</h3>
         <p>Le répertoire des démarches administratives en ligne et des guichets où les faire.</p>
+        <p class="action"><a class="bouton" href="trouver-sa-demarche.html">Chercher une démarche</a><small class="bouton-note">Où faire sa démarche ? — le répertoire des démarches en ligne et des guichets</small></p>
         <time datetime="2026-11-19">Publié le 19 novembre 2026</time>
-      </a>
+      </div>
       <a class="pub" href="fiches-ministeres/interieur.html">
         <span class="q">Situer · Fiches ministères</span>
         <h3>Fiche Intérieur</h3>
