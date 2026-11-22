@@ -60,7 +60,11 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('R6 aucune fiche « étudiant » dans les 3 premiers de la réponse', !affiches.some(r=>/[ée]tudiant/i.test(r.t)), affiches.map(r=>r.id).join(' ')); }
 { const q="Ma vitrine a été cassée pendant les manifestations, quelle aide ?";
   const cibles=R.filter(r=>r.k==='dn'&&r.po==='nat'&&/commerc/i.test(r.t)&&/endommag|d[ée]grad|d[ée]g[âa]t|violences urbaines/i.test(r.t)).map(r=>r.id);
-  if(!cibles.length){ console.log('ATTENTE R4 démarche de l\'État pour les commerces endommagés : absente de l\'index (aucune démarche de ce type dans le descriptif publié, export du 20 novembre 2026)'); attente++; }
+  const dateIndex=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','index_meta.json'),'utf8')).date_export;
+  // Démarche de ce type déclarée locale (service et département du descriptif) : signalée, sans changer le critère.
+  const locales=R.filter(r=>r.k==='dn'&&r.po!=='nat'&&/commerc|entreprise/i.test(r.t)&&/endommag|d[ée]grad|d[ée]g[âa]t|dommages|violences urbaines|troubles urbains/i.test(r.t));
+  if(!cibles.length&&locales.length){ const t3=top(q,{},3); console.log(`ATTENTE R4 démarche de l'État pour les commerces endommagés : ${locales.map(r=>r.id+' déclarée '+(r.dep||r.po)).join(', ')} (export du ${dateIndex}) ; le critère attend une démarche nationale — dans les 3 premiers : ${t3.some(r=>locales.includes(r))?'oui':'non'} (${ids(t3).join(' ')})`); attente++; }
+  else if(!cibles.length){ console.log(`ATTENTE R4 démarche de l'État pour les commerces endommagés : absente de l'index (export du ${dateIndex})`); attente++; }
   else { const t3=top(q,{},3); verifie('R4 démarche de l\'État pour les commerces endommagés dans les 3 premiers', ids(t3).some(i=>cibles.includes(i)), ids(t3).join(' ')); } }
 { // R5 : références à figer après validation par l'auteur (proposées dans la PR 70) ; en attente tant qu'elles ne le sont pas.
   const q="Mon club de foot a besoin d'argent pour acheter des équipements.", t3=top(q,{},3);

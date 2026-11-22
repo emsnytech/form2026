@@ -1,6 +1,6 @@
 {
  "objet": "Accueil, « Les plus demandées ». Corrigeable à la main : editeur.epingle (mots du titre, dans l'ordre voulu), editeur.exclu (clés à écarter) ; pour chaque ligne, ids (ses démarches), fiche (fiche service-public) et question_lieu (question posée quand ses démarches sont locales).",
- "date": "2026-11-20",
+ "date": "2026-11-22",
  "nationales": [
   {
    "titre": "Obtenir une attestation de droits",
@@ -36,7 +36,7 @@
    "cle": "medaille honneur travail",
    "titre": "Demander la médaille d'honneur du travail",
    "organisme": "2 démarches départementales",
-   "dossiers": 810527,
+   "dossiers": 810982,
    "dossiers_arrondis": "800 000",
    "variantes": 2,
    "ids": [
@@ -50,7 +50,7 @@
    "cle": "verification prealable embauche",
    "titre": "Vérifier le titre de séjour d'un futur salarié",
    "organisme": "5 démarches départementales",
-   "dossiers": 529640,
+   "dossiers": 530461,
    "dossiers_arrondis": "500 000",
    "variantes": 5,
    "ids": [
@@ -67,12 +67,12 @@
    "cle": "pass culture",
    "titre": "Demander le crédit du pass Culture",
    "organisme": "Ministère de la Culture",
-   "dossiers": 300841,
+   "dossiers": 301099,
    "dossiers_arrondis": "300 000",
    "variantes": 7,
    "ids": [
-    "DN-47480",
     "DN-47380",
+    "DN-47480",
     "DN-76135",
     "DN-81184",
     "DN-76442",
@@ -191,70 +191,70 @@
    "cle": "medaille honneur travail",
    "titre": "Demander la médaille d'honneur du travail",
    "organisme": "2 démarches départementales",
-   "dossiers": 810527,
+   "dossiers": 810982,
    "variantes": 2
   },
   {
    "cle": "verification prealable embauche",
    "titre": "Vérifier le titre de séjour d'un futur salarié",
    "organisme": "5 démarches départementales",
-   "dossiers": 529640,
+   "dossiers": 530461,
    "variantes": 5
   },
   {
    "cle": "consultation domaine version mai",
    "titre": "Consultation du Domaine (version de mai 2020)",
    "organisme": "Direction de l'immobilier de l'État",
-   "dossiers": 528294,
+   "dossiers": 528620,
    "variantes": 2
   },
   {
    "cle": "caf prestations familiales cmg attestation mensuelle micro creche",
    "titre": "CAF - PRESTATIONS FAMILIALES - CMG : ATTESTATION MENSUELLE MICRO-CRECHE",
    "organisme": "61 démarches départementales",
-   "dossiers": 482386,
+   "dossiers": 482473,
    "variantes": 61
   },
   {
    "cle": "pass culture",
    "titre": "Demander le crédit du pass Culture",
    "organisme": "Ministère de la Culture",
-   "dossiers": 300841,
+   "dossiers": 301099,
    "variantes": 7
   },
   {
    "cle": "medaille honneur ou communale collectivites",
    "titre": "Médaille d'honneur Régionale, Départementale ou Communale - Collectivités",
    "organisme": "Préfecture de département",
-   "dossiers": 295446,
+   "dossiers": 295461,
    "variantes": 1
   },
   {
    "cle": "communication reactivation neph national dossierpermisdeconduire",
    "titre": "Communication/réactivation du NEPH national (dossierpermisdeconduire)",
    "organisme": "Ministère de l'Intérieur",
-   "dossiers": 290676,
+   "dossiers": 291369,
    "variantes": 1
   },
   {
    "cle": "cd92 renouvellement titre amethyste v1",
    "titre": "CD92 - Demande de renouvellement de titre améthyste (v1.5)",
    "organisme": "Conseil Départemental des Hauts-de-Seine",
-   "dossiers": 215998,
+   "dossiers": 216123,
    "variantes": 1
   },
   {
    "cle": "caf prestations familiales cmg attestation mensuelle garde domicile",
    "titre": "CAF - PRESTATIONS FAMILIALES - CMG : ATTESTATION MENSUELLE GARDE A DOMICILE",
    "organisme": "62 démarches départementales",
-   "dossiers": 153124,
+   "dossiers": 153174,
    "variantes": 62
   },
   {
    "cle": "pref33 authentification titres sejour cartes identite europeennes",
    "titre": "PREF33 - Authentification des titres de séjour et cartes d'identité européennes",
    "organisme": "Préfecture de la Gironde",
-   "dossiers": 141018,
+   "dossiers": 141021,
    "variantes": 1
   }
  ],
