@@ -77,7 +77,8 @@ section{margin-top:2.4rem}
 .une{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
 @media (max-width:900px){.une{grid-template-columns:1fr}}
 .pub{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--min);border-radius:12px;padding:1.1rem 1.2rem;text-decoration:none;color:var(--ink)}
-.pub:hover{box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.pub:hover{box-shadow:0 6px 18px rgba(0,0,0,.08)} .pub.outil:hover{box-shadow:none}
+.pub .action,.liste .action{margin:.8rem 0 0;flex:none;color:var(--muted)} .pub .action .bouton{width:100%}
 .pub .q{font-size:.82rem;font-weight:700;color:var(--min);text-transform:uppercase;letter-spacing:.05em}
 .pub h3{font-size:1.22rem;margin:.35rem 0 .4rem}
 .pub p{margin:0;color:var(--muted);font-size:.96rem;flex:1}
@@ -144,6 +145,7 @@ def page(titre, desc, url, rubrique, corps):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="commun.css">
 <style>{STYLE}</style>
 </head>
 <body>
@@ -162,12 +164,24 @@ def libelle_pub(x):
     return RUB[x["rubrique"]]["verbe"] + (f" · {p['titre']}" if p else "")
 
 DE, GA, CG = CH["descriptif"], CH["gains"], CH["charge"]; pe = DE["par_etat"]
-une = "\n".join(f"""      <a class="pub" href="{e(x['url'])}">
+def carte(x):
+    # Un outil à utiliser (« bouton » dans ressources.json) : la carte n'est plus un lien, elle porte un bouton (style commun.css).
+    if x.get("bouton"):
+        b = x["bouton"]
+        return f"""      <div class="pub outil">
+        <span class="q">{e(libelle_pub(x))}</span>
+        <h3>{e(x['titre'])}</h3>
+        <p>{e(x['description'])}</p>
+        <p class="action"><a class="bouton" href="{e(x['url'])}">{e(b['libelle'])}</a><small class="bouton-note">{e(b['note'])}</small></p>
+        <time datetime="{x['date']}">Publié le {d(x['date'])}</time>
+      </div>"""
+    return f"""      <a class="pub" href="{e(x['url'])}">
         <span class="q">{e(libelle_pub(x))}</span>
         <h3>{e(x['titre'])}</h3>
         <p>{e(x['description'])}</p>
         <time datetime="{x['date']}">Publié le {d(x['date'])}</time>
-      </a>""" for x in UNE)
+      </a>"""
+une = "\n".join(carte(x) for x in UNE)
 prof = "\n".join(f"""      <div class="prof"><h3>{e(PROF[p])}</h3><ul>{"".join(f'<li><a href="{e(u)}">{e(PAR_URL[u]["titre"])}</a><small>{e(PAR_URL[u]["description"])}</small></li>' for u in urls)}</ul></div>"""
                  for p, urls in R["commencer"].items())
 cat = "\n".join(f"""      <div class="rub" id="{k}" style="--c:var({RUB[k]['couleur']})"><h3>{e(RUB[k]['verbe'])}</h3><p class="st">{e(RUB[k]['sous_titre'])}</p><ul>{"".join(
@@ -241,8 +255,11 @@ corps = f"""  <header>
     </div>
   </section>"""
 # ---------- toutes les publications ----------
+# Un outil cité ailleurs que dans sa carte « À la une » : la phrase reste, suivie du même bouton en version secondaire (contour).
+def bouton_secondaire(x):
+    return f'<p class="action"><a class="bouton secondaire" href="{e(x["url"])}">{e(x["bouton"]["libelle"])}</a></p>' if x.get("bouton") else ""
 liste = "\n".join(f"""    <li><time datetime="{x['date']}">{d(x['date'])}</time> · <span>{e(libelle_pub(x))}</span>
-      <h2><a href="{e(x['url'])}">{e(x['titre'])}</a></h2><p>{e(x['description'])}</p></li>""" for x in PUB)
+      <h2><a href="{e(x['url'])}">{e(x['titre'])}</a></h2><p>{e(x['description'])}</p>{bouton_secondaire(x)}</li>""" for x in PUB)
 corps2 = f"""  <header>
     <p class="brand"><a href="index.html">FORM 2026</a></p>
     <h1>Toutes les publications</h1>

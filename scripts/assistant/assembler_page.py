@@ -79,6 +79,8 @@ COMMUNES = [
 ]
 # Page FORM : chemins des données et des pages du site, lien vers la version avec assistant et fenêtre de ses conditions.
 ADAPTATIONS = COMMUNES + [
+    # Style commun du site (boutons) : servi par le site, absent de la version avec assistant, qui n'a pas de bouton vers elle-même.
+    (r"\n<style>", lambda m: '\n<link rel="stylesheet" href="commun.css">\n<style>'),
     (r"\n</style>", lambda m: "\n" + CSS_DIALOGUE.rstrip("\n") + "\n</style>"),
     (r"\n</main>\n", lambda m: "\n</main>\n" + DIALOGUE),
     (r"<script>/\*MOTEUR\*/</script>", lambda m: CONFIG_FORM + f"<script>{DEBUT}\n{FIN}</script>"),
