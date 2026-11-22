@@ -1,4 +1,4 @@
-# « Trouver sa démarche » : index du démonstrateur
+# « Où faire sa démarche ? » : index du répertoire
 
 Données de la page `trouver-sa-demarche.html`. Production de l'auteur à partir de données ouvertes. Voir `donnees/LICENCE.md`.
 

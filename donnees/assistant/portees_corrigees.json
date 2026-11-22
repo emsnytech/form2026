@@ -1,5 +1,5 @@
 {
-  "objet": "Portées corrigées par l'éditeur pour l'index de « Trouver sa démarche » : liste éditoriale, jamais de règle automatique. build_index.py applique la portée retenue (nat : nationale, dep : départementale, inc : locale, département inconnu) et garde dans l'index la portée et le département déclarés (po_declaree, dep_declare). Une référence absente de l'export est signalée.",
+  "objet": "Portées corrigées par l'éditeur pour l'index du répertoire « Où faire sa démarche ? » : liste éditoriale, jamais de règle automatique. build_index.py applique la portée retenue (nat : nationale, dep : départementale, inc : locale, département inconnu) et garde dans l'index la portée et le département déclarés (po_declaree, dep_declare). Une référence absente de l'export est signalée.",
   "corrections": [
     {
       "id": "DN-161645",

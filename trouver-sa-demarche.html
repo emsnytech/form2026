@@ -3,7 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trouver sa démarche — démonstrateur · FORM 2026</title>
+<title>Où faire sa démarche — FORM 2026</title>
+<!-- Nom du répertoire : seule source du titre, du sous-titre et du nom court (onglet, liens). assembler_page.py remplace
+     Où faire sa démarche ?, Le répertoire des démarches administratives en ligne et des guichets où les faire. et Où faire sa démarche — FORM 2026 dans les pages ; page_comment.py relit ce bloc dans la page assemblée. -->
+<script type="application/json" id="nom-repertoire">{"titre": "Où faire sa démarche ?", "sous_titre": "Le répertoire des démarches administratives en ligne et des guichets où les faire.", "nom_court": "Où faire sa démarche — FORM 2026"}</script>
 <style>
 :root{--accent:#0B5D52;--accent-fonce:#08463E;--ink:#1A1A1A;--muted:#555A60;--line:#E5E5E5;--line2:#D4D4D8;--fond:#FFFFFF;--doux:#F4F4F5;
   --urgent-fond:#FDF0E7;--urgent:#8A3B12;--saison-fond:#EAF1F8;--saison:#1F4D7A;--focus:#0B5D52}
@@ -43,6 +46,17 @@ h1{margin:0;font-size:clamp(30px,5vw,44px);line-height:1.15;font-weight:600;lett
 label.sel{font-size:15px;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 select{font:inherit;font-size:15px;min-height:44px;padding:0 10px;border-radius:8px;border:1px solid var(--line2);background:var(--fond);color:var(--ink);max-width:16rem}
 .ligne-stats{margin:0;font-size:14px;color:var(--muted)}
+.sous-titre{margin:0;font-size:15px;color:var(--muted)}
+/* Parcourir le répertoire par département */
+.parcourir-lien{margin:40px 0 0;font-size:16px}.parcourir-lien a{display:inline-flex;align-items:center;min-height:44px;font-weight:500}
+#parcourir{max-width:860px;padding-top:40px;display:flex;flex-direction:column;gap:14px}
+#parcourir h1{font-size:clamp(26px,4vw,34px)}
+.p-total{margin:0;font-size:16px}.p-total:empty{display:none}
+#p-filtre{font:inherit;font-size:15px;min-height:44px;padding:0 12px;border-radius:8px;border:1px solid var(--line2);width:18rem;max-width:100%}
+.p-groupe{border-top:1px solid var(--line)}.p-groupe:last-child{border-bottom:1px solid var(--line)}
+.p-groupe>summary{display:list-item;cursor:pointer;padding:10px 0;min-height:44px;font-size:16px;font-weight:500}
+.p-groupe ul{list-style:none;margin:0 0 10px;padding:0;display:flex;flex-direction:column;gap:8px}
+.p-groupe li{font-size:15px}
 .status{font-size:14px;color:var(--muted)}.status:empty{display:none}
 .exemples summary{font-size:14px;color:var(--muted);cursor:pointer;display:list-item;padding:10px 0}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
@@ -102,7 +116,7 @@ details.pli>summary{font-size:16px;font-weight:500;display:list-item;padding:10p
 .question-lieu{display:flex;flex-direction:column;gap:8px;padding:14px 16px;border:2px solid var(--accent);border-radius:12px;width:100%}
 .question-lieu b{font-size:17px}.question-lieu .row{margin:0}
 /* « Où aller » et pastilles (ou_aller.js) */
-input#cp,.cp-res{font:inherit;font-size:15px;min-height:44px;padding:0 10px;border-radius:8px;border:1px solid var(--line2);background:var(--fond);color:var(--ink);width:7.5rem}
+input#cp,input#p-cp,.cp-res{font:inherit;font-size:15px;min-height:44px;padding:0 10px;border-radius:8px;border:1px solid var(--line2);background:var(--fond);color:var(--ink);width:7.5rem}
 .cp-etat{font-size:15px;font-weight:600;color:var(--accent)}
 .perso-cp{font-size:14px;color:var(--muted);margin:6px 0 0}
 .pastilles{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:15px}
@@ -140,7 +154,7 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
 <body>
 <header class="tete"><div class="l">
   <div class="marque">
-    <a class="nom" href="#" id="lien-accueil">Trouver sa démarche</a>
+    <a class="nom" href="#" id="lien-accueil">Où faire sa démarche ?</a>
     <a class="badge-demo" id="badge-demo" href="https://emsnytech.github.io/form2026/">Démonstrateur FORM 2026</a>
   </div>
   <nav aria-label="Liens du démonstrateur">
@@ -153,6 +167,7 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
 <main>
 <section id="vue-accueil" class="l" aria-labelledby="titre-accueil">
   <div class="question">
+    <p class="sous-titre">Le répertoire des démarches administratives en ligne et des guichets où les faire.</p>
     <h1 id="titre-accueil">Que voulez-vous faire&nbsp;?</h1>
     <form class="ask" id="f">
       <label for="q" class="q-label">Votre situation, avec vos mots.</label>
@@ -162,7 +177,7 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
         <button type="submit" class="btn" id="chercher" disabled>Chercher</button>
       </div>
       <p class="perso" id="q-perso" hidden>Décrivez votre situation sans donnée personnelle&nbsp;: ni nom, ni numéro (sécurité sociale, titre de séjour, IBAN, téléphone), ni adresse précise, ni information de santé. Une commune suffit&nbsp;: n'indiquez ni votre adresse ni votre nom. Les numéros et adresses électroniques reconnus sont retirés avant l'envoi.</p>
-      <p class="avis-ia" id="avis-ia" hidden>Version de test avec assistant&nbsp;: vos questions sont traitées par Claude (Anthropic) sous votre compte, et les réponses sont à vérifier auprès de l'organisme cité. <a class="lien-comment" data-ancre="ia" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html#ia">En savoir plus</a></p>
+      <p class="avis-ia" id="avis-ia" hidden>Version de test&nbsp;: un assistant d'IA (Claude) interroge le répertoire pour vous. L'IA reformule votre question et rédige la réponse&nbsp;; les démarches, les liens et les guichets viennent du répertoire. À vérifier auprès de l'organisme cité. <a class="lien-comment" data-ancre="ia" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html#ia">En savoir plus</a></p>
       <p id="ligne-simple" hidden><button type="button" class="lien" id="simple">Recherche simple, sans IA</button></p>
       <details class="filtres" id="filtres"><summary>Préciser le public ou le lieu</summary>
     <div class="row">
@@ -181,7 +196,7 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
     </div>
     <p class="perso-cp">Votre code postal sert uniquement à trouver votre commune (API Géo de l'État). Rien d'autre n'est envoyé.</p>
       </details>
-      <p class="ligne-stats" id="ligne-stats">Démonstrateur expérimental · <a class="lien-comment" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html">Comment ça marche</a></p>
+      <p class="ligne-stats" id="ligne-stats">Le répertoire recense les démarches en ligne et les fiches officielles, et vous dit où les faire. Il ne remplace ni l'organisme qui décide, ni un conseiller. · <a class="lien-comment" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html">Comment ça marche</a></p>
       <p class="ligne-stats" id="ligne-ia" hidden></p>
       <div class="status" id="quota"></div>
       <div class="status" id="st" role="status"></div>
@@ -193,6 +208,18 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
     <section aria-labelledby="h-demandees" id="col-demandees"><h2 id="h-demandees">Les plus demandées</h2><div id="liste-demandees"></div><p class="source-col" id="source-demandees"></p></section>
     <section aria-labelledby="h-une" id="col-une"><h2 id="h-une">À la une</h2><div id="liste-une"></div><p class="source-col">Démarches récentes ou de saison, proposées automatiquement (urgence, échéance, saison) puis validées par l'éditeur.</p></section>
   </div>
+  <p class="parcourir-lien"><a href="#parcourir" id="lien-parcourir">Parcourir les démarches de mon département</a></p>
+</section>
+
+<section id="parcourir" class="l" hidden aria-labelledby="titre-parcourir">
+  <h1 id="titre-parcourir" tabindex="-1">Les démarches de mon département</h1>
+  <div class="row">
+    <label class="sel">Département <select id="p-dep"><option value="">— choisir —</option></select></label>
+    <label class="sel">ou code postal <input id="p-cp" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="ex. 58000"></label>
+  </div>
+  <p class="p-total" id="p-total" role="status"></p>
+  <label class="sel" id="p-filtre-l" hidden>Filtrer la liste <input id="p-filtre" type="search" placeholder="ex. subvention, chasse, école"></label>
+  <div id="p-groupes"></div>
 </section>
 
 <section id="vue-reponse" hidden aria-labelledby="titre-reponse">
@@ -716,7 +743,7 @@ const dateFr = (iso) => iso ? new Date(iso + "T12:00:00").toLocaleDateString("fr
 
 // ---------- Volumes (ligne sous le champ) : index_meta.json, sinon l'index une fois chargé.
 function majStats(ndn, nsp) {
-  $("ligne-stats").innerHTML = `Démonstrateur expérimental · ${fmt(ndn)} démarches en ligne et ${fmt(nsp)} fiches officielles · <a class="lien-comment" href="${esc(document.querySelector("a.lien-comment").href.split("#")[0])}">Comment ça marche</a>`;
+  $("ligne-stats").innerHTML = `Le répertoire recense ${fmt(ndn)} démarches en ligne et ${fmt(nsp)} fiches officielles, et vous dit où les faire. Il ne remplace ni l'organisme qui décide, ni un conseiller. · <a class="lien-comment" href="${esc(document.querySelector("a.lien-comment").href.split("#")[0])}">Comment ça marche</a>`;
 }
 fetch(DATA + "index_meta.json").then((r) => r.json()).then((m) => { META = m; majStats(m.demarches_en_ligne, m.fiches); }).catch(() => {});
 
@@ -764,6 +791,7 @@ fetch(DATA + "index.json").then((r) => r.json()).then((recs) => {
     IX = Moteur.build(recs);
     if (!META) { const ndn = recs.filter((r) => r.k === "dn").length; majStats(ndn, recs.length - ndn); }
     $("st").textContent = ""; $("chercher").disabled = false;
+    if (!$("parcourir").hidden) afficherParcours();
   }, 30);
 }).catch(() => { $("st").textContent = MESSAGES.chargement; });
 
@@ -772,7 +800,7 @@ fetch(DATA + "index.json").then((r) => r.json()).then((recs) => {
   try { sample = await claude.use("sample"); } catch (e) { sample = null; }
   if (sample) {
     majQuota(); $("avis-ia").hidden = false; $("q-perso").hidden = false; $("ff-perso").hidden = false; $("ligne-simple").hidden = false;
-    document.title = "Trouver sa démarche — démonstrateur avec assistant · FORM 2026";
+    document.title = "Où faire sa démarche — FORM 2026 · version avec assistant";
   } else {
     $("ff").hidden = true;
     if (window.FORM_ASSISTANT_URL) { $("ligne-ia").hidden = false; $("ligne-ia").innerHTML = `<button type="button" class="lien" id="ia">Essayer la version avec assistant (version de test)</button>`; }
@@ -780,13 +808,65 @@ fetch(DATA + "index.json").then((r) => r.json()).then((recs) => {
 })();
 
 // ---------- Vues
-function vueReponse() { $("vue-accueil").hidden = true; $("vue-reponse").hidden = false; $("lien-nouvelle").hidden = false; window.scrollTo(0, 0); $("titre-reponse").focus({ preventScroll: true }); }
+function vueReponse() { $("vue-accueil").hidden = true; $("parcourir").hidden = true; $("vue-reponse").hidden = false; $("lien-nouvelle").hidden = false; window.scrollTo(0, 0); $("titre-reponse").focus({ preventScroll: true }); }
 function vueAccueil() {
   if (ctrl) { try { ctrl.abort(); } catch (x) {} }
-  history = []; $("vue-reponse").hidden = true; $("vue-accueil").hidden = false; $("lien-nouvelle").hidden = true; $("q").value = ""; $("q").focus();
+  if (/^#parcourir/.test(location.hash)) try { window.history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+  history = []; $("vue-reponse").hidden = true; $("parcourir").hidden = true; $("vue-accueil").hidden = false; $("lien-nouvelle").hidden = true; $("q").value = ""; $("q").focus();
 }
 $("lien-nouvelle").addEventListener("click", (ev) => { ev.preventDefault(); vueAccueil(); });
 $("lien-accueil").addEventListener("click", (ev) => { ev.preventDefault(); vueAccueil(); });
+
+// ---------- Parcourir le répertoire par département : démarches en ligne ouvertes du département, groupées par
+// organisme, depuis index.json seulement (aucune donnée nouvelle, aucun appel extérieur). Adresse : #parcourir ou #parcourir-58.
+$("p-dep").insertAdjacentHTML("beforeend", DEPS.map((d) => `<option value="${d.split(" ")[0]}">${esc(d)}</option>`).join(""));
+const PAR_GROUPE = 50;
+function depDuCp(cp) {
+  if (!/^\d{5}$/.test(cp)) return "";
+  const d = cp.startsWith("97") ? cp.slice(0, 3) : cp.startsWith("20") ? (+cp[2] <= 1 ? "2A" : "2B") : cp.slice(0, 2);
+  return DEPNAME[d] ? d : "";
+}
+function vueParcourir(dep) {
+  $("vue-accueil").hidden = true; $("vue-reponse").hidden = true; $("parcourir").hidden = false; $("lien-nouvelle").hidden = false;
+  window.scrollTo(0, 0); $("titre-parcourir").focus({ preventScroll: true });
+  if (dep !== undefined) $("p-dep").value = dep;
+  afficherParcours();
+}
+function afficherParcours() {
+  const d = $("p-dep").value;
+  $("p-filtre-l").hidden = !d;
+  if (!d) { $("p-total").textContent = ""; $("p-groupes").innerHTML = ""; return; }
+  if (!IX) { $("p-total").textContent = MESSAGES.attente; return; }
+  const jour = new Date().toISOString().slice(0, 10);
+  const ouverte = (r) => r.k === "dn" && (!r.fe || r.fe >= jour);
+  const toutes = IX.recs.filter((r) => ouverte(r) && r.dep === d && r.po !== "nat");
+  const nat = IX.recs.filter((r) => ouverte(r) && r.po === "nat").length;
+  const mots = Moteur.norm($("p-filtre").value).split(" ").filter(Boolean);
+  const liste = mots.length ? toutes.filter((r) => { const n = " " + Moteur.norm(r.t + " " + r.o) + " "; return mots.every((m) => n.includes(m)); }) : toutes;
+  const groupes = new Map();
+  for (const r of liste) { const o = r.o || "Organisme non précisé"; if (!groupes.has(o)) groupes.set(o, []); groupes.get(o).push(r); }
+  const tri = [...groupes].sort((x, y) => y[1].length - x[1].length || x[0].localeCompare(y[0], "fr"));
+  const pl = (n, s, p) => fmt(n) + " " + (n > 1 ? p : s);
+  $("p-total").innerHTML = `<strong>${esc(DEPNAME[d])} (${esc(d)})</strong>&nbsp;: ${pl(toutes.length, "démarche en ligne ouverte", "démarches en ligne ouvertes")} du département, et ${pl(nat, "démarche nationale accessible", "démarches nationales accessibles")} partout.`
+    + (mots.length ? ` ${pl(liste.length, "démarche correspond", "démarches correspondent")} au filtre.` : "");
+  $("p-groupes").innerHTML = tri.map(([o, l], gi) => `<details class="p-groupe" data-g="${gi}"><summary>${esc(o)} <span class="meta">(${fmt(l.length)})</span></summary><ul>`
+    + l.sort((x, y) => (y.n || 0) - (x.n || 0)).map((r, i) => `<li${i >= PAR_GROUPE ? " hidden" : ""}><a href="${esc(dnUrl(r))}" target="_blank" rel="noopener">${esc(r.t)}</a>${r.n ? ` <span class="meta">· ${pl(r.n, "dossier", "dossiers")}</span>` : ""}</li>`).join("")
+    + `</ul>${l.length > PAR_GROUPE ? `<button type="button" class="lien p-plus">Afficher plus (${fmt(l.length - PAR_GROUPE)})</button>` : ""}</details>`).join("")
+    || `<p class="vide">Aucune démarche en ligne ne correspond.</p>`;
+}
+$("p-groupes").addEventListener("click", (ev) => {
+  const b = ev.target.closest(".p-plus"); if (!b) return;
+  const cachees = [...b.parentElement.querySelectorAll("li[hidden]")];
+  cachees.slice(0, PAR_GROUPE).forEach((li) => { li.hidden = false; });
+  const reste = cachees.length - PAR_GROUPE;
+  if (reste > 0) b.textContent = `Afficher plus (${fmt(reste)})`; else b.remove();
+});
+$("p-dep").addEventListener("change", () => { $("p-cp").value = ""; afficherParcours(); });
+$("p-cp").addEventListener("input", () => { const d = depDuCp($("p-cp").value); if (d) { $("p-dep").value = d; afficherParcours(); } });
+$("p-filtre").addEventListener("input", afficherParcours);
+function routeParcourir() { const m = location.hash.match(/^#parcourir(?:-([0-9AB]{2,3}))?$/i); if (m) vueParcourir(m[1] ? m[1].toUpperCase() : undefined); }
+window.addEventListener("hashchange", routeParcourir);
+routeParcourir();
 
 // ---------- Réponse : cartes, autres pistes, « Comment j'ai cherché », liens
 let LIENS = [];
@@ -1029,7 +1109,9 @@ function masquer(t) { let n = 0; for (const [re, rep] of MASQUES) t = t.replace(
 
 function consigne(q) {
   const pub = $("pub").value, dep = $("dep").value;
-  return `Tu es l'assistant d'orientation d'un démonstrateur public (FORM 2026). Tu aides une personne à trouver la démarche administrative dont elle a besoin.
+  return `Tu interroges le répertoire des démarches. Ton rôle est de reformuler la question en mots de l'administration et de présenter ce que le répertoire renvoie ; tu ne choisis une démarche que si le répertoire la situe sur le territoire de la personne.
+
+Tu es l'assistant d'orientation d'un démonstrateur public (FORM 2026). Tu aides une personne à trouver la démarche administrative dont elle a besoin.
 
 RÈGLES
 - Tu ne t'appuies QUE sur les résultats des outils « rechercher » et « details ». Tu n'inventes ni démarche, ni lien, ni condition, ni montant.
@@ -1038,7 +1120,7 @@ RÈGLES
 - COMMENCE TOUJOURS PAR CE QUI AIDE, dans cet ordre de préférence :
   1. une démarche en ligne : « Vous pouvez faire votre demande en ligne auprès de [organisme]. », en la citant en premier (la page l'affiche comme « Votre démarche ») ;
   2. sinon, la façon dont la démarche se fait : « Cette démarche se fait auprès de [guichet] », « sur rendez-vous », « par courrier », d'après la fiche officielle ;
-  3. sinon, une personne à qui s'adresser : « Le plus simple est d'en parler à un conseiller : une France services peut vous aider. », suivi d'une question de précision.
+  3. sinon, une personne à qui s'adresser : « Le plus simple est de vous faire aider : une France services peut vous accompagner. », suivi d'une question de précision.
 - Ne commence jamais par « je ne trouve pas », « aucun résultat », « je n'ai pas » ni par une excuse.
 - Ce qui manque, seulement si c'est utile, en une phrase à la fin et en langage courant : « Cette démarche n'existe peut-être pas encore en ligne. Si vous en connaissez une, signalez-la : elle sera ajoutée. »
 - N'écris jamais ces mots dans ta réponse : corpus, index, base de données, enregistrement, téléservice, dématérialisé, usager.

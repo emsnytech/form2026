@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Produit trouver-sa-demarche-comment.html, la page « Comment ça marche » de « Trouver sa démarche ».
+"""Produit trouver-sa-demarche-comment.html, la page « Comment ça marche » du répertoire des démarches.
 
     python3 scripts/assistant/page_comment.py           # écrit la page
     python3 scripts/assistant/page_comment.py --check   # n'écrit rien, sort en erreur (1) si la page diffère
@@ -9,9 +9,10 @@ encore et la suite du projet, le fonctionnement de la recherche, la version avec
 personnelles, l'appel à contribution. Aucun nombre n'y est écrit à la main : volumes et date de l'index viennent de
 donnees/assistant/index_meta.json (build_index.py), le nombre de France services de france_services.json, les chiffres
 d'Aides-territoires du rapport de la PR 69 (rapport_aides_territoires.md). Le cadre d'entrée est ensuite écrit par
-scripts/sync_cadre.py entre ses marqueurs.
+scripts/sync_cadre.py entre ses marqueurs. Le nom du répertoire (titre, sous-titre, nom court) est relu dans
+trouver-sa-demarche.html (bloc « nom-repertoire », seule constante du gabarit).
 """
-import datetime, json, re, sys
+import datetime, html, json, re, sys
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parents[2]
@@ -31,6 +32,11 @@ def fmt(n):
 def date_fr(iso):
     d = datetime.date.fromisoformat(iso)
     return f"{'1er' if d.day == 1 else d.day}&nbsp;{MOIS[d.month - 1]}&nbsp;{d.year}"
+
+
+def nom_repertoire():
+    page = (RACINE / "trouver-sa-demarche.html").read_text(encoding="utf-8")
+    return json.loads(re.search(r'<script type="application/json" id="nom-repertoire">(.*?)</script>', page, re.S)[1])
 
 
 def chiffres():
@@ -90,6 +96,7 @@ ul{padding-left:1.2em}li{margin:.35em 0}
 
 def page():
     meta, nfs, aides, vers_dn = chiffres()
+    nom = {k: html.escape(v, quote=False) for k, v in nom_repertoire().items()}
     ndn, nsp, date = meta["demarches_en_ligne"], meta["fiches"], date_fr(meta["date_export"])
     avenir = '<span class="sr-only"> (en cours d\'intégration)</span>'
     return f"""<!DOCTYPE html>
@@ -97,8 +104,8 @@ def page():
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Comment ça marche — Trouver sa démarche · FORM 2026</title>
-<meta name="description" content="Sources, limites, version avec assistant et données personnelles du démonstrateur « Trouver sa démarche » de FORM 2026.">
+<title>Comment ça marche — {nom['nom_court']}</title>
+<meta name="description" content="{nom['sous_titre']} Ce que fait le répertoire, sources, limites, version avec assistant et données personnelles.">
 <style>
 {CSS}</style>
 </head>
@@ -106,7 +113,7 @@ def page():
 <!-- Page produite par scripts/assistant/page_comment.py : ne pas modifier à la main. -->
 <header class="tete"><div class="l">
   <div class="marque">
-    <a class="nom" href="trouver-sa-demarche.html">Trouver sa démarche</a>
+    <a class="nom" href="trouver-sa-demarche.html">{nom['titre']}</a>
     <a class="badge-demo" href="./">Démonstrateur FORM 2026</a>
   </div>
   <nav aria-label="Liens du démonstrateur">
@@ -118,9 +125,18 @@ def page():
 
 <main class="l">
   <h1>Comment ça marche</h1>
-  <p class="chapo">Un démonstrateur de recherche en langage courant dans deux bases publiques réunies dans FORM&nbsp;: les démarches en ligne de Démarche Numérique et les fiches de service-public.gouv.fr. Il dit où déposer le dossier, ce qui vous sera demandé, et ce qu'il ne trouve pas. Une version avec assistant conversationnel est en test.</p>
+  <p class="chapo">{nom['sous_titre']}</p>
   <p><a class="retour" href="trouver-sa-demarche.html">← Revenir à la recherche</a></p>
+
+  <h2 id="role">Ce que fait le répertoire, et ce qu'il ne fait pas</h2>
+  <ul>
+    <li><strong>Ce que fait le répertoire&nbsp;:</strong> il recense les démarches en ligne de l'État, des opérateurs et, quand elles y sont publiées, des collectivités&nbsp;; il les situe (nationale, départementale)&nbsp;; il indique le guichet compétent et la France services la plus proche&nbsp;; il est mis à jour depuis les données ouvertes (index du {date}).</li>
+    <li><strong>Ce qu'il ne fait pas&nbsp;:</strong> il ne dit pas si vous avez droit à une aide&nbsp;; il ne calcule ni montant ni condition de ressources&nbsp;; il ne choisit pas à votre place quand il n'est pas sûr.</li>
+    <li id="utiliser-avec-votre-ia"><strong>Pour une réponse contextualisée&nbsp;:</strong> les assistants d'IA expliquent mieux une situation. Ce répertoire leur sera bientôt accessible, pour qu'ils trouvent le bon formulaire au lieu de le deviner. <a id="lien-votre-ia" hidden>Utiliser avec votre IA</a></li>
+  </ul>
+
   <nav class="sommaire" aria-label="Sur cette page"><b>Sur cette page</b><ul>
+    <li><a href="#role">Ce que fait le répertoire</a></li>
     <li><a href="#sources">Sources et limites</a></li>
     <li><a href="#recherche">Comment la recherche fonctionne</a></li>
     <li><a href="#ia">La version avec assistant</a></li>
@@ -129,9 +145,9 @@ def page():
   </ul></nav>
 
   <h2 id="sources">Sources et limites</h2>
-  <p><strong>Ce que la démo couvre&nbsp;:</strong> elle relie, pour chaque recherche, les démarches en ligne publiées par l'administration et les lieux où s'adresser près de chez vous.</p>
+  <p><strong>Ce que le répertoire couvre&nbsp;:</strong> il relie, pour chaque recherche, les démarches en ligne publiées par l'administration et les lieux où s'adresser près de chez vous.</p>
 <figure class="sources" aria-labelledby="sources-titre">
-  <figcaption id="sources-titre" class="sr-only">Schéma des sources de données de la démo</figcaption>
+  <figcaption id="sources-titre" class="sr-only">Schéma des sources de données du répertoire</figcaption>
   <div class="sc-col">
     <h3 class="sc-h">Sources ouvertes</h3>
     <div class="sc-group">
@@ -155,7 +171,7 @@ def page():
     <h3 class="sc-h">Traitement FORM</h3>
     <div class="sc-box acc"><b>Nettoyage</b><span>démarches de test, réservées aux agents ou fermées écartées ; contacts personnels masqués</span></div>
     <div class="sc-box acc"><b>Portée</b><span>nationale, départementale ou locale à vérifier</span></div>
-    <div class="sc-box acc"><b>Moteur de recherche</b><span>vos mots traduits en vocabulaire administratif</span></div>
+    <div class="sc-box acc"><b>Recherche</b><span>vos mots traduits en vocabulaire administratif</span></div>
   </div>
   <div class="sc-arrow" aria-hidden="true">→</div>
   <div class="sc-col">
@@ -175,16 +191,17 @@ def page():
 
   <h2 id="recherche">Comment la recherche fonctionne</h2>
   <ul>
-    <li><strong>Recherche&nbsp;:</strong> un moteur local (BM25, dans votre navigateur) interroge l'index. L'assistant (Claude) reformule votre situation en vocabulaire administratif, lance plusieurs recherches, ouvre le détail des résultats et rédige une réponse. Chaque élément cité renvoie à sa source&nbsp;; aucune adresse n'est inventée. Sans assistant, la recherche simple donne les mêmes cartes, le même «&nbsp;Où aller&nbsp;» et les mêmes liens&nbsp;; elle ne cite qu'une phrase tirée de la fiche officielle, jamais un texte rédigé.</li>
+    <li><strong>Recherche&nbsp;:</strong> une recherche locale (BM25, dans votre navigateur) interroge le répertoire. Dans la version avec assistant, l'IA (Claude) reformule votre situation en vocabulaire administratif, lance plusieurs recherches, ouvre le détail des résultats et rédige une réponse. Chaque élément cité renvoie à sa source&nbsp;; aucune adresse n'est inventée. Sans assistant, la recherche simple donne les mêmes cartes, le même «&nbsp;Où aller&nbsp;» et les mêmes liens&nbsp;; elle ne cite qu'une phrase tirée de la fiche officielle, jamais un texte rédigé.</li>
     <li><strong>Ce qui est propre à FORM&nbsp;:</strong> pour une démarche en ligne, le nombre de champs, les pièces justificatives demandées, les données préremplies (SIRET, RNA, IBAN, quotient familial…) et le volume de dossiers déposés&nbsp;; le rattachement aux moments de vie&nbsp;; le lien entre fiche service-public et formulaire en ligne quand il existe.</li>
-    <li><strong>Limites&nbsp;:</strong> le corpus ne couvre que ce qui est publié en open data. Les téléservices des autres sites publics (impots.gouv, CAF, ANTS…) n'y figurent que lorsqu'une fiche service-public y renvoie, et les démarches encore sur papier ou par courriel n'y sont pas. Une démarche locale n'est pertinente que pour son territoire. L'assistant oriente&nbsp;; il ne dit pas si vous avez droit à une aide.</li>
+    <li><strong>Limites&nbsp;:</strong> le répertoire ne couvre que ce qui est publié en open data. Les téléservices des autres sites publics (impots.gouv, CAF, ANTS…) n'y figurent que lorsqu'une fiche service-public y renvoie, et les démarches encore sur papier ou par courriel n'y sont pas. Une démarche locale n'est pertinente que pour son territoire. Le répertoire oriente&nbsp;; il ne dit pas si vous avez droit à une aide.</li>
     <li><strong>Où aller&nbsp;:</strong> votre code postal donne votre commune (API Géo de l'État). Le service local compétent pour votre commune vient de l'Annuaire de l'administration (DILA), interrogé avec le seul code de la commune&nbsp;; la France services la plus proche, de la liste des structures labellisées (ANCT). Les téléphones et adresses électroniques affichés sont ceux que ces deux sources publient pour chaque service.</li>
     <li><strong>Données&nbsp;:</strong> descriptif des démarches publiées sur demarche.numerique.gouv.fr (data.gouv.fr, extraction du {date}), base FORM&nbsp;2026 (champs et pièces justificatives, codification des publics et moments de vie), fiches de service-public.gouv.fr (DILA, licence ouverte). Les adresses électroniques et numéros de téléphone sont retirés de l'index.</li>
     <li><strong>Accueil&nbsp;:</strong> «&nbsp;Les plus demandées&nbsp;» croise l'Observatoire de la qualité des démarches en ligne (DINUM) et les volumes de dossiers du descriptif, variantes départementales regroupées&nbsp;; «&nbsp;À la une&nbsp;» réunit les démarches publiées depuis moins de 30&nbsp;jours et celles de saison, classées par urgence, dossiers déposés et échéance. Les deux listes sont proposées par la mise à jour, puis validées par l'éditeur.</li>
   </ul>
 
   <h2 id="ia">La version avec assistant</h2>
-  <p>L'assistant fonctionne pour l'instant avec Claude, le modèle d'Anthropic. Il faut un compte Claude&nbsp;: vos questions sont traitées par Anthropic sous votre propre compte, selon ses conditions d'utilisation et vos réglages de confidentialité, exactement comme si vous posiez la question directement à Claude. FORM 2026 ne reçoit ni ne conserve vos questions. L'objectif est que chacun puisse choisir son moteur d'IA&nbsp;: l'index est ouvert et pourra être interrogé par n'importe quel assistant (Albert, Mistral, Claude…). La recherche simple et les exemples préparés ne font appel à aucune IA.</p>
+  <p><strong>Version de test&nbsp;: un assistant d'IA (Claude) interroge le répertoire pour vous.</strong> L'IA reformule votre question et rédige la réponse&nbsp;; les démarches, les liens et les guichets viennent du répertoire. À vérifier auprès de l'organisme cité.</p>
+  <p>L'assistant fonctionne pour l'instant avec Claude, le modèle d'Anthropic. Il faut un compte Claude&nbsp;: vos questions sont traitées par Anthropic sous votre propre compte, selon ses conditions d'utilisation et vos réglages de confidentialité, exactement comme si vous posiez la question directement à Claude. FORM 2026 ne reçoit ni ne conserve vos questions. L'objectif est que chacun puisse choisir son assistant d'IA&nbsp;: le répertoire est ouvert et pourra être interrogé par n'importe quel assistant (Albert, Mistral, Claude…). La recherche simple et les exemples préparés ne font appel à aucune IA.</p>
   <ul>
     <li>C'est une version de test, publiée hors du site FORM, sur claude.ai.</li>
     <li>L'assistant fonctionne avec Claude, le modèle d'Anthropic&nbsp;: il faut un compte Claude, et vos questions sont décomptées de ce compte, selon les <a href="https://www.anthropic.com/legal/consumer-terms" target="_blank" rel="noopener">conditions d'utilisation d'Anthropic</a>.</li>
@@ -205,7 +222,7 @@ def page():
   </ul>
 
   <h2 id="contribuer">Contribuer</h2>
-  <p>Le démonstrateur est ouvert&nbsp;: le code, l'index et les listes de l'accueil sont publiés dans le dépôt du projet. Une démarche mal classée, un guichet erroné, une démarche de saison oubliée, une situation que la recherche ne comprend pas&nbsp;: signalez-le, ou proposez une correction.</p>
+  <p>Le répertoire est ouvert&nbsp;: le code, l'index et les listes de l'accueil sont publiés dans le dépôt du projet. Une démarche mal classée, un guichet erroné, une démarche de saison oubliée, une situation que la recherche ne comprend pas&nbsp;: signalez-le, ou proposez une correction.</p>
   <p><a class="btn-lien" href="{DEPOT}/issues" target="_blank" rel="noopener">Signaler ou proposer une correction</a></p>
   <p><a href="{NOTE_PROJET}">Note de projet (PDF)</a></p>
   <p>Une démarche en ligne manque&nbsp;? <a href="{DEPOT}/issues/new?template=signaler-demarche.yml" target="_blank" rel="noopener">Signalez-la</a>&nbsp;: nom de la démarche, organisme et lien suffisent.</p>

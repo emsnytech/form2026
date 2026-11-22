@@ -16,6 +16,10 @@ En particulier, la masse de procédures encore en PDF ou en papier n'est pas enc
 
 Site généré statiquement — publié via GitHub Pages.
 
+## Où faire sa démarche ?
+
+**Où faire sa démarche ?** — Le répertoire des démarches administratives en ligne et des guichets où les faire. Pages : `trouver-sa-demarche.html` (adresse inchangée) et `trouver-sa-demarche-comment.html` (« Comment ça marche »). Le titre, le sous-titre et le nom court des pages sont une seule constante du gabarit (bloc JSON `nom-repertoire`, voir `scripts/assistant/assembler_page.py`) ; ce paragraphe est le seul endroit du README qui les nomme. Méthode et données : `donnees/assistant/LISEZMOI_assistant.md`.
+
 ## Contrôle des liens
 
 `python3 scripts/verifier_liens.py` teste tous les liens internes et externes du site. Le workflow `.github/workflows/verifier-liens.yml` lance les liens des pages à chaque PR, et tous les liens, données embarquées comprises, chaque semaine. Le rapport est disponible dans les artefacts du workflow.
