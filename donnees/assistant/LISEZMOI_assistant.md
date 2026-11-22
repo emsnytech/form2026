@@ -14,7 +14,7 @@ Données de la page `trouver-sa-demarche.html`. Production de l'auteur à partir
 
 ## Sources et dates
 
-- **Descriptif des démarches publiées** de demarche.numerique.gouv.fr (data.gouv.fr), export du 20 novembre 2026 (`20261120041011-demarches.json.gz`). Il fournit les titres, organismes, départements, descriptions, adresses de dépôt et dates de fermeture.
+- **Descriptif des démarches publiées** de demarche.numerique.gouv.fr (data.gouv.fr), export du 22 novembre 2026 (`20261122041004-demarches.json.gz`). Il fournit les titres, organismes, départements, descriptions, adresses de dépôt et dates de fermeture.
 - **Base FORM 2026**, dans ce dépôt : `app_demarches_*.json`, `champs_shards/` et les référentiels embarqués dans `explorer.html` (manifeste des types de champs, moments de vie, codification des fiches service-public). Elle fournit le public, les champs, les pièces justificatives, les données préremplies et les liens vers les fiches.
 - **Fiches de service-public.gouv.fr** (DILA, licence ouverte) : exports « particuliers », « professionnels » et « associations » téléchargés le 12 septembre 2026, avec les formulaires CERFA et les liens vers les démarches en ligne.
 
@@ -63,7 +63,7 @@ Propre à la page FORM (`scripts/assistant/ou_aller.js`, recopié dans la page p
 - Le corpus ne couvre que les démarches publiées dans le descriptif ouvert et les fiches de service-public.gouv.fr. Il ne contient ni les téléservices des autres sites publics, sauf quand une fiche y renvoie, ni les démarches restées sur papier ou par courriel.
 - Les champs et les pièces justificatives viennent de la base FORM 2026. Une démarche modifiée depuis cette base peut demander autre chose.
 - Le département vient de l'organisme, ou du code qui ouvre le titre. Une démarche locale qui s'adresse à tout le territoire, ou une démarche nationale portée par un service local, est donc mal située ; une démarche locale sans département connu reste « inconnue ».
-- Aucune démarche publiée de l'export du 20 novembre 2026 ne porte de date de fermeture : les démarches fermées passent à l'état « close » et sortent de l'index. Le filtre des démarches fermées n'écarte donc rien dans cette version.
+- Aucune démarche publiée des exports du 20 et du 22 novembre 2026 ne porte de date de fermeture : les démarches fermées passent à l'état « close » et sortent de l'index. Le filtre des démarches fermées n'écarte donc rien dans cette version.
 - La page oriente : elle ne dit pas si une personne a droit à une aide.
 
 ## Reconstruire
@@ -82,7 +82,7 @@ La page elle-même repart du gabarit de l'auteur, `<cartographie>/assistant/page
 
 `<cartographie>` est le dossier de travail qui contient `dila/` (fiches DILA déjà découpées en `dila_*.jsonl`) et `assistant/`. Le « slim du mois » est l'extrait compact du descriptif : une ligne par démarche, avec numéro, état, date de publication, dossiers, SIRET, organisme, type d'organisme, département et titre. Il se produit par `python3 scripts/assistant/extraire_slim.py <export>.json[.gz] <cartographie>/assistant/slim_AAAAMMJJ.jsonl` ; appliquée à l'export du 3 novembre 2026, cette commande redonne à l'identique le slim qui avait servi (44 537 démarches). Le dernier contrôle de `build_index.py` vérifie que toutes les références de `exemples.json` existent encore. S'il échoue, l'index ne se publie pas : les exemples sont à revoir par l'auteur.
 
-L'index publié le 19 novembre 2026 a été reconstruit à l'identique par ces commandes, à partir de l'export du 3 novembre 2026. Celui du 20 novembre 2026 y ajoute la portée des démarches en ligne (champ `po`) et les départements déduits, sans rien changer d'autre : 1 798 démarches `nat`, 9 934 `dep` (dont 327 au département déduit) et 738 `inc`. L'index du 20 novembre 2026 (deuxième version) part de l'export du 20 novembre 2026 : 12 624 démarches en ligne (397 ajouts, 243 retraits, dont 231 fermées), 7 082 fiches ; 12 594 après l'exclusion des démarches de recette (30 écartées, 16 de plus de 10 dossiers gardées et signalées).
+L'index publié le 19 novembre 2026 a été reconstruit à l'identique par ces commandes, à partir de l'export du 3 novembre 2026. Celui du 20 novembre 2026 y ajoute la portée des démarches en ligne (champ `po`) et les départements déduits, sans rien changer d'autre : 1 798 démarches `nat`, 9 934 `dep` (dont 327 au département déduit) et 738 `inc`. L'index du 20 novembre 2026 (deuxième version) part de l'export du 20 novembre 2026 : 12 624 démarches en ligne (397 ajouts, 243 retraits, dont 231 fermées), 7 082 fiches ; 12 594 après l'exclusion des démarches de recette (30 écartées, 16 de plus de 10 dossiers gardées et signalées). L'index du 22 novembre 2026 part de l'export du 22 novembre 2026 : 12 606 démarches en ligne (35 ajouts, 23 retraits, 5 modifiées), 7 082 fiches ; portée : 1 545 `nat`, 10 303 `dep`, 758 `inc` ; 30 démarches de recette écartées, 16 gardées et signalées.
 
 ## Interface sobre (novembre 2026) : accueil, « Comment ça marche », version avec assistant
 
