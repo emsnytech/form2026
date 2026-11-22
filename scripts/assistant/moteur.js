@@ -1,7 +1,8 @@
 // Moteur de recherche local (BM25) sur l'index FORM 2026 + DILA.
 // Utilisable dans la page et sous node pour les tests.
 (function (root) {
-  const STOP = new Set(("a au aux avec ce ces dans de des du elle en et eux il je la le les leur lui ma mais me meme mes moi mon ne nos notre nous on ou par pas pour qu que qui sa se ses son sur ta te tes toi ton tu un une vos votre vous c d j l m n s t y ete etre avoir ai as avons avez ont suis es est sommes etes sont faire fait comment quoi quel quelle quels quelles dois doit veux veut voudrais souhaite souhaiterais besoin peux peut faut il ya y-a cela ca cet cette tout tous toute toutes plus moins tres aussi si alors donc car comme chez sans sous entre vers apres avant depuis lors quand ou bien mon ma mes demande demarche demarches demander habite habiter habitons habitez").split(" "));
+  const STOP = new Set(("a au aux avec ce ces dans de des du elle en et eux il je la le les leur lui ma mais me meme mes moi mon ne nos notre nous on ou par pas pour qu que qui sa se ses son sur ta te tes toi ton tu un une vos votre vous c d j l m n s t y ete etre avoir ai as avons avez ont suis es est sommes etes sont faire fait comment quoi quel quelle quels quelles dois doit veux veut voudrais souhaite souhaiterais besoin peux peut faut il ya y-a cela ca cet cette tout tous toute toutes plus moins tres aussi si alors donc car comme chez sans sous entre vers apres avant depuis lors quand ou bien mon ma mes demande demarche demarches demander habite habiter habitons habitez pendant existe exister possible possibles").split(" "));
+  const DEGRADATIONS = ["degradation", "dommage", "_troubles_urbains", "_dommages_subis"];
   const SYN = {
     bebe: ["naissance"], enfant: ["enfant"], boulot: ["emploi"], travail: ["emploi", "travail"], chomage: ["emploi", "chomage"],
     demenage: ["demenagement", "adresse"], demenager: ["demenagement", "adresse"], aide: ["aide", "subvention", "allocation"],
@@ -22,10 +23,10 @@
     // ferait remonter les fonds de relogement d'urgence.
     secheresse: ["calamite", "_fonds_d_urgence"], gel: ["calamite", "_fonds_d_urgence"], grele: ["calamite", "_fonds_d_urgence"],
     inondation: ["calamite", "_fonds_d_urgence"], tempete: ["calamite", "_fonds_d_urgence"], intemperies: ["calamite", "_fonds_d_urgence"], // crises
-    degradation: ["degradation", "dommage", "indemnisation"], pillage: ["degradation", "dommage", "indemnisation"],
-    vandalisme: ["degradation", "dommage", "indemnisation"], emeute: ["degradation", "dommage", "indemnisation", "_troubles_urbains"],
-    emeutes: ["degradation", "dommage", "indemnisation", "_troubles_urbains"], manifestation: ["degradation", "dommage", "indemnisation"],
-    manifestations: ["degradation", "dommage", "indemnisation"],                                     // dégradations
+    // Dégradations : « manifestation » n'est jamais un déclencheur seul (une fête, une brocante) ; seulement les expressions
+    // « pendant / lors des / en marge des manifestations ». Pas d'« indemnisation » (fiches sur le chômage) : « troubles
+    // urbains » et « dommages subis » (jetons d'expression).
+    degradation: DEGRADATIONS, pillage: DEGRADATIONS, vandalisme: DEGRADATIONS, emeute: DEGRADATIONS, emeutes: DEGRADATIONS,
     // restaurant ↔ commerce ; « bar » jamais seul (voir EXPRESSIONS : bar restaurant, bar-tabac, café-bar).
     restaurant: ["commerce"], restaurants: ["commerce"],
   };
@@ -34,9 +35,10 @@
     [["n arrive plus a payer", "arrive plus a payer", "ne peux plus payer", "ne peut plus payer", "ne pouvons plus payer", "retard de paiement",
       "facture impayee", "factures impayees"], ["impaye", "paiement"]],
     [["fonds d urgence"], ["calamite", "_fonds_d_urgence"]],
-    [["vitrine cassee", "vitrine brisee", "vitrine a ete cassee", "vitrines cassees", "vitre cassee"], ["degradation", "dommage", "indemnisation"]],
+    [["vitrine cassee", "vitrine brisee", "vitrine a ete cassee", "vitrines cassees", "vitre cassee"], DEGRADATIONS],
+    [["pendant les manifestations", "lors des manifestations", "en marge des manifestations"], DEGRADATIONS],
     // émeutes ↔ troubles urbains (jeton _troubles_urbains, voir JETONS_EXPRESSION)
-    [["troubles urbains"], ["_troubles_urbains", "emeute", "degradation", "dommage", "indemnisation"]],
+    [["troubles urbains"], [...DEGRADATIONS, "emeute"]],
     [["bar restaurant", "bar tabac", "cafe bar"], ["commerce", "restaurant"]],
     [["verifier le titre de sejour", "verifier son titre de sejour", "verifier un titre de sejour", "verifier les titres de sejour",
       "salarie etranger", "salaries etrangers", "embaucher un etranger", "embaucher un salarie etranger", "embaucher des etrangers"],
@@ -50,7 +52,7 @@
     return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
   }
   // Jetons d'expression : indexés quand l'expression figure dans un texte, cherchés par les synonymes (« _… », sans racinisation).
-  const JETONS_EXPRESSION = [["fonds d urgence", "_fonds_d_urgence"], ["troubles urbains", "_troubles_urbains"]];
+  const JETONS_EXPRESSION = [["fonds d urgence", "_fonds_d_urgence"], ["troubles urbains", "_troubles_urbains"], ["dommages subis", "_dommages_subis"]];
   function stem(w) {
     if (w[0] === "_") return w;
     if (w.length > 4) w = w.replace(/(s|x)$/, "");
@@ -407,9 +409,10 @@
     const ailleurs = (r) => !!d && r.k === "dn" && !!r.dep && r.dep !== d;
     const ordre = liste.filter((r) => !ailleurs(r));
     const principal = ordre.slice(0, 5).find((r) => sure(r, q, { ...opt, ix }, P)) || null;
-    // « Démarches possibles » : parmi les 3 premières, seulement celles qui passent le seuil de pertinence (une ou deux
-    // lignes plutôt qu'une troisième hors sujet) ; aucune : la page invite à reformuler.
-    const possibles = principal ? [] : ordre.filter((r) => r.k === "dn" || !/^SP-F/.test(r.id)).slice(0, 3).filter((r) => P.pertinente(r.id));
+    // « Démarches possibles » : parmi les 3 premières, seulement celles qui passent le seuil de pertinence et portent un
+    // terme de la question (hors termes trop généraux) dans leur titre ; une ou deux lignes plutôt qu'une troisième hors
+    // sujet. Aucune, et pas de fiche « Comprendre » : la page invite à reformuler.
+    const possibles = principal ? [] : ordre.filter((r) => r.k === "dn" || !/^SP-F/.test(r.id)).slice(0, 3).filter((r) => P.pertinente(r.id) && termeAuTitre(q, r));
     const locale = (r) => r.k === "dn" && porteeDe(r) !== "nat";
     // Lieu d'abord : seulement sans démarche sûre, quand les meilleurs résultats sont locaux ; avec une démarche nationale
     // sûre, le lieu reste proposé plus bas, pour « Où aller ».
