@@ -23,16 +23,21 @@
     secheresse: ["calamite", "_fonds_d_urgence"], gel: ["calamite", "_fonds_d_urgence"], grele: ["calamite", "_fonds_d_urgence"],
     inondation: ["calamite", "_fonds_d_urgence"], tempete: ["calamite", "_fonds_d_urgence"], intemperies: ["calamite", "_fonds_d_urgence"], // crises
     degradation: ["degradation", "dommage", "indemnisation"], pillage: ["degradation", "dommage", "indemnisation"],
-    vandalisme: ["degradation", "dommage", "indemnisation"], emeute: ["degradation", "dommage", "indemnisation"],
-    emeutes: ["degradation", "dommage", "indemnisation"], manifestation: ["degradation", "dommage", "indemnisation"],
+    vandalisme: ["degradation", "dommage", "indemnisation"], emeute: ["degradation", "dommage", "indemnisation", "_troubles_urbains"],
+    emeutes: ["degradation", "dommage", "indemnisation", "_troubles_urbains"], manifestation: ["degradation", "dommage", "indemnisation"],
     manifestations: ["degradation", "dommage", "indemnisation"],                                     // dégradations
+    // restaurant ↔ commerce ; « bar » jamais seul (voir EXPRESSIONS : bar restaurant, bar-tabac, café-bar).
+    restaurant: ["commerce"], restaurants: ["commerce"],
   };
   // Expressions de plusieurs mots, reconnues avant le découpage en mots (sur le texte normalisé).
   const EXPRESSIONS = [
     [["n arrive plus a payer", "arrive plus a payer", "ne peux plus payer", "ne peut plus payer", "ne pouvons plus payer", "retard de paiement",
       "facture impayee", "factures impayees"], ["impaye", "paiement"]],
     [["fonds d urgence"], ["calamite", "_fonds_d_urgence"]],
-    [["vitrine cassee", "vitrine brisee"], ["degradation", "dommage", "indemnisation"]],
+    [["vitrine cassee", "vitrine brisee", "vitrine a ete cassee", "vitrines cassees", "vitre cassee"], ["degradation", "dommage", "indemnisation"]],
+    // émeutes ↔ troubles urbains (jeton _troubles_urbains, voir JETONS_EXPRESSION)
+    [["troubles urbains"], ["_troubles_urbains", "emeute", "degradation", "dommage", "indemnisation"]],
+    [["bar restaurant", "bar tabac", "cafe bar"], ["commerce", "restaurant"]],
     [["verifier le titre de sejour", "verifier son titre de sejour", "verifier un titre de sejour", "verifier les titres de sejour",
       "salarie etranger", "salaries etrangers", "embaucher un etranger", "embaucher un salarie etranger", "embaucher des etrangers"],
      ["verification", "prealable", "embauche", "autorisation", "travail"]],
@@ -45,7 +50,7 @@
     return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
   }
   // Jetons d'expression : indexés quand l'expression figure dans un texte, cherchés par les synonymes (« _… », sans racinisation).
-  const JETONS_EXPRESSION = [["fonds d urgence", "_fonds_d_urgence"]];
+  const JETONS_EXPRESSION = [["fonds d urgence", "_fonds_d_urgence"], ["troubles urbains", "_troubles_urbains"]];
   function stem(w) {
     if (w[0] === "_") return w;
     if (w.length > 4) w = w.replace(/(s|x)$/, "");
@@ -329,11 +334,17 @@
   }
   const porteeDe = (r) => r.k !== "dn" ? (depRessource(r) ? "dep" : "nat") : r.po || (r.dep ? "dep" : "nat");
   const depDe = (r) => r.k === "dn" ? r.dep : depRessource(r);
+  // Termes trop généraux : ils ne comptent jamais pour la condition sur le titre (« démarche sûre », « Comprendre », « Aussi
+  // pour vous »). Comparés aux mots de la question : un terme est écarté si tous les mots de la question qui le donnent
+  // sont de la liste (« informatique » n'est pas écarté par « information », qui a la même racine).
+  const GENERAUX = new Set("aide aides demande demander dossier formulaire declaration droit droits service information".split(" "));
   // Termes significatifs de la question (groupes de synonymes et expressions, Moteur.analyse) présents dans un titre.
   function termesAuTitre(q, r) {
     const titre = new Set(toks(r.t)), n = " " + norm(r.t) + " ";
     for (const [e, j] of JETONS_EXPRESSION) if (n.includes(" " + e + " ")) titre.add(j);
-    const groupes = [...analyse(q).termes.values()];
+    const mots = norm(q).split(" ").filter((w) => w.length > 1), utiles = new Set(mots.filter((w) => !GENERAUX.has(w)).map(stem));
+    const general = (t) => !utiles.has(t) && mots.some((w) => GENERAUX.has(w) && stem(w) === t);
+    const groupes = [...analyse(q).termes].filter(([t]) => !general(t)).map(([, g]) => g);
     return { groupes, presents: groupes.filter((g) => [...g].some((s) => titre.has(s))) };
   }
   // Au moins un terme de la question dans le titre (règle des cartes « Comprendre » et « Aussi pour vous »).
@@ -396,7 +407,9 @@
     const ailleurs = (r) => !!d && r.k === "dn" && !!r.dep && r.dep !== d;
     const ordre = liste.filter((r) => !ailleurs(r));
     const principal = ordre.slice(0, 5).find((r) => sure(r, q, { ...opt, ix }, P)) || null;
-    const possibles = principal ? [] : ordre.filter((r) => r.k === "dn" || !/^SP-F/.test(r.id)).slice(0, 3);
+    // « Démarches possibles » : parmi les 3 premières, seulement celles qui passent le seuil de pertinence (une ou deux
+    // lignes plutôt qu'une troisième hors sujet) ; aucune : la page invite à reformuler.
+    const possibles = principal ? [] : ordre.filter((r) => r.k === "dn" || !/^SP-F/.test(r.id)).slice(0, 3).filter((r) => P.pertinente(r.id));
     const locale = (r) => r.k === "dn" && porteeDe(r) !== "nat";
     // Lieu d'abord : seulement sans démarche sûre, quand les meilleurs résultats sont locaux ; avec une démarche nationale
     // sûre, le lieu reste proposé plus bas, pour « Où aller ».
@@ -418,6 +431,6 @@
     if (v) return { principal: v, possibles: [], fiche, question: "", message: "", recs };
     return { principal: null, possibles: [], fiche, question: "", message: "Pas de démarche en ligne pour ce département : voici la fiche officielle et le guichet.", recs };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, termeAuTitre, termesAuTitre, reponseLigne, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

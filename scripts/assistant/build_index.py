@@ -71,6 +71,11 @@ recs=[]; skipped=collections.Counter(); portee=collections.Counter(); deduits=[]
 # Communes de donnees/assistant/communes.json (dans le dépôt) : lieu nommé dans le titre d'une démarche d'organisme national.
 charger_communes(os.path.join(FORM,'donnees','assistant','communes.json'))
 affines=collections.defaultdict(list); techniques=[]; declares_divergents=[]
+# Portées corrigées par l'éditeur (donnees/assistant/portees_corrigees.json) : liste éditoriale, jamais de règle automatique.
+# La portée retenue remplace celle qui est déduite ; la portée et le département déclarés restent à côté (po_declaree, dep_declare).
+_pc=os.path.join(FORM,'donnees','assistant','portees_corrigees.json')
+CORRECTIONS={c['id']:c for c in (json.load(open(_pc,encoding='utf8'))['corrections'] if os.path.exists(_pc) else [])}
+corr_appliquees=[]
 for num,a in desc.items():
     s=slim.get(num)
     if not s: skipped['sans_titre']+=1; continue
@@ -108,14 +113,22 @@ for num,a in desc.items():
             deduits.append({'id':'DN-%d'%num,'dep':d,'forme':forme,'source':source,'organisme':org,'titre':titre})
             if autre: ecarts.append({'id':'DN-%d'%num,'organisme':org,'titre':titre,'dep_retenu':d,'dep_ecarte':autre,'source':source})
         else: po,dep='inc',''
+    corr=CORRECTIONS.get('DN-%d'%num)
+    if corr:
+        corr_appliquees.append('DN-%d'%num); po_decl,dep_decl=po,dep
+        po,dep=corr['portee'],corr.get('departement') or ''
     portee[po]+=1
     recs.append({'k':'dn','id':'DN-%d'%num,'t':clean(titre,220),'d':clean(a[1],300),'o':clean(org,120),'dep':dep,'po':po,'dp':(datepub or '')[:10],
       'n':nd or 0,'cat':cat,'ev':ev.get(num,''),'u':slug,'ch':fr.get('nb_champs') or len(ch),'pj':pj,'pre':sorted(pre),
       'fd':[x.strip() for x in (fr.get('fiches_dila') or '').split(';') if x.strip()],'fe':(a[5] or '')[:10]})
+    if corr: recs[-1]['po_declaree']=po_decl; recs[-1]['dep_declare']=dep_decl
     if titre_technique(titre): recs[-1]['tc']=1; techniques.append({'id':'DN-%d'%num,'n':nd or 0,'portee':po,'titre':titre,'code':titre_technique(titre)})
 print('DN',len(recs),dict(skipped))
 print('démarches de recette écartées :',{k:len(v) for k,v in recettes.items()},'; gardées et signalées (plus de 10 dossiers) :',len(recettes_gardees))
 print('portée des démarches en ligne :',dict(portee),'; départements déduits :',len(deduits),dict(formes),'; organisme et titre divergents :',len(ecarts))
+print('portées corrigées par l\'éditeur :',len(corr_appliquees),corr_appliquees)
+_absentes=sorted(set(CORRECTIONS)-set(corr_appliquees))
+if _absentes: print('ATTENTION portées corrigées sans démarche dans l\'export :',_absentes)
 print('portée nationale affinée :',{k:len(v) for k,v in affines.items()},'; titres techniques :',len(techniques),'; département déclaré différent de celui du titre (« en / dans ») :',len(declares_divergents))
 if A.rapport:
     json.dump({'declares_divergents':declares_divergents,'recettes':recettes,'recettes_gardees':recettes_gardees,'affines':affines,'techniques':techniques,'portee':dict(portee),'formes':dict(formes),'exemples':random.Random(20261120).sample(deduits,min(15,len(deduits))),'ecarts':ecarts,'deduits':deduits},

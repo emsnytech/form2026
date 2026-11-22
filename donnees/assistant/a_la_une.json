@@ -3,6 +3,22 @@
  "date": "2026-11-22",
  "retenues": [
   {
+   "cle": "aide petites entreprises plus affectees dommages subis lors troubles urbains intervenus marge manifestations ayant eu lieu entre octobre novembre",
+   "titre": "Aide pour les petites entreprises les plus affectées par les dommages subis lors des troubles urbains intervenus en marge des manifestations ayant eu lieu entre le 17 octobre et le 19 novembre 2026",
+   "organisme": "Préfecture de région",
+   "portee": "nationale",
+   "etiquette": "Urgent",
+   "dossiers": 14,
+   "publiee": "2026-11-20",
+   "echeance": null,
+   "variantes": 1,
+   "ids": [
+    "DN-161645"
+   ],
+   "requete": "Aide pour les petites entreprises les plus affectées par les dommages subis lors des troubles urbains intervenus en marge des manifestations ayant eu lieu entre le 17 octobre et le 19 novembre 2026",
+   "question_lieu": "Dans quel département habitez-vous ?"
+  },
+  {
    "cle": "secheresse 2026",
    "titre": "Sécheresse 2026 : aides et dérogations pour les agriculteurs",
    "organisme": "20 démarches ouvertes",
@@ -100,7 +116,9 @@
    ],
    "requete": "Demande de copie d’acte d’état civil consulaire",
    "question_lieu": "Dans quel département habitez-vous ?"
-  },
+  }
+ ],
+ "suivantes": [
   {
    "cle": "aide entreprises btp utilisant gazole non routier gnr btp periode octobre",
    "titre": "Aide aux entreprises du BTP utilisant du Gazole Non Routier (GNR-BTP) - période d'octobre 2026",
@@ -116,9 +134,7 @@
    ],
    "requete": "Aide aux entreprises du BTP utilisant du Gazole Non Routier (GNR-BTP) - période d'octobre 2026",
    "question_lieu": "Dans quel département habitez-vous ?"
-  }
- ],
- "suivantes": [
+  },
   {
    "cle": "help aide entreprises difficultes alpes",
    "titre": "HELP « aide aux entreprises en difficultés » Rhône-Alpes",
@@ -149,22 +165,6 @@
     "DN-160412"
    ],
    "requete": "Procédure de déclaration d'autorisation, de renouvellement et de modification des demandes de vidéoprotection",
-   "question_lieu": "Dans quel département habitez-vous ?"
-  },
-  {
-   "cle": "cheque culture",
-   "titre": "Chèque culture 2026",
-   "organisme": "SRIAS Nouvelle-Aquitaine, Préfecture de la région Nouvelle-Aquitaine, Secrétariat général des affaires régionales",
-   "portee": "Paris (75)",
-   "etiquette": "Nouveau",
-   "dossiers": 471,
-   "publiee": "2026-11-19",
-   "echeance": null,
-   "variantes": 1,
-   "ids": [
-    "DN-162179"
-   ],
-   "requete": "Chèque culture 2026",
    "question_lieu": "Dans quel département habitez-vous ?"
   },
   {
@@ -200,29 +200,35 @@
    "question_lieu": "Dans quel département habitez-vous ?"
   },
   {
-   "cle": "actions clas bons achats multi enseignes",
-   "titre": "Préfecture du Val-de-Marne - Actions 2026 de la CLAS 94 - Bons d'achats multi-enseignes",
-   "organisme": "Préfecture du Val-de-Marne",
-   "portee": "Val-de-Marne (94)",
+   "cle": "releve fin annee",
+   "titre": "Formulaire 3 - Relevé de fin d'année 2026",
+   "organisme": "Ministère de la Transition Écologique et de la Cohésion des Territoires",
+   "portee": "Somme (80)",
    "etiquette": "Nouveau",
-   "dossiers": 437,
-   "publiee": "2026-11-17",
+   "dossiers": 434,
+   "publiee": "2026-11-02",
    "echeance": null,
    "variantes": 1,
    "ids": [
-    "DN-148491"
+    "DN-159589"
    ],
-   "requete": "Préfecture du Val-de-Marne - Actions 2026 de la CLAS 94 - Bons d'achats multi-enseignes",
+   "requete": "Formulaire 3 - Relevé de fin d'année 2026",
    "question_lieu": "Dans quel département habitez-vous ?"
   }
  ],
  "source": "Démarches publiées depuis moins de 30 jours, et démarches de saison (saisons.json) ; descriptif de Démarche Numérique",
  "editeur": {
-  "epingle": [],
+  "epingle": [
+   "troubles urbains"
+  ],
   "exclu": [
    "action clasac billets parc asterix saison",
-   "aide paiement impaye energie professionnels"
+   "aide paiement impaye energie professionnels",
+   "cheque culture",
+   "actions clas bons achats multi enseignes"
   ],
-  "etiquette": {}
+  "etiquette": {
+   "aide petites entreprises plus affectees dommages subis lors troubles urbains intervenus marge manifestations ayant eu lieu entre octobre novembre": "Urgent"
+  }
  }
 }

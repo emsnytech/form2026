@@ -59,7 +59,9 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('R6 en tête : une démarche ou fiche de titre de séjour, nationale ou du 38', !!c.principal&&titreSejour(c.principal)&&(c.principal.k==='sp'||c.principal.dep==='38'||c.principal.po==='nat'), c.principal&&c.principal.id+' '+c.principal.t);
   verifie('R6 aucune fiche « étudiant » dans les 3 premiers de la réponse', !affiches.some(r=>/[ée]tudiant/i.test(r.t)), affiches.map(r=>r.id).join(' ')); }
 { const q="Ma vitrine a été cassée pendant les manifestations, quelle aide ?";
-  const cibles=R.filter(r=>r.k==='dn'&&r.po==='nat'&&/commerc/i.test(r.t)&&/endommag|d[ée]grad|d[ée]g[âa]t|violences urbaines/i.test(r.t)).map(r=>r.id);
+  // Titre : commerces ou entreprises, et dommages (élargi le 22 novembre 2026 au titre réel de DN-161645, « petites entreprises… dommages
+  // subis lors des troubles urbains » ; la démarche doit rester nationale, ici par portees_corrigees.json).
+  const cibles=R.filter(r=>r.k==='dn'&&r.po==='nat'&&/commerc|entreprise/i.test(r.t)&&/endommag|d[ée]grad|d[ée]g[âa]t|dommages|violences urbaines|troubles urbains/i.test(r.t)).map(r=>r.id);
   const dateIndex=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','index_meta.json'),'utf8')).date_export;
   // Démarche de ce type déclarée locale (service et département du descriptif) : signalée, sans changer le critère.
   const locales=R.filter(r=>r.k==='dn'&&r.po!=='nat'&&/commerc|entreprise/i.test(r.t)&&/endommag|d[ée]grad|d[ée]g[âa]t|dommages|violences urbaines|troubles urbains/i.test(r.t));
