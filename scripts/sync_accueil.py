@@ -126,7 +126,9 @@ section{margin-top:2.4rem}
 .liste time{font-size:.85rem;color:var(--muted)} .liste h2{font-size:1.15rem;margin:.2rem 0 .3rem} .liste p{margin:0;color:var(--muted)}
 footer{margin-top:2.6rem;border-top:1px solid var(--line);padding-top:1rem;font-size:.88rem;color:var(--muted)}
 """
-def page(titre, desc, url, rubrique, corps):
+# Mention des licences (voir la section « Licences » du README), au pied de l'accueil seulement.
+LICENCES = "<br>" + e("Code (HTML, CSS, JS, scripts) sous EUPL 1.2 · données dérivées sous Licence Ouverte 2.0 · données sources sous la licence de leur producteur (DINUM, DILA, ANCT, IGN).")
+def page(titre, desc, url, rubrique, corps, licences=""):
     nav = build_nav_html(ORDRE, RUB, rubrique, "")
     return f"""<!DOCTYPE html>
 <html lang="fr">
@@ -153,7 +155,7 @@ def page(titre, desc, url, rubrique, corps):
 <div class="wrap">
   <p class="topnav" data-rubrique="{rubrique or ''}">{NAV_START}{nav}{NAV_END}</p>
 {corps}
-  <footer>FORM 2026 · Philippe Vrignaud · Données ouvertes et code source publics</footer>
+  <footer>FORM 2026 · Philippe Vrignaud · Données ouvertes et code source publics{licences}</footer>
 </div>
 </body>
 </html>
@@ -271,7 +273,7 @@ corps2 = f"""  <header>
   </ul>
   </section>"""
 
-PAGES = [(ROOT / "index.html", page(f"FORM 2026 · {TITRE}", f"{SOUS}. Publications, outils et données sur les démarches administratives, à partir des seules sources publiques.", SITE, None, corps)),
+PAGES = [(ROOT / "index.html", page(f"FORM 2026 · {TITRE}", f"{SOUS}. Publications, outils et données sur les démarches administratives, à partir des seules sources publiques.", SITE, None, corps, LICENCES)),
          (ROOT / "publications.html", page("FORM 2026 · Toutes les publications", "Les publications de FORM 2026, de la plus récente à la plus ancienne.", SITE + "publications.html", "situer", corps2))]
 ecarts = [p for p, t in PAGES if not p.exists() or p.read_text(encoding="utf-8") != t]
 if CHECK:
