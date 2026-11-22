@@ -16,6 +16,12 @@ En particulier, la masse de procédures encore en PDF ou en papier n'est pas enc
 
 Site généré statiquement — publié via GitHub Pages.
 
+## Licences
+
+- **Code** (HTML, CSS, JS, scripts) : [EUPL 1.2](LICENSE), Licence publique de l'Union européenne, texte officiel en français de la Commission européenne.
+- **Données dérivées** (gains, délais, base juridique, hypothèses, classements produits par FORM 2026) : Licence Ouverte 2.0 (Etalab), comme déjà annoncé.
+- **Données sources** : elles gardent la licence de leur producteur (DINUM pour Démarche Numérique, DILA pour service-public.fr et l'Annuaire, ANCT pour France services, IGN).
+
 ## Où faire sa démarche ?
 
 **Où faire sa démarche ?** — Le répertoire des démarches administratives en ligne et des guichets où les faire. Pages : `trouver-sa-demarche.html` (adresse inchangée) et `trouver-sa-demarche-comment.html` (« Comment ça marche »). Le titre, le sous-titre et le nom court des pages sont une seule constante du gabarit (bloc JSON `nom-repertoire`, voir `scripts/assistant/assembler_page.py`) ; ce paragraphe est le seul endroit du README qui les nomme. Méthode et données : `donnees/assistant/LISEZMOI_assistant.md`.
