@@ -127,6 +127,17 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie(`Ton : aucune formule d'échec en tête ni mot de spécialiste (${ex.length} réponses préparées, ${messages.length} messages)`, messages.length>0&&!fautes.length, fautes.join(' | '));
   const longues=ex.filter(e=>phrases(e.texte)>3).map(e=>e.q+' ('+phrases(e.texte)+' phrases)');
   verifie('Ton : réponses préparées en trois phrases au plus', !longues.length, longues.join(' | '));
-  verifie('Ton : la consigne de l\'assistant ne propose plus « Je ne trouve pas… » en ouverture', !/dis-le franchement|Je ne trouve pas de démarche en ligne pour cela/.test(page), ''); }
+  verifie('Ton : la consigne de l\'assistant ne propose plus « Je ne trouve pas… » en ouverture', !/dis-le franchement|Je ne trouve pas de démarche en ligne pour cela/.test(page), '');
+  // Recadrage « répertoire » (« Où faire sa démarche ? ») : la page oriente, elle ne recommande pas ; elle ne se présente ni
+  // comme un conseiller ni comme un « moteur ». Seule exception : la promesse sous le champ, « Il ne remplace ni l'organisme
+  // qui décide, ni un conseiller. »
+  const visible=(h)=>h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g,' ').replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ');
+  const comment=fs.readFileSync(path.join(__dirname,'..','..','trouver-sa-demarche-comment.html'),'utf8');
+  const NE_PAS=/\bconseillers?\b|nous vous recommandons|\bmoteurs?\b/i, PROMESSE=/ni un conseiller\./g;
+  const stats=(page.match(/\$\("ligne-stats"\)\.innerHTML = `([^`]*)`/)||[])[1]||'';
+  const consigneIA=(page.match(/function consigne\(q\) \{([\s\S]*?)\n\}/)||[])[1]||'';
+  const textesPage=[...textes,['page',visible(page)],['« Comment ça marche »',visible(comment)],['ligne sous le champ',stats],['consigne de l\'assistant',consigneIA]];
+  const fautesR=textesPage.filter(([,s])=>NE_PAS.test(sansRefs(s).replace(PROMESSE,''))).map(([n,s])=>n+' : '+sansRefs(s).replace(PROMESSE,'').match(NE_PAS)[0]);
+  verifie(`Ton : ni « conseiller », ni « nous vous recommandons », ni « moteur » dans les textes de la page (${textesPage.length} textes)`, !!stats&&!fautesR.length, fautesR.join(' | ')); }
 console.log(`\n${echecs?echecs+' échec(s)':'Toutes les situations de référence passent'}${attente?', '+attente+' en attente':''}.`);
 if(echecs) process.exit(1);

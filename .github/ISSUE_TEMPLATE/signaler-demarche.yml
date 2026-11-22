@@ -1,5 +1,5 @@
 name: Signaler une démarche
-description: Une démarche en ligne que « Trouver sa démarche » ne propose pas encore.
+description: Une démarche en ligne que le répertoire « Où faire sa démarche ? » ne propose pas encore.
 title: "Démarche à ajouter : "
 labels: ["demarche-a-ajouter"]
 body:

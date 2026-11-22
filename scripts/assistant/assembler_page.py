@@ -9,6 +9,9 @@ scripts/sync_nav.py). Les tests (test_moteur.js) portent donc sur le code exact 
     python3 scripts/assistant/assembler_page.py --check   # n'écrit rien, sort en erreur (1) si la page diffère
     python3 scripts/assistant/assembler_page.py --depuis <cartographie>/assistant/page.html
 
+Le nom du répertoire (titre, sous-titre, nom court) est une seule constante du gabarit, le bloc JSON « nom-repertoire » :
+les {{titre}}, {{sous_titre}} et {{nom_court}} du gabarit en sont remplis, et page_comment.py le relit dans la page.
+
 --depuis repart du gabarit de l'auteur (page.html, hors du dépôt, comme les sources de build_index.py) et en produit :
 - la page FORM, avec les adaptations listées dans ADAPTATIONS (en-tête du gabarit retiré, chemins des données et des pages
   du site, lien vers la version avec assistant et fenêtre de ses conditions, « Où aller ») ;
@@ -18,7 +21,7 @@ scripts/sync_nav.py). Les tests (test_moteur.js) portent donc sur le code exact 
 Chaque adaptation doit trouver sa place exactement une fois, sinon rien n'est écrit : le gabarit a changé et la liste est à revoir.
 --check vérifie aussi que la page « Comment ça marche » est à jour.
 """
-import re, subprocess, sys
+import json, re, subprocess, sys
 from pathlib import Path
 
 RACINE = Path(__file__).resolve().parents[2]
@@ -88,8 +91,20 @@ ADAPTATIONS_IA = COMMUNES + [
 ]
 
 
+def nom_repertoire(texte):
+    """Titre, sous-titre et nom court du répertoire : bloc JSON « nom-repertoire » du gabarit (ou de la page assemblée)."""
+    m = re.search(r'<script type="application/json" id="nom-repertoire">(.*?)</script>', texte, re.S)
+    if not m:
+        sys.exit("gabarit : bloc « nom-repertoire » absent ; rien n'est écrit")
+    return json.loads(m[1])
+
+
 def adapter(gabarit, adaptations=None):
-    t = gabarit
+    # Nom du répertoire : {{titre}}, {{sous_titre}} et {{nom_court}} remplacés partout, depuis la seule constante du gabarit.
+    nom = nom_repertoire(gabarit)
+    t = re.sub(r"\{\{(titre|sous_titre|nom_court)\}\}", lambda m: nom[m[1]], gabarit)
+    if "{{" in re.sub(r"<script>.*?</script>", "", t, flags=re.S):
+        sys.exit("gabarit : un {{…}} n'a pas été remplacé ; rien n'est écrit")
     for motif, rempl in (ADAPTATIONS if adaptations is None else adaptations):
         n = len(re.findall(motif, t, flags=re.S))
         if n != 1:

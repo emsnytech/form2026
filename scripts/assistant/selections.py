@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sélections de l'accueil de « Trouver sa démarche » : « Les plus demandées » et « À la une ».
+"""Sélections de l'accueil du répertoire « Où faire sa démarche ? » : « Les plus demandées » et « À la une ».
 
     python3 scripts/assistant/selections.py [--observatoire <observatoire.ods>]
 
