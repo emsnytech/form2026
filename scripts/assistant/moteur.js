@@ -334,11 +334,17 @@
   }
   const porteeDe = (r) => r.k !== "dn" ? (depRessource(r) ? "dep" : "nat") : r.po || (r.dep ? "dep" : "nat");
   const depDe = (r) => r.k === "dn" ? r.dep : depRessource(r);
+  // Termes trop généraux : ils ne comptent jamais pour la condition sur le titre (« démarche sûre », « Comprendre », « Aussi
+  // pour vous »). Comparés aux mots de la question : un terme est écarté si tous les mots de la question qui le donnent
+  // sont de la liste (« informatique » n'est pas écarté par « information », qui a la même racine).
+  const GENERAUX = new Set("aide aides demande demander dossier formulaire declaration droit droits service information".split(" "));
   // Termes significatifs de la question (groupes de synonymes et expressions, Moteur.analyse) présents dans un titre.
   function termesAuTitre(q, r) {
     const titre = new Set(toks(r.t)), n = " " + norm(r.t) + " ";
     for (const [e, j] of JETONS_EXPRESSION) if (n.includes(" " + e + " ")) titre.add(j);
-    const groupes = [...analyse(q).termes.values()];
+    const mots = norm(q).split(" ").filter((w) => w.length > 1), utiles = new Set(mots.filter((w) => !GENERAUX.has(w)).map(stem));
+    const general = (t) => !utiles.has(t) && mots.some((w) => GENERAUX.has(w) && stem(w) === t);
+    const groupes = [...analyse(q).termes].filter(([t]) => !general(t)).map(([, g]) => g);
     return { groupes, presents: groupes.filter((g) => [...g].some((s) => titre.has(s))) };
   }
   // Au moins un terme de la question dans le titre (règle des cartes « Comprendre » et « Aussi pour vous »).
@@ -401,7 +407,9 @@
     const ailleurs = (r) => !!d && r.k === "dn" && !!r.dep && r.dep !== d;
     const ordre = liste.filter((r) => !ailleurs(r));
     const principal = ordre.slice(0, 5).find((r) => sure(r, q, { ...opt, ix }, P)) || null;
-    const possibles = principal ? [] : ordre.filter((r) => r.k === "dn" || !/^SP-F/.test(r.id)).slice(0, 3);
+    // « Démarches possibles » : parmi les 3 premières, seulement celles qui passent le seuil de pertinence (une ou deux
+    // lignes plutôt qu'une troisième hors sujet) ; aucune : la page invite à reformuler.
+    const possibles = principal ? [] : ordre.filter((r) => r.k === "dn" || !/^SP-F/.test(r.id)).slice(0, 3).filter((r) => P.pertinente(r.id));
     const locale = (r) => r.k === "dn" && porteeDe(r) !== "nat";
     // Lieu d'abord : seulement sans démarche sûre, quand les meilleurs résultats sont locaux ; avec une démarche nationale
     // sûre, le lieu reste proposé plus bas, pour « Où aller ».

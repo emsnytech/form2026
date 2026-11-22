@@ -581,11 +581,17 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
   }
   const porteeDe = (r) => r.k !== "dn" ? (depRessource(r) ? "dep" : "nat") : r.po || (r.dep ? "dep" : "nat");
   const depDe = (r) => r.k === "dn" ? r.dep : depRessource(r);
+  // Termes trop généraux : ils ne comptent jamais pour la condition sur le titre (« démarche sûre », « Comprendre », « Aussi
+  // pour vous »). Comparés aux mots de la question : un terme est écarté si tous les mots de la question qui le donnent
+  // sont de la liste (« informatique » n'est pas écarté par « information », qui a la même racine).
+  const GENERAUX = new Set("aide aides demande demander dossier formulaire declaration droit droits service information".split(" "));
   // Termes significatifs de la question (groupes de synonymes et expressions, Moteur.analyse) présents dans un titre.
   function termesAuTitre(q, r) {
     const titre = new Set(toks(r.t)), n = " " + norm(r.t) + " ";
     for (const [e, j] of JETONS_EXPRESSION) if (n.includes(" " + e + " ")) titre.add(j);
-    const groupes = [...analyse(q).termes.values()];
+    const mots = norm(q).split(" ").filter((w) => w.length > 1), utiles = new Set(mots.filter((w) => !GENERAUX.has(w)).map(stem));
+    const general = (t) => !utiles.has(t) && mots.some((w) => GENERAUX.has(w) && stem(w) === t);
+    const groupes = [...analyse(q).termes].filter(([t]) => !general(t)).map(([, g]) => g);
     return { groupes, presents: groupes.filter((g) => [...g].some((s) => titre.has(s))) };
   }
   // Au moins un terme de la question dans le titre (règle des cartes « Comprendre » et « Aussi pour vous »).
@@ -648,7 +654,9 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     const ailleurs = (r) => !!d && r.k === "dn" && !!r.dep && r.dep !== d;
     const ordre = liste.filter((r) => !ailleurs(r));
     const principal = ordre.slice(0, 5).find((r) => sure(r, q, { ...opt, ix }, P)) || null;
-    const possibles = principal ? [] : ordre.filter((r) => r.k === "dn" || !/^SP-F/.test(r.id)).slice(0, 3);
+    // « Démarches possibles » : parmi les 3 premières, seulement celles qui passent le seuil de pertinence (une ou deux
+    // lignes plutôt qu'une troisième hors sujet) ; aucune : la page invite à reformuler.
+    const possibles = principal ? [] : ordre.filter((r) => r.k === "dn" || !/^SP-F/.test(r.id)).slice(0, 3).filter((r) => P.pertinente(r.id));
     const locale = (r) => r.k === "dn" && porteeDe(r) !== "nat";
     // Lieu d'abord : seulement sans démarche sûre, quand les meilleurs résultats sont locaux ; avec une démarche nationale
     // sûre, le lieu reste proposé plus bas, pour « Où aller ».
@@ -866,6 +874,10 @@ window.majCherche = () => { if (IX && QCOUR) commentCherche(QCOUR); };
 const enLigne = (r) => !!r && (r.k === "dn" || /Téléservice|selNG|ormulaire/i.test(r.ty) || (estFiche(r) && resDe(r).some((x) => /Téléservice|selNG/i.test(x.ty))));
 // Territoire d'une démarche, toujours visible dans « Démarches possibles ».
 const territoire = (r) => r.k !== "dn" ? "nationale" : r.dep ? `${DEPNAME[r.dep] || r.dep} (${r.dep})` : r.po === "nat" ? "nationale" : "département inconnu";
+// Invitation à reformuler, avec trois exemples (aucun résultat pertinent, ou aucune démarche possible pertinente).
+function invitationReformuler() {
+  return `<p>${esc(MESSAGES.autrement)}</p><div class="chips">${EXEMPLES.slice(0, 3).map((x, i) => `<button type="button" class="chip" data-i="${i}">${esc(x.q)}</button>`).join("")}</div>`;
+}
 function cartePossibles(l) {
   const el = $("carte-possibles"); if (!l.length) { el.hidden = true; return; }
   el.innerHTML = `<h2 id="h-possibles">Démarches possibles</h2><p class="avert-v">À vérifier&nbsp;: ces démarches peuvent ne pas correspondre à votre situation.</p><ul>`
@@ -889,7 +901,7 @@ function afficherResultats(liste, q, origine, principalDonne, extra = {}) {
   const rien = !liste.length || (origine === "simple" && !liste.some((r) => P.pertinente(r.id)));
   $("rep-autrement").hidden = !rien; $("rep-manque").hidden = true;
   if (rien) {
-    $("rep-autrement").innerHTML = `<p>${esc(MESSAGES.autrement)}</p><div class="chips">${EXEMPLES.slice(0, 3).map((x, i) => `<button type="button" class="chip" data-i="${i}">${esc(x.q)}</button>`).join("")}</div>`;
+    $("rep-autrement").innerHTML = invitationReformuler();
     carteDemarche(null); cartePossibles([]); carteAussi(null); carteComprendre(null); window.CARTES_TETE = []; autresPistes([]);
     commentCherche(q); vueReponse(); return;
   }
@@ -904,22 +916,25 @@ function afficherResultats(liste, q, origine, principalDonne, extra = {}) {
     : ligne ? (estFiche(principal) ? null : (lieeAuPrincipal || fiches[0] || null))
     : (estFiche(principal) ? principal : (fiches[0] || null));
   // « Aussi pour vous » : une fiche qui a un simulateur ou une démarche en ligne, et qui est soit citée par la fiche
-  // « Comprendre » (ses fiches liées, champ « fl ») et en rapport avec la question (au moins le quart du meilleur score),
-  // soit au-dessus du seuil de pertinence ; dans les deux cas, son titre passe la même règle que « Votre démarche »
-  // (Moteur.titreSur) ; sinon, pas de carte.
+  // « Comprendre » (ses fiches liées, champ « fl ») et en rapport avec la question (au moins le quart du meilleur score,
+  // et un terme de la question, hors termes trop généraux, dans son titre), soit au-dessus du seuil de pertinence avec un
+  // titre qui passe la même règle que « Votre démarche » (Moteur.titreSur) ; sinon, pas de carte.
   const utile = (f) => f !== principal && f !== comprendre && resDe(f).some((x) => /imulateur|Téléservice|selNG/i.test(x.ty));
   const lieesComprendre = comprendre && P ? (comprendre.fl || []).map(rec).filter((f) => f && utile(f)) : [];
   let aussi = null;
   if (lieesComprendre.length) {
     const tous = Moteur.search(IX, q, { ...opt, k: Infinity }), meilleur = tous.length ? tous[0].score : 0;
     const score = new Map(tous.map((x) => [x.r.id, x.score]));
-    aussi = lieesComprendre.find((f) => (score.get(f.id) || 0) >= meilleur / 4 && Moteur.titreSur(IX, q, f)) || null;
+    aussi = lieesComprendre.find((f) => (score.get(f.id) || 0) >= meilleur / 4 && Moteur.termeAuTitre(q, f)) || null;
   }
   aussi = aussi || (P ? fiches.find((f) => utile(f) && P.pertinente(f.id) && Moteur.titreSur(IX, q, f)) : null) || null;
   carteDemarche(ligne ? principal : null); cartePossibles(ligne ? [] : possibles); carteAussi(aussi); carteComprendre(comprendre);
   // Sans démarche sûre en tête : « Démarches possibles » d'abord (s'il y en a), puis la fiche officielle.
   if (ligne) $("carte-ou").after($("carte-comprendre")); else $("carte-possibles").after($("carte-comprendre"));
-  if (!ligne && !possibles.some((r) => r.k === "dn") && origine !== "ligne") { $("rep-manque").innerHTML = avecSignaler(MESSAGES.manque); $("rep-manque").hidden = false; }
+  // Recherche simple sans démarche sûre, sans démarche possible pertinente ni fiche « Comprendre » : l'invitation à
+  // reformuler, à la place. Avec une fiche « Comprendre », le message habituel (la démarche n'existe peut-être pas en ligne).
+  if (!ligne && !possibles.length && !comprendre && origine === "simple") { $("rep-autrement").innerHTML = invitationReformuler(); $("rep-autrement").hidden = false; }
+  else if (!ligne && !possibles.some((r) => r.k === "dn") && origine !== "ligne") { $("rep-manque").innerHTML = avecSignaler(MESSAGES.manque); $("rep-manque").hidden = false; }
   window.CARTES_TETE = [ligne ? principal : comprendre, aussi, ligne ? comprendre : principal, ...possibles].filter(Boolean);  // « Où aller » cherche le guichet de ces cartes
   // Sans démarche en ligne en tête, le premier résultat (modèle de lettre, outil…) reste dans « Autres pistes ».
   autresPistes(liste.filter((r) => (r !== principal || !ligne) && r !== aussi && r !== comprendre && !possibles.includes(r)));
