@@ -16,14 +16,6 @@
    "phrase": "Si votre propriété n'a pas été modifiée dans l'année, vous n'avez rien à faire.",
    "fiche": "SP-F59",
    "valide_le": "2026-11-23"
-  },
-  {
-   "ids": [
-    "SP-R1280"
-   ],
-   "phrase": "Si l'impôt calculé à partir de la déclaration correspond aux prélèvements à la source effectués l'année précédente, votre impôt est réglé. Vous n'avez aucune démarche à faire.",
-   "fiche": "SP-F35898",
-   "valide_le": "2026-11-23"
   }
  ],
  "propositions": [
@@ -71,6 +63,13 @@
    "fiche": "SP-F22388",
    "texte_de_la_fiche": "Si vous percevez uniquement des rémunérations déclarées par un tiers, vous n'avez pas de démarche à effectuer. Dans ce cas, c'est le tiers qui se charge de déclarer votre activité via le mécanisme du précompte.",
    "conditionnelle": true
+  },
+  {
+   "fiche": "SP-F35898",
+   "texte_de_la_fiche": "Si l'impôt calculé à partir de la déclaration correspond aux prélèvements à la source effectués l'année précédente, votre impôt est réglé. Vous n'avez aucune démarche à faire.",
+   "conditionnelle": true,
+   "raison": "parle du solde après déclaration ; en tête de \"Déclarer vos revenus\", elle ferait croire qu'il n'y a pas à déclarer",
+   "retiree_des_valides_le": "2026-11-23"
   }
  ]
 }
