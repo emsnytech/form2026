@@ -510,10 +510,6 @@
       lignes.push({ cle: "accessibilite", texte: `Accessibilité : ${etat}. Si vous rencontrez une difficulté, une France services peut vous aider`,
         liens: [{ texte: "France services la plus proche", url: "#carte-ou", titre: "" }], source: "symboles" });
       resume.push("accessibilité");
-    } else if (S.acc && S.acc.niveau === "inconnue") {
-      // Non connue : plus affichée sur la carte, mais dite ici.
-      lignes.push({ cle: "accessibilite", texte: `Accessibilité non connue : ${S.acc.detail.charAt(0).toLowerCase() + S.acc.detail.slice(1)}`, liens: [], source: "symboles" });
-      resume.push("accessibilité non connue");
     }
     if (S.vig.length) {
       const motifs = S.vig.map((v) => ({ delai: "délais de réponse", joignable: "difficulté à joindre l'administration", explication: "explications peu claires" })[v.motif]);
@@ -521,6 +517,12 @@
       lignes.push({ cle: "vigilance", texte: `Point${motifs.length > 1 ? "s" : ""} de vigilance signalé${motifs.length > 1 ? "s" : ""} par les usagers : ${motifs.join(", ")}${org ? ` (retours sur l'organisme « ${org} »)` : ""}`,
         liens: [{ texte: "Services Publics +", url: "https://www.plus.transformation.gouv.fr/", titre: `${S.vig[0].detail.split(" ; ")[0].replace(/^\d+ retours négatifs le signalent, sur /, "")} ; échantillon spontané, non représentatif` }], source: "symboles" });
       resume.push("vigilance");
+    }
+    // Accessibilité non connue : jamais seule. Dernière ligne, seulement si le bloc existe déjà pour une autre raison (questions,
+    // pièces, pré-remplissage, délai, silence vaut accord, vigilance) ; sinon pas de bloc, et le bouton « ? » de la ligne la dit.
+    if (S.acc && S.acc.niveau === "inconnue" && lignes.length && lignes.length < 4) {
+      lignes.push({ cle: "accessibilite", texte: `Accessibilité non connue : ${S.acc.detail.charAt(0).toLowerCase() + S.acc.detail.slice(1)}`, liens: [], source: "symboles" });
+      resume.push("accessibilité non connue");
     }
     return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
   }

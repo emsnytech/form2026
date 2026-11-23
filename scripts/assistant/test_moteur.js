@@ -150,6 +150,9 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('Z1 chaque mode a un libellé court', Object.keys(M.MODES_LIB).every(m=>M.MODES_COURT[m]), JSON.stringify(M.MODES_COURT));
   verifie('Z2 symboles dans la ligne sous le titre, bouton « ? » avec son aria-label, plus de lien « détail » ni de lien sous le bouton',
     /class="org ligne-symb"/.test(gab)&&/aria-label="Que signifient ces symboles \?"/.test(gab)&&!/symb-plus|lienSymboles|symbolesHtml/.test(gab)&&/<p class="titre">\$\{esc\(r\.t\)\}<\/p>`;/.test(gab));
+  const seule=ix.recs.filter(r=>{const L=M.avantDeCommencer(r,META).lignes;return L.length&&L.every(l=>l.cle==='accessibilite'&&/^Accessibilité non connue/.test(l.texte));});
+  const pasDerniere=ix.recs.filter(r=>{const L=M.avantDeCommencer(r,META).lignes,i=L.findIndex(l=>/^Accessibilité non connue/.test(l.texte));return i>=0&&i!==L.length-1;});
+  verifie('Z4 « Accessibilité non connue » n\'ouvre jamais seule « Avant de commencer » et vient toujours en dernière ligne', !seule.length&&!pasDerniere.length&&!M.avantDeCommencer(B('SP-R11193'),META).lignes.length&&M.avantDeCommencer(B('DN-13583'),META).lignes.slice(-1)[0].cle==='accessibilite', [...seule,...pasDerniere].slice(0,3).map(r=>r.id).join(' ')||'SP-R11193 sans bloc ; DN-13583 : '+M.avantDeCommencer(B('DN-13583'),META).lignes.map(l=>l.cle).join(', '));
   verifie('Z3 « Accessibilité non connue » n\'est pas dans la ligne de la carte (seulement dans le détail et « Avant de commencer »)', /S\.acc\.niveau !== "inconnue"/.test(gab));
   const avecVoies=ix.recs.filter(r=>M.symboles(r,META).voies.length).length;
   console.log(`        ${avecVoies} démarches avec des symboles « comment faire »`); }
