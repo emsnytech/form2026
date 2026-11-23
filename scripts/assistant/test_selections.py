@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).parent))
-from selections import colonne_nationale  # noqa: E402
+from selections import colonne_nationale, SOCLE_NATIONAL  # noqa: E402
 
 D = Path(__file__).resolve().parents[2] / "donnees" / "assistant"
 echecs = 0
@@ -33,8 +33,22 @@ verifie("S2 jusqua passée : la ligne sort, la ligne du socle suivante prend la 
 verifie("S3 editeur.exclu écarte une ligne nationale par son id", all(x["titre"] != "A" for x in colonne_nationale(socle, ed, "2026-11-23")[0]))
 verifie("S4 la ligne affichée ne garde ni position, ni jusqua, ni raison", set(colonne_nationale(socle, ed, "2026-11-23")[0][0]) <= {"titre", "ids", "fiche"})
 
-# Fichiers publiés : une proposition d'actualité n'entre dans la colonne que validée (editeur.ajout ou editeur.epingle).
+remp = {**ajout, "remplace": "A"}
+ed2 = {"epingle": [], "exclu": [], "etiquette": {}, "ajout": [remp]}
+verifie("S7 « remplace » écarte la ligne tant que l'ajout est actif", [x["titre"] for x in colonne_nationale(socle, ed2, "2027-03-13")[0]] == ["Listes", "B", "C"])
+verifie("S8 l'ajout sorti, la ligne remplacée revient d'elle-même", [x["titre"] for x in colonne_nationale(socle, ed2, "2027-03-14")[0]] == ["A", "B", "C"])
+
+# Le vrai socle et les vrais choix de l'éditeur
 pd = json.loads((D / "plus_demandees.json").read_text(encoding="utf-8"))
+verifie("S9 le socle national garde au moins 2 lignes de réserve", len(SOCLE_NATIONAL) >= 5, f"{len(SOCLE_NATIONAL)} lignes")
+l, s = colonne_nationale(SOCLE_NATIONAL, pd["editeur"], "2026-11-23")
+verifie("S10 au 23 novembre 2026 : listes électorales en tête, sans l'attestation de droits",
+        len(l) == 3 and l[0]["ids"] == ["SP-R16396"] and all("SP-R49811" not in x["ids"] for x in l), " | ".join(x["titre"] for x in l))
+l, s = colonne_nationale(SOCLE_NATIONAL, pd["editeur"], "2027-03-14")
+verifie("S11 au 14 mars 2027 : 3 lignes, dont l'attestation de droits", len(l) == 3 and any("SP-R49811" in x["ids"] for x in l),
+        " | ".join(x["titre"] for x in l))
+
+# Fichiers publiés : une proposition d'actualité n'entre dans la colonne que validée (editeur.ajout ou editeur.epingle).
 an = json.loads((D / "actualite_nationales.json").read_text(encoding="utf-8"))
 valides = {i for a in pd["editeur"].get("ajout", []) for i in a["ids"]}
 colonne = {i for x in pd["nationales"] for i in x["ids"]}

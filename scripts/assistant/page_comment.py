@@ -98,6 +98,7 @@ def page():
     meta, nfs, aides, vers_dn = chiffres()
     nom = {k: html.escape(v, quote=False) for k, v in nom_repertoire().items()}
     ndn, nsp, date = meta["demarches_en_ligne"], meta["fiches"], date_fr(meta["date_export"])
+    date_dila = f", export du {date_fr(meta['date_export_dila'])}" if meta.get("date_export_dila") else ""
     avenir = '<span class="sr-only"> (en cours d\'intégration)</span>'
     return f"""<!DOCTYPE html>
 <html lang="fr">
@@ -195,7 +196,7 @@ def page():
     <li><strong>Ce qui est propre à FORM&nbsp;:</strong> pour une démarche en ligne, le nombre de champs, les pièces justificatives demandées, les données préremplies (SIRET, RNA, IBAN, quotient familial…) et le volume de dossiers déposés&nbsp;; le rattachement aux moments de vie&nbsp;; le lien entre fiche service-public et formulaire en ligne quand il existe.</li>
     <li><strong>Limites&nbsp;:</strong> le répertoire ne couvre que ce qui est publié en open data. Les téléservices des autres sites publics (impots.gouv, CAF, ANTS…) n'y figurent que lorsqu'une fiche service-public y renvoie, et les démarches encore sur papier ou par courriel n'y sont pas. Une démarche locale n'est pertinente que pour son territoire. Le répertoire oriente&nbsp;; il ne dit pas si vous avez droit à une aide.</li>
     <li><strong>Où aller&nbsp;:</strong> votre code postal donne votre commune (API Géo de l'État). Le service local compétent pour votre commune vient de l'Annuaire de l'administration (DILA), interrogé avec le seul code de la commune&nbsp;; la France services la plus proche, de la liste des structures labellisées (ANCT). Les téléphones et adresses électroniques affichés sont ceux que ces deux sources publient pour chaque service.</li>
-    <li><strong>Données&nbsp;:</strong> descriptif des démarches publiées sur demarche.numerique.gouv.fr (data.gouv.fr, extraction du {date}), base FORM&nbsp;2026 (champs et pièces justificatives, codification des publics et moments de vie), fiches de service-public.gouv.fr (DILA, licence ouverte). Les adresses électroniques et numéros de téléphone sont retirés de l'index.</li>
+    <li><strong>Données&nbsp;:</strong> descriptif des démarches publiées sur demarche.numerique.gouv.fr (data.gouv.fr, extraction du {date}), base FORM&nbsp;2026 (champs et pièces justificatives, codification des publics et moments de vie), fiches de service-public.gouv.fr (DILA, licence ouverte{date_dila}). Les adresses électroniques et numéros de téléphone sont retirés de l'index.</li>
     <li><strong>Accueil&nbsp;:</strong> «&nbsp;Les plus demandées&nbsp;» croise l'Observatoire de la qualité des démarches en ligne (DINUM) et les volumes de dossiers du descriptif, variantes départementales regroupées&nbsp;; «&nbsp;À la une&nbsp;» réunit les démarches publiées depuis moins de 30&nbsp;jours et celles de saison, classées par urgence, dossiers déposés et échéance. Les deux listes sont proposées par la mise à jour, puis validées par l'éditeur.</li>
   </ul>
 

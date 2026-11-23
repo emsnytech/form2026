@@ -1,5 +1,5 @@
 {
- "objet": "Accueil, « Les plus demandées ». Corrigeable à la main, et gardé d'une mise à jour à l'autre : editeur.epingle (colonne Démarche Numérique : mots du titre, dans l'ordre voulu) ; editeur.exclu (clés Démarche Numérique, ou titre ou id d'une ligne nationale, à écarter) ; editeur.ajout (lignes nationales imposées, même absentes des candidates de l'Observatoire : titre, organisme, ids, fiche, requete, precision, position 1, 2 ou 3, jusqua = date de sortie AAAA-MM-JJ, raison = une phrase ; une fois jusqua passée, la ligne quitte la colonne à la mise à jour suivante, et le journal l'indique) ; les propositions d'actualité sont dans actualite_nationales.json, et n'entrent dans la colonne que recopiées ici ; pour chaque ligne, ids (ses démarches), fiche (fiche service-public) et question_lieu (question posée quand ses démarches sont locales).",
+ "objet": "Accueil, « Les plus demandées ». Corrigeable à la main, et gardé d'une mise à jour à l'autre : editeur.epingle (colonne Démarche Numérique : mots du titre, dans l'ordre voulu) ; editeur.exclu (clés Démarche Numérique, ou titre ou id d'une ligne nationale, à écarter) ; editeur.ajout (lignes nationales imposées, même absentes des candidates de l'Observatoire : titre, organisme, ids, fiche, requete, precision, position 1, 2 ou 3, jusqua = date de sortie AAAA-MM-JJ, raison = une phrase, remplace = titre ou id d'une ligne du socle écartée tant que l'ajout est actif, et qui revient quand il sort ; une fois jusqua passée, la ligne quitte la colonne à la mise à jour suivante, et le journal l'indique) ; les propositions d'actualité sont dans actualite_nationales.json, et n'entrent dans la colonne que recopiées ici ; pour chaque ligne, ids (ses démarches), fiche (fiche service-public) et question_lieu (question posée quand ses démarches sont locales).",
  "date": "2026-11-22",
  "nationales": [
   {
@@ -153,8 +153,8 @@
    "volume": 27000000,
    "volume_arrondi": "20 000 000",
    "usagers": "Particulier",
-   "fiche_proposee": "SP-R39502",
-   "fiche_titre": "Consulter en ligne le résultat de votre examen du permis de conduire"
+   "fiche_proposee": "SP-F18683",
+   "fiche_titre": "Échec à l'examen du permis de conduire : peut-on contester les résultats ?"
   },
   {
    "nom": "Mon estimation retraite",
@@ -173,8 +173,8 @@
    "volume": 23120000,
    "volume_arrondi": "20 000 000",
    "usagers": "Particulier",
-   "fiche_proposee": "SP-R64393",
-   "fiche_titre": "Parcours Info Retraite - Expatriation"
+   "fiche_proposee": "SP-R64410",
+   "fiche_titre": "Info retraite - Corriger ma carrière"
   },
   {
    "nom": "Ma carrière (Je consulte mon relevé de carrière)",
@@ -261,9 +261,7 @@
  ],
  "editeur": {
   "epingle": [],
-  "exclu": [
-   "SP-R49811"
-  ],
+  "exclu": [],
   "etiquette": {},
   "ajout": [
    {
@@ -277,7 +275,8 @@
     "fiche": "SP-F1367",
     "position": 1,
     "jusqua": "2027-03-13",
-    "raison": "Inscription au plus tard le 12 mars 2027 pour voter à l'élection présidentielle (fiche service-public F34240) ; sortie le lendemain."
+    "raison": "Inscription au plus tard le 12 mars 2027 pour voter à l'élection présidentielle (fiche service-public F34240) ; sortie le lendemain.",
+    "remplace": "SP-R49811"
    }
   ]
  }

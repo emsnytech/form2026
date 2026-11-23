@@ -42,8 +42,8 @@ PUBLIC_CIBLE = ["entreprise", "employeur", "agriculteur", "exploitant", "retrait
 URGENCE_CRISE = ["crise", "catastrophe", "intemperies", "inondation", "tempete", "cyclone", "secheresse", "emeutes",
                  "troubles urbains", "calamite"]
 URGENCE_EXCEPTION = ["exceptionnel", "exceptionnelle", "d'urgence", "fonds d'urgence"]
-OBLIGATION_DATEE = ["date limite", "avant le", "au plus tard", "sanction", "amende", "penalite", "majoration"]
-OBLIGATION = ["obligatoire", "obligation"]
+OBLIGATION_DATEE = ["date limite", "avant le", "sanction"]   # 2 points
+OBLIGATION = ["obligatoire"]                                 # 1 point
 # Services en ligne retenus comme démarches (types R de l'export) ; les formulaires, modèles et simulateurs n'en sont pas.
 TYPES_DEMARCHE = {"Téléservice", "selNG", "Téléservice personnalisé sur SP"}
 
@@ -123,6 +123,19 @@ def noter(texte, echeance, jour):
     return detail
 
 
+MOIS_RE = r"(?:janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre)"
+
+
+def dates_publiees(source, fid, annee):
+    """Dates complètes (« 15 avril 2027 ») de l'année voulue dans le texte d'une fiche de l'export, pour signaler qu'une
+    échéance encore vide de echeances.json a peut-être été publiée. Rien n'est écrit : l'éditeur valide."""
+    for nom, octets in fichiers_xml(source):
+        if nom == fid + ".xml":
+            t = n_(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", octets.decode("utf-8", "ignore"))))
+            return sorted(set(re.findall(r"\b(?:1er|\d{1,2}) " + MOIS_RE + " " + annee + r"\b", t)))
+    return []
+
+
 def date_fr(s):
     mois = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"]
     d = datetime.date.fromisoformat(s)
@@ -181,6 +194,9 @@ def main():
     for fid, c in cand.items():
         e = actuel.get(fid)
         if not e: continue
+        # Seules les démarches à faire montent : un service en ligne R, ou une fiche F qui mène à au moins un service en ligne.
+        # Une fiche de règles, ou un sujet d'actualité sans démarche, n'est pas candidate (ni son bonus actualité).
+        if (fid[0] == "R" and e["ty"] not in TYPES_DEMARCHE) or (fid[0] == "F" and not e["r"]): continue
         sortie_prop = c["echeance"] or ((datetime.date.fromisoformat(c["apparition"]) + datetime.timedelta(days=JOURS_SANS_ECHEANCE)).isoformat()
                                         if c["apparition"] else None)
         if not sortie_prop or sortie_prop < jour.isoformat(): continue   # nouveauté de plus de 30 jours, ou échéance passée
@@ -225,6 +241,13 @@ def main():
             print(f"  À voir : nouvelle candidate notée {p['note']} : {p['titre']} ({', '.join(p['ids'])}) — {p['raison']}")
     if sortie["signaux"]["echeances_sans_date"]:
         print("  Échéances sans date (echeances.json) : " + ", ".join(sortie["signaux"]["echeances_sans_date"]))
+    # Une échéance vide dont la fiche source publie maintenant une date complète de son année : à valider par l'éditeur.
+    for x in ech:
+        m_f, m_a = re.search(r"/(F\d+|R\d+)\b", x.get("source", "")), re.search(r"(20\d\d)", x["id"])
+        if x.get("echeance") or not m_f or not m_a: continue
+        trouvees = dates_publiees(A.export, m_f.group(1), m_a.group(1))
+        if trouvees:
+            print(f"  À valider : la fiche {m_f.group(1)} publie une date pour « {x['id']} » : {', '.join(trouvees)} (echeances.json, champ echeance)")
 
 
 if __name__ == "__main__":

@@ -103,6 +103,22 @@ def arrondi(n):
     return f"{(n // p) * p:,}".replace(",", " ")
 
 
+# Première version, donnée par l'éditeur (consigne du 20 novembre 2026), tant qu'il n'a rien épinglé d'autre.
+# « ids » : les démarches de la ligne (un clic affiche leur réponse, sans recherche sur un texte) ; « fiche » : la fiche
+# service-public à proposer en « Comprendre ». Choisis à la main dans l'index, à valider par l'éditeur.
+SOCLE_NATIONAL = [{"titre": "Obtenir une attestation de droits", "organisme": "Assurance maladie", "requete": "attestation de droits assurance maladie",
+                   "ids": ["SP-R49811"], "fiche": "SP-F10662"},
+                  {"titre": "Demander la prime d'activité", "organisme": "Caf, MSA", "requete": "prime d'activité",
+                   "precision": "Demande et déclaration trimestrielle dans votre espace Caf ou MSA", "ids": ["SP-R42724"], "fiche": "SP-F2882"},
+                  {"titre": "Payer une amende", "organisme": "Agence nationale de traitement automatisé des infractions (ANTAI)", "requete": "payer une amende",
+                   "ids": ["SP-R11026"], "fiche": "SP-F18509"},
+                  # Réserve (au moins 2 lignes), tirée des plus gros volumes de l'Observatoire, pour que la colonne ne tombe
+                  # jamais sous 3 lignes quand une ligne est exclue ou remplacée.
+                  {"titre": "Obtenir une attestation d'indemnités journalières", "organisme": "Assurance maladie",
+                   "requete": "attestation indemnités journalières", "ids": ["SP-R49830"], "fiche": "SP-F3053"},
+                  {"titre": "Consulter le solde de points de son permis de conduire", "organisme": "Ministère de l'Intérieur",
+                   "requete": "solde de points permis de conduire", "ids": ["SP-R17121"], "fiche": "SP-F17970"}]
+
 # Date du jour pour les sorties d'editeur.ajout (jusqua) : imposable pour un contrôle (SELECTIONS_DATE=AAAA-MM-JJ).
 AUJOURDHUI = os.environ.get("SELECTIONS_DATE") or datetime.date.today().isoformat()
 
@@ -110,13 +126,17 @@ AUJOURDHUI = os.environ.get("SELECTIONS_DATE") or datetime.date.today().isoforma
 def colonne_nationale(socle, ed, aujourdhui):
     """Colonne « Démarches nationales » : le socle, moins editeur.exclu (titre ou id), plus editeur.ajout à sa position
     (1 = en tête), 3 lignes au plus. Une entrée d'editeur.ajout dont la date jusqua est passée n'est plus affichée : elle
-    reste dans le fichier (l'éditeur la retire), et la ligne du socle suivante reprend sa place. Rend (lignes, sorties)."""
-    lignes = [x for x in socle if not any(c == x["titre"] or c in x["ids"] for c in ed["exclu"])]
-    sorties = []
+    reste dans le fichier (l'éditeur la retire), et la ligne du socle suivante reprend sa place. Une entrée active peut
+    écarter une ligne du socle (« remplace » : titre ou id) ; quand elle sort, cette ligne revient d'elle-même.
+    Rend (lignes, sorties)."""
+    ecarte = lambda x, c: c == x["titre"] or c in x["ids"]
+    actifs, sorties = [], []
     for a in sorted(ed.get("ajout", []), key=lambda a: a.get("position", 99)):
         if not a.get("ids") or not a.get("titre"): sys.exit(f"plus_demandees.json : editeur.ajout incomplet (titre et ids requis) : {a}")
-        if a.get("jusqua") and a["jusqua"] < aujourdhui:
-            sorties.append(a); continue
+        (sorties if a.get("jusqua") and a["jusqua"] < aujourdhui else actifs).append(a)
+    remplaces = [a["remplace"] for a in actifs if a.get("remplace")]
+    lignes = [x for x in socle if not any(ecarte(x, c) for c in list(ed["exclu"]) + remplaces)]
+    for a in actifs:
         ligne = {k: a[k] for k in ("titre", "organisme", "requete", "precision", "ids", "fiche", "question_lieu") if k in a}
         lignes.insert(max(0, a.get("position", len(lignes) + 1) - 1), ligne)
     return lignes[:3], sorties
@@ -205,15 +225,8 @@ process.stdin.on('data',d=>s+=d).on('end',()=>{ const out={}; for (const q of JS
             cand_nat.append({"nom": o["Nom Démarche"], "ministere": o.get("Ministère politique", ""), "administration": o.get("Réf Administration", ""),
                              "volume": o["volume"], "volume_arrondi": arrondi(o["volume"]), "usagers": o.get("Categories Usagers", ""),
                              "fiche_proposee": f["id"] if f else None, "fiche_titre": f["t"] if f else None})
-    # Première version, donnée par l'éditeur (consigne du 20 novembre 2026), tant qu'il n'a rien épinglé d'autre.
-    # « ids » : les démarches de la ligne (un clic affiche leur réponse, sans recherche sur un texte) ; « fiche » : la fiche
-    # service-public à proposer en « Comprendre ». Choisis à la main dans l'index, à valider par l'éditeur.
-    nat_defaut = [{"titre": "Obtenir une attestation de droits", "organisme": "Assurance maladie", "requete": "attestation de droits assurance maladie",
-                   "ids": ["SP-R49811"], "fiche": "SP-F10662"},
-                  {"titre": "Demander la prime d'activité", "organisme": "Caf, MSA", "requete": "prime d'activité",
-                   "precision": "Demande et déclaration trimestrielle dans votre espace Caf ou MSA", "ids": ["SP-R42724"], "fiche": "SP-F2882"},
-                  {"titre": "Payer une amende", "organisme": "Agence nationale de traitement automatisé des infractions (ANTAI)", "requete": "payer une amende",
-                   "ids": ["SP-R11026"], "fiche": "SP-F18509"}]
+    nat_defaut = [dict(x) for x in SOCLE_NATIONAL]
+    if len(nat_defaut) < 5: sys.exit("selections.py : le socle national doit garder au moins 2 lignes de réserve (5 lignes)")
     avant = {}
     try:
         _p = json.loads(pd_chemin.read_text(encoding="utf-8"))
@@ -231,7 +244,7 @@ process.stdin.on('data',d=>s+=d).on('end',()=>{ const out={}; for (const q of JS
     for mot in (ed["epingle"] or dn_defaut):
         c = next((c for c in cand_dn if all(w in c["cle"] for w in n_(mot).split()) and c["cle"] not in ed["exclu"]), None)
         if c and c not in choisis_dn: choisis_dn.append(c)
-    pd = {"objet": "Accueil, « Les plus demandées ». Corrigeable à la main, et gardé d'une mise à jour à l'autre : editeur.epingle (colonne Démarche Numérique : mots du titre, dans l'ordre voulu) ; editeur.exclu (clés Démarche Numérique, ou titre ou id d'une ligne nationale, à écarter) ; editeur.ajout (lignes nationales imposées, même absentes des candidates de l'Observatoire : titre, organisme, ids, fiche, requete, precision, position 1, 2 ou 3, jusqua = date de sortie AAAA-MM-JJ, raison = une phrase ; une fois jusqua passée, la ligne quitte la colonne à la mise à jour suivante, et le journal l'indique) ; les propositions d'actualité sont dans actualite_nationales.json, et n'entrent dans la colonne que recopiées ici ; pour chaque ligne, ids (ses démarches), fiche (fiche service-public) et question_lieu (question posée quand ses démarches sont locales).",
+    pd = {"objet": "Accueil, « Les plus demandées ». Corrigeable à la main, et gardé d'une mise à jour à l'autre : editeur.epingle (colonne Démarche Numérique : mots du titre, dans l'ordre voulu) ; editeur.exclu (clés Démarche Numérique, ou titre ou id d'une ligne nationale, à écarter) ; editeur.ajout (lignes nationales imposées, même absentes des candidates de l'Observatoire : titre, organisme, ids, fiche, requete, precision, position 1, 2 ou 3, jusqua = date de sortie AAAA-MM-JJ, raison = une phrase, remplace = titre ou id d'une ligne du socle écartée tant que l'ajout est actif, et qui revient quand il sort ; une fois jusqua passée, la ligne quitte la colonne à la mise à jour suivante, et le journal l'indique) ; les propositions d'actualité sont dans actualite_nationales.json, et n'entrent dans la colonne que recopiées ici ; pour chaque ligne, ids (ses démarches), fiche (fiche service-public) et question_lieu (question posée quand ses démarches sont locales).",
           "date": meta["date_export"], "nationales": nat_defaut,
           "demarche_numerique": [{**{k: v for k, v in c.items() if k != "pro"}, "question_lieu": avant.get(c["cle"], {}).get("question_lieu") or QUESTIONS_LIEU.get(c["cle"], "Dans quel département habitez-vous ?")} for c in choisis_dn[:3]],
           "source": "Observatoire de la qualité des démarches en ligne (DINUM) ; volumes du descriptif de Démarche Numérique",
