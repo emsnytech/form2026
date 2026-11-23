@@ -69,7 +69,8 @@ def proposer(obs):
     norm = lambda u: re.sub(r"^https?://(www\.)?", "", (u or "").strip().split("#")[0].rstrip("/").lower())
     recs = json.loads((D / "assistant" / "index.json").read_text(encoding="utf-8"))
     table = json.loads((D / "assistant" / "observatoire_rattachement.json").read_text(encoding="utf-8"))["rattachements"]
-    deja = {str(t["observatoire"]) for t in table}
+    doc = json.loads((D / "assistant" / "observatoire_rattachement.json").read_text(encoding="utf-8"))
+    deja = {str(t["observatoire"]) for t in table + doc.get("a_verifier", [])} | {"1759", "1754"}   # écartés par l'éditeur le 23/11/2026
     par_url, lignes = collections.defaultdict(list), collections.defaultdict(list)
     for r in recs:
         if r["k"] == "sp" and r.get("l"): par_url[norm(r["l"])].append(r)

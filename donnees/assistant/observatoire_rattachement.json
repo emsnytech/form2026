@@ -1,5 +1,5 @@
 {
- "objet": "Rattachement des démarches de l'Observatoire de la qualité des démarches en ligne (DINUM) aux démarches de l'index, lu par build_index.py (clés obs, acc, spp). Seules ces lignes sont rattachées : une ligne retirée n'est plus rattachée, une ligne ajoutée l'est à la prochaine construction. « observatoire » : colonne « ID Démarche » de l'ODS ; « id » : démarche de l'index. qualite.py --proposer liste les nouveaux rattachements univoques à ajouter.",
+ "objet": "Rattachement des démarches de l'Observatoire de la qualité des démarches en ligne (DINUM) aux démarches de l'index, lu par build_index.py (clés obs, acc, spp). Seules ces lignes sont rattachées : une ligne retirée n'est plus rattachée, une ligne ajoutée l'est à la prochaine construction. « observatoire » : colonne « ID Démarche » de l'ODS ; « id » : démarche de l'index. qualite.py --proposer liste les nouveaux rattachements univoques à ajouter. « a_verifier » : rattachements en attente, non lus par build_index.py, avec leur raison. Retirés par l'éditeur le 23/11/2026 : 1759 (permis international ≠ rétablissement du permis, SP-R56960) et 1754 (inscription à l'examen ≠ réservation de l'épreuve pratique, SP-R59785) ; qualite.py --proposer ne les repropose pas.",
  "rattachements": [
   {
    "observatoire": "3055",
@@ -13,13 +13,6 @@
    "nom": "Demande en ligne d'homologation d'une rupture conventionnelle (TéléRC)",
    "id": "SP-R19136",
    "titre": "Saisir en ligne une demande d'homologation de rupture conventionnelle individuelle (TéléRC)",
-   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
-  },
-  {
-   "observatoire": "1799",
-   "nom": "Demande de recherche administrative (créatrice de droits)",
-   "id": "SP-R41277",
-   "titre": "Demander un document administratif au Service historique de la Défense (Vincennes)",
    "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
   },
   {
@@ -107,24 +100,10 @@
    "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
   },
   {
-   "observatoire": "1759",
-   "nom": "Demande de permis de conduire international",
-   "id": "SP-R56960",
-   "titre": "Demande en ligne de rétablissement du permis de conduire français au retour en France après une expatriation",
-   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
-  },
-  {
    "observatoire": "1638",
    "nom": "Etablissement d'une procuration de vote (Maprocuration)",
    "id": "SP-R58939",
    "titre": "Maprocuration",
-   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
-  },
-  {
-   "observatoire": "1754",
-   "nom": "Inscription en ligne à l'examen du permis de conduire",
-   "id": "SP-R59785",
-   "titre": "Permis de conduire : réserver en ligne une place pour passer l'épreuve pratique du permis",
    "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
   },
   {
@@ -146,13 +125,6 @@
    "nom": "Demande unique d’aide à l’autonomie des personnes agées",
    "id": "SP-R66317",
    "titre": "Demande en ligne d’aides à l’autonomie à domicile pour les personnes âgées",
-   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
-  },
-  {
-   "observatoire": "1756",
-   "nom": "Demande de renouvellement du permis de conduire en cas de perte, vol, détérioration ou changement d'état-civil",
-   "id": "SP-R67352",
-   "titre": "Demander en ligne un nouveau permis de conduire en cas de changement d'état civil",
    "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
   },
   {
@@ -189,6 +161,26 @@
    "id": "SP-R73596",
    "titre": "Déclaration européenne de services (DES)",
    "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  }
+ ],
+ "a_verifier": [
+  {
+   "observatoire": "1799",
+   "nom": "Demande de recherche administrative (créatrice de droits)",
+   "id": "SP-R41277",
+   "titre": "Demander un document administratif au Service historique de la Défense (Vincennes)",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)",
+   "raison": "Même adresse, mais l'Observatoire parle d'une « recherche administrative (créatrice de droits) » plus large que la démarche de l'index (document administratif au Service historique de la Défense) : périmètre à vérifier.",
+   "mis_en_attente_le": "2026-11-23"
+  },
+  {
+   "observatoire": "1756",
+   "nom": "Demande de renouvellement du permis de conduire en cas de perte, vol, détérioration ou changement d'état-civil",
+   "id": "SP-R67352",
+   "titre": "Demander en ligne un nouveau permis de conduire en cas de changement d'état civil",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)",
+   "raison": "Même adresse, mais l'Observatoire couvre perte, vol, détérioration et changement d'état civil, alors que la démarche de l'index ne couvre que le changement d'état civil : périmètre à vérifier.",
+   "mis_en_attente_le": "2026-11-23"
   }
  ]
 }

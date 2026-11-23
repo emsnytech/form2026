@@ -143,6 +143,8 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const valides=new Set(raf.valides.flatMap(e=>e.ids)), rafHors=ix.recs.filter(r=>r.raf&&!valides.has(r.id));
   const essai=M.symboles({...B('SP-F1367'),raf:['Phrase validée.','SP-F35789']},META);
   verifie(`Y9 « rien à faire » : seulement les phrases validées (${raf.valides.length} validées, ${raf.propositions.length} propositions non affichées)`, !rafHors.length&&essai.rien&&essai.rien.phrase==='Phrase validée.'&&!M.symboles(B('SP-F1367'),META).rien===!valides.has('SP-F1367'), rafHors.slice(0,3).map(r=>r.id).join(' ')||'aucune hors table');
+  const manq=raf.valides.flatMap(e=>e.ids.filter(i=>{const r=B(i);return !r||!r.raf||r.raf[0]!==e.phrase;}));
+  verifie('Y10 chaque phrase validée est portée par ses démarches, condition comprise', !manq.length&&/^Si vous avez fait le recensement/.test(B('SP-R16396').raf[0]), manq.join(' ')||raf.valides.map(e=>e.ids.join('+')+' ← '+e.fiche).join(' ; '));
   const avecVoies=ix.recs.filter(r=>M.symboles(r,META).voies.length).length;
   console.log(`        ${avecVoies} démarches avec des symboles « comment faire »`); }
 { // Règle « démarche sûre » retenue (PR 76, variante d) : ni démarche hors sujet affirmée, ni démarche juste perdue.

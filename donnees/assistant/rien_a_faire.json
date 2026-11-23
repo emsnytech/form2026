@@ -1,6 +1,31 @@
 {
  "objet": "« Rien à faire » : une phrase en tête de réponse quand la fiche dit explicitement qu'il n'y a pas de démarche à faire (inscription d'office, versement sans demande). Seules les entrées de « valides » sont affichées, pour les démarches de leur champ ids. Chaque entrée : ids (démarches de l'index), phrase (reprise de la fiche, sans rien ajouter), fiche (SP-F… où la fiche le dit), valide_le (date de validation par l'éditeur). « propositions » : phrases repérées automatiquement dans les fiches, hors de tout cas, à relire ; la plupart sont conditionnelles et ne valent que pour une partie des situations. Aucune n'est affichée.",
- "valides": [],
+ "valides": [
+  {
+   "ids": [
+    "SP-R16396"
+   ],
+   "phrase": "Si vous avez fait le recensement citoyen, vous avez été inscrit d'office sur les listes électorales. Mais si vous avez déménagé depuis ou si vos parents chez qui vous vivez ont déménagé, vous devez vous réinscrire.",
+   "fiche": "SP-F35789",
+   "valide_le": "2026-11-23"
+  },
+  {
+   "ids": [
+    "SP-F59"
+   ],
+   "phrase": "Si votre propriété n'a pas été modifiée dans l'année, vous n'avez rien à faire.",
+   "fiche": "SP-F59",
+   "valide_le": "2026-11-23"
+  },
+  {
+   "ids": [
+    "SP-R1280"
+   ],
+   "phrase": "Si l'impôt calculé à partir de la déclaration correspond aux prélèvements à la source effectués l'année précédente, votre impôt est réglé. Vous n'avez aucune démarche à faire.",
+   "fiche": "SP-F35898",
+   "valide_le": "2026-11-23"
+  }
+ ],
  "propositions": [
   {
    "fiche": "SP-F13214",
@@ -8,33 +33,8 @@
    "conditionnelle": false
   },
   {
-   "fiche": "SP-F13277",
-   "texte_de_la_fiche": "Parce que vous y avez été inscrit d'office, après avoir fait votre recensement citoyen",
-   "conditionnelle": false
-  },
-  {
-   "fiche": "SP-F1433",
-   "texte_de_la_fiche": "Non, aucune démarche n'est nécessaire pour faire annuler le certificat de concubinage.",
-   "conditionnelle": false
-  },
-  {
-   "fiche": "SP-F176",
-   "texte_de_la_fiche": "Vous n'avez pas de démarche à faire auprès de votre employeur.",
-   "conditionnelle": false
-  },
-  {
    "fiche": "SP-F1886",
    "texte_de_la_fiche": "La prime est attribuée de façon automatique. Vous n'avez pas de démarche à effectuer.",
-   "conditionnelle": false
-  },
-  {
-   "fiche": "SP-F1962",
-   "texte_de_la_fiche": "Soit automatiquement, comme par exemple lors de l'inscription d'office d'un Français atteignant l'âge de 18 ans",
-   "conditionnelle": true
-  },
-  {
-   "fiche": "SP-F20739",
-   "texte_de_la_fiche": "Vous n'avez pas de démarche à effectuer. C'est votre entreprise qui négocie le contrat et assure son suivi auprès de l'organisme assureur.",
    "conditionnelle": false
   },
   {
@@ -53,21 +53,6 @@
    "conditionnelle": false
   },
   {
-   "fiche": "SP-F34687",
-   "texte_de_la_fiche": "La liste électorale sur laquelle vous êtes inscrit (inscription d'office ou inscription volontaire)",
-   "conditionnelle": false
-  },
-  {
-   "fiche": "SP-F35789",
-   "texte_de_la_fiche": "Si vous avez fait le recensement citoyen, vous avez été inscrit d'office sur les listes électorales. Mais si vous avez déménagé depuis ou si vos parents chez qui vous vivez ont déménagé, vous devez vous réinscrire.",
-   "conditionnelle": true
-  },
-  {
-   "fiche": "SP-F35898",
-   "texte_de_la_fiche": "Si l'impôt calculé à partir de la déclaration correspond aux prélèvements à la source effectués l'année précédente, votre impôt est réglé. Vous n'avez aucune démarche à faire.",
-   "conditionnelle": true
-  },
-  {
    "fiche": "SP-F36407",
    "texte_de_la_fiche": "Si votre titre exécutoire prévoit l'IFPA, vous n'avez pas de démarche à faire. Dans le cas contraire, vous pouvez demander sa mise en place.",
    "conditionnelle": true
@@ -76,16 +61,6 @@
    "fiche": "SP-F37904",
    "texte_de_la_fiche": "Si le jeune est inscrit sur le registre des Français établis hors de France, son recensement citoyen est automatique. Il n'y a aucune démarche à faire.",
    "conditionnelle": true
-  },
-  {
-   "fiche": "SP-F59",
-   "texte_de_la_fiche": "Si votre propriété n'a pas été modifiée dans l'année, vous n'avez rien à faire.",
-   "conditionnelle": true
-  },
-  {
-   "fiche": "SP-F868",
-   "texte_de_la_fiche": "Vous n'avez aucune démarche à faire.",
-   "conditionnelle": false
   },
   {
    "fiche": "SP-F22388",
