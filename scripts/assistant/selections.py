@@ -6,7 +6,8 @@
 Écrit donnees/assistant/plus_demandees.json et donnees/assistant/a_la_une.json. Les champs de l'éditeur déjà présents dans
 ces fichiers (`epingle`, `exclu`, `etiquette`, `ajout`) sont gardés d'une mise à jour à l'autre : ils l'emportent sur le calcul.
 Dans plus_demandees.json, `editeur.exclu` écarte aussi une ligne nationale (par son titre ou l'un de ses ids), et
-`editeur.ajout` impose une ligne absente des candidates (titre, organisme, ids, fiche, requete, precision, position).
+`editeur.ajout` impose une ligne absente des candidates (titre, organisme, ids, fiche, requete, precision, position,
+jusqua, raison) ; passée la date `jusqua`, elle quitte la colonne (le journal l'indique).
 
 - **Les plus demandées, « Démarches nationales »** : les démarches les plus volumineuses de l'Observatoire de la qualité des
   démarches en ligne (DINUM, data.gouv.fr, ODS), hors démarches de saison (donnees/assistant/saisons.json) et hors démarches
@@ -18,7 +19,7 @@ Dans plus_demandees.json, `editeur.exclu` écarte aussi une ligne nationale (par
   urgence (crise, fonds d'urgence, calamité, sécheresse, inondation, intempéries, dégradations, émeutes, troubles urbains,
   dommages subis), puis par dossiers déposés, puis par échéance proche ; variantes départementales regroupées en une ligne.
 """
-import argparse, collections, datetime, json, re, subprocess, sys, unicodedata, zipfile
+import argparse, collections, datetime, json, os, re, subprocess, sys, unicodedata, zipfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -100,6 +101,25 @@ def arrondi(n):
     if n < 10: return str(n)
     p = 10 ** (len(str(n)) - 1)
     return f"{(n // p) * p:,}".replace(",", " ")
+
+
+# Date du jour pour les sorties d'editeur.ajout (jusqua) : imposable pour un contrôle (SELECTIONS_DATE=AAAA-MM-JJ).
+AUJOURDHUI = os.environ.get("SELECTIONS_DATE") or datetime.date.today().isoformat()
+
+
+def colonne_nationale(socle, ed, aujourdhui):
+    """Colonne « Démarches nationales » : le socle, moins editeur.exclu (titre ou id), plus editeur.ajout à sa position
+    (1 = en tête), 3 lignes au plus. Une entrée d'editeur.ajout dont la date jusqua est passée n'est plus affichée : elle
+    reste dans le fichier (l'éditeur la retire), et la ligne du socle suivante reprend sa place. Rend (lignes, sorties)."""
+    lignes = [x for x in socle if not any(c == x["titre"] or c in x["ids"] for c in ed["exclu"])]
+    sorties = []
+    for a in sorted(ed.get("ajout", []), key=lambda a: a.get("position", 99)):
+        if not a.get("ids") or not a.get("titre"): sys.exit(f"plus_demandees.json : editeur.ajout incomplet (titre et ids requis) : {a}")
+        if a.get("jusqua") and a["jusqua"] < aujourdhui:
+            sorties.append(a); continue
+        ligne = {k: a[k] for k in ("titre", "organisme", "requete", "precision", "ids", "fiche", "question_lieu") if k in a}
+        lignes.insert(max(0, a.get("position", len(lignes) + 1) - 1), ligne)
+    return lignes[:3], sorties
 
 
 def lire_editeur(chemin):
@@ -203,20 +223,15 @@ process.stdin.on('data',d=>s+=d).on('end',()=>{ const out={}; for (const q of JS
     for x in nat_defaut:   # une ligne nationale corrigée à la main garde ses ids, sa fiche et sa question
         for k in ("ids", "fiche", "question_lieu", "precision"):
             if k in avant.get(x["titre"], {}): x[k] = avant[x["titre"]][k]
-    # Choix de l'éditeur, gardés d'une mise à jour à l'autre : editeur.exclu écarte une ligne nationale (titre ou id),
-    # editeur.ajout impose une ligne absente des candidates de l'Observatoire, à sa position (1 = en tête).
-    nat_defaut = [x for x in nat_defaut if not any(c == x["titre"] or c in x["ids"] for c in ed["exclu"])]
-    for a in sorted(ed.get("ajout", []), key=lambda a: a.get("position", 99)):
-        if not a.get("ids") or not a.get("titre"): sys.exit(f"plus_demandees.json : editeur.ajout incomplet (titre et ids requis) : {a}")
-        ligne = {k: a[k] for k in ("titre", "organisme", "requete", "precision", "ids", "fiche", "question_lieu") if k in a}
-        nat_defaut.insert(max(0, a.get("position", len(nat_defaut) + 1) - 1), ligne)
-    nat_defaut = nat_defaut[:3]
+    nat_defaut, sorties = colonne_nationale(nat_defaut, ed, AUJOURDHUI)
+    for a in sorties:
+        print(f"plus_demandees.json : editeur.ajout « {a['titre']} » sorti de la colonne nationale (jusqu'au {a['jusqua']}, passé)")
     dn_defaut = ["medaille honneur travail", "verification prealable embauche", "pass culture"]
     choisis_dn = []
     for mot in (ed["epingle"] or dn_defaut):
         c = next((c for c in cand_dn if all(w in c["cle"] for w in n_(mot).split()) and c["cle"] not in ed["exclu"]), None)
         if c and c not in choisis_dn: choisis_dn.append(c)
-    pd = {"objet": "Accueil, « Les plus demandées ». Corrigeable à la main, et gardé d'une mise à jour à l'autre : editeur.epingle (colonne Démarche Numérique : mots du titre, dans l'ordre voulu) ; editeur.exclu (clés Démarche Numérique, ou titre ou id d'une ligne nationale, à écarter) ; editeur.ajout (lignes nationales imposées, absentes des candidates de l'Observatoire : titre, organisme, ids, fiche, requete, precision, position à partir de 1) ; pour chaque ligne, ids (ses démarches), fiche (fiche service-public) et question_lieu (question posée quand ses démarches sont locales).",
+    pd = {"objet": "Accueil, « Les plus demandées ». Corrigeable à la main, et gardé d'une mise à jour à l'autre : editeur.epingle (colonne Démarche Numérique : mots du titre, dans l'ordre voulu) ; editeur.exclu (clés Démarche Numérique, ou titre ou id d'une ligne nationale, à écarter) ; editeur.ajout (lignes nationales imposées, même absentes des candidates de l'Observatoire : titre, organisme, ids, fiche, requete, precision, position 1, 2 ou 3, jusqua = date de sortie AAAA-MM-JJ, raison = une phrase ; une fois jusqua passée, la ligne quitte la colonne à la mise à jour suivante, et le journal l'indique) ; les propositions d'actualité sont dans actualite_nationales.json, et n'entrent dans la colonne que recopiées ici ; pour chaque ligne, ids (ses démarches), fiche (fiche service-public) et question_lieu (question posée quand ses démarches sont locales).",
           "date": meta["date_export"], "nationales": nat_defaut,
           "demarche_numerique": [{**{k: v for k, v in c.items() if k != "pro"}, "question_lieu": avant.get(c["cle"], {}).get("question_lieu") or QUESTIONS_LIEU.get(c["cle"], "Dans quel département habitez-vous ?")} for c in choisis_dn[:3]],
           "source": "Observatoire de la qualité des démarches en ligne (DINUM) ; volumes du descriptif de Démarche Numérique",

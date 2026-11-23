@@ -1,0 +1,45 @@
+{
+ "objet": "Calendrier des échéances nationales, lu par scripts/assistant/actualite.py. Une entrée par échéance : ids (démarche R et/ou fiche F, préfixe SP-), debut (date où la démarche commence à monter ; vide = dès maintenant), echeance (date limite, ou fin de période), source (lien officiel de la date), raison. Aucune date inventée : une date non publiée reste vide, et l'entrée n'est pas candidate tant qu'elle l'est. Entrée et sortie selon les dates, à chaque mise à jour quotidienne. À compléter par l'éditeur.",
+ "echeances": [
+  {
+   "id": "listes-electorales-presidentielle-2027",
+   "ids": ["SP-R16396", "SP-F1367", "SP-F34240"],
+   "debut": "",
+   "echeance": "2027-03-12",
+   "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34240",
+   "raison": "Inscription sur les listes électorales au plus tard le 12 mars 2027 pour voter à l'élection présidentielle (8 avril 2027 dans certaines situations)."
+  },
+  {
+   "id": "declaration-revenus-2027",
+   "ids": ["SP-F358", "SP-F359"],
+   "debut": "",
+   "echeance": "",
+   "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F359",
+   "raison": "Déclaration 2027 des revenus de 2026 : « débutera en avril 2027 » ; dates précises non publiées au 23 novembre 2026."
+  },
+  {
+   "id": "taxe-fonciere-2027",
+   "ids": ["SP-F59"],
+   "debut": "",
+   "echeance": "",
+   "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F59",
+   "raison": "Taxe foncière 2027 : date limite de paiement non publiée au 23 novembre 2026 (la fiche traite de la taxe 2026)."
+  },
+  {
+   "id": "cheque-energie-2027",
+   "ids": ["SP-R74067", "SP-F33667"],
+   "debut": "",
+   "echeance": "",
+   "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F33667",
+   "raison": "Chèque énergie 2027 : calendrier d'envoi et de demande non publié au 23 novembre 2026."
+  },
+  {
+   "id": "treve-hivernale-2026-2027",
+   "ids": ["SP-F34736"],
+   "debut": "2026-11-01",
+   "echeance": "2027-03-31",
+   "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34736",
+   "raison": "Trêve hivernale du 1er novembre au 31 mars de l'année suivante : pas d'expulsion locative pendant cette période."
+  }
+ ]
+}

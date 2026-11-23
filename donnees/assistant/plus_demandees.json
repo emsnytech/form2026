@@ -1,5 +1,5 @@
 {
- "objet": "Accueil, « Les plus demandées ». Corrigeable à la main, et gardé d'une mise à jour à l'autre : editeur.epingle (colonne Démarche Numérique : mots du titre, dans l'ordre voulu) ; editeur.exclu (clés Démarche Numérique, ou titre ou id d'une ligne nationale, à écarter) ; editeur.ajout (lignes nationales imposées, absentes des candidates de l'Observatoire : titre, organisme, ids, fiche, requete, precision, position à partir de 1) ; pour chaque ligne, ids (ses démarches), fiche (fiche service-public) et question_lieu (question posée quand ses démarches sont locales).",
+ "objet": "Accueil, « Les plus demandées ». Corrigeable à la main, et gardé d'une mise à jour à l'autre : editeur.epingle (colonne Démarche Numérique : mots du titre, dans l'ordre voulu) ; editeur.exclu (clés Démarche Numérique, ou titre ou id d'une ligne nationale, à écarter) ; editeur.ajout (lignes nationales imposées, même absentes des candidates de l'Observatoire : titre, organisme, ids, fiche, requete, precision, position 1, 2 ou 3, jusqua = date de sortie AAAA-MM-JJ, raison = une phrase ; une fois jusqua passée, la ligne quitte la colonne à la mise à jour suivante, et le journal l'indique) ; les propositions d'actualité sont dans actualite_nationales.json, et n'entrent dans la colonne que recopiées ici ; pour chaque ligne, ids (ses démarches), fiche (fiche service-public) et question_lieu (question posée quand ses démarches sont locales).",
  "date": "2026-11-22",
  "nationales": [
   {
@@ -275,7 +275,9 @@
      "SP-R16396"
     ],
     "fiche": "SP-F1367",
-    "position": 1
+    "position": 1,
+    "jusqua": "2027-03-13",
+    "raison": "Inscription au plus tard le 12 mars 2027 pour voter à l'élection présidentielle (fiche service-public F34240) ; sortie le lendemain."
    }
   ]
  }
