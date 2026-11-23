@@ -434,6 +434,42 @@
     if (v) return { principal: v, possibles: [], fiche, question: "", message: "", recs };
     return { principal: null, possibles: [], fiche, question: "", message: "Pas de démarche en ligne pour ce département : voici la fiche officielle et le guichet.", recs };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  // « Avant de commencer » : ce qui attend l'usager, d'après les données de la démarche seulement (aucune ligne sans donnée,
+  // aucun jugement, aucun délai inventé). Rend { resume, lignes } ; lignes vides : pas de bloc. Chaque ligne :
+  // { cle, texte, liens: [{ texte, url, titre }], source } ; source = ancre de « Comment ça marche » (sources).
+  // Une phrase par type de pré-remplissage (valeurs « pre » de l'index). L'IBAN n'y est pas : il est contrôlé, pas rempli.
+  const PRE_PHRASES = {
+    "SIRET (API Entreprise)": "Avec votre numéro SIRET, les informations sur l'entreprise sont remplies automatiquement (données publiques de l'État sur les entreprises).",
+    "RNA (associations)": "Avec le numéro RNA de l'association, ses informations sont remplies automatiquement (répertoire national des associations).",
+    "RNF (fondations)": "Avec le numéro de la fondation, ses informations sont remplies automatiquement (répertoire national des fondations).",
+    "Annuaire Éducation": "En choisissant l'établissement scolaire, ses coordonnées sont remplies automatiquement (annuaire de l'Éducation nationale).",
+    "Quotient familial (CAF)": "Votre quotient familial peut être récupéré directement auprès de la CAF.",
+    "Statut boursier": "Votre statut d'étudiant boursier peut être vérifié directement, sans justificatif à joindre.",
+    "Données préremplies": "Certaines réponses sont déjà remplies par l'administration.",
+  };
+  function avantDeCommencer(r) {
+    const lignes = [], resume = [];
+    if (!r) return { resume: "", lignes };
+    if (r.k === "dn" && r.u) {
+      const ch = r.ch || 0, pj = [...new Set(r.pj || [])], parts = [];
+      if (ch) { parts.push(`${ch} question${ch > 1 ? "s" : ""}`); resume.push(parts[0]); }
+      if (pj.length) {
+        // On ne nomme que les pièces au libellé complet et court (ni tronqué, ni « Autres documents ») ; les autres sont comptées.
+        const minus = (x) => /^[A-ZÉÈ][a-zéèêàç]/.test(x) ? x[0].toLowerCase() + x.slice(1) : x;
+        const noms = pj.filter((x) => !/…$/.test(x) && x.length <= 60 && !/^autres?\b/i.test(x)).slice(0, 2).map(minus), reste = pj.length - noms.length;
+        parts.push(`${pj.length} pièce${pj.length > 1 ? "s" : ""} à joindre${noms.length ? " : " + noms.join(", ") + (reste ? ` et ${reste} autre${reste > 1 ? "s" : ""}` : "") : ""}`);
+        resume.push(`${pj.length} pièce${pj.length > 1 ? "s" : ""}`);
+      }
+      const base = /^https?:/.test(r.u) ? r.u : "https://demarche.numerique.gouv.fr/commencer/" + encodeURIComponent(r.u);
+      lignes.push({ cle: "questions", texte: parts.length ? parts.join(" · ") : "Toutes les questions de la démarche",
+        liens: [{ texte: "Voir le formulaire à vide (PDF)", url: base.replace(/\/$/, "") + "/dossier_vide",
+                  titre: "Pour lire toutes les questions avant de commencer, pas pour le remplir" }], source: "sources" });
+      if (!resume.length) resume.push("le formulaire à vide");
+      const phrases = (r.pre || []).map((p) => PRE_PHRASES[p]).filter(Boolean);
+      if (phrases.length) { lignes.push({ cle: "prerempli", texte: phrases.join(" "), liens: [], source: "sources" }); resume.push("ce qui est rempli pour vous"); }
+    }
+    return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
+  }
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

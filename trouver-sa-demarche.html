@@ -47,6 +47,10 @@ h1{margin:0;font-size:clamp(30px,5vw,44px);line-height:1.15;font-weight:600;lett
 label.sel{font-size:15px;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 select{font:inherit;font-size:15px;min-height:44px;padding:0 10px;border-radius:8px;border:1px solid var(--line2);background:var(--fond);color:var(--ink);max-width:16rem}
 .ligne-stats{margin:0;font-size:14px;color:var(--muted)}
+.avant{margin-top:14px;border-top:1px solid var(--line);padding-top:10px;font-size:15px}
+.avant summary{cursor:pointer;color:var(--accent);font-weight:500;min-height:44px;display:list-item;padding:10px 0}
+.avant ul{margin:4px 0 0;padding-left:1.1rem}.avant li{margin:6px 0;line-height:1.45}
+.avant-note{color:var(--muted);font-size:13px}.avant-src{font-size:13px;color:var(--muted)}
 .promesse{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}.promesse .ligne-stats{flex:1 1 22rem}.ligne-ia{margin:0}
 /* Boutons : style commun du site (commun.css), dans la couleur du répertoire. */
 body{--bouton-fond:var(--accent);--bouton-fond-survol:var(--accent-fonce);--bouton-contour:var(--accent)}
@@ -716,7 +720,43 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     if (v) return { principal: v, possibles: [], fiche, question: "", message: "", recs };
     return { principal: null, possibles: [], fiche, question: "", message: "Pas de démarche en ligne pour ce département : voici la fiche officielle et le guichet.", recs };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  // « Avant de commencer » : ce qui attend l'usager, d'après les données de la démarche seulement (aucune ligne sans donnée,
+  // aucun jugement, aucun délai inventé). Rend { resume, lignes } ; lignes vides : pas de bloc. Chaque ligne :
+  // { cle, texte, liens: [{ texte, url, titre }], source } ; source = ancre de « Comment ça marche » (sources).
+  // Une phrase par type de pré-remplissage (valeurs « pre » de l'index). L'IBAN n'y est pas : il est contrôlé, pas rempli.
+  const PRE_PHRASES = {
+    "SIRET (API Entreprise)": "Avec votre numéro SIRET, les informations sur l'entreprise sont remplies automatiquement (données publiques de l'État sur les entreprises).",
+    "RNA (associations)": "Avec le numéro RNA de l'association, ses informations sont remplies automatiquement (répertoire national des associations).",
+    "RNF (fondations)": "Avec le numéro de la fondation, ses informations sont remplies automatiquement (répertoire national des fondations).",
+    "Annuaire Éducation": "En choisissant l'établissement scolaire, ses coordonnées sont remplies automatiquement (annuaire de l'Éducation nationale).",
+    "Quotient familial (CAF)": "Votre quotient familial peut être récupéré directement auprès de la CAF.",
+    "Statut boursier": "Votre statut d'étudiant boursier peut être vérifié directement, sans justificatif à joindre.",
+    "Données préremplies": "Certaines réponses sont déjà remplies par l'administration.",
+  };
+  function avantDeCommencer(r) {
+    const lignes = [], resume = [];
+    if (!r) return { resume: "", lignes };
+    if (r.k === "dn" && r.u) {
+      const ch = r.ch || 0, pj = [...new Set(r.pj || [])], parts = [];
+      if (ch) { parts.push(`${ch} question${ch > 1 ? "s" : ""}`); resume.push(parts[0]); }
+      if (pj.length) {
+        // On ne nomme que les pièces au libellé complet et court (ni tronqué, ni « Autres documents ») ; les autres sont comptées.
+        const minus = (x) => /^[A-ZÉÈ][a-zéèêàç]/.test(x) ? x[0].toLowerCase() + x.slice(1) : x;
+        const noms = pj.filter((x) => !/…$/.test(x) && x.length <= 60 && !/^autres?\b/i.test(x)).slice(0, 2).map(minus), reste = pj.length - noms.length;
+        parts.push(`${pj.length} pièce${pj.length > 1 ? "s" : ""} à joindre${noms.length ? " : " + noms.join(", ") + (reste ? ` et ${reste} autre${reste > 1 ? "s" : ""}` : "") : ""}`);
+        resume.push(`${pj.length} pièce${pj.length > 1 ? "s" : ""}`);
+      }
+      const base = /^https?:/.test(r.u) ? r.u : "https://demarche.numerique.gouv.fr/commencer/" + encodeURIComponent(r.u);
+      lignes.push({ cle: "questions", texte: parts.length ? parts.join(" · ") : "Toutes les questions de la démarche",
+        liens: [{ texte: "Voir le formulaire à vide (PDF)", url: base.replace(/\/$/, "") + "/dossier_vide",
+                  titre: "Pour lire toutes les questions avant de commencer, pas pour le remplir" }], source: "sources" });
+      if (!resume.length) resume.push("le formulaire à vide");
+      const phrases = (r.pre || []).map((p) => PRE_PHRASES[p]).filter(Boolean);
+      if (phrases.length) { lignes.push({ cle: "prerempli", texte: phrases.join(" "), liens: [], source: "sources" }); resume.push("ce qui est rempli pour vous"); }
+    }
+    return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
+  }
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -888,6 +928,14 @@ const typeLib = (r) => /Téléservice|selNG/i.test(r.ty) ? "Démarche en ligne" 
 const lienSp = (r) => (/^SP-R/.test(r.id) && r.l) ? r.l : r.u;
 const estFiche = (r) => r && r.k === "sp" && /^SP-F/.test(r.id);
 const resDe = (f) => (f.res || []).map(rec).filter(Boolean);
+// « Avant de commencer » (Moteur.avantDeCommencer) : un bloc replié sous le bouton, 4 lignes au plus, chacune avec sa source.
+function blocAvant(r) {
+  const A = Moteur.avantDeCommencer(r); if (!A.lignes.length) return "";
+  const base = (document.querySelector("a.lien-comment") || {}).href || ""; const comment = base.split("#")[0];
+  return `<details class="avant"><summary>${esc(A.resume)}</summary><ul>` + A.lignes.slice(0, 4).map((l) => `<li>${esc(l.texte)}`
+    + l.liens.map((x) => ` · <a href="${esc(x.url)}" target="_blank" rel="noopener"${x.titre ? ` title="${esc(x.titre)}"` : ""}>${esc(x.texte)}</a>${x.titre ? ` <span class="avant-note">(${esc(x.titre.charAt(0).toLowerCase() + x.titre.slice(1))})</span>` : ""}`).join("")
+    + (comment ? ` <a class="avant-src" href="${esc(comment + "#" + l.source)}">source</a>` : "") + `</li>`).join("") + `</ul></details>`;
+}
 function carteDemarche(r) {
   const el = $("carte-demarche"); if (!r) { el.hidden = true; return; }
   let h = `<h2 id="h-demarche">Votre démarche</h2><p class="titre">${esc(r.t)}</p>`;
@@ -895,9 +943,8 @@ function carteDemarche(r) {
     const lieu = r.dep ? r.dep + " " + (DEPNAME[r.dep] || "") : r.po === "nat" ? "nationale" : "";
     h += `<p class="org">${esc(r.o)}${lieu ? " · " + esc(lieu) : ""} · en ligne sur Démarche Numérique</p>`;
     if (r.po === "inc") h += `<p class="avert">Démarche locale&nbsp;: vérifiez qu'elle concerne votre commune.</p>`;
-    if ((r.pj || []).length) h += `<p class="prep2">À préparer&nbsp;: ${esc(r.pj.slice(0, 5).join(" ; "))}${r.pj.length > 5 ? "…" : "."}</p>`;
-    if ((r.pre || []).length) h += `<p class="org">Prérempli&nbsp;: ${esc(r.pre.join(", "))}</p>`;
     h += `<a class="btn-lien" href="${esc(dnUrl(r))}" target="_blank" rel="noopener">Faire la démarche</a>`;
+    h += blocAvant(r);
     ajouterLien(r.t, dnUrl(r), "Démarche Numérique");
   } else {
     const ts = resDe(r).find((x) => /Téléservice|selNG/i.test(x.ty));
@@ -905,6 +952,7 @@ function carteDemarche(r) {
     h += `<p class="org">${esc(typeLib(r))} · service-public.gouv.fr</p>`;
     if ((r.docs || []).length) h += `<p class="prep2">À préparer&nbsp;: ${esc(r.docs.slice(0, 5).join(" ; "))}${r.docs.length > 5 ? "…" : "."}</p>`;
     h += `<a class="btn-lien" href="${esc(cible)}" target="_blank" rel="noopener">${ts || r.l ? "Faire la démarche" : "Lire la fiche"}</a>`;
+    h += blocAvant(r);
     ajouterLien(ts ? ts.t : r.t, cible, "service-public.gouv.fr");
   }
   el.innerHTML = h; el.hidden = false;
