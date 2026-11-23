@@ -95,6 +95,11 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const emb=trouve(['titre','sejour','salarie']);
   if(!emb){ console.log("ATTENTE A2 ligne « vérifier le titre de séjour d'un futur salarié » absente de l'accueil"); attente++; }
   else { const R38=M.reponseLigne(ix,emb,{dep:'38'}); verifie('A2 vérification du titre de séjour avec le 38 : DN-13583 en « Votre démarche »', R38.principal&&R38.principal.id==='DN-13583', R38.principal?R38.principal.id:'aucune'); }
+  const lst=pd.nationales[0];
+  if(!lst||!/listes electorales/.test(M.norm(lst.titre))){ verifie('A4 « S\'inscrire sur les listes électorales » en 1re ligne nationale', false, lst?lst.titre:'aucune ligne'); }
+  else { const RL=M.reponseLigne(ix,lst,{});
+    verifie('A4 listes électorales : SP-R16396 en « Votre démarche », fiche SP-F1367 en « Comprendre »', RL.principal&&RL.principal.id==='SP-R16396'&&RL.fiche&&RL.fiche.id==='SP-F1367', `Votre démarche : ${RL.principal?RL.principal.id:'aucune'} ; Comprendre : ${RL.fiche?RL.fiche.id:'aucune'}`);
+    verifie('A4 l\'attestation de droits (SP-R49811) n\'est plus dans les lignes nationales', !pd.nationales.some(x=>(x.ids||[]).includes('SP-R49811')), pd.nationales.map(x=>x.titre).join(' | ')); }
   const hors=[];
   for(const x of lignes){ const deps=[...new Set(['', ...(x.ids||[]).map(i=>{const k=ix.byId.get(i);return k===undefined?'':ix.recs[k].dep||'';})])];
     for(const d of deps){ const R=M.reponseLigne(ix,x,{dep:d}); for(const r of [R.principal,...R.possibles].filter(Boolean)) if(!(x.ids||[]).includes(r.id)) hors.push(x.titre+' / '+(d||'sans territoire')+' : '+r.id); } }
