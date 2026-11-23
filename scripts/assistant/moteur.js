@@ -453,6 +453,9 @@
   // 20 retours rattachés (Services Publics +, critères cochés par l'usager dans ses retours négatifs ; jamais son texte).
   const MODES_LIB = { en_ligne: "En ligne", formulaire: "Formulaire à remplir", guichet: "Au guichet", rendez_vous: "Sur rendez-vous",
     courrier: "À envoyer par courrier", courriel: "À envoyer par courriel" };
+  // Libellés courts, affichés après chaque symbole dans la ligne sous le titre.
+  const MODES_COURT = { en_ligne: "En ligne", formulaire: "Formulaire", guichet: "Au guichet", rendez_vous: "Sur rendez-vous",
+    courrier: "Par courrier", courriel: "Par courriel" };
   const MOTIFS_LIB = { delai: "Délais de réponse signalés", joignable: "Difficile à joindre", explication: "Explications jugées peu claires" };
   const ACC_LIB = { tc: "Accessible", pc: "Accessibilité partielle", nc: "Non conforme", inconnue: "Accessibilité non connue" };
   const SEUIL_RETOURS = 20, MAX_VOIES = 3, MAX_VIGILANCES = 2;
@@ -515,8 +518,14 @@
         liens: [{ texte: "Services Publics +", url: "https://www.plus.transformation.gouv.fr/", titre: `${S.vig[0].detail.split(" ; ")[0].replace(/^\d+ retours négatifs le signalent, sur /, "")} ; échantillon spontané, non représentatif` }], source: "symboles" });
       resume.push("vigilance");
     }
+    // Accessibilité non connue : jamais seule. Dernière ligne, seulement si le bloc existe déjà pour une autre raison (questions,
+    // pièces, pré-remplissage, délai, silence vaut accord, vigilance) ; sinon pas de bloc, et le bouton « ? » de la ligne la dit.
+    if (S.acc && S.acc.niveau === "inconnue" && lignes.length && lignes.length < 4) {
+      lignes.push({ cle: "accessibilite", texte: `Accessibilité non connue : ${S.acc.detail.charAt(0).toLowerCase() + S.acc.detail.slice(1)}`, liens: [], source: "symboles" });
+      resume.push("accessibilité non connue");
+    }
     return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, voiesTexte, MODES_LIB, MOTIFS_LIB, ACC_LIB, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

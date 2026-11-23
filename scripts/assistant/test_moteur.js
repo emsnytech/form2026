@@ -135,7 +135,7 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const vigDn=S('DN-13583').vig;
   verifie('Y6 vigilance par organisme : l\'infobulle donne l\'effectif, la source, le périmètre et la limite', vigDn.length&&vigDn.every(v=>/\d+ retours négatifs le signalent, sur \d+ retours sur Services Publics \+/.test(v.detail)&&/organisme « Préfecture de l'Isère »/.test(v.detail)&&/spontané, non représentatif/.test(v.detail)), vigDn.map(v=>v.detail)[0]||'aucune');
   const accDn=S('DN-13583').acc;
-  verifie('Y7 démarche Démarche Numérique : accessibilité « non connue » (pas celle de la plateforme), vigilance par organisme', accDn.niveau==='inconnue'&&!ix.recs.some(r=>r.k==='dn'&&!r.obs&&M.symboles(r,META).acc.niveau!=='inconnue')&&!M.avantDeCommencer(B('DN-13583'),META).lignes.some(l=>l.cle==='accessibilite')&&vigDn.every(v=>v.organisme==="Préfecture de l'Isère"), accDn.texte);
+  verifie('Y7 démarche Démarche Numérique : accessibilité « non connue » (pas celle de la plateforme), vigilance par organisme', accDn.niveau==='inconnue'&&!ix.recs.some(r=>r.k==='dn'&&!r.obs&&M.symboles(r,META).acc.niveau!=='inconnue')&&M.avantDeCommencer(B('DN-13583'),META).lignes.some(l=>l.cle==='accessibilite'&&/^Accessibilité non connue/.test(l.texte)&&!l.liens.length)&&vigDn.every(v=>v.organisme==="Préfecture de l'Isère"), accDn.texte);
   const table=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','observatoire_rattachement.json'),'utf8')).rattachements, tid=new Set(table.map(t=>t.id));
   const horsTable=ix.recs.filter(r=>(r.obs||r.acc)&&!tid.has(r.id));
   verifie(`Y8 Observatoire : seules les démarches de observatoire_rattachement.json (${table.length}) ont une accessibilité`, !horsTable.length, horsTable.slice(0,3).map(r=>r.id).join(' ')||'aucune hors table');
@@ -145,6 +145,15 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie(`Y9 « rien à faire » : seulement les phrases validées (${raf.valides.length} validées, ${raf.propositions.length} propositions non affichées)`, !rafHors.length&&essai.rien&&essai.rien.phrase==='Phrase validée.'&&!M.symboles(B('SP-F1367'),META).rien===!valides.has('SP-F1367'), rafHors.slice(0,3).map(r=>r.id).join(' ')||'aucune hors table');
   const manq=raf.valides.flatMap(e=>e.ids.filter(i=>{const r=B(i);return !r||!r.raf||r.raf[0]!==e.phrase;}));
   verifie('Y10 chaque phrase validée est portée par ses démarches, condition comprise', !manq.length&&/^Si vous avez fait le recensement/.test(B('SP-R16396').raf[0]), manq.join(' ')||raf.valides.map(e=>e.ids.join('+')+' ← '+e.fiche).join(' ; '));
+  // Disposition des symboles (gabarit) : dans la ligne sous le titre, un seul bouton « ? », plus de lien « détail » ni « Que signifient ces symboles ? » sous le bouton.
+  const gab=fs.readFileSync(path.join(__dirname,'..','..','trouver-sa-demarche.html'),'utf8');
+  verifie('Z1 chaque mode a un libellé court', Object.keys(M.MODES_LIB).every(m=>M.MODES_COURT[m]), JSON.stringify(M.MODES_COURT));
+  verifie('Z2 symboles dans la ligne sous le titre, bouton « ? » avec son aria-label, plus de lien « détail » ni de lien sous le bouton',
+    /class="org ligne-symb"/.test(gab)&&/aria-label="Que signifient ces symboles \?"/.test(gab)&&!/symb-plus|lienSymboles|symbolesHtml/.test(gab)&&/<p class="titre">\$\{esc\(r\.t\)\}<\/p>`;/.test(gab));
+  const seule=ix.recs.filter(r=>{const L=M.avantDeCommencer(r,META).lignes;return L.length&&L.every(l=>l.cle==='accessibilite'&&/^Accessibilité non connue/.test(l.texte));});
+  const pasDerniere=ix.recs.filter(r=>{const L=M.avantDeCommencer(r,META).lignes,i=L.findIndex(l=>/^Accessibilité non connue/.test(l.texte));return i>=0&&i!==L.length-1;});
+  verifie('Z4 « Accessibilité non connue » n\'ouvre jamais seule « Avant de commencer » et vient toujours en dernière ligne', !seule.length&&!pasDerniere.length&&!M.avantDeCommencer(B('SP-R11193'),META).lignes.length&&M.avantDeCommencer(B('DN-13583'),META).lignes.slice(-1)[0].cle==='accessibilite', [...seule,...pasDerniere].slice(0,3).map(r=>r.id).join(' ')||'SP-R11193 sans bloc ; DN-13583 : '+M.avantDeCommencer(B('DN-13583'),META).lignes.map(l=>l.cle).join(', '));
+  verifie('Z3 « Accessibilité non connue » n\'est pas dans la ligne de la carte (seulement dans le détail et « Avant de commencer »)', /S\.acc\.niveau !== "inconnue"/.test(gab));
   const avecVoies=ix.recs.filter(r=>M.symboles(r,META).voies.length).length;
   console.log(`        ${avecVoies} démarches avec des symboles « comment faire »`); }
 { // Règle « démarche sûre » retenue (PR 76, variante d) : ni démarche hors sujet affirmée, ni démarche juste perdue.
