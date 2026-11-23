@@ -185,7 +185,10 @@ import os; print(os.path.getsize(OUT)/1e6,'Mo')
 # Métadonnées de l'index, lues par la page (ligne des volumes, « Comment j'ai cherché ») : date de l'export, nombres.
 _m=re.search(r'(\d{4})(\d{2})(\d{2})', os.path.basename(SLIM))
 date_export=A.date_export or (f"{_m.group(1)}-{_m.group(2)}-{_m.group(3)}" if _m else '')
-json.dump({'date_export':date_export,'demarches_en_ligne':sum(1 for r in recs if r['k']=='dn'),'fiches':sum(1 for r in recs if r['k']=='sp')},
+# Date de l'export DILA (fiches service-public), écrite par maj_dila.py : celle de l'export « particuliers ».
+_ed=os.path.join(UP,'dila','export_dila.json')
+date_export_dila=json.load(open(_ed)).get('particuliers',{}).get('date','') if os.path.exists(_ed) else ''
+json.dump({'date_export':date_export,'date_export_dila':date_export_dila,'demarches_en_ligne':sum(1 for r in recs if r['k']=='dn'),'fiches':sum(1 for r in recs if r['k']=='sp')},
           open(os.path.join(os.path.dirname(OUT),'index_meta.json'),'w'),ensure_ascii=False)
 # Contrôle : toutes les références citées par les réponses préparées existent encore dans l'index
 ex=os.path.join(os.path.dirname(OUT),'exemples.json')

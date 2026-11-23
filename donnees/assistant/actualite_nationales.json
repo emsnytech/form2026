@@ -35,83 +35,10 @@
   },
   {
    "ids": [
-    "SP-R49631",
-    "SP-R79213"
-   ],
-   "fiche": "SP-F34440",
-   "titre": "Forfait post-stationnement en cas de stationnement non payé",
-   "note": 4,
-   "detail": {
-    "personnes": 2,
-    "urgence": 0,
-    "echeance": 0,
-    "obligation": 2,
-    "actualite": 0
-   },
-   "raison": "fiche modifiée le 29 octobre 2026 (mène à un service en ligne)",
-   "date_sortie_proposee": "2026-11-28",
-   "dans_l_index": false
-  },
-  {
-   "ids": [
-    "SP-F34917"
-   ],
-   "fiche": "SP-F34917",
-   "titre": "Consultation d'un psychologue ou d'un psychiatre : quelle prise en charge ?",
-   "note": 3,
-   "detail": {
-    "personnes": 2,
-    "urgence": 0,
-    "echeance": 0,
-    "obligation": 0,
-    "actualite": 1
-   },
-   "raison": "citée dans l'actualité du 20 novembre 2026 (« Santé mentale : un nouveau dispositif en ligne pour aider les jeunes »)",
-   "date_sortie_proposee": "2026-12-20",
-   "dans_l_index": true
-  },
-  {
-   "ids": [
-    "SP-R62389"
-   ],
-   "fiche": null,
-   "titre": "Trouver un psychologue conventionné",
-   "note": 3,
-   "detail": {
-    "personnes": 2,
-    "urgence": 0,
-    "echeance": 0,
-    "obligation": 0,
-    "actualite": 1
-   },
-   "raison": "citée dans l'actualité du 20 novembre 2026 (« Santé mentale : un nouveau dispositif en ligne pour aider les jeunes »)",
-   "date_sortie_proposee": "2026-12-20",
-   "dans_l_index": false
-  },
-  {
-   "ids": [
     "SP-R1165"
    ],
    "fiche": "SP-F963",
    "titre": "Grossesse : examens médicaux",
-   "note": 3,
-   "detail": {
-    "personnes": 2,
-    "urgence": 0,
-    "echeance": 0,
-    "obligation": 0,
-    "actualite": 1
-   },
-   "raison": "citée dans l'actualité du 17 novembre 2026 (« Infertilité : un courriel envoyé pour sensibiliser les femmes et les hommes de 29 ans »)",
-   "date_sortie_proposee": "2026-12-17",
-   "dans_l_index": true
-  },
-  {
-   "ids": [
-    "SP-F31462"
-   ],
-   "fiche": "SP-F31462",
-   "titre": "Procréation médicalement assistée (PMA)",
    "note": 3,
    "detail": {
     "personnes": 2,
@@ -164,37 +91,110 @@
   },
   {
    "ids": [
-    "SP-F34736"
+    "SP-R59398"
    ],
-   "fiche": "SP-F34736",
-   "titre": "Quand s'applique la trêve hivernale ?",
+   "fiche": "SP-F16003",
+   "titre": "Carte de séjour d'un citoyen UE/EEE/Suisse travaillant en France",
    "note": 3,
    "detail": {
     "personnes": 2,
     "urgence": 0,
-    "echeance": 1,
-    "obligation": 0,
+    "echeance": 0,
+    "obligation": 1,
     "actualite": 0
    },
-   "raison": "fiche modifiée le 1er novembre 2026 ; échéance le 31 mars 2027",
-   "date_sortie_proposee": "2027-03-31",
+   "raison": "fiche modifiée le 6 novembre 2026 (mène à un service en ligne)",
+   "date_sortie_proposee": "2026-12-06",
    "dans_l_index": true
   },
   {
    "ids": [
-    "SP-F2234"
+    "SP-R17121"
    ],
-   "fiche": "SP-F2234",
-   "titre": "Sanctions disciplinaires d'un salarié du secteur privé",
+   "fiche": "SP-F628",
+   "titre": "Ceinture de sécurité et siège auto : règles pour circuler en voiture",
    "note": 3,
+   "detail": {
+    "personnes": 2,
+    "urgence": 0,
+    "echeance": 0,
+    "obligation": 1,
+    "actualite": 0
+   },
+   "raison": "fiche modifiée le 2 novembre 2026 (mène à un service en ligne)",
+   "date_sortie_proposee": "2026-12-02",
+   "dans_l_index": true
+  },
+  {
+   "ids": [
+    "SP-R66079"
+   ],
+   "fiche": null,
+   "titre": "Déclaration unifiée pour les ouvrages souterrains (DUPLOS)",
+   "note": 3,
+   "detail": {
+    "personnes": 2,
+    "urgence": 0,
+    "echeance": 0,
+    "obligation": 1,
+    "actualite": 0
+   },
+   "raison": "fiche modifiée le 27 octobre 2026",
+   "date_sortie_proposee": "2026-11-26",
+   "dans_l_index": true
+  },
+  {
+   "ids": [
+    "SP-R46083"
+   ],
+   "fiche": null,
+   "titre": "Info Retraite - Mon compte retraite",
+   "note": 2,
    "detail": {
     "personnes": 1,
     "urgence": 0,
     "echeance": 0,
-    "obligation": 2,
+    "obligation": 0,
+    "actualite": 1
+   },
+   "raison": "citée dans l'actualité du 16 novembre 2026 (« Des rendez-vous d’information gratuits dédiés à votre future retraite »)",
+   "date_sortie_proposee": "2026-12-16",
+   "dans_l_index": true
+  },
+  {
+   "ids": [
+    "SP-R53739"
+   ],
+   "fiche": null,
+   "titre": "Contacter la gendarmerie par messagerie instantanée",
+   "note": 2,
+   "detail": {
+    "personnes": 2,
+    "urgence": 0,
+    "echeance": 0,
+    "obligation": 0,
     "actualite": 0
    },
-   "raison": "fiche modifiée le 20 novembre 2026",
+   "raison": "fiche modifiée le 23 novembre 2026",
+   "date_sortie_proposee": "2026-12-23",
+   "dans_l_index": true
+  },
+  {
+   "ids": [
+    "SP-R3120",
+    "SP-R1280"
+   ],
+   "fiche": "SP-F358",
+   "titre": "Impôt sur le revenu - Déclaration de revenus annuelle",
+   "note": 2,
+   "detail": {
+    "personnes": 2,
+    "urgence": 0,
+    "echeance": 0,
+    "obligation": 0,
+    "actualite": 0
+   },
+   "raison": "fiche modifiée le 20 novembre 2026 (mène à un service en ligne)",
    "date_sortie_proposee": "2026-12-20",
    "dans_l_index": true
   }
