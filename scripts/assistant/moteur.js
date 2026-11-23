@@ -453,6 +453,9 @@
   // 20 retours rattachés (Services Publics +, critères cochés par l'usager dans ses retours négatifs ; jamais son texte).
   const MODES_LIB = { en_ligne: "En ligne", formulaire: "Formulaire à remplir", guichet: "Au guichet", rendez_vous: "Sur rendez-vous",
     courrier: "À envoyer par courrier", courriel: "À envoyer par courriel" };
+  // Libellés courts, affichés après chaque symbole dans la ligne sous le titre.
+  const MODES_COURT = { en_ligne: "En ligne", formulaire: "Formulaire", guichet: "Au guichet", rendez_vous: "Sur rendez-vous",
+    courrier: "Par courrier", courriel: "Par courriel" };
   const MOTIFS_LIB = { delai: "Délais de réponse signalés", joignable: "Difficile à joindre", explication: "Explications jugées peu claires" };
   const ACC_LIB = { tc: "Accessible", pc: "Accessibilité partielle", nc: "Non conforme", inconnue: "Accessibilité non connue" };
   const SEUIL_RETOURS = 20, MAX_VOIES = 3, MAX_VIGILANCES = 2;
@@ -507,6 +510,10 @@
       lignes.push({ cle: "accessibilite", texte: `Accessibilité : ${etat}. Si vous rencontrez une difficulté, une France services peut vous aider`,
         liens: [{ texte: "France services la plus proche", url: "#carte-ou", titre: "" }], source: "symboles" });
       resume.push("accessibilité");
+    } else if (S.acc && S.acc.niveau === "inconnue") {
+      // Non connue : plus affichée sur la carte, mais dite ici.
+      lignes.push({ cle: "accessibilite", texte: `Accessibilité non connue : ${S.acc.detail.charAt(0).toLowerCase() + S.acc.detail.slice(1)}`, liens: [], source: "symboles" });
+      resume.push("accessibilité non connue");
     }
     if (S.vig.length) {
       const motifs = S.vig.map((v) => ({ delai: "délais de réponse", joignable: "difficulté à joindre l'administration", explication: "explications peu claires" })[v.motif]);
@@ -517,6 +524,6 @@
     }
     return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, voiesTexte, MODES_LIB, MOTIFS_LIB, ACC_LIB, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

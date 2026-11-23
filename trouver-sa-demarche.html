@@ -55,20 +55,22 @@ select{font:inherit;font-size:15px;min-height:44px;padding:0 10px;border-radius:
    couleur seule) et la vigilance (orange, jamais rouge). Icônes Tabler (MIT), sprite #icones. Contrastes sur fond blanc :
    gris 6,9:1, vert 6,6:1, orange 5,6:1, rouge 6,5:1 (icônes 3:1 et textes 4,5:1 au moins). */
 :root{--sym:#555A60;--acc-tc:#1B6B36;--acc-pc:#A14A06;--acc-nc:#B42318;--vig:#A14A06}
-.symb{font-size:14px;margin:0}
-.symb summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-height:44px;color:var(--sym)}
-.symb summary::-webkit-details-marker{display:none}
-.ico{width:22px;height:22px;flex:none}
-.voie{display:inline-flex;gap:1px;align-items:center}
-.ou{font-size:12px;color:var(--muted)}
-.filet{width:1px;align-self:stretch;min-height:22px;background:var(--line2);margin:6px 4px}
-.acc,.vig{display:inline-flex;gap:4px;align-items:center}
-.acc{font-weight:500}.acc-tc{color:var(--acc-tc)}.acc-pc{color:var(--acc-pc)}.acc-nc{color:var(--acc-nc)}.acc-inconnue{color:var(--sym)}
-.vig{color:var(--vig)}
-.symb-plus{font-size:13px;color:var(--muted);text-decoration:underline}
-.symb[open] .symb-plus{text-decoration:none}
-.symb ul{margin:2px 0 6px;padding-left:1.1rem;color:var(--ink)}.symb li{margin:4px 0;line-height:1.45}
-.symb-aide{margin:0;font-size:13px}.symb-aide a{color:var(--muted)}
+.ligne-symb{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.ico{width:20px;height:20px;flex:none}
+.ligne-symb .u{display:inline-flex;gap:6px;align-items:center;white-space:nowrap}
+.mode,.acc,.vig{display:inline-flex;gap:4px;align-items:center;white-space:nowrap}
+.mode{color:var(--sym)}.mode .ico{color:var(--sym)}
+.ou{font-size:13px;color:var(--muted)}
+.sep{color:var(--muted)}
+.filet{display:inline-block;width:1px;height:20px;background:var(--line2);margin:0 2px}
+.acc{font-weight:500}.acc-tc{color:var(--acc-tc)}.acc-pc{color:var(--acc-pc)}.acc-nc{color:var(--acc-nc)}
+.vig{color:var(--vig);font-weight:500}
+.symb-q{flex:none;width:28px;height:28px;margin:-2px 0;border:1px solid var(--line2);border-radius:50%;background:var(--fond);color:var(--muted);font-size:14px;font-weight:600;line-height:1;padding:0;position:relative}
+.symb-q::after{content:"";position:absolute;inset:-8px}
+.symb-q[aria-expanded="true"]{background:var(--doux);color:var(--ink)}
+.symb-det{margin:0;padding:8px 12px;border-left:3px solid var(--line2);font-size:14px;color:var(--ink)}
+.symb-det ul{margin:0 0 4px;padding-left:1.1rem}.symb-det li{margin:4px 0;line-height:1.45}
+.symb-det a{font-size:13px}
 .rien{margin:0;padding:10px 14px;border-left:4px solid var(--accent);background:var(--doux);border-radius:0 8px 8px 0;font-weight:500}
 .promesse{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}.promesse .ligne-stats{flex:1 1 22rem}.ligne-ia{margin:0}
 /* Boutons : style commun du site (commun.css), dans la couleur du répertoire. */
@@ -759,6 +761,9 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
   // 20 retours rattachés (Services Publics +, critères cochés par l'usager dans ses retours négatifs ; jamais son texte).
   const MODES_LIB = { en_ligne: "En ligne", formulaire: "Formulaire à remplir", guichet: "Au guichet", rendez_vous: "Sur rendez-vous",
     courrier: "À envoyer par courrier", courriel: "À envoyer par courriel" };
+  // Libellés courts, affichés après chaque symbole dans la ligne sous le titre.
+  const MODES_COURT = { en_ligne: "En ligne", formulaire: "Formulaire", guichet: "Au guichet", rendez_vous: "Sur rendez-vous",
+    courrier: "Par courrier", courriel: "Par courriel" };
   const MOTIFS_LIB = { delai: "Délais de réponse signalés", joignable: "Difficile à joindre", explication: "Explications jugées peu claires" };
   const ACC_LIB = { tc: "Accessible", pc: "Accessibilité partielle", nc: "Non conforme", inconnue: "Accessibilité non connue" };
   const SEUIL_RETOURS = 20, MAX_VOIES = 3, MAX_VIGILANCES = 2;
@@ -813,6 +818,10 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
       lignes.push({ cle: "accessibilite", texte: `Accessibilité : ${etat}. Si vous rencontrez une difficulté, une France services peut vous aider`,
         liens: [{ texte: "France services la plus proche", url: "#carte-ou", titre: "" }], source: "symboles" });
       resume.push("accessibilité");
+    } else if (S.acc && S.acc.niveau === "inconnue") {
+      // Non connue : plus affichée sur la carte, mais dite ici.
+      lignes.push({ cle: "accessibilite", texte: `Accessibilité non connue : ${S.acc.detail.charAt(0).toLowerCase() + S.acc.detail.slice(1)}`, liens: [], source: "symboles" });
+      resume.push("accessibilité non connue");
     }
     if (S.vig.length) {
       const motifs = S.vig.map((v) => ({ delai: "délais de réponse", joignable: "difficulté à joindre l'administration", explication: "explications peu claires" })[v.motif]);
@@ -823,7 +832,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     }
     return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, voiesTexte, MODES_LIB, MOTIFS_LIB, ACC_LIB, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -1003,39 +1012,57 @@ function blocAvant(r) {
     + l.liens.map((x) => ` · <a href="${esc(x.url)}"${/^#/.test(x.url) ? "" : ` target="_blank" rel="noopener"`}${x.titre ? ` title="${esc(x.titre)}"` : ""}>${esc(x.texte)}</a>${x.titre ? ` <span class="avant-note">(${esc(x.titre.charAt(0).toLowerCase() + x.titre.slice(1))})</span>` : ""}`).join("")
     + (comment ? ` <a class="avant-src" href="${esc(comment + "#" + l.source)}">source</a>` : "") + `</li>`).join("") + `</ul></details>`;
 }
-// Symboles d'une démarche : un résumé replié (icônes, « ou », filet, signaux) qui s'ouvre au clavier comme au doigt sur
-// le détail écrit de chaque symbole, avec sa source et sa limite.
+// Symboles d'une démarche, dans la ligne grise sous le titre : chaque façon de faire avec son libellé court, « ou » entre
+// les voies, la source ; après un filet, l'accessibilité si elle est connue et les vigilances ; puis un bouton « ? » qui
+// déplie juste en dessous le détail de ces symboles (source et limite), avec un lien vers la légende complète.
 const ICO_MODE = { en_ligne: "device-laptop", formulaire: "file-type-pdf", courriel: "at", courrier: "mailbox", guichet: "building", rendez_vous: "calendar-event" };
 const ICO_MOTIF = { delai: "hourglass", joignable: "phone-off", explication: "help-circle" };
-const ico = (id, lab) => lab ? `<svg class="ico" role="img" aria-label="${esc(lab)}" focusable="false"><title>${esc(lab)}</title><use href="#ti-${id}"/></svg>`
-  : `<svg class="ico" aria-hidden="true" focusable="false"><use href="#ti-${id}"/></svg>`;
+const ico = (id) => `<svg class="ico" aria-hidden="true" focusable="false"><use href="#ti-${id}"/></svg>`;
 const urlComment = (ancre) => { const b = ((document.querySelector("a.lien-comment") || {}).href || "").split("#")[0]; return b ? b + "#" + ancre : ""; };
 const minuscule = (t) => t ? t.charAt(0).toLowerCase() + t.slice(1) : t;
-function symbolesHtml(r) {
-  const S = Moteur.symboles(r, META || {}); if (!S.voies.length) return "";
-  const modes = S.voies.map((v) => `<span class="voie">${v.map((m) => ico(ICO_MODE[m], Moteur.MODES_LIB[m])).join("")}</span>`).join(`<span class="ou">ou</span>`);
-  const sig = (S.acc ? `<span class="acc acc-${S.acc.niveau}">${ico("accessible")}<span>${esc(S.acc.texte)}</span></span>` : "")
-    + S.vig.map((v) => `<span class="vig">${ico(ICO_MOTIF[v.motif], v.texte)}</span>`).join("");
+let NUM_SYMB = 0;
+// source : texte après les façons de faire (« service-public.gouv.fr », « Préfecture … · Démarche Numérique ») ;
+// sans façon de faire connue, repli : la ligne d'avant (texte « sans »).
+function ligneSymboles(r, source, sans) {
+  const S = Moteur.symboles(r, META || {});
+  if (!S.voies.length) return { ligne: esc(sans), detail: "" };
+  // Unités insécables : la ligne ne se coupe qu'entre elles ; chaque séparateur (« ou », « · », filet) reste avec ce qui le suit.
+  const u = (h) => `<span class="u">${h}</span>`;
+  const modes = S.voies.flatMap((v, i) => v.map((m, j) => u(`${i && !j ? `<span class="ou">ou</span> ` : ""}<span class="mode">${ico(ICO_MODE[m])}${esc(Moteur.MODES_COURT[m])}</span>`)));
+  const acc = S.acc && S.acc.niveau !== "inconnue" ? [`<span class="acc acc-${S.acc.niveau}">${ico("accessible")}${esc(S.acc.texte)}</span>`] : [];
+  const sig = acc.concat(S.vig.map((v) => `<span class="vig">${ico(ICO_MOTIF[v.motif])}${esc(v.texte)}</span>`))
+    .map((h, i) => u(`${i ? "" : `<span class="filet" aria-hidden="true"></span> `}${h}`));
   const voies = Moteur.voiesTexte(S.voies);
   const det = [`Comment faire : ${voies}${r.k === "dn" ? ", sur Démarche Numérique" : S.sur ? ", d'après la fiche service-public.gouv.fr" : ", d'après la fiche service-public.gouv.fr ; la dernière voie est lue dans son texte, à vérifier sur la fiche"}.`,
     S.acc ? `${S.acc.texte} : ${minuscule(S.acc.detail)}.` : "", ...S.vig.map((v) => `${v.texte} : ${v.detail}.`)].filter(Boolean);
-  return `<details class="symb"><summary><span class="sr-only">Comment faire : </span>${modes}${sig ? `<span class="filet" aria-hidden="true"></span>${sig}` : ""}<span class="symb-plus">détail</span></summary>`
-    + `<ul>${det.map((t) => `<li>${esc(t)}</li>`).join("")}</ul></details>`;
+  const id = "symb-det-" + (++NUM_SYMB), aide = urlComment("symboles");
+  return {
+    ligne: (() => {
+      const units = [...modes, ...source.split(" · ").map((x) => u(`<span class="sep" aria-hidden="true">·</span> ${esc(x)}`)), ...sig];
+      const q = `<button type="button" class="symb-q" aria-label="Que signifient ces symboles ?" aria-expanded="false" aria-controls="${id}">?</button>`;
+      units[units.length - 1] = units[units.length - 1].replace(/<\/span>$/, ` ${q}</span>`);
+      return `<span class="sr-only">Comment faire : </span>` + units.join(" ");
+    })(),
+    detail: `<div class="symb-det" id="${id}" hidden><ul>${det.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>${aide ? `<a href="${esc(aide)}">Légende complète des symboles</a>` : ""}</div>` };
 }
+document.addEventListener("click", (ev) => {
+  const b = ev.target.closest(".symb-q"); if (!b) return;
+  const d = document.getElementById(b.getAttribute("aria-controls")); if (!d) return;
+  const ouvert = b.getAttribute("aria-expanded") !== "true"; b.setAttribute("aria-expanded", String(ouvert)); d.hidden = !ouvert;
+});
 // « Rien à faire » : phrase validée par l'éditeur (rien_a_faire.json → clé « raf » de l'index), avec la fiche qui le dit.
 function rienAFaire(r) {
   const R = Moteur.symboles(r, META || {}).rien || (r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null); if (!R) return "";
   const f = rec(R.fiche);
   return `<p class="rien">${esc(R.phrase)}${f ? ` <a class="avant-src" href="${esc(f.u)}" target="_blank" rel="noopener">source</a>` : ""}</p>`;
 }
-const lienSymboles = () => { const u = urlComment("symboles"); return u ? `<p class="symb-aide"><a href="${esc(u)}">Que signifient ces symboles&nbsp;?</a></p>` : ""; };
 function carteDemarche(r) {
   const el = $("carte-demarche"); if (!r) { el.hidden = true; return; }
-  const sym = symbolesHtml(r);
-  let h = `<h2 id="h-demarche">Votre démarche</h2>${rienAFaire(r)}${sym}<p class="titre">${esc(r.t)}</p>`;
+  let h = `<h2 id="h-demarche">Votre démarche</h2>${rienAFaire(r)}<p class="titre">${esc(r.t)}</p>`;
   if (r.k === "dn") {
     const lieu = r.dep ? r.dep + " " + (DEPNAME[r.dep] || "") : r.po === "nat" ? "nationale" : "";
-    h += `<p class="org">${esc(r.o)}${lieu ? " · " + esc(lieu) : ""} · en ligne sur Démarche Numérique</p>`;
+    const L = ligneSymboles(r, `${r.o}${lieu ? " · " + lieu : ""} · Démarche Numérique`, `${r.o}${lieu ? " · " + lieu : ""} · en ligne sur Démarche Numérique`);
+    h += `<p class="org ligne-symb">${L.ligne}</p>${L.detail}`;
     if (r.po === "inc") h += `<p class="avert">Démarche locale&nbsp;: vérifiez qu'elle concerne votre commune.</p>`;
     h += `<a class="btn-lien" href="${esc(dnUrl(r))}" target="_blank" rel="noopener">Faire la démarche</a>`;
     h += blocAvant(r);
@@ -1043,13 +1070,13 @@ function carteDemarche(r) {
   } else {
     const ts = resDe(r).find((x) => /Téléservice|selNG/i.test(x.ty));
     const cible = ts ? lienSp(ts) : r.l || r.u;
-    h += `<p class="org">${esc(typeLib(r))} · service-public.gouv.fr</p>`;
+    const L = ligneSymboles(r, "service-public.gouv.fr", `${typeLib(r)} · service-public.gouv.fr`);
+    h += `<p class="org ligne-symb">${L.ligne}</p>${L.detail}`;
     if ((r.docs || []).length) h += `<p class="prep2">À préparer&nbsp;: ${esc(r.docs.slice(0, 5).join(" ; "))}${r.docs.length > 5 ? "…" : "."}</p>`;
     h += `<a class="btn-lien" href="${esc(cible)}" target="_blank" rel="noopener">${ts || r.l ? "Faire la démarche" : "Lire la fiche"}</a>`;
     h += blocAvant(r);
     ajouterLien(ts ? ts.t : r.t, cible, "service-public.gouv.fr");
   }
-  if (sym) h += lienSymboles();
   el.innerHTML = h; el.hidden = false;
 }
 function carteAussi(f) {
@@ -1116,7 +1143,8 @@ function cartePossibles(l) {
   const el = $("carte-possibles"); if (!l.length) { el.hidden = true; return; }
   el.innerHTML = `<h2 id="h-possibles">Démarches possibles</h2><p class="avert-v">À vérifier&nbsp;: ces démarches peuvent ne pas correspondre à votre situation.</p><ul>`
     + l.map((r) => { const u = r.k === "dn" ? dnUrl(r) : lienSp(r); ajouterLien(r.t, u, r.k === "dn" ? "Démarche Numérique" : "service-public.gouv.fr");
-      return `<li>${symbolesHtml(r)}<a href="${esc(u)}" target="_blank" rel="noopener">${esc(r.t)}</a><span class="meta"><span class="terr">${esc(territoire(r))}</span> · ${esc(r.k === "dn" ? r.o : typeLib(r) + " · service-public.gouv.fr")}</span></li>`; }).join("") + `</ul>` + (l.some((r) => Moteur.symboles(r, META || {}).voies.length) ? lienSymboles() : "");
+      const L = r.k === "dn" ? ligneSymboles(r, r.o + " · Démarche Numérique", r.o) : ligneSymboles(r, "service-public.gouv.fr", typeLib(r) + " · service-public.gouv.fr");
+      return `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(r.t)}</a><span class="meta ligne-symb"><span class="terr">${esc(territoire(r))}</span> <span class="sep" aria-hidden="true">·</span> ${L.ligne}</span>${L.detail}</li>`; }).join("") + `</ul>`;
   el.hidden = false;
 }
 // extra : { possibles, fiche } — recherche simple (Moteur.choisir) ou ligne de l'accueil (Moteur.reponseLigne).

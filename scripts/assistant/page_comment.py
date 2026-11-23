@@ -61,16 +61,16 @@ def section_symboles(meta):
              ("at", "À envoyer par courriel", "La fiche a un cas « Par courriel » ou « Par mail », ou son texte dit d'envoyer « par courriel »." )]
     lignes = "".join(f'<li>{ico(i)} <b>{t}</b>&nbsp;: {html.escape(d[0].lower() + d[1:], quote=False)}</li>' for i, t, d in modes)
     acc = [("tc", "Accessible", "déclaration totalement conforme"), ("pc", "Accessibilité partielle (72&nbsp;%)", "partiellement conforme, avec le taux de l'audit"),
-           ("nc", "Non conforme", "non conforme"), ("inconnue", "Accessibilité non connue", "aucune déclaration trouvée pour cette démarche")]
+           ("nc", "Non conforme", "non conforme"), ("inconnue", "Accessibilité non connue", "aucune déclaration trouvée pour cette démarche ; ce n'est pas affiché sur la carte, seulement dans le détail et dans «&nbsp;Avant de commencer&nbsp;»")]
     lacc = "".join(f'<li><span class="acc acc-{c}">{ico("accessible")} {t}</span>&nbsp;: {d}.</li>' for c, t, d in acc)
     vig = [("hourglass", "Délais de réponse signalés", "critère « Réactivité »"), ("phone-off", "Difficile à joindre", "critère « Relation »"),
            ("help-circle", "Explications jugées peu claires", "critère « Information/Explication »")]
     lvig = "".join(f'<li><span class="vig">{ico(i)}</span> <b>{t}</b>&nbsp;: {d}.</li>' for i, t, d in vig)
     return f"""
   <h2 id="symboles">Les symboles</h2>
-  <p>Avant le titre d'une démarche, des symboles disent comment elle se fait. Appuyez sur la ligne des symboles pour lire leur sens, leur source et leur limite.</p>
+  <p>Dans la ligne grise sous le titre d'une démarche, des symboles suivis d'un libellé court disent comment elle se fait, puis viennent la source et, après un filet, les signaux. Le bouton «&nbsp;?&nbsp;» au bout de la ligne déplie le détail des symboles de cette démarche&nbsp;: leur sens, leur source et leur limite.</p>
   <h3>Comment faire</h3>
-  <p class="symb-ex">{ico("device-laptop")} <span class="ou">ou</span> {ico("file-type-pdf")}{ico("mailbox")} <span class="ou">ou</span> {ico("building")}&nbsp;: en ligne, ou un formulaire à envoyer par courrier, ou au guichet. Les symboles côte à côte se suivent dans une même voie&nbsp;; «&nbsp;ou&nbsp;» sépare des voies possibles. Trois voies au plus&nbsp;: en ligne, formulaire, guichet ou rendez-vous d'abord.</p>
+  <p class="symb-ex">{ico("device-laptop")} En ligne <span class="ou">ou</span> {ico("file-type-pdf")} Formulaire {ico("mailbox")} Par courrier <span class="ou">ou</span> {ico("building")} Au guichet&nbsp;: en ligne, ou un formulaire à envoyer par courrier, ou au guichet. Les symboles côte à côte se suivent dans une même voie&nbsp;; «&nbsp;ou&nbsp;» sépare des voies possibles. Trois voies au plus&nbsp;: en ligne, formulaire, guichet ou rendez-vous d'abord.</p>
   <ul class="symb-l">{lignes}</ul>
   <p><strong>Source et limites&nbsp;:</strong> les cas de chaque fiche de service-public.gouv.fr (DILA, licence ouverte), lus tels qu'ils sont structurés. Quand une voie ne vient que du texte de la fiche (courriel, rendez-vous), le détail le dit&nbsp;: à vérifier sur la fiche. Sans cas ni lien, aucun symbole n'est affiché. Le téléphone n'a pas de symbole.</p>
   <h3>Accessibilité</h3>
