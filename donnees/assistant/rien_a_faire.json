@@ -1,0 +1,75 @@
+{
+ "objet": "« Rien à faire » : une phrase en tête de réponse quand la fiche dit explicitement qu'il n'y a pas de démarche à faire (inscription d'office, versement sans demande). Seules les entrées de « valides » sont affichées, pour les démarches de leur champ ids. Chaque entrée : ids (démarches de l'index), phrase (reprise de la fiche, sans rien ajouter), fiche (SP-F… où la fiche le dit), valide_le (date de validation par l'éditeur). « propositions » : phrases repérées automatiquement dans les fiches, hors de tout cas, à relire ; la plupart sont conditionnelles et ne valent que pour une partie des situations. Aucune n'est affichée.",
+ "valides": [
+  {
+   "ids": [
+    "SP-R16396"
+   ],
+   "phrase": "Si vous avez fait le recensement citoyen, vous avez été inscrit d'office sur les listes électorales. Mais si vous avez déménagé depuis ou si vos parents chez qui vous vivez ont déménagé, vous devez vous réinscrire.",
+   "fiche": "SP-F35789",
+   "valide_le": "2026-11-23"
+  },
+  {
+   "ids": [
+    "SP-F59"
+   ],
+   "phrase": "Si votre propriété n'a pas été modifiée dans l'année, vous n'avez rien à faire.",
+   "fiche": "SP-F59",
+   "valide_le": "2026-11-23"
+  }
+ ],
+ "propositions": [
+  {
+   "fiche": "SP-F13214",
+   "texte_de_la_fiche": "Vous n'avez pas de démarche à effectuer, car les services fiscaux transmettent automatiquement les informations à la caisse d'allocations familiales (Caf) ou à la mutualité sociale agricole (MSA).",
+   "conditionnelle": false
+  },
+  {
+   "fiche": "SP-F1886",
+   "texte_de_la_fiche": "La prime est attribuée de façon automatique. Vous n'avez pas de démarche à effectuer.",
+   "conditionnelle": false
+  },
+  {
+   "fiche": "SP-F2981",
+   "texte_de_la_fiche": "Le changement est automatique. Vous n'avez pas de démarche à effectuer.",
+   "conditionnelle": false
+  },
+  {
+   "fiche": "SP-F31435",
+   "texte_de_la_fiche": "En principe, vous n'avez pas de démarche à faire. C'est la CPAM ou la MSA qui détermine directement si vous avez droit à la PCRTP.",
+   "conditionnelle": true
+  },
+  {
+   "fiche": "SP-F34328",
+   "texte_de_la_fiche": "La décote s'applique automatiquement, vous n'avez aucune démarche à effectuer.",
+   "conditionnelle": false
+  },
+  {
+   "fiche": "SP-F36407",
+   "texte_de_la_fiche": "Si votre titre exécutoire prévoit l'IFPA, vous n'avez pas de démarche à faire. Dans le cas contraire, vous pouvez demander sa mise en place.",
+   "conditionnelle": true
+  },
+  {
+   "fiche": "SP-F37904",
+   "texte_de_la_fiche": "Si le jeune est inscrit sur le registre des Français établis hors de France, son recensement citoyen est automatique. Il n'y a aucune démarche à faire.",
+   "conditionnelle": true
+  },
+  {
+   "fiche": "SP-F22388",
+   "texte_de_la_fiche": "Soit vous percevez uniquement des droits d'auteur déclarées par un tiers aux impôts (ex : éditeur, producteur, organisme de gestion collective). Dans ce cas, c'est le tiers qui se charge de déclarer votre activité via le mécanisme du précompte, vous n'avez pas de démarche à effectuer.",
+   "conditionnelle": true
+  },
+  {
+   "fiche": "SP-F22388",
+   "texte_de_la_fiche": "Si vous percevez uniquement des rémunérations déclarées par un tiers, vous n'avez pas de démarche à effectuer. Dans ce cas, c'est le tiers qui se charge de déclarer votre activité via le mécanisme du précompte.",
+   "conditionnelle": true
+  },
+  {
+   "fiche": "SP-F35898",
+   "texte_de_la_fiche": "Si l'impôt calculé à partir de la déclaration correspond aux prélèvements à la source effectués l'année précédente, votre impôt est réglé. Vous n'avez aucune démarche à faire.",
+   "conditionnelle": true,
+   "raison": "parle du solde après déclaration ; en tête de \"Déclarer vos revenus\", elle ferait croire qu'il n'y a pas à déclarer",
+   "retiree_des_valides_le": "2026-11-23"
+  }
+ ]
+}

@@ -1,1 +1,1 @@
-{"date_export": "2026-11-22", "date_export_dila": "2026-11-23", "demarches_en_ligne": 12606, "fiches": 7071}
+{"date_export": "2026-11-22", "date_export_dila": "2026-11-23", "observatoire": "édition 15 (octobre 2026)", "spp": {"date": "2026-11-23", "debut": "2024-11-23", "jeu": "https://www.data.gouv.fr/datasets/64c062e02590f67d0f9f7201", "seuil_retours": 20, "seuil_motif": 5, "criteres": {"Réactivité": "delai", "Relation": "joignable", "Information/Explication": "explication"}}, "demarches_en_ligne": 12606, "fiches": 7071}

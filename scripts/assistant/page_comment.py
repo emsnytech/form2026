@@ -39,6 +39,49 @@ def nom_repertoire():
     return json.loads(re.search(r'<script type="application/json" id="nom-repertoire">(.*?)</script>', page, re.S)[1])
 
 
+def icones():
+    """Le sprite des icônes (Tabler, MIT), relu dans la page produite par le gabarit : une seule source."""
+    page = (RACINE / "trouver-sa-demarche.html").read_text(encoding="utf-8")
+    m = re.search(r'<svg id="icones".*?</svg>', page, re.S)
+    return m[0] if m else ""
+
+
+def ico(nom, cls=""):
+    return f'<svg class="ico{(" " + cls) if cls else ""}" aria-hidden="true" focusable="false"><use href="#ti-{nom}"/></svg>'
+
+
+def section_symboles(meta):
+    spp = meta.get("spp") or {}
+    obs = html.escape(meta.get("observatoire") or "", quote=False)
+    modes = [("device-laptop", "En ligne", "Démarche Numérique : toujours ; fiche service-public : un cas « En ligne » ou « Sur internet », ou renvoie à un service en ligne."),
+             ("file-type-pdf", "Formulaire à remplir", "La fiche a un cas « Formulaire », ou renvoie à un cerfa ou à un formulaire."),
+             ("building", "Au guichet", "La fiche a un cas « Sur place » ou « Au guichet »."),
+             ("calendar-event", "Sur rendez-vous", "La fiche a un cas « Sur rendez-vous », ou son texte dit « sur rendez-vous » ou « prendre rendez-vous »."),
+             ("mailbox", "À envoyer par courrier", "La fiche a un cas « Par courrier »."),
+             ("at", "À envoyer par courriel", "La fiche a un cas « Par courriel » ou « Par mail », ou son texte dit d'envoyer « par courriel »." )]
+    lignes = "".join(f'<li>{ico(i)} <b>{t}</b>&nbsp;: {html.escape(d[0].lower() + d[1:], quote=False)}</li>' for i, t, d in modes)
+    acc = [("tc", "Accessible", "déclaration totalement conforme"), ("pc", "Accessibilité partielle (72&nbsp;%)", "partiellement conforme, avec le taux de l'audit"),
+           ("nc", "Non conforme", "non conforme"), ("inconnue", "Accessibilité non connue", "aucune déclaration trouvée pour cette démarche")]
+    lacc = "".join(f'<li><span class="acc acc-{c}">{ico("accessible")} {t}</span>&nbsp;: {d}.</li>' for c, t, d in acc)
+    vig = [("hourglass", "Délais de réponse signalés", "critère « Réactivité »"), ("phone-off", "Difficile à joindre", "critère « Relation »"),
+           ("help-circle", "Explications jugées peu claires", "critère « Information/Explication »")]
+    lvig = "".join(f'<li><span class="vig">{ico(i)}</span> <b>{t}</b>&nbsp;: {d}.</li>' for i, t, d in vig)
+    return f"""
+  <h2 id="symboles">Les symboles</h2>
+  <p>Avant le titre d'une démarche, des symboles disent comment elle se fait. Appuyez sur la ligne des symboles pour lire leur sens, leur source et leur limite.</p>
+  <h3>Comment faire</h3>
+  <p class="symb-ex">{ico("device-laptop")} <span class="ou">ou</span> {ico("file-type-pdf")}{ico("mailbox")} <span class="ou">ou</span> {ico("building")}&nbsp;: en ligne, ou un formulaire à envoyer par courrier, ou au guichet. Les symboles côte à côte se suivent dans une même voie&nbsp;; «&nbsp;ou&nbsp;» sépare des voies possibles. Trois voies au plus&nbsp;: en ligne, formulaire, guichet ou rendez-vous d'abord.</p>
+  <ul class="symb-l">{lignes}</ul>
+  <p><strong>Source et limites&nbsp;:</strong> les cas de chaque fiche de service-public.gouv.fr (DILA, licence ouverte), lus tels qu'ils sont structurés. Quand une voie ne vient que du texte de la fiche (courriel, rendez-vous), le détail le dit&nbsp;: à vérifier sur la fiche. Sans cas ni lien, aucun symbole n'est affiché. Le téléphone n'a pas de symbole.</p>
+  <h3>Accessibilité</h3>
+  <ul class="symb-l">{lacc}</ul>
+  <p><strong>Source et limites&nbsp;:</strong> la déclaration d'accessibilité de la démarche dans l'Observatoire de la qualité des démarches en ligne (DINUM, {obs}), pour les démarches rattachées une à une à l'Observatoire (table relue par l'éditeur). Ailleurs, et pour les démarches de Démarche Numérique, l'accessibilité est «&nbsp;non connue&nbsp;»&nbsp;: la déclaration de la plateforme ne dit rien du formulaire propre à chaque démarche. La couleur ne suffit jamais&nbsp;: le texte l'accompagne. En accessibilité partielle ou non conforme, «&nbsp;Avant de commencer&nbsp;» renvoie vers la France services la plus proche.</p>
+  <h3>Points de vigilance</h3>
+  <ul class="symb-l">{lvig}</ul>
+  <p><strong>Source et limites&nbsp;:</strong> Services Publics + (DITP), retours publiés depuis le {date_fr(spp.get("debut", ""))} (fichier du {date_fr(spp.get("date", ""))}). Un symbole n'apparaît qu'à partir de {spp.get("seuil_retours", 20)} retours sur la démarche, ou sur l'organisme qui la publie quand la démarche n'est pas nommée (le détail le dit alors)&nbsp;: les deux critères le plus souvent cochés par les usagers dans leurs retours négatifs, chacun dans au moins {spp.get("seuil_motif", 5)} retours, deux symboles au plus, toujours en orange. <strong>L'échantillon est spontané et non représentatif</strong>&nbsp;: ce sont les personnes qui ont choisi d'écrire. Aucun texte d'usager n'est lu ni affiché&nbsp;; seuls les critères qu'ils cochent sont comptés.</p>
+"""
+
+
 def chiffres():
     meta = json.loads((D / "index_meta.json").read_text(encoding="utf-8"))
     nfs = len(json.loads((D / "france_services.json").read_text(encoding="utf-8"))["structures"])
@@ -90,6 +133,11 @@ ul{padding-left:1.2em}li{margin:.35em 0}
 .btn-lien:hover{color:#fff;background:var(--accent-fonce)}
 .pied{border-top:1px solid var(--line);margin-top:56px}
 .pied .l{display:flex;gap:8px 24px;flex-wrap:wrap;padding-top:20px;padding-bottom:28px;font-size:13px;color:var(--muted)}
+.ico{width:22px;height:22px;vertical-align:-5px;color:var(--muted)}
+.symb-l{list-style:none;padding:0}.symb-l li{margin:.5em 0}
+.ou{font-size:12px;color:var(--muted)}
+.acc{font-weight:500}.acc .ico{color:currentColor}.acc-tc{color:#1B6B36}.acc-pc{color:#A14A06}.acc-nc{color:#B42318}.acc-inconnue{color:var(--muted)}
+.vig .ico{color:#A14A06}
 @media (max-width:720px){.l{padding:0 16px}main.l{padding-top:24px}.sources{grid-template-columns:1fr}.sc-arrow{transform:rotate(90deg);justify-self:center}.sommaire ul{columns:1}}
 """
 
@@ -112,6 +160,7 @@ def page():
 </head>
 <body>
 <!-- Page produite par scripts/assistant/page_comment.py : ne pas modifier à la main. -->
+{icones()}
 <header class="tete"><div class="l">
   <div class="marque">
     <a class="nom" href="trouver-sa-demarche.html">{nom['titre']}</a>
@@ -139,6 +188,7 @@ def page():
   <nav class="sommaire" aria-label="Sur cette page"><b>Sur cette page</b><ul>
     <li><a href="#role">Ce que fait le répertoire</a></li>
     <li><a href="#sources">Sources et limites</a></li>
+    <li><a href="#symboles">Les symboles</a></li>
     <li><a href="#recherche">Comment la recherche fonctionne</a></li>
     <li><a href="#ia">La version avec assistant</a></li>
     <li><a href="#donnees">Données personnelles</a></li>
@@ -190,6 +240,7 @@ def page():
   <!-- cadre:début -->
   <!-- cadre:fin -->
 
+{section_symboles(meta)}
   <h2 id="recherche">Comment la recherche fonctionne</h2>
   <ul>
     <li><strong>Recherche&nbsp;:</strong> une recherche locale (BM25, dans votre navigateur) interroge le répertoire. Dans la version avec assistant, l'IA (Claude) reformule votre situation en vocabulaire administratif, lance plusieurs recherches, ouvre le détail des résultats et rédige une réponse. Chaque élément cité renvoie à sa source&nbsp;; aucune adresse n'est inventée. Sans assistant, la recherche simple donne les mêmes cartes, le même «&nbsp;Où aller&nbsp;» et les mêmes liens&nbsp;; elle ne cite qu'une phrase tirée de la fiche officielle, jamais un texte rédigé.</li>

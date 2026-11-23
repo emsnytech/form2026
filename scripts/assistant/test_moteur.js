@@ -108,15 +108,45 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('F1 « médaille d\'honneur du travail » en recherche simple, sans territoire : aucune démarche locale en « Votre démarche »', !F.principal||F.principal.k!=='dn'||(F.principal.po||'')==='nat', F.principal?F.principal.id+' '+(F.principal.dep||F.principal.po)+' '+F.principal.t:'pas de « Votre démarche » ; démarches possibles : '+F.possibles.map(r=>r.id+' ('+(r.dep||r.po||'')+')').join(' ')); }
 { // « Avant de commencer » : un bloc replié sous « Faire la démarche », seulement avec des données de la démarche.
   const B=(i)=>{const k=ix.byId.get(i);return k===undefined?null:ix.recs[k];};
-  const emb=B('DN-13583'), A1=M.avantDeCommencer(emb);
-  verifie('B1 démarche DN avec pièces et pré-remplissage (DN-13583) : ligne « questions » puis ligne « rempli pour vous »', A1.lignes.map(l=>l.cle).join()==='questions,prerempli'&&/28 questions · 3 pièces/.test(A1.lignes[0].texte)&&/SIRET/.test(A1.lignes[1].texte), A1.resume);
+  const META=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','index_meta.json'),'utf8'));
+  const emb=B('DN-13583'), A1=M.avantDeCommencer(emb,META);
+  verifie('B1 démarche DN avec pièces et pré-remplissage (DN-13583) : ligne « questions » puis ligne « rempli pour vous »', A1.lignes.map(l=>l.cle).slice(0,2).join()==='questions,prerempli'&&/28 questions · 3 pièces/.test(A1.lignes[0].texte)&&/SIRET/.test(A1.lignes[1].texte), A1.resume);
   verifie('B1 lien vers le formulaire à vide, en PDF, avec sa précision', /\/commencer\/declaration-prealable-embauche\/dossier_vide$/.test(A1.lignes[0].liens[0].url)&&/pas pour le remplir/.test(A1.lignes[0].liens[0].titre), A1.lignes[0].liens[0].url);
   const sans=ix.recs.find(r=>r.k==='sp'&&/^SP-R/.test(r.id)&&!r.sva&&!r.obs), A2=M.avantDeCommencer(sans);
   verifie('B2 démarche sans aucune donnée : pas de bloc', !A2.lignes.length&&!A2.resume, sans.id+' '+sans.t);
-  const avec=ix.recs.filter(r=>M.avantDeCommencer(r).lignes.length), delai=avec.filter(r=>M.avantDeCommencer(r).lignes.some(l=>l.cle==='delai'||/d[ée]lai/i.test(l.texte)));
+  const avec=ix.recs.filter(r=>M.avantDeCommencer(r,META).lignes.length), delai=avec.filter(r=>M.avantDeCommencer(r,META).lignes.some(l=>l.cle==='delai'||(l.cle!=='vigilance'&&/d[ée]lai/i.test(l.texte))));
   verifie(`B3 aucun délai affiché sans donnée par démarche (${avec.length} blocs)`, !delai.length, delai.slice(0,3).map(r=>r.id).join(' ')||'aucun délai');
-  verifie('B4 au plus 4 lignes, et l\'IBAN n\'est pas présenté comme rempli', avec.every(r=>M.avantDeCommencer(r).lignes.length<=4)&&!('IBAN' in M.PRE_PHRASES));
-  console.log('ATTENTE B5 Observatoire (accessibilité, renvoi France services) : rattachement des démarches à décider (question 0.3)'); attente++; }
+  verifie('B4 au plus 4 lignes, et l\'IBAN n\'est pas présenté comme rempli', avec.every(r=>M.avantDeCommencer(r,META).lignes.length<=4)&&!('IBAN' in M.PRE_PHRASES));
+  const obsPc=ix.recs.find(r=>r.obs&&r.acc&&r.acc[0]!=='TC'), A5=M.avantDeCommencer(obsPc,META), l5=A5.lignes.find(l=>l.cle==='accessibilite');
+  verifie('B5 démarche de l\'Observatoire non totalement accessible : ligne d\'accessibilité et renvoi vers la France services la plus proche',
+    !!l5&&/Accessibilité : (partiellement|non) conforme/.test(l5.texte)&&/France services/.test(l5.texte)&&l5.liens[0].url==='#carte-ou', obsPc.id+' : '+(l5?l5.texte:'pas de ligne'));
+  // Symboles « comment faire », accessibilité, vigilance (Moteur.symboles).
+  const S=(i)=>M.symboles(B(i),META), dn=S('DN-13583');
+  verifie('Y1 une démarche DN affiche le seul symbole « en ligne »', JSON.stringify(dn.voies)==='[["en_ligne"]]', JSON.stringify(dn.voies));
+  for(const i of ['SP-R16396','SP-F1367']){ const v=S(i).voies, t=JSON.stringify(v);
+    verifie(`Y2 ${i} : en ligne ou formulaire, courrier ou guichet (d'après les cas du XML)`, t.includes('["en_ligne"]')&&t.includes('["formulaire","courrier"]')&&v.some(x=>x.includes('guichet'))&&v.length<=3, M.voiesTexte(v)); }
+  const sansAcc=B('SP-R16396');
+  verifie('Y3 une démarche sans donnée d\'accessibilité affiche « Accessibilité non connue »', !sansAcc.acc&&S('SP-R16396').acc.niveau==='inconnue'&&S('SP-R16396').acc.texte==='Accessibilité non connue');
+  const peu={...B('DN-13583'),spp:[19,15,[['delai',10]],'Préfecture de l\'Isère']};
+  const sousSeuil=ix.recs.filter(r=>r.spp&&r.spp[0]<20&&M.symboles(r,META).vig.length);
+  verifie('Y4 aucune vigilance sous 20 retours rattachés', !M.symboles(peu,META).vig.length&&!sousSeuil.length&&!M.avantDeCommencer(peu,META).lignes.some(l=>l.cle==='vigilance'), sousSeuil.slice(0,3).map(r=>r.id).join(' ')||'aucune');
+  const trop=ix.recs.filter(r=>{const x=M.symboles(r,META);return x.voies.length>3||x.vig.length>2;});
+  verifie(`Y5 jamais plus de 3 voies ni de 2 vigilances (${ix.recs.length} démarches)`, !trop.length, trop.slice(0,3).map(r=>r.id).join(' ')||'aucune');
+  const vigDn=S('DN-13583').vig;
+  verifie('Y6 vigilance par organisme : l\'infobulle donne l\'effectif, la source, le périmètre et la limite', vigDn.length&&vigDn.every(v=>/\d+ retours négatifs le signalent, sur \d+ retours sur Services Publics \+/.test(v.detail)&&/organisme « Préfecture de l'Isère »/.test(v.detail)&&/spontané, non représentatif/.test(v.detail)), vigDn.map(v=>v.detail)[0]||'aucune');
+  const accDn=S('DN-13583').acc;
+  verifie('Y7 démarche Démarche Numérique : accessibilité « non connue » (pas celle de la plateforme), vigilance par organisme', accDn.niveau==='inconnue'&&!ix.recs.some(r=>r.k==='dn'&&!r.obs&&M.symboles(r,META).acc.niveau!=='inconnue')&&!M.avantDeCommencer(B('DN-13583'),META).lignes.some(l=>l.cle==='accessibilite')&&vigDn.every(v=>v.organisme==="Préfecture de l'Isère"), accDn.texte);
+  const table=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','observatoire_rattachement.json'),'utf8')).rattachements, tid=new Set(table.map(t=>t.id));
+  const horsTable=ix.recs.filter(r=>(r.obs||r.acc)&&!tid.has(r.id));
+  verifie(`Y8 Observatoire : seules les démarches de observatoire_rattachement.json (${table.length}) ont une accessibilité`, !horsTable.length, horsTable.slice(0,3).map(r=>r.id).join(' ')||'aucune hors table');
+  const raf=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','rien_a_faire.json'),'utf8'));
+  const valides=new Set(raf.valides.flatMap(e=>e.ids)), rafHors=ix.recs.filter(r=>r.raf&&!valides.has(r.id));
+  const essai=M.symboles({...B('SP-F1367'),raf:['Phrase validée.','SP-F35789']},META);
+  verifie(`Y9 « rien à faire » : seulement les phrases validées (${raf.valides.length} validées, ${raf.propositions.length} propositions non affichées)`, !rafHors.length&&essai.rien&&essai.rien.phrase==='Phrase validée.'&&!M.symboles(B('SP-F1367'),META).rien===!valides.has('SP-F1367'), rafHors.slice(0,3).map(r=>r.id).join(' ')||'aucune hors table');
+  const manq=raf.valides.flatMap(e=>e.ids.filter(i=>{const r=B(i);return !r||!r.raf||r.raf[0]!==e.phrase;}));
+  verifie('Y10 chaque phrase validée est portée par ses démarches, condition comprise', !manq.length&&/^Si vous avez fait le recensement/.test(B('SP-R16396').raf[0]), manq.join(' ')||raf.valides.map(e=>e.ids.join('+')+' ← '+e.fiche).join(' ; '));
+  const avecVoies=ix.recs.filter(r=>M.symboles(r,META).voies.length).length;
+  console.log(`        ${avecVoies} démarches avec des symboles « comment faire »`); }
 { // Règle « démarche sûre » retenue (PR 76, variante d) : ni démarche hors sujet affirmée, ni démarche juste perdue.
   const P=(q,o={})=>M.choisir(ix,q,o).principal;
   const ko=[];

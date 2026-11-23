@@ -51,6 +51,25 @@ select{font:inherit;font-size:15px;min-height:44px;padding:0 10px;border-radius:
 .avant summary{cursor:pointer;color:var(--accent);font-weight:500;min-height:44px;display:list-item;padding:10px 0}
 .avant ul{margin:4px 0 0;padding-left:1.1rem}.avant li{margin:6px 0;line-height:1.45}
 .avant-note{color:var(--muted);font-size:13px}.avant-src{font-size:13px;color:var(--muted)}
+/* Symboles (Moteur.symboles) : « comment faire » en gris ; après un filet, l'accessibilité (couleur et texte, jamais la
+   couleur seule) et la vigilance (orange, jamais rouge). Icônes Tabler (MIT), sprite #icones. Contrastes sur fond blanc :
+   gris 6,9:1, vert 6,6:1, orange 5,6:1, rouge 6,5:1 (icônes 3:1 et textes 4,5:1 au moins). */
+:root{--sym:#555A60;--acc-tc:#1B6B36;--acc-pc:#A14A06;--acc-nc:#B42318;--vig:#A14A06}
+.symb{font-size:14px;margin:0}
+.symb summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-height:44px;color:var(--sym)}
+.symb summary::-webkit-details-marker{display:none}
+.ico{width:22px;height:22px;flex:none}
+.voie{display:inline-flex;gap:1px;align-items:center}
+.ou{font-size:12px;color:var(--muted)}
+.filet{width:1px;align-self:stretch;min-height:22px;background:var(--line2);margin:6px 4px}
+.acc,.vig{display:inline-flex;gap:4px;align-items:center}
+.acc{font-weight:500}.acc-tc{color:var(--acc-tc)}.acc-pc{color:var(--acc-pc)}.acc-nc{color:var(--acc-nc)}.acc-inconnue{color:var(--sym)}
+.vig{color:var(--vig)}
+.symb-plus{font-size:13px;color:var(--muted);text-decoration:underline}
+.symb[open] .symb-plus{text-decoration:none}
+.symb ul{margin:2px 0 6px;padding-left:1.1rem;color:var(--ink)}.symb li{margin:4px 0;line-height:1.45}
+.symb-aide{margin:0;font-size:13px}.symb-aide a{color:var(--muted)}
+.rien{margin:0;padding:10px 14px;border-left:4px solid var(--accent);background:var(--doux);border-radius:0 8px 8px 0;font-weight:500}
 .promesse{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}.promesse .ligne-stats{flex:1 1 22rem}.ligne-ia{margin:0}
 /* Boutons : style commun du site (commun.css), dans la couleur du répertoire. */
 body{--bouton-fond:var(--accent);--bouton-fond-survol:var(--accent-fonce);--bouton-contour:var(--accent)}
@@ -161,6 +180,7 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
 </style>
 </head>
 <body>
+<svg id="icones" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:none"><!-- Tabler Icons 3.24.0 (MIT, © 2020-2024 Paweł Kuna, tabler.io/icons) --><symbol id="ti-device-laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l18 0"/> <path d="M5 6m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z"/></symbol><symbol id="ti-file-type-pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/> <path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4"/> <path d="M5 18h1.5a1.5 1.5 0 0 0 0 -3h-1.5v6"/> <path d="M17 18h2"/> <path d="M20 15h-3v6"/> <path d="M11 15v6h1a2 2 0 0 0 2 -2v-2a2 2 0 0 0 -2 -2h-1z"/></symbol><symbol id="ti-at" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/> <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"/></symbol><symbol id="ti-mailbox" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 21v-6.5a3.5 3.5 0 0 0 -7 0v6.5h18v-6a4 4 0 0 0 -4 -4h-10.5"/> <path d="M12 11v-8h4l2 2l-2 2h-4"/> <path d="M6 15h1"/></symbol><symbol id="ti-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l18 0"/> <path d="M9 8l1 0"/> <path d="M9 12l1 0"/> <path d="M9 16l1 0"/> <path d="M14 8l1 0"/> <path d="M14 12l1 0"/> <path d="M14 16l1 0"/> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16"/></symbol><symbol id="ti-calendar-event" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"/> <path d="M16 3l0 4"/> <path d="M8 3l0 4"/> <path d="M4 11l16 0"/> <path d="M8 15h2v2h-2z"/></symbol><symbol id="ti-accessible" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/> <path d="M10 16.5l2 -3l2 3m-2 -3v-2l3 -1m-6 0l3 1"/> <circle cx="12" cy="7.5" r=".5" fill="currentColor"/></symbol><symbol id="ti-hourglass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 7h11"/> <path d="M6.5 17h11"/> <path d="M6 20v-2a6 6 0 1 1 12 0v2a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1z"/> <path d="M6 4v2a6 6 0 1 0 12 0v-2a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1z"/></symbol><symbol id="ti-help-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/> <path d="M12 16v.01"/> <path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483"/></symbol><symbol id="ti-phone-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l18 -18"/> <path d="M5.831 14.161a15.946 15.946 0 0 1 -2.831 -8.161a2 2 0 0 1 2 -2h4l2 5l-2.5 1.5c.108 .22 .223 .435 .345 .645m1.751 2.277c.843 .84 1.822 1.544 2.904 2.078l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a15.963 15.963 0 0 1 -10.344 -4.657"/></symbol></svg>
 <header class="tete"><div class="l">
   <div class="marque">
     <a class="nom" href="#" id="lien-accueil">Où faire sa démarche ?</a>
@@ -733,7 +753,39 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     "Statut boursier": "Votre statut d'étudiant boursier peut être vérifié directement, sans justificatif à joindre.",
     "Données préremplies": "Certaines réponses sont déjà remplies par l'administration.",
   };
-  function avantDeCommencer(r) {
+  // Symboles « comment faire » et signaux (accessibilité, vigilance), d'après les données de la démarche seulement.
+  // voies : liste de voies (alternatives, « ou »), chacune une liste de modes qui se suivent ; Démarche Numérique : en ligne.
+  // acc : { niveau: "tc" | "pc" | "nc" | "inconnue", texte, detail } ; vig : au plus 2 { motif, texte, detail }, à partir de
+  // 20 retours rattachés (Services Publics +, critères cochés par l'usager dans ses retours négatifs ; jamais son texte).
+  const MODES_LIB = { en_ligne: "En ligne", formulaire: "Formulaire à remplir", guichet: "Au guichet", rendez_vous: "Sur rendez-vous",
+    courrier: "À envoyer par courrier", courriel: "À envoyer par courriel" };
+  const MOTIFS_LIB = { delai: "Délais de réponse signalés", joignable: "Difficile à joindre", explication: "Explications jugées peu claires" };
+  const ACC_LIB = { tc: "Accessible", pc: "Accessibilité partielle", nc: "Non conforme", inconnue: "Accessibilité non connue" };
+  const SEUIL_RETOURS = 20, MAX_VOIES = 3, MAX_VIGILANCES = 2;
+  const dateCourte = (d) => (d || "").split("-").reverse().join("/");
+  function symboles(r, meta = {}) {
+    const vide = { voies: [], sur: true, acc: null, vig: [] };
+    if (!r) return vide;
+    const voies = r.k === "dn" ? [["en_ligne"]] : (r.md || []).slice(0, MAX_VOIES);
+    if (!voies.length) return vide;
+    const obs = meta.observatoire ? `Observatoire de la qualité des démarches en ligne, ${meta.observatoire}` : "Observatoire de la qualité des démarches en ligne";
+    let acc;
+    if (r.acc) {
+      const niveau = r.acc[0].toLowerCase(), taux = r.acc[1];
+      acc = { niveau, texte: ACC_LIB[niveau] + (niveau === "pc" && taux ? ` (${taux})` : ""), detail: `Déclaration d'accessibilité de cette démarche (${obs})`, perimetre: "demarche" };
+    } else acc = { niveau: "inconnue", texte: ACC_LIB.inconnue, perimetre: "",
+      detail: `Aucune déclaration trouvée pour cette démarche dans l'${obs}` + (r.k === "dn" ? " ; celle de la plateforme Démarche Numérique ne porte pas sur le formulaire de chaque démarche" : "") };
+    const vig = [];
+    if (r.spp && r.spp[0] >= SEUIL_RETOURS) {
+      const [n, neg, motifs, org] = r.spp, sp = meta.spp || {};
+      for (const [m, k] of (motifs || []).slice(0, MAX_VIGILANCES)) if (MOTIFS_LIB[m])
+        vig.push({ motif: m, texte: MOTIFS_LIB[m], organisme: org || "",
+          detail: `${k} retours négatifs le signalent, sur ${n} retours sur Services Publics +${sp.debut ? " depuis le " + dateCourte(sp.debut) : ""}, ${org ? `pour l'organisme « ${org} » (tout l'organisme, pas seulement cette démarche)` : "pour cette démarche"} ; échantillon spontané, non représentatif` });
+    }
+    return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, acc, vig, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
+  }
+  const voiesTexte = (v) => v.map((voie) => voie.map((m) => MODES_LIB[m].toLowerCase()).join(", ")).join(" ou ");
+  function avantDeCommencer(r, meta = {}) {
     const lignes = [], resume = [];
     if (!r) return { resume: "", lignes };
     if (r.k === "dn" && r.u) {
@@ -754,9 +806,24 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
       const phrases = (r.pre || []).map((p) => PRE_PHRASES[p]).filter(Boolean);
       if (phrases.length) { lignes.push({ cle: "prerempli", texte: phrases.join(" "), liens: [], source: "sources" }); resume.push("ce qui est rempli pour vous"); }
     }
+    // Accessibilité partielle ou non conforme (Observatoire) : renvoi vers une France services.
+    const S = symboles(r, meta);
+    if (S.acc && (S.acc.niveau === "pc" || S.acc.niveau === "nc")) {
+      const etat = S.acc.niveau === "pc" ? "partiellement conforme" + (/\(/.test(S.acc.texte) ? " " + S.acc.texte.replace(/^[^(]*/, "") : "") : "non conforme";
+      lignes.push({ cle: "accessibilite", texte: `Accessibilité : ${etat}. Si vous rencontrez une difficulté, une France services peut vous aider`,
+        liens: [{ texte: "France services la plus proche", url: "#carte-ou", titre: "" }], source: "symboles" });
+      resume.push("accessibilité");
+    }
+    if (S.vig.length) {
+      const motifs = S.vig.map((v) => ({ delai: "délais de réponse", joignable: "difficulté à joindre l'administration", explication: "explications peu claires" })[v.motif]);
+      const org = S.vig[0].organisme;
+      lignes.push({ cle: "vigilance", texte: `Point${motifs.length > 1 ? "s" : ""} de vigilance signalé${motifs.length > 1 ? "s" : ""} par les usagers : ${motifs.join(", ")}${org ? ` (retours sur l'organisme « ${org} »)` : ""}`,
+        liens: [{ texte: "Services Publics +", url: "https://www.plus.transformation.gouv.fr/", titre: `${S.vig[0].detail.split(" ; ")[0].replace(/^\d+ retours négatifs le signalent, sur /, "")} ; échantillon spontané, non représentatif` }], source: "symboles" });
+      resume.push("vigilance");
+    }
     return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, voiesTexte, MODES_LIB, MOTIFS_LIB, ACC_LIB, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -930,15 +997,42 @@ const estFiche = (r) => r && r.k === "sp" && /^SP-F/.test(r.id);
 const resDe = (f) => (f.res || []).map(rec).filter(Boolean);
 // « Avant de commencer » (Moteur.avantDeCommencer) : un bloc replié sous le bouton, 4 lignes au plus, chacune avec sa source.
 function blocAvant(r) {
-  const A = Moteur.avantDeCommencer(r); if (!A.lignes.length) return "";
+  const A = Moteur.avantDeCommencer(r, META || {}); if (!A.lignes.length) return "";
   const base = (document.querySelector("a.lien-comment") || {}).href || ""; const comment = base.split("#")[0];
   return `<details class="avant"><summary>${esc(A.resume)}</summary><ul>` + A.lignes.slice(0, 4).map((l) => `<li>${esc(l.texte)}`
-    + l.liens.map((x) => ` · <a href="${esc(x.url)}" target="_blank" rel="noopener"${x.titre ? ` title="${esc(x.titre)}"` : ""}>${esc(x.texte)}</a>${x.titre ? ` <span class="avant-note">(${esc(x.titre.charAt(0).toLowerCase() + x.titre.slice(1))})</span>` : ""}`).join("")
+    + l.liens.map((x) => ` · <a href="${esc(x.url)}"${/^#/.test(x.url) ? "" : ` target="_blank" rel="noopener"`}${x.titre ? ` title="${esc(x.titre)}"` : ""}>${esc(x.texte)}</a>${x.titre ? ` <span class="avant-note">(${esc(x.titre.charAt(0).toLowerCase() + x.titre.slice(1))})</span>` : ""}`).join("")
     + (comment ? ` <a class="avant-src" href="${esc(comment + "#" + l.source)}">source</a>` : "") + `</li>`).join("") + `</ul></details>`;
 }
+// Symboles d'une démarche : un résumé replié (icônes, « ou », filet, signaux) qui s'ouvre au clavier comme au doigt sur
+// le détail écrit de chaque symbole, avec sa source et sa limite.
+const ICO_MODE = { en_ligne: "device-laptop", formulaire: "file-type-pdf", courriel: "at", courrier: "mailbox", guichet: "building", rendez_vous: "calendar-event" };
+const ICO_MOTIF = { delai: "hourglass", joignable: "phone-off", explication: "help-circle" };
+const ico = (id, lab) => lab ? `<svg class="ico" role="img" aria-label="${esc(lab)}" focusable="false"><title>${esc(lab)}</title><use href="#ti-${id}"/></svg>`
+  : `<svg class="ico" aria-hidden="true" focusable="false"><use href="#ti-${id}"/></svg>`;
+const urlComment = (ancre) => { const b = ((document.querySelector("a.lien-comment") || {}).href || "").split("#")[0]; return b ? b + "#" + ancre : ""; };
+const minuscule = (t) => t ? t.charAt(0).toLowerCase() + t.slice(1) : t;
+function symbolesHtml(r) {
+  const S = Moteur.symboles(r, META || {}); if (!S.voies.length) return "";
+  const modes = S.voies.map((v) => `<span class="voie">${v.map((m) => ico(ICO_MODE[m], Moteur.MODES_LIB[m])).join("")}</span>`).join(`<span class="ou">ou</span>`);
+  const sig = (S.acc ? `<span class="acc acc-${S.acc.niveau}">${ico("accessible")}<span>${esc(S.acc.texte)}</span></span>` : "")
+    + S.vig.map((v) => `<span class="vig">${ico(ICO_MOTIF[v.motif], v.texte)}</span>`).join("");
+  const voies = Moteur.voiesTexte(S.voies);
+  const det = [`Comment faire : ${voies}${r.k === "dn" ? ", sur Démarche Numérique" : S.sur ? ", d'après la fiche service-public.gouv.fr" : ", d'après la fiche service-public.gouv.fr ; la dernière voie est lue dans son texte, à vérifier sur la fiche"}.`,
+    S.acc ? `${S.acc.texte} : ${minuscule(S.acc.detail)}.` : "", ...S.vig.map((v) => `${v.texte} : ${v.detail}.`)].filter(Boolean);
+  return `<details class="symb"><summary><span class="sr-only">Comment faire : </span>${modes}${sig ? `<span class="filet" aria-hidden="true"></span>${sig}` : ""}<span class="symb-plus">détail</span></summary>`
+    + `<ul>${det.map((t) => `<li>${esc(t)}</li>`).join("")}</ul></details>`;
+}
+// « Rien à faire » : phrase validée par l'éditeur (rien_a_faire.json → clé « raf » de l'index), avec la fiche qui le dit.
+function rienAFaire(r) {
+  const R = Moteur.symboles(r, META || {}).rien || (r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null); if (!R) return "";
+  const f = rec(R.fiche);
+  return `<p class="rien">${esc(R.phrase)}${f ? ` <a class="avant-src" href="${esc(f.u)}" target="_blank" rel="noopener">source</a>` : ""}</p>`;
+}
+const lienSymboles = () => { const u = urlComment("symboles"); return u ? `<p class="symb-aide"><a href="${esc(u)}">Que signifient ces symboles&nbsp;?</a></p>` : ""; };
 function carteDemarche(r) {
   const el = $("carte-demarche"); if (!r) { el.hidden = true; return; }
-  let h = `<h2 id="h-demarche">Votre démarche</h2><p class="titre">${esc(r.t)}</p>`;
+  const sym = symbolesHtml(r);
+  let h = `<h2 id="h-demarche">Votre démarche</h2>${rienAFaire(r)}${sym}<p class="titre">${esc(r.t)}</p>`;
   if (r.k === "dn") {
     const lieu = r.dep ? r.dep + " " + (DEPNAME[r.dep] || "") : r.po === "nat" ? "nationale" : "";
     h += `<p class="org">${esc(r.o)}${lieu ? " · " + esc(lieu) : ""} · en ligne sur Démarche Numérique</p>`;
@@ -955,6 +1049,7 @@ function carteDemarche(r) {
     h += blocAvant(r);
     ajouterLien(ts ? ts.t : r.t, cible, "service-public.gouv.fr");
   }
+  if (sym) h += lienSymboles();
   el.innerHTML = h; el.hidden = false;
 }
 function carteAussi(f) {
@@ -1021,7 +1116,7 @@ function cartePossibles(l) {
   const el = $("carte-possibles"); if (!l.length) { el.hidden = true; return; }
   el.innerHTML = `<h2 id="h-possibles">Démarches possibles</h2><p class="avert-v">À vérifier&nbsp;: ces démarches peuvent ne pas correspondre à votre situation.</p><ul>`
     + l.map((r) => { const u = r.k === "dn" ? dnUrl(r) : lienSp(r); ajouterLien(r.t, u, r.k === "dn" ? "Démarche Numérique" : "service-public.gouv.fr");
-      return `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(r.t)}</a><span class="meta"><span class="terr">${esc(territoire(r))}</span> · ${esc(r.k === "dn" ? r.o : typeLib(r) + " · service-public.gouv.fr")}</span></li>`; }).join("") + `</ul>`;
+      return `<li>${symbolesHtml(r)}<a href="${esc(u)}" target="_blank" rel="noopener">${esc(r.t)}</a><span class="meta"><span class="terr">${esc(territoire(r))}</span> · ${esc(r.k === "dn" ? r.o : typeLib(r) + " · service-public.gouv.fr")}</span></li>`; }).join("") + `</ul>` + (l.some((r) => Moteur.symboles(r, META || {}).voies.length) ? lienSymboles() : "");
   el.hidden = false;
 }
 // extra : { possibles, fiche } — recherche simple (Moteur.choisir) ou ligne de l'accueil (Moteur.reponseLigne).
@@ -1132,7 +1227,15 @@ function compact(r) {
   else { o.public = r.aud; if (r.l) o.lien_formulaire_ou_teleservice = "oui"; }
   return o;
 }
-function details(r) {
+// Comment faire, accessibilité et vigilance (Moteur.symboles), en texte, pour que l'assistant puisse les citer.
+function qualites(r) {
+  const S = Moteur.symboles(r, META || {}); if (!S.voies.length) return {};
+  return { comment_faire: Moteur.voiesTexte(S.voies) + (S.sur ? "" : " (dernière voie lue dans le texte de la fiche, à vérifier)"),
+    accessibilite: S.acc ? `${S.acc.texte} (${S.acc.detail})` : "", vigilance: S.vig.map((v) => `${v.texte} (${v.detail})`),
+    ...(S.rien ? { rien_a_faire: S.rien.phrase } : {}) };
+}
+function details(r) { return { ...detailsBruts(r), ...qualites(r) }; }
+function detailsBruts(r) {
   if (r.k === "dn") return { ref: r.id, titre: r.t, description: r.d, organisme: r.o, departement: r.dep || "national ou non précisé", public: PUBLAB[r.cat] || r.cat, dossiers_deposes: r.n, nombre_de_champs: r.ch, pieces_justificatives: r.pj, donnees_preremplies: r.pre, moment_de_vie: r.ev && r.ev !== "hors_perimetre" ? r.ev.replace(/_/g, " ") : "", fiches_service_public_liees: r.fd, date_fermeture: r.fe || "" };
   return { ref: r.id, type: r.ty, titre: r.t, description: r.d, public: r.aud, theme: r.th, documents_a_fournir: r.docs, cerfa: r.cerfa, a_un_lien_formulaire_ou_teleservice: !!r.l, demarches_en_ligne_liees: r.dn, modalite: r.m };
 }
@@ -1171,6 +1274,7 @@ Tu es l'assistant d'orientation d'un démonstrateur public (FORM 2026). Tu aides
 
 RÈGLES
 - Tu ne t'appuies QUE sur les résultats des outils « rechercher » et « details ». Tu n'inventes ni démarche, ni lien, ni condition, ni montant.
+- « comment_faire », « accessibilite » et « vigilance » (outil « details ») viennent des données : tu peux les citer en texte. N'affirme jamais une façon de faire qui n'y est pas, ne présente pas une vigilance comme un jugement sur le service, et n'annonce aucun délai.
 - Lance 2 à 4 recherches avec des formulations différentes, dans le vocabulaire de l'administration, puis ouvre avec « details » les 1 à 3 résultats les plus pertinents.
 - Distingue la fiche service-public (pour comprendre ses droits et la procédure) de la démarche en ligne (pour déposer un dossier).
 - COMMENCE TOUJOURS PAR CE QUI AIDE, dans cet ordre de préférence :
