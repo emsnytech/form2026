@@ -4,7 +4,9 @@
     python3 scripts/assistant/selections.py [--observatoire <observatoire.ods>]
 
 Écrit donnees/assistant/plus_demandees.json et donnees/assistant/a_la_une.json. Les champs de l'éditeur déjà présents dans
-ces fichiers (`epingle`, `exclu`, `etiquette`) sont gardés d'une mise à jour à l'autre : ils l'emportent sur le calcul.
+ces fichiers (`epingle`, `exclu`, `etiquette`, `ajout`) sont gardés d'une mise à jour à l'autre : ils l'emportent sur le calcul.
+Dans plus_demandees.json, `editeur.exclu` écarte aussi une ligne nationale (par son titre ou l'un de ses ids), et
+`editeur.ajout` impose une ligne absente des candidates (titre, organisme, ids, fiche, requete, precision, position).
 
 - **Les plus demandées, « Démarches nationales »** : les démarches les plus volumineuses de l'Observatoire de la qualité des
   démarches en ligne (DINUM, data.gouv.fr, ODS), hors démarches de saison (donnees/assistant/saisons.json) et hors démarches
@@ -105,7 +107,9 @@ def lire_editeur(chemin):
         e = json.loads(chemin.read_text(encoding="utf-8")).get("editeur") or {}
     except Exception:
         e = {}
-    return {"epingle": e.get("epingle", []), "exclu": e.get("exclu", []), "etiquette": e.get("etiquette", {})}
+    ed = {"epingle": e.get("epingle", []), "exclu": e.get("exclu", []), "etiquette": e.get("etiquette", {})}
+    if "ajout" in e: ed["ajout"] = e["ajout"]   # plus_demandees.json seulement : lignes nationales imposées par l'éditeur
+    return ed
 
 
 def saisons_du_mois(saisons, mois):
@@ -199,12 +203,20 @@ process.stdin.on('data',d=>s+=d).on('end',()=>{ const out={}; for (const q of JS
     for x in nat_defaut:   # une ligne nationale corrigée à la main garde ses ids, sa fiche et sa question
         for k in ("ids", "fiche", "question_lieu", "precision"):
             if k in avant.get(x["titre"], {}): x[k] = avant[x["titre"]][k]
+    # Choix de l'éditeur, gardés d'une mise à jour à l'autre : editeur.exclu écarte une ligne nationale (titre ou id),
+    # editeur.ajout impose une ligne absente des candidates de l'Observatoire, à sa position (1 = en tête).
+    nat_defaut = [x for x in nat_defaut if not any(c == x["titre"] or c in x["ids"] for c in ed["exclu"])]
+    for a in sorted(ed.get("ajout", []), key=lambda a: a.get("position", 99)):
+        if not a.get("ids") or not a.get("titre"): sys.exit(f"plus_demandees.json : editeur.ajout incomplet (titre et ids requis) : {a}")
+        ligne = {k: a[k] for k in ("titre", "organisme", "requete", "precision", "ids", "fiche", "question_lieu") if k in a}
+        nat_defaut.insert(max(0, a.get("position", len(nat_defaut) + 1) - 1), ligne)
+    nat_defaut = nat_defaut[:3]
     dn_defaut = ["medaille honneur travail", "verification prealable embauche", "pass culture"]
     choisis_dn = []
     for mot in (ed["epingle"] or dn_defaut):
         c = next((c for c in cand_dn if all(w in c["cle"] for w in n_(mot).split()) and c["cle"] not in ed["exclu"]), None)
         if c and c not in choisis_dn: choisis_dn.append(c)
-    pd = {"objet": "Accueil, « Les plus demandées ». Corrigeable à la main : editeur.epingle (mots du titre, dans l'ordre voulu), editeur.exclu (clés à écarter) ; pour chaque ligne, ids (ses démarches), fiche (fiche service-public) et question_lieu (question posée quand ses démarches sont locales).",
+    pd = {"objet": "Accueil, « Les plus demandées ». Corrigeable à la main, et gardé d'une mise à jour à l'autre : editeur.epingle (colonne Démarche Numérique : mots du titre, dans l'ordre voulu) ; editeur.exclu (clés Démarche Numérique, ou titre ou id d'une ligne nationale, à écarter) ; editeur.ajout (lignes nationales imposées, absentes des candidates de l'Observatoire : titre, organisme, ids, fiche, requete, precision, position à partir de 1) ; pour chaque ligne, ids (ses démarches), fiche (fiche service-public) et question_lieu (question posée quand ses démarches sont locales).",
           "date": meta["date_export"], "nationales": nat_defaut,
           "demarche_numerique": [{**{k: v for k, v in c.items() if k != "pro"}, "question_lieu": avant.get(c["cle"], {}).get("question_lieu") or QUESTIONS_LIEU.get(c["cle"], "Dans quel département habitez-vous ?")} for c in choisis_dn[:3]],
           "source": "Observatoire de la qualité des démarches en ligne (DINUM) ; volumes du descriptif de Démarche Numérique",
