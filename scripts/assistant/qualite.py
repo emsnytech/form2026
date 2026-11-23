@@ -7,7 +7,6 @@ Sources (données ouvertes, licence ouverte 2.0) :
   - Services Publics + (DITP), « Liste des expériences partagées par les usagers » (export-experiences.csv) : seulement des
     comptes, par démarche nommée (« Démarches modérées », nomenclature de l'Observatoire) et par structure (« Intitulé
     structure 1 à 3 »), sur les deux années avant la date du fichier. Aucun texte, aucun pseudonyme n'est lu ni écrit ;
-  - donnees/accessibilite/accessibilite_services_form2026.csv : déclaration de la plateforme Démarche Numérique.
 
 Motifs de vigilance : les critères structurés que l'usager coche lui-même dans Services Publics +, comptés parmi les retours
 négatifs. Trois critères ont un symbole : Réactivité (délais), Relation (joignabilité), Information/Explication (explications).
@@ -16,7 +15,7 @@ Aucun motif n'est tiré du texte des retours.
     python3 scripts/assistant/qualite.py --observatoire <édition.ods> --edition "édition 15 (octobre 2026)" \\
         --spp <export-experiences.csv> --date-spp 2026-11-23
 """
-import argparse, collections, csv, datetime, json, sys
+import argparse, collections, csv, datetime, json, re, sys
 from pathlib import Path
 
 sys.dont_write_bytecode = True
@@ -65,10 +64,29 @@ def lire_spp(chemin, date_fichier):
     return out, debut
 
 
+def proposer(obs):
+    """Rattachements univoques par l'adresse de la démarche (une ligne de l'Observatoire, une démarche de l'index), à relire."""
+    norm = lambda u: re.sub(r"^https?://(www\.)?", "", (u or "").strip().split("#")[0].rstrip("/").lower())
+    recs = json.loads((D / "assistant" / "index.json").read_text(encoding="utf-8"))
+    table = json.loads((D / "assistant" / "observatoire_rattachement.json").read_text(encoding="utf-8"))["rattachements"]
+    deja = {str(t["observatoire"]) for t in table}
+    par_url, lignes = collections.defaultdict(list), collections.defaultdict(list)
+    for r in recs:
+        if r["k"] == "sp" and r.get("l"): par_url[norm(r["l"])].append(r)
+        if r["k"] == "dn" and r.get("u"): par_url[norm("demarche.numerique.gouv.fr/commencer/" + r["u"])].append(r)
+    for o in obs:
+        if o["url"]: lignes[norm(o["url"])].append(o)
+    for u, os_ in lignes.items():
+        rs = par_url.get(u, [])
+        if len(os_) == 1 and len(rs) == 1 and os_[0]["id"] not in deja:
+            print(json.dumps({"observatoire": os_[0]["id"], "nom": os_[0]["nom"], "id": rs[0]["id"], "titre": rs[0]["t"]}, ensure_ascii=False))
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--observatoire", required=True); ap.add_argument("--edition", required=True)
     ap.add_argument("--spp", required=True); ap.add_argument("--date-spp", required=True, help="date du fichier export-experiences.csv (AAAA-MM-JJ)")
+    ap.add_argument("--proposer", action="store_true", help="liste les rattachements univoques Observatoire → index absents de observatoire_rattachement.json")
     A = ap.parse_args()
     obs = []
     for o in lire_observatoire(A.observatoire):
@@ -77,15 +95,12 @@ def main():
                     "acc": STATUTS.get((o.get("Prise en compte Handicap") or "").strip(), ""), "taux": taux,
                     "fc": (o.get("FranceConnect") or "").strip(), "dlnuf": (o.get("Score DLNUF") or "").strip(),
                     "date_declaration": (o.get("Date Publication Déclaration") or "").strip()})
-    dn = next(l for l in csv.DictReader(open(D / "accessibilite" / "accessibilite_services_form2026.csv", encoding="utf-8-sig"), delimiter=";")
-              if l["service"] == "Démarche Numérique")
+    if A.proposer: proposer(obs); return
     spp, debut = lire_spp(A.spp, datetime.date.fromisoformat(A.date_spp))
     out = {"objet": "Agrégats d'accessibilité et de vigilance, produits par scripts/assistant/qualite.py et lus par build_index.py. Aucun texte d'usager, aucun pseudonyme.",
            "sources": {"observatoire": {"edition": A.edition, "jeu": "https://www.data.gouv.fr/datasets/observatoire-de-la-qualite-des-demarches-en-ligne"},
                        "spp": {"date": A.date_spp, "debut": debut, "jeu": "https://www.data.gouv.fr/datasets/64c062e02590f67d0f9f7201",
-                               "seuil_retours": SEUIL_RETOURS, "seuil_motif": SEUIL_MOTIF, "criteres": CRITERES},
-                       "plateforme_dn": {"statut": dn["accessibilite_statut"], "taux": dn["accessibilite_taux"], "date": dn["date"],
-                                         "source": "donnees/accessibilite/accessibilite_services_form2026.csv"}},
+                               "seuil_retours": SEUIL_RETOURS, "seuil_motif": SEUIL_MOTIF, "criteres": CRITERES}},
            "observatoire": obs, "spp": spp}
     (D / "assistant" / "qualite.json").write_text(json.dumps(out, ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
     print(f"Observatoire : {len(obs)} démarches ; Services Publics + depuis {debut} : {len(spp['demarche'])} démarches et "

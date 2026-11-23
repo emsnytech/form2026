@@ -16,12 +16,6 @@
 "Relation": "joignable",
 "Information/Explication": "explication"
 }
-},
-"plateforme_dn": {
-"statut": "PC",
-"taux": "93,1 %",
-"date": "avr. 2025",
-"source": "donnees/accessibilite/accessibilite_services_form2026.csv"
 }
 },
 "observatoire": [

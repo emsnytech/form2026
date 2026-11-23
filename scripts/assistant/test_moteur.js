@@ -134,6 +134,15 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie(`Y5 jamais plus de 3 voies ni de 2 vigilances (${ix.recs.length} démarches)`, !trop.length, trop.slice(0,3).map(r=>r.id).join(' ')||'aucune');
   const vigDn=S('DN-13583').vig;
   verifie('Y6 vigilance par organisme : l\'infobulle donne l\'effectif, la source, le périmètre et la limite', vigDn.length&&vigDn.every(v=>/\d+ retours négatifs le signalent, sur \d+ retours sur Services Publics \+/.test(v.detail)&&/organisme « Préfecture de l'Isère »/.test(v.detail)&&/spontané, non représentatif/.test(v.detail)), vigDn.map(v=>v.detail)[0]||'aucune');
+  const accDn=S('DN-13583').acc;
+  verifie('Y7 démarche Démarche Numérique : accessibilité « non connue » (pas celle de la plateforme), vigilance par organisme', accDn.niveau==='inconnue'&&!ix.recs.some(r=>r.k==='dn'&&!r.obs&&M.symboles(r,META).acc.niveau!=='inconnue')&&!M.avantDeCommencer(B('DN-13583'),META).lignes.some(l=>l.cle==='accessibilite')&&vigDn.every(v=>v.organisme==="Préfecture de l'Isère"), accDn.texte);
+  const table=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','observatoire_rattachement.json'),'utf8')).rattachements, tid=new Set(table.map(t=>t.id));
+  const horsTable=ix.recs.filter(r=>(r.obs||r.acc)&&!tid.has(r.id));
+  verifie(`Y8 Observatoire : seules les démarches de observatoire_rattachement.json (${table.length}) ont une accessibilité`, !horsTable.length, horsTable.slice(0,3).map(r=>r.id).join(' ')||'aucune hors table');
+  const raf=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','rien_a_faire.json'),'utf8'));
+  const valides=new Set(raf.valides.flatMap(e=>e.ids)), rafHors=ix.recs.filter(r=>r.raf&&!valides.has(r.id));
+  const essai=M.symboles({...B('SP-F1367'),raf:['Phrase validée.','SP-F35789']},META);
+  verifie(`Y9 « rien à faire » : seulement les phrases validées (${raf.valides.length} validées, ${raf.propositions.length} propositions non affichées)`, !rafHors.length&&essai.rien&&essai.rien.phrase==='Phrase validée.'&&!M.symboles(B('SP-F1367'),META).rien===!valides.has('SP-F1367'), rafHors.slice(0,3).map(r=>r.id).join(' ')||'aucune hors table');
   const avecVoies=ix.recs.filter(r=>M.symboles(r,META).voies.length).length;
   console.log(`        ${avecVoies} démarches avec des symboles « comment faire »`); }
 { // Règle « démarche sûre » retenue (PR 76, variante d) : ni démarche hors sujet affirmée, ni démarche juste perdue.

@@ -1,0 +1,194 @@
+{
+ "objet": "Rattachement des démarches de l'Observatoire de la qualité des démarches en ligne (DINUM) aux démarches de l'index, lu par build_index.py (clés obs, acc, spp). Seules ces lignes sont rattachées : une ligne retirée n'est plus rattachée, une ligne ajoutée l'est à la prochaine construction. « observatoire » : colonne « ID Démarche » de l'ODS ; « id » : démarche de l'index. qualite.py --proposer liste les nouveaux rattachements univoques à ajouter.",
+ "rattachements": [
+  {
+   "observatoire": "3055",
+   "nom": "Déclaration d’Échanges de Biens Intracommunautaires (DEB)",
+   "id": "SP-R14336",
+   "titre": "Déclarer ses échanges Intra-UE de biens (DEBWEB2, ex DEB)",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "1693",
+   "nom": "Demande en ligne d'homologation d'une rupture conventionnelle (TéléRC)",
+   "id": "SP-R19136",
+   "titre": "Saisir en ligne une demande d'homologation de rupture conventionnelle individuelle (TéléRC)",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "1799",
+   "nom": "Demande de recherche administrative (créatrice de droits)",
+   "id": "SP-R41277",
+   "titre": "Demander un document administratif au Service historique de la Défense (Vincennes)",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "1737",
+   "nom": "Contestation d’avis de contravention et désignation de conducteur (infractions relevées par radars ou Pve)",
+   "id": "SP-R42185",
+   "titre": "Avis d'amende forfaitaire : contester ou désigner une autre personne en ligne",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "1755",
+   "nom": "Demande de permis de conduire après réussite à l'examen",
+   "id": "SP-R45443",
+   "titre": "Demander la fabrication de son permis de conduire à la suite de la réussite à l’examen",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "1636",
+   "nom": "Autorisation de sortie du territoire (AST) d'un mineur non accompagné par un titulaire de l'autorité parentale",
+   "id": "SP-R46121",
+   "titre": "Autorisation de sortie de territoire (AST)",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "2154",
+   "nom": "Microentrepreneur - Déclarer le chiffre d'affaires et payer les cotisations sociales",
+   "id": "SP-R46804",
+   "titre": "Déclarer les recettes de sa micro-entreprise",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "44",
+   "nom": "Obtenir une attestation de droits (Ameli)",
+   "id": "SP-R49811",
+   "titre": "Obtenir une attestation de droits (régime général)",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "1699",
+   "nom": "Demander une carte vitale",
+   "id": "SP-R49813",
+   "titre": "Demander une carte Vitale (régime général)",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "2771",
+   "nom": "Carte vitale : perte et vol (tous régimes partenaires gérés par le régime général)",
+   "id": "SP-R49814",
+   "titre": "Carte Vitale : perdue, volée ou défectueuse (régime général)",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "772",
+   "nom": "Déclarer une naissance (Ameli)",
+   "id": "SP-R49829",
+   "titre": "Déclarer une naissance (Ameli)",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "46",
+   "nom": "Attestation de paiement d'indemnités journalières",
+   "id": "SP-R49830",
+   "titre": "Attestation de paiement d'indemnités journalières",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "2981",
+   "nom": "Demande de prime à la conversion et bonus écologique",
+   "id": "SP-R49929",
+   "titre": "Demande en ligne du bonus écologique",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "3414",
+   "nom": "Demande de Visa (France Visa)",
+   "id": "SP-R50559",
+   "titre": "Demander un visa",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "1621",
+   "nom": "Demande de Complémentaire Santé Solidaire (CSS)",
+   "id": "SP-R52880",
+   "titre": "Demande de complémentaire santé solidaire",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "1759",
+   "nom": "Demande de permis de conduire international",
+   "id": "SP-R56960",
+   "titre": "Demande en ligne de rétablissement du permis de conduire français au retour en France après une expatriation",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "1638",
+   "nom": "Etablissement d'une procuration de vote (Maprocuration)",
+   "id": "SP-R58939",
+   "titre": "Maprocuration",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "1754",
+   "nom": "Inscription en ligne à l'examen du permis de conduire",
+   "id": "SP-R59785",
+   "titre": "Permis de conduire : réserver en ligne une place pour passer l'épreuve pratique du permis",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "2928",
+   "nom": "Mon espace santé",
+   "id": "SP-R60692",
+   "titre": "Mon espace santé",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "1641",
+   "nom": "Demande de permis de conduire après suspension, invalidation et annulation dont AM après perte de droits",
+   "id": "SP-R63568",
+   "titre": "Demande de fabrication d’un permis de conduire dans le cadre d'un retour au permis après une invalidation ou une annulation du permis de conduire",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "1707",
+   "nom": "Demande unique d’aide à l’autonomie des personnes agées",
+   "id": "SP-R66317",
+   "titre": "Demande en ligne d’aides à l’autonomie à domicile pour les personnes âgées",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "1756",
+   "nom": "Demande de renouvellement du permis de conduire en cas de perte, vol, détérioration ou changement d'état-civil",
+   "id": "SP-R67352",
+   "titre": "Demander en ligne un nouveau permis de conduire en cas de changement d'état civil",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "2658",
+   "nom": "Recherche du véhicule à partir du numéro d’immatriculation (fourrières)",
+   "id": "SP-R68776",
+   "titre": "Récupérer un véhicule mis en fourrière",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "2839",
+   "nom": "Signaler un problème de mal-logement (Signal Logement)",
+   "id": "SP-R69012",
+   "titre": "Signal Logement : pour signaler aux services de l'État les signes de non décence du logement loué",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "3005",
+   "nom": "Déclaration en douane – Fret traditionnel (DELTA G)",
+   "id": "SP-R53529",
+   "titre": "Delta G, un service en ligne unifié pour le dédouanement",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "2830",
+   "nom": "Vérifier une attestation Urssaf",
+   "id": "SP-R62158",
+   "titre": "Vérification de l'attestation de vigilance",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  },
+  {
+   "observatoire": "3056",
+   "nom": "Déclaration mensuelle des opérations de service pour lesquelles la TVA est acquittée par le preneur établi dans un autre État membre (DES)",
+   "id": "SP-R73596",
+   "titre": "Déclaration européenne de services (DES)",
+   "origine": "adresse de la démarche identique, une seule démarche de chaque côté (rattachement automatique du 23/11/2026, à relire)"
+  }
+ ]
+}

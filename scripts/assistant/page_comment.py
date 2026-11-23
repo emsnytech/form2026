@@ -51,7 +51,7 @@ def ico(nom, cls=""):
 
 
 def section_symboles(meta):
-    spp = meta.get("spp") or {}; dn = meta.get("acc_dn") or {}
+    spp = meta.get("spp") or {}
     obs = html.escape(meta.get("observatoire") or "", quote=False)
     modes = [("device-laptop", "En ligne", "Démarche Numérique : toujours ; fiche service-public : un cas « En ligne » ou « Sur internet », ou renvoie à un service en ligne."),
              ("file-type-pdf", "Formulaire à remplir", "La fiche a un cas « Formulaire », ou renvoie à un cerfa ou à un formulaire."),
@@ -75,10 +75,10 @@ def section_symboles(meta):
   <p><strong>Source et limites&nbsp;:</strong> les cas de chaque fiche de service-public.gouv.fr (DILA, licence ouverte), lus tels qu'ils sont structurés. Quand une voie ne vient que du texte de la fiche (courriel, rendez-vous), le détail le dit&nbsp;: à vérifier sur la fiche. Sans cas ni lien, aucun symbole n'est affiché. Le téléphone n'a pas de symbole.</p>
   <h3>Accessibilité</h3>
   <ul class="symb-l">{lacc}</ul>
-  <p><strong>Source et limites&nbsp;:</strong> la déclaration d'accessibilité de la démarche dans l'Observatoire de la qualité des démarches en ligne (DINUM, {obs}), quand l'adresse de la démarche ne correspond qu'à une seule démarche du répertoire. Pour Démarche Numérique, c'est la déclaration de la plateforme ({ {"TC": "totalement conforme", "PC": "partiellement conforme", "NC": "non conforme"}.get(dn.get("statut", ""), "statut non connu")}, {html.escape(dn.get("taux", ""), quote=False)}, {html.escape(dn.get("date", ""), quote=False)}), qui ne dit rien du formulaire propre à chaque démarche. La couleur ne suffit jamais&nbsp;: le texte l'accompagne. En accessibilité partielle ou non conforme, «&nbsp;Avant de commencer&nbsp;» renvoie vers la France services la plus proche.</p>
+  <p><strong>Source et limites&nbsp;:</strong> la déclaration d'accessibilité de la démarche dans l'Observatoire de la qualité des démarches en ligne (DINUM, {obs}), pour les démarches rattachées une à une à l'Observatoire (table relue par l'éditeur). Ailleurs, et pour les démarches de Démarche Numérique, l'accessibilité est «&nbsp;non connue&nbsp;»&nbsp;: la déclaration de la plateforme ne dit rien du formulaire propre à chaque démarche. La couleur ne suffit jamais&nbsp;: le texte l'accompagne. En accessibilité partielle ou non conforme, «&nbsp;Avant de commencer&nbsp;» renvoie vers la France services la plus proche.</p>
   <h3>Points de vigilance</h3>
   <ul class="symb-l">{lvig}</ul>
-  <p><strong>Source et limites&nbsp;:</strong> Services Publics + (DITP), retours publiés depuis le {date_fr(spp.get("debut", ""))} (fichier du {date_fr(spp.get("date", ""))}). Un symbole n'apparaît qu'à partir de {spp.get("seuil_retours", 20)} retours sur la démarche, ou sur son organisme quand la démarche n'est pas nommée (le détail le dit alors)&nbsp;: les deux critères le plus souvent cochés par les usagers dans leurs retours négatifs, chacun dans au moins {spp.get("seuil_motif", 5)} retours, deux symboles au plus, toujours en orange. <strong>L'échantillon est spontané et non représentatif</strong>&nbsp;: ce sont les personnes qui ont choisi d'écrire. Aucun texte d'usager n'est lu ni affiché&nbsp;; seuls les critères qu'ils cochent sont comptés.</p>
+  <p><strong>Source et limites&nbsp;:</strong> Services Publics + (DITP), retours publiés depuis le {date_fr(spp.get("debut", ""))} (fichier du {date_fr(spp.get("date", ""))}). Un symbole n'apparaît qu'à partir de {spp.get("seuil_retours", 20)} retours sur la démarche, ou sur l'organisme qui la publie quand la démarche n'est pas nommée (le détail le dit alors)&nbsp;: les deux critères le plus souvent cochés par les usagers dans leurs retours négatifs, chacun dans au moins {spp.get("seuil_motif", 5)} retours, deux symboles au plus, toujours en orange. <strong>L'échantillon est spontané et non représentatif</strong>&nbsp;: ce sont les personnes qui ont choisi d'écrire. Aucun texte d'usager n'est lu ni affiché&nbsp;; seuls les critères qu'ils cochent sont comptés.</p>
 """
 
 

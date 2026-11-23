@@ -467,11 +467,8 @@
     if (r.acc) {
       const niveau = r.acc[0].toLowerCase(), taux = r.acc[1];
       acc = { niveau, texte: ACC_LIB[niveau] + (niveau === "pc" && taux ? ` (${taux})` : ""), detail: `Déclaration d'accessibilité de cette démarche (${obs})`, perimetre: "demarche" };
-    } else if (r.k === "dn" && meta.acc_dn && /^(TC|PC|NC)$/.test(meta.acc_dn.statut)) {
-      const niveau = meta.acc_dn.statut.toLowerCase(), taux = meta.acc_dn.taux;
-      acc = { niveau, texte: ACC_LIB[niveau] + (niveau === "pc" && taux ? ` (${taux})` : ""), perimetre: "plateforme",
-              detail: `Déclaration de la plateforme Démarche Numérique (${meta.acc_dn.date}), pas propre à cette démarche` };
-    } else acc = { niveau: "inconnue", texte: ACC_LIB.inconnue, detail: `Aucune déclaration trouvée pour cette démarche dans l'${obs}`, perimetre: "" };
+    } else acc = { niveau: "inconnue", texte: ACC_LIB.inconnue, perimetre: "",
+      detail: `Aucune déclaration trouvée pour cette démarche dans l'${obs}` + (r.k === "dn" ? " ; celle de la plateforme Démarche Numérique ne porte pas sur le formulaire de chaque démarche" : "") };
     const vig = [];
     if (r.spp && r.spp[0] >= SEUIL_RETOURS) {
       const [n, neg, motifs, org] = r.spp, sp = meta.spp || {};
@@ -479,7 +476,7 @@
         vig.push({ motif: m, texte: MOTIFS_LIB[m], organisme: org || "",
           detail: `${k} retours négatifs le signalent, sur ${n} retours sur Services Publics +${sp.debut ? " depuis le " + dateCourte(sp.debut) : ""}, ${org ? `pour l'organisme « ${org} » (tout l'organisme, pas seulement cette démarche)` : "pour cette démarche"} ; échantillon spontané, non représentatif` });
     }
-    return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, acc, vig };
+    return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, acc, vig, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
   }
   const voiesTexte = (v) => v.map((voie) => voie.map((m) => MODES_LIB[m].toLowerCase()).join(", ")).join(" ou ");
   function avantDeCommencer(r, meta = {}) {
@@ -503,11 +500,11 @@
       const phrases = (r.pre || []).map((p) => PRE_PHRASES[p]).filter(Boolean);
       if (phrases.length) { lignes.push({ cle: "prerempli", texte: phrases.join(" "), liens: [], source: "sources" }); resume.push("ce qui est rempli pour vous"); }
     }
-    // Accessibilité partielle ou non conforme (Observatoire, ou plateforme Démarche Numérique) : renvoi vers une France services.
+    // Accessibilité partielle ou non conforme (Observatoire) : renvoi vers une France services.
     const S = symboles(r, meta);
     if (S.acc && (S.acc.niveau === "pc" || S.acc.niveau === "nc")) {
       const etat = S.acc.niveau === "pc" ? "partiellement conforme" + (/\(/.test(S.acc.texte) ? " " + S.acc.texte.replace(/^[^(]*/, "") : "") : "non conforme";
-      lignes.push({ cle: "accessibilite", texte: `${S.acc.perimetre === "plateforme" ? "Accessibilité de la plateforme Démarche Numérique" : "Accessibilité"} : ${etat}. Si vous rencontrez une difficulté, une France services peut vous aider`,
+      lignes.push({ cle: "accessibilite", texte: `Accessibilité : ${etat}. Si vous rencontrez une difficulté, une France services peut vous aider`,
         liens: [{ texte: "France services la plus proche", url: "#carte-ou", titre: "" }], source: "symboles" });
       resume.push("accessibilité");
     }
