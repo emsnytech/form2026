@@ -179,6 +179,55 @@ for r in recs:
     if fl: r['fl']=fl
     n_res+=bool(res or fl)
 print('SP',len(recs)-n0,'; fiches avec ressources ou fiches liées :',n_res)
+# Comment faire (« md », voies de modes, et « md_sur », toutes les voies lues dans une balise) : voir modes_dila.py.
+# Une fiche F lit ses propres cas ; un service en ligne R prend les voies de la fiche la plus précise qui le cite (celle qui
+# cite le moins de services), sinon son type (téléservice : en ligne ; formulaire : formulaire).
+import modes_dila
+n_md=collections.Counter(); voies_f={}
+for r in recs:
+    if r['k']=='sp' and r['id'].startswith('SP-F') and xml.get(r['id'][3:]):
+        v,sur,_=modes_dila.voies_fiche(xml[r['id'][3:]][0])
+        if v: r['md']=v; r['md_sur']=sur; voies_f[r['id']]=r; n_md['F']+=1
+citants=collections.defaultdict(list)
+for r in voies_f.values():
+    for i in r.get('res',[]): citants[i].append(r)
+for r in recs:
+    if r['k']!='sp' or not r['id'].startswith('SP-R'): continue
+    c=sorted((f for f in citants.get(r['id'],[]) if ['en_ligne'] in f['md'] or r['ty'] not in modes_dila.TYPES_EN_LIGNE),
+             key=lambda f:(len(f.get('res',[])),int(f['id'][4:])))
+    if c: r['md']=c[0]['md']; r['md_sur']=c[0]['md_sur']; n_md['R par fiche']+=1
+    elif r['ty'] in modes_dila.TYPES_EN_LIGNE: r['md']=[['en_ligne']]; r['md_sur']=True; n_md['R par type']+=1
+    elif r['ty'] in modes_dila.TYPES_FORMULAIRE: r['md']=[['formulaire']]; r['md_sur']=True; n_md['R par type']+=1
+print('comment faire (md) :',dict(n_md))
+# Accessibilité et vigilance (qualite.json, produit par qualite.py). Observatoire : rattachement par l'adresse de la démarche,
+# seulement quand il est univoque (une ligne de l'Observatoire pour une démarche de l'index, et inversement). Services Publics + :
+# par la démarche nommée (même nomenclature que l'Observatoire), sinon, pour Démarche Numérique, par l'organisme.
+QUAL=os.path.join(os.path.dirname(OUT),'qualite.json')
+qual=json.load(open(QUAL)) if os.path.exists(QUAL) else None
+def _url(u):
+    u=(u or '').strip().split('#')[0].rstrip('/').lower()
+    return re.sub(r'^https?://(www\.)?','',u)
+if qual:
+    par_url=collections.defaultdict(list)
+    for r in recs:
+        if r['k']=='sp' and r.get('l'): par_url[_url(r['l'])].append(r)
+        if r['k']=='dn' and r.get('u'): par_url[_url('demarche.numerique.gouv.fr/commencer/'+r['u'])].append(r)
+    lignes=collections.defaultdict(list)
+    for o in qual['observatoire']:
+        if o['url']: lignes[_url(o['url'])].append(o)
+    n_q=collections.Counter(); spp=qual['spp']
+    for u,os_ in lignes.items():
+        rs=par_url.get(u,[])
+        if len(os_)!=1 or len(rs)!=1: n_q['observatoire ambigu ou absent']+=len(os_); continue
+        o,r=os_[0],rs[0]; r['obs']=o['id']; n_q['observatoire univoque']+=1
+        if o['acc']: r['acc']=[o['acc'],o['taux'] if o['acc']=='PC' else '']
+        v=spp['demarche'].get(' '.join(o['nom'].replace('’',"'").split()).casefold())
+        if v: r['spp']=[v['n'],v['neg'],v['motifs'],'']; n_q['vigilance par démarche']+=1
+    for r in recs:
+        if r['k']=='dn' and 'spp' not in r:
+            v=spp['structure'].get(' '.join((r.get('o') or '').replace('’',"'").split()).casefold())
+            if v and v['motifs']: r['spp']=[v['n'],v['neg'],v['motifs'],v['nom']]; n_q['vigilance par organisme (DN)']+=1
+    print('accessibilité et vigilance :',dict(n_q))
 with open(OUT,'w') as o:
     o.write('[\n'+',\n'.join(json.dumps(r,ensure_ascii=False,separators=(',',':')) for r in recs)+'\n]\n')
 import os; print(os.path.getsize(OUT)/1e6,'Mo')
@@ -188,7 +237,8 @@ date_export=A.date_export or (f"{_m.group(1)}-{_m.group(2)}-{_m.group(3)}" if _m
 # Date de l'export DILA (fiches service-public), écrite par maj_dila.py : celle de l'export « particuliers ».
 _ed=os.path.join(UP,'dila','export_dila.json')
 date_export_dila=json.load(open(_ed)).get('particuliers',{}).get('date','') if os.path.exists(_ed) else ''
-json.dump({'date_export':date_export,'date_export_dila':date_export_dila,'demarches_en_ligne':sum(1 for r in recs if r['k']=='dn'),'fiches':sum(1 for r in recs if r['k']=='sp')},
+_q={'observatoire':qual['sources']['observatoire']['edition'],'spp':qual['sources']['spp'],'acc_dn':qual['sources']['plateforme_dn']} if qual else {}
+json.dump({'date_export':date_export,'date_export_dila':date_export_dila,**_q,'demarches_en_ligne':sum(1 for r in recs if r['k']=='dn'),'fiches':sum(1 for r in recs if r['k']=='sp')},
           open(os.path.join(os.path.dirname(OUT),'index_meta.json'),'w'),ensure_ascii=False)
 # Contrôle : toutes les références citées par les réponses préparées existent encore dans l'index
 ex=os.path.join(os.path.dirname(OUT),'exemples.json')

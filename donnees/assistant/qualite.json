@@ -1,0 +1,8906 @@
+{
+"objet": "Agrégats d'accessibilité et de vigilance, produits par scripts/assistant/qualite.py et lus par build_index.py. Aucun texte d'usager, aucun pseudonyme.",
+"sources": {
+"observatoire": {
+"edition": "édition 15 (octobre 2026)",
+"jeu": "https://www.data.gouv.fr/datasets/observatoire-de-la-qualite-des-demarches-en-ligne"
+},
+"spp": {
+"date": "2026-11-23",
+"debut": "2024-11-23",
+"jeu": "https://www.data.gouv.fr/datasets/64c062e02590f67d0f9f7201",
+"seuil_retours": 20,
+"seuil_motif": 5,
+"criteres": {
+"Réactivité": "delai",
+"Relation": "joignable",
+"Information/Explication": "explication"
+}
+},
+"plateforme_dn": {
+"statut": "PC",
+"taux": "93,1 %",
+"date": "avr. 2025",
+"source": "donnees/accessibilite/accessibilite_services_form2026.csv"
+}
+},
+"observatoire": [
+{
+"id": "44",
+"nom": "Obtenir une attestation de droits (Ameli)",
+"url": "https://assure.ameli.fr/PortailAS/appmanager/PortailAS/assure?_nfpb=true&_pageLabel=as_accueil_page&_somtc=true",
+"acc": "PC",
+"taux": "84 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "05/09/2025"
+},
+{
+"id": "45",
+"nom": "Changement d'adresse (Ameli)",
+"url": "https://assure.ameli.fr/PortailAS/appmanager/PortailAS/assure?_nfpb=true&_pageLabel=as_mod_adresse_postale_page",
+"acc": "PC",
+"taux": "83 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "05/09/2025"
+},
+{
+"id": "46",
+"nom": "Attestation de paiement d'indemnités journalières",
+"url": "https://assure.ameli.fr/PortailAS/appmanager/PortailAS/assure?_nfpb=true&_pageLabel=as_attestation_paiement_ij_page",
+"acc": "PC",
+"taux": "76 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "05/09/2025"
+},
+{
+"id": "757",
+"nom": "Demander une carte européenne d'assurance maladie (Ceam)",
+"url": "https://assure.ameli.fr/PortailAS/appmanager/PortailAS/assure?_nfpb=true&_pageLabel=as_carte_euro_assu_maladie_page",
+"acc": "PC",
+"taux": "79 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "05/09/2025"
+},
+{
+"id": "772",
+"nom": "Déclarer une naissance (Ameli)",
+"url": "https://assure.ameli.fr/PortailAS/appmanager/PortailAS/assure?_nfpb=true&_pageLabel=as_declarer_naissance_page",
+"acc": "PC",
+"taux": "82 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "05/09/2025"
+},
+{
+"id": "1617",
+"nom": "Ma demande de compensation du handicap MDPH (mdphenligne.cnsa.fr)",
+"url": "https://mdphenligne.cnsa.fr/",
+"acc": "TC",
+"taux": "100 %",
+"fc": "FranceConnect",
+"dlnuf": "9",
+"date_declaration": "30/01/2025"
+},
+{
+"id": "1620",
+"nom": "Déclaration de ressources annuelles auprès de la CAF",
+"url": "https://wwwd.caf.fr/wps/myportal/caffr/moncompte/mesressources#/accueil",
+"acc": "PC",
+"taux": "97,92 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "15/09/2026"
+},
+{
+"id": "1621",
+"nom": "Demande de Complémentaire Santé Solidaire (CSS)",
+"url": "https://assure.ameli.fr/PortailAS/appmanager/PortailAS/assure?_nfpb=true&_pageLabel=as_demander_cmuc_page",
+"acc": "PC",
+"taux": "76 %",
+"fc": "FranceConnect",
+"dlnuf": "7",
+"date_declaration": "05/09/2025"
+},
+{
+"id": "1622",
+"nom": "Demande de retraite personnelle",
+"url": "https://www.info-retraite.fr/portail-services/login",
+"acc": "PC",
+"taux": "95,50 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "18/11/2025"
+},
+{
+"id": "1623",
+"nom": "Demande de réversion",
+"url": "https://www.info-retraite.fr/portail-services/login",
+"acc": "TC",
+"taux": "100 %",
+"fc": "FranceConnect",
+"dlnuf": "12",
+"date_declaration": "15/10/2025"
+},
+{
+"id": "1624",
+"nom": "Déclarer un changement de situation pour les prestations familiales",
+"url": "https://connect.caf.fr/connexionappli/dist/#/login",
+"acc": "PC",
+"taux": "94,55 %",
+"fc": "FranceConnect",
+"dlnuf": "6",
+"date_declaration": "04/08/2026"
+},
+{
+"id": "1658",
+"nom": "URSSAF - Déclaration préalable à l'embauche (DPAE)",
+"url": "https://www.due.urssaf.fr",
+"acc": "PC",
+"taux": "55,36 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "09/07/2024"
+},
+{
+"id": "1690",
+"nom": "CESU - Déclarer les heures des volets sociaux (Chèque Emploi Service Universel)",
+"url": "https://www.cesu.urssaf.fr/",
+"acc": "TC",
+"taux": "100 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "10/12/2025"
+},
+{
+"id": "1691",
+"nom": "CESU - Créer son compte - Futur employeur (Chèque Emploi Service Universel)",
+"url": "https://www.cesu.urssaf.fr/",
+"acc": "TC",
+"taux": "100 %",
+"fc": "FranceConnect",
+"dlnuf": "1",
+"date_declaration": "10/12/2025"
+},
+{
+"id": "1693",
+"nom": "Demande en ligne d'homologation d'une rupture conventionnelle (TéléRC)",
+"url": "https://www.telerc.travail.gouv.fr/",
+"acc": "PC",
+"taux": "63,08 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "09/02/2026"
+},
+{
+"id": "1694",
+"nom": "Consulter mes droits de formation (CPF)",
+"url": "https://www.moncompteformation.gouv.fr/",
+"acc": "TC",
+"taux": "100 %",
+"fc": "FranceConnect +",
+"dlnuf": "1",
+"date_declaration": "30/06/2026"
+},
+{
+"id": "1695",
+"nom": "Saisie en ligne des états de présence (SYLAé)",
+"url": "https://sylae.asp.gouv.fr/portail-employeur/",
+"acc": "PC",
+"taux": "80,60 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "10/10/2025"
+},
+{
+"id": "1696",
+"nom": "Demande de prime d'activité",
+"url": "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaprimedactivite/",
+"acc": "PC",
+"taux": "98,31 %",
+"fc": "FranceConnect",
+"dlnuf": "7",
+"date_declaration": "22/09/2025"
+},
+{
+"id": "1697",
+"nom": "Publication d'une offre d'emploi en ligne (France Travail)",
+"url": "https://entreprise.francetravail.fr/",
+"acc": "PC",
+"taux": "98 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "01/09/2026"
+},
+{
+"id": "1699",
+"nom": "Demander une carte vitale",
+"url": "https://assure.ameli.fr/PortailAS/appmanager/PortailAS/assure?_nfpb=true&_pageLabel=as_commande_vitale_page",
+"acc": "PC",
+"taux": "79 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "05/09/2025"
+},
+{
+"id": "1700",
+"nom": "S'inscrire ou se réinscrire comme demandeur d'emploi à France Travail",
+"url": "https://candidat.francetravail.fr/",
+"acc": "PC",
+"taux": "97 %",
+"fc": "Non",
+"dlnuf": "5",
+"date_declaration": "01/09/2026"
+},
+{
+"id": "1701",
+"nom": "Demande de complément de libre choix de mode de garde - Prestation d'accueil du jeune enfant (Paje)",
+"url": "https://connect.caf.fr/connexionappli/dist/#/login",
+"acc": "PC",
+"taux": "92,86 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "31/07/2026"
+},
+{
+"id": "1703",
+"nom": "Inscription au registre national des refus de dons d'organes",
+"url": "https://www.registrenationaldesrefus.fr/",
+"acc": "PC",
+"taux": "91 %",
+"fc": "Non",
+"dlnuf": "5",
+"date_declaration": "11/09/2024"
+},
+{
+"id": "1705",
+"nom": "Demande d'aide au logement",
+"url": "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement",
+"acc": "PC",
+"taux": "98,15 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "14/08/2026"
+},
+{
+"id": "1706",
+"nom": "Demande d'aide au logement pour les étudiants",
+"url": "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement",
+"acc": "PC",
+"taux": "98,15 %",
+"fc": "FranceConnect",
+"dlnuf": "11",
+"date_declaration": "14/08/2026"
+},
+{
+"id": "1707",
+"nom": "Demande unique d’aide à l’autonomie des personnes agées",
+"url": "https://demande-autonomie.gouv.fr/?service=DUAPA&portail=3177&modeOuverture=onglet",
+"acc": "PC",
+"taux": "98,30 %",
+"fc": "FranceConnect",
+"dlnuf": "13",
+"date_declaration": "25/11/2025"
+},
+{
+"id": "1748",
+"nom": "Obtenir mon âge de départ à la retraite",
+"url": "https://www.lassuranceretraite.fr/portail-services-ihm/index.html#/sec/ouvrirService/AGEDEPART",
+"acc": "PC",
+"taux": "75,60 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "25/07/2025"
+},
+{
+"id": "1750",
+"nom": "Consulter le montant déclaré à l’administration fiscale",
+"url": "https://www.lassuranceretraite.fr/portail-services-ihm/index.html#/sec/afficherIframe/CONSULT_MONTANT",
+"acc": "PC",
+"taux": "91 %",
+"fc": "FranceConnect",
+"dlnuf": "3",
+"date_declaration": "27/11/2024"
+},
+{
+"id": "1775",
+"nom": "Demande d'indemnisation d'activité partielle",
+"url": "https://activitepartielle.emploi.gouv.fr/aparts/",
+"acc": "NC",
+"taux": "",
+"fc": "Non applicable",
+"dlnuf": "4",
+"date_declaration": "22/12/2022"
+},
+{
+"id": "1778",
+"nom": "Rechercher des offres d’emploi (France Travail)",
+"url": "https://candidat.francetravail.fr/",
+"acc": "PC",
+"taux": "57 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "01/09/2026"
+},
+{
+"id": "1779",
+"nom": "La Déclaration Unique Simplifiée (GUSO)",
+"url": "https://www.guso.fr",
+"acc": "PC",
+"taux": "67 %",
+"fc": "Non applicable",
+"dlnuf": "4",
+"date_declaration": "20/08/2026"
+},
+{
+"id": "1789",
+"nom": "Déclaration trimestrielle prime d'activité",
+"url": "https://connect.caf.fr/connexionappli/dist/#/login",
+"acc": "TC",
+"taux": "100 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "17/09/2025"
+},
+{
+"id": "2006",
+"nom": "Renouvellement mensuel de la situation de demandeur d’emploi (France Travail)",
+"url": "https://candidat.francetravail.fr/",
+"acc": "PC",
+"taux": "70 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "01/09/2026"
+},
+{
+"id": "2154",
+"nom": "Microentrepreneur - Déclarer le chiffre d'affaires et payer les cotisations sociales",
+"url": "https://www.autoentrepreneur.urssaf.fr/portail/accueil.html",
+"acc": "NC",
+"taux": "",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "20/09/2023"
+},
+{
+"id": "2155",
+"nom": "URSSAF - Obtenir une attestation de vigilance (attestation de régularité)",
+"url": "https://www.urssaf.fr/",
+"acc": "PC",
+"taux": "91 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "10/02/2026"
+},
+{
+"id": "2190",
+"nom": "Candidater à une offre d’emploi (France Travail)",
+"url": "https://candidat.francetravail.fr/",
+"acc": "PC",
+"taux": "57 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "01/09/2026"
+},
+{
+"id": "2191",
+"nom": "Rechercher sa formation (France Travail)",
+"url": "https://candidat.francetravail.fr/",
+"acc": "PC",
+"taux": "69 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "01/09/2026"
+},
+{
+"id": "2192",
+"nom": "CESU - Obtenir une attestation fiscale (Chèque Emploi Service Universel)",
+"url": "https://www.cesu.urssaf.fr/",
+"acc": "TC",
+"taux": "100 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "10/12/2025"
+},
+{
+"id": "2193",
+"nom": "PAJE - Déclarer les heures de volets sociaux (Prestation d'Accueil du Jeune Enfant)",
+"url": "https://pajemploi.urssaf.fr/",
+"acc": "PC",
+"taux": "83,67 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "10/11/2025"
+},
+{
+"id": "2194",
+"nom": "PAJE - Obtenir une attestation fiscale (Prestation d'Accueil du Jeune Enfant)",
+"url": "https://pajemploi.urssaf.fr/",
+"acc": "PC",
+"taux": "95,24 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "10/11/2025"
+},
+{
+"id": "2195",
+"nom": "PAJE - Adhérer (Prestation d'Accueil du Jeune Enfant)",
+"url": "https://pajemploi.urssaf.fr/",
+"acc": "PC",
+"taux": "72 %",
+"fc": "FranceConnect",
+"dlnuf": "3",
+"date_declaration": "10/07/2025"
+},
+{
+"id": "2443",
+"nom": "Mon estimation retraite",
+"url": "https://www.info-retraite.fr/portail-services/login",
+"acc": "NC",
+"taux": "",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "17/04/2023"
+},
+{
+"id": "2475",
+"nom": "Simulateur de revenus pour salarié",
+"url": "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net",
+"acc": "TC",
+"taux": "100 %",
+"fc": "Non applicable",
+"dlnuf": "Non applicable",
+"date_declaration": "13/01/2026"
+},
+{
+"id": "2737",
+"nom": "Demande d'allocation de soutien familial, d'intermédiation et d'aide au recouvrement des pensions alimentaires",
+"url": "https://connect.caf.fr/connexionappli/dist/#/login",
+"acc": "PC",
+"taux": "96 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "13/06/2024"
+},
+{
+"id": "2745",
+"nom": "Aide à la garde d'enfants (AGE) pour le demandeur d'emploi",
+"url": "https://candidat.francetravail.fr/",
+"acc": "PC",
+"taux": "50 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "01/09/2026"
+},
+{
+"id": "2763",
+"nom": "Ma carrière (Je consulte mon relevé de carrière)",
+"url": "https://www.info-retraite.fr/portail-services/login",
+"acc": "NC",
+"taux": "47 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "17/12/2024"
+},
+{
+"id": "2764",
+"nom": "Mes paiements - historique (paiements retraite info-retraite / suivi de mes paiements retraite)",
+"url": "https://www.info-retraite.fr/portail-services/login",
+"acc": "PC",
+"taux": "94,12 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "06/11/2024"
+},
+{
+"id": "2765",
+"nom": "Mes attestations de paiements",
+"url": "https://www.info-retraite.fr/portail-services/login",
+"acc": "PC",
+"taux": "94,29 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "06/11/2024"
+},
+{
+"id": "2766",
+"nom": "Mon épargne retraite (consulter ses contrats Epargne retraite)",
+"url": "https://www.info-retraite.fr/portail-services/login",
+"acc": "PC",
+"taux": "85,48 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "28/01/2026"
+},
+{
+"id": "2767",
+"nom": "Suivi des demandes (de correction de mon relevé de carrière, retraite et réversion )",
+"url": "https://www.info-retraite.fr/portail-services/login",
+"acc": "PC",
+"taux": "87,50 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "28/11/2024"
+},
+{
+"id": "2768",
+"nom": "Calculer l'indemnité de licenciement (simulateur)",
+"url": "https://code.travail.gouv.fr/outils/indemnite-licenciement",
+"acc": "TC",
+"taux": "100 %",
+"fc": "Non applicable",
+"dlnuf": "Non applicable",
+"date_declaration": "16/01/2026"
+},
+{
+"id": "2769",
+"nom": "Changement de situation (France Travail)",
+"url": "https://candidat.francetravail.fr/",
+"acc": "PC",
+"taux": "66 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "01/09/2026"
+},
+{
+"id": "2770",
+"nom": "Demande d'allocation de solidarité spécifique (France Travail)",
+"url": "https://candidat.francetravail.fr/",
+"acc": "PC",
+"taux": "80 %",
+"fc": "FranceConnect",
+"dlnuf": "À venir",
+"date_declaration": "01/09/2026"
+},
+{
+"id": "2771",
+"nom": "Carte vitale : perte et vol (tous régimes partenaires gérés par le régime général)",
+"url": "https://assure.ameli.fr/PortailAS/appmanager/PortailAS/assure?_nfpb=true&_pageLabel=as_pertevol_carte_vitale",
+"acc": "PC",
+"taux": "67 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "05/09/2025"
+},
+{
+"id": "2772",
+"nom": "Demande de pension d'invalidité",
+"url": "https://assure.ameli.fr/PortailAS/appmanager/PortailAS/assure?_somtc=true#",
+"acc": "NC",
+"taux": "44 %",
+"fc": "FranceConnect",
+"dlnuf": "4",
+"date_declaration": "05/09/2025"
+},
+{
+"id": "2773",
+"nom": "Prise de rendez-vous (Ameli)",
+"url": "https://assure.ameli.fr/PortailAS/appmanager/PortailAS/assure?_somtc=true#",
+"acc": "PC",
+"taux": "57 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "05/09/2025"
+},
+{
+"id": "2774",
+"nom": "Mise à jour des coordonnées bancaires (Ameli)",
+"url": "https://assure.ameli.fr/PortailAS/appmanager/PortailAS/assure?_nfpb=true&_pageLabel=as_infosbancaires_page",
+"acc": "PC",
+"taux": "67 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "05/09/2025"
+},
+{
+"id": "2775",
+"nom": "Chevauchement d’un organisme complémentaire",
+"url": "https://assure.ameli.fr/PortailAS/appmanager/PortailAS/assure?_nfpb=true&_pageLabel=as_infosbancaires_page",
+"acc": "PC",
+"taux": "58 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "05/09/2025"
+},
+{
+"id": "2823",
+"nom": "CEA - Emploi d'un salarié (Chèque Emploi Associatif)",
+"url": "",
+"acc": "",
+"taux": "",
+"fc": "À venir",
+"dlnuf": "À venir",
+"date_declaration": ""
+},
+{
+"id": "2826",
+"nom": "PAM - paiement des cotisations (Praticiens et Auxiliaires Médicaux)",
+"url": "https://www.urssaf.fr/",
+"acc": "PC",
+"taux": "66,67 %",
+"fc": "Non applicable",
+"dlnuf": "Non applicable",
+"date_declaration": "05/06/2025"
+},
+{
+"id": "2828",
+"nom": "AAD - Paiement des cotisations sociales (Diffuseurs d’œuvres)",
+"url": "https://www.artistes-auteurs.urssaf.fr/aa/",
+"acc": "NC",
+"taux": "43,10 %",
+"fc": "Non applicable",
+"dlnuf": "Non applicable",
+"date_declaration": "22/07/2025"
+},
+{
+"id": "2830",
+"nom": "Vérifier une attestation Urssaf",
+"url": "https://www.urssaf.fr/portail/home/utile-et-pratique/verification-attestation.html",
+"acc": "TC",
+"taux": "100 %",
+"fc": "Non applicable",
+"dlnuf": "Non applicable",
+"date_declaration": "01/09/2025"
+},
+{
+"id": "2865",
+"nom": "Simulateur de droits à l'aide au logement (PNDS)",
+"url": "https://www.mesdroitssociaux.gouv.fr/votre-simulateur/aide-logement",
+"acc": "PC",
+"taux": "98,08 %",
+"fc": "FranceConnect",
+"dlnuf": "2",
+"date_declaration": "26/06/2025"
+},
+{
+"id": "2866",
+"nom": "Simulateur de droits à l'allocation pour adulte handicapé(e) (PNDS)",
+"url": "https://www.mesdroitssociaux.gouv.fr/votre-simulateur/allocation-adulte-handicape",
+"acc": "PC",
+"taux": "98,08 %",
+"fc": "FranceConnect",
+"dlnuf": "4",
+"date_declaration": "26/06/2025"
+},
+{
+"id": "2867",
+"nom": "Simulateur de droits à la complémentaire santé solidaire (PNDS)",
+"url": "https://www.mesdroitssociaux.gouv.fr/votre-simulateur/complementaire-sante-solidaire",
+"acc": "PC",
+"taux": "98,08 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "26/06/2025"
+},
+{
+"id": "2868",
+"nom": "Simuler mes droits sociaux (PNDS)",
+"url": "https://www.mesdroitssociaux.gouv.fr/vos-simulateurs/#/rsa-pa/foyer",
+"acc": "TC",
+"taux": "100 %",
+"fc": "FranceConnect",
+"dlnuf": "À venir",
+"date_declaration": "26/06/2025"
+},
+{
+"id": "2928",
+"nom": "Mon espace santé",
+"url": "https://www.monespacesante.fr/",
+"acc": "PC",
+"taux": "86 %",
+"fc": "FranceConnect",
+"dlnuf": "Non applicable",
+"date_declaration": "31/01/2026"
+},
+{
+"id": "2940",
+"nom": "Achat de formation (CPF)",
+"url": "https://www.moncompteformation.gouv.fr/",
+"acc": "PC",
+"taux": "87,10 %",
+"fc": "FranceConnect +",
+"dlnuf": "1",
+"date_declaration": "30/06/2026"
+},
+{
+"id": "2988",
+"nom": "Déclaration préalable de détachement de salariés en ligne (SIPSI)",
+"url": "https://www.sipsi.travail.gouv.fr/",
+"acc": "PC",
+"taux": "82 %",
+"fc": "Non applicable",
+"dlnuf": "2",
+"date_declaration": "18/02/2026"
+},
+{
+"id": "3101",
+"nom": "Établir un certificat de décès",
+"url": "https://sic.certdc.inserm.fr/",
+"acc": "PC",
+"taux": "79 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "24/11/2025"
+},
+{
+"id": "3102",
+"nom": "Demande de Revenu de Solidarité Active (RSA)",
+"url": "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation#/solidariteetactivite",
+"acc": "PC",
+"taux": "94,34 %",
+"fc": "FranceConnect",
+"dlnuf": "7",
+"date_declaration": "05/03/2026"
+},
+{
+"id": "3103",
+"nom": "Déclaration trimestrielle RSA",
+"url": "https://connect.caf.fr/connexionappli/dist/#/login",
+"acc": "TC",
+"taux": "100 %",
+"fc": "FranceConnect",
+"dlnuf": "3",
+"date_declaration": "12/09/2025"
+},
+{
+"id": "3104",
+"nom": "Déclaration trimestrielle AAH (Allocation Adulte Handicapé)",
+"url": "https://connect.caf.fr/connexionappli/dist/#/login",
+"acc": "PC",
+"taux": "94,44 %",
+"fc": "FranceConnect",
+"dlnuf": "2",
+"date_declaration": "15/09/2025"
+},
+{
+"id": "3410",
+"nom": "Simulateur d'indemnité de rupture conventionnelle",
+"url": "https://code.travail.gouv.fr/outils/indemnite-rupture-conventionnelle",
+"acc": "TC",
+"taux": "100 %",
+"fc": "Non applicable",
+"dlnuf": "Non applicable",
+"date_declaration": "16/01/2026"
+},
+{
+"id": "3619",
+"nom": "Vérifier vos droits à la prime d'activité (Simulateur CAF)",
+"url": "https://wwwd.caf.fr/wps/portal/caffr/simulateurpa/",
+"acc": "NC",
+"taux": "",
+"fc": "Non applicable",
+"dlnuf": "Non applicable",
+"date_declaration": ""
+},
+{
+"id": "1666",
+"nom": "Tesa + Bulletins de salaire",
+"url": "https://monespaceprive.msa.fr/lfp/o/delegate/bookmark?codeServiceFct=K19TESAWEB",
+"acc": "NC",
+"taux": "",
+"fc": "FranceConnect",
+"dlnuf": "3",
+"date_declaration": ""
+},
+{
+"id": "1671",
+"nom": "Déclaration de situation pour les prestations familiales et les aides au logement",
+"url": "https://monespaceprive.msa.fr/lfp/o/delegate/bookmark?codeServiceFct=DCLCHGSIT",
+"acc": "PC",
+"taux": "91,67 %",
+"fc": "FranceConnect",
+"dlnuf": "2",
+"date_declaration": "04/06/2024"
+},
+{
+"id": "1819",
+"nom": "Déclaration trimestrielle de prime d’activité pour les assurés du régime agricole",
+"url": "https://monespaceprive.msa.fr/lfp/o/delegate/bookmark?codeServiceFct=PW3DMPAC",
+"acc": "NC",
+"taux": "41,30 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "20/05/2026"
+},
+{
+"id": "1820",
+"nom": "Demande de Complémentaire Santé Solidaire (CSS) pour les assurés du régime agricole",
+"url": "https://monespaceprive.msa.fr/lfp/o/delegate/bookmark?codeServiceFct=B45CMUCDMD",
+"acc": "NC",
+"taux": "42,50 %",
+"fc": "FranceConnect",
+"dlnuf": "2",
+"date_declaration": "20/05/2026"
+},
+{
+"id": "2058",
+"nom": "Demande d'aides aux surfaces (TéléPAC)",
+"url": "https://www2.telepac.agriculture.gouv.fr/telepac/auth/accueil.action",
+"acc": "NC",
+"taux": "25 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "23/07/2026"
+},
+{
+"id": "2059",
+"nom": "Demande d'aides aux bovins (TéléPAC)",
+"url": "https://www2.telepac.agriculture.gouv.fr/telepac/auth/accueil.action",
+"acc": "PC",
+"taux": "75 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "23/07/2026"
+},
+{
+"id": "2060",
+"nom": "Demande d'aides aux ovins (TéléPAC)",
+"url": "https://www2.telepac.agriculture.gouv.fr/telepac/auth/accueil.action",
+"acc": "PC",
+"taux": "75 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "23/07/2026"
+},
+{
+"id": "2244",
+"nom": "Demande d'aide au logement (MSA)",
+"url": "https://monespaceprive.msa.fr/lfp/o/delegate/bookmark?codeServiceFct=PL1SELPLOG",
+"acc": "PC",
+"taux": "71,43 %",
+"fc": "FranceConnect",
+"dlnuf": "3",
+"date_declaration": "04/06/2025"
+},
+{
+"id": "2706",
+"nom": "Tesa S Bulletins de salaire",
+"url": "https://monespaceprive.msa.fr/lfp/o/delegate/bookmark?codeServiceFct=K18TESAWEB",
+"acc": "PC",
+"taux": "59,18 %",
+"fc": "FranceConnect",
+"dlnuf": "3",
+"date_declaration": "07/11/2023"
+},
+{
+"id": "2752",
+"nom": "Demande de carte européenne d'assurance maladie (MSA)",
+"url": "https://monespaceprive.msa.fr/lfp/o/delegate/bookmark?codeServiceFct=DMDCEAM",
+"acc": "TC",
+"taux": "100 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "24/02/2026"
+},
+{
+"id": "2753",
+"nom": "Modification des coordonnées médiatiques (MSA)",
+"url": "https://monespaceprive.msa.fr/lfp/o/delegate/bookmark?codeServiceFct=GCMEXT",
+"acc": "TC",
+"taux": "100 %",
+"fc": "FranceConnect",
+"dlnuf": "1",
+"date_declaration": "12/05/2026"
+},
+{
+"id": "2757",
+"nom": "Attestations professionnelles (MSA)",
+"url": "https://monespaceprive.msa.fr/lfp/o/delegate/bookmark?codeServiceFct=N71ATTEXT",
+"acc": "NC",
+"taux": "29 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "22/11/2024"
+},
+{
+"id": "4024",
+"nom": "Tesa S DPAE",
+"url": "",
+"acc": "PC",
+"taux": "59,18 %",
+"fc": "À venir",
+"dlnuf": "À venir",
+"date_declaration": "07/11/2023"
+},
+{
+"id": "2733",
+"nom": "Aide à la transmission, à l’action culturelle et territoriale, à la langue française et aux langues de France",
+"url": "https://www.demarches-simplifiees.fr/commencer/aide_transmission-action-lflf",
+"acc": "PC",
+"taux": "93,10 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "15/04/2025"
+},
+{
+"id": "1771",
+"nom": "Recensement Citoyen Obligatoire",
+"url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2054",
+"acc": "PC",
+"taux": "92,73 %",
+"fc": "FranceConnect",
+"dlnuf": "5",
+"date_declaration": "27/04/2026"
+},
+{
+"id": "1799",
+"nom": "Demande de recherche administrative (créatrice de droits)",
+"url": "https://www.servicehistorique.sga.defense.gouv.fr/demarche/demande-de-documents-administratifs",
+"acc": "PC",
+"taux": "52,45 %",
+"fc": "Non",
+"dlnuf": "7",
+"date_declaration": "31/10/2025"
+},
+{
+"id": "2429",
+"nom": "Prestation éducation – aide à l’éducation",
+"url": "https://www.igesa.fr/e-social-des-armees/nos-offres-sociales/prestation-education",
+"acc": "PC",
+"taux": "83,33 %",
+"fc": "FranceConnect",
+"dlnuf": "9",
+"date_declaration": "08/01/2026"
+},
+{
+"id": "2491",
+"nom": "Subvention interministérielle pour le séjour de mon enfant en centre de loisirs sans hébergement",
+"url": "https://www.igesa.fr/e-social-des-armees/nos-offres-sociales/la-subvention-interministerielle-pour-le-sejour-de-mon-enfant-en-centre-de-loisirs-sans-hebergement",
+"acc": "PC",
+"taux": "83,33 %",
+"fc": "FranceConnect",
+"dlnuf": "12",
+"date_declaration": "08/01/2026"
+},
+{
+"id": "123",
+"nom": "Dépôts de compte et dépôts d’actes (entreprises)",
+"url": "https://procedures.inpi.fr/?/",
+"acc": "PC",
+"taux": "85,45 %",
+"fc": "FranceConnect +",
+"dlnuf": "3",
+"date_declaration": "01/08/2025"
+},
+{
+"id": "2042",
+"nom": "Gérer mon prélèvement à la source",
+"url": "https://www.impots.gouv.fr/",
+"acc": "PC",
+"taux": "82 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "30/10/2023"
+},
+{
+"id": "2225",
+"nom": "Recherche, consultation de données relatives aux entreprises",
+"url": "https://data.inpi.fr/",
+"acc": "PC",
+"taux": "96 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "27/04/2026"
+},
+{
+"id": "2343",
+"nom": "Formalités des entreprises (création, modification, cessation)",
+"url": "https://procedures.inpi.fr/?/",
+"acc": "PC",
+"taux": "85,45 %",
+"fc": "FranceConnect +",
+"dlnuf": "6",
+"date_declaration": "01/08/2025"
+},
+{
+"id": "2490",
+"nom": "Gérer Mes Biens Immobiliers – Déclaration d’occupation",
+"url": "https://www.impots.gouv.fr/",
+"acc": "NC",
+"taux": "41,94 %",
+"fc": "FranceConnect",
+"dlnuf": "3",
+"date_declaration": "17/04/2026"
+},
+{
+"id": "2726",
+"nom": "Formalité de l'enregistrement en ligne (dons, cessions de droits sociaux)",
+"url": "https://www.impots.gouv.fr/",
+"acc": "PC",
+"taux": "96,30 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "17/04/2024"
+},
+{
+"id": "2995",
+"nom": "Chorus Pro - Factures émises",
+"url": "https://cpro.chorus-pro.gouv.fr/cpp/rechercheFacturesEmises?execution=e3s1",
+"acc": "PC",
+"taux": "80,65 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "06/10/2025"
+},
+{
+"id": "3004",
+"nom": "Déclarations de contributions indirectes (alcool et tabacs) (CIEL)",
+"url": "https://www.douane.gouv.fr/service-en-ligne/contributions-indirectes-en-ligne-ciel2-tabacs",
+"acc": "PC",
+"taux": "94 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "27/04/2026"
+},
+{
+"id": "3005",
+"nom": "Déclaration en douane – Fret traditionnel (DELTA G)",
+"url": "https://www.douane.gouv.fr/service-en-ligne/declaration-en-douane-fret-traditionnel-delta-g",
+"acc": "NC",
+"taux": "35 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "01/04/2025"
+},
+{
+"id": "3008",
+"nom": "Déclaration de transit douanier (Delta-T)",
+"url": "https://www.douane.gouv.fr/service-en-ligne/declaration-de-transit-douanier-delta-t",
+"acc": "PC",
+"taux": "50 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "15/01/2026"
+},
+{
+"id": "3040",
+"nom": "Gestion de l’Accompagnement des Mouvements de Marchandises soumises à Accises (EMCS-GAMMA)",
+"url": "https://www.douane.gouv.fr/service-en-ligne/gamma2",
+"acc": "PC",
+"taux": "60 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "15/04/2024"
+},
+{
+"id": "3043",
+"nom": "Détaxe électronique pour les touristes : consultation bordereaux de vente en détaxe par les indépendants (PABLO-I )",
+"url": "https://www.douane.gouv.fr/service-en-ligne/gestion-de-bordereaux-de-vente-en-detaxe-pablo-i",
+"acc": "PC",
+"taux": "50 %",
+"fc": "Non applicable",
+"dlnuf": "3",
+"date_declaration": "27/01/2026"
+},
+{
+"id": "3055",
+"nom": "Déclaration d’Échanges de Biens Intracommunautaires (DEB)",
+"url": "https://www.douane.gouv.fr/service-en-ligne/echanges-intra-ue-de-biens-debweb2-ex-deb",
+"acc": "NC",
+"taux": "49 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "08/04/2026"
+},
+{
+"id": "3056",
+"nom": "Déclaration mensuelle des opérations de service pour lesquelles la TVA est acquittée par le preneur établi dans un autre État membre (DES)",
+"url": "https://www.douane.gouv.fr/service-en-ligne/declaration-europeenne-de-services-des",
+"acc": "PC",
+"taux": "52 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "08/04/2026"
+},
+{
+"id": "3059",
+"nom": "Déclaration des revenus",
+"url": "https://www.impots.gouv.fr/",
+"acc": "NC",
+"taux": "26 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "02/06/2026"
+},
+{
+"id": "3061",
+"nom": "Déclarer la TVA",
+"url": "https://www.impots.gouv.fr/",
+"acc": "PC",
+"taux": "76 %",
+"fc": "Non applicable",
+"dlnuf": "4",
+"date_declaration": "03/07/2025"
+},
+{
+"id": "3062",
+"nom": "Déclaration de résultat BIC, IS, BA pour régime RSI, BNC et RF des SCI déposant une 2072 C, TS (ACQUI EFI PRO)",
+"url": "https://www.impots.gouv.fr/",
+"acc": "PC",
+"taux": "76 %",
+"fc": "Non applicable",
+"dlnuf": "4",
+"date_declaration": "03/07/2025"
+},
+{
+"id": "3065",
+"nom": "Paiement amendes (Amendes)",
+"url": "https://www.amendes.gouv.fr/",
+"acc": "PC",
+"taux": "93 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "15/04/2026"
+},
+{
+"id": "3066",
+"nom": "Achat de timbre fiscal",
+"url": "https://timbres.impots.gouv.fr/",
+"acc": "PC",
+"taux": "89 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "24/04/2026"
+},
+{
+"id": "3067",
+"nom": "Rechercher des transactions immobilières",
+"url": "https://www.impots.gouv.fr/",
+"acc": "PC",
+"taux": "97,96 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "30/03/2026"
+},
+{
+"id": "3069",
+"nom": "Recensement de la population",
+"url": "https://www.le-recensement-et-moi.fr/",
+"acc": "PC",
+"taux": "96,20 %",
+"fc": "Non applicable",
+"dlnuf": "Non applicable",
+"date_declaration": "18/09/2025"
+},
+{
+"id": "3080",
+"nom": "Recherche, consultation des marques en vigueur en France (Base marques)",
+"url": "https://data.inpi.fr/",
+"acc": "PC",
+"taux": "96 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "27/04/2026"
+},
+{
+"id": "3081",
+"nom": "Recherche, consultation de brevets (Base brevets)",
+"url": "https://data.inpi.fr/",
+"acc": "PC",
+"taux": "96 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "27/04/2026"
+},
+{
+"id": "3082",
+"nom": "Recherche, consultation de modèles (Base dessins et modèles)",
+"url": "https://data.inpi.fr/",
+"acc": "PC",
+"taux": "96 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "27/04/2026"
+},
+{
+"id": "3537",
+"nom": "Demande de relevé de propriété",
+"url": "",
+"acc": "",
+"taux": "",
+"fc": "–",
+"dlnuf": "–",
+"date_declaration": ""
+},
+{
+"id": "3611",
+"nom": "Remboursement de timbres électroniques",
+"url": "https://timbres.impots.gouv.fr/",
+"acc": "PC",
+"taux": "89 %",
+"fc": "Non applicable",
+"dlnuf": "0",
+"date_declaration": "24/04/2026"
+},
+{
+"id": "1731",
+"nom": "Inscription en 5ème, 4ème ou 3ème",
+"url": "https://teleservices.education.gouv.fr/",
+"acc": "PC",
+"taux": "96 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "10/08/2026"
+},
+{
+"id": "1732",
+"nom": "Orientation en fin de collège",
+"url": "https://teleservices.education.gouv.fr/",
+"acc": "PC",
+"taux": "94 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "18/09/2026"
+},
+{
+"id": "1733",
+"nom": "Orientation au lycée",
+"url": "https://teleservices.education.gouv.fr/",
+"acc": "PC",
+"taux": "94 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "18/09/2026"
+},
+{
+"id": "1740",
+"nom": "Consulter le livret scolaire unique (école et collège)",
+"url": "https://teleservices.education.gouv.fr/",
+"acc": "PC",
+"taux": "76 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "02/10/2026"
+},
+{
+"id": "1742",
+"nom": "Consulter le livret scolaire (lycée)",
+"url": "https://teleservices.education.gouv.fr/",
+"acc": "PC",
+"taux": "77 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "10/07/2026"
+},
+{
+"id": "2972",
+"nom": "Demande de bourse (collège et lycée)",
+"url": "https://teleservices.education.gouv.fr/",
+"acc": "PC",
+"taux": "72 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "10/07/2026"
+},
+{
+"id": "3084",
+"nom": "S’inscrire à une formation au CNED",
+"url": "https://www.cned.fr/compte",
+"acc": "PC",
+"taux": "87 %",
+"fc": "FranceConnect",
+"dlnuf": "1",
+"date_declaration": "25/11/2024"
+},
+{
+"id": "3086",
+"nom": "Inscription à l'entrée au collège",
+"url": "https://teleservices.education.gouv.fr/",
+"acc": "PC",
+"taux": "96 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "10/08/2026"
+},
+{
+"id": "3093",
+"nom": "Formuler des vœux d'affectation ou de poursuite post 3ème",
+"url": "https://teleservices.education.gouv.fr/",
+"acc": "PC",
+"taux": "79 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "11/06/2026"
+},
+{
+"id": "3094",
+"nom": "Inscription à l'entrée au lycée",
+"url": "https://teleservices.education.gouv.fr/",
+"acc": "PC",
+"taux": "96 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "10/08/2026"
+},
+{
+"id": "3096",
+"nom": "Inscription en 2e ou 3e année de lycée",
+"url": "https://teleservices.education.gouv.fr/",
+"acc": "PC",
+"taux": "96 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "10/08/2026"
+},
+{
+"id": "1629",
+"nom": "Demande de regroupement familial (ressortissants étrangers)",
+"url": "https://etrangers-en-france.interieur.gouv.fr/vivre-en-france/le-regroupement-familial",
+"acc": "PC",
+"taux": "98,40 %",
+"fc": "Non applicable",
+"dlnuf": "1",
+"date_declaration": "17/03/2026"
+},
+{
+"id": "1634",
+"nom": "Déclaration de modification ou de dissolution d'une association",
+"url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R37933",
+"acc": "PC",
+"taux": "76,27 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "06/12/2024"
+},
+{
+"id": "1635",
+"nom": "Création d'une association (e-création)",
+"url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R37933",
+"acc": "PC",
+"taux": "72,34 %",
+"fc": "FranceConnect",
+"dlnuf": "5",
+"date_declaration": "13/01/2025"
+},
+{
+"id": "1636",
+"nom": "Autorisation de sortie du territoire (AST) d'un mineur non accompagné par un titulaire de l'autorité parentale",
+"url": "https://www.service-public.gouv.fr/simulateur/calcul/15646-01",
+"acc": "PC",
+"taux": "78,43 %",
+"fc": "Non applicable",
+"dlnuf": "Non applicable",
+"date_declaration": "19/12/2024"
+},
+{
+"id": "1637",
+"nom": "Demande d'inscription sur les listes électorales communales",
+"url": "https://www.inscriptionelectorale.service-public.fr/",
+"acc": "PC",
+"taux": "82 %",
+"fc": "FranceConnect",
+"dlnuf": "8",
+"date_declaration": "28/12/2024"
+},
+{
+"id": "1638",
+"nom": "Etablissement d'une procuration de vote (Maprocuration)",
+"url": "https://maprocuration.gouv.fr/",
+"acc": "PC",
+"taux": "98,15 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "07/01/2024"
+},
+{
+"id": "1641",
+"nom": "Demande de permis de conduire après suspension, invalidation et annulation dont AM après perte de droits",
+"url": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis",
+"acc": "PC",
+"taux": "55,22 %",
+"fc": "FranceConnect",
+"dlnuf": "4",
+"date_declaration": "06/02/2025"
+},
+{
+"id": "1642",
+"nom": "Déclaration de cession d'un véhicule",
+"url": "https://immatriculation.ants.gouv.fr/",
+"acc": "NC",
+"taux": "42,65 %",
+"fc": "FranceConnect",
+"dlnuf": "1",
+"date_declaration": "04/04/2024"
+},
+{
+"id": "1644",
+"nom": "Demande de renouvellement du certificat d'immatriculation (carte grise) suite à perte, vol ou détérioration du titre",
+"url": "https://immatriculation.ants.gouv.fr/",
+"acc": "NC",
+"taux": "39,71 %",
+"fc": "FranceConnect",
+"dlnuf": "1",
+"date_declaration": "04/04/2024"
+},
+{
+"id": "1652",
+"nom": "Déclaration de détention et d'acquisition d'armes",
+"url": "https://sia.detenteurs.interieur.gouv.fr",
+"acc": "NC",
+"taux": "42 %",
+"fc": "Non",
+"dlnuf": "8",
+"date_declaration": "24/07/2024"
+},
+{
+"id": "1657",
+"nom": "Demande de certificat de situation administrative (non gage)",
+"url": "https://siv.interieur.gouv.fr/map-usg-ui/do/accueil_certificat",
+"acc": "NC",
+"taux": "40,48 %",
+"fc": "Non applicable",
+"dlnuf": "1",
+"date_declaration": "20/03/2024"
+},
+{
+"id": "1713",
+"nom": "Mes Points Permis",
+"url": "https://mespoints.permisdeconduire.gouv.fr/bienvenue",
+"acc": "PC",
+"taux": "91 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "27/04/2024"
+},
+{
+"id": "1714",
+"nom": "Déclaration de changement d'adresse sur le certificat d'immatriculation",
+"url": "https://immatriculation.ants.gouv.fr/",
+"acc": "NC",
+"taux": "44,11 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "04/04/2024"
+},
+{
+"id": "1715",
+"nom": "Demande de passeport",
+"url": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-passeport",
+"acc": "PC",
+"taux": "73,24 %",
+"fc": "FranceConnect",
+"dlnuf": "1",
+"date_declaration": "20/12/2024"
+},
+{
+"id": "1729",
+"nom": "Demande de carte nationale d’identité",
+"url": "https://passeport.ants.gouv.fr/Services-associes/Realiser-une-pre-demande-de-carte-nationale-d-identite-CNI",
+"acc": "PC",
+"taux": "73,24 %",
+"fc": "FranceConnect",
+"dlnuf": "1",
+"date_declaration": "20/12/2024"
+},
+{
+"id": "1734",
+"nom": "Consulter les résultats de son examen de permis de conduire",
+"url": "http://www.securite-routiere.gouv.fr/permis-de-conduire/resultats-du-permis-de-conduire#/step-connexion",
+"acc": "PC",
+"taux": "80 %",
+"fc": "FranceConnect",
+"dlnuf": "1",
+"date_declaration": "18/12/2023"
+},
+{
+"id": "1737",
+"nom": "Contestation d’avis de contravention et désignation de conducteur (infractions relevées par radars ou Pve)",
+"url": "https://www.usagers.antai.gouv.fr/demarches/saisienumero?lang=fr",
+"acc": "PC",
+"taux": "79 %",
+"fc": "Non applicable",
+"dlnuf": "1",
+"date_declaration": "07/04/2026"
+},
+{
+"id": "1738",
+"nom": "Consulter et suivre son dossier d'infraction routière",
+"url": "https://www.antai.gouv.fr/particulier/suivre-mon-dossier-infraction/",
+"acc": "PC",
+"taux": "79 %",
+"fc": "Non applicable",
+"dlnuf": "1",
+"date_declaration": "07/04/2026"
+},
+{
+"id": "1754",
+"nom": "Inscription en ligne à l'examen du permis de conduire",
+"url": "https://www.securite-routiere.gouv.fr/passer-son-permis-de-conduire/inscription-et-formation/reserver-en-ligne-sa-place-pour-le",
+"acc": "PC",
+"taux": "80 %",
+"fc": "FranceConnect",
+"dlnuf": "4",
+"date_declaration": "18/12/2023"
+},
+{
+"id": "1755",
+"nom": "Demande de permis de conduire après réussite à l'examen",
+"url": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/reussite-a-l-examen-du-permis-de-conduire",
+"acc": "PC",
+"taux": "55,22 %",
+"fc": "FranceConnect",
+"dlnuf": "4",
+"date_declaration": "06/02/2025"
+},
+{
+"id": "1756",
+"nom": "Demande de renouvellement du permis de conduire en cas de perte, vol, détérioration ou changement d'état-civil",
+"url": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil",
+"acc": "PC",
+"taux": "55,22 %",
+"fc": "FranceConnect",
+"dlnuf": "4",
+"date_declaration": "06/02/2025"
+},
+{
+"id": "1757",
+"nom": "Demande de renouvellement du permis de conduire après expiration du titre",
+"url": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/deterioration-remplacement-du-permis-pliant-3-volets-ou-fin-de-validite",
+"acc": "PC",
+"taux": "55,22 %",
+"fc": "FranceConnect",
+"dlnuf": "4",
+"date_declaration": "06/02/2025"
+},
+{
+"id": "1758",
+"nom": "Signaler une utilisation frauduleuse de sa carte bancaire en ligne (PERCEVAL)",
+"url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R46526",
+"acc": "PC",
+"taux": "82,35 %",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "06/12/2024"
+},
+{
+"id": "1759",
+"nom": "Demande de permis de conduire international",
+"url": "https://permisdeconduire.ants.gouv.fr/",
+"acc": "NC",
+"taux": "49,23 %",
+"fc": "FranceConnect",
+"dlnuf": "4",
+"date_declaration": "21/10/2024"
+},
+{
+"id": "1760",
+"nom": "Consulter l’historique officiel et la situation administrative d’un véhicule d’occasion (Histovec)",
+"url": "https://histovec.interieur.gouv.fr/histovec/accueil",
+"acc": "PC",
+"taux": "82 %",
+"fc": "Non applicable",
+"dlnuf": "1",
+"date_declaration": "27/03/2026"
+},
+{
+"id": "1772",
+"nom": "Demande de titre de séjour",
+"url": "https://administration-etrangers-en-france.interieur.gouv.fr/particuliers/#/sejour/triage-demandeur",
+"acc": "NC",
+"taux": "",
+"fc": "Non",
+"dlnuf": "14",
+"date_declaration": "06/05/2024"
+},
+{
+"id": "1773",
+"nom": "Autres demandes concernant l’immatriculation de véhicule",
+"url": "https://immatriculation.ants.gouv.fr/",
+"acc": "NC",
+"taux": "",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "03/11/2022"
+},
+{
+"id": "1776",
+"nom": "Demande de certificat d'immatriculation d'un véhicule d'occasion immatriculé en France (changement de titulaire du véhicule)",
+"url": "https://immatriculation.ants.gouv.fr/",
+"acc": "NC",
+"taux": "42,66 %",
+"fc": "FranceConnect",
+"dlnuf": "1",
+"date_declaration": "04/04/2024"
+},
+{
+"id": "1795",
+"nom": "Dépôt de plainte en ligne pour escroqueries commises sur Internet (THESEE)",
+"url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R47816",
+"acc": "PC",
+"taux": "62 %",
+"fc": "FranceConnect",
+"dlnuf": "1",
+"date_declaration": "30/01/2025"
+},
+{
+"id": "2056",
+"nom": "Dépôt de plainte en ligne",
+"url": "https://plainte-en-ligne.masecurite.interieur.gouv.fr/",
+"acc": "TC",
+"taux": "100 %",
+"fc": "FranceConnect",
+"dlnuf": "3",
+"date_declaration": "26/03/2026"
+},
+{
+"id": "2658",
+"nom": "Recherche du véhicule à partir du numéro d’immatriculation (fourrières)",
+"url": "https://www.service-public.gouv.fr/particuliers/vosdroits/demarches-et-outils/interrogation-fourriere",
+"acc": "TC",
+"taux": "100 %",
+"fc": "Non applicable",
+"dlnuf": "Non applicable",
+"date_declaration": "14/12/2023"
+},
+{
+"id": "3414",
+"nom": "Demande de Visa (France Visa)",
+"url": "https://france-visas.gouv.fr/demande-de-visa",
+"acc": "PC",
+"taux": "80,95 %",
+"fc": "Non applicable",
+"dlnuf": "Non applicable",
+"date_declaration": "21/08/2026"
+},
+{
+"id": "1708",
+"nom": "Pre-demande de Pacs",
+"url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R46162",
+"acc": "NC",
+"taux": "",
+"fc": "FranceConnect",
+"dlnuf": "0",
+"date_declaration": "16/06/2023"
+},
+{
+"id": "1730",
+"nom": "Demande d'extrait de casier judiciaire (bulletin n°3)",
+"url": "https://casier-judiciaire.justice.gouv.fr/mai-web-b3-presentation/pages/creation/orientation.xhtml?cid=1",
+"acc": "TC",
+"taux": "100 %",
+"fc": "FranceConnect",
+"dlnuf": "3",
+"date_declaration": "18/12/2025"
+},
+{
+"id": "1747",
+"nom": "Demande d'aide juridictionnelle",
+"url": "https://www.aidejuridictionnelle.justice.fr/",
+"acc": "PC",
+"taux": "97 %",
+"fc": "FranceConnect",
+"dlnuf": "12",
+"date_declaration": "25/02/2026"
+},
+{
+"id": "1763",
+"nom": "Saisine du Défenseur des droits",
+"url": "https://formulaire.defenseurdesdroits.fr/code/afficher.php?ETAPE=accueil_2016",
+"acc": "PC",
+"taux": "96,40 %",
+"fc": "Non applicable",
+"dlnuf": "Non applicable",
+"date_declaration": "10/12/2024"
+},
+{
+"id": "1639",
+"nom": "Demande de subvention pour travaux - Propriétaires occupants dite « MonProjet ANAH »",
+"url": "https://monprojet.anah.gouv.fr/",
+"acc": "NC",
+"taux": "",
+"fc": "Non",
+"dlnuf": "1",
+"date_declaration": "25/07/2024"
+},
+{
+"id": "1709",
+"nom": "Demande de certificat qualité de l'air (Crit’air)",
+"url": "https://www.certificat-air.gouv.fr/",
+"acc": "NC",
+"taux": "",
+"fc": "FranceConnect",
+"dlnuf": "3",
+"date_declaration": "22/12/2022"
+},
+{
+"id": "1736",
+"nom": "Demande de logement social – renouvellement",
+"url": "https://www.demande-logement-social.gouv.fr/",
+"acc": "PC",
+"taux": "83 %",
+"fc": "FranceConnect",
+"dlnuf": "22",
+"date_declaration": "27/05/2026"
+},
+{
+"id": "2250",
+"nom": "Demande de prime de transition énergétique dite \"MaPrimeRénov'\"",
+"url": "https://www.maprimerenov.gouv.fr/",
+"acc": "NC",
+"taux": "",
+"fc": "FranceConnect +",
+"dlnuf": "0",
+"date_declaration": "11/07/2024"
+},
+{
+"id": "2278",
+"nom": "DossierFacile : aide à la constitution d’un dossier numérique de location de logement",
+"url": "https://www.dossierfacile.logement.gouv.fr/",
+"acc": "PC",
+"taux": "56,90 %",
+"fc": "FranceConnect",
+"dlnuf": "Non applicable",
+"date_declaration": "12/06/2025"
+},
+{
+"id": "2510",
+"nom": "Assistance aux Demandes d'Autorisation d'Urbanisme (Permis de construire en ligne) - ADAU",
+"url": "https://www.service-public.gouv.fr/particuliers/vosdroits/R52221",
+"acc": "PC",
+"taux": "69 %",
+"fc": "FranceConnect",
+"dlnuf": "1",
+"date_declaration": "19/05/2025"
+},
+{
+"id": "2604",
+"nom": "Demande de carte famille nombreuse",
+"url": "https://www.carte-familles-nombreuses.gouv.fr/",
+"acc": "TC",
+"taux": "100 %",
+"fc": "Non",
+"dlnuf": "11",
+"date_declaration": "10/10/2024"
+},
+{
+"id": "2717",
+"nom": "Demande de logement social – demande initiale",
+"url": "https://www.demande-logement-social.gouv.fr/",
+"acc": "PC",
+"taux": "83 %",
+"fc": "FranceConnect",
+"dlnuf": "22",
+"date_declaration": "27/05/2026"
+},
+{
+"id": "2839",
+"nom": "Signaler un problème de mal-logement (Signal Logement)",
+"url": "https://signal-logement.beta.gouv.fr/",
+"acc": "NC",
+"taux": "",
+"fc": "Non",
+"dlnuf": "3",
+"date_declaration": "12/09/2025"
+},
+{
+"id": "2981",
+"nom": "Demande de prime à la conversion et bonus écologique",
+"url": "https://www.primealaconversion.gouv.fr/dboneco/accueil/access.html",
+"acc": "PC",
+"taux": "98,36 %",
+"fc": "FranceConnect",
+"dlnuf": "1",
+"date_declaration": "15/01/2026"
+}
+],
+"spp": {
+"demarche": {
+"achat de timbre fiscal": {
+"nom": "Achat de timbre fiscal",
+"n": 66,
+"neg": 24,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+8
+]
+]
+},
+"admission dans l'enseignement supérieur (parcoursup)": {
+"nom": "Admission dans l'enseignement supérieur (Parcoursup)",
+"n": 49,
+"neg": 32,
+"motifs": [
+[
+"explication",
+13
+]
+]
+},
+"affiliation des travailleurs indépendants": {
+"nom": "Affiliation des travailleurs indépendants",
+"n": 47,
+"neg": 38,
+"motifs": [
+[
+"explication",
+12
+],
+[
+"delai",
+6
+]
+]
+},
+"attestation de paiement d'indemnités journalières": {
+"nom": "Attestation de paiement d'indemnités journalières",
+"n": 121,
+"neg": 77,
+"motifs": [
+[
+"delai",
+58
+],
+[
+"explication",
+41
+]
+]
+},
+"attestations fiscales retraités régime général": {
+"nom": "Attestations fiscales retraités régime général",
+"n": 24,
+"neg": 18,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+7
+]
+]
+},
+"autres demandes concernant l'immatriculation de véhicule": {
+"nom": "Autres demandes concernant l’immatriculation de véhicule",
+"n": 247,
+"neg": 181,
+"motifs": [
+[
+"explication",
+81
+],
+[
+"delai",
+61
+]
+]
+},
+"candidater à une offre d'emploi (france travail)": {
+"nom": "Candidater à une offre d’emploi (France Travail)",
+"n": 56,
+"neg": 30,
+"motifs": [
+[
+"explication",
+11
+],
+[
+"joignable",
+8
+]
+]
+},
+"carte vitale : perte et vol (tous régimes partenaires gérés par le régime général)": {
+"nom": "Carte vitale : perte et vol (tous régimes partenaires gérés par le régime général)",
+"n": 34,
+"neg": 12,
+"motifs": []
+},
+"cesu - créer son compte - futur employeur (chèque emploi service universel)": {
+"nom": "CESU - Créer son compte - Futur employeur (Chèque Emploi Service Universel)",
+"n": 21,
+"neg": 10,
+"motifs": []
+},
+"cesu - déclarer les heures des volets sociaux (chèque emploi service universel)": {
+"nom": "CESU - Déclarer les heures des volets sociaux (Chèque Emploi Service Universel)",
+"n": 269,
+"neg": 73,
+"motifs": [
+[
+"explication",
+23
+],
+[
+"delai",
+6
+]
+]
+},
+"changement d'adresse (ameli)": {
+"nom": "Changement d'adresse (Ameli)",
+"n": 38,
+"neg": 16,
+"motifs": [
+[
+"delai",
+5
+]
+]
+},
+"changement de situation (france travail)": {
+"nom": "Changement de situation (France Travail)",
+"n": 67,
+"neg": 47,
+"motifs": [
+[
+"explication",
+20
+],
+[
+"delai",
+14
+]
+]
+},
+"consultation du plan cadastral": {
+"nom": "Consultation du plan cadastral",
+"n": 24,
+"neg": 21,
+"motifs": [
+[
+"explication",
+8
+]
+]
+},
+"consulter le livret scolaire unique (école et collège)": {
+"nom": "Consulter le livret scolaire unique (école et collège)",
+"n": 28,
+"neg": 11,
+"motifs": []
+},
+"consulter le montant déclaré à l'administration fiscale": {
+"nom": "Consulter le montant déclaré à l’administration fiscale",
+"n": 38,
+"neg": 25,
+"motifs": [
+[
+"explication",
+12
+]
+]
+},
+"créer son compte sur le site majdc.fr": {
+"nom": "Créer son compte sur le site majdc.fr",
+"n": 33,
+"neg": 16,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"demande d'acte de mariage (célébré à l'étranger)": {
+"nom": "Demande d'acte de mariage (célébré à l'étranger)",
+"n": 53,
+"neg": 25,
+"motifs": [
+[
+"delai",
+12
+],
+[
+"explication",
+9
+]
+]
+},
+"demande d'acte de naissance (à l'étranger)": {
+"nom": "Demande d'acte de naissance (à l'étranger)",
+"n": 184,
+"neg": 100,
+"motifs": [
+[
+"explication",
+27
+],
+[
+"delai",
+22
+]
+]
+},
+"demande d'aide au logement": {
+"nom": "Demande d'aide au logement",
+"n": 109,
+"neg": 65,
+"motifs": [
+[
+"explication",
+35
+],
+[
+"delai",
+25
+]
+]
+},
+"demande d'aide financière": {
+"nom": "Demande d'aide financière",
+"n": 154,
+"neg": 112,
+"motifs": [
+[
+"delai",
+47
+],
+[
+"explication",
+40
+]
+]
+},
+"demande d'aide juridictionnelle": {
+"nom": "Demande d'aide juridictionnelle",
+"n": 36,
+"neg": 12,
+"motifs": []
+},
+"demande d'allocation de solidarité spécifique (france travail)": {
+"nom": "Demande d'allocation de solidarité spécifique (France Travail)",
+"n": 28,
+"neg": 13,
+"motifs": [
+[
+"explication",
+8
+]
+]
+},
+"demande d'allocation de soutien familial - aripa": {
+"nom": "Demande d'allocation de soutien familial - ARIPA",
+"n": 20,
+"neg": 18,
+"motifs": [
+[
+"delai",
+10
+],
+[
+"explication",
+8
+]
+]
+},
+"demande d'autorisation d'urbanisme": {
+"nom": "Demande d'autorisation d'urbanisme",
+"n": 23,
+"neg": 18,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"demande d'extrait de casier judiciaire (bulletin n°3)": {
+"nom": "Demande d'extrait de casier judiciaire (bulletin n°3)",
+"n": 138,
+"neg": 45,
+"motifs": [
+[
+"explication",
+9
+]
+]
+},
+"demande d'extrait de casier judiciaire (par internet) pour les personnes nées en france": {
+"nom": "Demande d’extrait de casier judiciaire (par internet) pour les personnes nées en France",
+"n": 41,
+"neg": 12,
+"motifs": []
+},
+"demande d'inscription sur les listes électorales communales": {
+"nom": "Demande d'inscription sur les listes électorales communales",
+"n": 396,
+"neg": 154,
+"motifs": [
+[
+"explication",
+50
+],
+[
+"delai",
+5
+]
+]
+},
+"demande d'éligibilité à maprimerenov'": {
+"nom": "Demande d'éligibilité à MaPrimeRenov'",
+"n": 209,
+"neg": 184,
+"motifs": [
+[
+"explication",
+91
+],
+[
+"delai",
+82
+]
+]
+},
+"demande de bonus écologique, prime à la conversion (particuliers)": {
+"nom": "Demande de bonus écologique, prime à la conversion (particuliers)",
+"n": 27,
+"neg": 23,
+"motifs": [
+[
+"delai",
+9
+],
+[
+"explication",
+9
+]
+]
+},
+"demande de bourse d'enseignement supérieur sur critères sociaux (bcs)": {
+"nom": "Demande de bourse d'enseignement supérieur sur critères sociaux (BCS)",
+"n": 89,
+"neg": 84,
+"motifs": [
+[
+"delai",
+32
+],
+[
+"explication",
+32
+]
+]
+},
+"demande de carte européenne d'assurance maladie (msa)": {
+"nom": "Demande de carte européenne d'assurance maladie (MSA)",
+"n": 21,
+"neg": 3,
+"motifs": []
+},
+"demande de carte nationale d'identité": {
+"nom": "Demande de carte nationale d’identité",
+"n": 262,
+"neg": 149,
+"motifs": [
+[
+"explication",
+37
+],
+[
+"delai",
+32
+]
+]
+},
+"demande de carte nationale d'identité auprès des services consulaires": {
+"nom": "Demande de carte nationale d'identité auprès des services consulaires",
+"n": 246,
+"neg": 100,
+"motifs": [
+[
+"delai",
+30
+],
+[
+"joignable",
+27
+]
+]
+},
+"demande de certificat d'immatriculation d'un véhicule d'occasion immatriculé en france (": {
+"nom": "Demande de certificat d'immatriculation d'un véhicule d'occasion immatriculé en France (",
+"n": 346,
+"neg": 191,
+"motifs": [
+[
+"explication",
+62
+],
+[
+"delai",
+56
+]
+]
+},
+"demande de certificat de situation administrative (non gage)": {
+"nom": "Demande de certificat de situation administrative (non gage)",
+"n": 92,
+"neg": 21,
+"motifs": [
+[
+"delai",
+5
+],
+[
+"explication",
+5
+]
+]
+},
+"demande de certificat qualité de l'air (crit'air)": {
+"nom": "Demande de certificat qualité de l'air (Crit’air)",
+"n": 112,
+"neg": 33,
+"motifs": [
+[
+"explication",
+7
+],
+[
+"delai",
+5
+]
+]
+},
+"demande de cni/passeport (ants)": {
+"nom": "Demande de CNI/Passeport (ANTS)",
+"n": 521,
+"neg": 252,
+"motifs": [
+[
+"explication",
+81
+],
+[
+"delai",
+78
+]
+]
+},
+"demande de cni/passeport (préfectures)": {
+"nom": "Demande de CNI/Passeport (Préfectures)",
+"n": 74,
+"neg": 57,
+"motifs": [
+[
+"delai",
+34
+],
+[
+"explication",
+25
+]
+]
+},
+"demande de complémentaire santé solidaire (cpam)": {
+"nom": "Demande de complémentaire santé solidaire (CPAM)",
+"n": 71,
+"neg": 32,
+"motifs": [
+[
+"explication",
+22
+],
+[
+"delai",
+16
+]
+]
+},
+"demande de copie ou d'extrait d'acte d'état civil par voie dématérialisée": {
+"nom": "Demande de copie ou d'extrait d'acte d'état civil par voie dématérialisée",
+"n": 249,
+"neg": 149,
+"motifs": [
+[
+"delai",
+39
+],
+[
+"explication",
+36
+]
+]
+},
+"demande de logement en cité universitaire": {
+"nom": "Demande de logement en cité universitaire",
+"n": 22,
+"neg": 12,
+"motifs": [
+[
+"explication",
+6
+]
+]
+},
+"demande de logement social – demande initiale": {
+"nom": "Demande de logement social – demande initiale",
+"n": 41,
+"neg": 26,
+"motifs": [
+[
+"explication",
+9
+]
+]
+},
+"demande de logement social – renouvellement": {
+"nom": "Demande de logement social – renouvellement",
+"n": 43,
+"neg": 25,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+8
+]
+]
+},
+"demande de passeport": {
+"nom": "Demande de passeport",
+"n": 784,
+"neg": 272,
+"motifs": [
+[
+"explication",
+89
+],
+[
+"joignable",
+79
+]
+]
+},
+"demande de pension d'invalidité": {
+"nom": "Demande de pension d'invalidité",
+"n": 70,
+"neg": 38,
+"motifs": [
+[
+"explication",
+22
+],
+[
+"delai",
+20
+]
+]
+},
+"demande de pension de réversion": {
+"nom": "Demande de pension de réversion",
+"n": 143,
+"neg": 86,
+"motifs": [
+[
+"delai",
+44
+],
+[
+"explication",
+43
+]
+]
+},
+"demande de permis de conduire après réussite à l'examen": {
+"nom": "Demande de permis de conduire après réussite à l'examen",
+"n": 182,
+"neg": 139,
+"motifs": [
+[
+"delai",
+63
+],
+[
+"explication",
+57
+]
+]
+},
+"demande de permis de conduire après suspension, invalidation et annulation dont am après": {
+"nom": "Demande de permis de conduire après suspension, invalidation et annulation dont AM après",
+"n": 165,
+"neg": 109,
+"motifs": [
+[
+"delai",
+57
+],
+[
+"explication",
+47
+]
+]
+},
+"demande de permis de conduire international": {
+"nom": "Demande de permis de conduire international",
+"n": 123,
+"neg": 54,
+"motifs": [
+[
+"delai",
+25
+],
+[
+"explication",
+19
+]
+]
+},
+"demande de prime d'activité": {
+"nom": "Demande de prime d'activité",
+"n": 36,
+"neg": 25,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+11
+]
+]
+},
+"demande de remboursement de soins (cnmss)": {
+"nom": "Demande de remboursement de soins (CNMSS)",
+"n": 100,
+"neg": 64,
+"motifs": [
+[
+"delai",
+38
+],
+[
+"explication",
+25
+]
+]
+},
+"demande de renouvellement du certificat d'immatriculation (carte grise) suite à perte, v": {
+"nom": "Demande de renouvellement du certificat d'immatriculation (carte grise) suite à perte, v",
+"n": 260,
+"neg": 180,
+"motifs": [
+[
+"explication",
+78
+],
+[
+"delai",
+62
+]
+]
+},
+"demande de renouvellement du permis de conduire après expiration du titre": {
+"nom": "Demande de renouvellement du permis de conduire après expiration du titre",
+"n": 283,
+"neg": 81,
+"motifs": [
+[
+"explication",
+28
+],
+[
+"delai",
+22
+]
+]
+},
+"demande de renouvellement du permis de conduire en cas de perte, vol, détérioration ou c": {
+"nom": "Demande de renouvellement du permis de conduire en cas de perte, vol, détérioration ou c",
+"n": 666,
+"neg": 193,
+"motifs": [
+[
+"explication",
+69
+],
+[
+"delai",
+47
+]
+]
+},
+"demande de retraite personnelle": {
+"nom": "Demande de retraite personnelle",
+"n": 726,
+"neg": 362,
+"motifs": [
+[
+"delai",
+194
+],
+[
+"explication",
+190
+]
+]
+},
+"demande de subvention pour travaux - propriétaires occupants dite « monprojet anah »": {
+"nom": "Demande de subvention pour travaux - Propriétaires occupants dite « MonProjet ANAH »",
+"n": 84,
+"neg": 73,
+"motifs": [
+[
+"delai",
+46
+],
+[
+"explication",
+39
+]
+]
+},
+"demande de transcription d'un acte survenu à l'étranger": {
+"nom": "Demande de transcription d'un acte survenu à l'étranger",
+"n": 140,
+"neg": 108,
+"motifs": [
+[
+"delai",
+85
+],
+[
+"explication",
+61
+]
+]
+},
+"demande et attribution du chèque énergie": {
+"nom": "Demande et Attribution du chèque énergie",
+"n": 200,
+"neg": 157,
+"motifs": [
+[
+"explication",
+68
+],
+[
+"delai",
+30
+]
+]
+},
+"demande initiale de rsa": {
+"nom": "Demande initiale de RSA",
+"n": 52,
+"neg": 37,
+"motifs": [
+[
+"explication",
+18
+],
+[
+"delai",
+17
+]
+]
+},
+"demander l'ouverture des droits à l'assurance maladie": {
+"nom": "Demander l'ouverture des droits à l'assurance maladie",
+"n": 41,
+"neg": 32,
+"motifs": [
+[
+"explication",
+17
+],
+[
+"delai",
+14
+]
+]
+},
+"demander une carte vitale": {
+"nom": "Demander une carte vitale",
+"n": 120,
+"neg": 69,
+"motifs": [
+[
+"delai",
+36
+],
+[
+"explication",
+21
+]
+]
+},
+"dossierfacile : aide à la constitution d'un dossier numérique de location de logement": {
+"nom": "DossierFacile : aide à la constitution d’un dossier numérique de location de logement",
+"n": 23,
+"neg": 7,
+"motifs": []
+},
+"déclaration de cession d'un véhicule": {
+"nom": "Déclaration de cession d'un véhicule",
+"n": 184,
+"neg": 114,
+"motifs": [
+[
+"explication",
+37
+],
+[
+"delai",
+16
+]
+]
+},
+"déclaration de changement d'adresse sur le certificat d'immatriculation": {
+"nom": "Déclaration de changement d'adresse sur le certificat d'immatriculation",
+"n": 305,
+"neg": 145,
+"motifs": [
+[
+"explication",
+58
+],
+[
+"delai",
+46
+]
+]
+},
+"déclaration de loyer pour l'aide au logement": {
+"nom": "Déclaration de loyer pour l'aide au logement",
+"n": 111,
+"neg": 49,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+5
+]
+]
+},
+"déclaration de ressources annuelles auprès de la caf": {
+"nom": "Déclaration de ressources annuelles auprès de la CAF",
+"n": 86,
+"neg": 41,
+"motifs": [
+[
+"explication",
+24
+],
+[
+"delai",
+12
+]
+]
+},
+"déclaration des revenus": {
+"nom": "Déclaration des revenus",
+"n": 2024,
+"neg": 807,
+"motifs": [
+[
+"explication",
+305
+],
+[
+"delai",
+44
+]
+]
+},
+"déclaration trimestrielle aah (allocation adulte handicapé)": {
+"nom": "Déclaration trimestrielle AAH (Allocation Adulte Handicapé)",
+"n": 49,
+"neg": 35,
+"motifs": [
+[
+"explication",
+20
+],
+[
+"delai",
+17
+]
+]
+},
+"déclaration trimestrielle prime d'activité": {
+"nom": "Déclaration trimestrielle prime d'activité",
+"n": 99,
+"neg": 40,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+6
+]
+]
+},
+"déclaration trimestrielle rsa": {
+"nom": "Déclaration trimestrielle RSA",
+"n": 130,
+"neg": 53,
+"motifs": [
+[
+"explication",
+26
+],
+[
+"delai",
+17
+]
+]
+},
+"déclarer un changement de situation pour les prestations familiales": {
+"nom": "Déclarer un changement de situation pour les prestations familiales",
+"n": 135,
+"neg": 68,
+"motifs": [
+[
+"explication",
+31
+],
+[
+"delai",
+26
+]
+]
+},
+"dépôt d'une réclamation aux impôts (usagers particuliers)": {
+"nom": "Dépôt d'une réclamation aux impôts (usagers particuliers)",
+"n": 46,
+"neg": 33,
+"motifs": [
+[
+"delai",
+11
+],
+[
+"explication",
+11
+]
+]
+},
+"dépôt de plainte en ligne (pel) - gendamerie": {
+"nom": "Dépôt de plainte en ligne (PEL) - Gendamerie",
+"n": 114,
+"neg": 63,
+"motifs": [
+[
+"explication",
+22
+],
+[
+"delai",
+19
+]
+]
+},
+"dépôt de plainte en ligne (pel) - gendamerie, dépôt de plainte en ligne (police)": {
+"nom": "Dépôt de plainte en ligne (PEL) - Gendamerie, Dépôt de plainte en ligne (police)",
+"n": 36,
+"neg": 17,
+"motifs": [
+[
+"delai",
+7
+],
+[
+"explication",
+6
+]
+]
+},
+"dépôt de plainte en ligne (police)": {
+"nom": "Dépôt de plainte en ligne (police)",
+"n": 454,
+"neg": 256,
+"motifs": [
+[
+"delai",
+98
+],
+[
+"explication",
+82
+]
+]
+},
+"dépôt de plainte en ligne pour escroqueries commises sur internet (thesee)": {
+"nom": "Dépôt de plainte en ligne pour escroqueries commises sur Internet (THESEE)",
+"n": 118,
+"neg": 56,
+"motifs": [
+[
+"explication",
+16
+],
+[
+"delai",
+8
+]
+]
+},
+"dépôts de compte et dépôts d'actes (entreprises)": {
+"nom": "Dépôts de compte et dépôts d’actes (entreprises)",
+"n": 29,
+"neg": 29,
+"motifs": [
+[
+"explication",
+11
+]
+]
+},
+"etablissement d'une procuration de vote (maprocuration)": {
+"nom": "Etablissement d'une procuration de vote (Maprocuration)",
+"n": 160,
+"neg": 99,
+"motifs": [
+[
+"explication",
+21
+],
+[
+"joignable",
+5
+]
+]
+},
+"formalité de l'enregistrement en ligne (dons, cessions de droits sociaux)": {
+"nom": "Formalité de l'enregistrement en ligne (dons, cessions de droits sociaux)",
+"n": 39,
+"neg": 12,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"formalités des entreprises (création, modification, cessation)": {
+"nom": "Formalités des entreprises (création, modification, cessation)",
+"n": 649,
+"neg": 545,
+"motifs": [
+[
+"explication",
+222
+],
+[
+"delai",
+68
+]
+]
+},
+"gérer mes biens immobiliers – déclaration d'occupation": {
+"nom": "Gérer Mes Biens Immobiliers – Déclaration d’occupation",
+"n": 111,
+"neg": 68,
+"motifs": [
+[
+"explication",
+25
+]
+]
+},
+"gérer mon prélèvement à la source": {
+"nom": "Gérer mon prélèvement à la source",
+"n": 163,
+"neg": 49,
+"motifs": [
+[
+"explication",
+26
+],
+[
+"joignable",
+5
+]
+]
+},
+"inscription consulaire (registre des français établis hors de france)": {
+"nom": "Inscription consulaire (registre des Français établis hors de France)",
+"n": 147,
+"neg": 96,
+"motifs": [
+[
+"explication",
+29
+],
+[
+"delai",
+10
+]
+]
+},
+"inscription dans l'enseignement supérieur français / demande de visa « étudiant » procéd": {
+"nom": "Inscription dans l'enseignement supérieur français / demande de visa « étudiant » procéd",
+"n": 20,
+"neg": 19,
+"motifs": [
+[
+"delai",
+9
+],
+[
+"explication",
+7
+]
+]
+},
+"inscription en ligne à l'examen du permis de conduire": {
+"nom": "Inscription en ligne à l'examen du permis de conduire",
+"n": 127,
+"neg": 93,
+"motifs": [
+[
+"explication",
+36
+],
+[
+"delai",
+24
+]
+]
+},
+"inscription à l'entrée au lycée": {
+"nom": "Inscription à l'entrée au lycée",
+"n": 29,
+"neg": 17,
+"motifs": []
+},
+"mes points permis": {
+"nom": "Mes Points Permis",
+"n": 107,
+"neg": 63,
+"motifs": [
+[
+"explication",
+30
+],
+[
+"delai",
+16
+]
+]
+},
+"mettre à jour ses données personnelles pour la journée défense et citoyenneté": {
+"nom": "Mettre à jour ses données personnelles pour la Journée Défense et Citoyenneté",
+"n": 36,
+"neg": 10,
+"motifs": []
+},
+"modification des coordonnées médiatiques (msa)": {
+"nom": "Modification des coordonnées médiatiques (MSA)",
+"n": 29,
+"neg": 4,
+"motifs": []
+},
+"mon espace santé": {
+"nom": "Mon espace santé",
+"n": 25,
+"neg": 25,
+"motifs": [
+[
+"explication",
+8
+]
+]
+},
+"notification des droits au chômage": {
+"nom": "Notification des droits au chômage",
+"n": 26,
+"neg": 20,
+"motifs": [
+[
+"delai",
+11
+],
+[
+"explication",
+9
+]
+]
+},
+"obtenir mon âge de départ à la retraite": {
+"nom": "Obtenir mon âge de départ à la retraite",
+"n": 195,
+"neg": 116,
+"motifs": [
+[
+"explication",
+73
+],
+[
+"delai",
+41
+]
+]
+},
+"orientation en fin de collège": {
+"nom": "Orientation en fin de collège",
+"n": 25,
+"neg": 18,
+"motifs": [
+[
+"explication",
+8
+]
+]
+},
+"paiement amendes (amendes)": {
+"nom": "Paiement amendes (Amendes)",
+"n": 703,
+"neg": 522,
+"motifs": [
+[
+"explication",
+191
+],
+[
+"delai",
+88
+]
+]
+},
+"paiement de la contribution de vie étudiante et de campus (cvec)": {
+"nom": "Paiement de la contribution de vie étudiante et de campus (CVEC)",
+"n": 45,
+"neg": 41,
+"motifs": [
+[
+"explication",
+8
+],
+[
+"delai",
+7
+]
+]
+},
+"paiement impôts particuliers": {
+"nom": "Paiement impôts particuliers",
+"n": 129,
+"neg": 76,
+"motifs": [
+[
+"explication",
+29
+],
+[
+"joignable",
+12
+]
+]
+},
+"pourvoi des offres d'emploi déposées à france travail": {
+"nom": "Pourvoi des offres d’emploi déposées à France Travail",
+"n": 26,
+"neg": 17,
+"motifs": [
+[
+"explication",
+10
+]
+]
+},
+"recensement de la population": {
+"nom": "Recensement de la population",
+"n": 170,
+"neg": 87,
+"motifs": [
+[
+"explication",
+30
+],
+[
+"joignable",
+14
+]
+]
+},
+"rechercher des offres d'emploi (france travail)": {
+"nom": "Rechercher des offres d’emploi (France Travail)",
+"n": 65,
+"neg": 42,
+"motifs": [
+[
+"explication",
+13
+],
+[
+"joignable",
+9
+]
+]
+},
+"rechercher sa formation (france travail)": {
+"nom": "Rechercher sa formation (France Travail)",
+"n": 42,
+"neg": 35,
+"motifs": [
+[
+"explication",
+8
+],
+[
+"joignable",
+6
+]
+]
+},
+"remboursement de timbres électroniques": {
+"nom": "Remboursement de timbres électroniques",
+"n": 28,
+"neg": 18,
+"motifs": [
+[
+"delai",
+8
+],
+[
+"explication",
+7
+]
+]
+},
+"renouvellement mensuel de la situation de demandeur d'emploi (france travail)": {
+"nom": "Renouvellement mensuel de la situation de demandeur d’emploi (France Travail)",
+"n": 289,
+"neg": 104,
+"motifs": [
+[
+"explication",
+42
+],
+[
+"joignable",
+19
+]
+]
+},
+"s'inscrire ou se réinscrire comme demandeur d'emploi": {
+"nom": "S'inscrire ou se réinscrire comme demandeur d'emploi",
+"n": 80,
+"neg": 24,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"joignable",
+6
+]
+]
+},
+"signalconso": {
+"nom": "SignalConso",
+"n": 69,
+"neg": 15,
+"motifs": [
+[
+"explication",
+6
+]
+]
+},
+"signaler une utilisation frauduleuse de sa carte bancaire en ligne (perceval)": {
+"nom": "Signaler une utilisation frauduleuse de sa carte bancaire en ligne (PERCEVAL)",
+"n": 99,
+"neg": 36,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+6
+]
+]
+},
+"suivi des demandes (de correction de mon relevé de carrière, retraite et réversion )": {
+"nom": "Suivi des demandes (de correction de mon relevé de carrière, retraite et réversion )",
+"n": 548,
+"neg": 468,
+"motifs": [
+[
+"delai",
+294
+],
+[
+"explication",
+243
+]
+]
+},
+"utilisation du chèque énergie": {
+"nom": "Utilisation du chèque énergie",
+"n": 137,
+"neg": 28,
+"motifs": [
+[
+"explication",
+10
+]
+]
+},
+"vote pour les français de l'etranger aux élections consulaires": {
+"nom": "Vote pour les Français de l’Etranger aux élections consulaires",
+"n": 105,
+"neg": 15,
+"motifs": [
+[
+"explication",
+6
+]
+]
+}
+},
+"structure": {
+"0809 401 401-plateforme d'assistance des particuliers de la direction générale des finances publiques": {
+"nom": "0809 401 401-Plateforme d'assistance des particuliers de la Direction Générale des Finances Publiques",
+"n": 56,
+"neg": 39,
+"motifs": [
+[
+"explication",
+20
+],
+[
+"joignable",
+5
+]
+]
+},
+"agence de services et de paiement (asp)": {
+"nom": "Agence de services et de paiement (ASP)",
+"n": 243,
+"neg": 222,
+"motifs": [
+[
+"delai",
+147
+],
+[
+"explication",
+81
+]
+]
+},
+"agirc-arrco": {
+"nom": "AGIRC-ARRCO",
+"n": 704,
+"neg": 530,
+"motifs": [
+[
+"explication",
+258
+],
+[
+"delai",
+205
+]
+]
+},
+"aides aux véhicules": {
+"nom": "Aides aux véhicules",
+"n": 44,
+"neg": 37,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+12
+]
+]
+},
+"ambassade de france au cambodge": {
+"nom": "Ambassade de France au Cambodge",
+"n": 24,
+"neg": 3,
+"motifs": []
+},
+"ambassade de france au cameroun": {
+"nom": "Ambassade de France au Cameroun",
+"n": 40,
+"neg": 30,
+"motifs": [
+[
+"delai",
+24
+],
+[
+"explication",
+19
+]
+]
+},
+"ambassade de france au congo": {
+"nom": "Ambassade de France au Congo",
+"n": 20,
+"neg": 11,
+"motifs": [
+[
+"explication",
+8
+]
+]
+},
+"ambassade de france au japon": {
+"nom": "Ambassade de France au Japon",
+"n": 48,
+"neg": 17,
+"motifs": [
+[
+"joignable",
+9
+],
+[
+"explication",
+8
+]
+]
+},
+"ambassade de france au luxembourg": {
+"nom": "Ambassade de France au Luxembourg",
+"n": 59,
+"neg": 19,
+"motifs": [
+[
+"delai",
+5
+],
+[
+"joignable",
+5
+]
+]
+},
+"ambassade de france au pakistan": {
+"nom": "Ambassade de France au Pakistan",
+"n": 29,
+"neg": 28,
+"motifs": [
+[
+"delai",
+23
+],
+[
+"explication",
+14
+]
+]
+},
+"ambassade de france au portugal": {
+"nom": "Ambassade de France au Portugal",
+"n": 66,
+"neg": 16,
+"motifs": [
+[
+"joignable",
+7
+]
+]
+},
+"ambassade de france au vietnam": {
+"nom": "Ambassade de France au Vietnam",
+"n": 30,
+"neg": 8,
+"motifs": []
+},
+"ambassade de france aux comores": {
+"nom": "Ambassade de France aux Comores",
+"n": 27,
+"neg": 25,
+"motifs": [
+[
+"delai",
+22
+],
+[
+"explication",
+13
+]
+]
+},
+"ambassade de france aux emirats arabes unis": {
+"nom": "Ambassade de France aux Emirats arabes unis",
+"n": 39,
+"neg": 6,
+"motifs": []
+},
+"ambassade de france en allemagne": {
+"nom": "Ambassade de France en Allemagne",
+"n": 125,
+"neg": 36,
+"motifs": [
+[
+"explication",
+11
+],
+[
+"joignable",
+5
+]
+]
+},
+"ambassade de france en arabie saoudite": {
+"nom": "Ambassade de France en Arabie saoudite",
+"n": 23,
+"neg": 8,
+"motifs": []
+},
+"ambassade de france en bolivie": {
+"nom": "Ambassade de France en Bolivie",
+"n": 23,
+"neg": 0,
+"motifs": []
+},
+"ambassade de france en chine": {
+"nom": "Ambassade de France en Chine",
+"n": 31,
+"neg": 6,
+"motifs": []
+},
+"ambassade de france en grèce": {
+"nom": "Ambassade de France en Grèce",
+"n": 21,
+"neg": 7,
+"motifs": []
+},
+"ambassade de france en irlande": {
+"nom": "Ambassade de France en Irlande",
+"n": 42,
+"neg": 16,
+"motifs": []
+},
+"ambassade de france en italie": {
+"nom": "Ambassade de France en Italie",
+"n": 49,
+"neg": 11,
+"motifs": []
+},
+"ambassade de france en république démocratique du congo": {
+"nom": "Ambassade de France en République démocratique du Congo",
+"n": 21,
+"neg": 11,
+"motifs": [
+[
+"joignable",
+6
+],
+[
+"explication",
+5
+]
+]
+},
+"ambassade de france en thaïlande": {
+"nom": "Ambassade de France en Thaïlande",
+"n": 111,
+"neg": 37,
+"motifs": [
+[
+"explication",
+12
+],
+[
+"joignable",
+7
+]
+]
+},
+"ambassade de france à singapour": {
+"nom": "Ambassade de France à Singapour",
+"n": 42,
+"neg": 18,
+"motifs": [
+[
+"joignable",
+8
+],
+[
+"explication",
+5
+]
+]
+},
+"amendes.gouv.fr": {
+"nom": "amendes.gouv.fr",
+"n": 819,
+"neg": 558,
+"motifs": [
+[
+"explication",
+103
+],
+[
+"delai",
+40
+]
+]
+},
+"anah": {
+"nom": "ANAH",
+"n": 819,
+"neg": 745,
+"motifs": [
+[
+"delai",
+342
+],
+[
+"explication",
+321
+]
+]
+},
+"anct": {
+"nom": "ANCT",
+"n": 191,
+"neg": 57,
+"motifs": [
+[
+"explication",
+20
+],
+[
+"joignable",
+12
+]
+]
+},
+"antai": {
+"nom": "ANTAI",
+"n": 1783,
+"neg": 1414,
+"motifs": [
+[
+"explication",
+696
+],
+[
+"delai",
+370
+]
+]
+},
+"assurance retraite ile-de-france": {
+"nom": "Assurance retraite Ile-de-France",
+"n": 2048,
+"neg": 1622,
+"motifs": [
+[
+"delai",
+942
+],
+[
+"explication",
+813
+]
+]
+},
+"autorisations d'urbanisme": {
+"nom": "Autorisations d'urbanisme",
+"n": 24,
+"neg": 19,
+"motifs": [
+[
+"explication",
+6
+]
+]
+},
+"bot rgara": {
+"nom": "BOT RGARA",
+"n": 157,
+"neg": 47,
+"motifs": [
+[
+"explication",
+17
+],
+[
+"joignable",
+14
+]
+]
+},
+"bot rgbfc": {
+"nom": "BOT RGBFC",
+"n": 49,
+"neg": 21,
+"motifs": [
+[
+"joignable",
+10
+]
+]
+},
+"bot rgbret": {
+"nom": "BOT RGBRET",
+"n": 72,
+"neg": 22,
+"motifs": [
+[
+"joignable",
+6
+],
+[
+"explication",
+6
+]
+]
+},
+"bot rgcvl": {
+"nom": "BOT RGCVL",
+"n": 37,
+"neg": 15,
+"motifs": [
+[
+"joignable",
+5
+]
+]
+},
+"bot rgge": {
+"nom": "BOT RGGE",
+"n": 48,
+"neg": 17,
+"motifs": [
+[
+"delai",
+8
+],
+[
+"explication",
+7
+]
+]
+},
+"bot rghf": {
+"nom": "BOT RGHF",
+"n": 43,
+"neg": 18,
+"motifs": [
+[
+"joignable",
+5
+]
+]
+},
+"bot rgif": {
+"nom": "BOT RGIF",
+"n": 50,
+"neg": 25,
+"motifs": [
+[
+"joignable",
+10
+],
+[
+"delai",
+6
+]
+]
+},
+"bot rgna": {
+"nom": "BOT RGNA",
+"n": 103,
+"neg": 35,
+"motifs": [
+[
+"explication",
+16
+],
+[
+"joignable",
+14
+]
+]
+},
+"bot rgnor": {
+"nom": "BOT RGNOR",
+"n": 34,
+"neg": 9,
+"motifs": []
+},
+"bot rgocc": {
+"nom": "BOT RGOCC",
+"n": 150,
+"neg": 44,
+"motifs": [
+[
+"joignable",
+20
+],
+[
+"explication",
+15
+]
+]
+},
+"bot rgpaca": {
+"nom": "BOT RGPACA",
+"n": 78,
+"neg": 28,
+"motifs": [
+[
+"joignable",
+12
+],
+[
+"explication",
+10
+]
+]
+},
+"bot rgpl": {
+"nom": "BOT RGPL",
+"n": 51,
+"neg": 18,
+"motifs": [
+[
+"delai",
+5
+]
+]
+},
+"cadastre.gouv.fr": {
+"nom": "Cadastre.gouv.fr",
+"n": 65,
+"neg": 50,
+"motifs": [
+[
+"explication",
+11
+]
+]
+},
+"caf d'ille-et-vilaine": {
+"nom": "Caf d'ILLE-ET-VILAINE",
+"n": 76,
+"neg": 57,
+"motifs": [
+[
+"explication",
+30
+],
+[
+"delai",
+25
+]
+]
+},
+"caf d'indre-et-loire": {
+"nom": "Caf d'INDRE-ET-LOIRE",
+"n": 27,
+"neg": 20,
+"motifs": [
+[
+"explication",
+8
+]
+]
+},
+"caf de charente-maritime": {
+"nom": "Caf de CHARENTE-MARITIME",
+"n": 30,
+"neg": 18,
+"motifs": [
+[
+"delai",
+11
+],
+[
+"explication",
+7
+]
+]
+},
+"caf de haute-savoie": {
+"nom": "Caf de HAUTE-SAVOIE",
+"n": 55,
+"neg": 43,
+"motifs": [
+[
+"delai",
+20
+],
+[
+"explication",
+15
+]
+]
+},
+"caf de l'ain": {
+"nom": "Caf de l'AIN",
+"n": 27,
+"neg": 22,
+"motifs": [
+[
+"explication",
+13
+],
+[
+"delai",
+8
+]
+]
+},
+"caf de l'aisne": {
+"nom": "Caf de l'AISNE",
+"n": 35,
+"neg": 15,
+"motifs": [
+[
+"explication",
+7
+],
+[
+"delai",
+6
+]
+]
+},
+"caf de l'ardeche": {
+"nom": "Caf de l'ARDECHE",
+"n": 20,
+"neg": 15,
+"motifs": [
+[
+"delai",
+6
+]
+]
+},
+"caf de l'aude": {
+"nom": "Caf de l'AUDE",
+"n": 47,
+"neg": 12,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"caf de l'essonne": {
+"nom": "Caf de l'ESSONNE",
+"n": 83,
+"neg": 62,
+"motifs": [
+[
+"explication",
+31
+],
+[
+"delai",
+29
+]
+]
+},
+"caf de l'eure": {
+"nom": "Caf de l'EURE",
+"n": 31,
+"neg": 23,
+"motifs": [
+[
+"explication",
+10
+]
+]
+},
+"caf de l'herault": {
+"nom": "Caf de l'HERAULT",
+"n": 95,
+"neg": 61,
+"motifs": [
+[
+"explication",
+29
+],
+[
+"delai",
+26
+]
+]
+},
+"caf de l'isere": {
+"nom": "Caf de l'ISERE",
+"n": 103,
+"neg": 65,
+"motifs": [
+[
+"delai",
+30
+],
+[
+"explication",
+28
+]
+]
+},
+"caf de l'oise": {
+"nom": "Caf de l'OISE",
+"n": 43,
+"neg": 33,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+12
+]
+]
+},
+"caf de l'yonne": {
+"nom": "Caf de l'YONNE",
+"n": 23,
+"neg": 10,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"caf de la cote d or": {
+"nom": "Caf de la cote d Or",
+"n": 21,
+"neg": 13,
+"motifs": [
+[
+"delai",
+5
+],
+[
+"explication",
+5
+]
+]
+},
+"caf de la drome": {
+"nom": "Caf de la DROME",
+"n": 45,
+"neg": 30,
+"motifs": [
+[
+"explication",
+11
+],
+[
+"delai",
+10
+]
+]
+},
+"caf de la gironde": {
+"nom": "Caf de la GIRONDE",
+"n": 140,
+"neg": 84,
+"motifs": [
+[
+"explication",
+33
+],
+[
+"delai",
+23
+]
+]
+},
+"caf de la guadeloupe": {
+"nom": "Caf de la GUADELOUPE",
+"n": 42,
+"neg": 25,
+"motifs": [
+[
+"explication",
+14
+],
+[
+"delai",
+8
+]
+]
+},
+"caf de la haute-garonne": {
+"nom": "Caf de la HAUTE-GARONNE",
+"n": 122,
+"neg": 87,
+"motifs": [
+[
+"explication",
+45
+],
+[
+"delai",
+35
+]
+]
+},
+"caf de la haute-vienne": {
+"nom": "Caf de la HAUTE-VIENNE",
+"n": 22,
+"neg": 13,
+"motifs": [
+[
+"delai",
+7
+]
+]
+},
+"caf de la loire": {
+"nom": "Caf de la LOIRE",
+"n": 39,
+"neg": 27,
+"motifs": [
+[
+"explication",
+14
+],
+[
+"delai",
+9
+]
+]
+},
+"caf de la manche": {
+"nom": "Caf de la MANCHE",
+"n": 24,
+"neg": 18,
+"motifs": [
+[
+"delai",
+7
+]
+]
+},
+"caf de la marne": {
+"nom": "Caf de la MARNE",
+"n": 45,
+"neg": 31,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+6
+]
+]
+},
+"caf de la moselle": {
+"nom": "Caf de la MOSELLE",
+"n": 56,
+"neg": 35,
+"motifs": [
+[
+"delai",
+14
+],
+[
+"explication",
+13
+]
+]
+},
+"caf de la reunion": {
+"nom": "Caf de la REUNION",
+"n": 65,
+"neg": 52,
+"motifs": [
+[
+"explication",
+29
+],
+[
+"delai",
+24
+]
+]
+},
+"caf de la sarthe": {
+"nom": "Caf de la SARTHE",
+"n": 21,
+"neg": 15,
+"motifs": [
+[
+"delai",
+5
+],
+[
+"explication",
+5
+]
+]
+},
+"caf de la savoie": {
+"nom": "Caf de la SAVOIE",
+"n": 28,
+"neg": 21,
+"motifs": [
+[
+"delai",
+11
+],
+[
+"explication",
+10
+]
+]
+},
+"caf de la somme": {
+"nom": "Caf de la SOMME",
+"n": 24,
+"neg": 14,
+"motifs": [
+[
+"explication",
+10
+],
+[
+"delai",
+5
+]
+]
+},
+"caf de la vendee": {
+"nom": "Caf de la VENDEE",
+"n": 26,
+"neg": 21,
+"motifs": [
+[
+"delai",
+9
+],
+[
+"explication",
+9
+]
+]
+},
+"caf de loire-atlantique": {
+"nom": "Caf de LOIRE-ATLANTIQUE",
+"n": 82,
+"neg": 60,
+"motifs": [
+[
+"delai",
+24
+],
+[
+"explication",
+24
+]
+]
+},
+"caf de maine-et-loire": {
+"nom": "Caf de MAINE-ET-LOIRE",
+"n": 32,
+"neg": 25,
+"motifs": [
+[
+"explication",
+12
+]
+]
+},
+"caf de meurthe et moselle": {
+"nom": "Caf de MEURTHE ET MOSELLE",
+"n": 31,
+"neg": 16,
+"motifs": [
+[
+"explication",
+6
+],
+[
+"delai",
+5
+]
+]
+},
+"caf de paris": {
+"nom": "Caf de PARIS",
+"n": 168,
+"neg": 120,
+"motifs": [
+[
+"explication",
+58
+],
+[
+"delai",
+43
+]
+]
+},
+"caf de saone-et-loire": {
+"nom": "Caf de SAONE-ET-LOIRE",
+"n": 23,
+"neg": 12,
+"motifs": [
+[
+"explication",
+7
+]
+]
+},
+"caf de seine-et-marne": {
+"nom": "Caf de SEINE-ET-MARNE",
+"n": 92,
+"neg": 69,
+"motifs": [
+[
+"delai",
+38
+],
+[
+"explication",
+28
+]
+]
+},
+"caf de seine-maritime": {
+"nom": "Caf de SEINE-MARITIME",
+"n": 68,
+"neg": 49,
+"motifs": [
+[
+"delai",
+26
+],
+[
+"explication",
+16
+]
+]
+},
+"caf de seine-saint-denis": {
+"nom": "Caf de SEINE-SAINT-DENIS",
+"n": 127,
+"neg": 93,
+"motifs": [
+[
+"explication",
+49
+],
+[
+"delai",
+45
+]
+]
+},
+"caf des alpes-de-haute-provence": {
+"nom": "Caf des Alpes-de-Haute-Provence",
+"n": 25,
+"neg": 19,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+8
+]
+]
+},
+"caf des alpes-maritimes": {
+"nom": "Caf des ALPES-MARITIMES",
+"n": 78,
+"neg": 48,
+"motifs": [
+[
+"explication",
+18
+],
+[
+"delai",
+15
+]
+]
+},
+"caf des bouches-du-rhone": {
+"nom": "Caf des BOUCHES-DU-RHONE",
+"n": 169,
+"neg": 119,
+"motifs": [
+[
+"delai",
+63
+],
+[
+"explication",
+61
+]
+]
+},
+"caf des cotes d'armor": {
+"nom": "Caf des COTES D'ARMOR",
+"n": 40,
+"neg": 24,
+"motifs": [
+[
+"delai",
+8
+],
+[
+"explication",
+8
+]
+]
+},
+"caf des hauts-de-seine": {
+"nom": "Caf des HAUTS-DE-SEINE",
+"n": 103,
+"neg": 74,
+"motifs": [
+[
+"delai",
+38
+],
+[
+"explication",
+35
+]
+]
+},
+"caf des landes": {
+"nom": "Caf des LANDES",
+"n": 28,
+"neg": 20,
+"motifs": [
+[
+"explication",
+8
+],
+[
+"delai",
+6
+]
+]
+},
+"caf des pyrenees-atlantiques": {
+"nom": "Caf des PYRENEES-ATLANTIQUES",
+"n": 29,
+"neg": 22,
+"motifs": [
+[
+"delai",
+10
+],
+[
+"explication",
+9
+]
+]
+},
+"caf des pyrenees-orientales": {
+"nom": "Caf des PYRENEES-ORIENTALES",
+"n": 37,
+"neg": 25,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+5
+]
+]
+},
+"caf des vosges": {
+"nom": "Caf des VOSGES",
+"n": 21,
+"neg": 12,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"caf des yvelines": {
+"nom": "Caf des YVELINES",
+"n": 96,
+"neg": 59,
+"motifs": [
+[
+"delai",
+23
+],
+[
+"explication",
+23
+]
+]
+},
+"caf du bas-rhin": {
+"nom": "Caf du BAS-RHIN",
+"n": 78,
+"neg": 59,
+"motifs": [
+[
+"explication",
+24
+],
+[
+"delai",
+22
+]
+]
+},
+"caf du calvados": {
+"nom": "Caf du CALVADOS",
+"n": 42,
+"neg": 31,
+"motifs": [
+[
+"delai",
+10
+],
+[
+"explication",
+9
+]
+]
+},
+"caf du cher": {
+"nom": "Caf du CHER",
+"n": 21,
+"neg": 13,
+"motifs": [
+[
+"delai",
+6
+]
+]
+},
+"caf du doubs": {
+"nom": "Caf du DOUBS",
+"n": 36,
+"neg": 27,
+"motifs": [
+[
+"explication",
+10
+]
+]
+},
+"caf du finistere": {
+"nom": "Caf du FINISTERE",
+"n": 37,
+"neg": 29,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+9
+]
+]
+},
+"caf du gard": {
+"nom": "Caf du GARD",
+"n": 72,
+"neg": 50,
+"motifs": [
+[
+"explication",
+27
+],
+[
+"delai",
+19
+]
+]
+},
+"caf du haut-rhin": {
+"nom": "Caf du HAUT-RHIN",
+"n": 34,
+"neg": 23,
+"motifs": [
+[
+"delai",
+15
+],
+[
+"explication",
+7
+]
+]
+},
+"caf du loiret": {
+"nom": "Caf du LOIRET",
+"n": 30,
+"neg": 21,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+6
+]
+]
+},
+"caf du morbihan": {
+"nom": "Caf du MORBIHAN",
+"n": 42,
+"neg": 35,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+13
+]
+]
+},
+"caf du nord": {
+"nom": "Caf du NORD",
+"n": 134,
+"neg": 102,
+"motifs": [
+[
+"delai",
+42
+],
+[
+"explication",
+41
+]
+]
+},
+"caf du pas-de-calais": {
+"nom": "Caf du PAS-DE-CALAIS",
+"n": 52,
+"neg": 36,
+"motifs": [
+[
+"delai",
+14
+],
+[
+"explication",
+13
+]
+]
+},
+"caf du puy-de-dome": {
+"nom": "Caf du PUY-DE-DOME",
+"n": 32,
+"neg": 22,
+"motifs": [
+[
+"explication",
+8
+],
+[
+"delai",
+6
+]
+]
+},
+"caf du rhone": {
+"nom": "Caf du RHONE",
+"n": 127,
+"neg": 93,
+"motifs": [
+[
+"explication",
+51
+],
+[
+"delai",
+34
+]
+]
+},
+"caf du tarn": {
+"nom": "Caf du TARN",
+"n": 23,
+"neg": 18,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"caf du val d'oise": {
+"nom": "Caf du VAL D'OISE",
+"n": 91,
+"neg": 66,
+"motifs": [
+[
+"delai",
+31
+],
+[
+"explication",
+26
+]
+]
+},
+"caf du val-de-marne": {
+"nom": "Caf du VAL-DE-MARNE",
+"n": 104,
+"neg": 74,
+"motifs": [
+[
+"delai",
+34
+],
+[
+"explication",
+28
+]
+]
+},
+"caf du var": {
+"nom": "Caf du VAR",
+"n": 64,
+"neg": 37,
+"motifs": [
+[
+"explication",
+19
+],
+[
+"delai",
+9
+]
+]
+},
+"caf du vaucluse": {
+"nom": "Caf du VAUCLUSE",
+"n": 52,
+"neg": 40,
+"motifs": [
+[
+"explication",
+21
+],
+[
+"delai",
+13
+]
+]
+},
+"caisse nationale militaire de securite sociale": {
+"nom": "CAISSE NATIONALE MILITAIRE DE SECURITE SOCIALE",
+"n": 22,
+"neg": 12,
+"motifs": [
+[
+"delai",
+5
+],
+[
+"explication",
+5
+]
+]
+},
+"carsat alsace moselle": {
+"nom": "CARSAT Alsace Moselle",
+"n": 234,
+"neg": 153,
+"motifs": [
+[
+"delai",
+80
+],
+[
+"explication",
+73
+]
+]
+},
+"carsat aquitaine": {
+"nom": "CARSAT Aquitaine",
+"n": 271,
+"neg": 183,
+"motifs": [
+[
+"explication",
+96
+],
+[
+"delai",
+76
+]
+]
+},
+"carsat auvergne": {
+"nom": "CARSAT Auvergne",
+"n": 98,
+"neg": 69,
+"motifs": [
+[
+"explication",
+39
+],
+[
+"delai",
+29
+]
+]
+},
+"carsat bourgogne et franche comté": {
+"nom": "CARSAT Bourgogne et Franche Comté",
+"n": 237,
+"neg": 149,
+"motifs": [
+[
+"explication",
+74
+],
+[
+"delai",
+63
+]
+]
+},
+"carsat bretagne": {
+"nom": "CARSAT Bretagne",
+"n": 613,
+"neg": 256,
+"motifs": [
+[
+"explication",
+144
+],
+[
+"delai",
+111
+]
+]
+},
+"carsat centre ouest": {
+"nom": "CARSAT Centre Ouest",
+"n": 1008,
+"neg": 385,
+"motifs": [
+[
+"explication",
+205
+],
+[
+"delai",
+166
+]
+]
+},
+"carsat centre val de loire": {
+"nom": "CARSAT Centre Val de Loire",
+"n": 192,
+"neg": 135,
+"motifs": [
+[
+"delai",
+70
+],
+[
+"explication",
+63
+]
+]
+},
+"carsat hauts de france": {
+"nom": "CARSAT Hauts de France",
+"n": 393,
+"neg": 291,
+"motifs": [
+[
+"delai",
+151
+],
+[
+"explication",
+145
+]
+]
+},
+"carsat languedoc-roussillon": {
+"nom": "CARSAT Languedoc-Roussillon",
+"n": 247,
+"neg": 170,
+"motifs": [
+[
+"explication",
+88
+],
+[
+"delai",
+87
+]
+]
+},
+"carsat midi-pyrénées": {
+"nom": "CARSAT Midi-Pyrénées",
+"n": 411,
+"neg": 269,
+"motifs": [
+[
+"explication",
+146
+],
+[
+"delai",
+130
+]
+]
+},
+"carsat nord est": {
+"nom": "CARSAT NORD EST",
+"n": 242,
+"neg": 111,
+"motifs": [
+[
+"explication",
+52
+],
+[
+"delai",
+51
+]
+]
+},
+"carsat normandie": {
+"nom": "CARSAT Normandie",
+"n": 630,
+"neg": 279,
+"motifs": [
+[
+"explication",
+171
+],
+[
+"delai",
+157
+]
+]
+},
+"carsat pays de la loire": {
+"nom": "CARSAT Pays de la Loire",
+"n": 242,
+"neg": 165,
+"motifs": [
+[
+"explication",
+90
+],
+[
+"delai",
+75
+]
+]
+},
+"carsat rhône-alpes": {
+"nom": "CARSAT Rhône-Alpes",
+"n": 590,
+"neg": 370,
+"motifs": [
+[
+"explication",
+204
+],
+[
+"delai",
+183
+]
+]
+},
+"carsat sud-est": {
+"nom": "CARSAT Sud-Est",
+"n": 787,
+"neg": 589,
+"motifs": [
+[
+"delai",
+326
+],
+[
+"explication",
+316
+]
+]
+},
+"casier judiciaire national": {
+"nom": "Casier judiciaire national",
+"n": 358,
+"neg": 107,
+"motifs": [
+[
+"explication",
+20
+],
+[
+"delai",
+12
+]
+]
+},
+"ccmsa": {
+"nom": "CCMSA",
+"n": 78,
+"neg": 63,
+"motifs": [
+[
+"delai",
+24
+],
+[
+"explication",
+19
+]
+]
+},
+"ccsp": {
+"nom": "CCSP",
+"n": 66,
+"neg": 62,
+"motifs": [
+[
+"delai",
+33
+],
+[
+"explication",
+9
+]
+]
+},
+"centre du service national et de la jeunesse bordeaux": {
+"nom": "Centre du service national et de la jeunesse BORDEAUX",
+"n": 62,
+"neg": 8,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"centre du service national et de la jeunesse la reunion-mayotte": {
+"nom": "Centre du service national et de la jeunesse LA REUNION-MAYOTTE",
+"n": 33,
+"neg": 0,
+"motifs": []
+},
+"centre du service national et de la jeunesse lille": {
+"nom": "Centre du service national et de la jeunesse LILLE",
+"n": 23,
+"neg": 4,
+"motifs": []
+},
+"centre du service national et de la jeunesse lyon": {
+"nom": "Centre du service national et de la jeunesse LYON",
+"n": 21,
+"neg": 11,
+"motifs": [
+[
+"explication",
+7
+]
+]
+},
+"centre du service national et de la jeunesse nancy": {
+"nom": "Centre du service national et de la jeunesse NANCY",
+"n": 58,
+"neg": 4,
+"motifs": []
+},
+"centre du service national et de la jeunesse paris": {
+"nom": "Centre du service national et de la jeunesse PARIS",
+"n": 121,
+"neg": 44,
+"motifs": [
+[
+"explication",
+21
+],
+[
+"delai",
+12
+]
+]
+},
+"centre du service national et de la jeunesse rennes": {
+"nom": "Centre du service national et de la jeunesse RENNES",
+"n": 20,
+"neg": 7,
+"motifs": []
+},
+"centre national cesu": {
+"nom": "CENTRE NATIONAL CESU",
+"n": 240,
+"neg": 90,
+"motifs": [
+[
+"explication",
+49
+],
+[
+"delai",
+13
+]
+]
+},
+"centre national pajemploi": {
+"nom": "CENTRE NATIONAL PAJEMPLOI",
+"n": 47,
+"neg": 41,
+"motifs": [
+[
+"explication",
+28
+],
+[
+"delai",
+7
+]
+]
+},
+"cgss retraite la réunion": {
+"nom": "CGSS Retraite La Réunion",
+"n": 32,
+"neg": 27,
+"motifs": [
+[
+"delai",
+16
+],
+[
+"explication",
+16
+]
+]
+},
+"chèque énergie": {
+"nom": "Chèque énergie",
+"n": 1171,
+"neg": 698,
+"motifs": [
+[
+"explication",
+316
+],
+[
+"delai",
+152
+]
+]
+},
+"cnam": {
+"nom": "CNAM",
+"n": 1034,
+"neg": 646,
+"motifs": [
+[
+"explication",
+178
+],
+[
+"delai",
+105
+]
+]
+},
+"consulat général de france au caire": {
+"nom": "Consulat Général de France au Caire",
+"n": 21,
+"neg": 10,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"consulat général de france à abidjan": {
+"nom": "Consulat Général de France à Abidjan",
+"n": 57,
+"neg": 27,
+"motifs": [
+[
+"joignable",
+14
+],
+[
+"delai",
+9
+]
+]
+},
+"consulat général de france à agadir": {
+"nom": "Consulat Général de France à Agadir",
+"n": 21,
+"neg": 10,
+"motifs": []
+},
+"consulat général de france à alger": {
+"nom": "Consulat Général de France à Alger",
+"n": 68,
+"neg": 24,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+13
+]
+]
+},
+"consulat général de france à amsterdam": {
+"nom": "Consulat Général de France à Amsterdam",
+"n": 60,
+"neg": 24,
+"motifs": [
+[
+"joignable",
+15
+],
+[
+"explication",
+8
+]
+]
+},
+"consulat général de france à barcelone": {
+"nom": "Consulat Général de France à Barcelone",
+"n": 44,
+"neg": 9,
+"motifs": []
+},
+"consulat général de france à beyrouth": {
+"nom": "Consulat Général de France à Beyrouth",
+"n": 28,
+"neg": 9,
+"motifs": []
+},
+"consulat général de france à bruxelles": {
+"nom": "Consulat Général de France à Bruxelles",
+"n": 190,
+"neg": 38,
+"motifs": [
+[
+"explication",
+14
+],
+[
+"joignable",
+13
+]
+]
+},
+"consulat général de france à casablanca": {
+"nom": "Consulat Général de France à Casablanca",
+"n": 86,
+"neg": 61,
+"motifs": [
+[
+"delai",
+26
+],
+[
+"explication",
+23
+]
+]
+},
+"consulat général de france à chicago": {
+"nom": "Consulat Général de France à Chicago",
+"n": 20,
+"neg": 6,
+"motifs": []
+},
+"consulat général de france à dakar": {
+"nom": "Consulat Général de France à Dakar",
+"n": 114,
+"neg": 90,
+"motifs": [
+[
+"delai",
+47
+],
+[
+"explication",
+34
+]
+]
+},
+"consulat général de france à dubaï": {
+"nom": "Consulat Général de France à Dubaï",
+"n": 32,
+"neg": 7,
+"motifs": []
+},
+"consulat général de france à francfort-sur-le-main": {
+"nom": "Consulat Général de France à Francfort-sur-le-Main",
+"n": 40,
+"neg": 13,
+"motifs": [
+[
+"joignable",
+6
+],
+[
+"explication",
+6
+]
+]
+},
+"consulat général de france à fès": {
+"nom": "Consulat Général de France à Fès",
+"n": 31,
+"neg": 18,
+"motifs": [
+[
+"explication",
+10
+],
+[
+"delai",
+9
+]
+]
+},
+"consulat général de france à genève": {
+"nom": "Consulat Général de France à Genève",
+"n": 314,
+"neg": 90,
+"motifs": [
+[
+"explication",
+33
+],
+[
+"joignable",
+22
+]
+]
+},
+"consulat général de france à hong kong": {
+"nom": "Consulat Général de France à Hong Kong",
+"n": 21,
+"neg": 3,
+"motifs": []
+},
+"consulat général de france à istanbul": {
+"nom": "Consulat Général de France à Istanbul",
+"n": 21,
+"neg": 8,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"consulat général de france à londres": {
+"nom": "Consulat Général de France à Londres",
+"n": 220,
+"neg": 88,
+"motifs": [
+[
+"joignable",
+35
+],
+[
+"explication",
+29
+]
+]
+},
+"consulat général de france à los angeles": {
+"nom": "Consulat Général de France à Los Angeles",
+"n": 44,
+"neg": 24,
+"motifs": [
+[
+"joignable",
+17
+],
+[
+"explication",
+8
+]
+]
+},
+"consulat général de france à madrid": {
+"nom": "Consulat Général de France à Madrid",
+"n": 147,
+"neg": 59,
+"motifs": [
+[
+"explication",
+21
+],
+[
+"delai",
+15
+]
+]
+},
+"consulat général de france à marrakech": {
+"nom": "Consulat Général de France à Marrakech",
+"n": 80,
+"neg": 44,
+"motifs": [
+[
+"explication",
+17
+],
+[
+"delai",
+14
+]
+]
+},
+"consulat général de france à mexico": {
+"nom": "Consulat Général de France à Mexico",
+"n": 96,
+"neg": 18,
+"motifs": [
+[
+"explication",
+7
+],
+[
+"joignable",
+5
+]
+]
+},
+"consulat général de france à miami": {
+"nom": "Consulat Général de France à Miami",
+"n": 24,
+"neg": 8,
+"motifs": []
+},
+"consulat général de france à montréal": {
+"nom": "Consulat Général de France à Montréal",
+"n": 194,
+"neg": 68,
+"motifs": [
+[
+"explication",
+25
+],
+[
+"joignable",
+23
+]
+]
+},
+"consulat général de france à munich": {
+"nom": "Consulat Général de France à Munich",
+"n": 30,
+"neg": 11,
+"motifs": []
+},
+"consulat général de france à new york": {
+"nom": "Consulat Général de France à New York",
+"n": 45,
+"neg": 13,
+"motifs": [
+[
+"joignable",
+5
+]
+]
+},
+"consulat général de france à oran": {
+"nom": "Consulat Général de France à Oran",
+"n": 36,
+"neg": 23,
+"motifs": [
+[
+"delai",
+22
+],
+[
+"explication",
+12
+]
+]
+},
+"consulat général de france à québec": {
+"nom": "Consulat Général de France à Québec",
+"n": 40,
+"neg": 12,
+"motifs": [
+[
+"joignable",
+5
+]
+]
+},
+"consulat général de france à rabat": {
+"nom": "Consulat Général de France à Rabat",
+"n": 43,
+"neg": 21,
+"motifs": [
+[
+"delai",
+12
+],
+[
+"explication",
+11
+]
+]
+},
+"consulat général de france à san francisco": {
+"nom": "Consulat Général de France à San Francisco",
+"n": 24,
+"neg": 12,
+"motifs": []
+},
+"consulat général de france à sydney": {
+"nom": "Consulat Général de France à Sydney",
+"n": 27,
+"neg": 8,
+"motifs": []
+},
+"consulat général de france à tananarive": {
+"nom": "Consulat Général de France à Tananarive",
+"n": 45,
+"neg": 22,
+"motifs": [
+[
+"explication",
+12
+],
+[
+"delai",
+10
+]
+]
+},
+"consulat général de france à tel-aviv": {
+"nom": "Consulat Général de France à Tel-Aviv",
+"n": 22,
+"neg": 7,
+"motifs": []
+},
+"consulat général de france à toronto": {
+"nom": "Consulat Général de France à Toronto",
+"n": 57,
+"neg": 26,
+"motifs": [
+[
+"joignable",
+12
+],
+[
+"explication",
+12
+]
+]
+},
+"consulat général de france à tunis": {
+"nom": "Consulat Général de France à Tunis",
+"n": 48,
+"neg": 30,
+"motifs": [
+[
+"delai",
+10
+],
+[
+"joignable",
+10
+]
+]
+},
+"consulat général de france à washington": {
+"nom": "Consulat Général de France à Washington",
+"n": 37,
+"neg": 13,
+"motifs": [
+[
+"explication",
+6
+],
+[
+"joignable",
+5
+]
+]
+},
+"consulat général de france à zurich": {
+"nom": "Consulat Général de France à Zurich",
+"n": 35,
+"neg": 8,
+"motifs": [
+[
+"explication",
+8
+]
+]
+},
+"cpam agen": {
+"nom": "CPAM AGEN",
+"n": 31,
+"neg": 13,
+"motifs": [
+[
+"delai",
+5
+]
+]
+},
+"cpam ajaccio": {
+"nom": "CPAM AJACCIO",
+"n": 21,
+"neg": 13,
+"motifs": [
+[
+"explication",
+10
+]
+]
+},
+"cpam albi": {
+"nom": "CPAM ALBI",
+"n": 23,
+"neg": 9,
+"motifs": [
+[
+"explication",
+6
+],
+[
+"delai",
+5
+]
+]
+},
+"cpam amiens": {
+"nom": "CPAM AMIENS",
+"n": 23,
+"neg": 6,
+"motifs": []
+},
+"cpam angouleme": {
+"nom": "CPAM ANGOULEME",
+"n": 33,
+"neg": 16,
+"motifs": [
+[
+"explication",
+8
+],
+[
+"delai",
+5
+]
+]
+},
+"cpam annecy": {
+"nom": "CPAM ANNECY",
+"n": 66,
+"neg": 39,
+"motifs": [
+[
+"delai",
+21
+],
+[
+"explication",
+20
+]
+]
+},
+"cpam ardeche": {
+"nom": "CPAM ARDECHE",
+"n": 22,
+"neg": 9,
+"motifs": [
+[
+"delai",
+5
+]
+]
+},
+"cpam artois": {
+"nom": "CPAM ARTOIS",
+"n": 32,
+"neg": 17,
+"motifs": [
+[
+"explication",
+10
+],
+[
+"delai",
+9
+]
+]
+},
+"cpam avignon": {
+"nom": "CPAM AVIGNON",
+"n": 34,
+"neg": 14,
+"motifs": [
+[
+"delai",
+8
+],
+[
+"explication",
+8
+]
+]
+},
+"cpam bas rhin": {
+"nom": "CPAM BAS RHIN",
+"n": 53,
+"neg": 25,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+8
+]
+]
+},
+"cpam bayonne": {
+"nom": "CPAM BAYONNE",
+"n": 22,
+"neg": 10,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"cpam bobigny": {
+"nom": "CPAM BOBIGNY",
+"n": 84,
+"neg": 62,
+"motifs": [
+[
+"delai",
+38
+],
+[
+"explication",
+29
+]
+]
+},
+"cpam bordeaux": {
+"nom": "CPAM BORDEAUX",
+"n": 67,
+"neg": 44,
+"motifs": [
+[
+"explication",
+24
+],
+[
+"delai",
+20
+]
+]
+},
+"cpam bourges": {
+"nom": "CPAM BOURGES",
+"n": 23,
+"neg": 9,
+"motifs": [
+[
+"delai",
+5
+]
+]
+},
+"cpam caen": {
+"nom": "CPAM CAEN",
+"n": 27,
+"neg": 11,
+"motifs": [
+[
+"delai",
+5
+]
+]
+},
+"cpam carcassonne": {
+"nom": "CPAM CARCASSONNE",
+"n": 33,
+"neg": 16,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+5
+]
+]
+},
+"cpam cergy pontoise": {
+"nom": "CPAM CERGY PONTOISE",
+"n": 53,
+"neg": 34,
+"motifs": [
+[
+"delai",
+16
+],
+[
+"explication",
+16
+]
+]
+},
+"cpam chambery": {
+"nom": "CPAM CHAMBERY",
+"n": 37,
+"neg": 18,
+"motifs": [
+[
+"delai",
+7
+],
+[
+"explication",
+7
+]
+]
+},
+"cpam chartres": {
+"nom": "CPAM CHARTRES",
+"n": 24,
+"neg": 14,
+"motifs": [
+[
+"delai",
+7
+],
+[
+"joignable",
+5
+]
+]
+},
+"cpam chateauroux": {
+"nom": "CPAM CHATEAUROUX",
+"n": 24,
+"neg": 9,
+"motifs": [
+[
+"delai",
+5
+],
+[
+"explication",
+5
+]
+]
+},
+"cpam clermond ferrand": {
+"nom": "CPAM CLERMOND FERRAND",
+"n": 48,
+"neg": 21,
+"motifs": [
+[
+"explication",
+11
+],
+[
+"delai",
+7
+]
+]
+},
+"cpam cote d'opale": {
+"nom": "CPAM COTE D'OPALE",
+"n": 20,
+"neg": 10,
+"motifs": [
+[
+"delai",
+5
+],
+[
+"explication",
+5
+]
+]
+},
+"cpam cotes d'armor": {
+"nom": "CPAM COTES D'ARMOR",
+"n": 38,
+"neg": 17,
+"motifs": [
+[
+"delai",
+8
+],
+[
+"explication",
+7
+]
+]
+},
+"cpam creteil": {
+"nom": "CPAM CRETEIL",
+"n": 77,
+"neg": 51,
+"motifs": [
+[
+"explication",
+28
+],
+[
+"delai",
+25
+]
+]
+},
+"cpam de l'ain": {
+"nom": "CPAM DE L'AIN",
+"n": 37,
+"neg": 20,
+"motifs": [
+[
+"delai",
+8
+],
+[
+"explication",
+5
+]
+]
+},
+"cpam de l'aisne": {
+"nom": "CPAM DE L'AISNE",
+"n": 29,
+"neg": 10,
+"motifs": [
+[
+"explication",
+7
+]
+]
+},
+"cpam de loire atlantique": {
+"nom": "CPAM de Loire Atlantique",
+"n": 104,
+"neg": 74,
+"motifs": [
+[
+"delai",
+47
+],
+[
+"explication",
+35
+]
+]
+},
+"cpam dijon": {
+"nom": "CPAM DIJON",
+"n": 32,
+"neg": 19,
+"motifs": [
+[
+"explication",
+10
+],
+[
+"delai",
+6
+]
+]
+},
+"cpam doubs": {
+"nom": "CPAM DOUBS",
+"n": 34,
+"neg": 20,
+"motifs": [
+[
+"delai",
+6
+],
+[
+"explication",
+6
+]
+]
+},
+"cpam epinal": {
+"nom": "CPAM EPINAL",
+"n": 30,
+"neg": 16,
+"motifs": [
+[
+"delai",
+7
+]
+]
+},
+"cpam evreux": {
+"nom": "CPAM EVREUX",
+"n": 27,
+"neg": 8,
+"motifs": []
+},
+"cpam evry": {
+"nom": "CPAM EVRY",
+"n": 62,
+"neg": 36,
+"motifs": [
+[
+"delai",
+16
+],
+[
+"explication",
+11
+]
+]
+},
+"cpam finistere": {
+"nom": "CPAM FINISTERE",
+"n": 46,
+"neg": 22,
+"motifs": [
+[
+"delai",
+11
+],
+[
+"explication",
+8
+]
+]
+},
+"cpam haut rhin": {
+"nom": "CPAM HAUT RHIN",
+"n": 42,
+"neg": 19,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+8
+]
+]
+},
+"cpam herault": {
+"nom": "CPAM HERAULT",
+"n": 52,
+"neg": 23,
+"motifs": [
+[
+"explication",
+13
+],
+[
+"delai",
+11
+]
+]
+},
+"cpam isere": {
+"nom": "CPAM ISERE",
+"n": 58,
+"neg": 33,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+12
+]
+]
+},
+"cpam la roche sur yon": {
+"nom": "CPAM LA ROCHE SUR YON",
+"n": 58,
+"neg": 35,
+"motifs": [
+[
+"delai",
+25
+],
+[
+"explication",
+11
+]
+]
+},
+"cpam la rochelle": {
+"nom": "CPAM LA ROCHELLE",
+"n": 40,
+"neg": 23,
+"motifs": [
+[
+"delai",
+11
+],
+[
+"explication",
+11
+]
+]
+},
+"cpam le havre": {
+"nom": "CPAM LE HAVRE",
+"n": 33,
+"neg": 16,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"cpam le mans": {
+"nom": "CPAM LE MANS",
+"n": 31,
+"neg": 12,
+"motifs": [
+[
+"delai",
+6
+]
+]
+},
+"cpam lille douai": {
+"nom": "CPAM LILLE DOUAI",
+"n": 104,
+"neg": 49,
+"motifs": [
+[
+"explication",
+22
+],
+[
+"delai",
+20
+]
+]
+},
+"cpam limoges": {
+"nom": "CPAM LIMOGES",
+"n": 21,
+"neg": 9,
+"motifs": []
+},
+"cpam loire": {
+"nom": "CPAM LOIRE",
+"n": 33,
+"neg": 16,
+"motifs": [
+[
+"explication",
+10
+],
+[
+"joignable",
+6
+]
+]
+},
+"cpam lons le saunier": {
+"nom": "CPAM LONS LE SAUNIER",
+"n": 27,
+"neg": 15,
+"motifs": [
+[
+"explication",
+11
+],
+[
+"delai",
+7
+]
+]
+},
+"cpam maine et loire": {
+"nom": "CPAM MAINE ET LOIRE",
+"n": 33,
+"neg": 17,
+"motifs": [
+[
+"delai",
+5
+],
+[
+"explication",
+5
+]
+]
+},
+"cpam marseille": {
+"nom": "CPAM MARSEILLE",
+"n": 107,
+"neg": 65,
+"motifs": [
+[
+"explication",
+32
+],
+[
+"delai",
+24
+]
+]
+},
+"cpam melun": {
+"nom": "CPAM MELUN",
+"n": 50,
+"neg": 22,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+8
+]
+]
+},
+"cpam meurthe et moselle": {
+"nom": "CPAM MEURTHE et MOSELLE",
+"n": 41,
+"neg": 20,
+"motifs": [
+[
+"explication",
+7
+],
+[
+"delai",
+6
+]
+]
+},
+"cpam mont de marsan": {
+"nom": "CPAM MONT DE MARSAN",
+"n": 26,
+"neg": 13,
+"motifs": []
+},
+"cpam moselle": {
+"nom": "CPAM MOSELLE",
+"n": 50,
+"neg": 24,
+"motifs": [
+[
+"explication",
+14
+],
+[
+"delai",
+13
+]
+]
+},
+"cpam moulins": {
+"nom": "CPAM MOULINS",
+"n": 25,
+"neg": 15,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+6
+]
+]
+},
+"cpam mâcon": {
+"nom": "CPAM MÂCON",
+"n": 25,
+"neg": 13,
+"motifs": [
+[
+"explication",
+7
+],
+[
+"delai",
+6
+]
+]
+},
+"cpam nanterre": {
+"nom": "CPAM NANTERRE",
+"n": 106,
+"neg": 78,
+"motifs": [
+[
+"delai",
+45
+],
+[
+"explication",
+32
+]
+]
+},
+"cpam nice": {
+"nom": "CPAM NICE",
+"n": 80,
+"neg": 53,
+"motifs": [
+[
+"delai",
+29
+],
+[
+"explication",
+25
+]
+]
+},
+"cpam nimes": {
+"nom": "CPAM NIMES",
+"n": 56,
+"neg": 20,
+"motifs": [
+[
+"delai",
+8
+],
+[
+"explication",
+8
+]
+]
+},
+"cpam oise": {
+"nom": "CPAM OISE",
+"n": 25,
+"neg": 7,
+"motifs": [
+[
+"explication",
+6
+]
+]
+},
+"cpam orleans": {
+"nom": "CPAM ORLEANS",
+"n": 40,
+"neg": 28,
+"motifs": [
+[
+"delai",
+16
+],
+[
+"explication",
+6
+]
+]
+},
+"cpam paris": {
+"nom": "CPAM PARIS",
+"n": 232,
+"neg": 157,
+"motifs": [
+[
+"explication",
+78
+],
+[
+"delai",
+72
+]
+]
+},
+"cpam pau": {
+"nom": "CPAM PAU",
+"n": 32,
+"neg": 11,
+"motifs": [
+[
+"delai",
+5
+]
+]
+},
+"cpam perigueux": {
+"nom": "CPAM PERIGUEUX",
+"n": 25,
+"neg": 7,
+"motifs": []
+},
+"cpam perpignan": {
+"nom": "CPAM PERPIGNAN",
+"n": 37,
+"neg": 15,
+"motifs": [
+[
+"explication",
+8
+],
+[
+"delai",
+6
+]
+]
+},
+"cpam poitiers": {
+"nom": "CPAM POITIERS",
+"n": 33,
+"neg": 16,
+"motifs": [
+[
+"delai",
+9
+],
+[
+"explication",
+7
+]
+]
+},
+"cpam reims": {
+"nom": "CPAM REIMS",
+"n": 26,
+"neg": 9,
+"motifs": []
+},
+"cpam rennes": {
+"nom": "CPAM RENNES",
+"n": 54,
+"neg": 22,
+"motifs": [
+[
+"explication",
+11
+],
+[
+"delai",
+6
+]
+]
+},
+"cpam rhone": {
+"nom": "CPAM RHONE",
+"n": 61,
+"neg": 31,
+"motifs": [
+[
+"explication",
+16
+],
+[
+"delai",
+14
+]
+]
+},
+"cpam rouen elbeuf dieppe": {
+"nom": "CPAM ROUEN ELBEUF DIEPPE",
+"n": 43,
+"neg": 26,
+"motifs": [
+[
+"explication",
+13
+],
+[
+"delai",
+9
+]
+]
+},
+"cpam st lo": {
+"nom": "CPAM ST LO",
+"n": 314,
+"neg": 159,
+"motifs": [
+[
+"explication",
+99
+],
+[
+"delai",
+72
+]
+]
+},
+"cpam toulon": {
+"nom": "CPAM TOULON",
+"n": 65,
+"neg": 45,
+"motifs": [
+[
+"delai",
+24
+],
+[
+"explication",
+23
+]
+]
+},
+"cpam toulouse": {
+"nom": "CPAM TOULOUSE",
+"n": 72,
+"neg": 30,
+"motifs": [
+[
+"explication",
+12
+],
+[
+"delai",
+11
+]
+]
+},
+"cpam tours": {
+"nom": "CPAM TOURS",
+"n": 36,
+"neg": 22,
+"motifs": [
+[
+"delai",
+10
+],
+[
+"explication",
+5
+]
+]
+},
+"cpam valence": {
+"nom": "CPAM VALENCE",
+"n": 29,
+"neg": 11,
+"motifs": [
+[
+"explication",
+6
+]
+]
+},
+"cpam vannes": {
+"nom": "CPAM VANNES",
+"n": 45,
+"neg": 18,
+"motifs": [
+[
+"explication",
+11
+],
+[
+"delai",
+8
+]
+]
+},
+"cpam versailles": {
+"nom": "CPAM VERSAILLES",
+"n": 78,
+"neg": 50,
+"motifs": [
+[
+"delai",
+21
+],
+[
+"explication",
+20
+]
+]
+},
+"crit'air": {
+"nom": "Crit'air",
+"n": 718,
+"neg": 295,
+"motifs": [
+[
+"explication",
+75
+],
+[
+"delai",
+60
+]
+]
+},
+"crous aix-marseille": {
+"nom": "CROUS AIX-MARSEILLE",
+"n": 27,
+"neg": 22,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+8
+]
+]
+},
+"crous bordeaux-aquitaine": {
+"nom": "CROUS BORDEAUX-AQUITAINE",
+"n": 27,
+"neg": 23,
+"motifs": [
+[
+"explication",
+10
+],
+[
+"delai",
+5
+]
+]
+},
+"crous creteil": {
+"nom": "CROUS CRETEIL",
+"n": 27,
+"neg": 23,
+"motifs": [
+[
+"explication",
+10
+],
+[
+"delai",
+7
+]
+]
+},
+"crous lyon": {
+"nom": "CROUS LYON",
+"n": 29,
+"neg": 25,
+"motifs": [
+[
+"explication",
+8
+],
+[
+"delai",
+6
+]
+]
+},
+"crous montpellier-occitanie": {
+"nom": "CROUS MONTPELLIER-OCCITANIE",
+"n": 29,
+"neg": 24,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+6
+]
+]
+},
+"crous paris": {
+"nom": "CROUS PARIS",
+"n": 74,
+"neg": 70,
+"motifs": [
+[
+"explication",
+24
+],
+[
+"delai",
+21
+]
+]
+},
+"crous rennes-bretagne": {
+"nom": "CROUS RENNES-BRETAGNE",
+"n": 20,
+"neg": 14,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"crous toulouse-occitanie": {
+"nom": "CROUS TOULOUSE-OCCITANIE",
+"n": 29,
+"neg": 28,
+"motifs": [
+[
+"delai",
+12
+],
+[
+"explication",
+12
+]
+]
+},
+"dalo": {
+"nom": "Dalo",
+"n": 25,
+"neg": 18,
+"motifs": [
+[
+"delai",
+6
+],
+[
+"explication",
+6
+]
+]
+},
+"dg onacvg": {
+"nom": "DG ONaCVG",
+"n": 23,
+"neg": 13,
+"motifs": []
+},
+"dgccrf": {
+"nom": "DGCCRF",
+"n": 199,
+"neg": 75,
+"motifs": [
+[
+"explication",
+27
+],
+[
+"delai",
+25
+]
+]
+},
+"dgfip": {
+"nom": "DGFIP",
+"n": 204,
+"neg": 116,
+"motifs": [
+[
+"explication",
+43
+],
+[
+"delai",
+17
+]
+]
+},
+"dipn des bouches du rhone": {
+"nom": "DIPN DES BOUCHES DU RHONE",
+"n": 31,
+"neg": 30,
+"motifs": [
+[
+"joignable",
+15
+],
+[
+"delai",
+9
+]
+]
+},
+"direction de la relation cotisants": {
+"nom": "DIRECTION DE LA RELATION COTISANTS",
+"n": 424,
+"neg": 302,
+"motifs": [
+[
+"explication",
+110
+],
+[
+"delai",
+62
+]
+]
+},
+"direction de la securite de proximite de l'agglomeration parisienne": {
+"nom": "DIRECTION DE LA SECURITE DE PROXIMITE DE L'AGGLOMERATION PARISIENNE",
+"n": 22,
+"neg": 22,
+"motifs": [
+[
+"explication",
+12
+],
+[
+"joignable",
+11
+]
+]
+},
+"direction des français à l'étranger et de l'administration consulaire": {
+"nom": "Direction des Français à l'étranger et de l'administration consulaire",
+"n": 1684,
+"neg": 631,
+"motifs": [
+[
+"explication",
+182
+],
+[
+"joignable",
+138
+]
+]
+},
+"direction des offres particulieres": {
+"nom": "DIRECTION DES OFFRES PARTICULIERES",
+"n": 714,
+"neg": 312,
+"motifs": [
+[
+"explication",
+87
+],
+[
+"delai",
+50
+]
+]
+},
+"direction départementale de l'emploi, du travail et des solidarités de l'hérault": {
+"nom": "Direction départementale de l'emploi, du travail et des solidarités de l'Hérault",
+"n": 22,
+"neg": 18,
+"motifs": [
+[
+"delai",
+6
+],
+[
+"explication",
+6
+]
+]
+},
+"direction générale de l'administration pénitentiaire (ac)": {
+"nom": "Direction générale de l'administration pénitentiaire (AC)",
+"n": 43,
+"neg": 24,
+"motifs": [
+[
+"explication",
+7
+],
+[
+"delai",
+5
+]
+]
+},
+"direction générale de l'insee": {
+"nom": "Direction générale de l'INSEE",
+"n": 1241,
+"neg": 566,
+"motifs": [
+[
+"explication",
+150
+],
+[
+"joignable",
+52
+]
+]
+},
+"direction générale des douanes et droits indirects": {
+"nom": "Direction générale des douanes et droits indirects",
+"n": 49,
+"neg": 29,
+"motifs": [
+[
+"explication",
+11
+]
+]
+},
+"direction interministérielle du numérique (dinum)": {
+"nom": "Direction interministérielle du Numérique (DINUM)",
+"n": 60,
+"neg": 40,
+"motifs": [
+[
+"delai",
+19
+],
+[
+"explication",
+12
+]
+]
+},
+"direction régionale de la banque de france ile de france": {
+"nom": "Direction régionale de la Banque de France ILE DE FRANCE",
+"n": 29,
+"neg": 8,
+"motifs": []
+},
+"dispositif national du masa": {
+"nom": "Dispositif national du Masa",
+"n": 67,
+"neg": 55,
+"motifs": [
+[
+"delai",
+13
+],
+[
+"explication",
+13
+]
+]
+},
+"dr auvergne-rhone-alpes-france travail": {
+"nom": "DR AUVERGNE-RHONE-ALPES-France Travail",
+"n": 261,
+"neg": 160,
+"motifs": [
+[
+"explication",
+72
+],
+[
+"joignable",
+36
+]
+]
+},
+"dr bourgogne-franche-comte-france travail": {
+"nom": "DR BOURGOGNE-FRANCHE-COMTE-France Travail",
+"n": 119,
+"neg": 56,
+"motifs": [
+[
+"explication",
+24
+],
+[
+"delai",
+15
+]
+]
+},
+"dr bretagne-france travail": {
+"nom": "DR BRETAGNE-France Travail",
+"n": 96,
+"neg": 58,
+"motifs": [
+[
+"explication",
+29
+],
+[
+"joignable",
+12
+]
+]
+},
+"dr centre-val de loire-france travail": {
+"nom": "DR CENTRE-VAL DE LOIRE-France Travail",
+"n": 90,
+"neg": 55,
+"motifs": [
+[
+"explication",
+16
+],
+[
+"delai",
+9
+]
+]
+},
+"dr grand est-france travail": {
+"nom": "DR GRAND EST-France Travail",
+"n": 161,
+"neg": 99,
+"motifs": [
+[
+"explication",
+47
+],
+[
+"joignable",
+28
+]
+]
+},
+"dr guadeloupe-france travail": {
+"nom": "DR GUADELOUPE-France Travail",
+"n": 30,
+"neg": 23,
+"motifs": [
+[
+"explication",
+12
+],
+[
+"delai",
+9
+]
+]
+},
+"dr hauts-de-france-france travail": {
+"nom": "DR HAUTS-DE-FRANCE-France Travail",
+"n": 155,
+"neg": 102,
+"motifs": [
+[
+"explication",
+44
+],
+[
+"joignable",
+35
+]
+]
+},
+"dr ile de france-france travail": {
+"nom": "DR ILE DE FRANCE-France Travail",
+"n": 581,
+"neg": 412,
+"motifs": [
+[
+"explication",
+188
+],
+[
+"delai",
+104
+]
+]
+},
+"dr normandie-france travail": {
+"nom": "DR NORMANDIE-France Travail",
+"n": 101,
+"neg": 64,
+"motifs": [
+[
+"explication",
+34
+],
+[
+"delai",
+15
+]
+]
+},
+"dr nouvelle-aquitaine-france travail": {
+"nom": "DR NOUVELLE-AQUITAINE-France Travail",
+"n": 189,
+"neg": 125,
+"motifs": [
+[
+"explication",
+47
+],
+[
+"joignable",
+38
+]
+]
+},
+"dr occitanie-france travail": {
+"nom": "DR OCCITANIE-France Travail",
+"n": 228,
+"neg": 143,
+"motifs": [
+[
+"explication",
+63
+],
+[
+"joignable",
+33
+]
+]
+},
+"dr pays de la loire-france travail": {
+"nom": "DR PAYS DE LA LOIRE-France Travail",
+"n": 106,
+"neg": 62,
+"motifs": [
+[
+"explication",
+25
+],
+[
+"joignable",
+18
+]
+]
+},
+"dr provence alpes cote d'azur-france travail": {
+"nom": "DR PROVENCE ALPES COTE D'AZUR-France Travail",
+"n": 201,
+"neg": 124,
+"motifs": [
+[
+"explication",
+59
+],
+[
+"delai",
+43
+]
+]
+},
+"dr reunion-france travail": {
+"nom": "DR REUNION-France Travail",
+"n": 20,
+"neg": 12,
+"motifs": [
+[
+"joignable",
+5
+]
+]
+},
+"ensap": {
+"nom": "ENSAP",
+"n": 389,
+"neg": 368,
+"motifs": [
+[
+"explication",
+87
+],
+[
+"delai",
+27
+]
+]
+},
+"france connect": {
+"nom": "France connect",
+"n": 1833,
+"neg": 1438,
+"motifs": [
+[
+"explication",
+197
+],
+[
+"delai",
+82
+]
+]
+},
+"france titres-ants": {
+"nom": "France Titres-ANTS",
+"n": 10801,
+"neg": 6866,
+"motifs": [
+[
+"explication",
+2359
+],
+[
+"delai",
+2218
+]
+]
+},
+"impots.gouv.fr": {
+"nom": "Impots.gouv.fr",
+"n": 3975,
+"neg": 1978,
+"motifs": [
+[
+"explication",
+641
+],
+[
+"delai",
+107
+]
+]
+},
+"inpi-institut national de la propriété industrielle": {
+"nom": "INPI-Institut National de la Propriété Industrielle",
+"n": 1431,
+"neg": 1251,
+"motifs": [
+[
+"explication",
+533
+],
+[
+"delai",
+166
+]
+]
+},
+"inscription au registre des transports routiers": {
+"nom": "Inscription au registre des transports routiers",
+"n": 27,
+"neg": 23,
+"motifs": [
+[
+"delai",
+11
+],
+[
+"explication",
+9
+]
+]
+},
+"logement social": {
+"nom": "Logement social",
+"n": 110,
+"neg": 87,
+"motifs": [
+[
+"explication",
+31
+],
+[
+"delai",
+25
+]
+]
+},
+"maprim'renov": {
+"nom": "maprim'renov",
+"n": 388,
+"neg": 350,
+"motifs": [
+[
+"explication",
+171
+],
+[
+"delai",
+153
+]
+]
+},
+"maprocuration.gouv.fr": {
+"nom": "Maprocuration.gouv.fr",
+"n": 272,
+"neg": 175,
+"motifs": [
+[
+"explication",
+37
+]
+]
+},
+"masecurite.fr": {
+"nom": "masecurite.fr",
+"n": 713,
+"neg": 392,
+"motifs": [
+[
+"explication",
+118
+],
+[
+"delai",
+112
+]
+]
+},
+"mes droits sociaux": {
+"nom": "Mes droits sociaux",
+"n": 27,
+"neg": 24,
+"motifs": [
+[
+"explication",
+13
+]
+]
+},
+"mes services etudiant": {
+"nom": "Mes Services Etudiant",
+"n": 305,
+"neg": 278,
+"motifs": [
+[
+"explication",
+82
+],
+[
+"delai",
+42
+]
+]
+},
+"ministère des solidarités et de la santé": {
+"nom": "Ministère des Solidarités et de la Santé",
+"n": 147,
+"neg": 85,
+"motifs": [
+[
+"explication",
+21
+],
+[
+"delai",
+14
+]
+]
+},
+"ministère du travail, de l'emploi et de l'insertion": {
+"nom": "Ministère du Travail, de l'Emploi et de l'Insertion",
+"n": 288,
+"neg": 249,
+"motifs": [
+[
+"explication",
+55
+],
+[
+"delai",
+35
+]
+]
+},
+"mon compte formation (cpf)": {
+"nom": "Mon Compte Formation (CPF)",
+"n": 1192,
+"neg": 1099,
+"motifs": [
+[
+"explication",
+270
+],
+[
+"delai",
+119
+]
+]
+},
+"msa ain rhône": {
+"nom": "MSA Ain Rhône",
+"n": 29,
+"neg": 25,
+"motifs": [
+[
+"explication",
+13
+],
+[
+"delai",
+12
+]
+]
+},
+"msa alpes du nord": {
+"nom": "MSA Alpes du Nord",
+"n": 33,
+"neg": 27,
+"motifs": [
+[
+"explication",
+14
+],
+[
+"delai",
+13
+]
+]
+},
+"msa alpes vaucluse": {
+"nom": "MSA Alpes Vaucluse",
+"n": 36,
+"neg": 29,
+"motifs": [
+[
+"delai",
+19
+],
+[
+"explication",
+10
+]
+]
+},
+"msa alsace": {
+"nom": "MSA Alsace",
+"n": 27,
+"neg": 20,
+"motifs": [
+[
+"explication",
+13
+],
+[
+"delai",
+8
+]
+]
+},
+"msa ardèche drôme loire": {
+"nom": "MSA Ardèche Drôme Loire",
+"n": 27,
+"neg": 24,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+11
+]
+]
+},
+"msa auvergne": {
+"nom": "MSA Auvergne",
+"n": 30,
+"neg": 21,
+"motifs": [
+[
+"delai",
+14
+],
+[
+"explication",
+8
+]
+]
+},
+"msa beauce cœur de loire": {
+"nom": "MSA Beauce Cœur de Loire",
+"n": 34,
+"neg": 31,
+"motifs": [
+[
+"delai",
+19
+],
+[
+"explication",
+13
+]
+]
+},
+"msa bourgogne": {
+"nom": "MSA Bourgogne",
+"n": 46,
+"neg": 39,
+"motifs": [
+[
+"delai",
+19
+],
+[
+"explication",
+19
+]
+]
+},
+"msa gironde": {
+"nom": "MSA Gironde",
+"n": 24,
+"neg": 19,
+"motifs": [
+[
+"explication",
+10
+],
+[
+"delai",
+6
+]
+]
+},
+"msa grand sud": {
+"nom": "MSA Grand Sud",
+"n": 24,
+"neg": 18,
+"motifs": [
+[
+"delai",
+11
+],
+[
+"explication",
+9
+]
+]
+},
+"msa ile de france": {
+"nom": "MSA Ile de France",
+"n": 93,
+"neg": 86,
+"motifs": [
+[
+"delai",
+45
+],
+[
+"explication",
+43
+]
+]
+},
+"msa languedoc": {
+"nom": "MSA Languedoc",
+"n": 40,
+"neg": 33,
+"motifs": [
+[
+"delai",
+19
+],
+[
+"explication",
+10
+]
+]
+},
+"msa limousin": {
+"nom": "MSA Limousin",
+"n": 22,
+"neg": 20,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+7
+]
+]
+},
+"msa loire atlantique vendée": {
+"nom": "MSA Loire Atlantique Vendée",
+"n": 32,
+"neg": 23,
+"motifs": [
+[
+"explication",
+17
+],
+[
+"delai",
+15
+]
+]
+},
+"msa marne ardennes meuse": {
+"nom": "MSA Marne Ardennes Meuse",
+"n": 38,
+"neg": 29,
+"motifs": [
+[
+"delai",
+17
+],
+[
+"explication",
+15
+]
+]
+},
+"msa mayenne orne sarthe": {
+"nom": "MSA Mayenne Orne Sarthe",
+"n": 20,
+"neg": 15,
+"motifs": [
+[
+"delai",
+9
+],
+[
+"explication",
+9
+]
+]
+},
+"msa midi pyrénées nord": {
+"nom": "MSA Midi Pyrénées Nord",
+"n": 27,
+"neg": 26,
+"motifs": [
+[
+"delai",
+16
+],
+[
+"explication",
+8
+]
+]
+},
+"msa midi pyrénées sud": {
+"nom": "MSA Midi Pyrénées Sud",
+"n": 42,
+"neg": 38,
+"motifs": [
+[
+"delai",
+17
+],
+[
+"explication",
+14
+]
+]
+},
+"msa nord pas de calais": {
+"nom": "MSA Nord Pas de Calais",
+"n": 28,
+"neg": 25,
+"motifs": [
+[
+"explication",
+14
+],
+[
+"delai",
+11
+]
+]
+},
+"msa portes de bretagne": {
+"nom": "MSA Portes de Bretagne",
+"n": 29,
+"neg": 24,
+"motifs": [
+[
+"explication",
+13
+],
+[
+"delai",
+12
+]
+]
+},
+"msa provence azur": {
+"nom": "MSA Provence Azur",
+"n": 59,
+"neg": 51,
+"motifs": [
+[
+"delai",
+30
+],
+[
+"explication",
+23
+]
+]
+},
+"msa sud aquitaine": {
+"nom": "MSA Sud Aquitaine",
+"n": 27,
+"neg": 24,
+"motifs": [
+[
+"delai",
+13
+],
+[
+"explication",
+7
+]
+]
+},
+"mte-mctrct": {
+"nom": "MTE-MCTRCT",
+"n": 170,
+"neg": 91,
+"motifs": [
+[
+"delai",
+28
+],
+[
+"explication",
+24
+]
+]
+},
+"omp": {
+"nom": "OMP",
+"n": 39,
+"neg": 39,
+"motifs": [
+[
+"delai",
+21
+],
+[
+"explication",
+11
+]
+]
+},
+"opération tranquillité vacances (otv)": {
+"nom": "Opération tranquillité vacances (OTV)",
+"n": 320,
+"neg": 51,
+"motifs": [
+[
+"explication",
+10
+]
+]
+},
+"pass culture": {
+"nom": "Pass Culture",
+"n": 45,
+"neg": 42,
+"motifs": [
+[
+"delai",
+20
+],
+[
+"explication",
+16
+]
+]
+},
+"payfip.gouv.fr": {
+"nom": "PayFip.gouv.fr",
+"n": 237,
+"neg": 219,
+"motifs": [
+[
+"explication",
+46
+],
+[
+"delai",
+12
+]
+]
+},
+"perceval": {
+"nom": "PERCEVAL",
+"n": 408,
+"neg": 183,
+"motifs": [
+[
+"explication",
+44
+],
+[
+"delai",
+28
+]
+]
+},
+"pharos": {
+"nom": "PHAROS",
+"n": 71,
+"neg": 59,
+"motifs": [
+[
+"explication",
+15
+]
+]
+},
+"plainte en ligne (pel)": {
+"nom": "Plainte en ligne (PEL)",
+"n": 1214,
+"neg": 698,
+"motifs": [
+[
+"delai",
+210
+],
+[
+"explication",
+203
+]
+]
+},
+"préfecture d'indre-et-loire": {
+"nom": "Préfecture d'Indre-et-Loire",
+"n": 35,
+"neg": 31,
+"motifs": [
+[
+"delai",
+21
+],
+[
+"explication",
+15
+]
+]
+},
+"préfecture de charente-maritime": {
+"nom": "Préfecture de Charente-Maritime",
+"n": 40,
+"neg": 37,
+"motifs": [
+[
+"delai",
+22
+],
+[
+"explication",
+14
+]
+]
+},
+"préfecture de l'ain": {
+"nom": "Préfecture de l'Ain",
+"n": 25,
+"neg": 17,
+"motifs": [
+[
+"explication",
+8
+],
+[
+"delai",
+6
+]
+]
+},
+"préfecture de l'essonne": {
+"nom": "Préfecture de l'Essonne",
+"n": 408,
+"neg": 385,
+"motifs": [
+[
+"delai",
+302
+],
+[
+"explication",
+185
+]
+]
+},
+"préfecture de l'eure": {
+"nom": "Préfecture de l'Eure",
+"n": 24,
+"neg": 21,
+"motifs": [
+[
+"delai",
+12
+],
+[
+"explication",
+5
+]
+]
+},
+"préfecture de l'eure-et-loir": {
+"nom": "Préfecture de l'Eure-et-Loir",
+"n": 29,
+"neg": 27,
+"motifs": [
+[
+"delai",
+16
+],
+[
+"explication",
+16
+]
+]
+},
+"préfecture de l'hérault": {
+"nom": "Préfecture de l'Hérault",
+"n": 89,
+"neg": 73,
+"motifs": [
+[
+"delai",
+50
+],
+[
+"explication",
+33
+]
+]
+},
+"préfecture de l'ille-et-vilaine": {
+"nom": "Préfecture de l'Ille-et-Vilaine",
+"n": 64,
+"neg": 52,
+"motifs": [
+[
+"delai",
+32
+],
+[
+"explication",
+22
+]
+]
+},
+"préfecture de l'isère": {
+"nom": "Préfecture de l'Isère",
+"n": 210,
+"neg": 185,
+"motifs": [
+[
+"delai",
+110
+],
+[
+"explication",
+87
+]
+]
+},
+"préfecture de l'oise": {
+"nom": "Préfecture de l'Oise",
+"n": 34,
+"neg": 24,
+"motifs": [
+[
+"delai",
+13
+],
+[
+"explication",
+11
+]
+]
+},
+"préfecture de la gironde": {
+"nom": "Préfecture de la Gironde",
+"n": 118,
+"neg": 98,
+"motifs": [
+[
+"delai",
+51
+],
+[
+"explication",
+33
+]
+]
+},
+"préfecture de la guadeloupe": {
+"nom": "Préfecture de la Guadeloupe",
+"n": 23,
+"neg": 17,
+"motifs": [
+[
+"explication",
+10
+],
+[
+"delai",
+9
+]
+]
+},
+"préfecture de la haute-garonne": {
+"nom": "Préfecture de la Haute-Garonne",
+"n": 49,
+"neg": 33,
+"motifs": [
+[
+"delai",
+18
+],
+[
+"explication",
+13
+]
+]
+},
+"préfecture de la haute-savoie": {
+"nom": "Préfecture de la Haute-Savoie",
+"n": 90,
+"neg": 83,
+"motifs": [
+[
+"delai",
+54
+],
+[
+"explication",
+29
+]
+]
+},
+"préfecture de la loire": {
+"nom": "Préfecture de la Loire",
+"n": 45,
+"neg": 35,
+"motifs": [
+[
+"delai",
+21
+],
+[
+"explication",
+18
+]
+]
+},
+"préfecture de la loire-atlantique": {
+"nom": "Préfecture de la Loire-Atlantique",
+"n": 74,
+"neg": 53,
+"motifs": [
+[
+"delai",
+33
+],
+[
+"explication",
+24
+]
+]
+},
+"préfecture de la manche": {
+"nom": "Préfecture de la Manche",
+"n": 24,
+"neg": 19,
+"motifs": [
+[
+"explication",
+10
+],
+[
+"delai",
+6
+]
+]
+},
+"préfecture de la marne": {
+"nom": "Préfecture de la Marne",
+"n": 23,
+"neg": 19,
+"motifs": [
+[
+"delai",
+9
+],
+[
+"explication",
+8
+]
+]
+},
+"préfecture de la meurthe-et-moselle": {
+"nom": "Préfecture de la Meurthe-et-Moselle",
+"n": 36,
+"neg": 23,
+"motifs": [
+[
+"delai",
+16
+],
+[
+"explication",
+10
+]
+]
+},
+"préfecture de la moselle": {
+"nom": "Préfecture de la Moselle",
+"n": 33,
+"neg": 30,
+"motifs": [
+[
+"delai",
+15
+],
+[
+"explication",
+15
+]
+]
+},
+"préfecture de la région île de france": {
+"nom": "Préfecture de la région île de France",
+"n": 65,
+"neg": 56,
+"motifs": [
+[
+"delai",
+41
+],
+[
+"explication",
+31
+]
+]
+},
+"préfecture de la sarthe": {
+"nom": "Préfecture de la Sarthe",
+"n": 30,
+"neg": 25,
+"motifs": [
+[
+"delai",
+13
+],
+[
+"explication",
+10
+]
+]
+},
+"préfecture de la savoie": {
+"nom": "Préfecture de la Savoie",
+"n": 22,
+"neg": 15,
+"motifs": [
+[
+"delai",
+8
+],
+[
+"explication",
+5
+]
+]
+},
+"préfecture de la seine-et-marne": {
+"nom": "Préfecture de la Seine-et-Marne",
+"n": 111,
+"neg": 90,
+"motifs": [
+[
+"delai",
+61
+],
+[
+"explication",
+42
+]
+]
+},
+"préfecture de la seine-maritime": {
+"nom": "Préfecture de la Seine-Maritime",
+"n": 51,
+"neg": 39,
+"motifs": [
+[
+"delai",
+26
+],
+[
+"explication",
+19
+]
+]
+},
+"préfecture de la seine-saint-denis": {
+"nom": "Préfecture de la Seine-Saint-Denis",
+"n": 902,
+"neg": 835,
+"motifs": [
+[
+"delai",
+680
+],
+[
+"explication",
+350
+]
+]
+},
+"préfecture de police de paris (police)": {
+"nom": "Préfecture de police de Paris (Police)",
+"n": 38,
+"neg": 26,
+"motifs": [
+[
+"joignable",
+11
+],
+[
+"explication",
+11
+]
+]
+},
+"préfecture de police de paris-dupa": {
+"nom": "Préfecture de police de Paris-DUPA",
+"n": 20,
+"neg": 12,
+"motifs": []
+},
+"préfecture de police de paris-délim": {
+"nom": "Préfecture de police de Paris-Délim",
+"n": 158,
+"neg": 132,
+"motifs": [
+[
+"delai",
+98
+],
+[
+"explication",
+61
+]
+]
+},
+"préfecture des alpes-maritimes": {
+"nom": "Préfecture des Alpes-Maritimes",
+"n": 157,
+"neg": 149,
+"motifs": [
+[
+"delai",
+113
+],
+[
+"explication",
+72
+]
+]
+},
+"préfecture des bouches-du-rhône": {
+"nom": "Préfecture des Bouches-du-Rhône",
+"n": 236,
+"neg": 209,
+"motifs": [
+[
+"delai",
+157
+],
+[
+"explication",
+83
+]
+]
+},
+"préfecture des hauts-de-seine": {
+"nom": "Préfecture des Hauts-de-Seine",
+"n": 488,
+"neg": 456,
+"motifs": [
+[
+"delai",
+352
+],
+[
+"explication",
+231
+]
+]
+},
+"préfecture des pyrénées-orientales": {
+"nom": "Préfecture des Pyrénées-Orientales",
+"n": 37,
+"neg": 32,
+"motifs": [
+[
+"delai",
+17
+],
+[
+"explication",
+6
+]
+]
+},
+"préfecture des yvelines": {
+"nom": "Préfecture des Yvelines",
+"n": 220,
+"neg": 204,
+"motifs": [
+[
+"delai",
+126
+],
+[
+"explication",
+71
+]
+]
+},
+"préfecture du bas-rhin": {
+"nom": "Préfecture du Bas-Rhin",
+"n": 74,
+"neg": 62,
+"motifs": [
+[
+"delai",
+46
+],
+[
+"explication",
+28
+]
+]
+},
+"préfecture du calvados": {
+"nom": "Préfecture du Calvados",
+"n": 37,
+"neg": 28,
+"motifs": [
+[
+"delai",
+20
+],
+[
+"explication",
+14
+]
+]
+},
+"préfecture du gard": {
+"nom": "Préfecture du Gard",
+"n": 63,
+"neg": 54,
+"motifs": [
+[
+"delai",
+36
+],
+[
+"explication",
+19
+]
+]
+},
+"préfecture du loiret": {
+"nom": "Préfecture du Loiret",
+"n": 44,
+"neg": 36,
+"motifs": [
+[
+"delai",
+22
+],
+[
+"explication",
+11
+]
+]
+},
+"préfecture du morbihan": {
+"nom": "Préfecture du Morbihan",
+"n": 22,
+"neg": 12,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"préfecture du nord": {
+"nom": "Préfecture du Nord",
+"n": 188,
+"neg": 167,
+"motifs": [
+[
+"delai",
+124
+],
+[
+"explication",
+66
+]
+]
+},
+"préfecture du pas-de-calais": {
+"nom": "Préfecture du Pas-de-Calais",
+"n": 27,
+"neg": 21,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+6
+]
+]
+},
+"préfecture du puy-de-dôme": {
+"nom": "Préfecture du Puy-de-Dôme",
+"n": 120,
+"neg": 110,
+"motifs": [
+[
+"delai",
+94
+],
+[
+"explication",
+60
+]
+]
+},
+"préfecture du rhône": {
+"nom": "Préfecture du Rhône",
+"n": 272,
+"neg": 233,
+"motifs": [
+[
+"delai",
+184
+],
+[
+"explication",
+116
+]
+]
+},
+"préfecture du val-d'oise": {
+"nom": "Préfecture du Val-d'Oise",
+"n": 124,
+"neg": 105,
+"motifs": [
+[
+"delai",
+82
+],
+[
+"explication",
+51
+]
+]
+},
+"préfecture du val-de-marne": {
+"nom": "Préfecture du Val-de-Marne",
+"n": 301,
+"neg": 275,
+"motifs": [
+[
+"delai",
+204
+],
+[
+"explication",
+127
+]
+]
+},
+"préfecture du var": {
+"nom": "Préfecture du Var",
+"n": 67,
+"neg": 59,
+"motifs": [
+[
+"delai",
+29
+],
+[
+"explication",
+21
+]
+]
+},
+"préfecture du vaucluse": {
+"nom": "Préfecture du Vaucluse",
+"n": 28,
+"neg": 21,
+"motifs": [
+[
+"delai",
+12
+],
+[
+"explication",
+11
+]
+]
+},
+"relation usagers des ministères en-esre-sjva": {
+"nom": "Relation usagers des ministères EN-ESRE-SJVA",
+"n": 941,
+"neg": 786,
+"motifs": [
+[
+"delai",
+380
+],
+[
+"explication",
+273
+]
+]
+},
+"retraitesdeletat.gouv.fr": {
+"nom": "retraitesdeletat.gouv.fr",
+"n": 29,
+"neg": 27,
+"motifs": [
+[
+"delai",
+11
+],
+[
+"explication",
+11
+]
+]
+},
+"sadjav": {
+"nom": "SADJAV",
+"n": 20,
+"neg": 10,
+"motifs": []
+},
+"secrétariat général du ministère de la justice": {
+"nom": "Secrétariat général du Ministère de la Justice",
+"n": 74,
+"neg": 47,
+"motifs": [
+[
+"explication",
+11
+],
+[
+"delai",
+9
+]
+]
+},
+"service central d'etat civil": {
+"nom": "Service Central d'Etat Civil",
+"n": 623,
+"neg": 459,
+"motifs": [
+[
+"delai",
+217
+],
+[
+"explication",
+131
+]
+]
+},
+"service des impôts des particuliers (sip) bordeaux": {
+"nom": "Service des Impôts des particuliers (SIP) BORDEAUX",
+"n": 21,
+"neg": 13,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"service des impôts des particuliers (sip) grenoble belledonne-vercors": {
+"nom": "Service des Impôts des particuliers (SIP) GRENOBLE BELLEDONNE-VERCORS",
+"n": 21,
+"neg": 15,
+"motifs": [
+[
+"explication",
+7
+]
+]
+},
+"service des impôts des particuliers (sip) lyon 1": {
+"nom": "Service des Impôts des particuliers (SIP) LYON 1",
+"n": 20,
+"neg": 11,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"service des impôts des particuliers (sip) melun": {
+"nom": "Service des Impôts des particuliers (SIP) MELUN",
+"n": 22,
+"neg": 14,
+"motifs": [
+[
+"explication",
+9
+]
+]
+},
+"service des impôts des particuliers (sip) nantes centre": {
+"nom": "Service des Impôts des particuliers (SIP) NANTES CENTRE",
+"n": 25,
+"neg": 10,
+"motifs": [
+[
+"explication",
+7
+]
+]
+},
+"service des impôts des particuliers (sip) nice est-ouest-menton": {
+"nom": "Service des Impôts des particuliers (SIP) NICE EST-OUEST-MENTON",
+"n": 20,
+"neg": 15,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"service des impôts des particuliers (sip) nimes": {
+"nom": "Service des Impôts des particuliers (SIP) NIMES",
+"n": 29,
+"neg": 24,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+10
+]
+]
+},
+"service des impôts des particuliers (sip) non residents": {
+"nom": "Service des Impôts des particuliers (SIP) NON RESIDENTS",
+"n": 23,
+"neg": 13,
+"motifs": []
+},
+"service des impôts des particuliers (sip) versailles": {
+"nom": "Service des Impôts des particuliers (SIP) VERSAILLES",
+"n": 21,
+"neg": 14,
+"motifs": [
+[
+"explication",
+10
+],
+[
+"delai",
+5
+]
+]
+},
+"service départemental de l'enregistrement (sde) lyon": {
+"nom": "Service départemental de l'enregistrement (SDE) LYON",
+"n": 20,
+"neg": 20,
+"motifs": [
+[
+"delai",
+16
+],
+[
+"explication",
+6
+]
+]
+},
+"service-public.gouv.fr": {
+"nom": "Service-public.gouv.fr",
+"n": 2772,
+"neg": 1489,
+"motifs": [
+[
+"explication",
+385
+],
+[
+"delai",
+160
+]
+]
+},
+"services numériques du ministère de l'intérieur": {
+"nom": "Services numériques du ministère de l'Intérieur",
+"n": 3510,
+"neg": 2941,
+"motifs": [
+[
+"explication",
+1078
+],
+[
+"delai",
+1007
+]
+]
+},
+"services publics+": {
+"nom": "Services Publics+",
+"n": 40,
+"neg": 30,
+"motifs": [
+[
+"explication",
+5
+]
+]
+},
+"services électoraux": {
+"nom": "Services électoraux",
+"n": 87,
+"neg": 44,
+"motifs": [
+[
+"explication",
+10
+]
+]
+},
+"sgmas": {
+"nom": "SGMAS",
+"n": 57,
+"neg": 46,
+"motifs": [
+[
+"explication",
+8
+],
+[
+"delai",
+5
+]
+]
+},
+"signalconso": {
+"nom": "SignalConso",
+"n": 758,
+"neg": 177,
+"motifs": [
+[
+"delai",
+55
+],
+[
+"explication",
+48
+]
+]
+},
+"sous-préfecture d'aix-en-provence": {
+"nom": "Sous-Préfecture d'Aix-en-Provence",
+"n": 40,
+"neg": 37,
+"motifs": [
+[
+"delai",
+32
+],
+[
+"explication",
+17
+]
+]
+},
+"thesee": {
+"nom": "THESEE",
+"n": 181,
+"neg": 125,
+"motifs": [
+[
+"explication",
+36
+],
+[
+"delai",
+15
+]
+]
+},
+"tribunal judiciaire de nantes": {
+"nom": "Tribunal judiciaire de Nantes",
+"n": 35,
+"neg": 32,
+"motifs": [
+[
+"delai",
+22
+],
+[
+"explication",
+13
+]
+]
+},
+"tribunal judiciaire de paris": {
+"nom": "Tribunal judiciaire de Paris",
+"n": 27,
+"neg": 21,
+"motifs": [
+[
+"explication",
+10
+],
+[
+"delai",
+9
+]
+]
+},
+"trésorerie amendes lille amendes": {
+"nom": "Trésorerie amendes LILLE AMENDES",
+"n": 33,
+"neg": 33,
+"motifs": [
+[
+"explication",
+15
+],
+[
+"delai",
+7
+]
+]
+},
+"trésorerie amendes paris amendes 2eme division": {
+"nom": "Trésorerie amendes PARIS AMENDES 2EME DIVISION",
+"n": 53,
+"neg": 53,
+"motifs": [
+[
+"explication",
+21
+],
+[
+"delai",
+9
+]
+]
+},
+"trésorerie amendes seine-et-marne amendes": {
+"nom": "Trésorerie amendes SEINE-ET-MARNE AMENDES",
+"n": 26,
+"neg": 25,
+"motifs": [
+[
+"explication",
+10
+]
+]
+},
+"trésorerie amendes toulouse amendes": {
+"nom": "Trésorerie amendes TOULOUSE AMENDES",
+"n": 78,
+"neg": 73,
+"motifs": [
+[
+"explication",
+21
+],
+[
+"delai",
+10
+]
+]
+},
+"télépoint": {
+"nom": "Télépoint",
+"n": 295,
+"neg": 179,
+"motifs": [
+[
+"explication",
+76
+],
+[
+"delai",
+47
+]
+]
+},
+"universités et écoles": {
+"nom": "Universités et écoles",
+"n": 188,
+"neg": 111,
+"motifs": [
+[
+"explication",
+36
+],
+[
+"delai",
+15
+]
+]
+},
+"urssaf caisse nationale": {
+"nom": "URSSAF CAISSE NATIONALE",
+"n": 41,
+"neg": 32,
+"motifs": [
+[
+"explication",
+10
+]
+]
+},
+"urssaf provence alpes côte d'azur": {
+"nom": "URSSAF PROVENCE ALPES CÔTE D'AZUR",
+"n": 21,
+"neg": 16,
+"motifs": [
+[
+"explication",
+8
+]
+]
+},
+"urssaf rhône alpes": {
+"nom": "URSSAF RHÔNE ALPES",
+"n": 36,
+"neg": 29,
+"motifs": [
+[
+"explication",
+17
+],
+[
+"delai",
+5
+]
+]
+},
+"urssaf île de france": {
+"nom": "URSSAF ÎLE DE FRANCE",
+"n": 61,
+"neg": 51,
+"motifs": [
+[
+"explication",
+13
+]
+]
+}
+}
+}
+}

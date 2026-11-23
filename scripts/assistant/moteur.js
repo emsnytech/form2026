@@ -447,7 +447,42 @@
     "Statut boursier": "Votre statut d'étudiant boursier peut être vérifié directement, sans justificatif à joindre.",
     "Données préremplies": "Certaines réponses sont déjà remplies par l'administration.",
   };
-  function avantDeCommencer(r) {
+  // Symboles « comment faire » et signaux (accessibilité, vigilance), d'après les données de la démarche seulement.
+  // voies : liste de voies (alternatives, « ou »), chacune une liste de modes qui se suivent ; Démarche Numérique : en ligne.
+  // acc : { niveau: "tc" | "pc" | "nc" | "inconnue", texte, detail } ; vig : au plus 2 { motif, texte, detail }, à partir de
+  // 20 retours rattachés (Services Publics +, critères cochés par l'usager dans ses retours négatifs ; jamais son texte).
+  const MODES_LIB = { en_ligne: "En ligne", formulaire: "Formulaire à remplir", guichet: "Au guichet", rendez_vous: "Sur rendez-vous",
+    courrier: "À envoyer par courrier", courriel: "À envoyer par courriel" };
+  const MOTIFS_LIB = { delai: "Délais de réponse signalés", joignable: "Difficile à joindre", explication: "Explications jugées peu claires" };
+  const ACC_LIB = { tc: "Accessible", pc: "Accessibilité partielle", nc: "Non conforme", inconnue: "Accessibilité non connue" };
+  const SEUIL_RETOURS = 20, MAX_VOIES = 3, MAX_VIGILANCES = 2;
+  const dateCourte = (d) => (d || "").split("-").reverse().join("/");
+  function symboles(r, meta = {}) {
+    const vide = { voies: [], sur: true, acc: null, vig: [] };
+    if (!r) return vide;
+    const voies = r.k === "dn" ? [["en_ligne"]] : (r.md || []).slice(0, MAX_VOIES);
+    if (!voies.length) return vide;
+    const obs = meta.observatoire ? `Observatoire de la qualité des démarches en ligne, ${meta.observatoire}` : "Observatoire de la qualité des démarches en ligne";
+    let acc;
+    if (r.acc) {
+      const niveau = r.acc[0].toLowerCase(), taux = r.acc[1];
+      acc = { niveau, texte: ACC_LIB[niveau] + (niveau === "pc" && taux ? ` (${taux})` : ""), detail: `Déclaration d'accessibilité de cette démarche (${obs})`, perimetre: "demarche" };
+    } else if (r.k === "dn" && meta.acc_dn && /^(TC|PC|NC)$/.test(meta.acc_dn.statut)) {
+      const niveau = meta.acc_dn.statut.toLowerCase(), taux = meta.acc_dn.taux;
+      acc = { niveau, texte: ACC_LIB[niveau] + (niveau === "pc" && taux ? ` (${taux})` : ""), perimetre: "plateforme",
+              detail: `Déclaration de la plateforme Démarche Numérique (${meta.acc_dn.date}), pas propre à cette démarche` };
+    } else acc = { niveau: "inconnue", texte: ACC_LIB.inconnue, detail: `Aucune déclaration trouvée pour cette démarche dans l'${obs}`, perimetre: "" };
+    const vig = [];
+    if (r.spp && r.spp[0] >= SEUIL_RETOURS) {
+      const [n, neg, motifs, org] = r.spp, sp = meta.spp || {};
+      for (const [m, k] of (motifs || []).slice(0, MAX_VIGILANCES)) if (MOTIFS_LIB[m])
+        vig.push({ motif: m, texte: MOTIFS_LIB[m], organisme: org || "",
+          detail: `${k} retours négatifs le signalent, sur ${n} retours sur Services Publics +${sp.debut ? " depuis le " + dateCourte(sp.debut) : ""}, ${org ? `pour l'organisme « ${org} » (tout l'organisme, pas seulement cette démarche)` : "pour cette démarche"} ; échantillon spontané, non représentatif` });
+    }
+    return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, acc, vig };
+  }
+  const voiesTexte = (v) => v.map((voie) => voie.map((m) => MODES_LIB[m].toLowerCase()).join(", ")).join(" ou ");
+  function avantDeCommencer(r, meta = {}) {
     const lignes = [], resume = [];
     if (!r) return { resume: "", lignes };
     if (r.k === "dn" && r.u) {
@@ -468,8 +503,23 @@
       const phrases = (r.pre || []).map((p) => PRE_PHRASES[p]).filter(Boolean);
       if (phrases.length) { lignes.push({ cle: "prerempli", texte: phrases.join(" "), liens: [], source: "sources" }); resume.push("ce qui est rempli pour vous"); }
     }
+    // Accessibilité partielle ou non conforme (Observatoire, ou plateforme Démarche Numérique) : renvoi vers une France services.
+    const S = symboles(r, meta);
+    if (S.acc && (S.acc.niveau === "pc" || S.acc.niveau === "nc")) {
+      const etat = S.acc.niveau === "pc" ? "partiellement conforme" + (/\(/.test(S.acc.texte) ? " " + S.acc.texte.replace(/^[^(]*/, "") : "") : "non conforme";
+      lignes.push({ cle: "accessibilite", texte: `${S.acc.perimetre === "plateforme" ? "Accessibilité de la plateforme Démarche Numérique" : "Accessibilité"} : ${etat}. Si vous rencontrez une difficulté, une France services peut vous aider`,
+        liens: [{ texte: "France services la plus proche", url: "#carte-ou", titre: "" }], source: "symboles" });
+      resume.push("accessibilité");
+    }
+    if (S.vig.length) {
+      const motifs = S.vig.map((v) => ({ delai: "délais de réponse", joignable: "difficulté à joindre l'administration", explication: "explications peu claires" })[v.motif]);
+      const org = S.vig[0].organisme;
+      lignes.push({ cle: "vigilance", texte: `Point${motifs.length > 1 ? "s" : ""} de vigilance signalé${motifs.length > 1 ? "s" : ""} par les usagers : ${motifs.join(", ")}${org ? ` (retours sur l'organisme « ${org} »)` : ""}`,
+        liens: [{ texte: "Services Publics +", url: "https://www.plus.transformation.gouv.fr/", titre: `${S.vig[0].detail.split(" ; ")[0].replace(/^\d+ retours négatifs le signalent, sur /, "")} ; échantillon spontané, non représentatif` }], source: "symboles" });
+      resume.push("vigilance");
+    }
     return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, voiesTexte, MODES_LIB, MOTIFS_LIB, ACC_LIB, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
