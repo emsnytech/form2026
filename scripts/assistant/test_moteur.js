@@ -106,6 +106,17 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie(`A3 chaque ligne de l'accueil (${lignes.length}) ne montre que ses propres démarches`, !hors.length&&lignes.every(x=>(x.ids||[]).length), hors.slice(0,5).join(' | ')||'toutes les lignes ont des ids');
   const F=M.choisir(ix,"Demander la médaille d'honneur du travail",{});
   verifie('F1 « médaille d\'honneur du travail » en recherche simple, sans territoire : aucune démarche locale en « Votre démarche »', !F.principal||F.principal.k!=='dn'||(F.principal.po||'')==='nat', F.principal?F.principal.id+' '+(F.principal.dep||F.principal.po)+' '+F.principal.t:'pas de « Votre démarche » ; démarches possibles : '+F.possibles.map(r=>r.id+' ('+(r.dep||r.po||'')+')').join(' ')); }
+{ // « Avant de commencer » : un bloc replié sous « Faire la démarche », seulement avec des données de la démarche.
+  const B=(i)=>{const k=ix.byId.get(i);return k===undefined?null:ix.recs[k];};
+  const emb=B('DN-13583'), A1=M.avantDeCommencer(emb);
+  verifie('B1 démarche DN avec pièces et pré-remplissage (DN-13583) : ligne « questions » puis ligne « rempli pour vous »', A1.lignes.map(l=>l.cle).join()==='questions,prerempli'&&/28 questions · 3 pièces/.test(A1.lignes[0].texte)&&/SIRET/.test(A1.lignes[1].texte), A1.resume);
+  verifie('B1 lien vers le formulaire à vide, en PDF, avec sa précision', /\/commencer\/declaration-prealable-embauche\/dossier_vide$/.test(A1.lignes[0].liens[0].url)&&/pas pour le remplir/.test(A1.lignes[0].liens[0].titre), A1.lignes[0].liens[0].url);
+  const sans=ix.recs.find(r=>r.k==='sp'&&/^SP-R/.test(r.id)&&!r.sva&&!r.obs), A2=M.avantDeCommencer(sans);
+  verifie('B2 démarche sans aucune donnée : pas de bloc', !A2.lignes.length&&!A2.resume, sans.id+' '+sans.t);
+  const avec=ix.recs.filter(r=>M.avantDeCommencer(r).lignes.length), delai=avec.filter(r=>M.avantDeCommencer(r).lignes.some(l=>l.cle==='delai'||/d[ée]lai/i.test(l.texte)));
+  verifie(`B3 aucun délai affiché sans donnée par démarche (${avec.length} blocs)`, !delai.length, delai.slice(0,3).map(r=>r.id).join(' ')||'aucun délai');
+  verifie('B4 au plus 4 lignes, et l\'IBAN n\'est pas présenté comme rempli', avec.every(r=>M.avantDeCommencer(r).lignes.length<=4)&&!('IBAN' in M.PRE_PHRASES));
+  console.log('ATTENTE B5 Observatoire (accessibilité, renvoi France services) : rattachement des démarches à décider (question 0.3)'); attente++; }
 { // Règle « démarche sûre » retenue (PR 76, variante d) : ni démarche hors sujet affirmée, ni démarche juste perdue.
   const P=(q,o={})=>M.choisir(ix,q,o).principal;
   const ko=[];
@@ -141,7 +152,7 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const NE_PAS=/\bconseillers?\b|nous vous recommandons|\bmoteurs?\b/i, PROMESSE=/ni un conseiller\./g;
   const stats=(page.match(/\$\("ligne-stats"\)\.innerHTML = `([^`]*)`/)||[])[1]||'';
   const consigneIA=(page.match(/function consigne\(q\) \{([\s\S]*?)\n\}/)||[])[1]||'';
-  const textesPage=[...textes,['page',visible(page)],['« Comment ça marche »',visible(comment)],['ligne sous le champ',stats],['consigne de l\'assistant',consigneIA]];
+  const textesPage=[...textes,...Object.values(M.PRE_PHRASES).map((t,i)=>['« Avant de commencer » '+(i+1),t]),['page',visible(page)],['« Comment ça marche »',visible(comment)],['ligne sous le champ',stats],['consigne de l\'assistant',consigneIA]];
   const fautesR=textesPage.filter(([,s])=>NE_PAS.test(sansRefs(s).replace(PROMESSE,''))).map(([n,s])=>n+' : '+sansRefs(s).replace(PROMESSE,'').match(NE_PAS)[0]);
   verifie(`Ton : ni « conseiller », ni « nous vous recommandons », ni « moteur » dans les textes de la page (${textesPage.length} textes)`, !!stats&&!fautesR.length, fautesR.join(' | ')); }
 console.log(`\n${echecs?echecs+' échec(s)':'Toutes les situations de référence passent'}${attente?', '+attente+' en attente':''}.`);
