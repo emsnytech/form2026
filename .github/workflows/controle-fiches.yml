@@ -32,3 +32,5 @@ jobs:
         run: python3 scripts/assistant/assembler_page.py --check
       - name: Le moteur du répertoire « Où faire sa démarche ? » passe les situations de référence
         run: node scripts/assistant/test_moteur.js
+      - name: La colonne « Démarches nationales » respecte les choix de l'éditeur (sorties à date, propositions non validées)
+        run: python3 scripts/assistant/test_selections.py
