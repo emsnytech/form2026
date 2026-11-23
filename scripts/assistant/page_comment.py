@@ -61,7 +61,7 @@ def section_symboles(meta):
              ("at", "À envoyer par courriel", "La fiche a un cas « Par courriel » ou « Par mail », ou son texte dit d'envoyer « par courriel »." )]
     lignes = "".join(f'<li>{ico(i)} <b>{t}</b>&nbsp;: {html.escape(d[0].lower() + d[1:], quote=False)}</li>' for i, t, d in modes)
     acc = [("tc", "Accessible", "déclaration totalement conforme"), ("pc", "Accessibilité partielle (72&nbsp;%)", "partiellement conforme, avec le taux de l'audit"),
-           ("nc", "Non conforme", "non conforme"), ("inconnue", "Accessibilité non connue", "aucune déclaration trouvée pour cette démarche ; ce n'est pas affiché sur la carte, seulement dans le détail et dans «&nbsp;Avant de commencer&nbsp;»")]
+           ("nc", "Non conforme", "non conforme"), ("inconnue", "Accessibilité non connue", "aucune déclaration trouvée pour cette démarche ; ce n'est pas affiché sur la carte, mais dans le détail (bouton «&nbsp;?&nbsp;») et, en dernière ligne, dans «&nbsp;Avant de commencer&nbsp;» quand ce bloc existe pour une autre raison")]
     lacc = "".join(f'<li><span class="acc acc-{c}">{ico("accessible")} {t}</span>&nbsp;: {d}.</li>' for c, t, d in acc)
     vig = [("hourglass", "Délais de réponse signalés", "critère « Réactivité »"), ("phone-off", "Difficile à joindre", "critère « Relation »"),
            ("help-circle", "Explications jugées peu claires", "critère « Information/Explication »")]
