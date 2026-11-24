@@ -203,12 +203,23 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('J10 à côté du formulaire à vide : « PDF non accessible, selon la déclaration de la plateforme », lu dans accessibilite_plateformes.json',
     META.acc_plateformes.dn.pdf_non_accessible===true&&/PDF non accessible, selon la déclaration de la plateforme/.test(pdf.titre)&&!/PDF non accessible/.test(M.avantDeCommencer(B('DN-69348'),{}).lignes[0].liens[0].titre), pdf.titre);
   const dnD=B('DN-69348'), spD=ix.recs.find(r=>r.k==='sp'&&M.symboles(r,META).voies.length), SD=M.symboles(dnD,META);
-  verifie('D1 délais constatés : le lien vers la page statistiques (adresse de la démarche, « commencer » → « statistiques ») est dans le détail « ? » de toute démarche Démarche Numérique',
-    SD.delais&&SD.delais.url==='https://demarche.numerique.gouv.fr/statistiques/'+dnD.u&&ix.recs.filter(r=>r.k==='dn'&&r.u).every(r=>{const d=M.symboles(r,META).delais;return d&&/\/statistiques\//.test(d.url)&&!/\/commencer\//.test(d.url);})&&/if \(S\.delais\) det\.push\(`Délais constatés : <a href="\$\{esc\(S\.delais\.url\)\}" target="_blank"/.test(gab), SD.delais&&SD.delais.url);
+  verifie('D1 délais constatés : le lien vers la page statistiques (adresse de la démarche, « commencer » → « statistiques ») existe pour toute démarche Démarche Numérique (dans « Avant de commencer » ou, sinon, dans le détail « ? »)',
+    SD.delais&&SD.delais.url==='https://demarche.numerique.gouv.fr/statistiques/'+dnD.u&&ix.recs.filter(r=>r.k==='dn'&&r.u).every(r=>{const d=M.symboles(r,META).delais;return d&&/\/statistiques\//.test(d.url)&&!/\/commencer\//.test(d.url);})&&/Moteur\.detailSymboles\(r, META \|\| \{\}\)/.test(gab), SD.delais&&SD.delais.url);
   verifie('D2 délais constatés : rien pour une fiche service-public', spD&&!M.symboles(spD,META).delais&&!M.avantDeCommencer(spD,META).lignes.some(l=>l.cle==='delais'), spD&&spD.id);
   const sansBloc={...dnD,u:undefined}, avecBloc=M.avantDeCommencer(dnD,META);
   verifie('D3 délais constatés : la ligne n\'ouvre jamais seule « Avant de commencer » ; elle s\'ajoute quand le bloc existe, avec le nouvel onglet signalé, sans aucun chiffre',
     M.avantDeCommencer({k:'dn',id:'X',t:'x'},META).lignes.length===0&&avecBloc.lignes.some(l=>l.cle==='delais'&&/nouvel onglet/.test(l.liens[0].titre)&&!/\d/.test(l.texte))&&ix.recs.filter(r=>r.k==='dn').slice(0,3000).every(r=>{const L=M.avantDeCommencer(r,META).lignes;return !(L.length===1&&L[0].cle==='delais');}), avecBloc.resume);
+  // Une information, un seul endroit : aucune phrase (ni aucun lien) à la fois dans le « ? » et dans « Avant de commencer ».
+  const phrases=(t)=>t.split(/(?<=[.;:])\s+|\s+·\s+/).map(x=>M.norm(x)).filter(x=>x.split(' ').length>=3);
+  const doublons=[]; let nDet=0, nDelaisDet=0, nAccDet=0;
+  for(const r of ix.recs){ const D=M.detailSymboles(r,META); if(!D.length) continue; nDet++; const A=M.avantDeCommencer(r,META);
+    const pa=new Set(A.lignes.flatMap(l=>[...phrases(l.texte),...l.liens.map(x=>x.url)]));
+    const pd=D.flatMap(d=>[...phrases(d.texte),...(d.lien?[d.lien.url]:[])]);
+    if(pd.some(x=>pa.has(x))) doublons.push(r.id+' : '+pd.find(x=>pa.has(x)));
+    if(D.some(d=>d.lien)) nDelaisDet++; if(D.some(d=>/^Plateforme /.test(d.texte))) nAccDet++; }
+  verifie(`U1 une information, un seul endroit : aucune phrase ni aucun lien à la fois dans le « ? » et dans « Avant de commencer » (${nDet} démarches ; délais dans le « ? » faute de place : ${nDelaisDet} ; accessibilité de la plateforme dans le « ? » : ${nAccDet})`, !doublons.length, doublons.slice(0,3).join(' | '));
+  const D69=M.detailSymboles(B('DN-69348'),META).map(d=>d.texte).join(' ');
+  verifie('U2 médaille (bloc « Avant de commencer » présent) : le « ? » garde comment faire et FranceConnect, sans délais ni accessibilité de la plateforme', /^Comment faire/.test(D69)&&/FranceConnect/.test(D69)&&!/Délais|Plateforme/.test(D69), D69);
   verifie('Z3 « Accessibilité non connue » n\'est pas dans la ligne de la carte (seulement dans le détail et « Avant de commencer »)', /!\["inconnue", "plateforme"\]\.includes\(S\.acc\.niveau\)/.test(gab));
   const avecVoies=ix.recs.filter(r=>M.symboles(r,META).voies.length).length;
   console.log(`        ${avecVoies} démarches avec des symboles « comment faire »`); }

@@ -607,6 +607,22 @@
     }
     return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
   }
-  const api = { statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  // Détail du bouton « ? » : ce qui explique la ligne de symboles (comment faire, signaux de simplicité, accessibilité,
+  // nom d'organisme long, vigilances). Une information ne s'affiche qu'à un seul endroit : l'accessibilité de la plateforme
+  // (ou non connue) et les délais constatés vont dans « Avant de commencer » quand ce bloc les porte, sinon ici.
+  // Rend une liste de { texte, lien?: { texte, url, note } }.
+  function detailSymboles(r, meta = {}) {
+    const S = symboles(r, meta); if (!S.voies.length) return [];
+    const A = avantDeCommencer(r, meta), dansAvant = (cle) => A.lignes.some((l) => l.cle === cle);
+    const accFin = S.acc && (S.acc.niveau === "plateforme" || S.acc.niveau === "inconnue");
+    const min = (t) => t.charAt(0).toLowerCase() + t.slice(1), org = r.oa || r.o || "";
+    const det = [`Comment faire : ${voiesTexte(S.voies)}${r.k === "dn" ? ", sur Démarche Numérique" : S.sur ? ", d'après la fiche service-public.gouv.fr" : ", d'après la fiche service-public.gouv.fr ; la dernière voie est lue dans son texte, à vérifier sur la fiche"}.`,
+      ...S.simp.map((x) => `${x.texte} : ${x.detail}.`),
+      S.acc && !(accFin && dansAvant("accessibilite")) ? (S.acc.ligne || `${S.acc.texte} : ${min(S.acc.detail)}.`) : "",
+      r.k === "dn" && org.length > 50 ? `Organisme : ${org}.` : "", ...S.vig.map((v) => `${v.texte} : ${v.detail}.`)].filter(Boolean).map((texte) => ({ texte }));
+    if (S.delais && !dansAvant("delais")) det.push({ texte: "Délais constatés :", lien: { texte: "voir les statistiques de la démarche", url: S.delais.url, note: "s'ouvre dans un nouvel onglet ; calculés en direct par Démarche Numérique" } });
+    return det;
+  }
+  const api = { detailSymboles, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
