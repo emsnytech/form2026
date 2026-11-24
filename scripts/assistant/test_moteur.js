@@ -88,10 +88,10 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const med=trouve(['medaille','honneur','travail']);
   if(!med){ console.log("ATTENTE A1 ligne « médaille d'honneur du travail » absente de l'accueil"); attente++; }
   else { const R0=M.reponseLigne(ix,med,{});
-    verifie('A1 médaille du travail sans territoire : la page demande le département, aucune « Votre démarche »', !!R0.question&&!R0.principal, `question « ${R0.question} » ; Votre démarche : ${R0.principal?R0.principal.id:'aucune'}`);
+    verifie('A1 médaille du travail sans territoire : la démarche nationale (DN-69348) en « Votre démarche », sans question sur le département', !R0.question&&R0.principal&&R0.principal.id==='DN-69348', `question « ${R0.question||''} » ; Votre démarche : ${R0.principal?R0.principal.id:'aucune'}`);
     verifie('A1 aucune fiche sur l\'autorisation de travail', !(R0.fiche&&/autorisation de travail/i.test(R0.fiche.t)), R0.fiche?R0.fiche.id+' '+R0.fiche.t:'pas de fiche');
-    const R75=M.reponseLigne(ix,med,{dep:'75'}), v75=R0.recs.find(r=>r.dep==='75');
-    verifie('A1 avec le 75 : la démarche du 75 si elle existe', v75?(R75.principal===v75):(!R75.principal&&!!R75.message), R75.principal?R75.principal.id+' '+R75.principal.t:R75.message); }
+    const R75=M.reponseLigne(ix,med,{dep:'75'}), R05=M.reponseLigne(ix,med,{dep:'05'});
+    verifie('A1 avec le 75 ou le 05 : la démarche nationale reste en « Votre démarche » (même titre que celle des Hautes-Alpes)', R75.principal&&R75.principal.id==='DN-69348'&&R05.principal&&R05.principal.id==='DN-69348', `75 : ${R75.principal?R75.principal.id:R75.message} ; 05 : ${R05.principal?R05.principal.id:R05.message}`); }
   const emb=trouve(['titre','sejour','salarie']);
   if(!emb){ console.log("ATTENTE A2 ligne « vérifier le titre de séjour d'un futur salarié » absente de l'accueil"); attente++; }
   else { const R38=M.reponseLigne(ix,emb,{dep:'38'}); verifie('A2 vérification du titre de séjour avec le 38 : DN-13583 en « Votre démarche »', R38.principal&&R38.principal.id==='DN-13583', R38.principal?R38.principal.id:'aucune'); }
@@ -135,7 +135,11 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const vigDn=S('DN-13583').vig;
   verifie('Y6 vigilance par organisme : l\'infobulle donne l\'effectif, la source, le périmètre et la limite', vigDn.length&&vigDn.every(v=>/\d+ retours négatifs le signalent, sur \d+ retours sur Services Publics \+/.test(v.detail)&&/organisme « Préfecture de l'Isère »/.test(v.detail)&&/spontané, non représentatif/.test(v.detail)), vigDn.map(v=>v.detail)[0]||'aucune');
   const accDn=S('DN-13583').acc;
-  verifie('Y7 démarche Démarche Numérique : accessibilité « non connue » (pas celle de la plateforme), vigilance par organisme', accDn.niveau==='inconnue'&&!ix.recs.some(r=>r.k==='dn'&&!r.obs&&M.symboles(r,META).acc.niveau!=='inconnue')&&M.avantDeCommencer(B('DN-13583'),META).lignes.some(l=>l.cle==='accessibilite'&&/^Accessibilité non connue/.test(l.texte)&&!l.liens.length)&&vigDn.every(v=>v.organisme==="Préfecture de l'Isère"), accDn.texte);
+  const accP=META.acc_plateformes.dn, moisP="janvier février mars avril mai juin juillet août septembre octobre novembre décembre".split(" ")[+accP.mise_a_jour.slice(5,7)-1];
+  verifie('Y7 démarche Démarche Numérique : taux de la plateforme (déclaration publiée), pour une démarche type ; vigilance par organisme',
+    accDn.niveau==='plateforme'&&accDn.ligne.startsWith(`Plateforme Démarche Numérique : accessibilité partielle (${accP.taux}, déclaration d'${moisP} ${accP.mise_a_jour.slice(0,4)}), pour une démarche type. Le taux peut être un peu différent selon la démarche, par exemple si elle contient une carte.`)
+    &&!ix.recs.some(r=>r.k==='dn'&&!r.obs&&M.symboles(r,META).acc.niveau!=='plateforme')&&M.avantDeCommencer(B('DN-13583'),META).lignes.some(l=>l.cle==='accessibilite'&&/^Plateforme Démarche Numérique/.test(l.texte)&&l.liens.every(x=>x.url===accP.url))
+    &&!M.avantDeCommencer(B('DN-13583'),META).lignes.some(l=>/France services/.test(l.texte))&&vigDn.every(v=>v.organisme==="Préfecture de l'Isère"), accDn.ligne);
   const table=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','observatoire_rattachement.json'),'utf8')).rattachements, tid=new Set(table.map(t=>t.id));
   const horsTable=ix.recs.filter(r=>(r.obs||r.acc)&&!tid.has(r.id));
   verifie(`Y8 Observatoire : seules les démarches de observatoire_rattachement.json (${table.length}) ont une accessibilité`, !horsTable.length, horsTable.slice(0,3).map(r=>r.id).join(' ')||'aucune hors table');
@@ -150,9 +154,9 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('Z1 chaque mode a un libellé court', Object.keys(M.MODES_LIB).every(m=>M.MODES_COURT[m]), JSON.stringify(M.MODES_COURT));
   verifie('Z2 symboles dans la ligne sous le titre, bouton « ? » avec son aria-label, plus de lien « détail » ni de lien sous le bouton',
     /class="org ligne-symb"/.test(gab)&&/aria-label="Que signifient ces symboles \?"/.test(gab)&&!/symb-plus|lienSymboles|symbolesHtml/.test(gab)&&/<p class="titre">\$\{esc\(r\.t\)\}<\/p>`;/.test(gab));
-  const seule=ix.recs.filter(r=>{const L=M.avantDeCommencer(r,META).lignes;return L.length&&L.every(l=>l.cle==='accessibilite'&&/^Accessibilité non connue/.test(l.texte));});
-  const pasDerniere=ix.recs.filter(r=>{const L=M.avantDeCommencer(r,META).lignes,i=L.findIndex(l=>/^Accessibilité non connue/.test(l.texte));return i>=0&&i!==L.length-1;});
-  verifie('Z4 « Accessibilité non connue » n\'ouvre jamais seule « Avant de commencer » et vient toujours en dernière ligne', !seule.length&&!pasDerniere.length&&!M.avantDeCommencer(B('SP-R11193'),META).lignes.length&&M.avantDeCommencer(B('DN-13583'),META).lignes.slice(-1)[0].cle==='accessibilite', [...seule,...pasDerniere].slice(0,3).map(r=>r.id).join(' ')||'SP-R11193 sans bloc ; DN-13583 : '+M.avantDeCommencer(B('DN-13583'),META).lignes.map(l=>l.cle).join(', '));
+  const seule=ix.recs.filter(r=>{const L=M.avantDeCommencer(r,META).lignes;return L.length&&L.every(l=>l.cle==='accessibilite'&&/^(Accessibilité non connue|Plateforme )/.test(l.texte));});
+  const pasDerniere=ix.recs.filter(r=>{const L=M.avantDeCommencer(r,META).lignes,i=L.findIndex(l=>/^(Accessibilité non connue|Plateforme )/.test(l.texte));return i>=0&&i!==L.length-1;});
+  verifie('Z4 « Accessibilité non connue » et le taux de la plateforme n\'ouvrent jamais seuls « Avant de commencer » et vient toujours en dernière ligne', !seule.length&&!pasDerniere.length&&!M.avantDeCommencer(B('SP-R11193'),META).lignes.length&&M.avantDeCommencer(B('DN-13583'),META).lignes.slice(-1)[0].cle==='accessibilite', [...seule,...pasDerniere].slice(0,3).map(r=>r.id).join(' ')||'SP-R11193 sans bloc ; DN-13583 : '+M.avantDeCommencer(B('DN-13583'),META).lignes.map(l=>l.cle).join(', '));
   // Signaux de simplicité (FranceConnect, données récupérées) : positifs, seulement quand c'est vrai.
   const SIMP=(r)=>M.symboles(r,META).simp.map(s=>s.cle);
   const dnSansFc=ix.recs.filter(r=>r.k==='dn'&&!SIMP(r).includes('fc'));
@@ -172,8 +176,25 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const siret=ix.recs.find(r=>r.k==='dn'&&r.pre.includes('SIRET (API Entreprise)')), dRec=M.symboles(siret,META).simp.find(s=>s.cle==='rec');
   verifie('S5 le détail nomme la source : « informations sur l\'entreprise récupérées à partir du SIRET (API Entreprise) »', /informations sur l'entreprise récupérées à partir du SIRET \(API Entreprise\)/.test(dRec.detail), siret.id+' : '+dRec.detail);
   verifie('S6 icônes neutres en gris (user-check, database-import), pas de logo FranceConnect, signaux juste après les modes',
-    /id="ti-user-check"/.test(gab)&&/id="ti-database-import"/.test(gab)&&/class="mode simp"/.test(gab)&&/\[\.\.\.modes, \.\.\.simp, \.\.\.source/.test(gab)&&!/franceconnect[^"' ]*\.(svg|png)|logo[-_ ]?franceconnect/i.test(gab), '');
-  verifie('Z3 « Accessibilité non connue » n\'est pas dans la ligne de la carte (seulement dans le détail et « Avant de commencer »)', /S\.acc\.niveau !== "inconnue"/.test(gab));
+    /id="ti-user-check"/.test(gab)&&/id="ti-database-import"/.test(gab)&&/class="mode simp"/.test(gab)&&/\[\.\.\.modes, \.\.\.simp, \.\.\.srcUnits/.test(gab)&&!/franceconnect[^"' ]*\.(svg|png)|logo[-_ ]?franceconnect/i.test(gab), '');
+  // Ajustements du 24 novembre : carte à manipuler, pastille, médaille du travail, nom d'organisme.
+  const avecCarte=ix.recs.filter(r=>r.crt), sansCarte=B('DN-13583');
+  verifie(`J1 démarche avec une carte à manipuler : la phrase s'ajoute au détail (${avecCarte.length} démarches, type de champ « Carte ») ; pas sans carte`,
+    avecCarte.length&&avecCarte.every(r=>r.k==='dn'&&M.symboles(r,META).acc.ligne.endsWith(M.CARTE_PHRASE))&&!sansCarte.crt&&!M.symboles(sansCarte,META).acc.ligne.includes(M.CARTE_PHRASE), avecCarte[0]&&avecCarte[0].id);
+  verifie('J2 pas de pastille d\'accessibilité sur la carte pour une démarche de Démarche Numérique (ni « non connue », ni le taux de la plateforme)', /!\["inconnue", "plateforme"\]\.includes\(S\.acc\.niveau\)/.test(gab));
+  const med=(o)=>top("médaille d'honneur du travail",o,12), med0=med({}), med05=med({dep:'05'});
+  const i0=med0.findIndex(r=>r.id==='DN-69348'), i05=ids(med05);
+  verifie('J3 médaille d\'honneur du travail : la démarche du ministère de l\'Intérieur est nationale ; sans département, pas de démarche des Hautes-Alpes ; avec le 05, la nationale passe devant',
+    B('DN-69348').po==='nat'&&!B('DN-69348').dep&&B('DN-69348').dep_declare==='75'&&i0>=0&&!ids(med0).includes('DN-118359')&&i05.includes('DN-118359')&&i05.indexOf('DN-69348')<i05.indexOf('DN-118359'),
+    `sans département : ${ids(med0).filter(i=>i.startsWith('DN')).join(' ')} ; 05 : ${i05.filter(i=>i.startsWith('DN')).join(' ')}`);
+  verifie('J4 plus d\'étiquette « Paris (75) » sur la médaille : département vide, portée nationale', B('DN-69348').dep===''&&!/Paris|75/.test(B('DN-69348').dep||''));
+  const jum=[...ix.jumelles.keys()].map(i=>ix.recs[i]);
+  verifie(`J5 règle « nationale devant » limitée aux démarches de même titre (${jum.length} démarches locales concernées)`, jum.every(r=>r.k==='dn'&&r.po!=='nat'&&ix.recs[ix.jumelles.get(ix.byId.get(r.id))].po==='nat'&&M.norm(ix.recs[ix.jumelles.get(ix.byId.get(r.id))].t)===M.norm(r.t)), jum.slice(0,3).map(r=>r.id).join(' '));
+  const ddets=B('DN-118359').oa||'', caps=ix.recs.filter(r=>r.oa&&r.oa===r.oa.toUpperCase());
+  verifie('J6 nom tout en capitales en casse normale, sigles gardés ; jamais un nom en casse mixte', /^Direction départementale de l'emploi, du travail, des solidarités et de la protection des populations des Hautes-Alpes/.test(ddets)&&/\(DDETSPP\)/.test(ddets)&&!caps.length&&!ix.recs.some(r=>r.oa&&r.o!==r.o.toUpperCase()), ddets);
+  verifie('J7 nom d\'organisme coupé dans la carte (« … », nom complet en infobulle) : aucun nom plus large que la carte',
+    /\.ligne-symb \.u-org\{min-width:0;max-width:min\(100%,30em\)\}/.test(gab)&&/\.ligne-symb \.org-nom\{min-width:0;overflow:hidden;text-overflow:ellipsis\}/.test(gab)&&/class="org-nom" title="/.test(gab));
+  verifie('Z3 « Accessibilité non connue » n\'est pas dans la ligne de la carte (seulement dans le détail et « Avant de commencer »)', /!\["inconnue", "plateforme"\]\.includes\(S\.acc\.niveau\)/.test(gab));
   const avecVoies=ix.recs.filter(r=>M.symboles(r,META).voies.length).length;
   console.log(`        ${avecVoies} démarches avec des symboles « comment faire »`); }
 { // Règle « démarche sûre » retenue (PR 76, variante d) : ni démarche hors sujet affirmée, ni démarche juste perdue.

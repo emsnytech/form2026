@@ -4,7 +4,7 @@ Lit des sources hors dépôt (descriptions extraites de l'export du descriptif, 
 prévue par la règle du README, décrite dans donnees/assistant/LISEZMOI_assistant.md. Depuis la racine du dépôt :
     python3 scripts/assistant/build_index.py --form . --carto ~/Documents/cartographie --slim <slim du mois> --out donnees/assistant/index.json
 Le dernier contrôle vérifie que les références de exemples.json (à côté de --out) existent toujours ; sinon, sortie en erreur."""
-import json, glob, re, collections, html, sys
+import json, glob, re, collections, html, sys, unicodedata
 import argparse, os, random
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from departements import deduire, affiner_nationale, titre_technique, charger_communes, _dans as dep_dans_texte
@@ -90,11 +90,12 @@ for num,a in desc.items():
         if (nd or 0)>10: recettes_gardees.append({'id':'DN-%d'%num,'marqueur':k,'dossiers':nd,'titre':titre})
         else: skipped['recette']+=1; recettes[k].append({'id':'DN-%d'%num,'dossiers':nd or 0,'titre':titre}); continue
     ch=shards.get(str(num),[])
-    pj=[]; pre=set()
+    pj=[]; pre=set(); carte=False
     for t,lib,obl,api in ch:
         tn=types[t]
         if tn=='PieceJustificative' and lib and len(pj)<8 and clean(lib,70) not in pj: pj.append(clean(lib,70))
         if tn in PRE: pre.add(PRE[tn])
+        if tn=='Carte': carte=True   # carte à manipuler : peut gêner certains usagers (accessibilité)
     slug=(a[2] or '').rsplit('/',1)[-1]
     national = torg in ('administration_centrale','operateur_d_etat') and not re.search(r'pr[ée]fecture|d[ée]partement|r[ée]gion|acad[ée]m|rectorat|\bDD|\bDR|DREAL|DRAAF|\bARS\b|\bCAF\b|CPAM|ville|mairie|commune',org or '',re.I)
     if national:
@@ -118,9 +119,10 @@ for num,a in desc.items():
         corr_appliquees.append('DN-%d'%num); po_decl,dep_decl=po,dep
         po,dep=corr['portee'],corr.get('departement') or ''
     portee[po]+=1
-    recs.append({'k':'dn','id':'DN-%d'%num,'t':clean(titre,220),'d':clean(a[1],300),'o':clean(org,120),'dep':dep,'po':po,'dp':(datepub or '')[:10],
+    recs.append({'k':'dn','id':'DN-%d'%num,'t':clean(titre,220),'d':clean(a[1],300),'o':clean(org,250),'dep':dep,'po':po,'dp':(datepub or '')[:10],
       'n':nd or 0,'cat':cat,'ev':ev.get(num,''),'u':slug,'ch':fr.get('nb_champs') or len(ch),'pj':pj,'pre':sorted(pre),
       'fd':[x.strip() for x in (fr.get('fiches_dila') or '').split(';') if x.strip()],'fe':(a[5] or '')[:10]})
+    if carte: recs[-1]['crt']=1
     if corr: recs[-1]['po_declaree']=po_decl; recs[-1]['dep_declare']=dep_decl
     if titre_technique(titre): recs[-1]['tc']=1; techniques.append({'id':'DN-%d'%num,'n':nd or 0,'portee':po,'titre':titre,'code':titre_technique(titre)})
 print('DN',len(recs),dict(skipped))
@@ -223,6 +225,45 @@ if qual:
             v=spp['structure'].get(' '.join((r.get('o') or '').replace('’',"'").split()).casefold())
             if v and v['motifs']: r['spp']=[v['n'],v['neg'],v['motifs'],v['nom']]; n_q['vigilance par organisme (DN)']+=1
     print('accessibilité et vigilance :',dict(n_q))
+# Nom d'organisme écrit entièrement en capitales (« DIRECTION DEPARTEMENTALE DE L'EMPLOI… ») : forme en casse normale pour
+# l'affichage, clé « oa ». Rien n'est inventé : l'orthographe (accents, majuscules des noms propres) et les sigles sont lus
+# dans les noms d'organismes et les titres en casse mixte de l'index. Un mot est gardé en capitales s'il y apparaît surtout en
+# capitales (DDETSPP, DRIEETS, ANCT…) ou s'il n'a pas de voyelle ; un mot inconnu passe en minuscules, sans accent ajouté.
+_MOT=re.compile(r"[A-Za-zÀ-ÖØ-öø-ÿŒœ]+")
+_sans=lambda s:unicodedata.normalize('NFKD',s).encode('ascii','ignore').decode().lower()
+_formes=collections.defaultdict(collections.Counter); _maj=collections.Counter(); _autres=collections.Counter()
+for _r in recs:
+    for _s in ([_r['o']] if _r['k']=='dn' else [])+[_r['t']]:
+        if not _s or _s==_s.upper(): continue
+        for _m in _MOT.finditer(_s):
+            w=_m.group(0)
+            if len(w)>1 and w.isupper(): _maj[_sans(w)]+=1; continue
+            _autres[_sans(w)]+=1
+            if _m.start()>0 and _s[_m.start()-1] not in '.:—-«(' and not (_m.start()>1 and _s[_m.start()-2] in '.:'): _formes[_sans(w)][w]+=1
+_SIGLES={w for w,n in _maj.items() if n>=2 and n>_autres.get(w,0)}
+def _forme(w, debut):
+    k=_sans(w)
+    if len(w)==1: return w if debut else w.lower()
+    if k in _SIGLES or not re.search('[AEIOUYÀ-ÖØ-Ý]',w): return w
+    f=_formes.get(k)
+    if not f: return w if len(w)<=5 else w[0]+w[1:].lower()   # inconnu : court = sigle probable, long = nom propre
+    minus=[(x,n) for x,n in f.items() if x[0].islower()]
+    if minus and sum(n for _,n in minus)>=0.25*sum(f.values()): return max(minus,key=lambda x:x[1])[0]
+    return f.most_common(1)[0][0]
+def _commun(w):
+    f=_formes.get(_sans(w)); return len(w)>=4 and _sans(w) not in _SIGLES and f and sum(n for x,n in f.items() if x[0].islower())>=0.25*sum(f.values())
+def casse_normale(o):
+    # seulement un nom tout en capitales qui contient au moins un mot courant (« DIRECTION », « LYCEE ») : pas « CPAM,CGSS,CNAM »
+    if not o or o!=o.upper() or not any(_commun(m.group(0)) for m in _MOT.finditer(o)): return ''
+    s=_MOT.sub(lambda m:_forme(m.group(0), m.start()==0),o)
+    s=s[0].upper()+s[1:]
+    return s if s!=o else ''
+_n_oa=0
+for _r in recs:
+    if _r['k']=='dn':
+        _oa=casse_normale(_r['o'])
+        if _oa: _r['oa']=_oa; _n_oa+=1
+print('organismes en capitales mis en casse normale (oa) :',_n_oa,'; sigles lus dans les données :',len(_SIGLES))
 # « Rien à faire » : phrases validées par l'éditeur (rien_a_faire.json, « valides »), clé « raf ».
 RAF=os.path.join(os.path.dirname(OUT),'rien_a_faire.json')
 if os.path.exists(RAF):
@@ -241,6 +282,9 @@ date_export=A.date_export or (f"{_m.group(1)}-{_m.group(2)}-{_m.group(3)}" if _m
 _ed=os.path.join(UP,'dila','export_dila.json')
 date_export_dila=json.load(open(_ed)).get('particuliers',{}).get('date','') if os.path.exists(_ed) else ''
 _q={'observatoire':qual['sources']['observatoire']['edition'],'spp':qual['sources']['spp']} if qual else {}
+# Accessibilité déclarée des plateformes (accessibilite_plateformes.json, relue sur la déclaration publiée) : pour une démarche type
+_ap=os.path.join(os.path.dirname(OUT),'accessibilite_plateformes.json')
+if os.path.exists(_ap): _q['acc_plateformes']={c:{k:v for k,v in x.items() if k!='extrait'} for c,x in json.load(open(_ap))['plateformes'].items()}
 json.dump({'date_export':date_export,'date_export_dila':date_export_dila,**_q,'demarches_en_ligne':sum(1 for r in recs if r['k']=='dn'),'fiches':sum(1 for r in recs if r['k']=='sp')},
           open(os.path.join(os.path.dirname(OUT),'index_meta.json'),'w'),ensure_ascii=False)
 # Contrôle : toutes les références citées par les réponses préparées existent encore dans l'index

@@ -189,7 +189,12 @@
       let L = 0; for (const [t, v] of tf) { L += v; if (!inv.has(t)) inv.set(t, []); inv.get(t).push(i, v); }
       len[i] = L; tot += L;
     });
-    return { recs, inv, len, avg: tot / recs.length, byId: new Map(recs.map((r, i) => [r.id, i])) };
+    // Démarches locales qui ont une jumelle nationale (même titre, normalisé) : index de la locale → index de la nationale.
+    const nat = new Map();
+    recs.forEach((r, i) => { if (r.k === "dn" && r.po === "nat") nat.set(norm(r.t), i); });
+    const jumelles = new Map();
+    if (nat.size) recs.forEach((r, i) => { if (r.k === "dn" && r.po !== "nat" && nat.has(norm(r.t))) jumelles.set(i, nat.get(norm(r.t))); });
+    return { recs, inv, len, avg: tot / recs.length, byId: new Map(recs.map((r, i) => [r.id, i])), jumelles };
   }
 
   const PUBLIC_DN = { particulier: ["particulier", "mixte", "indetermine"], entreprise: ["entreprise", "mixte", "personne_morale", "indetermine"],
@@ -200,7 +205,10 @@
   // Le même motif, trouvé dans la question, annule la rétrogradation.
   const PUBLICS_PARTICULIERS = [/ etudiant(e|s|es)? | etude(s)? /, / stagiaire(s)? /, / au pair /, / saisonnier(s)? /].map((re) => [re]);
   function search(ix, q, opt = {}) {
-    const { pub = "", dep = "", source = "", k = 10, ouvertes = true } = opt;
+    const { pub = "", dep = "", source = "", k = 10, ouvertes = true, sansJumelles = false } = opt;
+    // Même titre qu'une démarche nationale : la nationale passe devant, la locale n'apparaît que si l'usager a choisi son
+    // département (pas pour un lieu seulement reconnu dans la question). Ne vaut que pour les démarches de même titre.
+    const jumelles = sansJumelles ? new Map() : ix.jumelles || new Map();
     const qt = queryToks(q); if (!qt.length) return [];
     const N = ix.recs.length, k1 = 1.2, b = 0.75, sc = new Map(), hit = new Map();
     for (const t of qt) {
@@ -226,6 +234,7 @@
       if (r.k === "dn") {
         if (pub && PUBLIC_DN[pub] && !PUBLIC_DN[pub].includes(r.cat)) continue;
         if (dep && r.dep && r.dep !== dep) continue; // garde les démarches nationales (« nat ») et de département inconnu (« inc »)
+        if (jumelles.has(i) && !(dep && r.dep === dep)) continue;
         if (depsRegion && r.dep && !depsRegion.includes(r.dep)) continue;
         if (ouvertes && r.fe && r.fe < today) continue;
       } else {
@@ -249,6 +258,12 @@
       out.push([s, i]);
     }
     out.sort((a, b) => b[0] - a[0]);
+    // Jumelle locale gardée (département choisi) : placée juste après sa nationale si elle la précède.
+    for (let j = 0; j < out.length; j++) {
+      const n = jumelles.get(out[j][1]); if (n === undefined) continue;
+      const p = out.findIndex((x) => x[1] === n);
+      if (p > j) { const [x] = out.splice(j, 1); out.splice(p, 0, x); j--; }
+    }
     // Diversité : au plus deux démarches en ligne d'un même organisme parmi les résultats ; les suivantes ne disparaissent
     // pas, elles sont regroupées sous la 2e (champ « autres » du résultat, et Moteur.regroupements pour la page). Pas de
     // regroupement quand la recherche est filtrée sur une source.
@@ -449,7 +464,7 @@
   };
   // Symboles « comment faire » et signaux (accessibilité, vigilance), d'après les données de la démarche seulement.
   // voies : liste de voies (alternatives, « ou »), chacune une liste de modes qui se suivent ; Démarche Numérique : en ligne.
-  // acc : { niveau: "tc" | "pc" | "nc" | "inconnue", texte, detail } ; vig : au plus 2 { motif, texte, detail }, à partir de
+  // acc : { niveau: "tc" | "pc" | "nc" | "inconnue" | "plateforme" (Démarche Numérique, taux de la plateforme), texte, detail } ; vig : au plus 2 { motif, texte, detail }, à partir de
   // 20 retours rattachés (Services Publics +, critères cochés par l'usager dans ses retours négatifs ; jamais son texte).
   const MODES_LIB = { en_ligne: "En ligne", formulaire: "Formulaire à remplir", guichet: "Au guichet", rendez_vous: "Sur rendez-vous",
     courrier: "À envoyer par courrier", courriel: "À envoyer par courriel" };
@@ -460,6 +475,8 @@
   const ACC_LIB = { tc: "Accessible", pc: "Accessibilité partielle", nc: "Non conforme", inconnue: "Accessibilité non connue" };
   const SEUIL_RETOURS = 20, MAX_VOIES = 3, MAX_VIGILANCES = 2;
   const dateCourte = (d) => (d || "").split("-").reverse().join("/");
+  const MOIS = "janvier février mars avril mai juin juillet août septembre octobre novembre décembre".split(" ");
+  const CARTE_PHRASE = "Cette démarche contient une carte à manipuler, ce qui peut gêner certains usagers.";
   // Signaux de simplicité, positifs, seulement quand c'est vrai (étude : scripts/assistant/etude_simplicite.py).
   // FranceConnect : toutes les démarches DN (la plateforme le propose partout) ; une fiche SP seulement si l'Observatoire le
   // déclare pour la démarche rattachée (clé « fc »). Données récupérées : DN dont le formulaire a un champ qui va chercher la
@@ -493,6 +510,14 @@
     if (r.acc) {
       const niveau = r.acc[0].toLowerCase(), taux = r.acc[1];
       acc = { niveau, texte: ACC_LIB[niveau] + (niveau === "pc" && taux ? ` (${taux})` : ""), detail: `Déclaration d'accessibilité de cette démarche (${obs})`, perimetre: "demarche" };
+    } else if (r.k === "dn" && meta.acc_plateformes && meta.acc_plateformes.dn) {
+      // Démarche Numérique : jamais de taux par démarche ; celui de la plateforme (déclaration publiée, accessibilite_plateformes.json),
+      // pour une démarche type. Pas de pastille sur la carte, pas de renvoi vers France services pour ce seul motif.
+      const p = meta.acc_plateformes.dn, [a, m] = (p.mise_a_jour || "").split("-"), mois = MOIS[+m - 1] || "";
+      const etat = { "partiellement conforme": "partielle", "totalement conforme": "totale", "non conforme": "non conforme" }[p.statut] || p.statut;
+      const phrase = `Plateforme ${p.nom} : accessibilité ${etat} (${p.taux}${mois ? `, déclaration ${/^[aeiouy]/.test(mois) ? "d'" : "de "}${mois} ${a}` : ""}), pour une démarche type. Le taux peut être un peu différent selon la démarche, par exemple si elle contient une carte.`
+        + (r.crt ? " " + CARTE_PHRASE : "");
+      acc = { niveau: "plateforme", texte: "Accessibilité de la plateforme", detail: phrase, ligne: phrase, perimetre: "plateforme", url: p.url, carte: !!r.crt };
     } else acc = { niveau: "inconnue", texte: ACC_LIB.inconnue, perimetre: "",
       detail: `Aucune déclaration trouvée pour cette démarche dans l'${obs}` + (r.k === "dn" ? " ; celle de la plateforme Démarche Numérique ne porte pas sur le formulaire de chaque démarche" : "") };
     const vig = [];
@@ -547,8 +572,13 @@
       lignes.push({ cle: "accessibilite", texte: `Accessibilité non connue : ${S.acc.detail.charAt(0).toLowerCase() + S.acc.detail.slice(1)}`, liens: [], source: "symboles" });
       resume.push("accessibilité non connue");
     }
+    // Accessibilité de la plateforme (Démarche Numérique) : même règle, jamais seule, toujours en dernière ligne.
+    if (S.acc && S.acc.niveau === "plateforme" && lignes.length && lignes.length < 4) {
+      lignes.push({ cle: "accessibilite", texte: S.acc.ligne.replace(/\.$/, ""), liens: [{ texte: "déclaration d'accessibilité", url: S.acc.url, titre: "" }], source: "symboles" });
+      resume.push("accessibilité de la plateforme");
+    }
     return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
