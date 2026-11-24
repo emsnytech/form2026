@@ -819,6 +819,14 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
       detail: `${rec.join(" ; ")}, par un champ du formulaire de la démarche sur Démarche Numérique` });
     return out;
   }
+  // Délais constatés : jamais copiés, seulement un renvoi vers la page statistiques publique de la démarche, dont l'adresse
+  // est celle de la démarche avec « commencer » remplacé par « statistiques » (vérifiée sur un échantillon, voir la PR).
+  const DELAIS_TEXTE = "Délais constatés : voir les statistiques de la démarche";
+  function statsUrl(r) {
+    if (!r || r.k !== "dn" || !r.u) return "";
+    const u = /^https?:/.test(r.u) ? r.u : "https://demarche.numerique.gouv.fr/commencer/" + encodeURIComponent(r.u);
+    return /\/commencer\//.test(u) ? u.replace("/commencer/", "/statistiques/").replace(/\/$/, "") : "";
+  }
   function symboles(r, meta = {}) {
     const vide = { voies: [], sur: true, acc: null, vig: [], simp: [] };
     if (!r) return vide;
@@ -846,7 +854,8 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
         vig.push({ motif: m, texte: MOTIFS_LIB[m], organisme: org || "",
           detail: `${k} retours négatifs le signalent, sur ${n} retours sur Services Publics +${sp.debut ? " depuis le " + dateCourte(sp.debut) : ""}, ${org ? `pour l'organisme « ${org} » (tout l'organisme, pas seulement cette démarche)` : "pour cette démarche"} ; échantillon spontané, non représentatif` });
     }
-    return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, simp: simplicite(r, meta), acc, vig, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
+    const su = statsUrl(r);
+    return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, simp: simplicite(r, meta), acc, vig, delais: su ? { texte: DELAIS_TEXTE, url: su } : null, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
   }
   const voiesTexte = (v) => v.map((voie) => voie.map((m) => MODES_LIB[m].toLowerCase()).join(", ")).join(" ou ");
   // La déclaration d'accessibilité de Démarche Numérique dit que le PDF de la démarche n'est pas accessible
@@ -889,6 +898,13 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
         liens: [{ texte: "Services Publics +", url: "https://www.plus.transformation.gouv.fr/", titre: `${S.vig[0].detail.split(" ; ")[0].replace(/^\d+ retours négatifs le signalent, sur /, "")} ; échantillon spontané, non représentatif` }], source: "symboles" });
       resume.push("vigilance");
     }
+    // Délais constatés (Démarche Numérique) : jamais seule, comme l'accessibilité non connue ; seulement si le bloc existe déjà.
+    // Quatre lignes au plus : l'accessibilité (dernière ligne, plus bas) garde sa place, les délais prennent la place qui reste.
+    const accFin = S.acc && (S.acc.niveau === "inconnue" || S.acc.niveau === "plateforme") ? 1 : 0;
+    if (S.delais && lignes.length && lignes.length + accFin < 4) {
+      lignes.push({ cle: "delais", texte: "Délais constatés", liens: [{ texte: "voir les statistiques de la démarche", url: S.delais.url, titre: "S'ouvre dans un nouvel onglet" }], source: "sources" });
+      resume.push("délais constatés");
+    }
     // Accessibilité non connue : jamais seule. Dernière ligne, seulement si le bloc existe déjà pour une autre raison (questions,
     // pièces, pré-remplissage, délai, silence vaut accord, vigilance) ; sinon pas de bloc, et le bouton « ? » de la ligne la dit.
     if (S.acc && S.acc.niveau === "inconnue" && lignes.length && lignes.length < 4) {
@@ -902,7 +918,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     }
     return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
   }
-  const api = { build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -1112,7 +1128,9 @@ function ligneSymboles(r, source, sans) {
   const voies = Moteur.voiesTexte(S.voies);
   const det = [`Comment faire : ${voies}${r.k === "dn" ? ", sur Démarche Numérique" : S.sur ? ", d'après la fiche service-public.gouv.fr" : ", d'après la fiche service-public.gouv.fr ; la dernière voie est lue dans son texte, à vérifier sur la fiche"}.`,
     ...S.simp.map((s) => `${s.texte} : ${s.detail}.`), S.acc ? (S.acc.ligne || `${S.acc.texte} : ${minuscule(S.acc.detail)}.`) : "",
-    r.k === "dn" && nomOrg(r).length > 50 ? `Organisme : ${nomOrg(r)}.` : "", ...S.vig.map((v) => `${v.texte} : ${v.detail}.`)].filter(Boolean);
+    r.k === "dn" && nomOrg(r).length > 50 ? `Organisme : ${nomOrg(r)}.` : "", ...S.vig.map((v) => `${v.texte} : ${v.detail}.`)].filter(Boolean).map(esc);
+  // Délais constatés (Démarche Numérique) : toujours dans le détail ; un lien vers la page statistiques, aucun chiffre.
+  if (S.delais) det.push(`Délais constatés : <a href="${esc(S.delais.url)}" target="_blank" rel="noopener">voir les statistiques de la démarche</a> <span class="avant-note">(s'ouvre dans un nouvel onglet ; calculés en direct par Démarche Numérique)</span>`);
   const id = "symb-det-" + (++NUM_SYMB), aide = urlComment("symboles");
   return {
     ligne: (() => {
@@ -1129,7 +1147,7 @@ function ligneSymboles(r, source, sans) {
       units[units.length - 1] = units[units.length - 1].replace(/<\/span>$/, ` ${q}</span>`);
       return `<span class="sr-only">Comment faire : </span>` + units.join(" ");
     })(),
-    detail: `<div class="symb-det" id="${id}" hidden><ul>${det.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>${aide ? `<a href="${esc(aide)}">Légende complète des symboles</a>` : ""}</div>` };
+    detail: `<div class="symb-det" id="${id}" hidden><ul>${det.map((t) => `<li>${t}</li>`).join("")}</ul>${aide ? `<a href="${esc(aide)}">Légende complète des symboles</a>` : ""}</div>` };
 }
 document.addEventListener("click", (ev) => {
   const b = ev.target.closest(".symb-q"); if (!b) return;
@@ -1364,6 +1382,7 @@ function compact(r) {
 function qualites(r) {
   const S = Moteur.symboles(r, META || {}); if (!S.voies.length) return {};
   return { comment_faire: Moteur.voiesTexte(S.voies) + (S.sur ? "" : " (dernière voie lue dans le texte de la fiche, à vérifier)"),
+    delais_constates: S.delais ? S.delais.url : "",
     simplicite: S.simp.map((s) => `${s.texte} (${s.detail} ; ${s.surete === "déclaré" ? "déclaré par l'administration" : "constaté dans la démarche"})`),
     accessibilite: S.acc ? `${S.acc.texte} (${S.acc.detail})` : "", vigilance: S.vig.map((v) => `${v.texte} (${v.detail})`),
     ...(S.rien ? { rien_a_faire: S.rien.phrase } : {}) };
@@ -1408,7 +1427,7 @@ Tu es l'assistant d'orientation d'un démonstrateur public (FORM 2026). Tu aides
 
 RÈGLES
 - Tu ne t'appuies QUE sur les résultats des outils « rechercher » et « details ». Tu n'inventes ni démarche, ni lien, ni condition, ni montant.
-- « comment_faire », « accessibilite » et « vigilance » (outil « details ») viennent des données : tu peux les citer en texte. N'affirme jamais une façon de faire qui n'y est pas, ne présente pas une vigilance comme un jugement sur le service, et n'annonce aucun délai.
+- « comment_faire », « accessibilite » et « vigilance » (outil « details ») viennent des données : tu peux les citer en texte. N'affirme jamais une façon de faire qui n'y est pas, ne présente pas une vigilance comme un jugement sur le service, et n'annonce aucun délai. « delais_constates » (Démarche Numérique) est le lien vers la page statistiques de la démarche : tu peux le donner pour les délais, sans jamais citer de chiffre ni de durée.
 - « simplicite » (FranceConnect, données récupérées) vient aussi des données, avec sa source et sa sûreté (déclaré par l'administration, ou constaté dans la démarche). Ne l'affirme jamais pour une démarche où il n'est pas, et ne déduis pas FranceConnect d'une autorisation ou d'une habilitation de l'organisme.
 - Lance 2 à 4 recherches avec des formulations différentes, dans le vocabulaire de l'administration, puis ouvre avec « details » les 1 à 3 résultats les plus pertinents.
 - Distingue la fiche service-public (pour comprendre ses droits et la procédure) de la démarche en ligne (pour déposer un dossier).

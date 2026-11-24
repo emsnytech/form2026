@@ -508,6 +508,14 @@
       detail: `${rec.join(" ; ")}, par un champ du formulaire de la démarche sur Démarche Numérique` });
     return out;
   }
+  // Délais constatés : jamais copiés, seulement un renvoi vers la page statistiques publique de la démarche, dont l'adresse
+  // est celle de la démarche avec « commencer » remplacé par « statistiques » (vérifiée sur un échantillon, voir la PR).
+  const DELAIS_TEXTE = "Délais constatés : voir les statistiques de la démarche";
+  function statsUrl(r) {
+    if (!r || r.k !== "dn" || !r.u) return "";
+    const u = /^https?:/.test(r.u) ? r.u : "https://demarche.numerique.gouv.fr/commencer/" + encodeURIComponent(r.u);
+    return /\/commencer\//.test(u) ? u.replace("/commencer/", "/statistiques/").replace(/\/$/, "") : "";
+  }
   function symboles(r, meta = {}) {
     const vide = { voies: [], sur: true, acc: null, vig: [], simp: [] };
     if (!r) return vide;
@@ -535,7 +543,8 @@
         vig.push({ motif: m, texte: MOTIFS_LIB[m], organisme: org || "",
           detail: `${k} retours négatifs le signalent, sur ${n} retours sur Services Publics +${sp.debut ? " depuis le " + dateCourte(sp.debut) : ""}, ${org ? `pour l'organisme « ${org} » (tout l'organisme, pas seulement cette démarche)` : "pour cette démarche"} ; échantillon spontané, non représentatif` });
     }
-    return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, simp: simplicite(r, meta), acc, vig, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
+    const su = statsUrl(r);
+    return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, simp: simplicite(r, meta), acc, vig, delais: su ? { texte: DELAIS_TEXTE, url: su } : null, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
   }
   const voiesTexte = (v) => v.map((voie) => voie.map((m) => MODES_LIB[m].toLowerCase()).join(", ")).join(" ou ");
   // La déclaration d'accessibilité de Démarche Numérique dit que le PDF de la démarche n'est pas accessible
@@ -578,6 +587,13 @@
         liens: [{ texte: "Services Publics +", url: "https://www.plus.transformation.gouv.fr/", titre: `${S.vig[0].detail.split(" ; ")[0].replace(/^\d+ retours négatifs le signalent, sur /, "")} ; échantillon spontané, non représentatif` }], source: "symboles" });
       resume.push("vigilance");
     }
+    // Délais constatés (Démarche Numérique) : jamais seule, comme l'accessibilité non connue ; seulement si le bloc existe déjà.
+    // Quatre lignes au plus : l'accessibilité (dernière ligne, plus bas) garde sa place, les délais prennent la place qui reste.
+    const accFin = S.acc && (S.acc.niveau === "inconnue" || S.acc.niveau === "plateforme") ? 1 : 0;
+    if (S.delais && lignes.length && lignes.length + accFin < 4) {
+      lignes.push({ cle: "delais", texte: "Délais constatés", liens: [{ texte: "voir les statistiques de la démarche", url: S.delais.url, titre: "S'ouvre dans un nouvel onglet" }], source: "sources" });
+      resume.push("délais constatés");
+    }
     // Accessibilité non connue : jamais seule. Dernière ligne, seulement si le bloc existe déjà pour une autre raison (questions,
     // pièces, pré-remplissage, délai, silence vaut accord, vigilance) ; sinon pas de bloc, et le bouton « ? » de la ligne la dit.
     if (S.acc && S.acc.niveau === "inconnue" && lignes.length && lignes.length < 4) {
@@ -591,6 +607,6 @@
     }
     return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
   }
-  const api = { build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
