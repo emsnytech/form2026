@@ -153,6 +153,26 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const seule=ix.recs.filter(r=>{const L=M.avantDeCommencer(r,META).lignes;return L.length&&L.every(l=>l.cle==='accessibilite'&&/^Accessibilité non connue/.test(l.texte));});
   const pasDerniere=ix.recs.filter(r=>{const L=M.avantDeCommencer(r,META).lignes,i=L.findIndex(l=>/^Accessibilité non connue/.test(l.texte));return i>=0&&i!==L.length-1;});
   verifie('Z4 « Accessibilité non connue » n\'ouvre jamais seule « Avant de commencer » et vient toujours en dernière ligne', !seule.length&&!pasDerniere.length&&!M.avantDeCommencer(B('SP-R11193'),META).lignes.length&&M.avantDeCommencer(B('DN-13583'),META).lignes.slice(-1)[0].cle==='accessibilite', [...seule,...pasDerniere].slice(0,3).map(r=>r.id).join(' ')||'SP-R11193 sans bloc ; DN-13583 : '+M.avantDeCommencer(B('DN-13583'),META).lignes.map(l=>l.cle).join(', '));
+  // Signaux de simplicité (FranceConnect, données récupérées) : positifs, seulement quand c'est vrai.
+  const SIMP=(r)=>M.symboles(r,META).simp.map(s=>s.cle);
+  const dnSansFc=ix.recs.filter(r=>r.k==='dn'&&!SIMP(r).includes('fc'));
+  verifie(`S1 toute démarche de Démarche Numérique affiche « FranceConnect » (${ix.recs.filter(r=>r.k==='dn').length} démarches)`, !dnSansFc.length&&M.symboles(B('DN-13583'),META).simp[0].texte==='FranceConnect', dnSansFc.slice(0,3).map(r=>r.id).join(' ')||M.symboles(B('DN-13583'),META).simp[0].detail);
+  const spFc=ix.recs.filter(r=>r.k==='sp'&&SIMP(r).includes('fc')).map(r=>r.id), obsFc=ix.recs.filter(r=>/^FranceConnect/.test(r.fc||'')).map(r=>r.id);
+  const papier=ix.recs.filter(r=>r.k==='sp'&&!r.fc&&SIMP(r).length);
+  verifie(`S2 une fiche service-public n'a « FranceConnect » que si l'Observatoire le déclare (${spFc.length}), et aucune autre fiche n'a de signal de simplicité`,
+    spFc.join()===obsFc.join()&&!papier.length&&!SIMP(B('SP-R69012')).length&&!SIMP(B('SP-F1367')).length, papier.slice(0,3).map(r=>r.id).join(' ')||spFc.join(' '));
+  const fcPlus=M.symboles({...B('SP-R49813'),fc:'FranceConnect +'},META).simp[0];
+  verifie('S3 FranceConnect+ s\'affiche « FranceConnect », la précision est dans le détail ; « Non », « À venir » ou une habilitation seule : rien',
+    fcPlus.texte==='FranceConnect'&&/FranceConnect\+/.test(fcPlus.detail)&&['Non','À venir','Non applicable'].every(v=>!SIMP({...B('SP-R49813'),fc:v}).length)&&!SIMP({...B('SP-R49813'),fc:undefined,datapass:['FranceConnect']}).length, fcPlus.detail);
+  const VRAIS=new Set(Object.keys(M.RECUPERE)), attendu=ix.recs.filter(r=>r.k==='dn'&&(r.pre||[]).some(p=>VRAIS.has(p))).length, recs=ix.recs.filter(r=>SIMP(r).includes('rec'));
+  const faux=recs.filter(r=>r.k!=='dn'||!(r.pre||[]).some(p=>VRAIS.has(p)));
+  const seulIban=ix.recs.find(r=>r.k==='dn'&&r.pre.length&&r.pre.every(p=>p==='IBAN')), seulPre=ix.recs.find(r=>r.k==='dn'&&r.pre.length&&r.pre.every(p=>p==='Données préremplies'));
+  verifie(`S4 « Données récupérées pour vous » : SIRET, RNA, RNF, Annuaire Éducation seulement (${recs.length} démarches) ; ni IBAN ni lien prérempli`,
+    recs.length===attendu&&!faux.length&&[...VRAIS].join()==='SIRET (API Entreprise),RNA (associations),RNF (fondations),Annuaire Éducation'&&seulIban&&!SIMP(seulIban).includes('rec')&&(!seulPre||!SIMP(seulPre).includes('rec')), `${seulIban&&seulIban.id} (IBAN seul), ${seulPre&&seulPre.id} (prérempli seul)`);
+  const siret=ix.recs.find(r=>r.k==='dn'&&r.pre.includes('SIRET (API Entreprise)')), dRec=M.symboles(siret,META).simp.find(s=>s.cle==='rec');
+  verifie('S5 le détail nomme la source : « informations sur l\'entreprise récupérées à partir du SIRET (API Entreprise) »', /informations sur l'entreprise récupérées à partir du SIRET \(API Entreprise\)/.test(dRec.detail), siret.id+' : '+dRec.detail);
+  verifie('S6 icônes neutres en gris (user-check, database-import), pas de logo FranceConnect, signaux juste après les modes',
+    /id="ti-user-check"/.test(gab)&&/id="ti-database-import"/.test(gab)&&/class="mode simp"/.test(gab)&&/\[\.\.\.modes, \.\.\.simp, \.\.\.source/.test(gab)&&!/franceconnect[^"' ]*\.(svg|png)|logo[-_ ]?franceconnect/i.test(gab), '');
   verifie('Z3 « Accessibilité non connue » n\'est pas dans la ligne de la carte (seulement dans le détail et « Avant de commencer »)', /S\.acc\.niveau !== "inconnue"/.test(gab));
   const avecVoies=ix.recs.filter(r=>M.symboles(r,META).voies.length).length;
   console.log(`        ${avecVoies} démarches avec des symboles « comment faire »`); }
