@@ -53,6 +53,9 @@ def ico(nom, cls=""):
 def section_symboles(meta):
     spp = meta.get("spp") or {}
     obs = html.escape(meta.get("observatoire") or "", quote=False)
+    p = (meta.get("acc_plateformes") or {}).get("dn") or {}
+    acc_dn = (f'<a href="{html.escape(p["url"])}">{html.escape(p["statut"])}, {html.escape(p["taux"]).replace(" ", "&nbsp;")}, '
+              f'déclaration mise à jour le {date_fr(p["mise_a_jour"])}</a>') if p else "déclaration non relue"
     modes = [("device-laptop", "En ligne", "Démarche Numérique : toujours ; fiche service-public : un cas « En ligne » ou « Sur internet », ou renvoie à un service en ligne."),
              ("file-type-pdf", "Formulaire à remplir", "La fiche a un cas « Formulaire », ou renvoie à un cerfa ou à un formulaire."),
              ("building", "Au guichet", "La fiche a un cas « Sur place » ou « Au guichet »."),
@@ -61,7 +64,7 @@ def section_symboles(meta):
              ("at", "À envoyer par courriel", "La fiche a un cas « Par courriel » ou « Par mail », ou son texte dit d'envoyer « par courriel »." )]
     lignes = "".join(f'<li>{ico(i)} <b>{t}</b>&nbsp;: {html.escape(d[0].lower() + d[1:], quote=False)}</li>' for i, t, d in modes)
     acc = [("tc", "Accessible", "déclaration totalement conforme"), ("pc", "Accessibilité partielle (72&nbsp;%)", "partiellement conforme, avec le taux de l'audit"),
-           ("nc", "Non conforme", "non conforme"), ("inconnue", "Accessibilité non connue", "aucune déclaration trouvée pour cette démarche ; ce n'est pas affiché sur la carte, mais dans le détail (bouton «&nbsp;?&nbsp;») et, en dernière ligne, dans «&nbsp;Avant de commencer&nbsp;» quand ce bloc existe pour une autre raison")]
+           ("nc", "Non conforme", "non conforme"), ("inconnue", "Accessibilité non connue", "aucune déclaration trouvée pour cette fiche ; ce n'est pas affiché sur la carte, mais dans le détail (bouton «&nbsp;?&nbsp;») et, en dernière ligne, dans «&nbsp;Avant de commencer&nbsp;» quand ce bloc existe pour une autre raison")]
     lacc = "".join(f'<li><span class="acc acc-{c}">{ico("accessible")} {t}</span>&nbsp;: {d}.</li>' for c, t, d in acc)
     vig = [("hourglass", "Délais de réponse signalés", "critère « Réactivité »"), ("phone-off", "Difficile à joindre", "critère « Relation »"),
            ("help-circle", "Explications jugées peu claires", "critère « Information/Explication »")]
@@ -79,7 +82,7 @@ def section_symboles(meta):
   <p><strong>Source et limites&nbsp;:</strong> ces signaux ne s'affichent que quand c'est vrai&nbsp;; leur absence ne dit pas qu'une démarche est compliquée. En gris, comme la façon de faire&nbsp;: ce sont des faits, pas des alertes. Ce ne sont pas les logos officiels. Ne comptent pas&nbsp;: un IBAN (son format est vérifié, rien n'est récupéré), une habilitation DataPass de l'organisme (elle dit qu'il a le droit d'utiliser un service, pas que cette démarche le fait), le score «&nbsp;Dites-le-nous une fois&nbsp;» de l'Observatoire (il compte ce qui pourrait encore être prérempli).</p>
   <h3>Accessibilité</h3>
   <ul class="symb-l">{lacc}</ul>
-  <p><strong>Source et limites&nbsp;:</strong> la déclaration d'accessibilité de la démarche dans l'Observatoire de la qualité des démarches en ligne (DINUM, {obs}), pour les démarches rattachées une à une à l'Observatoire (table relue par l'éditeur). Ailleurs, et pour les démarches de Démarche Numérique, l'accessibilité est «&nbsp;non connue&nbsp;»&nbsp;: la déclaration de la plateforme ne dit rien du formulaire propre à chaque démarche. La couleur ne suffit jamais&nbsp;: le texte l'accompagne. En accessibilité partielle ou non conforme, «&nbsp;Avant de commencer&nbsp;» renvoie vers la France services la plus proche.</p>
+  <p><strong>Source et limites&nbsp;:</strong> la déclaration d'accessibilité de la démarche dans l'Observatoire de la qualité des démarches en ligne (DINUM, {obs}), pour les démarches rattachées une à une à l'Observatoire (table relue par l'éditeur). Ailleurs, pour une fiche service-public, l'accessibilité est «&nbsp;non connue&nbsp;». Pour une démarche de Démarche Numérique, il n'y a jamais de taux par démarche&nbsp;: le détail donne celui de la plateforme, lu sur sa déclaration d'accessibilité publiée ({acc_dn}), pour une démarche type, et précise quand la démarche contient une carte à manipuler. Ce taux n'est pas celui de la démarche&nbsp;: il ne s'affiche pas sur la carte, et vient en dernière ligne de «&nbsp;Avant de commencer&nbsp;» seulement quand ce bloc existe pour une autre raison. La couleur ne suffit jamais&nbsp;: le texte l'accompagne. En accessibilité partielle ou non conforme, «&nbsp;Avant de commencer&nbsp;» renvoie vers la France services la plus proche.</p>
   <h3>Points de vigilance</h3>
   <ul class="symb-l">{lvig}</ul>
   <p><strong>Source et limites&nbsp;:</strong> Services Publics + (DITP), retours publiés depuis le {date_fr(spp.get("debut", ""))} (fichier du {date_fr(spp.get("date", ""))}). Un symbole n'apparaît qu'à partir de {spp.get("seuil_retours", 20)} retours sur la démarche, ou sur l'organisme qui la publie quand la démarche n'est pas nommée (le détail le dit alors)&nbsp;: les deux critères le plus souvent cochés par les usagers dans leurs retours négatifs, chacun dans au moins {spp.get("seuil_motif", 5)} retours, deux symboles au plus, toujours en orange. <strong>L'échantillon est spontané et non représentatif</strong>&nbsp;: ce sont les personnes qui ont choisi d'écrire. Aucun texte d'usager n'est lu ni affiché&nbsp;; seuls les critères qu'ils cochent sont comptés.</p>
