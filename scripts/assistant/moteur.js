@@ -569,23 +569,17 @@
                   titre: "Pour lire toutes les questions avant de commencer, pas pour le remplir"
                     + (pdfNonAccessible(meta) ? " ; PDF non accessible, selon la déclaration de la plateforme" : "") }], source: "sources" });
       if (!resume.length) resume.push("le formulaire à vide");
-      const phrases = (r.pre || []).map((p) => PRE_PHRASES[p]).filter(Boolean);
+      // Les données récupérées (RECUPERE) sont expliquées dans le « ? » (signal « Données récupérées pour vous ») : pas ici.
+      const phrases = [...new Set(r.pre || [])].filter((p) => !RECUPERE[p]).map((p) => PRE_PHRASES[p]).filter(Boolean);
       if (phrases.length) { lignes.push({ cle: "prerempli", texte: phrases.join(" "), liens: [], source: "sources" }); resume.push("ce qui est rempli pour vous"); }
     }
-    // Accessibilité partielle ou non conforme (Observatoire) : renvoi vers une France services.
+    // Accessibilité partielle ou non conforme (Observatoire) : le niveau est dans le « ? » ; ici, seulement le renvoi vers une
+    // France services. Les vigilances sont dans le « ? » seulement (une information, un seul endroit).
     const S = symboles(r, meta);
     if (S.acc && (S.acc.niveau === "pc" || S.acc.niveau === "nc")) {
-      const etat = S.acc.niveau === "pc" ? "partiellement conforme" + (/\(/.test(S.acc.texte) ? " " + S.acc.texte.replace(/^[^(]*/, "") : "") : "non conforme";
-      lignes.push({ cle: "accessibilite", texte: `Accessibilité : ${etat}. Si vous rencontrez une difficulté, une France services peut vous aider`,
+      lignes.push({ cle: "accessibilite", texte: "En cas de difficulté d'accessibilité, une France services peut vous aider",
         liens: [{ texte: "France services la plus proche", url: "#carte-ou", titre: "" }], source: "symboles" });
-      resume.push("accessibilité");
-    }
-    if (S.vig.length) {
-      const motifs = S.vig.map((v) => ({ delai: "délais de réponse", joignable: "difficulté à joindre l'administration", explication: "explications peu claires" })[v.motif]);
-      const org = S.vig[0].organisme;
-      lignes.push({ cle: "vigilance", texte: `Point${motifs.length > 1 ? "s" : ""} de vigilance signalé${motifs.length > 1 ? "s" : ""} par les usagers : ${motifs.join(", ")}${org ? ` (retours sur l'organisme « ${org} »)` : ""}`,
-        liens: [{ texte: "Services Publics +", url: "https://www.plus.transformation.gouv.fr/", titre: `${S.vig[0].detail.split(" ; ")[0].replace(/^\d+ retours négatifs le signalent, sur /, "")} ; échantillon spontané, non représentatif` }], source: "symboles" });
-      resume.push("vigilance");
+      resume.push("aide en France services");
     }
     // Délais constatés (Démarche Numérique) : jamais seule, comme l'accessibilité non connue ; seulement si le bloc existe déjà.
     // Quatre lignes au plus : l'accessibilité (dernière ligne, plus bas) garde sa place, les délais prennent la place qui reste.
