@@ -214,6 +214,8 @@ if qual:
         if not r or not o: n_q['rattachement sans démarche ou sans ligne Observatoire']+=1; print('ATTENTION rattachement Observatoire introuvable :',t); continue
         r['obs']=o['id']; n_q['observatoire (table)']+=1
         if o['acc']: r['acc']=[o['acc'],o['taux'] if o['acc']=='PC' else '']
+        # FranceConnect déclaré par l'Observatoire (« FranceConnect » ou « FranceConnect + ») ; « Non », « À venir »… : rien
+        if (o.get('fc') or '').startswith('FranceConnect'): r['fc']=o['fc']; n_q['FranceConnect (Observatoire)']+=1
         v=spp['demarche'].get(' '.join(o['nom'].replace('’',"'").split()).casefold())
         if v: r['spp']=[v['n'],v['neg'],v['motifs'],'']; n_q['vigilance par démarche']+=1
     for r in recs:

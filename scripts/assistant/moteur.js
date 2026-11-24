@@ -460,8 +460,31 @@
   const ACC_LIB = { tc: "Accessible", pc: "Accessibilité partielle", nc: "Non conforme", inconnue: "Accessibilité non connue" };
   const SEUIL_RETOURS = 20, MAX_VOIES = 3, MAX_VIGILANCES = 2;
   const dateCourte = (d) => (d || "").split("-").reverse().join("/");
+  // Signaux de simplicité, positifs, seulement quand c'est vrai (étude : scripts/assistant/etude_simplicite.py).
+  // FranceConnect : toutes les démarches DN (la plateforme le propose partout) ; une fiche SP seulement si l'Observatoire le
+  // déclare pour la démarche rattachée (clé « fc »). Données récupérées : DN dont le formulaire a un champ qui va chercher la
+  // donnée. Jamais : IBAN (format vérifié, rien n'est récupéré), lien prérempli, score DLNUF, habilitation DataPass seule.
+  const RECUPERE = {
+    "SIRET (API Entreprise)": "informations sur l'entreprise récupérées à partir du SIRET (API Entreprise)",
+    "RNA (associations)": "informations sur l'association récupérées à partir du numéro RNA (répertoire national des associations)",
+    "RNF (fondations)": "informations sur la fondation récupérées à partir de son numéro (répertoire national des fondations)",
+    "Annuaire Éducation": "coordonnées de l'établissement scolaire récupérées dans l'annuaire de l'Éducation nationale",
+  };
+  function simplicite(r, meta = {}) {
+    const out = [];
+    if (!r) return out;
+    const obs = meta.observatoire ? `Observatoire de la qualité des démarches en ligne, ${meta.observatoire}` : "Observatoire de la qualité des démarches en ligne";
+    if (r.k === "dn") out.push({ cle: "fc", texte: "FranceConnect", surete: "déployé",
+      detail: `connexion possible avec un compte FranceConnect (impots.gouv, ameli, La Poste…) : Démarche Numérique le propose sur toutes ses démarches${meta.date_export ? ` (descriptif du ${dateCourte(meta.date_export)})` : ""}` });
+    else if (r.fc && /^FranceConnect/.test(r.fc)) out.push({ cle: "fc", texte: "FranceConnect", surete: "déclaré",
+      detail: `connexion possible avec ${/\+/.test(r.fc) ? "FranceConnect+, la version de FranceConnect à sécurité renforcée" : "un compte FranceConnect (impots.gouv, ameli, La Poste…)"}, déclarée pour cette démarche (${obs})` });
+    const rec = r.k === "dn" ? [...new Set(r.pre || [])].map((p) => RECUPERE[p]).filter(Boolean) : [];
+    if (rec.length) out.push({ cle: "rec", texte: "Données récupérées pour vous", surete: "déployé",
+      detail: `${rec.join(" ; ")}, par un champ du formulaire de la démarche sur Démarche Numérique` });
+    return out;
+  }
   function symboles(r, meta = {}) {
-    const vide = { voies: [], sur: true, acc: null, vig: [] };
+    const vide = { voies: [], sur: true, acc: null, vig: [], simp: [] };
     if (!r) return vide;
     const voies = r.k === "dn" ? [["en_ligne"]] : (r.md || []).slice(0, MAX_VOIES);
     if (!voies.length) return vide;
@@ -479,7 +502,7 @@
         vig.push({ motif: m, texte: MOTIFS_LIB[m], organisme: org || "",
           detail: `${k} retours négatifs le signalent, sur ${n} retours sur Services Publics +${sp.debut ? " depuis le " + dateCourte(sp.debut) : ""}, ${org ? `pour l'organisme « ${org} » (tout l'organisme, pas seulement cette démarche)` : "pour cette démarche"} ; échantillon spontané, non représentatif` });
     }
-    return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, acc, vig, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
+    return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, simp: simplicite(r, meta), acc, vig, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
   }
   const voiesTexte = (v) => v.map((voie) => voie.map((m) => MODES_LIB[m].toLowerCase()).join(", ")).join(" ou ");
   function avantDeCommencer(r, meta = {}) {
@@ -526,6 +549,6 @@
     }
     return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
