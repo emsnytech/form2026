@@ -175,6 +175,12 @@
   const ANNEE = new Date().getFullYear();
   const EV_LABEL = (ev) => (ev && ev !== "hors_perimetre" ? ev.replace(/_/g, " ") : "");
 
+  const MODELES = /\b(DINUM|DINSIC)\b/;
+  // Démarches locales de même titre qu'une démarche nationale (règle « nationale devant ») : index des locales.
+  function jumellesDe(ix, r) {
+    const i = ix.byId.get(r && r.id); if (i === undefined || !ix.jumelles) return [];
+    const out = []; for (const [l, n] of ix.jumelles) if (n === i) out.push(l); return out;
+  }
   function build(recs) {
     const inv = new Map(); const len = new Float32Array(recs.length); let tot = 0;
     recs.forEach((r, i) => {
@@ -190,8 +196,10 @@
       len[i] = L; tot += L;
     });
     // Démarches locales qui ont une jumelle nationale (même titre, normalisé) : index de la locale → index de la nationale.
+    // Les démarches de la DINUM et de la DINSIC n'entrent pas dans la règle : probablement des démarches modèles, qui
+    // masqueraient la vraie démarche locale de même titre.
     const nat = new Map();
-    recs.forEach((r, i) => { if (r.k === "dn" && r.po === "nat") nat.set(norm(r.t), i); });
+    recs.forEach((r, i) => { if (r.k === "dn" && r.po === "nat" && !MODELES.test(r.o || "")) nat.set(norm(r.t), i); });
     const jumelles = new Map();
     if (nat.size) recs.forEach((r, i) => { if (r.k === "dn" && r.po !== "nat" && nat.has(norm(r.t))) jumelles.set(i, nat.get(norm(r.t))); });
     return { recs, inv, len, avg: tot / recs.length, byId: new Map(recs.map((r, i) => [r.id, i])), jumelles };
@@ -530,6 +538,9 @@
     return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, simp: simplicite(r, meta), acc, vig, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
   }
   const voiesTexte = (v) => v.map((voie) => voie.map((m) => MODES_LIB[m].toLowerCase()).join(", ")).join(" ou ");
+  // La déclaration d'accessibilité de Démarche Numérique dit que le PDF de la démarche n'est pas accessible
+  // (accessibilite_plateformes.json, clé « pdf_non_accessible », relue sur la page).
+  const pdfNonAccessible = (meta) => !!(meta.acc_plateformes && meta.acc_plateformes.dn && meta.acc_plateformes.dn.pdf_non_accessible);
   function avantDeCommencer(r, meta = {}) {
     const lignes = [], resume = [];
     if (!r) return { resume: "", lignes };
@@ -546,7 +557,8 @@
       const base = /^https?:/.test(r.u) ? r.u : "https://demarche.numerique.gouv.fr/commencer/" + encodeURIComponent(r.u);
       lignes.push({ cle: "questions", texte: parts.length ? parts.join(" · ") : "Toutes les questions de la démarche",
         liens: [{ texte: "Voir le formulaire à vide (PDF)", url: base.replace(/\/$/, "") + "/dossier_vide",
-                  titre: "Pour lire toutes les questions avant de commencer, pas pour le remplir" }], source: "sources" });
+                  titre: "Pour lire toutes les questions avant de commencer, pas pour le remplir"
+                    + (pdfNonAccessible(meta) ? " ; PDF non accessible, selon la déclaration de la plateforme" : "") }], source: "sources" });
       if (!resume.length) resume.push("le formulaire à vide");
       const phrases = (r.pre || []).map((p) => PRE_PHRASES[p]).filter(Boolean);
       if (phrases.length) { lignes.push({ cle: "prerempli", texte: phrases.join(" "), liens: [], source: "sources" }); resume.push("ce qui est rempli pour vous"); }
@@ -579,6 +591,6 @@
     }
     return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

@@ -194,6 +194,14 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('J6 nom tout en capitales en casse normale, sigles gardés ; jamais un nom en casse mixte', /^Direction départementale de l'emploi, du travail, des solidarités et de la protection des populations des Hautes-Alpes/.test(ddets)&&/\(DDETSPP\)/.test(ddets)&&!caps.length&&!ix.recs.some(r=>r.oa&&r.o!==r.o.toUpperCase()), ddets);
   verifie('J7 nom d\'organisme coupé dans la carte (« … », nom complet en infobulle) : aucun nom plus large que la carte',
     /\.ligne-symb \.u-org\{min-width:0;max-width:min\(100%,30em\)\}/.test(gab)&&/\.ligne-symb \.org-nom\{min-width:0;overflow:hidden;text-overflow:ellipsis\}/.test(gab)&&/class="org-nom" title="/.test(gab));
+  const modeles=ix.recs.filter(r=>r.k==='dn'&&r.po==='nat'&&M.MODELES.test(r.o||'')), voirie=top("Demande d'autorisation de voirie ou de commencement de travaux",{},12);
+  verifie(`J8 démarches de la DINUM et de la DINSIC hors de la règle « nationale devant » (${modeles.length} nationales) : elles ne masquent aucune démarche locale`,
+    modeles.length&&![...ix.jumelles.values()].some(n=>M.MODELES.test(ix.recs[n].o||''))&&!ix.jumelles.has(ix.byId.get('DN-7286'))&&!ix.jumelles.has(ix.byId.get('DN-5237'))&&ids(voirie).includes('DN-5237'), ids(voirie).filter(i=>i.startsWith('DN')).join(' '));
+  verifie('J9 médaille sans territoire : la nationale a des démarches locales de même titre, la carte propose « préciser le vôtre » ; avec le 05, la démarche des Hautes-Alpes est citée',
+    M.jumellesDe(ix,B('DN-69348')).map(i=>ix.recs[i].id).includes('DN-118359')&&/Certains départements ont leur propre démarche&nbsp;: <button type="button" class="lien-changer" id="preciser-dep">préciser le vôtre<\/button>/.test(gab)&&/a aussi sa propre démarche/.test(gab));
+  const pdf=M.avantDeCommencer(B('DN-69348'),META).lignes[0].liens[0];
+  verifie('J10 à côté du formulaire à vide : « PDF non accessible, selon la déclaration de la plateforme », lu dans accessibilite_plateformes.json',
+    META.acc_plateformes.dn.pdf_non_accessible===true&&/PDF non accessible, selon la déclaration de la plateforme/.test(pdf.titre)&&!/PDF non accessible/.test(M.avantDeCommencer(B('DN-69348'),{}).lignes[0].liens[0].titre), pdf.titre);
   verifie('Z3 « Accessibilité non connue » n\'est pas dans la ligne de la carte (seulement dans le détail et « Avant de commencer »)', /!\["inconnue", "plateforme"\]\.includes\(S\.acc\.niveau\)/.test(gab));
   const avecVoies=ix.recs.filter(r=>M.symboles(r,META).voies.length).length;
   console.log(`        ${avecVoies} démarches avec des symboles « comment faire »`); }

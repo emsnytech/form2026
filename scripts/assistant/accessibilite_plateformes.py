@@ -29,11 +29,14 @@ def lire(cle, p):
     statut = re.search(r"est (totalement conforme|partiellement conforme|non conforme) au Référentiel Général d’Amélioration de l’Accessibilité", t)
     taux = re.search(r"(L’audit réalisé[^.]*? en (\w+) (\d{4})[^.]*?taux de conformité global est de ([\d,]+) ?%[^.]*\.)", t)
     maj = re.search(r"mise à jour le (\d{1,2}) (\w+) (\d{4})", t)
+    # Non-conformité qui touche le « formulaire à vide (PDF) » vers lequel renvoie la page : relue, jamais supposée.
+    pdf = re.search(r"le document PDF de dématérialisation de la démarche n’est pas accessible", t)
     if not (statut and taux and maj) or taux[2] not in MOIS or maj[2] not in MOIS:
         sys.exit(f"{p['url']} : statut, taux ou date introuvable, la page a changé de forme ; rien n'est écrit")
     return {"nom": p["nom"], "url": p["url"], "statut": statut[1], "niveau": STATUTS[statut[1]],
             "taux": taux[4].rstrip("0").rstrip(",") + " %", "audit": f"{taux[2]} {taux[3]}",
             "mise_a_jour": datetime.date(int(maj[3]), MOIS.index(maj[2]) + 1, int(maj[1])).isoformat(),
+            "pdf_non_accessible": bool(pdf), "extrait_pdf": pdf[0] if pdf else "",
             "extrait": taux[1], "lu_le": datetime.date.today().isoformat()}
 
 

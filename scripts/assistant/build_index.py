@@ -284,7 +284,7 @@ date_export_dila=json.load(open(_ed)).get('particuliers',{}).get('date','') if o
 _q={'observatoire':qual['sources']['observatoire']['edition'],'spp':qual['sources']['spp']} if qual else {}
 # Accessibilité déclarée des plateformes (accessibilite_plateformes.json, relue sur la déclaration publiée) : pour une démarche type
 _ap=os.path.join(os.path.dirname(OUT),'accessibilite_plateformes.json')
-if os.path.exists(_ap): _q['acc_plateformes']={c:{k:v for k,v in x.items() if k!='extrait'} for c,x in json.load(open(_ap))['plateformes'].items()}
+if os.path.exists(_ap): _q['acc_plateformes']={c:{k:v for k,v in x.items() if k not in ('extrait','extrait_pdf')} for c,x in json.load(open(_ap))['plateformes'].items()}
 json.dump({'date_export':date_export,'date_export_dila':date_export_dila,**_q,'demarches_en_ligne':sum(1 for r in recs if r['k']=='dn'),'fiches':sum(1 for r in recs if r['k']=='sp')},
           open(os.path.join(os.path.dirname(OUT),'index_meta.json'),'w'),ensure_ascii=False)
 # Contrôle : toutes les références citées par les réponses préparées existent encore dans l'index

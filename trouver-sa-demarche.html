@@ -121,6 +121,7 @@ body{--bouton-fond:var(--accent);--bouton-fond-survol:var(--accent-fonce);--bout
 .carte .org{margin:0;font-size:15px;color:var(--muted)}
 .carte .prep2{margin:0;font-size:15px}
 .carte .avert{margin:0;font-size:14px;font-weight:600;color:var(--urgent)}
+.carte .jumelles{margin:8px 0 0;font-size:15px}.carte .jumelles select{margin-left:4px}
 .carte .liens{display:flex;gap:8px 20px;flex-wrap:wrap;font-size:15px}
 .btn-lien{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;font-size:17px;font-weight:600;color:#fff;background:var(--accent);border-radius:10px;text-decoration:none;align-self:flex-start}
 .btn-lien:hover{color:#fff;background:var(--accent-fonce)}
@@ -485,6 +486,12 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
   const ANNEE = new Date().getFullYear();
   const EV_LABEL = (ev) => (ev && ev !== "hors_perimetre" ? ev.replace(/_/g, " ") : "");
 
+  const MODELES = /\b(DINUM|DINSIC)\b/;
+  // Démarches locales de même titre qu'une démarche nationale (règle « nationale devant ») : index des locales.
+  function jumellesDe(ix, r) {
+    const i = ix.byId.get(r && r.id); if (i === undefined || !ix.jumelles) return [];
+    const out = []; for (const [l, n] of ix.jumelles) if (n === i) out.push(l); return out;
+  }
   function build(recs) {
     const inv = new Map(); const len = new Float32Array(recs.length); let tot = 0;
     recs.forEach((r, i) => {
@@ -500,8 +507,10 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
       len[i] = L; tot += L;
     });
     // Démarches locales qui ont une jumelle nationale (même titre, normalisé) : index de la locale → index de la nationale.
+    // Les démarches de la DINUM et de la DINSIC n'entrent pas dans la règle : probablement des démarches modèles, qui
+    // masqueraient la vraie démarche locale de même titre.
     const nat = new Map();
-    recs.forEach((r, i) => { if (r.k === "dn" && r.po === "nat") nat.set(norm(r.t), i); });
+    recs.forEach((r, i) => { if (r.k === "dn" && r.po === "nat" && !MODELES.test(r.o || "")) nat.set(norm(r.t), i); });
     const jumelles = new Map();
     if (nat.size) recs.forEach((r, i) => { if (r.k === "dn" && r.po !== "nat" && nat.has(norm(r.t))) jumelles.set(i, nat.get(norm(r.t))); });
     return { recs, inv, len, avg: tot / recs.length, byId: new Map(recs.map((r, i) => [r.id, i])), jumelles };
@@ -840,6 +849,9 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, simp: simplicite(r, meta), acc, vig, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
   }
   const voiesTexte = (v) => v.map((voie) => voie.map((m) => MODES_LIB[m].toLowerCase()).join(", ")).join(" ou ");
+  // La déclaration d'accessibilité de Démarche Numérique dit que le PDF de la démarche n'est pas accessible
+  // (accessibilite_plateformes.json, clé « pdf_non_accessible », relue sur la page).
+  const pdfNonAccessible = (meta) => !!(meta.acc_plateformes && meta.acc_plateformes.dn && meta.acc_plateformes.dn.pdf_non_accessible);
   function avantDeCommencer(r, meta = {}) {
     const lignes = [], resume = [];
     if (!r) return { resume: "", lignes };
@@ -856,7 +868,8 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
       const base = /^https?:/.test(r.u) ? r.u : "https://demarche.numerique.gouv.fr/commencer/" + encodeURIComponent(r.u);
       lignes.push({ cle: "questions", texte: parts.length ? parts.join(" · ") : "Toutes les questions de la démarche",
         liens: [{ texte: "Voir le formulaire à vide (PDF)", url: base.replace(/\/$/, "") + "/dossier_vide",
-                  titre: "Pour lire toutes les questions avant de commencer, pas pour le remplir" }], source: "sources" });
+                  titre: "Pour lire toutes les questions avant de commencer, pas pour le remplir"
+                    + (pdfNonAccessible(meta) ? " ; PDF non accessible, selon la déclaration de la plateforme" : "") }], source: "sources" });
       if (!resume.length) resume.push("le formulaire à vide");
       const phrases = (r.pre || []).map((p) => PRE_PHRASES[p]).filter(Boolean);
       if (phrases.length) { lignes.push({ cle: "prerempli", texte: phrases.join(" "), liens: [], source: "sources" }); resume.push("ce qui est rempli pour vous"); }
@@ -889,7 +902,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     }
     return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
   }
-  const api = { build, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -1137,6 +1150,17 @@ function carteDemarche(r) {
     const L = ligneSymboles(r, `${nomOrg(r)}${lieu ? " · " + lieu : ""} · Démarche Numérique`, `${nomOrg(r)}${lieu ? " · " + lieu : ""} · en ligne sur Démarche Numérique`);
     h += `<p class="org ligne-symb">${L.ligne}</p>${L.detail}`;
     if (r.po === "inc") h += `<p class="avert">Démarche locale&nbsp;: vérifiez qu'elle concerne votre commune.</p>`;
+    // Démarche nationale qui a des démarches locales de même titre, sans département choisi : on garde la nationale et on
+    // propose de préciser le département (règle « nationale devant », Moteur.jumellesDe).
+    // Département choisi qui a la sienne : elle est citée sous la nationale.
+    const jum = r.po === "nat" ? Moteur.jumellesDe(IX, r).map((i) => IX.recs[i]) : [], dep = $("dep").value;
+    const sienne = dep && jum.find((x) => x.dep === dep);
+    if (jum.length && !dep)
+      h += `<p class="jumelles" id="jumelles">Certains départements ont leur propre démarche&nbsp;: <button type="button" class="lien-changer" id="preciser-dep">préciser le vôtre</button></p>`;
+    else if (sienne) {
+      h += `<p class="jumelles">${esc(DEPNAME[dep] || dep)} (${esc(dep)}) a aussi sa propre démarche&nbsp;: <a href="${esc(dnUrl(sienne))}" target="_blank" rel="noopener">${esc(sienne.t)}</a> <span class="meta">(${esc(nomOrg(sienne))})</span></p>`;
+      ajouterLien(sienne.t, dnUrl(sienne), "Démarche Numérique");
+    }
     h += `<a class="btn-lien" href="${esc(dnUrl(r))}" target="_blank" rel="noopener">Faire la démarche</a>`;
     h += blocAvant(r);
     ajouterLien(r.t, dnUrl(r), "Démarche Numérique");
@@ -1151,6 +1175,14 @@ function carteDemarche(r) {
     ajouterLien(ts ? ts.t : r.t, cible, "service-public.gouv.fr");
   }
   el.innerHTML = h; el.hidden = false;
+  const b = $("preciser-dep");
+  if (b) b.addEventListener("click", () => {
+    const p = $("jumelles");
+    p.innerHTML = `<label for="dep-jum">Certains départements ont leur propre démarche&nbsp;: votre département</label> <select id="dep-jum">${$("dep").innerHTML}</select>`;
+    const s = $("dep-jum"); s.value = ""; s.focus();
+    s.addEventListener("change", () => { if (!s.value) return; $("dep").value = s.value; $("dep").dispatchEvent(new Event("change"));
+      if (typeof window.relancerReponse === "function") window.relancerReponse(); else afficherResultats([r], r.t, "citee", r); });
+  });
 }
 function carteAussi(f) {
   const el = $("carte-aussi"); if (!f) { el.hidden = true; return; }

@@ -9,8 +9,10 @@
    "taux": "93,1 %",
    "audit": "avril 2025",
    "mise_a_jour": "2025-04-15",
+   "pdf_non_accessible": true,
+   "extrait_pdf": "le document PDF de dématérialisation de la démarche n’est pas accessible",
    "extrait": "L’audit réalisé en interne en avril 2025 révèle que le taux de conformité global est de 93,10% sur l’échantillon de pages analysés.",
-   "lu_le": "2026-11-24"
+   "lu_le": "2026-11-25"
   }
  }
 }
