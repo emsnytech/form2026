@@ -1,0 +1,41 @@
+{
+ "objet": "Rattachements validés par l'éditeur le 25/11/2026 : démarche nommée de Services Publics + (« Démarches modérées ») → fiche de l'index. Repris des propositions « sûres » de spp_rattachement_propositions.json (qualite.py --proposer-spp) ; lus par build_index.py. Table éditoriale : à modifier à la main seulement après relecture.",
+ "rattachements": [
+  {
+   "spp": "Inscription en ligne à l'examen du permis de conduire",
+   "id": "SP-R59785",
+   "titre": "Permis de conduire : réserver en ligne une place pour passer l'épreuve pratique du permis",
+   "raison": "même adresse de service (securite-routiere.gouv.fr/passer-son-permis-de-conduire/inscription-et-formation/reserver-en-ligne-sa-place-pour-le)"
+  },
+  {
+   "spp": "SignalConso",
+   "id": "SP-R67053",
+   "titre": "Signal Conso",
+   "raison": "même adresse de service (signal.conso.gouv.fr/fr)"
+  },
+  {
+   "spp": "Rechercher des offres d’emploi (France Travail)",
+   "id": "SP-R31528",
+   "titre": "Rechercher une offre d'emploi sur France Travail",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; nom quasi identique (0.974), un seul candidat"
+  },
+  {
+   "spp": "Demander l'ouverture des droits à l'assurance maladie",
+   "id": "SP-R45084",
+   "titre": "Demander l'ouverture des droits à l'Assurance maladie",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; nom quasi identique (1.0), un seul candidat"
+  },
+  {
+   "spp": "Demande de prime d'activité",
+   "id": "SP-R42726",
+   "titre": "Demander la prime d'activité",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; nom quasi identique (0.978), un seul candidat"
+  },
+  {
+   "spp": "Demande d'allocation de soutien familial - ARIPA",
+   "id": "SP-R1448",
+   "titre": "Demande d'allocation de soutien familial (ASF)",
+   "raison": "nom quasi identique (0.925), un seul candidat"
+  }
+ ]
+}

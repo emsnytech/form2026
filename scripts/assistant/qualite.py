@@ -316,7 +316,8 @@ ETR_TAGS = {"Titre de séjour", "Naturalisation", "Asile", "Aide aux réfugiés"
 ETR_MOTS = r"s[ée]jour|\bANEF\b|naturali|asile|\bvisas?\b|[ée]trangers?\b|nationalit|r[ée]fugi|OFPRA|OFII|regroupement familial|apatrid"
 FR_ETRANGER = r"à l.étranger|de l.[ée]tranger|survenu à l|célébré à l|Français|consulaire"   # Français établis hors de France : hors sujet
 # Titres de démarches DN sur les étrangers : plus large (abréviations des préfectures), pour qu'aucune n'y perde sa vigilance par erreur
-DN_ETR_MOTS = ETR_MOTS + r"|passeport talent|statut [ée]tudiant|changement de statut|r[ée]c[ée]piss|\bAPS\b|binationa|droit d.option|d[ée]claration d.option|protection temporaire|autorisation de travail|carte de r[ée]sident|\bDCEM\b|\bTIR\b|titre de voyage|\bOQTF\b|r[ée]gularisation|ressortissant|\bBPI\b|\bTUE\b"
+DN_ETR_MOTS = ETR_MOTS + r"|passeport talent|statut [ée]tudiant|changement de statut|r[ée]c[ée]piss|\bAPS\b|binationa|droit d.option|d[ée]claration d.option|protection temporaire|autorisation de travail|carte de r[ée]sident|\bDCEM\b|(?-i:\bTIR\b)|titre de voyage|\bOQTF\b|r[ée]gularisation|ressortissant|\bBPI\b|\bTUE\b"
+ANEF = "administration-etrangers-en-france.interieur.gouv.fr"
 PART_FORTE = 0.5                           # part des retours d'une préfecture sur les étrangers jugée forte
 
 
@@ -354,6 +355,50 @@ def est_etranger(x):
                 or any(re.search(ETR_MOTS, d, re.I) and not re.search(FR_ETRANGER, d) for d in x["dms"]))
 
 
+def domaine_ants(nom, obs_par_nom):
+    os_ = obs_par_nom.get(cle(nom), [])
+    if len(os_) == 1:
+        d = _domaine(os_[0].get("URL Démarche"))
+        return (ANTS_DOMAINES[d], "adresse dans l'Observatoire") if d in ANTS_DOMAINES else (None, f"autre service ({d or 'sans adresse'})")
+    if len(os_) > 1: return None, "plusieurs lignes de l'Observatoire"
+    for motif, dom in ANTS_NOMS:
+        if re.search(motif, nom, re.I): return dom, "nom (absent de l'Observatoire)"
+    return None, "hors des trois domaines"
+
+
+def ants_par_domaine(L, obs_par_nom):
+    ants = [x for x in L if ANTS in x["st"]]
+    noms, par_dom = {}, collections.defaultdict(list); hors = collections.Counter()
+    for x in ants:
+        if not x["dms"]: hors["sans démarche nommée"] += 1; continue
+        ds = {noms.setdefault(d, domaine_ants(d, obs_par_nom))[0] for d in x["dms"]}
+        if len(ds) == 1 and None not in ds: par_dom[ds.pop()].append(x)
+        else: hors["démarche nommée hors domaine, ou plusieurs domaines"] += 1
+    return ants, noms, par_dom, hors
+
+
+def est_anef(x):
+    return "ANEF" in x["ty"] or "Titre de séjour" in x["tags"]
+
+
+def cibles_spp(chemin, obs_par_nom, debut):
+    """Vigilances validées le 25/11/2026 (suite de la PR 94), lues par build_index.py : ANTS par domaine, titres de séjour (ANEF),
+    préfectures sans les retours sur les étrangers. France Travail (structure) est écarté. Comptes et critères cochés seulement."""
+    L = list(lire_lignes_spp(chemin, debut))
+    _, _, par_dom, _ = ants_par_domaine(L, obs_par_nom)
+    nom_dom = {v: k for k, v in ANTS_DOMAINES.items()}
+    sans = lambda a: {k: v for k, v in a.items() if k != "vigilance"}
+    pref = collections.defaultdict(list)
+    for x in L:
+        if est_etranger(x): continue
+        for s in x["st"]:
+            if re.match(r"(Sous-)?[Pp]r[ée]fecture", s): pref[(cle(s), s)].append(x)
+    return {"ants": [{"adresse": nom_dom[d], "domaine": d, **sans(agreger(xs))} for d, xs in sorted(par_dom.items())],
+            "anef": {"adresse": ANEF, "definition": "typologie « ANEF » ou tag métier « Titre de séjour »", **sans(agreger([x for x in L if est_anef(x)]))},
+            "prefectures_sans_etrangers": {k: {"nom": nom, **sans(agreger(xs))} for (k, nom), xs in sorted(pref.items())},
+            "titres_etrangers": DN_ETR_MOTS}
+
+
 def etude_spp_suite(A, recs, obs_par_nom, debut):
     sp = [r for r in recs if r["k"] == "sp"]
     toutes = list(lire_lignes_spp(A.spp)); L = [x for x in toutes if x["date"] >= debut]
@@ -363,22 +408,7 @@ def etude_spp_suite(A, recs, obs_par_nom, debut):
            "periode": {"debut": debut, "fichier": A.date_spp}, "seuils": {"retours": SEUIL_RETOURS, "motif": SEUIL_MOTIF, "part_forte": PART_FORTE}}
 
     # 1. ANTS, découpée par domaine : un retour ne compte pour un domaine que si toutes ses démarches nommées en relèvent.
-    def domaine_ants(nom):
-        os_ = obs_par_nom.get(cle(nom), [])
-        if len(os_) == 1:
-            d = _domaine(os_[0].get("URL Démarche"))
-            return (ANTS_DOMAINES[d], "adresse dans l'Observatoire") if d in ANTS_DOMAINES else (None, f"autre service ({d or 'sans adresse'})")
-        if len(os_) > 1: return None, "plusieurs lignes de l'Observatoire"
-        for motif, dom in ANTS_NOMS:
-            if re.search(motif, nom, re.I): return dom, "nom (absent de l'Observatoire)"
-        return None, "hors des trois domaines"
-    ants = [x for x in L if ANTS in x["st"]]
-    noms, par_dom = {}, collections.defaultdict(list); hors = collections.Counter()
-    for x in ants:
-        if not x["dms"]: hors["sans démarche nommée"] += 1; continue
-        ds = {noms.setdefault(d, domaine_ants(d))[0] for d in x["dms"]}
-        if len(ds) == 1 and None not in ds: par_dom[ds.pop()].append(x)
-        else: hors["démarche nommée hors domaine, ou plusieurs domaines"] += 1
+    ants, noms, par_dom, hors = ants_par_domaine(L, obs_par_nom)
     doms = []
     for d, dom in ANTS_DOMAINES.items():
         fs = [fiche(r) for r in sp if r.get("l") and _domaine(r["l"]) == d]
@@ -420,7 +450,7 @@ def etude_spp_suite(A, recs, obs_par_nom, debut):
         "typologies_des_retours": collections.Counter(t for x in E for t in x["ty"]).most_common(15),
         "lignes_observatoire": [[o[0]["ID Démarche"], o[0]["Nom Démarche"], _domaine(o[0].get("URL Démarche"))] for k, o in obs_par_nom.items()
                                 if re.search(ETR_MOTS, o[0]["Nom Démarche"], re.I) and not re.search(FR_ETRANGER, o[0]["Nom Démarche"])],
-        "fiches_vers_anef": [fiche(r) for r in sp if r.get("l") and _domaine(r["l"]) == "administration-etrangers-en-france.interieur.gouv.fr"]}
+        "fiches_vers_anef": [fiche(r) for r in sp if r.get("l") and _domaine(r["l"]) == ANEF]}
 
     # 4. Préfectures rattachées aux démarches DN par leur organisme : part des retours sur les étrangers.
     dn_pref = collections.defaultdict(list)
@@ -514,6 +544,9 @@ def main():
                        "spp": {"date": A.date_spp, "debut": debut, "jeu": "https://www.data.gouv.fr/datasets/64c062e02590f67d0f9f7201",
                                "seuil_retours": SEUIL_RETOURS, "seuil_motif": SEUIL_MOTIF, "criteres": CRITERES}},
            "observatoire": obs, "spp": spp}
+    obs_par_nom = collections.defaultdict(list)
+    for o in lire_toutes_obs(A.observatoire): obs_par_nom[cle(o["Nom Démarche"])].append(o)
+    out["spp_cibles"] = cibles_spp(A.spp, obs_par_nom, debut)
     (D / "assistant" / "qualite.json").write_text(json.dumps(out, ensure_ascii=False, indent=0) + "\n", encoding="utf-8")
     print(f"Observatoire : {len(obs)} démarches ; Services Publics + depuis {debut} : {len(spp['demarche'])} démarches et "
           f"{len(spp['structure'])} structures d'au moins {SEUIL_RETOURS} retours")

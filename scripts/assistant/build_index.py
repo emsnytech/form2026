@@ -220,10 +220,35 @@ if qual:
         if (o.get('fc') or '').startswith('FranceConnect'): r['fc']=o['fc']; n_q['FranceConnect (Observatoire)']+=1
         v=spp['demarche'].get(' '.join(o['nom'].replace('’',"'").split()).casefold())
         if v: r['spp']=[v['n'],v['neg'],v['motifs'],'']; n_q['vigilance par démarche']+=1
+    # Rattachements Services Publics + validés (spp_rattachement.json) : démarche nommée → fiche de l'index.
+    for t in json.load(open(os.path.join(os.path.dirname(OUT),'spp_rattachement.json')))['rattachements']:
+        r,v=par_id.get(t['id']),spp['demarche'].get(' '.join(t['spp'].replace('’',"'").split()).casefold())
+        if not r or not v: print('ATTENTION rattachement Services Publics + introuvable :',t); continue
+        if 'spp' not in r: r['spp']=[v['n'],v['neg'],v['motifs'],'']; n_q['vigilance par démarche (table SPP)']+=1
+    # Fiches service-public dont le service en ligne est un domaine retenu (ANTS par domaine, ANEF), sauf si la démarche a sa
+    # propre vigilance : « portée » en 5e élément, pour l'infobulle.
+    cib=qual.get('spp_cibles') or {}
+    dom=lambda u:re.sub(r'^www\.','',(re.match(r'^https?://([^/?#:]+)',u or '') or [None,''])[1].lower())
+    lib={'immatriculation':"l'immatriculation",'permis de conduire':'le permis de conduire',"passeport et carte d'identité":"les passeports et cartes d'identité"}
+    par_dom={a['adresse']:(a,f"retours sur {lib.get(a['domaine'],a['domaine'])} (ANTS)") for a in cib.get('ants',[])}
+    if cib.get('anef'): par_dom[cib['anef']['adresse']]=(cib['anef'],'retours sur les titres de séjour (ANEF)')
+    for r in recs:
+        if r['k']!='sp' or 'spp' in r: continue
+        a,portee=par_dom.get(dom(r.get('l')),(None,''))
+        if a and a['n']>=20 and a['motifs']: r['spp']=[a['n'],a['neg'],a['motifs'],'',portee]; n_q['vigilance par domaine : '+portee]+=1
+    # Démarche Numérique : par l'organisme. Préfecture : sans les retours sur les étrangers pour les démarches qui ne les concernent pas.
+    pref,etr=cib.get('prefectures_sans_etrangers',{}),re.compile(cib.get('titres_etrangers') or r'(?!x)x',re.I)
     for r in recs:
         if r['k']=='dn' and 'spp' not in r:
-            v=spp['structure'].get(' '.join((r.get('o') or '').replace('’',"'").split()).casefold())
-            if v and v['motifs']: r['spp']=[v['n'],v['neg'],v['motifs'],v['nom']]; n_q['vigilance par organisme (DN)']+=1
+            k=' '.join((r.get('o') or '').replace('’',"'").split()).casefold()
+            v=spp['structure'].get(k)
+            if not (v and v['motifs']): continue
+            if k in pref and not etr.search(r['t']):
+                w=pref[k]
+                if w['n']>=20 and w['motifs']: r['spp']=[w['n'],w['neg'],w['motifs'],v['nom'],'hors retours sur les étrangers']; n_q['vigilance préfecture sans étrangers (DN)']+=1
+                else: n_q['préfecture : vigilance retirée sans les étrangers (DN)']+=1
+                continue
+            r['spp']=[v['n'],v['neg'],v['motifs'],v['nom']]; n_q['vigilance par organisme (DN)']+=1
     print('accessibilité et vigilance :',dict(n_q))
 # Nom d'organisme écrit entièrement en capitales (« DIRECTION DEPARTEMENTALE DE L'EMPLOI… ») : forme en casse normale pour
 # l'affichage, clé « oa ». Rien n'est inventé : l'orthographe (accents, majuscules des noms propres) et les sigles sont lus
