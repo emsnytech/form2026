@@ -63,6 +63,7 @@ select{font:inherit;font-size:15px;min-height:44px;padding:0 10px;border-radius:
 .ligne-symb .u-org{min-width:0;max-width:min(100%,30em)}.ligne-symb .org-nom{min-width:0;overflow:hidden;text-overflow:ellipsis}.ligne-symb .src-fin{flex:none}
 .mode,.acc,.vig{display:inline-flex;gap:4px;align-items:center;white-space:nowrap}
 .mode{color:var(--sym)}.mode .ico{color:var(--sym)}
+a.mode.cerfa{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
 .ou{font-size:13px;color:var(--muted)}
 .sep{color:var(--muted)}
 .filet{display:inline-block;width:1px;height:20px;background:var(--line2);margin:0 2px}
@@ -149,8 +150,8 @@ details.pli>summary{font-size:16px;font-weight:500;display:list-item;padding:10p
 .autrement{display:flex;flex-direction:column;gap:10px;font-size:17px}.autrement p{margin:0}
 .manque{margin:0;font-size:15px;color:#3F4349}
 .possibles .avert-v{margin:0;font-size:15px;font-weight:600;color:var(--urgent)}
-.possibles ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
-.possibles li{display:flex;flex-direction:column;gap:2px}.possibles li a{font-size:17px}
+.possibles > ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.possibles > ul > li{display:flex;flex-direction:column;gap:2px}.possibles > ul > li > a{font-size:17px}
 .possibles .terr{font-weight:600;color:var(--ink)}
 .question-lieu{display:flex;flex-direction:column;gap:8px;padding:14px 16px;border:2px solid var(--accent);border-radius:12px;width:100%}
 .question-lieu b{font-size:17px}.question-lieu .row{margin:0}
@@ -908,7 +909,9 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
           detail: `${k} retours négatifs le signalent, sur ${n} retours sur Services Publics +${sp.debut ? " depuis le " + dateCourte(sp.debut) : ""}, ${pour} ; échantillon spontané, non représentatif` });
     }
     const su = statsUrl(r);
-    return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, simp: simplicite(r, meta), acc, vig, delais: su ? { texte: DELAIS_TEXTE, url: su } : null, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
+    // Formulaire cerfa d'une ressource service-public (« cerfa », lien « l ») : le symbole « Formulaire » devient un lien.
+    const cerfa = r.k === "sp" && r.cerfa && r.l && voies.some((v) => v.includes("formulaire")) ? { texte: `Formulaire cerfa n°\u00a0${r.cerfa}`, url: r.l } : null;
+    return { voies, cerfa, sur: r.k === "dn" ? true : r.md_sur !== false, simp: simplicite(r, meta), acc, vig, delais: su ? { texte: DELAIS_TEXTE, url: su } : null, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
   }
   const voiesTexte = (v) => v.map((voie) => voie.map((m) => MODES_LIB[m].toLowerCase()).join(", ")).join(" ou ");
   // La déclaration d'accessibilité de Démarche Numérique dit que le PDF de la démarche n'est pas accessible
@@ -966,12 +969,19 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
   // la page la connaît mieux que la fiche (téléservice rattaché à une fiche F…). Rend [{ ico, texte, titre?, lien? }].
   function detailSymboles(r, meta = {}, opt = {}) {
     const S = symboles(r, meta); if (!S.voies.length) return [];
-    const A = avantDeCommencer(r, meta), dansAvant = (cle) => A.lignes.some((l) => l.cle === cle);
+    // opt.avant === false : la carte n'affiche pas « Avant de commencer » (« Démarches possibles ») ; tout va dans le « ? »,
+    // y compris le lien vers le formulaire à vide de Démarche Numérique.
+    const A = opt.avant === false ? { lignes: [] } : avantDeCommencer(r, meta), dansAvant = (cle) => A.lignes.some((l) => l.cle === cle);
     const min = (t) => t.charAt(0).toLowerCase() + t.slice(1), org = r.on || r.oa || r.o || "";
     const site = r.k === "dn" ? "Démarche Numérique" : siteLisible(opt.site || r.l);
     const det = S.voies.map((voie, i) => ({ ico: ICO[voie[0]],
       texte: MODES_COURT[voie[0]] + (voie[0] === "en_ligne" && site ? `, sur ${site}` : "") + voie.slice(1).map((m) => ", " + min(MODES_LIB[m])).join("")
         + (!S.sur && i === S.voies.length - 1 ? " (à vérifier sur la fiche)" : "") }));
+    if (opt.avant === false && r.k === "dn" && r.u) {
+      const base = /^https?:/.test(r.u) ? r.u : "https://demarche.numerique.gouv.fr/commencer/" + encodeURIComponent(r.u);
+      det.push({ ico: ICO.formulaire, texte: "", lien: { texte: "Voir le formulaire", url: base.replace(/\/$/, "") + "/dossier_vide",
+        titre: "Pour lire toutes les questions avant de commencer, pas pour le remplir", apres: pdfNonAccessible(meta) ? "(PDF non accessible)" : "(PDF)" } });
+    }
     for (const x of S.simp) {
       if (x.cle === "fc") det.push({ ico: ICO.fc, texte: `Connexion avec ${x.texte}` });
       else if (x.cle === "rec" && !dansAvant("donnees")) det.push({ ico: ICO.rec, texte: `Données récupérées : ${[...new Set(r.pre || [])].filter((p) => RECUPERE[p]).map((p) => PRE_COURT[p]).join(", ")}` });
@@ -1181,12 +1191,18 @@ let NUM_SYMB = 0;
 // sans façon de faire connue, repli : la ligne d'avant (texte « sans »).
 // Nom d'organisme affiché : en casse normale s'il est écrit tout en capitales dans l'export (clé « oa » de l'index).
 const nomOrg = (r) => r.on || r.oa || r.o || "";  // on : entité qui publie une démarche passée en nationale (Sirene)
-function ligneSymboles(r, source, sans, site) {
+function ligneSymboles(r, source, sans, site, avant = true) {
   const S = Moteur.symboles(r, META || {});
   if (!S.voies.length) return { ligne: esc(sans), detail: "" };
   // Unités insécables : la ligne ne se coupe qu'entre elles ; chaque séparateur (« ou », « · », filet) reste avec ce qui le suit.
   const u = (h) => `<span class="u">${h}</span>`;
-  const modes = S.voies.flatMap((v, i) => v.map((m, j) => u(`${i && !j ? `<span class="ou">ou</span> ` : ""}<span class="mode">${ico(ICO_MODE[m])}${esc(Moteur.MODES_COURT[m])}</span>`)));
+  // Formulaire cerfa (Moteur.symboles, clé « cerfa ») : le premier symbole « Formulaire » devient le lien vers le formulaire.
+  let cerfa = S.cerfa;
+  const modes = S.voies.flatMap((v, i) => v.map((m, j) => {
+    const lien = m === "formulaire" && cerfa; if (lien) cerfa = null;
+    return u(`${i && !j ? `<span class="ou">ou</span> ` : ""}` + (lien ? `<a class="mode cerfa" href="${esc(lien.url)}" target="_blank" rel="noopener">${ico(ICO_MODE[m])}${esc(lien.texte)}<span class="sr-only"> (nouvel onglet)</span></a>`
+      : `<span class="mode">${ico(ICO_MODE[m])}${esc(Moteur.MODES_COURT[m])}</span>`));
+  }));
   // Signaux de simplicité : en gris comme les modes, juste après eux (ce sont des faits, pas des alertes).
   // Un « · » les sépare des modes : côte à côte, des symboles se suivent dans une même voie.
   const simp = S.simp.map((s, i) => u(`${i ? "" : `<span class="sep" aria-hidden="true">·</span> `}<span class="mode simp">${ico(ICO_SIMP[s.cle])}${esc(s.texte)}</span>`));
@@ -1195,7 +1211,7 @@ function ligneSymboles(r, source, sans, site) {
   const sig = acc.concat(S.vig.map((v) => `<span class="vig">${ico(ICO_MOTIF[v.motif])}${esc(v.texte)}</span>`))
     .map((h, i) => u(`${i ? "" : `<span class="filet" aria-hidden="true"></span> `}${h}`));
   // Détail du « ? » (Moteur.detailSymboles) : sans ce que « Avant de commencer » porte déjà (une information, un seul endroit).
-  const det = Moteur.detailSymboles(r, META || {}, { site }).map((d) => ligneCourte(d, d.lien ? [d.lien] : []));
+  const det = Moteur.detailSymboles(r, META || {}, { site, avant }).map((d) => ligneCourte(d, d.lien ? [d.lien] : []));
   const id = "symb-det-" + (++NUM_SYMB), aide = urlComment("symboles");
   return {
     ligne: (() => {
@@ -1331,7 +1347,8 @@ function cartePossibles(l) {
   const el = $("carte-possibles"); if (!l.length) { el.hidden = true; return; }
   el.innerHTML = `<h2 id="h-possibles">Démarches possibles</h2><p class="avert-v">À vérifier&nbsp;: ces démarches peuvent ne pas correspondre à votre situation.</p><ul>`
     + l.map((r) => { const u = r.k === "dn" ? dnUrl(r) : lienSp(r); ajouterLien(r.t, u, r.k === "dn" ? "Démarche Numérique" : "service-public.gouv.fr");
-      const L = r.k === "dn" ? ligneSymboles(r, nomOrg(r) + " · Démarche Numérique", nomOrg(r)) : ligneSymboles(r, "service-public.gouv.fr", typeLib(r) + " · service-public.gouv.fr");
+      // Pas de « Avant de commencer » sur ces cartes : le « ? » porte aussi le formulaire à vide (Démarche Numérique).
+      const L = r.k === "dn" ? ligneSymboles(r, nomOrg(r) + " · Démarche Numérique", nomOrg(r), undefined, false) : ligneSymboles(r, "service-public.gouv.fr", typeLib(r) + " · service-public.gouv.fr", undefined, false);
       return `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(r.t)}</a><span class="meta ligne-symb"><span class="terr">${esc(territoire(r))}</span> <span class="sep" aria-hidden="true">·</span> ${L.ligne}</span>${L.detail}</li>`; }).join("") + `</ul>`;
   el.hidden = false;
 }
