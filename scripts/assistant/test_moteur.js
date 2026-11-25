@@ -223,6 +223,9 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const rep=ix.recs.filter(r=>{const S=M.symboles(r,META),c=new Set(M.avantDeCommencer(r,META).lignes.map(l=>l.cle));
     return (S.vig.length&&c.has('vigilance'))||(S.simp.some(x=>x.cle==='rec')&&M.avantDeCommencer(r,META).lignes.some(l=>Object.keys(M.RECUPERE).some(k=>l.texte.includes(M.PRE_PHRASES[k]))));});
   verifie('U3 même information, autre formulation : ni vigilance ni données récupérées répétées dans « Avant de commencer » (elles sont dans le « ? »)', !rep.length, rep.slice(0,3).map(r=>r.id).join(' '));
+  const m69=B('DN-69348'), d69=M.detailSymboles(m69,META).map(d=>d.texte).join(' ');
+  verifie('O1 médaille passée en nationale : « Ministère de l\'Intérieur » (Sirene, SIRET 11001401600015) affiché, l\'organisme déclaré dans le « ? » ; aucune autre démarche n\'a ce nom de remplacement',
+    m69.on==="Ministère de l'Intérieur"&&/nomOrg = \(r\) => r\.on \|\| r\.oa \|\| r\.o/.test(gab)&&/Organisme déclaré sur Démarche Numérique : Préfecture, sous-préfecture, DDETSPP, DRIEETS\./.test(d69)&&ix.recs.filter(r=>r.on).every(r=>r.po==='nat'), ix.recs.filter(r=>r.on).map(r=>r.id).join(' '));
   verifie('Z3 « Accessibilité non connue » n\'est pas dans la ligne de la carte (seulement dans le détail et « Avant de commencer »)', /!\["inconnue", "plateforme"\]\.includes\(S\.acc\.niveau\)/.test(gab));
   const avecVoies=ix.recs.filter(r=>M.symboles(r,META).voies.length).length;
   console.log(`        ${avecVoies} démarches avec des symboles « comment faire »`); }

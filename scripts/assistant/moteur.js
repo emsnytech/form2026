@@ -609,11 +609,13 @@
     const S = symboles(r, meta); if (!S.voies.length) return [];
     const A = avantDeCommencer(r, meta), dansAvant = (cle) => A.lignes.some((l) => l.cle === cle);
     const accFin = S.acc && (S.acc.niveau === "plateforme" || S.acc.niveau === "inconnue");
-    const min = (t) => t.charAt(0).toLowerCase() + t.slice(1), org = r.oa || r.o || "";
+    const min = (t) => t.charAt(0).toLowerCase() + t.slice(1), org = r.on || r.oa || r.o || "";
     const det = [`Comment faire : ${voiesTexte(S.voies)}${r.k === "dn" ? ", sur Démarche Numérique" : S.sur ? ", d'après la fiche service-public.gouv.fr" : ", d'après la fiche service-public.gouv.fr ; la dernière voie est lue dans son texte, à vérifier sur la fiche"}.`,
       ...S.simp.map((x) => `${x.texte} : ${x.detail}.`),
       S.acc && !(accFin && dansAvant("accessibilite")) ? (S.acc.ligne || `${S.acc.texte} : ${min(S.acc.detail)}.`) : "",
-      r.k === "dn" && org.length > 50 ? `Organisme : ${org}.` : "", ...S.vig.map((v) => `${v.texte} : ${v.detail}.`)].filter(Boolean).map((texte) => ({ texte }));
+      r.k === "dn" && org.length > 50 ? `Organisme : ${org}.` : "",
+      // Démarche passée en nationale : la ligne affiche l'entité qui la publie (Sirene) ; l'organisme déclaré est rappelé ici.
+      r.k === "dn" && r.on ? `Organisme déclaré sur Démarche Numérique : ${r.oa || r.o}. La démarche est publiée par ${/^Ministère /.test(r.on) ? "le " + min(r.on) : r.on} (base Sirene) et vaut pour toute la France.` : "", ...S.vig.map((v) => `${v.texte} : ${v.detail}.`)].filter(Boolean).map((texte) => ({ texte }));
     if (S.delais && !dansAvant("delais")) det.push({ texte: "Délais constatés :", lien: { texte: "voir les statistiques de la démarche", url: S.delais.url, note: "s'ouvre dans un nouvel onglet ; calculés en direct par Démarche Numérique" } });
     return det;
   }
