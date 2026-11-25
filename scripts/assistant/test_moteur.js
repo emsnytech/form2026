@@ -333,6 +333,13 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('L2 carte « Démarches possibles » (Démarche Numérique) : « Voir le formulaire (PDF) » dans le « ? » ; pas dans le « ? » de « Votre démarche », où « Avant de commencer » le porte',
     !!lf&&lf.lien.texte==='Voir le formulaire'&&/^\(PDF/.test(lf.lien.apres)&&lf.ico===M.ICO.formulaire&&!vd.some(d=>d.lien&&/dossier_vide/.test(d.lien.url))&&M.avantDeCommencer(dn,META).lignes.some(l=>l.liens.some(x=>/dossier_vide/.test(x.url)))
     &&/ligneSymboles\(r, nomOrg\(r\) \+ " · Démarche Numérique", nomOrg\(r\), undefined, false\)/.test(page), lf&&lf.lien.url); }
+// Expressions « carte grise » et « liste(s) électorale(s) » ; service en ligne devant le formulaire. R : premier résultat de la
+// recherche ; A : « Votre démarche ».
+{ const cas=[['carte grise perdue','SP-R47917'],['inscription liste électorale','SP-R16396'],["m'inscrire sur les listes électorales",'SP-R16396'],['inscripsion liste electoral','SP-R16396']];
+  for(const [q,att] of cas){ const qc=M.corriger(q).texte, t=M.search(ix,qc,{k:5}).map(x=>x.r.id), C=M.choisir(ix,qc,{k:20});
+    verifie(`R7 « ${q} » : ${att} en 1re position`, t[0]===att, t.join(' '));
+    verifie(`A10 « ${q} » : ${att} en « Votre démarche »`, C.principal&&C.principal.id===att, C.principal&&C.principal.id); }
+  const g=M.analyse('carte grise perdue').termes; verifie('R7 « carte grise » est une expression (certificat d\'immatriculation), comptée double par la règle « démarche sûre »', [...g.keys()].some(k=>/_carte_grise/.test(k))); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');

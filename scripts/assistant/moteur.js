@@ -43,6 +43,13 @@
     [["verifier le titre de sejour", "verifier son titre de sejour", "verifier un titre de sejour", "verifier les titres de sejour",
       "salarie etranger", "salaries etrangers", "embaucher un etranger", "embaucher un salarie etranger", "embaucher des etrangers"],
      ["verification", "prealable", "embauche", "autorisation", "travail"]],
+    // Carte grise : nom courant du certificat d'immatriculation (titre des fiches et de la démarche de l'ANTS).
+    [["carte grise", "cartes grises"], ["_carte_grise"]],
+    // Carte grise perdue ou volée : on la refait en ligne (« Refaire son certificat d'immatriculation… en cas de perte, vol »).
+    [["carte grise perdue", "carte grise perdu", "carte grise volee", "carte grise vole", "perdu ma carte grise", "perdu sa carte grise",
+      "perte de carte grise", "perte de la carte grise", "perte de ma carte grise", "vol de carte grise", "vol de ma carte grise"], ["_carte_grise", "refaire", "perte", "vol"]],
+    // Liste électorale : une expression (inscription sur les listes électorales), pas les mots « liste » et « électorale » isolés.
+    [["liste electorale", "listes electorales", "liste electoral", "listes electorale", "listes electoraux"], ["liste", "electorale"]],
     // Renouveler son titre de séjour : la démarche se fait auprès du bureau des étrangers, souvent sur rendez-vous.
     [["renouveler mon titre de sejour", "renouveler son titre de sejour", "renouveler le titre de sejour", "renouveler ma carte de sejour",
       "renouvellement de mon titre de sejour", "renouvellement du titre de sejour", "renouvellement de titre de sejour"],
@@ -52,7 +59,9 @@
     return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
   }
   // Jetons d'expression : indexés quand l'expression figure dans un texte, cherchés par les synonymes (« _… », sans racinisation).
-  const JETONS_EXPRESSION = [["fonds d urgence", "_fonds_d_urgence"], ["troubles urbains", "_troubles_urbains"], ["dommages subis", "_dommages_subis"]];
+  const JETONS_EXPRESSION = [["fonds d urgence", "_fonds_d_urgence"], ["troubles urbains", "_troubles_urbains"], ["dommages subis", "_dommages_subis"],
+    // carte grise = certificat d'immatriculation : un même jeton, quel que soit le nom employé par la fiche
+    ["carte grise", "_carte_grise"], ["cartes grises", "_carte_grise"], ["certificat d immatriculation", "_carte_grise"], ["certificats d immatriculation", "_carte_grise"]];
   function stem(w) {
     if (w[0] === "_") return w;
     if (w.length > 4) w = w.replace(/(s|x)$/, "");
@@ -304,7 +313,8 @@
         if (r.tc) s *= 0.7;   // titre qui ressemble à un identifiant interne (« Bilan_4BNaap12_… ») : rétrogradé, quelle que soit la portée
         const yrs = (r.t.match(/20[12]\d/g) || []).map(Number); if (yrs.length && Math.max(...yrs) < ANNEE - 1) s *= 0.6; }
       else {
-        if (/Téléservice|Formulaire|formulaireNG/.test(r.ty)) s *= 1.1;
+        // Service en ligne (« Téléservice », « selNG ») devant le formulaire : la démarche se fait d'abord en ligne.
+        if (/Téléservice|selNG/.test(r.ty)) s *= 1.2; else if (/Formulaire|formulaireNG/.test(r.ty)) s *= 1.1;
         // Fiche réservée à un public particulier (« Étudiant étranger… », « … stagiaire ») que la question ne nomme pas :
         // rétrogradée, pour que la fiche générale passe devant.
         const pp = PUBLICS_PARTICULIERS.find(([re]) => re.test(" " + norm(r.t) + " "));
