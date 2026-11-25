@@ -202,7 +202,7 @@
     if (!c) {
       // Carte d'identité, passeport en tête : on ne demande pas la commune (titres_identite.json).
       const tete = (window.CARTES_TETE || [])[0];
-      if (tete && Moteur.titreIdentite && Moteur.titreIdentite(tete)) { majOu(); return; }
+      if ((tete && Moteur.titreIdentite && Moteur.titreIdentite(tete)) || window.BESOINS_SANS_LIEU) { majOu(); return; }
       if (!enLigne) el.innerHTML = `<div class="ou-t">Une France services peut vous aider à faire cette démarche</div><p>Indiquez votre code postal pour trouver la plus proche, ou consultez la <a href="https://www.france-services.gouv.fr/" target="_blank" rel="noopener">carte des France services</a>.</p>`;
       majOu(); return;
     }
@@ -294,6 +294,8 @@
     // Carte d'identité, passeport en tête : la commune n'est pas demandée (la mairie se choisit ensuite, sur la carte de l'ANTS).
     const tete = (window.CARTES_TETE || [])[0];
     if (!L && tete && Moteur.titreIdentite && Moteur.titreIdentite(tete)) return;
+    // « Vos démarches » dont aucune ligne n'a besoin d'un lieu (opposition bancaire, titres d'identité…) : pas de code postal demandé.
+    if (!L && window.BESOINS_SANS_LIEU) return;
     if (!L) {
       // Ni code postal, ni département, ni lieu reconnu : les démarches d'un département sont rétrogradées (×0,8 dans le
       // moteur) ; la page invite à préciser la commune.

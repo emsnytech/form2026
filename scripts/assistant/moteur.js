@@ -4,7 +4,7 @@
   const STOP = new Set(("a au aux avec ce ces dans de des du elle en et eux il je la le les leur lui ma mais me meme mes moi mon ne nos notre nous on ou par pas pour qu que qui sa se ses son sur ta te tes toi ton tu un une vos votre vous c d j l m n s t y ete etre avoir ai as avons avez ont suis es est sommes etes sont faire fait comment quoi quel quelle quels quelles dois doit veux veut voudrais souhaite souhaiterais besoin peux peut faut il ya y-a cela ca cet cette tout tous toute toutes plus moins tres aussi si alors donc car comme chez sans sous entre vers apres avant depuis lors quand ou bien mon ma mes demande demarche demarches demander habite habiter habitons habitez pendant existe exister possible possibles").split(" "));
   const DEGRADATIONS = ["degradation", "dommage", "_troubles_urbains", "_dommages_subis"];
   const SYN = {
-    bebe: ["naissance"], enfant: ["enfant"], boulot: ["emploi"], travail: ["emploi", "travail"], chomage: ["emploi", "chomage"],
+    bebe: ["naissance"], enfant: ["enfant"], boulot: ["emploi"], travail: ["emploi", "travail"], chomage: ["emploi", "chomage", "inscription"],
     demenage: ["demenagement", "adresse"], demenager: ["demenagement", "adresse"], aide: ["aide", "subvention", "allocation"],
     argent: ["aide", "subvention", "financement"], asso: ["association"], boite: ["entreprise"], societe: ["entreprise"],
     voiture: ["vehicule", "immatriculation"], auto: ["vehicule"], carte: ["carte"], fete: ["manifestation"], brocante: ["vide", "grenier", "manifestation"],
@@ -57,6 +57,11 @@
     [["liste electorale", "listes electorales", "liste electoral", "listes electorale", "listes electoraux"], ["liste", "electorale"]],
     // Carte d'identité : son jeton ; seule dans la question, la pré-demande en ligne aussi (comme « passeport » seul).
     [["carte d identite", "carte identite", "cartes d identite", "carte nationale d identite", "cni"], ["_cni"], { seul: ["_pre_demande"] }],
+    // Mots courants → vocabulaire des fiches : l'attestation de droits (« attestation Vitale »), la déclaration de naissance.
+    [["attestation de securite sociale", "attestation securite sociale", "attestation secu", "attestation de secu", "attestation vitale",
+      "attestation carte vitale", "attestation d assurance maladie", "attestation assurance maladie"], ["_attestation_droits"]],
+    [["naissance enfant", "naissance d un enfant", "naissance de mon enfant", "naissance de notre enfant", "naissance de mon bebe", "mon bebe est ne",
+      "vient de naitre", "declarer une naissance", "declarer la naissance"], ["_declaration_naissance", "naissance"], { sansSyn: true }],
     // Passeport talent : un titre de séjour, pas un passeport.
     [["passeport talent", "passeports talent"], ["talent"], { sansSyn: true }],
     // Passeport : obtenir un passeport (pré-demande d'un 1er passeport, ANTS) ; le refaire (pré-demande de renouvellement).
@@ -78,7 +83,7 @@
     // carte grise = certificat d'immatriculation : un même jeton, quel que soit le nom employé par la fiche
     ["carte grise", "_carte_grise"], ["cartes grises", "_carte_grise"], ["certificat d immatriculation", "_carte_grise"], ["certificats d immatriculation", "_carte_grise"],
     // pré-demande en ligne (passeport, carte d'identité) : un jeton, cherché par le synonyme de « passeport »
-    ["pre demande", "_pre_demande"],
+    ["pre demande", "_pre_demande"], ["attestation de droits", "_attestation_droits"], ["declaration de naissance", "_declaration_naissance"],
     // carte d'identité : un jeton propre (la racine « identi » est aussi celle d'« identification »)
     ["carte d identite", "_cni"], ["cartes d identite", "_cni"], ["carte nationale d identite", "_cni"]];
   function stem(w) {
@@ -302,7 +307,25 @@
   // Fiches annexes (timbre fiscal, suivi d'une demande, titre retrouvé) : après la démarche elle-même, sauf si la question en
   // parle ; jamais en « Votre démarche » dans ce cas. [motif sur le titre, motif sur la question], textes normalisés entourés d'espaces.
   const ANNEXES = [[/ timbres? /, / timbres? /], [/^ (suivre|suivez) | ou en est | etat d avancement | suivre /, / suivre | suivi | suivie | avancement | ou en est /],
-    [/ retrouve(e|s|es)? /, / retrouve(e|s|es)? | retrouver /]];
+    [/ retrouve(e|s|es)? /, / retrouve(e|s|es)? | retrouver /],
+    // espace personnel, compte en ligne : on y suit ses démarches ; la démarche elle-même d'abord
+    [/ mon compte | votre compte | espace personnel | espace prive | espace numerique /, / compte | espace /]];
+  // Fiche annexe que la question nomme (« suivre ma demande de passeport ») : elle remonte, et peut être « Votre démarche ».
+  const annexeNommee = (r, q) => { if (r.k !== "sp") return false; const t = " " + norm(r.t) + " ", n = " " + norm(q) + " ";
+    return ANNEXES.some(([rt, rq]) => rt.test(t) && rq.test(n)); };
+  // Cas particulier (public ou objet précis) dans le titre d'une démarche ou d'une fiche, que la question ne nomme pas : après
+  // le cas général, et jamais en « Votre démarche ». [motif sur le titre, motif sur la question], textes normalisés entourés d'espaces.
+  const PUBLICS_PRECIS = [
+    [/ agricoles? | agriculteurs? /, / agricoles? | agriculteurs? | tracteurs? | exploitants? | msa /],
+    [/ independants? | auto entrepreneurs? | micro entrepreneurs? | artistes auteurs | non salaries /, / independants? | auto entrepreneurs? | micro entrepreneurs? | artistes? | auteurs? | non salaries? /],
+    [/ militaires? | armees? | anciens? combattants? | combattants? | appeles du service national /, / militaires? | armee | armees | combattants? | soldats? | gendarmes? | service national /],
+    [/ agents? publics? | fonctionnaires? | fonction publique | agents? de l etat | magistrats? | contractuels? | agents? hospitaliers? /, / agents? publics? | fonctionnaires? | fonction publique | agents? | magistrats? | contractuels? /],
+    [/ mandataires? sociaux? | mandataire social /, / mandataires? | dirigeants? | gerants? /],
+    // opération particulière sur un titre ou un dossier (modifier, corriger, ajouter un co-titulaire) : après la demande elle-même
+    [/ modifier | modifie | modifiee | modifies | modification | correction | corriger | ajouter | co titulaire | cotitulaires? /, / modifier | modification | changer | changement | corriger | correction | erreur | ajouter | adresse | demenage | demenagement | titulaire /],
+    [/ marins? | gens de mer | notaires? | clercs? | journalistes? | detenus? | frontaliers? | pensionnes? /, / marins? | mer | notaires? | clercs? | journalistes? | detenus? | prison | frontaliers? | pensionnes? /]];
+  const casParticulierTitre = (r, q) => { const t = " " + norm(r.t) + " ", n = " " + norm(q) + " ";
+    return PUBLICS_PRECIS.some(([rt, rq]) => rt.test(t) && !rq.test(n)); };
   const annexe = (r, q) => { if (r.k !== "sp") return false; const t = " " + norm(r.t) + " ", n = " " + norm(q) + " ";
     return ANNEXES.some(([rt, rq]) => rt.test(t) && !rq.test(n)); };
   // Fiche « majeur » ou « mineur » : la fiche du majeur d'abord, sauf si la question parle d'un enfant (mot ou âge de moins de 18 ans).
@@ -317,7 +340,7 @@
     return !!tt && !tt.test(" " + norm(q) + " ") && !/ etranger /.test(" " + norm(q) + " "); };
   // Fiche d'un cas particulier (vol, perte, décès, détérioration) que la question n'évoque pas : jamais citée en phrase d'introduction.
   const CAS_PARTICULIERS = [/ vol | vols | vole | volee | volees | voles | vole /, / perte | pertes | perdu | perdue | perdus | perdues /,
-    / deces | decede | decedee | mort /, / deterioration | deteriore | deterioree | endommage | endommagee | abime | abimee /];
+    / deces | decede | decedee | mort | heriter | herite | heritage | succession /, / deterioration | deteriore | deterioree | endommage | endommagee | abime | abimee | accident | accidente | accidentee /];
   const casParticulier = (r, q) => { const t = " " + norm(r.t) + " ", n = " " + norm(q) + " "; return CAS_PARTICULIERS.some((re) => re.test(t) && !re.test(n)); };
   // Libellés des liens d'une carte : une même adresse une seule fois ; deux adresses de même libellé sont nommées par leur site
   // (« Faire une demande en ligne sur ants.gouv.fr »), puis, si le site est le même, par leur titre ; à titre égal, un seul lien.
@@ -425,6 +448,7 @@
         if (pub === "collectivite") continue;
       }
       let s = s0 * (0.5 + 0.5 * hit.get(i) / qt.length); // récompense la couverture de la requête
+      if (casParticulierTitre(r, q)) s *= 0.7;   // cas particulier que la question ne nomme pas
       if (r.k === "dn") { s *= 1 + 0.12 * Math.log10(1 + r.n); if (dep && r.dep === dep) s *= 1.15; else if (depLieu && r.dep === depLieu) s *= 1.3;
         else if (depsRegion && r.dep && depsRegion.includes(r.dep)) s *= 1.15;
         else if (!dep && !depLieu && !depsRegion && (r.po ? r.po !== "nat" : !!r.dep)) s *= 0.8;   // territoire inconnu : une démarche locale (département connu ou non) passe après
@@ -439,8 +463,11 @@
         const pp = PUBLICS_PARTICULIERS.find(([re]) => re.test(" " + norm(r.t) + " "));
         if (pp && !pp[0].test(" " + norm(q) + " ")) s *= 0.7;
         if (horsTerritoire(r, q)) s *= 0.7;
-        if (annexe(r, q)) s *= 0.6;
+        if (annexe(r, q)) s *= 0.6; else if (annexeNommee(r, q)) s *= 2;
+        // Fiche question-réponse (« … : quelles différences ? ») : un peu après la fiche d'information du même sujet.
+        if (/Question-réponse/.test(r.ty)) s *= 0.9;
         if (ageInadapte(r, q)) s *= 0.85;
+        else if (parleEnfant(q) && / mineure?s? /.test(" " + norm(r.t) + " ")) s *= 1.15;   // pour un enfant, la fiche « mineur » remonte
       }
       out.push([s, i]);
     }
@@ -542,11 +569,14 @@
   // Termes trop généraux : ils ne comptent jamais pour la condition sur le titre (« démarche sûre », « Comprendre », « Aussi
   // pour vous »). Comparés aux mots de la question : un terme est écarté si tous les mots de la question qui le donnent
   // sont de la liste (« informatique » n'est pas écarté par « information », qui a la même racine).
-  const GENERAUX = new Set("aide aides demande demander dossier formulaire declaration droit droits service information".split(" "));
+  // … et les mots qui disent pour qui est la démarche (« passeport enfant ») plutôt que laquelle : non exigés dans le titre.
+  const GENERAUX = new Set("aide aides demande demander dossier formulaire declaration droit droits service information enfant enfants fils fille".split(" "));
   // Termes significatifs de la question (groupes de synonymes et expressions, Moteur.analyse) présents dans un titre.
   function termesAuTitre(q, r) {
     const titre = new Set(toks(r.t)), n = " " + norm(r.t) + " ";
     for (const [e, j] of JETONS_EXPRESSION) if (n.includes(" " + e + " ")) titre.add(j);
+    // « enfant » (et ses formes) est couvert par un titre « … d'un mineur » : la question parle bien de ce cas.
+    if (/ mineure?s? /.test(n)) ["enfant", "enfants", "fils", "fille"].forEach((w) => titre.add(stem(w)));
     const mots = norm(q).split(" ").filter((w) => w.length > 1), utiles = new Set(mots.filter((w) => !GENERAUX.has(w)).map(stem));
     const general = (t) => !utiles.has(t) && mots.some((w) => GENERAUX.has(w) && stem(w) === t);
     const groupes = [...analyse(q).termes].filter(([t]) => !general(t)).map(([, g]) => g);
@@ -587,7 +617,7 @@
   // service-public), ou du département connu ; pas réservée aux professionnels pour un particulier.
   function sure(r, q, opt = {}, P = null) {
     const { pub = "", dep = "" } = opt, d = departementConnu(q, dep);
-    if (!r || !(P || opt.P).pertinente(r.id) || !titreSur(opt.ix, q, r) || horsTerritoire(r, q) || annexe(r, q)) return false;
+    if (!r || !(P || opt.P).pertinente(r.id) || !titreSur(opt.ix, q, r) || horsTerritoire(r, q) || annexe(r, q) || casParticulierTitre(r, q)) return false;
     const po = porteeDe(r);
     if (po !== "nat" && !(po === "dep" && d && depDe(r) === d)) return false;
     if ((!pub || pub === "particulier") && (RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t))) return false;
@@ -813,6 +843,6 @@
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { annexe, ageInadapte, titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { casParticulierTitre, annexeNommee, annexe, ageInadapte, titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
