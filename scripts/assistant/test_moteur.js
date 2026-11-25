@@ -384,6 +384,15 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const cx=R.filter(r=>r.lc&&r.ls), grands=cx.filter(r=>r.lg), mal=cx.filter(r=>!!r.lg!==G.includes(M.siteLisible(r.lc)));
   verifie(`B12 ${cx.length} ressources à deux liens, dont ${grands.length} grands espaces (${G.join(', ')}, liste relue dans grands_espaces.json) ; adresse directe : un seul bouton`,
     cx.length===120&&grands.length>0&&!mal.length&&dir===null&&!/caf\.fr|ameli|impots|ants\.gouv/.test(fs.readFileSync(path.join(__dirname,'moteur.js'),'utf8').match(/function boutonsConnexion[\s\S]*?\n  \}/)[0]), mal.map(r=>r.id).join(' ')); }
+// Schéma des sources (« Comment ça marche », référence v2) : trois colonnes, chiffres et dates lus dans les données.
+{ const c=fs.readFileSync(path.join(__dirname,'..','..','trouver-sa-demarche-comment.html'),'utf8'), fig=(c.match(/<figure class="sources"[\s\S]*?<\/figure>/)||[''])[0];
+  const me=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','index_meta.json'),'utf8')), fr=(n)=>n.toLocaleString('fr-FR').replace(/ /g,' ');
+  const nfs=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','france_services.json'),'utf8')).structures.length, dc=(d)=>d.split('-').reverse().join('/');
+  const att=[fr(me.demarches_en_ligne)+' démarches en ligne publiées (DINUM) · '+dc(me.date_export), fr(me.fiches)+' fiches et ressources, dont '+fr(R.filter(r=>r.cerfa).length)+' cerfa',
+    fr(R.filter(r=>r.obs).length)+' démarches rattachées', me.observatoire, fr(R.filter(r=>r.spp).length)+' démarches avec vigilance', fr(nfs)+' structures', dc(me.date_export_dila)].map(x=>x.replace(/ /g,' '));
+  const txt=fig.replace(/&nbsp;| /g,' '), manque=att.filter(a=>!txt.replace(/ /g,' ').includes(a));
+  verifie('SC1 schéma des sources : trois colonnes (sources, traitement FORM, ce que vous obtenez), chiffres et dates lus dans les données, pointillés pour DataPass, Aides-territoires et la règle de réponse',
+    (fig.match(/class="sc-col"/g)||[]).length===3&&!manque.length&&(fig.match(/sc-avenir/g)||[]).length===3&&/Délais constatés/.test(fig)&&/étudié ou en cours d'intégration\. Chiffres de l'index du/.test(c), manque.join(' | ')||'ok'); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');

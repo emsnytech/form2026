@@ -29,6 +29,11 @@ def fmt(n):
     return f"{n:,}".replace(",", " ")
 
 
+def date_court(iso):
+    """« 22/11/2026 » (date d'export dans une boîte du schéma)."""
+    return "/".join(reversed(iso.split("-"))) if iso else ""
+
+
 def date_fr(iso):
     d = datetime.date.fromisoformat(iso)
     return f"{'1er' if d.day == 1 else d.day}&nbsp;{MOIS[d.month - 1]}&nbsp;{d.year}"
@@ -155,10 +160,13 @@ ul{padding-left:1.2em}li{margin:.35em 0}
 
 def page():
     meta, nfs, aides, vers_dn = chiffres()
+    # Comptes lus dans l'index (aucun chiffre écrit à la main) : cerfa, rattachements Observatoire, vigilances.
+    idx = json.loads((D / "index.json").read_text(encoding="utf-8"))
+    n = {"cerfa": sum(1 for r in idx if r.get("cerfa")), "obs": sum(1 for r in idx if r.get("obs")), "spp": sum(1 for r in idx if r.get("spp"))}
     nom = {k: html.escape(v, quote=False) for k, v in nom_repertoire().items()}
     ndn, nsp, date = meta["demarches_en_ligne"], meta["fiches"], date_fr(meta["date_export"])
     date_dila = f", export du {date_fr(meta['date_export_dila'])}" if meta.get("date_export_dila") else ""
-    avenir = '<span class="sr-only"> (en cours d\'intégration)</span>'
+    avenir = '<span class="sr-only"> (étudié ou en cours d\'intégration)</span>'
     return f"""<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -209,43 +217,56 @@ def page():
   <h2 id="sources">Sources et limites</h2>
   <p><strong>Ce que le répertoire couvre&nbsp;:</strong> il relie, pour chaque recherche, les démarches en ligne publiées par l'administration et les lieux où s'adresser près de chez vous.</p>
 <figure class="sources" aria-labelledby="sources-titre">
-  <figcaption id="sources-titre" class="sr-only">Schéma des sources de données du répertoire</figcaption>
+  <figcaption id="sources-titre" class="sr-only">Schéma des sources de données du répertoire, de gauche à droite : sources ouvertes, traitement FORM, ce que vous obtenez</figcaption>
   <div class="sc-col">
     <h3 class="sc-h">Sources ouvertes</h3>
     <div class="sc-group">
       <span class="sc-tag">Les démarches</span>
-      <div class="sc-box adm"><b>Démarche Numérique</b><span>{fmt(ndn)} démarches en ligne publiées (open data)</span></div>
-      <div class="sc-box adm"><b>service-public.gouv.fr</b><span>{fmt(nsp)} fiches et ressources (DILA)</span></div>
+      <div class="sc-box adm"><b>Démarche Numérique</b><span>{fmt(ndn)} démarches en ligne publiées (DINUM) · {date_court(meta["date_export"])}</span></div>
+      <div class="sc-box adm"><b>service-public.gouv.fr</b><span>{fmt(nsp)} fiches et ressources, dont {fmt(n["cerfa"])} cerfa, et actualités (DILA) · {date_court(meta.get("date_export_dila", ""))}</span></div>
+      <div class="sc-box adm"><b>Base FORM 2026</b><span>champs, pièces à joindre, pré-remplissage</span></div>
     </div>
     <div class="sc-group">
-      <span class="sc-tag">Les financeurs</span>
-      <div class="sc-box adm sc-avenir"><b>Aides-territoires</b><span>portails de dépôt des financeurs, pour les collectivités (ANCT)</span>{avenir}</div>
+      <span class="sc-tag">La qualité de service</span>
+      <div class="sc-box adm"><b>Observatoire de la qualité (DINUM)</b><span>{fmt(n["obs"])} démarches rattachées · accessibilité, FranceConnect · {html.escape(meta.get("observatoire", ""))}</span></div>
+      <div class="sc-box adm"><b>Services Publics + (DITP)</b><span>{fmt(n["spp"])} démarches avec vigilance · retours d'usagers sur deux ans</span></div>
+      <div class="sc-box adm sc-avenir"><b>Habilitations DataPass (DINUM)</b><span>FranceConnect, API : étudiées, non affichées</span>{avenir}</div>
     </div>
     <div class="sc-group">
       <span class="sc-tag">Les lieux</span>
-      <div class="sc-box usa"><b>API Géo</b><span>du code postal à la commune</span></div>
-      <div class="sc-box usa"><b>Annuaire de l'administration</b><span>guichets, CCAS, horaires, contacts officiels (DILA, interrogé en direct)</span></div>
-      <div class="sc-box usa"><b>France services</b><span>{fmt(nfs)} structures (ANCT)</span></div>
+      <div class="sc-box usa"><b>Annuaire de l'administration (DILA)</b><span>guichets, horaires, contacts officiels · en direct</span></div>
+      <div class="sc-box usa"><b>France services (ANCT) · API Géo</b><span>{fmt(nfs)} structures d'accompagnement · communes</span></div>
+    </div>
+    <div class="sc-group">
+      <span class="sc-tag">Les financeurs</span>
+      <div class="sc-box adm sc-avenir"><b>Aides-territoires (ANCT)</b><span>financeurs des collectivités</span>{avenir}</div>
     </div>
   </div>
   <div class="sc-arrow" aria-hidden="true">→</div>
   <div class="sc-col">
     <h3 class="sc-h">Traitement FORM</h3>
-    <div class="sc-box acc"><b>Nettoyage</b><span>démarches de test, réservées aux agents ou fermées écartées ; contacts personnels masqués</span></div>
-    <div class="sc-box acc"><b>Portée</b><span>nationale, départementale ou locale à vérifier</span></div>
+    <div class="sc-box acc"><b>Nettoyage</b><span>démarches de test, fermées ou réservées aux agents écartées&nbsp;; contacts personnels masqués</span></div>
+    <div class="sc-box acc"><b>Portée</b><span>nationale, départementale ou locale&nbsp;; corrections validées</span></div>
+    <div class="sc-box acc"><b>Comment faire</b><span>modes lus dans les fiches : en ligne, formulaire, courrier, guichet…</span></div>
+    <div class="sc-box acc"><b>Qualité rattachée</b><span>accessibilité, vigilances, simplicité : seuils et validations</span></div>
+    <div class="sc-box acc"><b>Actualité</b><span>échéances et nouveautés proposées, puis validées par l'éditeur</span></div>
     <div class="sc-box acc"><b>Recherche</b><span>vos mots traduits en vocabulaire administratif</span></div>
   </div>
   <div class="sc-arrow" aria-hidden="true">→</div>
   <div class="sc-col">
     <h3 class="sc-h">Ce que vous obtenez</h3>
-    <div class="sc-box out"><b>La démarche en ligne</b><span>et ce qu'elle demande</span></div>
-    <div class="sc-box out"><b>La fiche officielle</b><span>pour comprendre vos droits, et ses démarches liées (demande en ligne, simulateur)</span></div>
-    <div class="sc-box out"><b>Où aller</b><span>le bon guichet, ses horaires, son téléphone</span></div>
-    <div class="sc-box out"><b>France services</b><span>la plus proche, pour être accompagné</span></div>
-    <div class="sc-box out sc-avenir"><b>Financeurs de votre territoire</b><span>pour les collectivités : Région, Département, agence de l'eau</span>{avenir}</div>
+    <div class="sc-box out"><b>La démarche</b><span>et comment la faire, d'un coup d'œil</span></div>
+    <div class="sc-box out"><b>Avant de commencer</b><span>questions, pièces, «&nbsp;rien à faire&nbsp;»</span></div>
+    <div class="sc-box out sc-avenir"><b>Règle de réponse</b><span>silence vaut accord ou rejet</span>{avenir}</div>
+    <div class="sc-box out"><b>Ce qui simplifie</b><span>FranceConnect, données récupérées pour vous</span></div>
+    <div class="sc-box out"><b>Points d'attention</b><span>accessibilité connue, vigilances signalées</span></div>
+    <div class="sc-box out"><b>La fiche officielle</b><span>pour comprendre ses droits</span></div>
+    <div class="sc-box out"><b>Où aller</b><span>guichet compétent, France services la plus proche</span></div>
+    <div class="sc-box out"><b>Les démarches d'actualité</b><span>sur l'accueil, avec leur date de sortie</span></div>
+    <div class="sc-box out"><b>Délais constatés</b><span>lien vers les statistiques de la démarche</span></div>
   </div>
 </figure>
-  <p class="sc-legende"><span class="sc-avenir-ex" aria-hidden="true"></span> En pointillés&nbsp;: en cours d'intégration.</p>
+  <p class="sc-legende"><span class="sc-avenir-ex" aria-hidden="true"></span> En pointillés&nbsp;: étudié ou en cours d'intégration. Chiffres de l'index du {date}.</p>
   <p><strong>Ce qui manque encore&nbsp;:</strong> les démarches des autres sites publics, celles qui restent sur papier ou par courriel, et celles qu'aucune fiche ne présente. Pour les aides aux collectivités, la plupart des financeurs passent par leur propre portail&nbsp;: sur {fmt(aides)} aides recensées par Aides-territoires, {fmt(vers_dn)} renvoient vers Démarche Numérique.</p>
   <p><strong>La suite du projet&nbsp;:</strong> indexer les services publics en ligne, d'abord ceux de l'État et de ses opérateurs, puis ceux des collectivités.</p>
   <!-- cadre:début -->
