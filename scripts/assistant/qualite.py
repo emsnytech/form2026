@@ -273,6 +273,7 @@ def proposer_spp(A):
             "seuils": {"retours": SEUIL_STRUCTURE, "vague_demarches_nommees": VAGUE_DEMARCHES, "vague_fiches": VAGUE_FICHES}, "structures": structs}
     (D / "assistant" / "spp_structures_propositions.json").write_text(json.dumps(out2, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     rapport_spp(out1, out2, par_id, rnd)
+    rapport_suite(etude_spp_suite(A, recs, obs_par_nom, debut))
 
 
 def rapport_spp(out1, out2, par_id, rnd):
@@ -297,6 +298,197 @@ def rapport_spp(out1, out2, par_id, rnd):
     for s in out2["structures"]:
         p(f"| {s['structure']} | {s['retours']} | {mot(s['motifs'])} | {s['demarches_nommees_distinctes']} | {s['domaine_propose'] or '—'}"
           f"{' (%d %%)' % round(100 * s['part_des_retours_nommes_vers_ce_domaine']) if s['domaine_propose'] else ''} | {s['fiches_sp_vers_ce_domaine']} | {'oui' if s['trop_vague'] else 'non'} |")
+
+
+# ---------- Suite de l'étude (même option) : ANTS par domaine, France Travail, étrangers, préfectures. Rien n'est appliqué.
+# Ressources : les colonnes de catégories de l'export (« Intitulé Typologie », « Tags Métiers ») servent à reconnaître les retours
+# sur les étrangers ; ce sont des listes de valeurs, pas du texte d'usager.
+ANTS = "France Titres-ANTS"
+ANTS_DOMAINES = {"immatriculation.ants.gouv.fr": "immatriculation", "permisdeconduire.ants.gouv.fr": "permis de conduire",
+                 "passeport.ants.gouv.fr": "passeport et carte d'identité"}
+# Repli, seulement pour un nom absent de l'Observatoire (« Demande de CNI/Passeport (ANTS) »…)
+ANTS_NOMS = [(r"immatriculation|carte grise", "immatriculation"), (r"permis de conduire", "permis de conduire"),
+             (r"\bCNI\b|passeport|carte nationale d.identit", "passeport et carte d'identité")]
+FT_DR = r"^DR .*-France Travail$"          # directions régionales de France Travail
+FT_DOMAINE = "candidat.francetravail.fr"
+ETR_TYPOLOGIES = {"ANEF", "OFII", "Office français de protection des réfugiés et apatrides (OFPRA)", "Parrainage.refugies.info"}
+ETR_TAGS = {"Titre de séjour", "Naturalisation", "Asile", "Aide aux réfugiés"}
+ETR_MOTS = r"s[ée]jour|\bANEF\b|naturali|asile|\bvisas?\b|[ée]trangers?\b|nationalit|r[ée]fugi|OFPRA|OFII|regroupement familial|apatrid"
+FR_ETRANGER = r"à l.étranger|de l.[ée]tranger|survenu à l|célébré à l|Français|consulaire"   # Français établis hors de France : hors sujet
+# Titres de démarches DN sur les étrangers : plus large (abréviations des préfectures), pour qu'aucune n'y perde sa vigilance par erreur
+DN_ETR_MOTS = ETR_MOTS + r"|passeport talent|statut [ée]tudiant|changement de statut|r[ée]c[ée]piss|\bAPS\b|binationa|droit d.option|d[ée]claration d.option|protection temporaire|autorisation de travail|carte de r[ée]sident|\bDCEM\b|\bTIR\b|titre de voyage|\bOQTF\b|r[ée]gularisation|ressortissant|\bBPI\b|\bTUE\b"
+PART_FORTE = 0.5                           # part des retours d'une préfecture sur les étrangers jugée forte
+
+
+def lire_lignes_spp(chemin, debut=""):
+    """Une ligne par retour : date, ressenti, critères cochés, démarches nommées, structures, typologies, tags. Aucun texte."""
+    csv.field_size_limit(10 ** 9)
+    with open(chemin, encoding="utf-8-sig", newline="") as f:
+        r = csv.reader(f, delimiter=";"); h = [x.strip() for x in next(r)]; col = {k: i for i, k in enumerate(h)}
+        i_st = [i for i, k in enumerate(h) if k.startswith("Intitulé structure")]
+        i_ty = [i for i, k in enumerate(h) if k.startswith("Intitulé Typologie")]
+        for row in r:
+            if len(row) < len(h) or row[col["Date de publication"]][:10] < debut: continue
+            neg = row[col["Ressenti usager"]] == "Négatif"
+            dm = row[col["Démarches modérées"]].strip()
+            yield {"date": row[col["Date de publication"]][:10], "neg": neg,
+                   "crit": [CRITERES[c] for c in CRITERES if row[col[c]] == "Négatif"] if neg else [],
+                   "dm": dm, "dms": [x.strip() for x in re.split(r", (?=[A-ZÉÈÀÂ])", dm) if x.strip()],
+                   "st": list(dict.fromkeys(x for x in (row[i].strip() for i in i_st) if x and x != "Hors-structures")),
+                   "ty": {row[i].strip() for i in i_ty} - {""},
+                   "tags": {t.strip() for t in row[col["Tags Métiers"]].split(",") if t.strip()}}
+
+
+def agreger(lignes):
+    c = collections.Counter()
+    for x in lignes:
+        c["n"] += 1; c["neg"] += x["neg"]
+        for m in x["crit"]: c[m] += 1
+    motifs = sorted(((m, c[m]) for m in CRITERES.values() if c[m] >= SEUIL_MOTIF), key=lambda x: -x[1])[:MAX_MOTIFS]
+    return {"n": c["n"], "neg": c["neg"], "motifs": [list(m) for m in motifs] if c["n"] >= SEUIL_RETOURS else [],
+            "vigilance": c["n"] >= SEUIL_RETOURS and bool(motifs)}
+
+
+def est_etranger(x):
+    return bool(x["ty"] & ETR_TYPOLOGIES or x["tags"] & ETR_TAGS
+                or any(re.search(ETR_MOTS, d, re.I) and not re.search(FR_ETRANGER, d) for d in x["dms"]))
+
+
+def etude_spp_suite(A, recs, obs_par_nom, debut):
+    sp = [r for r in recs if r["k"] == "sp"]
+    toutes = list(lire_lignes_spp(A.spp)); L = [x for x in toutes if x["date"] >= debut]
+    fiche = lambda r: {"id": r["id"], "titre": r["t"], "url_fiche": r["u"], "service_en_ligne": r.get("l", "")}
+    out = {"objet": "Suite de l'étude Services Publics + (qualite.py --proposer-spp) : ANTS par domaine, France Travail, retours sur les "
+                    "étrangers, part des étrangers dans les préfectures rattachées aux démarches Démarche Numérique. Rien n'est appliqué.",
+           "periode": {"debut": debut, "fichier": A.date_spp}, "seuils": {"retours": SEUIL_RETOURS, "motif": SEUIL_MOTIF, "part_forte": PART_FORTE}}
+
+    # 1. ANTS, découpée par domaine : un retour ne compte pour un domaine que si toutes ses démarches nommées en relèvent.
+    def domaine_ants(nom):
+        os_ = obs_par_nom.get(cle(nom), [])
+        if len(os_) == 1:
+            d = _domaine(os_[0].get("URL Démarche"))
+            return (ANTS_DOMAINES[d], "adresse dans l'Observatoire") if d in ANTS_DOMAINES else (None, f"autre service ({d or 'sans adresse'})")
+        if len(os_) > 1: return None, "plusieurs lignes de l'Observatoire"
+        for motif, dom in ANTS_NOMS:
+            if re.search(motif, nom, re.I): return dom, "nom (absent de l'Observatoire)"
+        return None, "hors des trois domaines"
+    ants = [x for x in L if ANTS in x["st"]]
+    noms, par_dom = {}, collections.defaultdict(list); hors = collections.Counter()
+    for x in ants:
+        if not x["dms"]: hors["sans démarche nommée"] += 1; continue
+        ds = {noms.setdefault(d, domaine_ants(d))[0] for d in x["dms"]}
+        if len(ds) == 1 and None not in ds: par_dom[ds.pop()].append(x)
+        else: hors["démarche nommée hors domaine, ou plusieurs domaines"] += 1
+    doms = []
+    for d, dom in ANTS_DOMAINES.items():
+        fs = [fiche(r) for r in sp if r.get("l") and _domaine(r["l"]) == d]
+        dn = collections.Counter(n for x in par_dom[dom] for n in x["dms"])
+        doms.append({"domaine": dom, "adresse": d, **agreger(par_dom[dom]), "demarches_nommees": [[k, v, noms[k][1]] for k, v in dn.most_common()],
+                     "fiches": fs})
+    out["ants"] = {"structure": ANTS, "retours": len(ants), "non_comptes": dict(hors), "domaines": doms,
+                   "noms_hors_domaine": sorted([[k, sum(1 for x in ants if k in x["dms"]), v[1]] for k, v in noms.items() if v[0] is None], key=lambda t: -t[1]),
+                   "fiches_ants_non_retenues": [fiche(r) for r in sp if r.get("l") and _domaine(r["l"]).endswith("ants.gouv.fr") and _domaine(r["l"]) not in ANTS_DOMAINES]}
+
+    # 2. France Travail : directions régionales additionnées (un retour compté une fois).
+    ft = [x for x in L if any(re.match(FT_DR, s) for s in x["st"])]
+    autres_ft = [x for x in L if not any(re.match(FT_DR, s) for s in x["st"]) and any(re.search(r"france travail", s, re.I) for s in x["st"])]
+    dr = collections.Counter(s for x in ft for s in x["st"] if re.match(FT_DR, s))
+    dn = collections.Counter(n for x in ft for n in x["dms"])
+    out["france_travail"] = {"structure": "France Travail (directions régionales additionnées)", **agreger(ft),
+                             "directions_regionales": dr.most_common(), "retours_sans_demarche_nommee": sum(1 for x in ft if not x["dms"]),
+                             "demarches_nommees_distinctes": len(dn), "demarches_nommees": dn.most_common(15),
+                             "autres_structures_france_travail_non_comptees": {"structures": len({s for x in autres_ft for s in x["st"] if re.search("france travail", s, re.I)}), "retours": len(autres_ft)},
+                             "domaine": FT_DOMAINE, "fiches": [fiche(r) for r in sp if r.get("l") and _domaine(r["l"]) == FT_DOMAINE],
+                             "fiches_autres_domaines_france_travail": [fiche(r) for r in sp if r.get("l") and re.search(r"francetravail|pole-emploi", _domaine(r["l"])) and _domaine(r["l"]) != FT_DOMAINE]}
+
+    # 3. Étrangers : tout le fichier, sans seuil.
+    def compte(xs): return {"tout_le_fichier": len(xs), "deux_ans": sum(1 for x in xs if x["date"] >= debut)}
+    E = [x for x in toutes if est_etranger(x)]
+    dms = collections.Counter(d for x in toutes for d in x["dms"] if re.search(ETR_MOTS, d, re.I))
+    sts = collections.Counter(s for x in toutes for s in x["st"] if re.search(ETR_MOTS, s, re.I))
+    out["etrangers"] = {
+        "definition": "retour dont une typologie est %s, ou un tag métier %s, ou une démarche nommée liée aux étrangers (hors Français établis à l'étranger)"
+                      % (sorted(ETR_TYPOLOGIES), sorted(ETR_TAGS)),
+        "retours": compte(E), "annees": sorted(collections.Counter(x["date"][:4] for x in E).items()),
+        "par_typologie": {t: compte([x for x in E if t in x["ty"]]) for t in sorted(ETR_TYPOLOGIES)},
+        "par_tag": {t: compte([x for x in E if t in x["tags"]]) for t in sorted(ETR_TAGS)},
+        "sans_demarche_nommee": compte([x for x in E if not x["dms"]]),
+        "sans_structure": compte([x for x in E if not x["st"]]),
+        "demarches_nommees_qui_citent_ces_mots": [[d, n, "Français établis à l'étranger (hors sujet)" if re.search(FR_ETRANGER, d) else "étrangers"] for d, n in dms.most_common()],
+        "structures_qui_citent_ces_mots": [[s, n, "Français établis à l'étranger (hors sujet)" if re.search(FR_ETRANGER + r"|à l'étranger", s) else "étrangers"] for s, n in sts.most_common()],
+        "structures_des_retours": collections.Counter(s for x in E for s in x["st"]).most_common(30),
+        "typologies_des_retours": collections.Counter(t for x in E for t in x["ty"]).most_common(15),
+        "lignes_observatoire": [[o[0]["ID Démarche"], o[0]["Nom Démarche"], _domaine(o[0].get("URL Démarche"))] for k, o in obs_par_nom.items()
+                                if re.search(ETR_MOTS, o[0]["Nom Démarche"], re.I) and not re.search(FR_ETRANGER, o[0]["Nom Démarche"])],
+        "fiches_vers_anef": [fiche(r) for r in sp if r.get("l") and _domaine(r["l"]) == "administration-etrangers-en-france.interieur.gouv.fr"]}
+
+    # 4. Préfectures rattachées aux démarches DN par leur organisme : part des retours sur les étrangers.
+    dn_pref = collections.defaultdict(list)
+    for r in recs:
+        if r["k"] == "dn" and r.get("spp") and r["spp"][3] and re.match(r"(Sous-)?[Pp]r[ée]fecture", r["spp"][3]): dn_pref[cle(r["spp"][3])].append(r)
+    prefs = []
+    for k, rs in sorted(dn_pref.items(), key=lambda kv: -len(kv[1])):
+        xs = [x for x in L if k in {cle(s) for s in x["st"]}]; e = [x for x in xs if est_etranger(x)]; ne = [x for x in xs if not est_etranger(x)]
+        de = [r for r in rs if re.search(DN_ETR_MOTS, r["t"], re.I)]
+        sans = agreger(ne)
+        prefs.append({"structure": rs[0]["spp"][3], **{k2: v for k2, v in agreger(xs).items() if k2 != "vigilance"}, "etrangers": len(e),
+                      "part_etrangers": round(len(e) / len(xs), 3) if xs else 0, "forte": bool(xs) and len(e) / len(xs) >= PART_FORTE,
+                      "sans_etrangers": sans, "demarches_dn": len(rs), "demarches_dn_etrangers": [[r["id"], r["t"]] for r in de]})
+    forte = [p for p in prefs if p["forte"]]
+    out["prefectures"] = {"definition_etrangers": "comme pour la partie étrangers", "structures": prefs,
+        "bilan": {"structures": len(prefs), "demarches_dn_avec_vigilance_prefecture": sum(p["demarches_dn"] for p in prefs),
+                  "structures_part_forte": len(forte),
+                  "demarches_dn_non_etrangers_des_prefectures_part_forte": sum(p["demarches_dn"] - len(p["demarches_dn_etrangers"]) for p in forte),
+                  "demarches_dn_etrangers_des_prefectures_part_forte": sum(len(p["demarches_dn_etrangers"]) for p in forte),
+                  "variante_sans_etrangers_vigilance_gardee": sum(p["demarches_dn"] - len(p["demarches_dn_etrangers"]) for p in prefs if p["sans_etrangers"]["vigilance"]),
+                  "variante_sans_etrangers_vigilance_perdue": sum(p["demarches_dn"] - len(p["demarches_dn_etrangers"]) for p in prefs if not p["sans_etrangers"]["vigilance"])}}
+    (D / "assistant" / "spp_suite_propositions.json").write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    return out
+
+
+def rapport_suite(o):
+    p = print; mot = lambda m: ", ".join(f"{a} ({b})" for a, b in m) or "aucun"
+    a = o["ants"]
+    p(f"\n## Partie 3 : ANTS par domaine\n\n{a['retours']} retours sur la structure « {a['structure']} » ; non comptés : "
+      + " ; ".join(f"{k} {v}" for k, v in a["non_comptes"].items()) + ".\n")
+    p("| Domaine | Retours | Négatifs | Motifs | Vigilance | Fiches (adresse) |\n|---|---|---|---|---|---|")
+    for d in a["domaines"]:
+        p(f"| {d['domaine']} | {d['n']} | {d['neg']} | {mot(d['motifs'])} | {'oui' if d['vigilance'] else 'non'} | {len(d['fiches'])} ({d['adresse']}) |")
+    for d in a["domaines"]:
+        p(f"\n**{d['domaine']}** : démarches nommées comptées — " + " ; ".join(f"{k} ({v}, par {m})" for k, v, m in d["demarches_nommees"]))
+        p("\nFiches : " + " ; ".join(f"[{f['id']}]({f['url_fiche']}) {f['titre'][:70]}" for f in d["fiches"]))
+    p("\nNoms écartés (hors des trois domaines) : " + " ; ".join(f"{k} ({n}, {m})" for k, n, m in a["noms_hors_domaine"][:15]))
+    p("\nFiches ANTS d'une autre adresse, non retenues : " + " ; ".join(f"[{f['id']}]({f['url_fiche']}) {f['titre'][:60]} ({_domaine(f['service_en_ligne'])})" for f in a["fiches_ants_non_retenues"]))
+    f = o["france_travail"]
+    p(f"\n## Partie 4 : France Travail\n\n| | |\n|---|---|\n| Directions régionales additionnées | {len(f['directions_regionales'])} |"
+      f"\n| Retours (comptés une fois) | {f['n']} |\n| Négatifs | {f['neg']} |\n| Motifs | {mot(f['motifs'])} |\n| Vigilance | {'oui' if f['vigilance'] else 'non'} |"
+      f"\n| Retours sans démarche nommée | {f['retours_sans_demarche_nommee']} |\n| Démarches nommées distinctes | {f['demarches_nommees_distinctes']} |"
+      f"\n| Autres structures France Travail, non comptées | {f['autres_structures_france_travail_non_comptees']['structures']} structures, {f['autres_structures_france_travail_non_comptees']['retours']} retours |"
+      f"\n| Fiches vers {f['domaine']} | {len(f['fiches'])} |\n")
+    p("Démarches nommées les plus citées : " + " ; ".join(f"{k} ({v})" for k, v in f["demarches_nommees"][:10]))
+    p("\nFiches : " + " ; ".join(f"[{x['id']}]({x['url_fiche']}) {x['titre'][:70]}" for x in f["fiches"]))
+    p("\nFiches vers un autre domaine France Travail, non retenues : " + " ; ".join(f"[{x['id']}]({x['url_fiche']}) {x['titre'][:50]} ({_domaine(x['service_en_ligne'])})" for x in f["fiches_autres_domaines_france_travail"]))
+    e = o["etrangers"]; c = lambda v: f"{v['tout_le_fichier']} | {v['deux_ans']}"
+    p(f"\n## Partie 5 : étrangers (tout le fichier, sans seuil)\n\nDéfinition : {e['definition']}.\n\n| | Tout le fichier | Deux ans |\n|---|---|---|")
+    p(f"| Retours sur les étrangers | {c(e['retours'])} |\n| dont sans démarche nommée | {c(e['sans_demarche_nommee'])} |\n| dont sans structure | {c(e['sans_structure'])} |")
+    for t, v in e["par_typologie"].items(): p(f"| typologie « {t} » | {c(v)} |")
+    for t, v in e["par_tag"].items(): p(f"| tag métier « {t} » | {c(v)} |")
+    p("\nPar année : " + ", ".join(f"{a} : {n}" for a, n in e["annees"]))
+    p("\nDémarches nommées qui citent ces mots (tout le fichier) : " + " ; ".join(f"{d} ({n}, {k})" for d, n, k in e["demarches_nommees_qui_citent_ces_mots"] if "," not in d or k == "étrangers"))
+    p("\nStructures qui citent ces mots : " + " ; ".join(f"{s} ({n}, {k})" for s, n, k in e["structures_qui_citent_ces_mots"]))
+    p("\nStructures des retours sur les étrangers : " + " ; ".join(f"{s} ({n})" for s, n in e["structures_des_retours"][:15]))
+    p("\nLignes de l'Observatoire sur les étrangers : " + " ; ".join(f"{i} {n[:70]} ({d})" for i, n, d in e["lignes_observatoire"]))
+    p(f"\nFiches service-public vers l'ANEF (administration-etrangers-en-france.interieur.gouv.fr) : {len(e['fiches_vers_anef'])}")
+    pr = o["prefectures"]; b = pr["bilan"]
+    p(f"\n## Partie 6 : préfectures rattachées aux démarches Démarche Numérique\n\n| Préfecture | Retours | Étrangers | Part | Motifs | Sans les étrangers : retours, motifs | Démarches DN | dont sur les étrangers |\n|---|---|---|---|---|---|---|---|")
+    for x in pr["structures"]:
+        s = x["sans_etrangers"]
+        p(f"| {x['structure']} | {x['n']} | {x['etrangers']} | {round(100 * x['part_etrangers'])} %{' (forte)' if x['forte'] else ''} | {mot(x['motifs'])} | "
+          f"{s['n']}, {mot(s['motifs']) if s['vigilance'] else 'plus de vigilance'} | {x['demarches_dn']} | {len(x['demarches_dn_etrangers'])} |")
+    p(f"\n{b['structures']} préfectures, {b['demarches_dn_avec_vigilance_prefecture']} démarches DN avec leur vigilance ; part forte (≥ {round(100 * PART_FORTE)} %) : "
+      f"{b['structures_part_forte']} préfectures, {b['demarches_dn_non_etrangers_des_prefectures_part_forte']} démarches DN hors étrangers qui perdraient la vigilance, "
+      f"{b['demarches_dn_etrangers_des_prefectures_part_forte']} sur les étrangers qui la garderaient. Variante (vigilance recalculée sans les retours sur les étrangers, "
+      f"pour toutes les préfectures) : {b['variante_sans_etrangers_vigilance_gardee']} démarches DN hors étrangers la gardent, {b['variante_sans_etrangers_vigilance_perdue']} la perdent.")
 
 
 def main():
