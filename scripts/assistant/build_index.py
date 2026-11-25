@@ -264,6 +264,18 @@ for _r in recs:
         _oa=casse_normale(_r['o'])
         if _oa: _r['oa']=_oa; _n_oa+=1
 print('organismes en capitales mis en casse normale (oa) :',_n_oa,'; sigles lus dans les données :',len(_SIGLES))
+# Démarches passées en nationale par portees_corrigees.json : nom de l'unité légale qui les publie, lu dans Sirene
+# (organismes_sirene.json, scripts/assistant/organismes_sirene.py), clé « on ». L'organisme déclaré reste dans « o ».
+_os=os.path.join(FORM,'donnees','assistant','organismes_sirene.json')
+if os.path.exists(_os):
+    _osj=json.load(open(_os,encoding='utf8'))
+    for _r in recs:
+        _s=_osj['demarches'].get(_r['id'])
+        if _r['k']=='dn' and _r['po']=='nat' and _s and _s in _osj['organismes'] and _r['id'] in CORRECTIONS:
+            _nom=_osj['organismes'][_s]['nom']; _on=casse_normale(_nom) or _nom
+            # règle typographique : le premier nom du domaine d'un ministère prend la majuscule (ministère de l'Intérieur)
+            _r['on']=re.sub(r"^(Ministère (?:de l'|de la |du |des |de ))(\w)",lambda m:m.group(1)+m.group(2).upper(),_on)
+            print('organisme Sirene (on) :',_r['id'],'→',_r['on'])
 # « Rien à faire » : phrases validées par l'éditeur (rien_a_faire.json, « valides »), clé « raf ».
 RAF=os.path.join(os.path.dirname(OUT),'rien_a_faire.json')
 if os.path.exists(RAF):

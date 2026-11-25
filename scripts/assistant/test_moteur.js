@@ -110,7 +110,7 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const B=(i)=>{const k=ix.byId.get(i);return k===undefined?null:ix.recs[k];};
   const META=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','index_meta.json'),'utf8'));
   const emb=B('DN-13583'), A1=M.avantDeCommencer(emb,META);
-  verifie('B1 démarche DN avec pièces et pré-remplissage (DN-13583) : ligne « questions » puis ligne « rempli pour vous »', A1.lignes.map(l=>l.cle).slice(0,2).join()==='questions,prerempli'&&/28 questions · 3 pièces/.test(A1.lignes[0].texte)&&/SIRET/.test(A1.lignes[1].texte), A1.resume);
+  verifie('B1 démarche DN avec pièces et pré-remplissage (DN-13583) : ligne « questions » ; les données récupérées (SIRET) sont dans le « ? », pas répétées', A1.lignes[0].cle==='questions'&&/28 questions · 3 pièces/.test(A1.lignes[0].texte)&&!A1.lignes.some(l=>l.cle==='prerempli'||/SIRET/.test(l.texte))&&M.detailSymboles(B('DN-13583'),META).some(d=>/^Données récupérées pour vous : .*SIRET/.test(d.texte)), A1.resume);
   verifie('B1 lien vers le formulaire à vide, en PDF, avec sa précision', /\/commencer\/declaration-prealable-embauche\/dossier_vide$/.test(A1.lignes[0].liens[0].url)&&/pas pour le remplir/.test(A1.lignes[0].liens[0].titre), A1.lignes[0].liens[0].url);
   const sans=ix.recs.find(r=>r.k==='sp'&&/^SP-R/.test(r.id)&&!r.sva&&!r.obs), A2=M.avantDeCommencer(sans);
   verifie('B2 démarche sans aucune donnée : pas de bloc', !A2.lignes.length&&!A2.resume, sans.id+' '+sans.t);
@@ -118,8 +118,8 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie(`B3 aucun délai affiché sans donnée par démarche (${avec.length} blocs)`, !delai.length, delai.slice(0,3).map(r=>r.id).join(' ')||'aucun délai');
   verifie('B4 au plus 4 lignes, et l\'IBAN n\'est pas présenté comme rempli', avec.every(r=>M.avantDeCommencer(r,META).lignes.length<=4)&&!('IBAN' in M.PRE_PHRASES));
   const obsPc=ix.recs.find(r=>r.obs&&r.acc&&r.acc[0]!=='TC'), A5=M.avantDeCommencer(obsPc,META), l5=A5.lignes.find(l=>l.cle==='accessibilite');
-  verifie('B5 démarche de l\'Observatoire non totalement accessible : ligne d\'accessibilité et renvoi vers la France services la plus proche',
-    !!l5&&/Accessibilité : (partiellement|non) conforme/.test(l5.texte)&&/France services/.test(l5.texte)&&l5.liens[0].url==='#carte-ou', obsPc.id+' : '+(l5?l5.texte:'pas de ligne'));
+  verifie('B5 démarche de l\'Observatoire non totalement accessible : le niveau dans le « ? », seulement le renvoi vers la France services la plus proche dans « Avant de commencer »',
+    !!l5&&!/conforme|partielle|%/.test(l5.texte)&&/France services/.test(l5.texte)&&l5.liens[0].url==='#carte-ou'&&M.detailSymboles(obsPc,META).some(d=>/^(Accessibilité partielle|Non conforme)/.test(d.texte)), obsPc.id+' : '+(l5?l5.texte:'pas de ligne'));
   // Symboles « comment faire », accessibilité, vigilance (Moteur.symboles).
   const S=(i)=>M.symboles(B(i),META), dn=S('DN-13583');
   verifie('Y1 une démarche DN affiche le seul symbole « en ligne »', JSON.stringify(dn.voies)==='[["en_ligne"]]', JSON.stringify(dn.voies));
@@ -203,12 +203,29 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('J10 à côté du formulaire à vide : « PDF non accessible, selon la déclaration de la plateforme », lu dans accessibilite_plateformes.json',
     META.acc_plateformes.dn.pdf_non_accessible===true&&/PDF non accessible, selon la déclaration de la plateforme/.test(pdf.titre)&&!/PDF non accessible/.test(M.avantDeCommencer(B('DN-69348'),{}).lignes[0].liens[0].titre), pdf.titre);
   const dnD=B('DN-69348'), spD=ix.recs.find(r=>r.k==='sp'&&M.symboles(r,META).voies.length), SD=M.symboles(dnD,META);
-  verifie('D1 délais constatés : le lien vers la page statistiques (adresse de la démarche, « commencer » → « statistiques ») est dans le détail « ? » de toute démarche Démarche Numérique',
-    SD.delais&&SD.delais.url==='https://demarche.numerique.gouv.fr/statistiques/'+dnD.u&&ix.recs.filter(r=>r.k==='dn'&&r.u).every(r=>{const d=M.symboles(r,META).delais;return d&&/\/statistiques\//.test(d.url)&&!/\/commencer\//.test(d.url);})&&/if \(S\.delais\) det\.push\(`Délais constatés : <a href="\$\{esc\(S\.delais\.url\)\}" target="_blank"/.test(gab), SD.delais&&SD.delais.url);
+  verifie('D1 délais constatés : le lien vers la page statistiques (adresse de la démarche, « commencer » → « statistiques ») existe pour toute démarche Démarche Numérique (dans « Avant de commencer » ou, sinon, dans le détail « ? »)',
+    SD.delais&&SD.delais.url==='https://demarche.numerique.gouv.fr/statistiques/'+dnD.u&&ix.recs.filter(r=>r.k==='dn'&&r.u).every(r=>{const d=M.symboles(r,META).delais;return d&&/\/statistiques\//.test(d.url)&&!/\/commencer\//.test(d.url);})&&/Moteur\.detailSymboles\(r, META \|\| \{\}\)/.test(gab), SD.delais&&SD.delais.url);
   verifie('D2 délais constatés : rien pour une fiche service-public', spD&&!M.symboles(spD,META).delais&&!M.avantDeCommencer(spD,META).lignes.some(l=>l.cle==='delais'), spD&&spD.id);
   const sansBloc={...dnD,u:undefined}, avecBloc=M.avantDeCommencer(dnD,META);
   verifie('D3 délais constatés : la ligne n\'ouvre jamais seule « Avant de commencer » ; elle s\'ajoute quand le bloc existe, avec le nouvel onglet signalé, sans aucun chiffre',
     M.avantDeCommencer({k:'dn',id:'X',t:'x'},META).lignes.length===0&&avecBloc.lignes.some(l=>l.cle==='delais'&&/nouvel onglet/.test(l.liens[0].titre)&&!/\d/.test(l.texte))&&ix.recs.filter(r=>r.k==='dn').slice(0,3000).every(r=>{const L=M.avantDeCommencer(r,META).lignes;return !(L.length===1&&L[0].cle==='delais');}), avecBloc.resume);
+  // Une information, un seul endroit : aucune phrase (ni aucun lien) à la fois dans le « ? » et dans « Avant de commencer ».
+  const phrases=(t)=>t.split(/(?<=[.;:])\s+|\s+·\s+/).map(x=>M.norm(x)).filter(x=>x.split(' ').length>=3);
+  const doublons=[]; let nDet=0, nDelaisDet=0, nAccDet=0;
+  for(const r of ix.recs){ const D=M.detailSymboles(r,META); if(!D.length) continue; nDet++; const A=M.avantDeCommencer(r,META);
+    const pa=new Set(A.lignes.flatMap(l=>[...phrases(l.texte),...l.liens.map(x=>x.url)]));
+    const pd=D.flatMap(d=>[...phrases(d.texte),...(d.lien?[d.lien.url]:[])]);
+    if(pd.some(x=>pa.has(x))) doublons.push(r.id+' : '+pd.find(x=>pa.has(x)));
+    if(D.some(d=>d.lien)) nDelaisDet++; if(D.some(d=>/^Plateforme /.test(d.texte))) nAccDet++; }
+  verifie(`U1 une information, un seul endroit : aucune phrase ni aucun lien à la fois dans le « ? » et dans « Avant de commencer » (${nDet} démarches ; délais dans le « ? » faute de place : ${nDelaisDet} ; accessibilité de la plateforme dans le « ? » : ${nAccDet})`, !doublons.length, doublons.slice(0,3).join(' | '));
+  const D69=M.detailSymboles(B('DN-69348'),META).map(d=>d.texte).join(' ');
+  verifie('U2 médaille (bloc « Avant de commencer » présent) : le « ? » garde comment faire et FranceConnect, sans délais ni accessibilité de la plateforme', /^Comment faire/.test(D69)&&/FranceConnect/.test(D69)&&!/Délais|Plateforme/.test(D69), D69);
+  const rep=ix.recs.filter(r=>{const S=M.symboles(r,META),c=new Set(M.avantDeCommencer(r,META).lignes.map(l=>l.cle));
+    return (S.vig.length&&c.has('vigilance'))||(S.simp.some(x=>x.cle==='rec')&&M.avantDeCommencer(r,META).lignes.some(l=>Object.keys(M.RECUPERE).some(k=>l.texte.includes(M.PRE_PHRASES[k]))));});
+  verifie('U3 même information, autre formulation : ni vigilance ni données récupérées répétées dans « Avant de commencer » (elles sont dans le « ? »)', !rep.length, rep.slice(0,3).map(r=>r.id).join(' '));
+  const m69=B('DN-69348'), d69=M.detailSymboles(m69,META).map(d=>d.texte).join(' ');
+  verifie('O1 médaille passée en nationale : « Ministère de l\'Intérieur » (Sirene, SIRET 11001401600015) affiché, l\'organisme déclaré dans le « ? » ; aucune autre démarche n\'a ce nom de remplacement',
+    m69.on==="Ministère de l'Intérieur"&&/nomOrg = \(r\) => r\.on \|\| r\.oa \|\| r\.o/.test(gab)&&/Organisme déclaré sur Démarche Numérique : Préfecture, sous-préfecture, DDETSPP, DRIEETS\./.test(d69)&&ix.recs.filter(r=>r.on).every(r=>r.po==='nat'), ix.recs.filter(r=>r.on).map(r=>r.id).join(' '));
   verifie('Z3 « Accessibilité non connue » n\'est pas dans la ligne de la carte (seulement dans le détail et « Avant de commencer »)', /!\["inconnue", "plateforme"\]\.includes\(S\.acc\.niveau\)/.test(gab));
   const avecVoies=ix.recs.filter(r=>M.symboles(r,META).voies.length).length;
   console.log(`        ${avecVoies} démarches avec des symboles « comment faire »`); }

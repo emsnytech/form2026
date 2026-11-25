@@ -1,0 +1,15 @@
+{
+ "objet": "Nom de l'unité légale (Sirene) des démarches passées en nationale par portees_corrigees.json, lu par scripts/assistant/organismes_sirene.py dans l'API Recherche d'entreprises ; lu par build_index.py (clé « on »).",
+ "source": "https://recherche-entreprises.api.gouv.fr (DINUM, données Sirene de l'INSEE)",
+ "demarches": {
+  "DN-161645": "11001401600015",
+  "DN-69348": "11001401600015"
+ },
+ "organismes": {
+  "11001401600015": {
+   "siren": "110014016",
+   "nom": "MINISTERE DE L'INTERIEUR",
+   "lu_le": "2026-11-25"
+  }
+ }
+}
