@@ -469,9 +469,9 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   // Racines : deux mots ne se rapprochent que si l'un est une forme de l'autre (pluriel, féminin, conjugaison) ou en dérive
   // par un suffixe courant ; jamais par un simple début commun.
   const r=(w)=>M.toks(w)[0], diff=[['maternite','maternelle'],['procuration','procureur'],['commune','communication'],['electricite','electronique'],
-    ['autorisation','autorite'],['licenciement','licence'],['commencement','commentaire']],
+    ['autorisation','autorite'],['licenciement','licence'],['commencement','commentaire'],['electricite','electrique']],
     memes=[['maternite','maternites'],['autorisation','autorisations'],['licenciement','licencie'],['declaration','declarer'],['inscription','inscrire'],
-      ['renouvellement','renouveler'],['etudiant','etudiantes'],['maternel','maternelle'],['verification','verifier'],['electricite','electrique'],['aide','aider']];
+      ['renouvellement','renouveler'],['etudiant','etudiantes'],['maternel','maternelle'],['verification','verifier'],['aide','aider']];
   const md=diff.filter(([a,b])=>r(a)===r(b)), mm=memes.filter(([a,b])=>r(a)!==r(b));
   verifie('Q7 racines : maternité ≠ maternelle, licenciement ≠ licence… ; déclaration = déclarer, licenciement = licencié…',
     !md.length&&!mm.length, [...md.map(x=>x.join('=')),...mm.map(x=>x.join('≠'))].join(' ')||diff.map(([a,b])=>r(a)+'≠'+r(b)).join(' ')); }
@@ -482,6 +482,13 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
       ['SP-R41448','SP-R1292'].includes(x.p)&&x.t[0]!=='SP-R1332', x.t.join(' ')+' | '+x.p); }
   const et=P('aide logement étudiant');
   verifie('Q8 « aide logement étudiant » : l\'aide au logement étudiant (SP-R1332) en « Votre démarche »', et.p==='SP-R1332', et.t.join(' ')+' | '+et.p); }
+// Régressions relevées par la mesure (questions de référence) : « électricité » n'appelle plus « électrique » ; un cas
+// d'exception (incapacité permanente) passe après le cas courant ; « Caf ou MSA » n'est pas un cas particulier ; une fiche
+// question-réponse en tête dont le titre porte tous les mots de la question peut être « Votre démarche ».
+{ const P=(q)=>{const C=M.choisir(ix,q,{k:20});return {t:M.search(ix,q,{k:3}).map(x=>x.r.id),p:C.principal&&C.principal.id};};
+  for(const [q,ok] of [['aide électricité',['SP-F33667','SP-R74067']],['accident de travail indemnisation',['SP-F175']],['kbis',['SP-F21000']],
+    ['déclaration trimestrielle aah',['SP-R14412']],['changer taux prélèvement',['SP-F35894']],['allocation de soutien familial',['SP-R1448','SP-R57339']]]){
+    const x=P(q); verifie(`Q9 « ${q} » : ${ok.join(' ou ')} en « Votre démarche »`, ok.includes(x.p), x.t.join(' ')+' | '+x.p); } }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');

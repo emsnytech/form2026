@@ -101,7 +101,8 @@
     ["carte d identite", "_cni"], ["cartes d identite", "_cni"], ["carte nationale d identite", "_cni"]];
   // Racines : deux mots se rapprochent seulement si l'un est une forme de l'autre (pluriel, féminin, conjugaison) ou en dérive
   // par un suffixe courant (-ation, -ement, -ité, -ique…). On retire la terminaison, on ne coupe plus à longueur fixe : « maternité »
-  // (matern) ≠ « maternelle » (maternel), « licenciement » (licenci) ≠ « licence » (licenc), « procuration » ≠ « procureur ».
+  // (matern) ≠ « maternelle » (maternel), « licenciement » (licenci) ≠ « licence » (licenc), « procuration » ≠ « procureur »,
+  // « électricité » (l'énergie) ≠ « électrique » (une voiture électrique).
   // Terminaisons essayées de la plus longue à la plus courte ; la première qui laisse une racine assez longue est retirée
   // (5 lettres au moins pour un suffixe de dérivation : « cassée » ≠ « cassation »).
   const SUFFIXES = [["issements", 5], ["issement", 5], ["ements", 5], ["ement", 5], ["ataires", 5], ["ataire", 5], ["ations", 5],
@@ -112,7 +113,7 @@
   function stem(w) {
     if (w[0] === "_") return w;
     if (w.length > 4) w = w.replace(/aux$/, "al").replace(/(s|x)$/, "");
-    w = w.replace(/elle$/, "el").replace(/enne$/, "en").replace(/([ts])ive$/, "$1if").replace(/([^a])ire$/, "$1i").replace(/ique$/, "ic").replace(/ication$/, "i");
+    w = w.replace(/elle$/, "el").replace(/enne$/, "en").replace(/([ts])ive$/, "$1if").replace(/([^a])ire$/, "$1i").replace(/ication$/, "i");
     for (const [x, min] of SUFFIXES) if (w.endsWith(x) && w.length - x.length >= min) { w = w.slice(0, -x.length); break; }
     return w.length > 4 ? w.replace(/([^aeiouy])\1$/, "$1") : w;
   }
@@ -351,13 +352,19 @@
     // organisme ou régime particulier
     [/ ircantec | msa | rafp | cnracl | enim | regime agricole | regime local | caisse des depots | fonctions? publiques? /, / ircantec | msa | rafp | cnracl | enim | agricole | regime local | fonction publique | fonctionnaires? | agents? /],
     // métier particulier
-    [/ assistante?s? maternelle?s? | assistants? maternels? | assistante?s? familiale?s? | assistants? familiaux | particulier employeur | employes? a domicile | taxis? | vtc /, / assistante?s? | nounou | particulier employeur | employeur | domicile | taxis? | vtc /],
+    [/ assistante?s? maternelle?s? | assistants? maternels? | assistante?s? familiale?s? | assistants? familiaux | particulier employeur | employes? a domicile | taxis? | vtc /, / assistante?s? | nounou | particulier employeur | domicile | taxis? | vtc /],
     // situation d'exception
     [/ maladie professionnelle | maladies professionnelles | accident du travail | accident de travail | accidents? de trajet | remise gracieuse | impossibilite de payer | delai de paiement | terrorisme | catastrophe naturelle | deces de la mere | licenciement | droits de succession | impots locaux /,
      / professionnelle | accident | trajet | remise | gracieuse | impossib | plus payer | peux pas payer | delai | terroris | catastrophe | mere | licencie | licenciement | succession | heritage | locaux | locales | fonciere | habitation /],
     [/ etudiante?s? | etudiants? | alternants? | alternance /, / etudiante?s? | etudiants? | etudes | etudier | universite | fac | crous | bourses? | stage | stagiaires? | alternance | apprentis? /],
+    // suite d'exception d'un accident ou d'une maladie (incapacité permanente, décès) : après le cas courant (arrêt, indemnités journalières)
+    [/ incapacite permanente | deces d un salarie | deces du salarie | deces de l assure /, / incapacite | permanente | rente | deces | decede | mort | ayants? droits? /],
+    [/ apres disparition | declaration judiciaire /, / disparu | disparue | disparition | judiciaire /],
     [/ marins? | gens de mer | notaires? | clercs? | journalistes? | detenus? | frontaliers? | pensionnes? /, / marins? | mer | notaires? | clercs? | journalistes? | detenus? | prison | frontaliers? | pensionnes? /]];
-  const casParticulierTitre = (r, q) => { const t = " " + norm(r.t) + " ", n = " " + norm(q) + " ";
+  // Un organisme particulier cité avec le régime général (« Caf ou MSA », « Caf et MSA ») ne fait pas un cas particulier ;
+  // « ASF » après « allocation de soutien familial » est le sigle de l'allocation, pas l'action sociale des ministères.
+  const AVEC_REGIME_GENERAL = / caf (ou|et) (la )?msa | msa (ou|et) (la )?caf /g;
+  const casParticulierTitre = (r, q) => { const t = (" " + norm(r.t) + " ").replace(AVEC_REGIME_GENERAL, " caf ").replace(/ soutien familial asf /g, " soutien familial "), n = " " + norm(q) + " ";
     return PUBLICS_PRECIS.some(([rt, rq]) => rt.test(t) && !rq.test(n)); };
   const annexe = (r, q) => { if (r.k !== "sp") return false; const t = " " + norm(r.t) + " ", n = " " + norm(q) + " ";
     return ANNEXES.some(([rt, rq]) => rt.test(t) && !rq.test(n)); };
@@ -662,11 +669,19 @@
   }
   // Démarche sûre : pertinente (Moteur.pertinence) et un terme de la question dans son titre ; nationale (ou fiche
   // service-public), ou du département connu ; pas réservée aux professionnels pour un particulier.
+  // Tous les mots utiles de la question (hors lieux, tels quels, sans synonyme) sont dans le titre.
+  function titrePorteTout(q, r) {
+    const mots = [...analyse(q).termes.keys()].filter((t) => !t.startsWith("« ")), tt = new Set(toks(r.t));
+    return mots.length > 0 && mots.every((t) => tt.has(t));
+  }
+  // Mots du titre (hors mots vides) absents de la question.
+  function motsEnPlus(q, r) { const qq = new Set(toks(q)); return new Set(toks(r.t).filter((t) => !qq.has(t))).size; }
   function sure(r, q, opt = {}, P = null) {
     const { pub = "", dep = "" } = opt, d = departementConnu(q, dep);
     if (!r || !(P || opt.P).pertinente(r.id) || !titreSur(opt.ix, q, r) || horsTerritoire(r, q) || annexe(r, q) || casParticulierTitre(r, q)) return false;
     // Une fiche question-réponse n'est pas une démarche : jamais en « Votre démarche », sauf si la question la nomme (annexe).
-    if (/Question-réponse/.test(r.ty || "") && !annexeNommee(r, q)) return false;
+    // Exception : la fiche est en tête des résultats et son titre porte tous les mots de la question (« kbis »).
+    if (/Question-réponse/.test(r.ty || "") && !annexeNommee(r, q) && !(opt.tete === r && titrePorteTout(q, r))) return false;
     const po = porteeDe(r);
     if (po !== "nat" && !(po === "dep" && d && depDe(r) === d)) return false;
     if ((!pub || pub === "particulier") && (RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t))) return false;
@@ -690,7 +705,12 @@
     // ni démarche réservée aux professionnels ; parmi les 5 premiers, la première sûre.
     const ailleurs = (r) => !!d && r.k === "dn" && !!r.dep && r.dep !== d;
     const ordre = liste.filter((r) => !ailleurs(r));
-    const principal = ordre.slice(0, 5).find((r) => sure(r, q, { ...opt, ix }, P)) || null;
+    const sures = ordre.slice(0, 5).filter((r) => sure(r, q, { ...opt, ix, tete: ordre[0] }, P));
+    // « Votre démarche » est d'abord une démarche : une fiche d'information sûre cède la place à un service en ligne ou à un
+    // formulaire sûr des 5 premiers dont le titre porte tous les mots de la question et au plus deux autres (« Demande
+    // d'allocation de soutien familial (ASF) ») ; la fiche reste dans « Comprendre ».
+    const DEMARCHE = /Téléservice|selNG|^Formulaire|formulaireNG/;
+    const principal = (sures[0] && /^SP-F/.test(sures[0].id) && sures.find((r) => DEMARCHE.test(r.ty || "") && titrePorteTout(q, r) && motsEnPlus(q, r) <= 2)) || sures[0] || null;
     // « Démarches possibles » : parmi les 3 premières, seulement celles qui passent le seuil de pertinence et portent un
     // terme de la question (hors termes trop généraux) dans leur titre ; une ou deux lignes plutôt qu'une troisième hors
     // sujet. Aucune, et pas de fiche « Comprendre » : la page invite à reformuler.
