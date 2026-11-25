@@ -878,10 +878,11 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
       if (pj) parts.push(`${pj} pièce${pj > 1 ? "s" : ""}`);
       resume.push(...parts.map((x) => x.replace(" ", "\u00a0")));   // « 6 pièces » ne se coupe pas
       const base = /^https?:/.test(r.u) ? r.u : "https://demarche.numerique.gouv.fr/commencer/" + encodeURIComponent(r.u);
-      lignes.push({ cle: "questions", ico: ICO.questions, texte: parts.join(" · "),
-        liens: [{ texte: "Voir le formulaire (PDF)", url: base.replace(/\/$/, "") + "/dossier_vide",
+      // Le nombre de questions et de pièces est dans le titre replié : la ligne ne porte que le lien.
+      lignes.push({ cle: "questions", ico: ICO.questions, texte: "",
+        liens: [{ texte: "Voir le formulaire", url: base.replace(/\/$/, "") + "/dossier_vide",
                   titre: "Pour lire toutes les questions avant de commencer, pas pour le remplir",
-                  apres: pdfNonAccessible(meta) ? "(PDF non accessible)" : "" }] });
+                  apres: pdfNonAccessible(meta) ? "(PDF non accessible)" : "(PDF)" }] });
       // Ce que le formulaire va chercher (signal « Données récupérées pour vous » de la ligne sous le titre), puis ce qui peut être prérempli.
       const pre = [...new Set(r.pre || [])], rec = pre.filter((p) => RECUPERE[p]).map((p) => PRE_COURT[p]), autres = pre.filter((p) => !RECUPERE[p] && PRE_COURT[p]).map((p) => PRE_COURT[p]);
       if (rec.length) lignes.push({ cle: "donnees", ico: ICO.rec, texte: `Données récupérées : ${rec.join(", ")}`, liens: [] });
@@ -985,7 +986,7 @@ function ligne(titre, sous, item, avant) {
 Promise.all([fetch(DATA + "plus_demandees.json").then((r) => r.json()).catch(() => null), fetch(DATA + "a_la_une.json").then((r) => r.json()).catch(() => null)]).then(([pd, une]) => {
   if (pd) {
     $("liste-demandees").innerHTML = `<p class="sur-titre">Démarches nationales</p>` + pd.nationales.map((x) => ligne(x.titre, (x.precision ? x.precision + " · " : "") + x.organisme + " · service-public.gouv.fr", x)).join("")
-      + `<p class="sur-titre">Sur Démarche Numérique</p>` + pd.demarche_numerique.map((x) => ligne(x.titre, `${x.organisme} · plus de ${x.dossiers_arrondis} dossiers`, x)).join("");
+      + `<p class="sur-titre">Sur Démarche Numérique</p>` + pd.demarche_numerique.map((x) => ligne(x.titre, x.organisme, x)).join("");
   } else $("col-demandees").hidden = true;
   if (une) $("liste-une").innerHTML = une.retenues.map((x) => ligne(x.titre, x.organisme, x,
       `<span><span class="etiq ${ETIQ[x.etiquette] || ""}">${esc(x.etiquette)}</span><span class="t2">${x.publiee ? "Publiée le " + esc(dateFr(x.publiee)) + " · " : ""}${esc(x.portee)}</span></span>`)).join("");

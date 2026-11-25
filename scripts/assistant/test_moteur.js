@@ -110,7 +110,7 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const B=(i)=>{const k=ix.byId.get(i);return k===undefined?null:ix.recs[k];};
   const META=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','index_meta.json'),'utf8'));
   const emb=B('DN-13583'), A1=M.avantDeCommencer(emb,META);
-  verifie('B1 démarche DN avec pièces et pré-remplissage (DN-13583) : « 28 questions · 3 pièces », puis « Données récupérées : SIRET » (pas dans le « ? »)', A1.lignes[0].cle==='questions'&&A1.lignes[0].texte==='28 questions · 3 pièces'&&A1.lignes.some(l=>l.cle==='donnees'&&l.texte==='Données récupérées : SIRET')&&!M.detailSymboles(B('DN-13583'),META).some(d=>/Données récupérées/.test(d.texte)), A1.lignes.map(l=>l.texte).join(' | '));
+  verifie('B1 démarche DN avec pièces et pré-remplissage (DN-13583) : titre « 28 questions, 3 pièces », première ligne « Voir le formulaire (PDF…) » sans le décompte, puis « Données récupérées : SIRET » (pas dans le « ? »)', A1.resume==='Avant de commencer · 28\u00a0questions, 3\u00a0pièces'&&A1.lignes[0].cle==='questions'&&A1.lignes[0].texte===''&&A1.lignes.some(l=>l.cle==='donnees'&&l.texte==='Données récupérées : SIRET')&&!M.detailSymboles(B('DN-13583'),META).some(d=>/Données récupérées/.test(d.texte)), A1.lignes.map(l=>l.texte).join(' | '));
   verifie('B1 lien vers le formulaire à vide, en PDF, avec sa précision', /\/commencer\/declaration-prealable-embauche\/dossier_vide$/.test(A1.lignes[0].liens[0].url)&&/pas pour le remplir/.test(A1.lignes[0].liens[0].titre), A1.lignes[0].liens[0].url);
   const sans=ix.recs.find(r=>r.k==='sp'&&/^SP-R/.test(r.id)&&!r.sva&&!r.obs), A2=M.avantDeCommencer(sans);
   verifie('B2 démarche sans aucune donnée : pas de bloc', !A2.lignes.length&&!A2.resume, sans.id+' '+sans.t);
@@ -200,7 +200,7 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('J9 médaille sans territoire : la nationale a des démarches locales de même titre, la carte propose « préciser le vôtre » ; avec le 05, la démarche des Hautes-Alpes est citée',
     M.jumellesDe(ix,B('DN-69348')).map(i=>ix.recs[i].id).includes('DN-118359')&&/Certains départements ont leur propre démarche&nbsp;: <button type="button" class="lien-changer" id="preciser-dep">préciser le vôtre<\/button>/.test(gab)&&/a aussi sa propre démarche/.test(gab));
   const pdf=M.avantDeCommencer(B('DN-69348'),META).lignes[0].liens[0];
-  verifie('J10 après le lien du formulaire : « (PDF non accessible) », lu dans accessibilite_plateformes.json', META.acc_plateformes.dn.pdf_non_accessible===true&&pdf.apres==='(PDF non accessible)'&&pdf.texte==='Voir le formulaire (PDF)'&&!M.avantDeCommencer(B('DN-69348'),{}).lignes[0].liens[0].apres, pdf.texte+' '+pdf.apres);
+  verifie('J10 « Voir le formulaire (PDF non accessible) », ou « (PDF) » quand la plateforme ne le dit pas, lu dans accessibilite_plateformes.json', META.acc_plateformes.dn.pdf_non_accessible===true&&pdf.apres==='(PDF non accessible)'&&pdf.texte==='Voir le formulaire'&&M.avantDeCommencer(B('DN-69348'),{}).lignes[0].liens[0].apres==='(PDF)', pdf.texte+' '+pdf.apres);
   const dnD=B('DN-69348'), spD=ix.recs.find(r=>r.k==='sp'&&M.symboles(r,META).voies.length), SD=M.symboles(dnD,META);
   verifie('D1 délais constatés : le lien vers la page statistiques (adresse de la démarche, « commencer » → « statistiques ») existe pour toute démarche Démarche Numérique (dans « Avant de commencer » ou, sinon, dans le détail « ? »)',
     SD.delais&&SD.delais.url==='https://demarche.numerique.gouv.fr/statistiques/'+dnD.u&&ix.recs.filter(r=>r.k==='dn'&&r.u).every(r=>{const d=M.symboles(r,META).delais;return d&&/\/statistiques\//.test(d.url)&&!/\/commencer\//.test(d.url);})&&/Moteur\.detailSymboles\(r, META \|\| \{\}, \{ site \}\)/.test(gab), SD.delais&&SD.delais.url);
@@ -289,8 +289,8 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   // Accueil et réponse, sur le modèle d'Altinn (consigne « sobriété », section 4) : ni chiffres ni sources sur l'accueil,
   // la phrase sur la décision une seule fois, dans le pied de page.
   const vis=visible(page).replace(/\s+/g,' ');
-  verifie('A5 accueil : ni chiffres ni sources, « Comment ça marche » seul sous le champ, plus de phrase sur l\'API Géo ; « la décision appartient à l\'organisme cité » une seule fois, dans le pied de page',
+  verifie('A5 accueil : ni chiffres ni sources, ni volumes de dossiers dans « Les plus demandées », « Comment ça marche » seul sous le champ, plus de phrase sur l\'API Géo ; « la décision appartient à l\'organisme cité » une seule fois, dans le pied de page',
     stats.startsWith('<a class="lien-comment"')&&stats.endsWith('>Comment ça marche</a>')&&!/recense|fmt\(/.test(stats)&&!/recense|API Géo de l'État\)\. Rien d'autre|Il ne remplace ni|Sources : /.test(vis)&&(vis.match(/la décision appartient à l'organisme cité/g)||[]).length===1&&/<footer[\s\S]*la décision appartient à l'organisme cité/.test(page)
-    &&/Indiquez votre commune pour des réponses plus précises\./.test(page)&&/Précisez votre commune pour voir où aller\./.test(page), stats); }
+    &&!/dossiers_arrondis|plus de \$\{/.test(page)&&/Indiquez votre commune pour des réponses plus précises\./.test(page)&&/Précisez votre commune pour voir où aller\./.test(page), stats); }
 console.log(`\n${echecs?echecs+' échec(s)':'Toutes les situations de référence passent'}${attente?', '+attente+' en attente':''}.`);
 if(echecs) process.exit(1);

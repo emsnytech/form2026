@@ -569,10 +569,11 @@
       if (pj) parts.push(`${pj} pièce${pj > 1 ? "s" : ""}`);
       resume.push(...parts.map((x) => x.replace(" ", "\u00a0")));   // « 6 pièces » ne se coupe pas
       const base = /^https?:/.test(r.u) ? r.u : "https://demarche.numerique.gouv.fr/commencer/" + encodeURIComponent(r.u);
-      lignes.push({ cle: "questions", ico: ICO.questions, texte: parts.join(" · "),
-        liens: [{ texte: "Voir le formulaire (PDF)", url: base.replace(/\/$/, "") + "/dossier_vide",
+      // Le nombre de questions et de pièces est dans le titre replié : la ligne ne porte que le lien.
+      lignes.push({ cle: "questions", ico: ICO.questions, texte: "",
+        liens: [{ texte: "Voir le formulaire", url: base.replace(/\/$/, "") + "/dossier_vide",
                   titre: "Pour lire toutes les questions avant de commencer, pas pour le remplir",
-                  apres: pdfNonAccessible(meta) ? "(PDF non accessible)" : "" }] });
+                  apres: pdfNonAccessible(meta) ? "(PDF non accessible)" : "(PDF)" }] });
       // Ce que le formulaire va chercher (signal « Données récupérées pour vous » de la ligne sous le titre), puis ce qui peut être prérempli.
       const pre = [...new Set(r.pre || [])], rec = pre.filter((p) => RECUPERE[p]).map((p) => PRE_COURT[p]), autres = pre.filter((p) => !RECUPERE[p] && PRE_COURT[p]).map((p) => PRE_COURT[p]);
       if (rec.length) lignes.push({ cle: "donnees", ico: ICO.rec, texte: `Données récupérées : ${rec.join(", ")}`, liens: [] });
