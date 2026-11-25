@@ -407,11 +407,20 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('BS3 un seul besoin : pas de « Vos démarches » (la carte « Votre démarche » reste)', !seuls.length, seuls.join(' | ')||'aucune');
   const page=fs.readFileSync(path.join(__dirname,'..','..','trouver-sa-demarche.html'),'utf8'), code=fs.readFileSync(path.join(__dirname,'moteur.js'),'utf8').match(/function besoins[\s\S]*?\n  \}/)[0];
   const ids=TB.papiers.flatMap(p=>Object.values(p.fiche)), absents=ids.filter(i=>!ix.byId.has(i));
-  verifie('BS4 « Vos démarches » dans la page, réponse de l\'assistant une ligne par besoin sans paragraphe, questions de suite sur le premier besoin ; table lue dans besoins.json (aucun papier dans le code), fiches de la table présentes dans l\'index',
-    /<h2 id="h-demarche">Vos démarches<\/h2>/.test(page)&&/une ligne par besoin, dans cet ordre, sans paragraphe/.test(page)&&/window\.PRINCIPAL = recsB\[0\]/.test(page)&&!/carte bancaire|passeport|SP-F/i.test(code)&&!absents.length
+  verifie('BS4 « Vos démarches » dans la page, questions de suite sur le premier besoin ; table lue dans besoins.json (aucun papier dans le code), fiches de la table présentes dans l\'index',
+    /<h2 id="h-demarche">Vos démarches<\/h2>/.test(page)&&/Ne répète pas cette liste et ne cite pas ces démarches une par une/.test(page)&&/window\.PRINCIPAL = recsB\[0\]/.test(page)&&!/carte bancaire|passeport|SP-F/i.test(code)&&!absents.length
     &&/besoins\.json/.test(fs.readFileSync(path.join(__dirname,'assembler_page.py'),'utf8')), absents.join(' '));
   verifie('BS5 Où aller, carte d\'identité ou passeport : la mairie de la commune et « vérifiez qu\'elle est équipée » (l\'Annuaire ne distingue pas les mairies équipées)',
     /Vérifiez que votre mairie est équipée pour les cartes d'identité et les passeports/.test(page)&&/services\(c\.code, \["mairie"\]\)/.test(page)); }
+// Plusieurs besoins, version avec assistant : la carte « Vos démarches » est gardée, la réponse ne répète pas la liste.
+{ const page=fs.readFileSync(path.join(__dirname,'..','..','trouver-sa-demarche.html'),'utf8'), cons=(page.match(/function consigneBesoins\(B\) \{[\s\S]*?\n\}/)||[''])[0];
+  const filtre=(page.match(/const refsB = [\s\S]*?const r = renderText\(texteRep\);/)||[''])[0];
+  // le filtre de la page, appliqué à une réponse qui répète la liste malgré la consigne
+  const refsB=new Set(['SP-F2428','SP-F1759']), texte="Faites d'abord opposition.\n- Carte bancaire : opposition [[SP-F2428]]\n- Carte d'identité : la refaire [[SP-F1759]]\n- Voir aussi [[SP-F31421]]";
+  const garde=texte.split("\n").filter((l)=>!(/^\s*[-•*]\s+/.test(l)&&[...l.matchAll(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g)].some((m)=>refsB.has(m[1])))).join("\n");
+  verifie('BS6 assistant et plusieurs besoins : carte « Vos démarches » gardée ; consigne : ne pas répéter la liste, deux phrases au plus ; la page retire les lignes de liste qui citent une démarche de la carte',
+    /Ne répète pas cette liste/.test(cons)&&/deux phrases au plus, sans liste/.test(cons)&&!/une ligne par besoin/.test(cons)&&/afficherResultats\(citedRecs\.concat\(others\), text, "citee", undefined, \{ besoins: BESOINS_Q \}\)/.test(page)
+    &&/refsB\.has\(m\[1\]\)/.test(filtre)&&garde==="Faites d'abord opposition.\n- Voir aussi [[SP-F31421]]", JSON.stringify(garde)); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');

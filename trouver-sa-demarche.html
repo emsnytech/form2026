@@ -1648,13 +1648,13 @@ const MASQUES = [
 ];
 function masquer(t) { let n = 0; for (const [re, rep] of MASQUES) t = t.replace(re, (...m) => { n++; return typeof rep === "string" ? rep.replace("$1", m[1] || "").replace("$2", m[2] || "") : rep; }); return { texte: t, n }; }
 
-// Plusieurs besoins : la réponse suit le même découpage, une ligne par papier, dans l'ordre d'urgence de la table relue.
+// Plusieurs besoins : la carte « Vos démarches » affiche la liste (une ligne par besoin, avec son bouton) ; la réponse de
+// l'assistant ne la répète pas : seulement ce que la carte ne dit pas, en deux phrases au plus.
 function consigneBesoins(B) {
   if (!B || B.length < 2) return "";
   return `\n\nPLUSIEURS BESOINS
-La question contient ${B.length} besoins ; la page les affiche dans « Vos démarches ». Réponds par une ligne par besoin, dans cet ordre, sans paragraphe, au format « - Nom : action en quelques mots [[référence]] » :
-` + B.map((b) => `- ${b.nom}${b.rec ? ` [[${b.rec.id}]]` : ""}${b.action ? ` (action : ${b.action})` : b.note ? ` (${b.note})` : ""}`).join("\n")
-    + `\nN'ajoute ni introduction ni conclusion. Si une précision manque, pose ta question sur le premier besoin de la liste seulement.`;
+La question contient ${B.length} besoins. La page les affiche elle-même dans « Vos démarches », un par ligne, avec son lien et dans cet ordre : ${B.map((b) => b.nom).join(", ")}.
+Ne répète pas cette liste et ne cite pas ces démarches une par une. Réponds en deux phrases au plus, sans liste, seulement avec ce qui aide en plus (par exemple ce qui est à faire en premier). Si une précision manque, pose ta question sur le premier besoin seulement : ${B[0].nom}.`;
 }
 function consigne(q) {
   const pub = $("pub").value, dep = $("dep").value;
@@ -1770,7 +1770,10 @@ async function ask(text, first) {
     const out = await sample(history, { tools: TOOLS, modelTier: "default", cache: false, signal: ctrl.signal,
       onText: ({ text }) => { if (text && text !== "Thinking...") $("rep-texte").innerHTML = `<div class="texte-ia">${renderText(text).html}</div>`; } });
     history.push({ role: "assistant", content: out.text });
-    const r = renderText(out.text);
+    // Plusieurs besoins : les lignes de liste qui citent une démarche de « Vos démarches » sont retirées (la carte les porte).
+    const refsB = new Set(BESOINS_Q.length >= 2 ? BESOINS_Q.map((b) => b.rec && b.rec.id).filter(Boolean) : []);
+    const texteRep = refsB.size ? out.text.split("\n").filter((l) => !(/^\s*[-•*]\s+/.test(l) && [...l.matchAll(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g)].some((m) => refsB.has(m[1])))).join("\n") : out.text;
+    const r = renderText(texteRep);
     const citedRecs = citedOrder(out.text).map(rec).filter(Boolean);
     const others = [...seen.values()].filter((x) => !cited.has(x.id)).slice(0, 6);
     afficherResultats(citedRecs.concat(others), text, "citee", undefined, { besoins: BESOINS_Q });
