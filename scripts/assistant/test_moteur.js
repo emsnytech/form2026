@@ -374,6 +374,16 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
     const b=M.libellesUniques(rs.map(x=>({texte:M.libelleRessource(x),url:lien(x),origine:x.ls,titre:x.t}))); if(new Set(b.map(x=>x.texte)).size!==b.length) dup.push(f.id); }
   const ex=M.libellesUniques([{texte:'Faire une demande en ligne',url:'https://passeport.ants.gouv.fr/a'},{texte:'Faire une demande en ligne',url:'https://www.service-public.gouv.fr/b'}]).map(x=>x.texte);
   verifie('D1 aucun libellé de lien deux fois dans une carte « Aussi pour vous » ; deux liens différents de même libellé sont nommés par leur site', !dup.length&&ex.join(' | ')==='Faire une demande en ligne sur ants.gouv.fr | Faire une demande en ligne sur service-public.gouv.fr', dup.slice(0,3).join(' ')||ex.join(' | ')); }
+// Lien d'origine vers une page de connexion : un bouton et un lien discret ; grands espaces lus dans grands_espaces.json.
+{ const G=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','grands_espaces.json'),'utf8')).sites.map(x=>x.site);
+  const caf=M.boutonsConnexion(R.find(r=>r.id==='SP-R1165')), pacs=M.boutonsConnexion(R.find(r=>r.id==='SP-R57680')), dir=M.boutonsConnexion(R.find(r=>r.id==='SP-R44607'));
+  verifie('B10 grand espace (Caf) : bouton « Se connecter sur caf.fr » vers la connexion, lien « Lire la fiche »',
+    caf&&caf.bouton.texte==='Se connecter sur caf.fr'&&/connect\.caf\.fr/.test(caf.bouton.url)&&caf.lien.texte==='Lire la fiche'&&/vosdroits\/R1165$/.test(caf.lien.url), caf&&caf.bouton.texte);
+  verifie('B11 autre site (service-public « mademarche ») : bouton « Lire la fiche », lien « Se connecter directement sur service-public.gouv.fr »',
+    pacs&&pacs.bouton.texte==='Lire la fiche'&&pacs.lien.texte==='Se connecter directement sur service-public.gouv.fr'&&/mademarche/.test(pacs.lien.url), pacs&&pacs.lien.texte);
+  const cx=R.filter(r=>r.lc&&r.ls), grands=cx.filter(r=>r.lg), mal=cx.filter(r=>!!r.lg!==G.includes(M.siteLisible(r.lc)));
+  verifie(`B12 ${cx.length} ressources à deux liens, dont ${grands.length} grands espaces (${G.join(', ')}, liste relue dans grands_espaces.json) ; adresse directe : un seul bouton`,
+    cx.length===120&&grands.length>0&&!mal.length&&dir===null&&!/caf\.fr|ameli|impots|ants\.gouv/.test(fs.readFileSync(path.join(__dirname,'moteur.js'),'utf8').match(/function boutonsConnexion[\s\S]*?\n  \}/)[0]), mal.map(r=>r.id).join(' ')); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');

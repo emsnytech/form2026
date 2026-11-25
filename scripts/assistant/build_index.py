@@ -174,6 +174,8 @@ def _site(u):
 _xml_r={}
 for d in ('extracted_part','extracted_pro','extracted_asso'):
     for f in glob.glob(UP+'/dila/raw/'+d+'/R*.xml'): _xml_r.setdefault(os.path.basename(f)[:-4],f)
+# Grands espaces (donnees/assistant/grands_espaces.json, liste relue) : la connexion y est l'entrée attendue (« lg »).
+_grands={x['site'] for x in json.load(open(os.path.join(os.path.dirname(OUT),'grands_espaces.json')))['sites']}
 n_cx=collections.Counter()
 for r in recs:
     l=r.get('l') or ''
@@ -187,7 +189,9 @@ for r in recs:
              and _site(u)==_site(l) and re.search(r'(?i)demarche|declar|demande|teleservice|teleprocedure',_up.urlsplit(u).path)]
     r['lc']=l
     if alt: r['l']=alt[0].replace('&amp;','&'); n_cx['adresse directe']+=1
-    else: r['l']=r['u']; r['ls']=re.match(r'^https?://[^/?#]+',l)[0]; n_cx['fiche service-public']+=1
+    else:
+        r['l']=r['u']; r['ls']=re.match(r'^https?://[^/?#]+',l)[0]; n_cx['fiche service-public']+=1
+        if _site(l) in _grands: r['lg']=1; n_cx['dont grand espace (bouton « Se connecter »)']+=1
 print('liens vers une page de connexion :',dict(n_cx))
 # Ressources citées par chaque fiche (F…), lues dans les fichiers XML bruts de la DILA : services en ligne, formulaires,
 # simulateurs (<ServiceEnLigne ID="R…">), puis fiches liées (<LienInterne LienPublication="F…">). Seules celles présentes

@@ -307,6 +307,15 @@
     const t = new Set();
     return l.map(({ nouveau, site, origine, ...x }) => (nouveau ? { ...x, texte: nouveau } : x)).filter((x) => !t.has(x.texte) && t.add(x.texte));
   }
+  // Ressource dont le lien menait à une page de connexion (« lc », remplacé par la fiche) : deux liens, un bouton et un lien
+  // discret. Grand espace personnel (« lg », grands_espaces.json) : « Se connecter sur caf.fr », puis « Lire la fiche » ;
+  // ailleurs : « Lire la fiche », puis « Se connecter directement sur … ».
+  function boutonsConnexion(r) {
+    if (!r || !r.lc || !r.ls) return null;
+    const site = siteLisible(r.lc), fiche = { texte: "Lire la fiche", url: r.u };
+    return r.lg ? { bouton: { texte: `Se connecter sur ${site}`, url: r.lc }, lien: fiche }
+      : { bouton: fiche, lien: { texte: `Se connecter directement sur ${site}`, url: r.lc } };
+  }
   // Libellé d'une ressource service-public dans une carte.
   const libelleRessource = (r) => /imulateur/i.test(r.ty) ? "Savoir si j'y ai droit (simulateur)" : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne"
     : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : r.t;
@@ -734,6 +743,6 @@
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

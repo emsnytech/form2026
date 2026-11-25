@@ -126,6 +126,7 @@ body{--bouton-fond:var(--accent);--bouton-fond-survol:var(--accent-fonce);--bout
 .carte .liens{display:flex;gap:8px 20px;flex-wrap:wrap;font-size:15px}
 .btn-lien{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;font-size:17px;font-weight:600;color:#fff;background:var(--accent);border-radius:10px;text-decoration:none;align-self:flex-start}
 .btn-lien:hover{color:#fff;background:var(--accent-fonce)}
+.boutons-cx{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin:0}.lien-cx{font-size:15px;color:var(--muted)}
 .comprendre{display:flex;flex-direction:column;gap:6px;padding:0 4px}.comprendre a{font-size:17px}.comprendre span{font-size:14px;color:var(--muted)}
 details.pli{border-top:1px solid var(--line);padding-top:6px}
 details.pli>summary{font-size:16px;font-weight:500;display:list-item;padding:10px 0;cursor:pointer}
@@ -181,6 +182,7 @@ input#cp,input#p-cp,.cp-res{font:inherit;font-size:15px;min-height:44px;padding:
   .texte-ia{font-size:16px}
   .carte{padding:16px}
   .btn-lien{align-self:stretch;justify-content:center}
+  .boutons-cx{flex-direction:column;align-items:stretch;text-align:center}
 }
 @media (max-width:720px){#ff.ff-bas{flex-wrap:nowrap}#ff.ff-bas .perso{display:none}#ff.ff-bas .btn{width:auto;min-height:48px;padding:0 16px}#ff.ff-bas input{min-height:48px}}
 dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line2);border-radius:14px;padding:20px 22px;background:var(--fond);color:var(--ink)}
@@ -623,6 +625,15 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     const t = new Set();
     return l.map(({ nouveau, site, origine, ...x }) => (nouveau ? { ...x, texte: nouveau } : x)).filter((x) => !t.has(x.texte) && t.add(x.texte));
   }
+  // Ressource dont le lien menait à une page de connexion (« lc », remplacé par la fiche) : deux liens, un bouton et un lien
+  // discret. Grand espace personnel (« lg », grands_espaces.json) : « Se connecter sur caf.fr », puis « Lire la fiche » ;
+  // ailleurs : « Lire la fiche », puis « Se connecter directement sur … ».
+  function boutonsConnexion(r) {
+    if (!r || !r.lc || !r.ls) return null;
+    const site = siteLisible(r.lc), fiche = { texte: "Lire la fiche", url: r.u };
+    return r.lg ? { bouton: { texte: `Se connecter sur ${site}`, url: r.lc }, lien: fiche }
+      : { bouton: fiche, lien: { texte: `Se connecter directement sur ${site}`, url: r.lc } };
+  }
   // Libellé d'une ressource service-public dans une carte.
   const libelleRessource = (r) => /imulateur/i.test(r.ty) ? "Savoir si j'y ai droit (simulateur)" : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne"
     : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : r.t;
@@ -1050,7 +1061,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -1323,7 +1334,10 @@ function carteDemarche(r) {
     const L = ligneSymboles(r, "service-public.gouv.fr", `${typeLib(r)} · service-public.gouv.fr`, ts ? (ts.ls || ts.l) : (r.ls || r.l));
     h += `<p class="org ligne-symb">${L.ligne}</p>${L.detail}`;
     if ((r.docs || []).length) h += `<p class="prep2">À préparer&nbsp;: ${esc(r.docs.slice(0, 5).join(" ; "))}${r.docs.length > 5 ? "…" : "."}</p>`;
-    h += `<a class="btn-lien" href="${esc(cible)}" target="_blank" rel="noopener">${ts || r.l ? "Faire la démarche" : "Lire la fiche"}</a>`;
+    const cx = Moteur.boutonsConnexion(ts || r);   // lien d'origine vers une page de connexion : un bouton, un lien discret à côté
+    h += cx ? `<p class="boutons-cx"><a class="btn-lien" href="${esc(cx.bouton.url)}" target="_blank" rel="noopener">${esc(cx.bouton.texte)}</a>`
+        + ` <a class="lien-cx" href="${esc(cx.lien.url)}" target="_blank" rel="noopener">${esc(cx.lien.texte)}<span class="sr-only"> (nouvel onglet)</span></a></p>`
+      : `<a class="btn-lien" href="${esc(cible)}" target="_blank" rel="noopener">${ts || r.l ? "Faire la démarche" : "Lire la fiche"}</a>`;
     h += blocAvant(r);
     ajouterLien(ts ? ts.t : r.t, cible, "service-public.gouv.fr");
   }
