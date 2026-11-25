@@ -1,0 +1,186 @@
+{
+ "objet": "Plusieurs besoins dans une question (« j'ai perdu ma carte bancaire et ma carte d'identité ») : table relue par l'éditeur (25/11/2026), lue par la page et par Moteur.besoins. Pour chaque papier : les mots qui le désignent (sans accents), son rang d'urgence, son symbole (Tabler), l'action en quelques mots, et la fiche service-public qui la décrit selon le contexte de la question (perte ou vol ; « * » : les deux). Un papier sans démarche publique a une « note » à la place de la fiche ; « guichet » : false, un papier sans guichet public (la banque), dont « Où aller » ne tient pas compte. Un morceau de question qui n'est pas un papier de la table garde la démarche que le moteur juge sûre, au dernier rang.",
+ "contexte": {
+  "vol": [
+   "vol",
+   "vole",
+   "volee",
+   "voles",
+   "volees",
+   "voler",
+   "cambriole",
+   "cambriolage",
+   "arrache"
+  ],
+  "perte": [
+   "perdu",
+   "perdue",
+   "perdus",
+   "perdues",
+   "perte",
+   "egare",
+   "egaree",
+   "egares"
+  ]
+ },
+ "urgence": [
+  {
+   "rang": 1,
+   "libelle": "Opposition : à faire tout de suite"
+  },
+  {
+   "rang": 2,
+   "libelle": "Pièces d'identité"
+  },
+  {
+   "rang": 3,
+   "libelle": "Le reste"
+  }
+ ],
+ "papiers": [
+  {
+   "cle": "carte_bancaire",
+   "nom": "Carte bancaire",
+   "urgence": 1,
+   "ico": "credit-card",
+   "action": "Faire opposition tout de suite",
+   "motifs": [
+    "carte bancaire",
+    "cartes bancaires",
+    "carte bleue",
+    "carte de credit",
+    "carte de paiement",
+    "cb"
+   ],
+   "fiche": {
+    "perte": "SP-F31241",
+    "vol": "SP-F2428"
+   },
+   "guichet": false
+  },
+  {
+   "cle": "chequier",
+   "nom": "Chéquier",
+   "urgence": 1,
+   "ico": "cash-banknote",
+   "action": "Faire opposition tout de suite",
+   "motifs": [
+    "chequier",
+    "chequiers",
+    "carnet de cheques"
+   ],
+   "fiche": {
+    "perte": "SP-F37234",
+    "vol": "SP-F2409"
+   },
+   "guichet": false
+  },
+  {
+   "cle": "carte_identite",
+   "nom": "Carte d'identité",
+   "urgence": 2,
+   "ico": "id",
+   "action": "La refaire dans une mairie équipée",
+   "motifs": [
+    "carte nationale d identite",
+    "carte d identite",
+    "carte identite",
+    "cni"
+   ],
+   "fiche": {
+    "perte": "SP-F1344",
+    "vol": "SP-F1759"
+   }
+  },
+  {
+   "cle": "passeport",
+   "nom": "Passeport",
+   "urgence": 2,
+   "ico": "id",
+   "action": "Le refaire dans une mairie équipée",
+   "motifs": [
+    "passeport",
+    "passeports"
+   ],
+   "fiche": {
+    "perte": "SP-F21246",
+    "vol": "SP-F21247"
+   }
+  },
+  {
+   "cle": "permis_de_conduire",
+   "nom": "Permis de conduire",
+   "urgence": 3,
+   "ico": "license",
+   "action": "Le refaire en ligne",
+   "motifs": [
+    "permis de conduire"
+   ],
+   "fiche": {
+    "perte": "SP-F1727",
+    "vol": "SP-F1450"
+   }
+  },
+  {
+   "cle": "carte_grise",
+   "nom": "Carte grise",
+   "urgence": 3,
+   "ico": "car",
+   "action": "Demander un duplicata",
+   "motifs": [
+    "carte grise",
+    "certificat d immatriculation"
+   ],
+   "fiche": {
+    "*": "SP-F1726"
+   }
+  },
+  {
+   "cle": "carte_vitale",
+   "nom": "Carte Vitale",
+   "urgence": 3,
+   "ico": "id-badge-2",
+   "action": "En commander une nouvelle",
+   "motifs": [
+    "carte vitale",
+    "vitale"
+   ],
+   "fiche": {
+    "*": "SP-R49814"
+   }
+  },
+  {
+   "cle": "attestation_securite_sociale",
+   "nom": "Attestation de sécurité sociale",
+   "urgence": 3,
+   "ico": "file-certificate",
+   "action": "La télécharger en ligne",
+   "motifs": [
+    "attestation de securite sociale",
+    "attestation securite sociale",
+    "attestation secu",
+    "attestation de droits",
+    "attestation vitale",
+    "attestation d assurance maladie",
+    "attestation assurance maladie"
+   ],
+   "fiche": {
+    "*": "SP-R49811"
+   }
+  },
+  {
+   "cle": "attestation_assurance",
+   "nom": "Attestation d'assurance",
+   "urgence": 3,
+   "ico": "file-certificate",
+   "action": "",
+   "motifs": [
+    "attestation d assurance",
+    "attestation assurance",
+    "attestations d assurance"
+   ],
+   "fiche": {},
+   "note": "Pas de démarche publique : demandez-la à votre assureur"
+  }
+ ]
+}

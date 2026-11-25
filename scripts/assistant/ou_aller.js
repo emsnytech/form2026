@@ -151,9 +151,15 @@
     const r = (window.CARTES_TETE || LISTE.slice(0, 3)).find((x) => x && portee(x) !== "inc" && regle(x) && (x.k !== "dn" || duDepartement(x, c)));
     if (!r) return;
     const g = regle(r);
+    // Carte d'identité, passeport : l'Annuaire ne dit pas quelles mairies sont équipées (aucun champ ; vérifié le 25/11/2026).
+    // La mairie de la commune, avec l'invitation à vérifier qu'elle l'est.
     if (g.identite) {
-      el.innerHTML = `<div class="ou-t">Où déposer la demande</div><p>Seules certaines mairies sont équipées : la fiche dit comment trouver la vôtre.</p>`;
-      majOu(); return;
+      const verif = `<div class="ou-t">Où déposer la demande</div><p>Vérifiez que votre mairie est équipée pour les cartes d'identité et les passeports&nbsp;: seules certaines le sont.</p>`;
+      if (SANS_API) { el.innerHTML = verif + lienAnnuaire(c, "Mairie"); majOu(); return; }
+      el.innerHTML = verif + `<p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`; majOu();
+      let l; try { l = await services(c.code, ["mairie"]); } catch (e) { el.innerHTML = verif + lienAnnuaire(c, "Mairie"); majOu(); return; }
+      if (COMMUNE !== c) return;
+      el.innerHTML = verif + (l.length ? l.map(htmlService).join("") : lienAnnuaire(c, "Mairie")); majOu(); return;
     }
     if (SANS_API) { el.innerHTML = lienAnnuaire(c, g.libelle); majOu(); return; }
     // Le type de la table ne sert qu'à choisir le guichet : la carte affiche le nom que renvoie l'Annuaire.
