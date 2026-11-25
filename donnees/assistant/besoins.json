@@ -1,5 +1,5 @@
 {
- "objet": "Plusieurs besoins dans une question (« j'ai perdu ma carte bancaire et ma carte d'identité ») : table relue par l'éditeur (25/11/2026), lue par la page et par Moteur.besoins. Pour chaque papier : les mots qui le désignent (sans accents), son rang d'urgence, son symbole (Tabler), l'action en quelques mots, et la fiche service-public qui la décrit selon le contexte de la question (perte ou vol ; « * » : les deux). Un papier sans démarche publique a une « note » à la place de la fiche ; « guichet » : false, un papier dont « Où aller » ne tient pas compte : sans guichet public (la banque), ou déposé dans la mairie équipée de son choix (carte d'identité, passeport ; titres_identite.json). Un morceau de question qui n'est pas un papier de la table garde la démarche que le moteur juge sûre, au dernier rang.",
+ "objet": "Plusieurs besoins dans une question (« j'ai perdu ma carte bancaire et ma carte d'identité ») : table relue par l'éditeur (25/11/2026), lue par la page et par Moteur.besoins. Pour chaque papier : les mots qui le désignent (sans accents), son rang d'urgence, son symbole (Tabler), l'action en quelques mots, et la fiche service-public qui la décrit selon le contexte de la question (perte ou vol ; « * » : les deux). Un papier sans démarche publique a une « note » à la place de la fiche ; « guichet » : false, un papier dont « Où aller » ne tient pas compte : sans guichet public (la banque), ou déposé dans la mairie équipée de son choix (carte d'identité, passeport ; titres_identite.json). Un morceau de question qui n'est pas un papier de la table garde la démarche que le moteur juge sûre, au dernier rang. « pre_demande » : la pré-demande en ligne (ANTS) d'un titre d'identité, qui devient le bouton de la ligne ; la fiche passe en lien discret (modèle de la PR 100).",
  "contexte": {
   "vol": [
    "vol",
@@ -91,7 +91,8 @@
     "perte": "SP-F1344",
     "vol": "SP-F1759"
    },
-   "guichet": false
+   "guichet": false,
+   "pre_demande": "SP-R62483"
   },
   {
    "cle": "passeport",
@@ -107,7 +108,8 @@
     "perte": "SP-F21246",
     "vol": "SP-F21247"
    },
-   "guichet": false
+   "guichet": false,
+   "pre_demande": "SP-R62484"
   },
   {
    "cle": "permis_de_conduire",

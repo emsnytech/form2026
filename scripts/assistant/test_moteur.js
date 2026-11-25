@@ -428,6 +428,20 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('BS6 assistant et plusieurs besoins : carte « Vos démarches » gardée ; consigne : ne pas répéter la liste, deux phrases au plus ; la page retire les lignes de liste qui citent une démarche de la carte',
     /Ne répète pas cette liste/.test(cons)&&/deux phrases au plus, sans liste/.test(cons)&&!/une ligne par besoin/.test(cons)&&/afficherResultats\(citedRecs\.concat\(others\), text, "citee", undefined, \{ besoins: BESOINS_Q \}\)/.test(page)
     &&/refsB\.has\(m\[1\]\)/.test(filtre)&&garde==="Faites d'abord opposition.\n- Voir aussi [[SP-F31421]]", JSON.stringify(garde)); }
+// Titres d'identité, règles générales : fiches annexes (timbre, suivi, titre retrouvé) après la démarche sauf si la question
+// en parle ; fiche « majeur » avant « mineur » sauf pour un enfant ; « carte identité » seule : la pré-demande.
+{ for(const [q,att] of [["carte d'identité perdue",'SP-F1344'],["carte d'identité volée",'SP-F1759'],['passeport perdu','SP-F21246'],['carte identité','SP-R62483'],
+    ['passeport perdu de mon fils','SP-F21244'],["timbre fiscal carte d'identité perdue",'SP-F33805']]){
+    const t=M.search(ix,q,{k:5}).map(x=>x.r.id), C=M.choisir(ix,q,{k:20});
+    verifie(`T1 « ${q} » : ${att} en tête et en « Votre démarche »`, t[0]===att&&C.principal&&C.principal.id===att, t.join(' ')+' | '+(C.principal&&C.principal.id)); }
+  const suivi=M.search(ix,"suivre ma demande de carte d'identité",{k:3}).map(x=>x.r.id), retr=M.choisir(ix,"j'ai retrouvé ma carte d'identité",{k:20}).principal;
+  verifie('T2 une fiche annexe remonte quand la question en parle (« suivre », « retrouvé »)', /SP-R(49786|1580)/.test(suivi.join(' '))&&retr&&retr.id==='SP-F18704', suivi.join(' ')+' | '+(retr&&retr.id));
+  verifie('T3 âge : « carte d\'identité de ma fille de 12 ans » ne rétrograde pas la fiche mineur ; « 25 ans » rétrograde la fiche mineur', !M.ageInadapte(R.find(r=>r.id==='SP-F1342'),"carte d'identité de ma fille de 12 ans")&&M.ageInadapte(R.find(r=>r.id==='SP-F1342'),"carte d'identité, j'ai 25 ans")&&M.ageInadapte(R.find(r=>r.id==='SP-F1341'),"carte d'identité pour mon enfant de 8 ans"));
+  const TB=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','besoins.json'),'utf8')); M.chargerBesoins(TB);
+  const b=M.besoins(ix,"on m'a volé mon sac : carte bancaire et carte d'identité"), cni=b.find(x=>x.cle==='carte_identite'), page=fs.readFileSync(path.join(__dirname,'..','..','trouver-sa-demarche.html'),'utf8');
+  verifie('T4 « Vos démarches », carte d\'identité : bouton « Faire la pré-demande » vers l\'ANTS, lien discret « Lire la fiche » vers la fiche',
+    cni&&cni.pre&&cni.pre.id==='SP-R62483'&&/^https:\/\/passeport\.ants\.gouv\.fr\//.test(cni.pre.l)&&cni.rec.id==='SP-F1759'&&!b.find(x=>x.cle==='carte_bancaire').pre
+    &&/href="\$\{esc\(lienSp\(b\.pre\)\)\}"[^>]*>Faire la pré-demande/.test(page)&&/class="lien-cx" href="\$\{esc\(u\)\}"[^>]*>Lire la fiche/.test(page), cni&&cni.pre&&cni.pre.l); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');
