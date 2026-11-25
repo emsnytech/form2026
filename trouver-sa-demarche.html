@@ -135,10 +135,16 @@ details.pli>summary{font-size:16px;font-weight:500;display:list-item;padding:10p
 #ff{display:flex;gap:8px;flex-wrap:wrap}
 #fq{flex:1 1 360px;min-width:0;min-height:52px;padding:0 16px;font:inherit;font-size:16px;border:2px solid var(--ink);border-radius:10px}
 #ff .btn{min-height:52px;padding:0 22px;font-size:16px}
-.liens-rep{border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:8px}
-.liens-rep h2{margin:0;font-size:14px;font-weight:600}
-.liens-rep ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:14px}
-.liens-rep p{margin:4px 0 0;font-size:13px;color:var(--muted)}
+/* Réponse de l'assistant : pastille de source, deux questions de suite, « Signaler une erreur » ; champ fixé en bas */
+.rep-suite{display:flex;flex-direction:column;gap:10px}
+.rep-suite .source{display:inline-flex;align-self:flex-start;padding:2px 10px;font-size:13px;color:var(--muted);border:1px solid var(--line2);border-radius:999px}
+.rep-suite .suites{display:flex;gap:8px;flex-wrap:wrap}
+.rep-suite .signaler{margin:0;font-size:13px}.rep-suite .signaler a{color:var(--muted)}
+.ext{font-size:.8em;margin-left:2px}
+.bulle .corrige{display:block;margin-top:6px;font-size:14px;color:var(--muted)}
+#ff.ff-bas{position:sticky;bottom:0;z-index:5;background:var(--fond);padding:10px 0 12px;border-top:1px solid var(--line);align-items:center}
+#ff.ff-bas{flex-wrap:wrap}#ff.ff-bas input{flex:1 1 0;min-width:0}
+#ff.ff-bas .perso{flex-basis:100%;font-size:13px}
 .vide{color:var(--muted);font-style:italic}
 .autrement{display:flex;flex-direction:column;gap:10px;font-size:17px}.autrement p{margin:0}
 .manque{margin:0;font-size:15px;color:#3F4349}
@@ -175,6 +181,7 @@ input#cp,input#p-cp,.cp-res{font:inherit;font-size:15px;min-height:44px;padding:
   .carte{padding:16px}
   .btn-lien{align-self:stretch;justify-content:center}
 }
+@media (max-width:720px){#ff.ff-bas{flex-wrap:nowrap}#ff.ff-bas .perso{display:none}#ff.ff-bas .btn{width:auto;min-height:48px;padding:0 16px}#ff.ff-bas input{min-height:48px}}
 dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line2);border-radius:14px;padding:20px 22px;background:var(--fond);color:var(--ink)}
 dialog::backdrop{background:rgba(0,0,0,.45)}
 dialog h2{font-size:20px;margin:0 0 8px;font-weight:600}
@@ -201,17 +208,16 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
 <main>
 <section id="vue-accueil" class="l" aria-labelledby="titre-accueil">
   <div class="question">
-    <p class="sous-titre">Le répertoire des démarches administratives en ligne et des guichets où les faire.</p>
     <h1 id="titre-accueil">Que voulez-vous faire&nbsp;?</h1>
     <form class="ask" id="f">
-      <label for="q" class="q-label">Votre situation, avec vos mots.</label>
-      <p class="q-aide" id="q-aide">Indiquez votre commune pour des réponses plus précises.</p>
+      <label for="q" class="sr-only">Votre situation</label>
+      <p class="q-aide" id="q-aide">Décrivez votre situation, avec votre commune.</p>
       <div class="saisie">
-        <textarea id="q" rows="2" aria-describedby="q-aide q-perso" placeholder="Ex. : Je n'arrive plus à payer ma facture d'électricité, j'habite à Rezé."></textarea>
+        <textarea id="q" rows="2" aria-describedby="q-aide q-perso" placeholder="Ex. : Je n'arrive plus à payer ma facture d'électricité, j'habite à Rezé"></textarea>
         <button type="submit" class="btn" id="chercher" disabled>Chercher</button>
       </div>
       <p class="perso" id="q-perso" hidden>Sans nom, numéro, adresse ni information de santé&nbsp;: une commune suffit.</p>
-      <p class="avis-ia" id="avis-ia" hidden>Version de test&nbsp;: un assistant d'IA (Claude) cherche pour vous. À vérifier auprès de l'organisme cité. <a class="lien-comment" data-ancre="ia" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html#ia">En savoir plus</a></p>
+      <p class="avis-ia" id="avis-ia" hidden>Version de test avec IA · <a class="lien-comment" data-ancre="ia" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html#ia">En savoir plus</a></p>
       <p id="ligne-simple" hidden><button type="button" class="lien" id="simple">Recherche simple, sans IA</button></p>
       <details class="filtres" id="filtres"><summary>Préciser le public ou le lieu</summary>
     <div class="row">
@@ -263,6 +269,7 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
   <div id="rep-pastille"></div>
   <div id="rep-choix" class="choix"></div>
   <div id="rep-texte"></div>
+  <div id="rep-suite" class="rep-suite" hidden></div>
   <div id="rep-autrement" class="autrement" hidden></div>
   <section class="carte" id="carte-demarche" aria-labelledby="h-demarche" hidden></section>
   <section class="carte possibles" id="carte-possibles" aria-labelledby="h-possibles" hidden></section>
@@ -271,14 +278,13 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
   <section class="comprendre" id="carte-comprendre" aria-labelledby="h-comprendre" hidden></section>
   <details class="pli" id="autres" hidden><summary id="autres-titre">Autres pistes</summary><ul class="pistes" id="autres-liste"></ul></details>
   <details class="pli" id="cherche"><summary>Comment j'ai cherché</summary><div class="cherche" id="cherche-corps"></div></details>
-  <form id="ff">
-    <label for="fq" class="sr-only">Préciser ma situation</label>
-    <input id="fq" type="text" placeholder="Préciser ma situation…">
-    <button type="submit" class="btn" id="fgo">Envoyer</button>
-  </form>
   <p class="manque" id="rep-manque" hidden></p>
-  <p class="perso" id="ff-perso" hidden>Sans donnée personnelle.</p>
-  <section class="liens-rep" aria-labelledby="h-liens"><h2 id="h-liens">Liens de cette réponse</h2><ol id="liens-liste"></ol></section>
+  <form id="ff" class="ff-bas">
+    <label for="fq" class="sr-only">Une autre question</label>
+    <input id="fq" type="text" placeholder="Une autre question ?" aria-describedby="ff-perso">
+    <button type="submit" class="btn" id="fgo">Envoyer</button>
+    <p class="perso" id="ff-perso" hidden>Sans donnée personnelle.</p>
+  </form>
 </section>
 </main>
 <dialog id="dlg-ia" aria-labelledby="dlg-ia-t">
@@ -490,7 +496,54 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     const i = ix.byId.get(r && r.id); if (i === undefined || !ix.jumelles) return [];
     const out = []; for (const [l, n] of ix.jumelles) if (n === i) out.push(l); return out;
   }
+  // ---------- Tolérance aux fautes (recherche simple) : un mot inconnu de l'index, hors lieux et mots vides, est rapproché du
+  // mot connu le plus proche (distance d'édition 1, ou 2 à partir de 8 lettres ; voir « cout »). Vocabulaire :
+  // les mots des titres et descriptions de l'index, des expressions et des synonymes, avec leur forme écrite la plus courante.
+  let VOCAB = null, VOCAB_LONG = null, RECS_VOCAB = null; const MOT = /[A-Za-zÀ-ÖØ-öø-ÿœŒ]{3,}/g;
+  function vocabulaire(recs) {
+    const c = new Map(), ajout = (w, n = 1) => { const k = norm(w); if (k.length < 3 || /\d/.test(k)) return;
+      let e = c.get(k); if (!e) c.set(k, e = { n: 0, formes: new Map() }); e.n += n; const f = w.toLowerCase(); e.formes.set(f, (e.formes.get(f) || 0) + n); };
+    for (const r of recs) for (const s of [r.t, r.d]) if (s) for (const w of s.match(MOT) || []) ajout(w);
+    for (const [f, vers] of EXPRESSIONS) for (const w of f.split(" ").concat(vers)) ajout(w, 2);
+    for (const [k, v] of Object.entries(SYN)) for (const w of [k, ...v]) ajout(w, 2);
+    VOCAB = new Map(); VOCAB_LONG = new Map();
+    for (const [k, e] of c) { if (e.n < 2) continue; const forme = [...e.formes].sort((a, b) => b[1] - a[1])[0][0];
+      VOCAB.set(k, { n: e.n, forme }); if (!VOCAB_LONG.has(k.length)) VOCAB_LONG.set(k.length, []); VOCAB_LONG.get(k.length).push(k); }
+  }
+  // Lettre oubliée ou en trop : 1. Lettre remplacée : 1 entre lettres qui se confondent à l'oreille (s, c, t, z, x ; i, y ;
+  // c, k, q ; m, n ; g, j ; e, a), 2 sinon, et 2 pour la dernière lettre (terminaison) : « tiens » ne devient ni « tiers » ni « tient », « foot » ne devient pas « font ».
+  const SONS = ["sctzx", "iy", "ckq", "mn", "gj", "ea"];
+  const cout = (x, y) => x === y ? 0 : SONS.some((g) => g.includes(x) && g.includes(y)) ? 1 : 2;
+  function distance(a, b, max) {
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    let prec = Array.from({ length: b.length + 1 }, (_, j) => j);
+    for (let i = 1; i <= a.length; i++) {
+      const cur = [i]; let min = i;
+      for (let j = 1; j <= b.length; j++) { cur[j] = Math.min(prec[j] + 1, cur[j - 1] + 1, prec[j - 1] + (i === a.length && j === b.length && a[i - 1] !== b[j - 1] ? 2 : cout(a[i - 1], b[j - 1]))); if (cur[j] < min) min = cur[j]; }
+      if (min > max) return max + 1; prec = cur;
+    }
+    return prec[b.length];
+  }
+  function corriger(q) {
+    const corrections = []; if (!VOCAB && RECS_VOCAB) vocabulaire(RECS_VOCAB); if (!VOCAB) return { texte: q, corrections };
+    const L = lieux(q);
+    const texte = (q || "").replace(/[A-Za-zÀ-ÖØ-öø-ÿœŒ]+/g, (w) => {
+      const n = norm(w);
+      if (n.length < 4 || VOCAB.has(n) || STOP.has(n) || SYN[n] || L.mots.has(n) || (COMMUNES && COMMUNES.has(n))) return w;
+      const max = n.length >= 8 ? 2 : 1; let best = null;
+      for (let l = n.length - max; l <= n.length + max; l++) for (const k of VOCAB_LONG.get(l) || []) {
+        const d = distance(n, k, max); if (d > max) continue;
+        // à égalité de distance : même première lettre d'abord (les fautes portent rarement sur elle), puis le plus fréquent
+      const v = VOCAB.get(k), p = k[0] === n[0] ? 1 : 0;
+      if (!best || d < best.d || (d === best.d && (p > best.p || (p === best.p && v.n > best.n)))) best = { d, p, n: v.n, forme: v.forme };
+      }
+      if (!best) return w;
+      corrections.push([w, best.forme]); return best.forme;
+    });
+    return { texte, corrections };
+  }
   function build(recs) {
+    RECS_VOCAB = recs; VOCAB = null;   // vocabulaire construit à la première correction (pas au chargement)
     const inv = new Map(); const len = new Float32Array(recs.length); let tot = 0;
     recs.forEach((r, i) => {
       const tf = new Map();
@@ -932,7 +985,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -1093,9 +1146,10 @@ window.addEventListener("hashchange", routeParcourir);
 routeParcourir();
 
 // ---------- Réponse : cartes, autres pistes, « Comment j'ai cherché », liens
+// Liens de la réponse : plus de bloc séparé (ils sont dans les phrases et les cartes) ; la liste sert aux adresses que
+// l'assistant peut écrire en lien dans sa réponse (renderText), rien d'autre.
 let LIENS = [];
-function ajouterLien(titre, url, source) { if (!url || LIENS.some((l) => l.url === url)) return; LIENS.push({ titre, url, source }); afficherLiens(); }
-function afficherLiens() { $("liens-liste").innerHTML = LIENS.map((l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.titre)}</a> — ${esc(l.source)}</li>`).join(""); }
+function ajouterLien(titre, url, source) { if (!url || LIENS.some((l) => l.url === url)) return; LIENS.push({ titre, url, source }); }
 const LIB_RES = (r) => /imulateur/i.test(r.ty) ? "Savoir si j'y ai droit (simulateur)" : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne"
   : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : r.t;
 // Type d'une ressource service-public, en langage courant.
@@ -1283,7 +1337,7 @@ function cartePossibles(l) {
 }
 // extra : { possibles, fiche } — recherche simple (Moteur.choisir) ou ligne de l'accueil (Moteur.reponseLigne).
 function afficherResultats(liste, q, origine, principalDonne, extra = {}) {
-  ORIGINE = window.ORIGINE_RESULTATS = origine; QCOUR = q; LIENS = []; afficherLiens();
+  ORIGINE = window.ORIGINE_RESULTATS = origine; QCOUR = q; LIENS = []; $("rep-suite").hidden = true;
   if (origine !== "simple" && origine !== "ligne") { window.DEMANDER_LIEU = ""; window.relancerReponse = null; }
   const opt = { pub: $("pub").value, dep: $("dep").value };
   // « Votre démarche » : donnée par Moteur.choisir (seulement si elle est sûre) ou par la ligne de l'accueil ; pour une
@@ -1324,6 +1378,7 @@ function afficherResultats(liste, q, origine, principalDonne, extra = {}) {
     aussi = lieesComprendre.find((f) => (score.get(f.id) || 0) >= meilleur / 4 && Moteur.termeAuTitre(q, f)) || null;
   }
   aussi = aussi || (P ? fiches.find((f) => utile(f) && P.pertinente(f.id) && Moteur.titreSur(IX, q, f)) : null) || null;
+  window.PRINCIPAL = ligne ? principal : (comprendre || possibles[0] || null);
   carteDemarche(ligne ? principal : null); cartePossibles(ligne ? [] : possibles); carteAussi(aussi); carteComprendre(comprendre);
   // Sans démarche sûre en tête : « Démarches possibles » d'abord (s'il y en a), puis la fiche officielle.
   if (ligne) $("carte-ou").after($("carte-comprendre")); else $("carte-possibles").after($("carte-comprendre"));
@@ -1344,8 +1399,15 @@ function poserQuestion(q, html) { $("fil").innerHTML = `<div class="bulle">${esc
 
 // ---------- Recherche simple (sans IA) : mêmes cartes, pastilles et liens ; une phrase tirée de la fiche, jamais inventée.
 function rechercheSimple() {
-  const q = $("q").value.trim(); if (!q || !IX) return;
-  traceLines = []; poserQuestion(q);
+  const q0 = $("q").value.trim(); if (!q0 || !IX) return;
+  // Tolérance aux fautes (Moteur.corriger) : la question corrigée n'est retenue, et dite en une ligne, que si elle change la réponse.
+  const c = Moteur.corriger(q0), opt0 = { pub: $("pub").value, dep: $("dep").value, k: 20 };
+  let q = q0, note = "";
+  if (c.corrections.length) {
+    const cle = (C) => (C.principal ? C.principal.id : "") + "|" + C.liste.slice(0, 5).map((r) => r.id).join(",");
+    if (cle(Moteur.choisir(IX, q0, opt0)) !== cle(Moteur.choisir(IX, c.texte, opt0))) { q = c.texte; note = `<span class="corrige">Résultats pour&nbsp;: ${esc(c.texte)}</span>`; }
+  }
+  traceLines = []; poserQuestion(q0, note);
   // Moteur.choisir : les 20 premiers résultats, les 3 premières démarches du département reconnu, les 3 premières fiches
   // service-public, et « Votre démarche ».
   const C = Moteur.choisir(IX, q, { pub: $("pub").value, dep: $("dep").value, k: 20 }), res = C.liste;
@@ -1414,9 +1476,13 @@ const TOOLS = [
 function log(s) { traceLines.push(s); }
 
 const MAX_LIBRES = 12;
+let QUESTION_INITIALE = "";
 function used() { try { return +(sessionStorage.getItem("form-assistant-n") || 0); } catch (e) { return window.__n || 0; } }
 function use1() { const n = used() + 1; try { sessionStorage.setItem("form-assistant-n", n); } catch (e) { window.__n = n; } majQuota(); }
-function majQuota() { if (!sample) return; const r = Math.max(0, MAX_LIBRES - used()); $("quota").textContent = `Messages à l'assistant pour cette visite : ${r} sur ${MAX_LIBRES}.`; if (!r) { $("fgo").disabled = true; $("quota").textContent = "Vous avez utilisé les " + MAX_LIBRES + " messages à l'assistant de cette visite. La recherche simple et les exemples restent disponibles."; } }
+// Compteur : affiché seulement quand il reste 3 questions ou moins.
+function majQuota() { if (!sample) return; const r = Math.max(0, MAX_LIBRES - used());
+  $("quota").textContent = r > 3 ? "" : r ? `Encore ${r} question${r > 1 ? "s" : ""}` : "Plus de question à l'assistant pour cette visite. La recherche simple reste disponible.";
+  if (!r) $("fgo").disabled = true; }
 function citedOrder(text) { const ids = [...new Set((text.match(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g) || []).map((s) => s.slice(2, -2)))]; return ids.concat([...cited.keys()].filter((i) => !ids.includes(i))); }
 
 // Retire les données personnelles reconnues avant tout envoi à l'IA (règles inspirées de scripts/retirer_contacts.py de FORM 2026).
@@ -1455,7 +1521,9 @@ RÈGLES
 - Cite chaque démarche ou fiche par sa référence entre doubles crochets, exactement comme renvoyée : [[DN-12345]] ou [[SP-F1234]] ; la page les remplace par leur titre. N'écris jamais une référence hors des doubles crochets.
 - C'est une conversation : la personne peut préciser sa situation au fil des échanges. Tiens compte de tout ce qu'elle a déjà dit, et relance des recherches quand une précision change la réponse.
 - Quand une information manquante changerait vraiment la réponse (département, statut : particulier, entreprise, association ou collectivité, nature exacte du projet, montant), termine par UNE seule question courte. Mets alors sur la toute dernière ligne 2 à 4 réponses possibles, au format exact : « Choix : réponse 1 | réponse 2 | réponse 3 ». Pas de question si la réponse est déjà claire.
-- Réponds en français simple, en vouvoyant, en phrases courtes, en TROIS PHRASES AU PLUS, sans liste ni titre : l'action d'abord.
+- Réponds en français simple, en vouvoyant, en 2 à 5 puces courtes (lignes commençant par « - »), une à deux lignes chacune, dans l'ordre de l'action : où commencer (en ligne, et sur quel site), sinon à quel guichet ; puis ce qu'il faut savoir (pièces, délais constatés quand le lien existe). Ni titre, ni introduction, ni conclusion.
+- Les liens sont dans les phrases : une démarche par sa référence [[…]] ; le lien des délais constatés au format [délais constatés](adresse donnée par « details »). Aucune autre adresse.
+- Si « details » donne « rien_a_faire », la page affiche cette phrase en tête de ta réponse : ne la répète pas et ne la reformule pas.
 
 CONTEXTE DONNÉ PAR LA PERSONNE
 - Public : ${pub || "non précisé"}
@@ -1468,7 +1536,9 @@ ${q}`;
 // Texte de l'assistant : références en liens, « Choix : » en pastilles (rendues à part).
 function renderText(t) {
   let h = esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-  h = h.replace(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g, (m, id) => { cited.set(id, true); const r = rec(id); return r ? `<a href="${esc(r.k === "dn" ? dnUrl(r) : r.u)}" target="_blank" rel="noopener">${esc(r.t)}</a>` : ""; });
+  h = h.replace(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g, (m, id) => { cited.set(id, true); const r = rec(id); return r ? lienExt(r.k === "dn" ? dnUrl(r) : r.u, esc(r.t)) : ""; });
+  // [texte](adresse) : seulement vers une adresse que le répertoire a donnée pour cette réponse (démarche, fiche, statistiques).
+  h = h.replace(/\[([^\]\n]{1,80})\]\((https:\/\/[^\s)]+)\)/g, (m, t, u) => urlsConnues().has(u.replace(/&amp;/g, "&")) ? lienExt(u, t) : t);
   const out = []; let inList = false, choix = [], question = "";
   for (const line of h.split(/\n+/)) {
     const l = line.trim(); if (!l) continue;
@@ -1480,6 +1550,46 @@ function renderText(t) {
   if (inList) out.push("</ul>");
   return { html: out.join(""), choix };
 }
+// Lien vers un site extérieur, dans une phrase : une petite flèche, et « nouvel onglet » pour les lecteurs d'écran.
+const lienExt = (u, html) => `<a href="${esc(u)}" target="_blank" rel="noopener">${html}<span class="ext" aria-hidden="true">↗</span><span class="sr-only"> (nouvel onglet)</span></a>`;
+function urlsConnues() {
+  const s = new Set(LIENS.map((l) => l.url));
+  for (const r of [...seen.values(), ...[...cited.keys()].map(rec).filter(Boolean)]) {
+    [r.k === "dn" ? dnUrl(r) : r.u, r.l, Moteur.statsUrl(r)].forEach((u) => u && s.add(u));
+    resDe(r).forEach((x) => s.add(lienSp(x)));
+  }
+  return s;
+}
+// Sous la réponse de l'assistant : une pastille de source (l'organisme de la démarche principale), deux questions de suite
+// dont la réponse est dans le répertoire, et « Signaler une erreur ». La phrase « rien à faire » validée passe en tête.
+function questionsDeSuite(r) {
+  if (!r) return [];
+  const S = Moteur.symboles(r, META || {}), q = [];
+  if ((r.k === "dn" && (r.pj || []).length) || (r.docs || []).length) q.push("Quelles pièces préparer ?");
+  if (S.voies.some((v) => v.includes("guichet") || v.includes("rendez_vous"))) q.push("Où aller près de chez moi ?");
+  if (enLigne(r)) q.push("Et si je n'ai pas Internet ?");
+  if (S.delais) q.push("Où voir les délais constatés ?");
+  return q.slice(0, 2);
+}
+const SIGNALER_ERREUR_URL = "https://github.com/emsnytech/form2026/issues/new?template=signaler-erreur.yml";
+function finirReponse(q, choix, recs) {
+  const principal = window.PRINCIPAL || recs[0] || null;
+  const rien = document.querySelector("#carte-demarche .rien");
+  if (rien) {   // une information, un seul endroit : la phrase validée quitte la carte et ouvre la réponse, sans lien « source »
+    const a = rien.querySelector("a.avant-src"), R = principal && Moteur.symboles(principal, META || {}).rien, f = R && rec(R.fiche);
+    if (a) a.remove(); if (f) rien.title = `Source : fiche « ${f.t} » (service-public.gouv.fr)`;
+    $("rep-texte").prepend(rien);
+  }
+  const src = principal ? (principal.k === "dn" ? nomOrg(principal) : "service-public.gouv.fr") : "";
+  const suites = choix.length ? [] : questionsDeSuite(principal);
+  const refs = [...new Set(recs.map((r) => r.id))].slice(0, 8).join(", ");
+  const sig = SIGNALER_ERREUR_URL + "&question=" + encodeURIComponent(q) + "&references=" + encodeURIComponent(refs);
+  $("rep-suite").innerHTML = (src ? `<span class="source">Source&nbsp;: ${esc(src)}</span>` : "")
+    + (suites.length ? `<div class="suites">${suites.map((x) => `<button type="button" class="chip" data-suite="${esc(x)}">${esc(x)}</button>`).join("")}</div>` : "")
+    + `<p class="signaler"><a href="${esc(sig)}" target="_blank" rel="noopener">Signaler une erreur</a></p>`;
+  $("rep-suite").hidden = false;
+}
+$("rep-suite").addEventListener("click", (ev) => { const b = ev.target.closest("button[data-suite]"); if (b && sample && !busy) ask(b.dataset.suite, false); });
 function afficherChoix(choix) {
   $("rep-choix").innerHTML = choix.length ? `<div class="boutons">${choix.map((o) => `<button type="button" data-v="${o}">${o}</button>`).join("")}</div>` : "";
 }
@@ -1490,7 +1600,7 @@ async function ask(text, first) {
   use1();
   busy = true; $("chercher").disabled = true; $("fgo").disabled = true;
   if (first) { history = []; cited = new Map(); seen = new Map(); traceLines = []; }
-  const m = masquer(text); text = m.texte;
+  const m = masquer(text); text = m.texte; if (first) QUESTION_INITIALE = text;
   history.push({ role: "user", content: first ? consigne(text) : text + `\n(Contexte des sélecteurs : public ${$("pub").value || "non précisé"}, département ${$("dep").value ? $("dep").value + " " + DEPNAME[$("dep").value] : "non précisé"}. Mêmes règles qu'au premier message.)` });
   const retire = m.n ? `<div class="retire">${m.n} donnée${m.n > 1 ? "s" : ""} personnelle${m.n > 1 ? "s" : ""} retirée${m.n > 1 ? "s" : ""} avant l'envoi.</div>` : "";
   if (first) { poserQuestion(text, retire); vueReponse(); } else $("fil").insertAdjacentHTML("beforeend", `<div class="bulle">${esc(text)}${retire}</div>`);
@@ -1505,6 +1615,7 @@ async function ask(text, first) {
     const others = [...seen.values()].filter((x) => !cited.has(x.id)).slice(0, 6);
     afficherResultats(citedRecs.concat(others), text, "citee");
     $("rep-texte").innerHTML = `<div class="texte-ia">${r.html}</div>`; afficherChoix(r.choix);
+    finirReponse(QUESTION_INITIALE || text, r.choix, citedRecs);
   } catch (e) {
     history.pop();
     const msg = e && e.code === "not_granted" ? "L'assistant n'est pas autorisé sur cette page. La recherche simple reste disponible."

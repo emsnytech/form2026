@@ -181,7 +181,54 @@
     const i = ix.byId.get(r && r.id); if (i === undefined || !ix.jumelles) return [];
     const out = []; for (const [l, n] of ix.jumelles) if (n === i) out.push(l); return out;
   }
+  // ---------- Tolérance aux fautes (recherche simple) : un mot inconnu de l'index, hors lieux et mots vides, est rapproché du
+  // mot connu le plus proche (distance d'édition 1, ou 2 à partir de 8 lettres ; voir « cout »). Vocabulaire :
+  // les mots des titres et descriptions de l'index, des expressions et des synonymes, avec leur forme écrite la plus courante.
+  let VOCAB = null, VOCAB_LONG = null, RECS_VOCAB = null; const MOT = /[A-Za-zÀ-ÖØ-öø-ÿœŒ]{3,}/g;
+  function vocabulaire(recs) {
+    const c = new Map(), ajout = (w, n = 1) => { const k = norm(w); if (k.length < 3 || /\d/.test(k)) return;
+      let e = c.get(k); if (!e) c.set(k, e = { n: 0, formes: new Map() }); e.n += n; const f = w.toLowerCase(); e.formes.set(f, (e.formes.get(f) || 0) + n); };
+    for (const r of recs) for (const s of [r.t, r.d]) if (s) for (const w of s.match(MOT) || []) ajout(w);
+    for (const [f, vers] of EXPRESSIONS) for (const w of f.split(" ").concat(vers)) ajout(w, 2);
+    for (const [k, v] of Object.entries(SYN)) for (const w of [k, ...v]) ajout(w, 2);
+    VOCAB = new Map(); VOCAB_LONG = new Map();
+    for (const [k, e] of c) { if (e.n < 2) continue; const forme = [...e.formes].sort((a, b) => b[1] - a[1])[0][0];
+      VOCAB.set(k, { n: e.n, forme }); if (!VOCAB_LONG.has(k.length)) VOCAB_LONG.set(k.length, []); VOCAB_LONG.get(k.length).push(k); }
+  }
+  // Lettre oubliée ou en trop : 1. Lettre remplacée : 1 entre lettres qui se confondent à l'oreille (s, c, t, z, x ; i, y ;
+  // c, k, q ; m, n ; g, j ; e, a), 2 sinon, et 2 pour la dernière lettre (terminaison) : « tiens » ne devient ni « tiers » ni « tient », « foot » ne devient pas « font ».
+  const SONS = ["sctzx", "iy", "ckq", "mn", "gj", "ea"];
+  const cout = (x, y) => x === y ? 0 : SONS.some((g) => g.includes(x) && g.includes(y)) ? 1 : 2;
+  function distance(a, b, max) {
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    let prec = Array.from({ length: b.length + 1 }, (_, j) => j);
+    for (let i = 1; i <= a.length; i++) {
+      const cur = [i]; let min = i;
+      for (let j = 1; j <= b.length; j++) { cur[j] = Math.min(prec[j] + 1, cur[j - 1] + 1, prec[j - 1] + (i === a.length && j === b.length && a[i - 1] !== b[j - 1] ? 2 : cout(a[i - 1], b[j - 1]))); if (cur[j] < min) min = cur[j]; }
+      if (min > max) return max + 1; prec = cur;
+    }
+    return prec[b.length];
+  }
+  function corriger(q) {
+    const corrections = []; if (!VOCAB && RECS_VOCAB) vocabulaire(RECS_VOCAB); if (!VOCAB) return { texte: q, corrections };
+    const L = lieux(q);
+    const texte = (q || "").replace(/[A-Za-zÀ-ÖØ-öø-ÿœŒ]+/g, (w) => {
+      const n = norm(w);
+      if (n.length < 4 || VOCAB.has(n) || STOP.has(n) || SYN[n] || L.mots.has(n) || (COMMUNES && COMMUNES.has(n))) return w;
+      const max = n.length >= 8 ? 2 : 1; let best = null;
+      for (let l = n.length - max; l <= n.length + max; l++) for (const k of VOCAB_LONG.get(l) || []) {
+        const d = distance(n, k, max); if (d > max) continue;
+        // à égalité de distance : même première lettre d'abord (les fautes portent rarement sur elle), puis le plus fréquent
+      const v = VOCAB.get(k), p = k[0] === n[0] ? 1 : 0;
+      if (!best || d < best.d || (d === best.d && (p > best.p || (p === best.p && v.n > best.n)))) best = { d, p, n: v.n, forme: v.forme };
+      }
+      if (!best) return w;
+      corrections.push([w, best.forme]); return best.forme;
+    });
+    return { texte, corrections };
+  }
   function build(recs) {
+    RECS_VOCAB = recs; VOCAB = null;   // vocabulaire construit à la première correction (pas au chargement)
     const inv = new Map(); const len = new Float32Array(recs.length); let tot = 0;
     recs.forEach((r, i) => {
       const tf = new Map();
@@ -623,6 +670,6 @@
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
