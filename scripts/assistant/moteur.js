@@ -458,18 +458,14 @@
     return { principal: null, possibles: [], fiche, question: "", message: "Pas de démarche en ligne pour ce département : voici la fiche officielle et le guichet.", recs };
   }
   // « Avant de commencer » : ce qui attend l'usager, d'après les données de la démarche seulement (aucune ligne sans donnée,
-  // aucun jugement, aucun délai inventé). Rend { resume, lignes } ; lignes vides : pas de bloc. Chaque ligne :
-  // { cle, texte, liens: [{ texte, url, titre }], source } ; source = ancre de « Comment ça marche » (sources).
-  // Une phrase par type de pré-remplissage (valeurs « pre » de l'index). L'IBAN n'y est pas : il est contrôlé, pas rempli.
-  const PRE_PHRASES = {
-    "SIRET (API Entreprise)": "Avec votre numéro SIRET, les informations sur l'entreprise sont remplies automatiquement (données publiques de l'État sur les entreprises).",
-    "RNA (associations)": "Avec le numéro RNA de l'association, ses informations sont remplies automatiquement (répertoire national des associations).",
-    "RNF (fondations)": "Avec le numéro de la fondation, ses informations sont remplies automatiquement (répertoire national des fondations).",
-    "Annuaire Éducation": "En choisissant l'établissement scolaire, ses coordonnées sont remplies automatiquement (annuaire de l'Éducation nationale).",
-    "Quotient familial (CAF)": "Votre quotient familial peut être récupéré directement auprès de la CAF.",
-    "Statut boursier": "Votre statut d'étudiant boursier peut être vérifié directement, sans justificatif à joindre.",
-    "Données préremplies": "Certaines réponses sont déjà remplies par l'administration.",
-  };
+  // aucun jugement, aucun délai inventé). Sobriété : une ligne = un symbole et quelques mots ; la source, la date et la
+  // limite vont dans l'infobulle (titre) ou dans « Comment ça marche ». Rend { resume, lignes } ; lignes vides : pas de bloc.
+  // Chaque ligne : { cle, ico, texte, titre, liens: [{ texte, url, titre, apres }] }.
+  // Ce qui est récupéré ou prérempli, en quelques mots (valeurs « pre » de l'index). L'IBAN n'y est pas : il est contrôlé, pas rempli.
+  const PRE_COURT = { "SIRET (API Entreprise)": "SIRET", "RNA (associations)": "numéro RNA", "RNF (fondations)": "numéro de fondation",
+    "Annuaire Éducation": "établissement scolaire", "Quotient familial (CAF)": "quotient familial (CAF)", "Statut boursier": "statut boursier",
+    "Données préremplies": "certaines réponses" };
+  const MAX_AVANT = 5;
   // Symboles « comment faire » et signaux (accessibilité, vigilance), d'après les données de la démarche seulement.
   // voies : liste de voies (alternatives, « ou »), chacune une liste de modes qui se suivent ; Démarche Numérique : en ligne.
   // acc : { niveau: "tc" | "pc" | "nc" | "inconnue" | "plateforme" (Démarche Numérique, taux de la plateforme), texte, detail } ; vig : au plus 2 { motif, texte, detail }, à partir de
@@ -501,7 +497,7 @@
     const obs = meta.observatoire ? `Observatoire de la qualité des démarches en ligne, ${meta.observatoire}` : "Observatoire de la qualité des démarches en ligne";
     if (r.k === "dn") out.push({ cle: "fc", texte: "FranceConnect", surete: "déployé",
       detail: `connexion possible avec un compte FranceConnect (impots.gouv, ameli, La Poste…) : Démarche Numérique le propose sur toutes ses démarches${meta.date_export ? ` (descriptif du ${dateCourte(meta.date_export)})` : ""}` });
-    else if (r.fc && /^FranceConnect/.test(r.fc)) out.push({ cle: "fc", texte: "FranceConnect", surete: "déclaré",
+    else if (r.fc && /^FranceConnect/.test(r.fc)) out.push({ cle: "fc", texte: /\+/.test(r.fc) ? "FranceConnect+" : "FranceConnect", surete: "déclaré",
       detail: `connexion possible avec ${/\+/.test(r.fc) ? "FranceConnect+, la version de FranceConnect à sécurité renforcée" : "un compte FranceConnect (impots.gouv, ameli, La Poste…)"}, déclarée pour cette démarche (${obs})` });
     const rec = r.k === "dn" ? [...new Set(r.pre || [])].map((p) => RECUPERE[p]).filter(Boolean) : [];
     if (rec.length) out.push({ cle: "rec", texte: "Données récupérées pour vous", surete: "déployé",
@@ -525,7 +521,8 @@
     let acc;
     if (r.acc) {
       const niveau = r.acc[0].toLowerCase(), taux = r.acc[1];
-      acc = { niveau, texte: ACC_LIB[niveau] + (niveau === "pc" && taux ? ` (${taux})` : ""), detail: `Déclaration d'accessibilité de cette démarche (${obs})`, perimetre: "demarche" };
+      acc = { niveau, texte: ACC_LIB[niveau] + (niveau === "pc" && taux ? ` (${taux})` : ""), detail: `Déclaration d'accessibilité de cette démarche (${obs})`, perimetre: "demarche",
+        court: ACC_LIB[niveau] + (taux ? ` : ${taux}` : "") };
     } else if (r.k === "dn" && meta.acc_plateformes && meta.acc_plateformes.dn) {
       // Démarche Numérique : jamais de taux par démarche ; celui de la plateforme (déclaration publiée, accessibilite_plateformes.json),
       // pour une démarche type. Pas de pastille sur la carte, pas de renvoi vers France services pour ce seul motif.
@@ -533,14 +530,15 @@
       const etat = { "partiellement conforme": "partielle", "totalement conforme": "totale", "non conforme": "non conforme" }[p.statut] || p.statut;
       const phrase = `Plateforme ${p.nom} : accessibilité ${etat} (${p.taux}${mois ? `, déclaration ${/^[aeiouy]/.test(mois) ? "d'" : "de "}${mois} ${a}` : ""}), pour une démarche type. Le taux peut être un peu différent selon la démarche, par exemple si elle contient une carte.`
         + (r.crt ? " " + CARTE_PHRASE : "");
-      acc = { niveau: "plateforme", texte: "Accessibilité de la plateforme", detail: phrase, ligne: phrase, perimetre: "plateforme", url: p.url, carte: !!r.crt };
-    } else acc = { niveau: "inconnue", texte: ACC_LIB.inconnue, perimetre: "",
+      acc = { niveau: "plateforme", texte: "Accessibilité de la plateforme", detail: phrase, ligne: phrase, perimetre: "plateforme", url: p.url, carte: !!r.crt,
+        court: `Accessibilité : ${p.taux} (plateforme)`, titre: `Déclaration d'accessibilité de ${p.nom}${mois ? `, ${mois} ${a}` : ""}, pour une démarche type` };
+    } else acc = { niveau: "inconnue", texte: ACC_LIB.inconnue, perimetre: "", court: ACC_LIB.inconnue,
       detail: `Aucune déclaration trouvée pour cette démarche dans l'${obs}` + (r.k === "dn" ? " ; celle de la plateforme Démarche Numérique ne porte pas sur le formulaire de chaque démarche" : "") };
     const vig = [];
     if (r.spp && r.spp[0] >= SEUIL_RETOURS) {
       const [n, neg, motifs, org] = r.spp, sp = meta.spp || {};
       for (const [m, k] of (motifs || []).slice(0, MAX_VIGILANCES)) if (MOTIFS_LIB[m])
-        vig.push({ motif: m, texte: MOTIFS_LIB[m], organisme: org || "",
+        vig.push({ motif: m, texte: MOTIFS_LIB[m], organisme: org || "", k,
           detail: `${k} retours négatifs le signalent, sur ${n} retours sur Services Publics +${sp.debut ? " depuis le " + dateCourte(sp.debut) : ""}, ${org ? `pour l'organisme « ${org} » (tout l'organisme, pas seulement cette démarche)` : "pour cette démarche"} ; échantillon spontané, non représentatif` });
     }
     const su = statsUrl(r);
@@ -550,75 +548,77 @@
   // La déclaration d'accessibilité de Démarche Numérique dit que le PDF de la démarche n'est pas accessible
   // (accessibilite_plateformes.json, clé « pdf_non_accessible », relue sur la page).
   const pdfNonAccessible = (meta) => !!(meta.acc_plateformes && meta.acc_plateformes.dn && meta.acc_plateformes.dn.pdf_non_accessible);
+  // Site d'un service en ligne, lisible : nom de domaine sans « www. » ni chemin, ramené au site qui le publie
+  // (« immatriculation.ants.gouv.fr » → « ants.gouv.fr », « wwwd.caf.fr » → « caf.fr »).
+  function siteLisible(u) {
+    const m = /^https?:\/\/([^\/?#:]+)/i.exec(u || ""); if (!m) return "";
+    const h = m[1].toLowerCase().replace(/^www\d*\./, ""), p = h.split(".");
+    return p.slice(/\.gouv\.fr$/.test(h) ? -3 : -2).join(".");
+  }
+  // Icônes (Tabler) de chaque ligne : la même que dans la ligne sous le titre quand la ligne explique un symbole.
+  const ICO = { en_ligne: "device-laptop", formulaire: "file-type-pdf", courriel: "at", courrier: "mailbox", guichet: "building",
+    rendez_vous: "calendar-event", fc: "key", rec: "database-import", acc: "accessible", delai: "hourglass", joignable: "phone-off",
+    explication: "help-circle", organisme: "building", questions: "file-text", delais: "clock", carte: "map", aide: "map-pin", rien: "circle-check" };
+  const NOUVEL_ONGLET = "S'ouvre dans un nouvel onglet";
   function avantDeCommencer(r, meta = {}) {
     const lignes = [], resume = [];
     if (!r) return { resume: "", lignes };
     if (r.k === "dn" && r.u) {
-      const ch = r.ch || 0, pj = [...new Set(r.pj || [])], parts = [];
-      if (ch) { parts.push(`${ch} question${ch > 1 ? "s" : ""}`); resume.push(parts[0]); }
-      if (pj.length) {
-        // On ne nomme que les pièces au libellé complet et court (ni tronqué, ni « Autres documents ») ; les autres sont comptées.
-        const minus = (x) => /^[A-ZÉÈ][a-zéèêàç]/.test(x) ? x[0].toLowerCase() + x.slice(1) : x;
-        const noms = pj.filter((x) => !/…$/.test(x) && x.length <= 60 && !/^autres?\b/i.test(x)).slice(0, 2).map(minus), reste = pj.length - noms.length;
-        parts.push(`${pj.length} pièce${pj.length > 1 ? "s" : ""} à joindre${noms.length ? " : " + noms.join(", ") + (reste ? ` et ${reste} autre${reste > 1 ? "s" : ""}` : "") : ""}`);
-        resume.push(`${pj.length} pièce${pj.length > 1 ? "s" : ""}`);
-      }
+      const ch = r.ch || 0, pj = [...new Set(r.pj || [])].length, parts = [];
+      if (ch) parts.push(`${ch} question${ch > 1 ? "s" : ""}`);
+      if (pj) parts.push(`${pj} pièce${pj > 1 ? "s" : ""}`);
+      resume.push(...parts.map((x) => x.replace(" ", "\u00a0")));   // « 6 pièces » ne se coupe pas
       const base = /^https?:/.test(r.u) ? r.u : "https://demarche.numerique.gouv.fr/commencer/" + encodeURIComponent(r.u);
-      lignes.push({ cle: "questions", texte: parts.length ? parts.join(" · ") : "Toutes les questions de la démarche",
-        liens: [{ texte: "Voir le formulaire à vide (PDF)", url: base.replace(/\/$/, "") + "/dossier_vide",
-                  titre: "Pour lire toutes les questions avant de commencer, pas pour le remplir"
-                    + (pdfNonAccessible(meta) ? " ; PDF non accessible, selon la déclaration de la plateforme" : "") }], source: "sources" });
-      if (!resume.length) resume.push("le formulaire à vide");
-      // Les données récupérées (RECUPERE) sont expliquées dans le « ? » (signal « Données récupérées pour vous ») : pas ici.
-      const phrases = [...new Set(r.pre || [])].filter((p) => !RECUPERE[p]).map((p) => PRE_PHRASES[p]).filter(Boolean);
-      if (phrases.length) { lignes.push({ cle: "prerempli", texte: phrases.join(" "), liens: [], source: "sources" }); resume.push("ce qui est rempli pour vous"); }
+      // Le nombre de questions et de pièces est dans le titre replié : la ligne ne porte que le lien.
+      lignes.push({ cle: "questions", ico: ICO.questions, texte: "",
+        liens: [{ texte: "Voir le formulaire", url: base.replace(/\/$/, "") + "/dossier_vide",
+                  titre: "Pour lire toutes les questions avant de commencer, pas pour le remplir",
+                  apres: pdfNonAccessible(meta) ? "(PDF non accessible)" : "(PDF)" }] });
+      // Ce que le formulaire va chercher (signal « Données récupérées pour vous » de la ligne sous le titre), puis ce qui peut être prérempli.
+      const pre = [...new Set(r.pre || [])], rec = pre.filter((p) => RECUPERE[p]).map((p) => PRE_COURT[p]), autres = pre.filter((p) => !RECUPERE[p] && PRE_COURT[p]).map((p) => PRE_COURT[p]);
+      if (rec.length) lignes.push({ cle: "donnees", ico: ICO.rec, texte: `Données récupérées : ${rec.join(", ")}`, liens: [] });
+      if (autres.length) lignes.push({ cle: "prerempli", ico: ICO.rec, texte: `Peut être rempli pour vous : ${autres.join(", ")}`, liens: [] });
     }
-    // Accessibilité partielle ou non conforme (Observatoire) : le niveau est dans le « ? » ; ici, seulement le renvoi vers une
-    // France services. Les vigilances sont dans le « ? » seulement (une information, un seul endroit).
+    // Accessibilité partielle ou non conforme (Observatoire) : le niveau est dans le « ? » ; ici, seulement le renvoi vers une France services.
     const S = symboles(r, meta);
-    if (S.acc && (S.acc.niveau === "pc" || S.acc.niveau === "nc")) {
-      lignes.push({ cle: "accessibilite", texte: "En cas de difficulté d'accessibilité, une France services peut vous aider",
-        liens: [{ texte: "France services la plus proche", url: "#carte-ou", titre: "" }], source: "symboles" });
-      resume.push("aide en France services");
-    }
-    // Délais constatés (Démarche Numérique) : jamais seule, comme l'accessibilité non connue ; seulement si le bloc existe déjà.
-    // Quatre lignes au plus : l'accessibilité (dernière ligne, plus bas) garde sa place, les délais prennent la place qui reste.
-    const accFin = S.acc && (S.acc.niveau === "inconnue" || S.acc.niveau === "plateforme") ? 1 : 0;
-    if (S.delais && lignes.length && lignes.length + accFin < 4) {
-      lignes.push({ cle: "delais", texte: "Délais constatés", liens: [{ texte: "voir les statistiques de la démarche", url: S.delais.url, titre: "S'ouvre dans un nouvel onglet" }], source: "sources" });
-      resume.push("délais constatés");
-    }
-    // Accessibilité non connue : jamais seule. Dernière ligne, seulement si le bloc existe déjà pour une autre raison (questions,
-    // pièces, pré-remplissage, délai, silence vaut accord, vigilance) ; sinon pas de bloc, et le bouton « ? » de la ligne la dit.
-    if (S.acc && S.acc.niveau === "inconnue" && lignes.length && lignes.length < 4) {
-      lignes.push({ cle: "accessibilite", texte: `Accessibilité non connue : ${S.acc.detail.charAt(0).toLowerCase() + S.acc.detail.slice(1)}`, liens: [], source: "symboles" });
-      resume.push("accessibilité non connue");
-    }
-    // Accessibilité de la plateforme (Démarche Numérique) : même règle, jamais seule, toujours en dernière ligne.
-    if (S.acc && S.acc.niveau === "plateforme" && lignes.length && lignes.length < 4) {
-      lignes.push({ cle: "accessibilite", texte: S.acc.ligne.replace(/\.$/, ""), liens: [{ texte: "déclaration d'accessibilité", url: S.acc.url, titre: "" }], source: "symboles" });
-      resume.push("accessibilité de la plateforme");
-    }
-    return { resume: lignes.length ? "Avant de commencer : " + resume.join(", ") : "", lignes };
+    if (S.acc && (S.acc.niveau === "pc" || S.acc.niveau === "nc"))
+      lignes.push({ cle: "aide", ico: ICO.aide, texte: "Besoin d'aide :", liens: [{ texte: "France services la plus proche", url: "#carte-ou", titre: "" }] });
+    // Jamais seules : l'accessibilité de la plateforme (ou non connue) et la carte à manipuler, en dernières lignes, et les délais
+    // constatés, juste avant, s'il reste de la place. Ce qui ne trouve pas sa place ici va dans le « ? ».
+    const fin = [];
+    if (lignes.length && S.acc && (S.acc.niveau === "plateforme" || S.acc.niveau === "inconnue"))
+      fin.push({ cle: "accessibilite", ico: ICO.acc, texte: S.acc.court, titre: S.acc.titre || S.acc.detail, liens: [] });
+    if (lignes.length && r.crt) fin.push({ cle: "carte", ico: ICO.carte, texte: "Contient une carte à manipuler", titre: CARTE_PHRASE, liens: [] });
+    if (lignes.length && S.delais && lignes.length + fin.length < MAX_AVANT)
+      lignes.push({ cle: "delais", ico: ICO.delais, texte: "Délais :", liens: [{ texte: "voir les statistiques", url: S.delais.url, titre: NOUVEL_ONGLET }] });
+    const tout = lignes.concat(fin).slice(0, MAX_AVANT);
+    return { resume: tout.length ? "Avant de commencer" + (resume.length ? " · " + resume.join(", ") : "") : "", lignes: tout };
   }
-  // Détail du bouton « ? » : ce qui explique la ligne de symboles (comment faire, signaux de simplicité, accessibilité,
-  // nom d'organisme long, vigilances). Une information ne s'affiche qu'à un seul endroit : l'accessibilité de la plateforme
-  // (ou non connue) et les délais constatés vont dans « Avant de commencer » quand ce bloc les porte, sinon ici.
-  // Rend une liste de { texte, lien?: { texte, url, note } }.
-  function detailSymboles(r, meta = {}) {
+  // Détail du bouton « ? » : une ligne par symbole de la ligne sous le titre, qui commence par ce symbole (comment faire,
+  // connexion, accessibilité, vigilances), puis le nom complet de l'organisme s'il est coupé. Une information ne s'affiche
+  // qu'à un seul endroit : ce que porte « Avant de commencer » n'y est pas. opt.site : adresse du service en ligne quand
+  // la page la connaît mieux que la fiche (téléservice rattaché à une fiche F…). Rend [{ ico, texte, titre?, lien? }].
+  function detailSymboles(r, meta = {}, opt = {}) {
     const S = symboles(r, meta); if (!S.voies.length) return [];
     const A = avantDeCommencer(r, meta), dansAvant = (cle) => A.lignes.some((l) => l.cle === cle);
-    const accFin = S.acc && (S.acc.niveau === "plateforme" || S.acc.niveau === "inconnue");
     const min = (t) => t.charAt(0).toLowerCase() + t.slice(1), org = r.on || r.oa || r.o || "";
-    const det = [`Comment faire : ${voiesTexte(S.voies)}${r.k === "dn" ? ", sur Démarche Numérique" : S.sur ? ", d'après la fiche service-public.gouv.fr" : ", d'après la fiche service-public.gouv.fr ; la dernière voie est lue dans son texte, à vérifier sur la fiche"}.`,
-      ...S.simp.map((x) => `${x.texte} : ${x.detail}.`),
-      S.acc && !(accFin && dansAvant("accessibilite")) ? (S.acc.ligne || `${S.acc.texte} : ${min(S.acc.detail)}.`) : "",
-      r.k === "dn" && org.length > 50 ? `Organisme : ${org}.` : "",
-      // Démarche passée en nationale : la ligne affiche l'entité qui la publie (Sirene) ; l'organisme déclaré est rappelé ici.
-      r.k === "dn" && r.on ? `Organisme déclaré sur Démarche Numérique : ${r.oa || r.o}. La démarche est publiée par ${/^Ministère /.test(r.on) ? "le " + min(r.on) : r.on} (base Sirene) et vaut pour toute la France.` : "", ...S.vig.map((v) => `${v.texte} : ${v.detail}.`)].filter(Boolean).map((texte) => ({ texte }));
-    if (S.delais && !dansAvant("delais")) det.push({ texte: "Délais constatés :", lien: { texte: "voir les statistiques de la démarche", url: S.delais.url, note: "s'ouvre dans un nouvel onglet ; calculés en direct par Démarche Numérique" } });
+    const site = r.k === "dn" ? "Démarche Numérique" : siteLisible(opt.site || r.l);
+    const det = S.voies.map((voie, i) => ({ ico: ICO[voie[0]],
+      texte: MODES_COURT[voie[0]] + (voie[0] === "en_ligne" && site ? `, sur ${site}` : "") + voie.slice(1).map((m) => ", " + min(MODES_LIB[m])).join("")
+        + (!S.sur && i === S.voies.length - 1 ? " (à vérifier sur la fiche)" : "") }));
+    for (const x of S.simp) {
+      if (x.cle === "fc") det.push({ ico: ICO.fc, texte: `Connexion avec ${x.texte}` });
+      else if (x.cle === "rec" && !dansAvant("donnees")) det.push({ ico: ICO.rec, texte: `Données récupérées : ${[...new Set(r.pre || [])].filter((p) => RECUPERE[p]).map((p) => PRE_COURT[p]).join(", ")}` });
+    }
+    if (S.acc && !dansAvant("accessibilite")) det.push({ ico: ICO.acc, texte: S.acc.court, titre: S.acc.titre || S.acc.detail });
+    if (r.crt && !dansAvant("carte")) det.push({ ico: ICO.carte, texte: "Contient une carte à manipuler", titre: CARTE_PHRASE });
+    for (const v of S.vig) det.push({ ico: ICO[v.motif], texte: `${v.texte} (${v.k} retours)`, titre: v.detail });
+    if (S.delais && !dansAvant("delais")) det.push({ ico: ICO.delais, texte: "Délais :", lien: { texte: "voir les statistiques", url: S.delais.url, titre: NOUVEL_ONGLET } });
+    // Démarche passée en nationale : la ligne affiche l'entité qui la publie (Sirene) ; l'organisme déclaré est rappelé ici.
+    if (r.k === "dn" && r.on) det.push({ ico: ICO.organisme, texte: `Déclarée par : ${r.oa || r.o}`, titre: `Publiée par ${/^Ministère /.test(r.on) ? "le " + min(r.on) : r.on} (base Sirene), pour toute la France`, organisme: true });
+    else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { detailSymboles, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, PRE_PHRASES, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

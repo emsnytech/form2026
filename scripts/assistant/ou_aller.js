@@ -152,7 +152,7 @@
     if (!r) return;
     const g = regle(r);
     if (g.identite) {
-      el.innerHTML = `<div class="ou-t">Où déposer la demande</div><p>Toutes les mairies ne prennent pas les demandes de carte d'identité et de passeport : la fiche explique comment trouver une mairie équipée près de chez vous.</p>`;
+      el.innerHTML = `<div class="ou-t">Où déposer la demande</div><p>Seules certaines mairies sont équipées : la fiche dit comment trouver la vôtre.</p>`;
       majOu(); return;
     }
     if (SANS_API) { el.innerHTML = lienAnnuaire(c, g.libelle); majOu(); return; }
@@ -161,7 +161,7 @@
     let l;
     try { l = await services(c.code, g.types); } catch (e) { el.innerHTML = `<p class="ou-src">L'Annuaire de l'administration ne répond pas pour l'instant.</p>`; return; }
     if (COMMUNE !== c) return;
-    el.innerHTML = l.length ? `${l.map(htmlService).join("")}<p class="ou-src">Service compétent pour votre commune selon l'Annuaire, interrogé avec le seul code de la commune.</p>` : "";
+    el.innerHTML = l.length ? `${l.map(htmlService).join("")}` : "";
     majOu();
   }
 
@@ -210,7 +210,7 @@
     const C = Object.fromEntries(FS.champs.map((k, i) => [k, i]));
     const proches = FS.structures.map((f) => [km(c.lat, c.lon, f[C.lat], f[C.lon]), f]).sort((a, b) => a[0] - b[0]).slice(0, 3);
     if (!proches.length) return;
-    const src = `<p class="ou-src">Source&nbsp;: liste des structures labellisées France services (ANCT, data.gouv.fr${FS.date ? ", " + esc(FS.date.split("-").reverse().join("/")) : ""}). Distance à vol d'oiseau depuis le centre de ${esc(c.nom)}.</p>`;
+    const src = `<p class="ou-src" title="Liste des structures labellisées France services (ANCT, data.gouv.fr${FS.date ? ", " + esc(FS.date.split("-").reverse().join("/")) : ""}), depuis le centre de ${esc(c.nom)}">Distance à vol d'oiseau.</p>`;
     const [d, f] = proches[0], premiere = htmlFS(f, C, d);
     const suivantes = proches.slice(1).map(([d2, f2]) => htmlFS(f2, C, d2)).join("");
     if (enLigne) {
@@ -235,7 +235,7 @@
     if (SANS_API) { el.innerHTML = `<div class="ou-t">Aide sociale de votre commune</div>` + lienAnnuaire(c, "CCAS"); majOu(); return; }
     let l; try { l = await services(c.code, ["ccas"]); } catch (e) { return; }
     if (COMMUNE !== c || !l.length) return;
-    el.innerHTML = `<div class="ou-t">Aide sociale de votre commune</div>${l.map(htmlService).join("")}<p class="ou-src">Centre communal d'action sociale compétent pour votre commune selon l'Annuaire, interrogé avec le seul code de la commune.</p>`;
+    el.innerHTML = `<div class="ou-t">Aide sociale de votre commune</div>${l.map(htmlService).join("")}`;
     majOu();
   }
 
@@ -294,9 +294,9 @@
       // Ni code postal, ni département, ni lieu reconnu : les démarches d'un département sont rétrogradées (×0,8 dans le
       // moteur) ; la page invite à préciser la commune.
       if (!$("dep").value && SANS_API) {
-        el.innerHTML = `<span class="meta">Précisez votre commune dans votre question (par exemple «&nbsp;j'habite à Rezé&nbsp;») pour voir les démarches de votre territoire et où aller.</span>`;
+        el.innerHTML = `<span class="meta">Précisez votre commune pour voir où aller.</span>`;
       } else if (!$("dep").value) {
-        el.innerHTML = `<label class="meta" for="cp-res">Précisez votre commune pour voir les démarches de votre territoire et où aller&nbsp;:</label> `
+        el.innerHTML = `<label class="meta" for="cp-res">Précisez votre commune pour voir où aller&nbsp;:</label> `
           + `<input id="cp-res" class="cp-res" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="code postal">`;
         const c2 = $("cp-res");
         c2.addEventListener("input", () => { cp.value = c2.value.replace(/\D/g, "").slice(0, 5); cp.dispatchEvent(new Event("input"));

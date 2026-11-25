@@ -16,8 +16,9 @@ les {{titre}}, {{sous_titre}} et {{nom_court}} du gabarit en sont remplis, et pa
 - la page FORM, avec les adaptations listées dans ADAPTATIONS (en-tête du gabarit retiré, chemins des données et des pages
   du site, lien vers la version avec assistant et fenêtre de ses conditions, « Où aller ») ;
 - la page « Comment ça marche » (page_comment.py), dont sync_cadre.py remplit le cadre d'entrée ;
-- la version avec assistant, écrite dans ~/Documents/cartographie/assistant/version_ia.html (ADAPTATIONS_IA), que
-  l'éditeur republie lui-même sur claude.ai ; elle charge ses données à côté d'elle.
+- la version avec assistant, écrite dans ~/Documents/cartographie/assistant/artefact/version_ia.html (ADAPTATIONS_IA),
+  avec les données qu'elle charge à côté d'elle ; l'éditeur la republie lui-même sur claude.ai. Plus de copie hors de
+  artefact/ : une page posée à côté d'anciennes données les aurait lues.
 Chaque adaptation doit trouver sa place exactement une fois, sinon rien n'est écrit : le gabarit a changé et la liste est à revoir.
 --check vérifie aussi que la page « Comment ça marche » est à jour.
 """
@@ -31,10 +32,10 @@ DEBUT, FIN = "/*moteur:début*/", "/*moteur:fin*/"
 MODULES = [(MOTEUR, DEBUT, FIN), (Path(__file__).with_name("ou_aller.js"), "/*ou_aller:début*/", "/*ou_aller:fin*/")]
 ASSISTANT_URL = "https://claude.ai/artifact/LLfjE77eNYPjiykcDdcJza"
 
-VERSION_IA = Path.home() / "Documents" / "cartographie" / "assistant" / "version_ia.html"
+VERSION_IA = Path.home() / "Documents" / "cartographie" / "assistant" / "artefact" / "version_ia.html"
 # Dossier de publication de la version avec assistant : la page et les fichiers qu'elle charge, à côté d'elle, sous les
 # noms qu'elle attend (window.FORM_DATA vide). L'éditeur publie depuis ce dossier.
-ARTEFACT = VERSION_IA.parent / "artefact"
+ARTEFACT = VERSION_IA.parent
 FICHIERS_IA = ["index.json", "index_meta.json", "exemples.json", "plus_demandees.json", "a_la_une.json", "types_guichets.json",
                "communes.json", "france_services.json"]
 
@@ -135,12 +136,10 @@ if "--depuis" in sys.argv:
         subprocess.run([sys.executable, str(RACINE / "scripts" / script)], cwd=RACINE, check=True, capture_output=True)
     print(f"écrit : {PAGE.name} et trouver-sa-demarche-comment.html, depuis {source}")
     # Version avec assistant : même gabarit, hors du dépôt, republiée à la main sur claude.ai par l'éditeur.
-    if VERSION_IA.parent.is_dir():
-        VERSION_IA.write_text(avec_moteur(adapter(gabarit, ADAPTATIONS_IA)), encoding="utf-8")
-        print(f"écrit : {VERSION_IA}")
+    if ARTEFACT.parent.is_dir():
         import shutil
         ARTEFACT.mkdir(exist_ok=True)
-        shutil.copyfile(VERSION_IA, ARTEFACT / "version_ia.html")
+        VERSION_IA.write_text(avec_moteur(adapter(gabarit, ADAPTATIONS_IA)), encoding="utf-8")
         lignes = [f"version_ia.html\t{(ARTEFACT / 'version_ia.html').stat().st_size}"]
         for f in FICHIERS_IA:
             shutil.copyfile(RACINE / "donnees" / "assistant" / f, ARTEFACT / f)
