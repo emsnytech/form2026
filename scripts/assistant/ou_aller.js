@@ -79,8 +79,7 @@
   // ---------- 2. Où aller : table de correspondance, puis Annuaire
   function regle(r) {
     if (!TABLE) return null;
-    const ti = TABLE.titres_identite;
-    if (r.k === "sp" && r.th === ti.theme && ti.indices.some((i) => motEntier(norm(r.t), i))) return { identite: true };
+    if (Moteur.titreIdentite && Moteur.titreIdentite(r)) return { identite: true };   // titres_identite.json
     const txt = norm(r.k === "dn" ? r.o : r.t + " " + (r.th || ""));
     return TABLE.regles.find((g) => g.indices.some((i) => motEntier(txt, i))) || null;
   }
@@ -151,16 +150,9 @@
     const r = (window.CARTES_TETE || LISTE.slice(0, 3)).find((x) => x && portee(x) !== "inc" && regle(x) && (x.k !== "dn" || duDepartement(x, c)));
     if (!r) return;
     const g = regle(r);
-    // Carte d'identité, passeport : l'Annuaire ne dit pas quelles mairies sont équipées (aucun champ ; vérifié le 25/11/2026).
-    // La mairie de la commune, avec l'invitation à vérifier qu'elle l'est.
-    if (g.identite) {
-      const verif = `<div class="ou-t">Où déposer la demande</div><p>Vérifiez que votre mairie est équipée pour les cartes d'identité et les passeports&nbsp;: seules certaines le sont.</p>`;
-      if (SANS_API) { el.innerHTML = verif + lienAnnuaire(c, "Mairie"); majOu(); return; }
-      el.innerHTML = verif + `<p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`; majOu();
-      let l; try { l = await services(c.code, ["mairie"]); } catch (e) { el.innerHTML = verif + lienAnnuaire(c, "Mairie"); majOu(); return; }
-      if (COMMUNE !== c) return;
-      el.innerHTML = verif + (l.length ? l.map(htmlService).join("") : lienAnnuaire(c, "Mairie")); majOu(); return;
-    }
+    // Carte d'identité, passeport : pré-demande en ligne, puis n'importe quelle mairie équipée ; pas de guichet par commune
+    // (la ligne « Ensuite… » de la carte le dit ; titres_identite.json).
+    if (g.identite) { el.innerHTML = ""; majOu(); return; }
     if (SANS_API) { el.innerHTML = lienAnnuaire(c, g.libelle); majOu(); return; }
     // Le type de la table ne sert qu'à choisir le guichet : la carte affiche le nom que renvoie l'Annuaire.
     el.innerHTML = `<p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`; majOu();
@@ -208,6 +200,9 @@
     el.className = enLigne ? "fs-pied" : "fs-fort";
     const c = COMMUNE;
     if (!c) {
+      // Carte d'identité, passeport en tête : on ne demande pas la commune (titres_identite.json).
+      const tete = (window.CARTES_TETE || [])[0];
+      if (tete && Moteur.titreIdentite && Moteur.titreIdentite(tete)) { majOu(); return; }
       if (!enLigne) el.innerHTML = `<div class="ou-t">Une France services peut vous aider à faire cette démarche</div><p>Indiquez votre code postal pour trouver la plus proche, ou consultez la <a href="https://www.france-services.gouv.fr/" target="_blank" rel="noopener">carte des France services</a>.</p>`;
       majOu(); return;
     }
@@ -296,6 +291,9 @@
       $("region-choisir").addEventListener("click", () => { Moteur.region = { nom: Rg.nom, deps: Rg.deps }; relancer(); });
       return;
     }
+    // Carte d'identité, passeport en tête : la commune n'est pas demandée (la mairie se choisit ensuite, sur la carte de l'ANTS).
+    const tete = (window.CARTES_TETE || [])[0];
+    if (!L && tete && Moteur.titreIdentite && Moteur.titreIdentite(tete)) return;
     if (!L) {
       // Ni code postal, ni département, ni lieu reconnu : les démarches d'un département sont rétrogradées (×0,8 dans le
       // moteur) ; la page invite à préciser la commune.

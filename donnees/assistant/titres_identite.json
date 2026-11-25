@@ -1,0 +1,8 @@
+{
+ "objet": "Carte d'identité et passeport : la démarche commence par la pré-demande en ligne ; la mairie ne se choisit qu'ensuite, pour le dépôt du dossier, et ce peut être n'importe quelle mairie équipée, pas forcément celle de la commune de l'usager. Pour une fiche service-public du thème ci-dessous dont le titre contient l'un des indices (mots entiers, sans accents ni casse) : ni mairie de la commune ni demande de commune dans « Où aller » ; après le bouton, une seule ligne, « ensuite », avec ses deux liens. Aucun lien vers RDV Service Public (peu de communes l'emploient). Lu par la page (Moteur.titreIdentite) et par « Où aller » ; relu par l'éditeur le 25/11/2026.",
+ "theme": "Papiers - Citoyenneté - Élections",
+ "indices": ["carte d'identité", "passeport"],
+ "ensuite": "Ensuite, rendez-vous dans la mairie équipée de votre choix",
+ "rendez_vous": {"texte": "Prendre rendez-vous", "url": "https://rendezvouspasseport.ants.gouv.fr/"},
+ "carte": {"texte": "Toutes les mairies équipées (carte de l'ANTS)", "url": "https://passeport.ants.gouv.fr/services/geolocaliser-une-mairie-habilitee"}
+}

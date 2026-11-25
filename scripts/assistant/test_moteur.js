@@ -400,7 +400,7 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('BS1 papiers perdus à Blois : six lignes, opposition d\'abord, puis pièces d\'identité, puis le reste ; fiches « perte » de la table',
     b1.length===6&&noms[0]==='Carte bancaire'&&noms.slice(1,3).sort().join()==="Carte d'identité,Passeport"&&urg.every((u,i)=>!i||u>=urg[i-1])
     &&b1[0].rec.id==='SP-F31241'&&b1.find(b=>b.nom==="Carte d'identité").rec.id==='SP-F1344'&&b1.find(b=>b.nom==='Carte Vitale').rec.id==='SP-R49814'
-    &&b1.find(b=>b.nom==="Attestation d'assurance").rec===null&&!b1[0].guichet&&b1[1].guichet&&!b1.some(b=>/Blois/.test(b.nom)), noms.join(' | '));
+    &&b1.find(b=>b.nom==="Attestation d'assurance").rec===null&&!b1[0].guichet&&!b1[1].guichet&&!b1[2].guichet&&b1.find(b=>b.nom==='Carte Vitale').guichet&&!b1.some(b=>/Blois/.test(b.nom)), noms.join(' | '));
   const b2=M.besoins(ix,"on m'a volé mon sac : carte bancaire et carte d'identité");
   verifie('BS2 sac volé : carte bancaire (opposition, fiche « vol ») puis carte d\'identité (fiche « vol »), deux lignes', b2.length===2&&b2[0].rec.id==='SP-F2428'&&b2[1].rec.id==='SP-F1759', b2.map(b=>b.nom+' '+(b.rec&&b.rec.id)).join(' | '));
   const seuls=['je veux renouveler mon passeport','carte grise perdue','inscription liste électorale',"je n'arrive plus à payer mon électricité, j'habite à Rezé"].filter(q=>M.besoins(ix,q).length);
@@ -410,8 +410,15 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('BS4 « Vos démarches » dans la page, questions de suite sur le premier besoin ; table lue dans besoins.json (aucun papier dans le code), fiches de la table présentes dans l\'index',
     /<h2 id="h-demarche">Vos démarches<\/h2>/.test(page)&&/Ne répète pas cette liste et ne cite pas ces démarches une par une/.test(page)&&/window\.PRINCIPAL = recsB\[0\]/.test(page)&&!/carte bancaire|passeport|SP-F/i.test(code)&&!absents.length
     &&/besoins\.json/.test(fs.readFileSync(path.join(__dirname,'assembler_page.py'),'utf8')), absents.join(' '));
-  verifie('BS5 Où aller, carte d\'identité ou passeport : la mairie de la commune et « vérifiez qu\'elle est équipée » (l\'Annuaire ne distingue pas les mairies équipées)',
-    /Vérifiez que votre mairie est équipée pour les cartes d'identité et les passeports/.test(page)&&/services\(c\.code, \["mairie"\]\)/.test(page)); }
+  // BS5 : carte d'identité, passeport : pré-demande, puis mairie équipée au choix ; ni mairie de la commune ni demande de commune.
+  const TI=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','titres_identite.json'),'utf8')); M.chargerTitres(TI);
+  const qb="carte d'identité perdue, j'habite à Blois", Cb=M.choisir(ix,qb,{k:20}), E=M.ensuiteTitres(), ou=fs.readFileSync(path.join(__dirname,'ou_aller.js'),'utf8');
+  const codes=['moteur.js','ou_aller.js'].map(f=>fs.readFileSync(path.join(__dirname,f),'utf8')).join('')+page;
+  verifie('BS5 « carte d\'identité perdue, j\'habite à Blois » : ni mairie de Blois ni « vérifiez qu\'elle est équipée » ni demande de commune ; après le bouton, la ligne « Ensuite… » et ses deux liens (adresses lues dans titres_identite.json) ; aucun lien RDV Service Public',
+    Cb.principal&&M.titreIdentite(Cb.principal)&&E.texte==='Ensuite, rendez-vous dans la mairie équipée de votre choix'&&E.rendez_vous.url==='https://rendezvouspasseport.ants.gouv.fr/'&&E.carte.url==='https://passeport.ants.gouv.fr/services/geolocaliser-une-mairie-habilitee'
+    &&/if \(g\.identite\) \{ el\.innerHTML = ""; majOu\(\); return; \}/.test(ou)&&!/Vérifiez que votre mairie est équipée|services\(c\.code, \["mairie"\]\)/.test(ou+page)&&(ou.match(/Moteur\.titreIdentite\(tete\)/g)||[]).length===2
+    &&/if \(Moteur\.titreIdentite\(r\) \|\| \(ts && Moteur\.titreIdentite\(ts\)\)\) h \+= ligneEnsuite\(\);/.test(page)&&!/rendezvouspasseport|geolocaliser-une-mairie|rdv-service-public|rendezvous\.service-public/i.test(codes)
+    &&/Ne parle jamais de la mairie du domicile/.test(page)&&!M.titreIdentite(R.find(r=>r.id==='SP-R61680'))&&!M.titreIdentite(R.find(r=>r.id==='SP-R77429')), Cb.principal&&Cb.principal.id); }
 // Plusieurs besoins, version avec assistant : la carte « Vos démarches » est gardée, la réponse ne répète pas la liste.
 { const page=fs.readFileSync(path.join(__dirname,'..','..','trouver-sa-demarche.html'),'utf8'), cons=(page.match(/function consigneBesoins\(B\) \{[\s\S]*?\n\}/)||[''])[0];
   const filtre=(page.match(/const refsB = [\s\S]*?const r = renderText\(texteRep\);/)||[''])[0];

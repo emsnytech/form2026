@@ -1,5 +1,5 @@
 {
- "objet": "Plusieurs besoins dans une question (« j'ai perdu ma carte bancaire et ma carte d'identité ») : table relue par l'éditeur (25/11/2026), lue par la page et par Moteur.besoins. Pour chaque papier : les mots qui le désignent (sans accents), son rang d'urgence, son symbole (Tabler), l'action en quelques mots, et la fiche service-public qui la décrit selon le contexte de la question (perte ou vol ; « * » : les deux). Un papier sans démarche publique a une « note » à la place de la fiche ; « guichet » : false, un papier sans guichet public (la banque), dont « Où aller » ne tient pas compte. Un morceau de question qui n'est pas un papier de la table garde la démarche que le moteur juge sûre, au dernier rang.",
+ "objet": "Plusieurs besoins dans une question (« j'ai perdu ma carte bancaire et ma carte d'identité ») : table relue par l'éditeur (25/11/2026), lue par la page et par Moteur.besoins. Pour chaque papier : les mots qui le désignent (sans accents), son rang d'urgence, son symbole (Tabler), l'action en quelques mots, et la fiche service-public qui la décrit selon le contexte de la question (perte ou vol ; « * » : les deux). Un papier sans démarche publique a une « note » à la place de la fiche ; « guichet » : false, un papier dont « Où aller » ne tient pas compte : sans guichet public (la banque), ou déposé dans la mairie équipée de son choix (carte d'identité, passeport ; titres_identite.json). Un morceau de question qui n'est pas un papier de la table garde la démarche que le moteur juge sûre, au dernier rang.",
  "contexte": {
   "vol": [
    "vol",
@@ -80,7 +80,7 @@
    "nom": "Carte d'identité",
    "urgence": 2,
    "ico": "id",
-   "action": "La refaire dans une mairie équipée",
+   "action": "Faire la pré-demande en ligne",
    "motifs": [
     "carte nationale d identite",
     "carte d identite",
@@ -90,14 +90,15 @@
    "fiche": {
     "perte": "SP-F1344",
     "vol": "SP-F1759"
-   }
+   },
+   "guichet": false
   },
   {
    "cle": "passeport",
    "nom": "Passeport",
    "urgence": 2,
    "ico": "id",
-   "action": "Le refaire dans une mairie équipée",
+   "action": "Faire la pré-demande en ligne",
    "motifs": [
     "passeport",
     "passeports"
@@ -105,7 +106,8 @@
    "fiche": {
     "perte": "SP-F21246",
     "vol": "SP-F21247"
-   }
+   },
+   "guichet": false
   },
   {
    "cle": "permis_de_conduire",

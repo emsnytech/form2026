@@ -132,6 +132,7 @@ body{--bouton-fond:var(--accent);--bouton-fond-survol:var(--accent-fonce);--bout
 .besoins .b-txt{flex:1;display:flex;flex-direction:column;line-height:1.35}.besoins .b-act{font-size:15px;color:var(--muted)}
 .besoins .b-btn{flex:none;display:inline-flex;align-items:center;min-height:44px;padding:0 16px;font-size:15px;font-weight:600;color:#fff;background:var(--accent);border-radius:8px;text-decoration:none}
 .besoins .b-btn:hover{color:#fff;background:var(--accent-fonce)}
+.ensuite{margin:0;font-size:15px}.ensuite .lien-cx{margin-left:12px}
 .boutons-cx{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin:0}.lien-cx{font-size:15px;color:var(--muted)}
 .comprendre{display:flex;flex-direction:column;gap:6px;padding:0 4px}.comprendre a{font-size:17px}.comprendre span{font-size:14px;color:var(--muted)}
 details.pli{border-top:1px solid var(--line);padding-top:6px}
@@ -673,6 +674,17 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     if (out.length < 2) return [];
     return out.sort((a, b) => a.urgence - b.urgence || a.ordre - b.ordre).slice(0, 6);
   }
+  // Carte d'identité et passeport (titres_identite.json, chargé par chargerTitres) : pré-demande en ligne, puis dépôt dans la
+  // mairie équipée de son choix. titreIdentite : fiche service-public du thème de la table dont le titre contient un indice ;
+  // ensuiteTitres : la ligne « Ensuite… » et ses deux liens, lus dans la table.
+  let TITRES = null;
+  function chargerTitres(d) { TITRES = d; }
+  function titreIdentite(r) {
+    if (!TITRES || !r || r.k !== "sp" || r.th !== TITRES.theme) return false;
+    const t = " " + norm(r.t) + " ";
+    return TITRES.indices.some((i) => t.includes(" " + norm(i) + " "));
+  }
+  const ensuiteTitres = () => TITRES ? { texte: TITRES.ensuite, rendez_vous: TITRES.rendez_vous, carte: TITRES.carte } : null;
   // Libellé d'une ressource service-public dans une carte.
   const libelleRessource = (r) => /imulateur/i.test(r.ty) ? "Savoir si j'y ai droit (simulateur)" : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne"
     : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : r.t;
@@ -1100,7 +1112,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { besoins, chargerBesoins, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -1179,6 +1191,8 @@ function ouvrirLigne(item) {
 // ---------- Index
 // Plusieurs besoins dans une question : table relue des papiers (besoins.json), lue par Moteur.besoins.
 fetch(DATA + "besoins.json").then((r) => r.json()).then((d) => Moteur.chargerBesoins(d)).catch(() => {});
+// Carte d'identité, passeport : pré-demande, puis mairie équipée au choix (titres_identite.json).
+fetch(DATA + "titres_identite.json").then((r) => r.json()).then((d) => Moteur.chargerTitres(d)).catch(() => {});
 fetch(DATA + "index.json").then((r) => r.json()).then((recs) => {
   $("st").textContent = MESSAGES.attente;
   setTimeout(() => {
@@ -1379,6 +1393,7 @@ function carteDemarche(r) {
     h += cx ? `<p class="boutons-cx"><a class="btn-lien" href="${esc(cx.bouton.url)}" target="_blank" rel="noopener">${esc(cx.bouton.texte)}</a>`
         + ` <a class="lien-cx" href="${esc(cx.lien.url)}" target="_blank" rel="noopener">${esc(cx.lien.texte)}<span class="sr-only"> (nouvel onglet)</span></a></p>`
       : `<a class="btn-lien" href="${esc(cible)}" target="_blank" rel="noopener">${ts || r.l ? "Faire la démarche" : "Lire la fiche"}</a>`;
+    if (Moteur.titreIdentite(r) || (ts && Moteur.titreIdentite(ts))) h += ligneEnsuite();
     h += blocAvant(r);
     ajouterLien(ts ? ts.t : r.t, cible, "service-public.gouv.fr");
   }
@@ -1394,6 +1409,13 @@ function carteDemarche(r) {
 }
 // « Vos démarches » : plusieurs besoins dans la question (Moteur.besoins) ; une ligne par besoin : symbole, nom du papier,
 // action en quelques mots, un bouton ; rangées par urgence (opposition, pièces d'identité, le reste ; table besoins.json).
+// Carte d'identité, passeport : après le bouton, une seule ligne « Ensuite… », avec « Prendre rendez-vous » et, discret,
+// la carte des mairies équipées de l'ANTS (adresses lues dans titres_identite.json).
+function ligneEnsuite() {
+  const E = Moteur.ensuiteTitres(); if (!E) return "";
+  return `<p class="ensuite">${esc(E.texte)}&nbsp;: <a href="${esc(E.rendez_vous.url)}" target="_blank" rel="noopener">${esc(E.rendez_vous.texte)}<span class="sr-only"> (nouvel onglet)</span></a>`
+    + ` <a class="lien-cx" href="${esc(E.carte.url)}" target="_blank" rel="noopener">${esc(E.carte.texte)}<span class="sr-only"> (nouvel onglet)</span></a></p>`;
+}
 function carteBesoins(B) {
   const el = $("carte-demarche");
   el.innerHTML = `<h2 id="h-demarche">Vos démarches</h2><ul class="besoins">` + B.map((b) => {
@@ -1402,7 +1424,7 @@ function carteBesoins(B) {
     const quoi = b.action || b.note || (r ? "" : "");
     return `<li>${b.ico ? ico(b.ico) : ico("file-text")}<span class="b-txt"><b>${esc(b.nom)}</b>${quoi ? `<span class="b-act">${esc(quoi)}</span>` : ""}</span>`
       + (r ? `<a class="b-btn" href="${esc(u)}" target="_blank" rel="noopener"${r.t !== b.nom ? ` title="${esc(r.t)}"` : ""}>${r.k === "dn" || /^SP-R/.test(r.id) ? "Faire la démarche" : "Lire la fiche"}<span class="sr-only"> : ${esc(b.nom)} (nouvel onglet)</span></a>` : "") + `</li>`;
-  }).join("") + `</ul>`;
+  }).join("") + `</ul>` + (B.some((b) => b.rec && Moteur.titreIdentite(b.rec)) ? ligneEnsuite() : "");
   el.hidden = false;
 }
 function carteAussi(f) {
@@ -1677,6 +1699,7 @@ RÈGLES
 - N'écris jamais ces mots dans ta réponse : corpus, index, base de données, enregistrement, téléservice, dématérialisé, usager.
 - Une démarche en ligne locale ne vaut que pour son territoire. Si le département de la personne n'est pas connu et que les démarches trouvées sont locales, dis-le.
 - La page affiche elle-même les pièces à préparer, les liens et les guichets : ne les recopie pas.
+- Carte d'identité et passeport : la démarche commence par la pré-demande en ligne ; le dossier se dépose ensuite dans n'importe quelle mairie équipée, au choix, et la page donne le lien pour prendre rendez-vous. Ne parle jamais de la mairie du domicile ni de la commune de la personne pour ces titres, et ne lui demande pas sa commune pour cela.
 - Ne te prononce jamais sur l'éligibilité ; dis « à vérifier dans la fiche » ou « auprès du service ».
 - Cite chaque démarche ou fiche par sa référence entre doubles crochets, exactement comme renvoyée : [[DN-12345]] ou [[SP-F1234]] ; la page les remplace par leur titre. N'écris jamais une référence hors des doubles crochets.
 - C'est une conversation : la personne peut préciser sa situation au fil des échanges. Tiens compte de tout ce qu'elle a déjà dit, et relance des recherches quand une précision change la réponse.
@@ -1880,8 +1903,7 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
   // ---------- 2. Où aller : table de correspondance, puis Annuaire
   function regle(r) {
     if (!TABLE) return null;
-    const ti = TABLE.titres_identite;
-    if (r.k === "sp" && r.th === ti.theme && ti.indices.some((i) => motEntier(norm(r.t), i))) return { identite: true };
+    if (Moteur.titreIdentite && Moteur.titreIdentite(r)) return { identite: true };   // titres_identite.json
     const txt = norm(r.k === "dn" ? r.o : r.t + " " + (r.th || ""));
     return TABLE.regles.find((g) => g.indices.some((i) => motEntier(txt, i))) || null;
   }
@@ -1952,16 +1974,9 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
     const r = (window.CARTES_TETE || LISTE.slice(0, 3)).find((x) => x && portee(x) !== "inc" && regle(x) && (x.k !== "dn" || duDepartement(x, c)));
     if (!r) return;
     const g = regle(r);
-    // Carte d'identité, passeport : l'Annuaire ne dit pas quelles mairies sont équipées (aucun champ ; vérifié le 25/11/2026).
-    // La mairie de la commune, avec l'invitation à vérifier qu'elle l'est.
-    if (g.identite) {
-      const verif = `<div class="ou-t">Où déposer la demande</div><p>Vérifiez que votre mairie est équipée pour les cartes d'identité et les passeports&nbsp;: seules certaines le sont.</p>`;
-      if (SANS_API) { el.innerHTML = verif + lienAnnuaire(c, "Mairie"); majOu(); return; }
-      el.innerHTML = verif + `<p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`; majOu();
-      let l; try { l = await services(c.code, ["mairie"]); } catch (e) { el.innerHTML = verif + lienAnnuaire(c, "Mairie"); majOu(); return; }
-      if (COMMUNE !== c) return;
-      el.innerHTML = verif + (l.length ? l.map(htmlService).join("") : lienAnnuaire(c, "Mairie")); majOu(); return;
-    }
+    // Carte d'identité, passeport : pré-demande en ligne, puis n'importe quelle mairie équipée ; pas de guichet par commune
+    // (la ligne « Ensuite… » de la carte le dit ; titres_identite.json).
+    if (g.identite) { el.innerHTML = ""; majOu(); return; }
     if (SANS_API) { el.innerHTML = lienAnnuaire(c, g.libelle); majOu(); return; }
     // Le type de la table ne sert qu'à choisir le guichet : la carte affiche le nom que renvoie l'Annuaire.
     el.innerHTML = `<p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`; majOu();
@@ -2009,6 +2024,9 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
     el.className = enLigne ? "fs-pied" : "fs-fort";
     const c = COMMUNE;
     if (!c) {
+      // Carte d'identité, passeport en tête : on ne demande pas la commune (titres_identite.json).
+      const tete = (window.CARTES_TETE || [])[0];
+      if (tete && Moteur.titreIdentite && Moteur.titreIdentite(tete)) { majOu(); return; }
       if (!enLigne) el.innerHTML = `<div class="ou-t">Une France services peut vous aider à faire cette démarche</div><p>Indiquez votre code postal pour trouver la plus proche, ou consultez la <a href="https://www.france-services.gouv.fr/" target="_blank" rel="noopener">carte des France services</a>.</p>`;
       majOu(); return;
     }
@@ -2097,6 +2115,9 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
       $("region-choisir").addEventListener("click", () => { Moteur.region = { nom: Rg.nom, deps: Rg.deps }; relancer(); });
       return;
     }
+    // Carte d'identité, passeport en tête : la commune n'est pas demandée (la mairie se choisit ensuite, sur la carte de l'ANTS).
+    const tete = (window.CARTES_TETE || [])[0];
+    if (!L && tete && Moteur.titreIdentite && Moteur.titreIdentite(tete)) return;
     if (!L) {
       // Ni code postal, ni département, ni lieu reconnu : les démarches d'un département sont rétrogradées (×0,8 dans le
       // moteur) ; la page invite à préciser la commune.

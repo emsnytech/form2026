@@ -349,6 +349,17 @@
     if (out.length < 2) return [];
     return out.sort((a, b) => a.urgence - b.urgence || a.ordre - b.ordre).slice(0, 6);
   }
+  // Carte d'identité et passeport (titres_identite.json, chargé par chargerTitres) : pré-demande en ligne, puis dépôt dans la
+  // mairie équipée de son choix. titreIdentite : fiche service-public du thème de la table dont le titre contient un indice ;
+  // ensuiteTitres : la ligne « Ensuite… » et ses deux liens, lus dans la table.
+  let TITRES = null;
+  function chargerTitres(d) { TITRES = d; }
+  function titreIdentite(r) {
+    if (!TITRES || !r || r.k !== "sp" || r.th !== TITRES.theme) return false;
+    const t = " " + norm(r.t) + " ";
+    return TITRES.indices.some((i) => t.includes(" " + norm(i) + " "));
+  }
+  const ensuiteTitres = () => TITRES ? { texte: TITRES.ensuite, rendez_vous: TITRES.rendez_vous, carte: TITRES.carte } : null;
   // Libellé d'une ressource service-public dans une carte.
   const libelleRessource = (r) => /imulateur/i.test(r.ty) ? "Savoir si j'y ai droit (simulateur)" : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne"
     : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : r.t;
@@ -776,6 +787,6 @@
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { besoins, chargerBesoins, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
