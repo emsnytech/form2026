@@ -291,6 +291,39 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const vis=visible(page).replace(/\s+/g,' ');
   verifie('A5 accueil : ni chiffres ni sources, ni volumes de dossiers dans « Les plus demandées », « Comment ça marche » seul sous le champ, plus de phrase sur l\'API Géo ; « la décision appartient à l\'organisme cité » une seule fois, dans le pied de page',
     stats.startsWith('<a class="lien-comment"')&&stats.endsWith('>Comment ça marche</a>')&&!/recense|fmt\(/.test(stats)&&!/recense|API Géo de l'État\)\. Rien d'autre|Il ne remplace ni|Sources : /.test(vis)&&(vis.match(/la décision appartient à l'organisme cité/g)||[]).length===1&&/<footer[\s\S]*la décision appartient à l'organisme cité/.test(page)
-    &&!/dossiers_arrondis|plus de \$\{/.test(page)&&/Indiquez votre commune pour des réponses plus précises\./.test(page)&&/Précisez votre commune pour voir où aller\./.test(page), stats); }
+    &&!/dossiers_arrondis|plus de \$\{/.test(page)&&/Décrivez votre situation, avec votre commune\./.test(page)&&/Précisez votre commune pour voir où aller\./.test(page), stats); }
+// Haut de l'accueil (consigne « sobriété », 4 bis) et réponse de l'assistant (modèle America.gov) : contrôles sur le gabarit assemblé.
+{ const page=fs.readFileSync(path.join(__dirname,'..','..','trouver-sa-demarche.html'),'utf8'), vis=page.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g,' ').replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').replace(/\s+/g,' ');
+  const accueil=(page.match(/<section id="vue-accueil"[\s\S]*?<form class="ask"/)||[''])[0];
+  verifie('A6 haut de l\'accueil : le titre, une phrase, le champ ; plus de sous-titre ni de « Votre situation, avec vos mots »',
+    !/sous-titre|Le répertoire des démarches administratives/.test(accueil)&&!/Votre situation, avec vos mots/.test(vis)&&/<h1 id="titre-accueil">Que voulez-vous faire&nbsp;\?<\/h1>/.test(page)&&/placeholder="Ex\. : Je n'arrive plus à payer ma facture d'électricité, j'habite à Rezé"/.test(page));
+  const quota=(page.match(/function majQuota\(\) \{[\s\S]*?\n/)||[''])[0]+(page.match(/function majQuota\(\)[\s\S]*?if \(!r\)[^\n]*/)||[''])[0];
+  verifie('A7 version avec assistant : « Version de test avec IA · En savoir plus » ; compteur seulement à 3 questions ou moins ; ligne « une commune suffit » gardée',
+    /Version de test avec IA · <a[^>]*>En savoir plus<\/a>/.test(page)&&!/un assistant d'IA \(Claude\) cherche pour vous/.test(page)&&/r > 3 \? "" : r \? `Encore \$\{r\} question/.test(quota)&&/Sans nom, numéro, adresse ni information de santé&nbsp;: une commune suffit\./.test(page));
+  const cons=(page.match(/function consigne\(q\) \{([\s\S]*?)\n\}/)||[])[1]||'';
+  verifie('A8 réponse de l\'assistant : puces dans l\'ordre de l\'action, liens dans les phrases, « rien à faire » en tête et non répété ; plus de bloc « Liens de cette réponse »',
+    /2 à 5 puces courtes/.test(cons)&&!/TROIS PHRASES AU PLUS/.test(cons)&&/rien_a_faire.*ne la répète pas/.test(cons)&&!/Liens de cette réponse|liens-liste/.test(page)&&/\$\("rep-texte"\)\.prepend\(rien\)/.test(page)&&/class="ext" aria-hidden="true">↗/.test(page));
+  verifie('A9 sous la réponse : une pastille de source, deux questions de suite au plus, « Signaler une erreur » (formulaire sans donnée personnelle) ; champ « Une autre question ? » fixé en bas',
+    /<span class="source">Source&nbsp;: /.test(page)&&/return q\.slice\(0, 2\)/.test(page)&&/issues\/new\?template=signaler-erreur\.yml/.test(page)&&fs.existsSync(path.join(__dirname,'..','..','.github','ISSUE_TEMPLATE','signaler-erreur.yml'))
+    &&/placeholder="Une autre question \?"/.test(page)&&/#ff\.ff-bas\{position:sticky;bottom:0/.test(page)&&!/Préciser ma situation/.test(page)); }
+// ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
+// l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
+console.log('\n=== Fautes de frappe et d\'orthographe');
+{ const tp=Date.now(); M.corriger('xx'); const t1=Date.now()-tp;
+  const avec=(q,o={})=>{const c=M.corriger(q),C=M.choisir(ix,c.texte,{...o,k:20});return {c,C,top:M.search(ix,c.texte,{...o,k:5}).map(x=>x.r.id)};};
+  const memes=(a,b)=>{const x=avec(a),y=avec(b);return {ok:(x.C.principal&&x.C.principal.id)===(y.C.principal&&y.C.principal.id),x,y};};
+  const cas=[['inscripsion liste electoral','inscription liste électorale'],['medaille du travaille','médaille du travail'],['titre de sejour','titre de séjour'],
+    ['carte grise perdu','carte grise perdue'],['allocation logement','allocation logement'],['declaration revenu','déclaration revenus'],
+    ["je n'arive plus a payer mon electricite rezé","je n'arrive plus à payer mon électricité, j'habite à Rezé"],['subvension asociation sportive','subvention association sportive']];
+  for(const [a,b] of cas){const m=memes(a,b);verifie(`F1 « ${a} » : même « Votre démarche » que « ${b} »`,m.ok,`${m.x.c.texte} → ${m.x.C.principal?m.x.C.principal.id:'aucune démarche sûre'} ; ${m.x.top.slice(0,3).join(' ')}`);}
+  const el=avec("je n'arive plus a payer mon electricite rezé");
+  verifie('F2 facture d\'électricité à Rezé, avec fautes : « Aide au paiement d\'un impayé d\'énergie (ménages) » en « Votre démarche »', el.C.principal&&el.C.principal.id==='DN-50108', el.C.principal&&el.C.principal.id);
+  const med=avec('medaille du travaille'); verifie('F3 « medaille du travaille » → médaille d\'honneur du travail', med.C.principal&&/médaille d'honneur du travail/i.test(med.C.principal.t), med.C.principal&&med.C.principal.id);
+  const sur=["Je tiens un restaurant à Grenoble","Mon club de foot a besoin d'argent","j'habite à Rezé","autorisation de tir du sanglier","titre de séjour à Grenoble"].filter(q=>M.corriger(q).corrections.length);
+  verifie('F4 aucune correction sur un lieu, une terminaison ou un mot courant absent de l\'index', !sur.length, sur.map(q=>q+' → '+M.corriger(q).texte).join(' | ')||'aucune');
+  const t0=Date.now(); for(const [a] of cas) M.corriger(a); const t2=(Date.now()-t0)/cas.length;
+  verifie(`F5 temps : vocabulaire construit à la première correction (${t1} ms), puis ${t2.toFixed(1)} ms par question`, t1<1500&&t2<50); }
+const enTete=M.search(ix,'inscription liste électorale',{k:5}).map(x=>x.r.id);
+console.log(`        (classement, hors fautes : « inscription liste électorale » → ${enTete.join(' ')} ; SP-R16396 en ${enTete.indexOf('SP-R16396')+1}e position)`);
 console.log(`\n${echecs?echecs+' échec(s)':'Toutes les situations de référence passent'}${attente?', '+attente+' en attente':''}.`);
 if(echecs) process.exit(1);
