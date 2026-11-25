@@ -442,6 +442,21 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('T4 « Vos démarches », carte d\'identité : bouton « Faire la pré-demande » vers l\'ANTS, lien discret « Lire la fiche » vers la fiche',
     cni&&cni.pre&&cni.pre.id==='SP-R62483'&&/^https:\/\/passeport\.ants\.gouv\.fr\//.test(cni.pre.l)&&cni.rec.id==='SP-F1759'&&!b.find(x=>x.cle==='carte_bancaire').pre
     &&/href="\$\{esc\(lienSp\(b\.pre\)\)\}"[^>]*>Faire la pré-demande/.test(page)&&/class="lien-cx" href="\$\{esc\(u\)\}"[^>]*>Lire la fiche/.test(page), cni&&cni.pre&&cni.pre.l); }
+// Questions courantes, règles générales : annexe nommée, cas général avant cas particulier, aucune réponse vide.
+{ const P=(q)=>{const t=M.search(ix,q,{k:5}).map(x=>x.r.id),C=M.choisir(ix,q,{k:20});return {t,p:C.principal&&C.principal.id};};
+  for(const [q,ok,lib] of [['suivre ma demande de passeport',['SP-R1827'],'la fiche de suivi'],['carte grise',['SP-R48603'],'la carte grise du cas général (véhicule d\'occasion)'],
+    ['déclaration de revenus',['SP-R1280'],'la déclaration en ligne des impôts'],['retraite',['SP-R42866','SP-R1388'],'la demande de retraite du régime général'],
+    ['chômage',['SP-F1636','SP-R49998'],'l\'inscription à France Travail'],['attestation sécurité sociale',['SP-R49811'],'l\'attestation de droits'],['naissance enfant',['SP-F961'],'la déclaration de naissance']]){
+    const x=P(q); verifie(`Q1 « ${q} » : ${lib} en tête et en « Votre démarche »`, ok.includes(x.t[0])&&ok.includes(x.p), x.t.slice(0,3).join(' ')+' | '+x.p); }
+  const pe=P('passeport enfant');
+  verifie('Q2 « passeport enfant » : la pré-demande (ou SP-F21244) en tête ; « Votre démarche » : une fiche ou pré-demande de passeport pour un mineur', ['SP-F21244','SP-R42946','SP-R62484'].includes(pe.t[0])&&['SP-F21244','SP-F14930','SP-R42946','SP-R62484'].includes(pe.p), pe.t.slice(0,3).join(' ')+' | '+pe.p);
+  const part=['carte grise','déclaration de revenus','retraite','chômage'].map(q=>[q,M.choisir(ix,q,{k:20}).principal]).filter(([q,r])=>!r||M.casParticulierTitre(r,q));
+  verifie('Q3 cas général avant cas particulier : aucune « Votre démarche » réservée à un public ou à un objet que la question ne nomme pas (véhicule agricole, indépendants, militaires, agents publics…) ; nommé, il revient',
+    !part.length&&!M.casParticulierTitre(R.find(r=>r.id==='SP-R56736'),'carte grise véhicule agricole')&&M.casParticulierTitre(R.find(r=>r.id==='SP-R56736'),'carte grise'), part.map(x=>x[0]).join(' | ')||'aucune');
+  const page=fs.readFileSync(path.join(__dirname,'..','..','trouver-sa-demarche.html'),'utf8'), ou=fs.readFileSync(path.join(__dirname,'ou_aller.js'),'utf8');
+  verifie('Q4 « Aussi pour vous » écarte une fiche mineur (ou majeur) inadaptée ; « Vos démarches » ne demande le code postal que si une ligne a besoin d\'un lieu',
+    /&& !Moteur\.ageInadapte\(f, q\);/.test(page)&&/window\.BESOINS_SANS_LIEU = !window\.CARTES_TETE\.length;/.test(page)&&/if \(!L && window\.BESOINS_SANS_LIEU\) return;/.test(ou)&&/\|\| window\.BESOINS_SANS_LIEU\) \{ majOu\(\); return; \}/.test(ou)
+    &&M.ageInadapte(R.find(r=>r.id==='SP-F1153'),"carte d'identité perdue")); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');
