@@ -1,0 +1,3276 @@
+{
+ "objet": "Suite de l'étude Services Publics + (qualite.py --proposer-spp) : ANTS par domaine, France Travail, retours sur les étrangers, part des étrangers dans les préfectures rattachées aux démarches Démarche Numérique. Rien n'est appliqué.",
+ "periode": {
+  "debut": "2024-11-23",
+  "fichier": "2026-11-23"
+ },
+ "seuils": {
+  "retours": 20,
+  "motif": 5,
+  "part_forte": 0.5
+ },
+ "ants": {
+  "structure": "France Titres-ANTS",
+  "retours": 10801,
+  "non_comptes": {
+   "sans démarche nommée": 7305,
+   "démarche nommée hors domaine, ou plusieurs domaines": 319
+  },
+  "domaines": [
+   {
+    "domaine": "immatriculation",
+    "adresse": "immatriculation.ants.gouv.fr",
+    "n": 1256,
+    "neg": 769,
+    "motifs": [
+     [
+      "explication",
+      300
+     ],
+     [
+      "delai",
+      232
+     ]
+    ],
+    "vigilance": true,
+    "demarches_nommees": [
+     [
+      "Demande de certificat d'immatriculation d'un véhicule d'occasion immatriculé en France (",
+      345,
+      "nom (absent de l'Observatoire)"
+     ],
+     [
+      "Déclaration de changement d'adresse sur le certificat d'immatriculation",
+      265,
+      "adresse dans l'Observatoire"
+     ],
+     [
+      "Demande de renouvellement du certificat d'immatriculation (carte grise) suite à perte, v",
+      248,
+      "nom (absent de l'Observatoire)"
+     ],
+     [
+      "Autres demandes concernant l’immatriculation de véhicule",
+      226,
+      "adresse dans l'Observatoire"
+     ],
+     [
+      "Déclaration de cession d'un véhicule",
+      183,
+      "adresse dans l'Observatoire"
+     ]
+    ],
+    "fiches": [
+     {
+      "id": "SP-R41137",
+      "titre": "Déclarer la vente ou le don de son véhicule",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R41137",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/vendre-ou-donner-votre-vehicule"
+     },
+     {
+      "id": "SP-R47917",
+      "titre": "Refaire son certificat d’immatriculation (auparavant appelé carte grise) en cas de perte, vol ou détérioration",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R47917",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/refaire-votre-certificat-dimmatriculation"
+     },
+     {
+      "id": "SP-R48603",
+      "titre": "Demander la carte grise d'un véhicule d'occasion ayant une immatriculation française",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R48603",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/acheter-ou-recevoir-un-vehicule-doccasion"
+     },
+     {
+      "id": "SP-R48607",
+      "titre": "Modifier l'adresse de sa carte grise",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R48607",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/modifier-l-adresse-sur-votre-certificat-d-immatriculation"
+     },
+     {
+      "id": "SP-R49166",
+      "titre": "Ajouter un co-titulaire sur la carte grise",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49166",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/signaler-un-changement-sur-votre-situation-personnelle"
+     },
+     {
+      "id": "SP-R49257",
+      "titre": "Demander l'immatriculation d'un véhicule neuf",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49257",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/immatriculer-pour-la-premiere-fois-un-vehicule-en-france"
+     },
+     {
+      "id": "SP-R49258",
+      "titre": "Demander le certificat d’immatriculation d'un véhicule d'occasion ayant une immatriculation étrangère",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49258",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/immatriculer-pour-la-premiere-fois-un-vehicule-en-france"
+     },
+     {
+      "id": "SP-R49259",
+      "titre": "Demander une carte grise d'un véhicule faisant l'objet d'un héritage",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49259",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/signaler-un-changement-sur-votre-situation-personnelle"
+     },
+     {
+      "id": "SP-R49260",
+      "titre": "Certificat d’immatriculation : signaler un changement sur la situation de votre véhicule",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49260",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/signaler-un-changement-sur-la-situation-de-votre-vehicule"
+     },
+     {
+      "id": "SP-R49261",
+      "titre": "Demander la correction d'une erreur sur la carte grise",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49261",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/signaler-une-erreur-sur-votre-certificat-d-immatriculation-ou-sur-le-dossier-administratif-de-votre-vehicule"
+     },
+     {
+      "id": "SP-R49263",
+      "titre": "Demander une carte grise suite à la transformation du véhicule",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49263",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/signaler-un-changement-sur-la-situation-de-votre-vehicule"
+     },
+     {
+      "id": "SP-R49264",
+      "titre": "Demander une carte grise suite à l'usurpation des plaques d'immatriculation",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49264",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/signaler-un-changement-sur-la-situation-de-votre-vehicule"
+     },
+     {
+      "id": "SP-R49266",
+      "titre": "Demander une fiche d'identification du véhicule",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49266",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/obtenir-un-justificatif-ou-un-remboursement"
+     },
+     {
+      "id": "SP-R49273",
+      "titre": "Déclarer la remise d'un véhicule à un centre véhicule hors d'usage (VHU)",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49273",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/signaler-un-changement-sur-la-situation-de-votre-vehicule"
+     },
+     {
+      "id": "SP-R49279",
+      "titre": "Certificat d’immatriculation : signaler un changement de situation personnelle",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49279",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/signaler-un-changement-sur-votre-situation-personnelle"
+     },
+     {
+      "id": "SP-R49287",
+      "titre": "Demander le retrait de la circulation d'un véhicule",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49287",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/signaler-un-changement-sur-la-situation-de-votre-vehicule"
+     },
+     {
+      "id": "SP-R49289",
+      "titre": "Demander la remise en circulation d'un véhicule après une période de retrait",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49289",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/signaler-un-changement-sur-la-situation-de-votre-vehicule"
+     },
+     {
+      "id": "SP-R49291",
+      "titre": "Demander la remise en circulation d'un véhicule réparé (après un accident)",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49291",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/signaler-un-changement-sur-la-situation-de-votre-vehicule"
+     },
+     {
+      "id": "SP-R49386",
+      "titre": "Faire un recours gracieux suite au refus de délivrance d'une carte grise",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49386",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/faire-une-autre-demande"
+     },
+     {
+      "id": "SP-R56736",
+      "titre": "Demander la carte grise d'un véhicule agricole",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R56736",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne"
+     },
+     {
+      "id": "SP-R70560",
+      "titre": "Demande d'un quitus fiscal pour les professionnels",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R70560",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/demander-seulement-un-quitus-fiscal"
+     },
+     {
+      "id": "SP-R70562",
+      "titre": "Immatriculation d'un véhicule et demande de quitus fiscal pour les particuliers",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R70562",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/demarches-en-ligne/immatriculer-un-vehicule-et-demander-un-quitus-fiscal"
+     },
+     {
+      "id": "SP-R72578",
+      "titre": "Agence Nationale des Titres Sécurisés - Démarches immatriculation",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R72578",
+      "service_en_ligne": "https://immatriculation.ants.gouv.fr/"
+     }
+    ]
+   },
+   {
+    "domaine": "permis de conduire",
+    "adresse": "permisdeconduire.ants.gouv.fr",
+    "n": 1343,
+    "neg": 532,
+    "motifs": [
+     [
+      "explication",
+      204
+     ],
+     [
+      "delai",
+      198
+     ]
+    ],
+    "vigilance": true,
+    "demarches_nommees": [
+     [
+      "Demande de renouvellement du permis de conduire en cas de perte, vol, détérioration ou c",
+      647,
+      "nom (absent de l'Observatoire)"
+     ],
+     [
+      "Demande de renouvellement du permis de conduire après expiration du titre",
+      270,
+      "adresse dans l'Observatoire"
+     ],
+     [
+      "Demande de permis de conduire après réussite à l'examen",
+      176,
+      "adresse dans l'Observatoire"
+     ],
+     [
+      "Demande de permis de conduire après suspension, invalidation et annulation dont AM après",
+      132,
+      "nom (absent de l'Observatoire)"
+     ],
+     [
+      "Demande de permis de conduire international",
+      123,
+      "adresse dans l'Observatoire"
+     ]
+    ],
+    "fiches": [
+     {
+      "id": "SP-R42947",
+      "titre": "Demander en ligne le renouvellement d’un permis de conduire perdu ou volé",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R42947",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/perte-ou-vol-de-permis"
+     },
+     {
+      "id": "SP-R45443",
+      "titre": "Demander la fabrication de son permis de conduire à la suite de la réussite à l’examen",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R45443",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/reussite-a-l-examen-du-permis-de-conduire"
+     },
+     {
+      "id": "SP-R49186",
+      "titre": "S’inscrire à l'examen du permis de conduire",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49186",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/inscription-examen-permis"
+     },
+     {
+      "id": "SP-R49276",
+      "titre": "Demander en ligne un nouveau permis de conduire en cas de fin de validité",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49276",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/deterioration-remplacement-du-permis-pliant-3-volets-ou-fin-de-validite"
+     },
+     {
+      "id": "SP-R49299",
+      "titre": "Demande de conversion d'un brevet militaire pour obtenir un permis de conduire civil",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49299",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/conversion-de-brevet-militaire"
+     },
+     {
+      "id": "SP-R50828",
+      "titre": "Demander un permis international",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R50828",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-un-permis-international"
+     },
+     {
+      "id": "SP-R51109",
+      "titre": "Signaler une erreur sur son permis de conduire reçu il y a moins de 6 mois",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R51109",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/signaler-une-erreur-sur-votre-permis"
+     },
+     {
+      "id": "SP-R52141",
+      "titre": "Demande en ligne de permis de conduire après validation de diplôme ou titre professionnel",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R52141",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/validation-de-diplome-professionnel"
+     },
+     {
+      "id": "SP-R55669",
+      "titre": "Échanger un permis étranger ou obtenu dans une Com pour un permis français",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R55669",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/echanger-un-permis-etranger"
+     },
+     {
+      "id": "SP-R56960",
+      "titre": "Demande en ligne de rétablissement du permis de conduire français au retour en France après une expatriation",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R56960",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/"
+     },
+     {
+      "id": "SP-R63504",
+      "titre": "Demande d’inscription à l’examen du permis de conduire dans le cadre d'un retour au permis après une invalidation ou une annulation du permis de conduire",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R63504",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/inscription-examen-permis"
+     },
+     {
+      "id": "SP-R63568",
+      "titre": "Demande de fabrication d’un permis de conduire dans le cadre d'un retour au permis après une invalidation ou une annulation du permis de conduire",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R63568",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/invalidation-ou-annulation-du-permis"
+     },
+     {
+      "id": "SP-R65232",
+      "titre": "Permis de conduire : demande de fabrication à la suite d'une suspension du permis de conduire",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R65232",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/suspension-du-permis"
+     },
+     {
+      "id": "SP-R67336",
+      "titre": "Demander en ligne le remplacement du permis de conduire au format « pliant rose 3 volets » par un permis au format « carte de crédit »",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R67336",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/deterioration-remplacement-du-permis-pliant-3-volets-ou-fin-de-validite"
+     },
+     {
+      "id": "SP-R67351",
+      "titre": "Demander un permis de conduire en cas de détérioration, de fin de validité ou en remplacement d’un permis pliant 3 volets",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R67351",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/deterioration-remplacement-du-permis-pliant-3-volets-ou-fin-de-validite"
+     },
+     {
+      "id": "SP-R67352",
+      "titre": "Demander en ligne un nouveau permis de conduire en cas de changement d'état civil",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R67352",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/-changement-d-etat-civil"
+     },
+     {
+      "id": "SP-R67361",
+      "titre": "Demander en ligne un nouveau permis de conduire à la suite d'une régularisation médicale",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R67361",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/demander-la-fabrication-de-votre-permis-de-conduire/regularisation-medicale"
+     },
+     {
+      "id": "SP-R78702",
+      "titre": "Signaler une erreur sur un permis de conduire international reçu il y a moins de 6 mois ou signaler sa non réception (PCI demandé à partir du 3 mars 2026)",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R78702",
+      "service_en_ligne": "https://permisdeconduire.ants.gouv.fr/demarches-en-ligne/signaler-une-erreur-sur-votre-permis-de-conduire-international"
+     }
+    ]
+   },
+   {
+    "domaine": "passeport et carte d'identité",
+    "adresse": "passeport.ants.gouv.fr",
+    "n": 578,
+    "neg": 413,
+    "motifs": [
+     [
+      "delai",
+      146
+     ],
+     [
+      "explication",
+      139
+     ]
+    ],
+    "vigilance": true,
+    "demarches_nommees": [
+     [
+      "Demande de CNI/Passeport (ANTS)",
+      239,
+      "nom (absent de l'Observatoire)"
+     ],
+     [
+      "Demande de carte nationale d’identité",
+      155,
+      "adresse dans l'Observatoire"
+     ],
+     [
+      "Demande de passeport",
+      135,
+      "adresse dans l'Observatoire"
+     ],
+     [
+      "Demande de CNI/Passeport (Préfectures)",
+      39,
+      "nom (absent de l'Observatoire)"
+     ],
+     [
+      "Demande de carte nationale d'identité auprès des services consulaires",
+      31,
+      "nom (absent de l'Observatoire)"
+     ]
+    ],
+    "fiches": [
+     {
+      "id": "SP-R42946",
+      "titre": "Pré-demande pour une demande de 1er passeport",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R42946",
+      "service_en_ligne": "https://passeport.ants.gouv.fr/demarches-en-ligne/faire-une-premiere-demande-de-passeport"
+     },
+     {
+      "id": "SP-R45668",
+      "titre": "Pré-demande pour une 1re demande de carte d'identité",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R45668",
+      "service_en_ligne": "https://passeport.ants.gouv.fr/demarches-en-ligne/faire-une-premiere-demande-de-carte-nationale-d-identite"
+     },
+     {
+      "id": "SP-R62483",
+      "titre": "Pré-demande pour un renouvellement de carte d'identité",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R62483",
+      "service_en_ligne": "https://passeport.ants.gouv.fr/demarches-en-ligne/effectuer-le-renouvellement-de-votre-carte-didentite"
+     },
+     {
+      "id": "SP-R62484",
+      "titre": "Pré-demande pour un renouvellement de passeport",
+      "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R62484",
+      "service_en_ligne": "https://passeport.ants.gouv.fr/demarches-en-ligne/effectuer-le-renouvellement-de-votre-passeport"
+     }
+    ]
+   }
+  ],
+  "noms_hors_domaine": [
+   [
+    "Inscription en ligne à l'examen du permis de conduire",
+    108,
+    "autre service (securite-routiere.gouv.fr)"
+   ],
+   [
+    "Demande de certificat de situation administrative (non gage)",
+    56,
+    "autre service (siv.interieur.gouv.fr)"
+   ],
+   [
+    "Mes Points Permis",
+    26,
+    "autre service (mespoints.permisdeconduire.gouv.fr)"
+   ],
+   [
+    "Déclaration des revenus",
+    21,
+    "autre service (impots.gouv.fr)"
+   ],
+   [
+    "Demande d'inscription sur les listes électorales communales",
+    9,
+    "autre service (inscriptionelectorale.service-public.fr)"
+   ],
+   [
+    "Achat de timbre fiscal",
+    8,
+    "autre service (timbres.impots.gouv.fr)"
+   ],
+   [
+    "Changement d'adresse (Ameli)",
+    6,
+    "autre service (assure.ameli.fr)"
+   ],
+   [
+    "Demander une carte vitale",
+    6,
+    "autre service (assure.ameli.fr)"
+   ],
+   [
+    "Délivrance des attestations de réussite",
+    5,
+    "hors des trois domaines"
+   ],
+   [
+    "Demande de certificat qualité de l'air (Crit’air)",
+    5,
+    "autre service (certificat-air.gouv.fr)"
+   ],
+   [
+    "Demande d'acte de naissance (à l'étranger)",
+    4,
+    "autre service (service-public.gouv.fr)"
+   ],
+   [
+    "Paiement amendes (Amendes)",
+    3,
+    "autre service (amendes.gouv.fr)"
+   ],
+   [
+    "Demande d'aide financière",
+    3,
+    "hors des trois domaines"
+   ],
+   [
+    "Carte vitale : perte et vol (tous régimes partenaires gérés par le régime général)",
+    3,
+    "autre service (assure.ameli.fr)"
+   ],
+   [
+    "Dépôt de plainte en ligne (police)",
+    3,
+    "hors des trois domaines"
+   ],
+   [
+    "Assistance aux Demandes d'Autorisation d'Urbanisme (Permis de construire en ligne) - ADA",
+    3,
+    "hors des trois domaines"
+   ],
+   [
+    "Utilisation du chèque énergie",
+    3,
+    "autre service (chequeenergie.gouv.fr)"
+   ],
+   [
+    "Déclaration trimestrielle AAH (Allocation Adulte Handicapé)",
+    2,
+    "autre service (connect.caf.fr)"
+   ],
+   [
+    "Demande de copie ou d'extrait d'acte d'état civil par voie dématérialisée",
+    2,
+    "hors des trois domaines"
+   ],
+   [
+    "Demande d'inscription au registre des transporteurs routiers",
+    2,
+    "hors des trois domaines"
+   ],
+   [
+    "Inscription consulaire (registre des Français établis hors de France)",
+    2,
+    "autre service (service-public.gouv.fr)"
+   ],
+   [
+    "Déclaration de loyer pour l'aide au logement",
+    2,
+    "hors des trois domaines"
+   ],
+   [
+    "CESU - Déclarer les heures des volets sociaux (Chèque Emploi Service Universel)",
+    2,
+    "autre service (cesu.urssaf.fr)"
+   ],
+   [
+    "Renouvellement mensuel de la situation de demandeur d’emploi (France Travail)",
+    2,
+    "autre service (candidat.francetravail.fr)"
+   ],
+   [
+    "Consulter l’historique officiel et la situation administrative d’un véhicule d’occasion",
+    2,
+    "hors des trois domaines"
+   ],
+   [
+    "Demande de crédits du Pass culture (jeunes de 15 à 17 ans)",
+    1,
+    "hors des trois domaines"
+   ],
+   [
+    "Demande de bourse d'enseignement supérieur sur critères sociaux (BCS)",
+    1,
+    "hors des trois domaines"
+   ],
+   [
+    "Demande de certificat individuel de produits phytopharmaceutiques",
+    1,
+    "hors des trois domaines"
+   ],
+   [
+    "Demande d'information émise par courriel (Insee)",
+    1,
+    "hors des trois domaines"
+   ],
+   [
+    "Demande d'autorisation de plantation des vignes (Vitiplantation)",
+    1,
+    "hors des trois domaines"
+   ],
+   [
+    "CESU - Créer son compte - Futur employeur (Chèque Emploi Service Universel)",
+    1,
+    "autre service (cesu.urssaf.fr)"
+   ],
+   [
+    "Attestations professionnelles (MSA)",
+    1,
+    "autre service (monespaceprive.msa.fr)"
+   ],
+   [
+    "Changement de situation (France Travail)",
+    1,
+    "autre service (candidat.francetravail.fr)"
+   ],
+   [
+    "Créer son compte sur le site majdc.fr",
+    1,
+    "autre service (presaje.sga.defense.gouv.fr)"
+   ],
+   [
+    "Recensement de la population",
+    1,
+    "autre service (le-recensement-et-moi.fr)"
+   ],
+   [
+    "Paiement impôts particuliers",
+    1,
+    "autre service (cfspart-idp.impots.gouv.fr)"
+   ],
+   [
+    "Gérer mon prélèvement à la source",
+    1,
+    "autre service (impots.gouv.fr)"
+   ],
+   [
+    "Formalité de l'enregistrement en ligne (dons, cessions de droits sociaux)",
+    1,
+    "autre service (impots.gouv.fr)"
+   ],
+   [
+    "Demande de carte européenne d'assurance maladie (MSA)",
+    1,
+    "autre service (monespaceprive.msa.fr)"
+   ],
+   [
+    "Déclaration de résultat BIC",
+    1,
+    "hors des trois domaines"
+   ],
+   [
+    "IS",
+    1,
+    "hors des trois domaines"
+   ],
+   [
+    "BA pour régime RSI",
+    1,
+    "hors des trois domaines"
+   ],
+   [
+    "BNC et RF des SCI déposant une 2072",
+    1,
+    "hors des trois domaines"
+   ],
+   [
+    "Demande d'acte de mariage (célébré à l'étranger)",
+    1,
+    "autre service (service-public.gouv.fr)"
+   ],
+   [
+    "Demande d'aide juridictionnelle",
+    1,
+    "autre service (aidejuridictionnelle.justice.fr)"
+   ],
+   [
+    "Demande d'extrait de casier judiciaire (bulletin n°3)",
+    1,
+    "autre service (casier-judiciaire.justice.gouv.fr)"
+   ],
+   [
+    "Demande de logement social – demande initiale",
+    1,
+    "autre service (demande-logement-social.gouv.fr)"
+   ],
+   [
+    "Paiement de la contribution de vie étudiante et de campus (CVEC)",
+    1,
+    "autre service (cvec.etudiant.gouv.fr)"
+   ],
+   [
+    "Gérer Mes Biens Immobiliers – Déclaration d’occupation",
+    1,
+    "autre service (impots.gouv.fr)"
+   ],
+   [
+    "Mettre à jour ses données personnelles pour la Journée Défense et Citoyenneté",
+    1,
+    "autre service (presaje.sga.defense.gouv.fr)"
+   ],
+   [
+    "Formalités des entreprises (création, modification, cessation)",
+    1,
+    "autre service (procedures.inpi.fr)"
+   ],
+   [
+    "Traitement des réclamations",
+    1,
+    "hors des trois domaines"
+   ],
+   [
+    "Remboursement de timbres électroniques",
+    1,
+    "autre service (timbres.impots.gouv.fr)"
+   ],
+   [
+    "Déclarer un changement de situation pour les prestations familiales",
+    1,
+    "autre service (connect.caf.fr)"
+   ]
+  ],
+  "fiches_ants_non_retenues": [
+   {
+    "id": "SP-R1580",
+    "titre": "Suivez votre demande de carte d'identité",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1580",
+    "service_en_ligne": "https://moncompte.ants.gouv.fr/suivi_cni_passeport"
+   },
+   {
+    "id": "SP-R1827",
+    "titre": "Suivre l'état d'avancement d'une demande de passeport",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1827",
+    "service_en_ligne": "https://moncompte.ants.gouv.fr/suivi_cni_passeport"
+   },
+   {
+    "id": "SP-R20907",
+    "titre": "Suivre la demande de certificat d’immatriculation",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R20907",
+    "service_en_ligne": "https://moncompte.ants.gouv.fr/connexion"
+   },
+   {
+    "id": "SP-R36427",
+    "titre": "Suivre l'avancement d'une demande de permis de conduire",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R36427",
+    "service_en_ligne": "https://moncompte.ants.gouv.fr/connexion"
+   },
+   {
+    "id": "SP-R49646",
+    "titre": "Demander un certificat W garage",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49646",
+    "service_en_ligne": "https://pha.ants.gouv.fr/demarches-en-ligne/enregistrer-une-autre-demande/faire-une-operation-liee-au-commerce-de-l-automobile?lang=fr"
+   },
+   {
+    "id": "SP-R49786",
+    "titre": "Suivre votre demande de carte d'identité",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49786",
+    "service_en_ligne": "https://moncompte.ants.gouv.fr/suivi_cni_passeport"
+   },
+   {
+    "id": "SP-R49796",
+    "titre": "Déclarer la réception de son passeport",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49796",
+    "service_en_ligne": "https://telereception-passeport.ants.gouv.fr/"
+   },
+   {
+    "id": "SP-R61459",
+    "titre": "Accéder à son compte ANTS pour faire une demande en ligne de permis de conduire",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R61459",
+    "service_en_ligne": "https://moncompte.ants.gouv.fr/connexion"
+   },
+   {
+    "id": "SP-R66200",
+    "titre": "Simplimmat.gouv : application pour smartphone pour déclarer la cession d'un véhicule et demander votre nouvelle carte grise",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R66200",
+    "service_en_ligne": "https://ants.gouv.fr/nos-missions/les-solutions-numeriques/simplimmat"
+   },
+   {
+    "id": "SP-R71022",
+    "titre": "Suivre l'expédition d'un certificat d'immatriculation",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R71022",
+    "service_en_ligne": "https://moncompte.ants.gouv.fr/suivi_immatriculation"
+   }
+  ]
+ },
+ "france_travail": {
+  "structure": "France Travail (directions régionales additionnées)",
+  "n": 2361,
+  "neg": 1510,
+  "motifs": [
+   [
+    "explication",
+    671
+   ],
+   [
+    "joignable",
+    377
+   ]
+  ],
+  "vigilance": true,
+  "directions_regionales": [
+   [
+    "DR ILE DE FRANCE-France Travail",
+    581
+   ],
+   [
+    "DR AUVERGNE-RHONE-ALPES-France Travail",
+    261
+   ],
+   [
+    "DR OCCITANIE-France Travail",
+    228
+   ],
+   [
+    "DR PROVENCE ALPES COTE D'AZUR-France Travail",
+    201
+   ],
+   [
+    "DR NOUVELLE-AQUITAINE-France Travail",
+    189
+   ],
+   [
+    "DR GRAND EST-France Travail",
+    161
+   ],
+   [
+    "DR HAUTS-DE-FRANCE-France Travail",
+    155
+   ],
+   [
+    "DR BOURGOGNE-FRANCHE-COMTE-France Travail",
+    119
+   ],
+   [
+    "DR PAYS DE LA LOIRE-France Travail",
+    106
+   ],
+   [
+    "DR NORMANDIE-France Travail",
+    101
+   ],
+   [
+    "DR BRETAGNE-France Travail",
+    96
+   ],
+   [
+    "DR CENTRE-VAL DE LOIRE-France Travail",
+    90
+   ],
+   [
+    "DR GUADELOUPE-France Travail",
+    30
+   ],
+   [
+    "DR REUNION-France Travail",
+    20
+   ],
+   [
+    "DR MARTINIQUE-France Travail",
+    11
+   ],
+   [
+    "DR CORSE-France Travail",
+    6
+   ],
+   [
+    "DR GUYANE-France Travail",
+    4
+   ],
+   [
+    "DR MAYOTTE-France Travail",
+    2
+   ],
+   [
+    "DR France Travail Services-France Travail",
+    1
+   ]
+  ],
+  "retours_sans_demarche_nommee": 1711,
+  "demarches_nommees_distinctes": 55,
+  "demarches_nommees": [
+   [
+    "Renouvellement mensuel de la situation de demandeur d’emploi (France Travail)",
+    260
+   ],
+   [
+    "S'inscrire ou se réinscrire comme demandeur d'emploi",
+    71
+   ],
+   [
+    "Rechercher des offres d’emploi (France Travail)",
+    65
+   ],
+   [
+    "Changement de situation (France Travail)",
+    58
+   ],
+   [
+    "Candidater à une offre d’emploi (France Travail)",
+    48
+   ],
+   [
+    "Demande d'allocation de solidarité spécifique (France Travail)",
+    24
+   ],
+   [
+    "Rechercher sa formation (France Travail)",
+    21
+   ],
+   [
+    "Notification des droits au chômage",
+    20
+   ],
+   [
+    "Pourvoi des offres d’emploi déposées à France Travail",
+    19
+   ],
+   [
+    "Demande d'aide financière",
+    10
+   ],
+   [
+    "Déclaration des revenus",
+    8
+   ],
+   [
+    "Demande d'indemnisation d'activité partielle",
+    7
+   ],
+   [
+    "URSSAF - Déclaration préalable à l'embauche (DPAE)",
+    5
+   ],
+   [
+    "Déclaration trimestrielle RSA",
+    5
+   ],
+   [
+    "Attestation de paiement d'indemnités journalières",
+    5
+   ]
+  ],
+  "autres_structures_france_travail_non_comptees": {
+   "structures": 186,
+   "retours": 272
+  },
+  "domaine": "candidat.francetravail.fr",
+  "fiches": [
+   {
+    "id": "SP-R17654",
+    "titre": "Guide des simulateurs d'allocations et aides de France Travail (anciennement Pôle emploi)",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R17654",
+    "service_en_ligne": "https://candidat.francetravail.fr/portail-simulateurs/"
+   },
+   {
+    "id": "SP-R31528",
+    "titre": "Rechercher une offre d'emploi sur France Travail",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R31528",
+    "service_en_ligne": "https://candidat.francetravail.fr/offres/emploi"
+   },
+   {
+    "id": "SP-R49998",
+    "titre": "S'inscrire à France Travail (anciennement Pôle emploi)",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49998",
+    "service_en_ligne": "https://candidat.francetravail.fr/inscription-en-ligne/"
+   },
+   {
+    "id": "SP-R51814",
+    "titre": "Rechercher une formation avec France Travail (anciennement Pôle emploi)",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R51814",
+    "service_en_ligne": "https://candidat.francetravail.fr/formations/recherche;JSESSIONID_RECH_FORMATION=UNShRQNz-R4NwHEpzd4ejBiBD17xli95fqWB6-RaVmXYd_Kx5eIF!-87540300?range=0-9&tri=0"
+   },
+   {
+    "id": "SP-R55515",
+    "titre": "Se réinscrire à France Travail",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R55515",
+    "service_en_ligne": "https://candidat.francetravail.fr/inscription-en-ligne/"
+   },
+   {
+    "id": "SP-R67653",
+    "titre": "Guide des simulateurs d'allocations et aides de France Travail (anciennement Pôle emploi)",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R67653",
+    "service_en_ligne": "https://candidat.francetravail.fr/portail-simulateurs/"
+   },
+   {
+    "id": "SP-R74406",
+    "titre": "Connaître les aides France Travail à la création ou reprise d'entreprise",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R74406",
+    "service_en_ligne": "https://candidat.francetravail.fr/portail-simulateurs/parcour-reprise-entreprise"
+   },
+   {
+    "id": "SP-R74358",
+    "titre": "Estimer les allocations et aides possibles à la fin de son activité non salariée",
+    "url_fiche": "https://www.service-public.gouv.fr/professionnels-entreprises/vosdroits/R74358",
+    "service_en_ligne": "https://candidat.francetravail.fr/portail-simulateurs/allocations-et-aides/parcours/votre-situation"
+   },
+   {
+    "id": "SP-R74360",
+    "titre": "Estimer le montant des allocations et aides en cas de reprise d'un emploi salarié",
+    "url_fiche": "https://www.service-public.gouv.fr/professionnels-entreprises/vosdroits/R74360",
+    "service_en_ligne": "https://candidat.francetravail.fr/portail-simulateurs/allocations-et-aides/parcours/votre-situation"
+   },
+   {
+    "id": "SP-R74361",
+    "titre": "Estimer le montant des allocations en cas de perte d’un emploi salarié",
+    "url_fiche": "https://www.service-public.gouv.fr/professionnels-entreprises/vosdroits/R74361",
+    "service_en_ligne": "https://candidat.francetravail.fr/portail-simulateurs/allocations-et-aides/parcours/votre-situation"
+   },
+   {
+    "id": "SP-R74363",
+    "titre": "Estimer le montant des revenus en cas de formation",
+    "url_fiche": "https://www.service-public.gouv.fr/professionnels-entreprises/vosdroits/R74363",
+    "service_en_ligne": "https://candidat.francetravail.fr/portail-simulateurs/allocations-et-aides/parcours/votre-situation"
+   }
+  ],
+  "fiches_autres_domaines_france_travail": [
+   {
+    "id": "SP-R10665",
+    "titre": "France Travail : espace personnel",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R10665",
+    "service_en_ligne": "https://www.francetravail.fr/candidat/votre-espace-personnel.html"
+   },
+   {
+    "id": "SP-R14578",
+    "titre": "France Travail : services en ligne pour les employeurs (attestations employeur, etc.)",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R14578",
+    "service_en_ligne": "https://gestion.pole-emploi.fr/espaceemployeur/espaceemployeur/authentification/authentification"
+   },
+   {
+    "id": "SP-R1481",
+    "titre": "Espace Particulier-employeur : création et gestion des attestations employeur France Travail",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1481",
+    "service_en_ligne": "https://particulieremployeur.francetravail.fr/particulieremployeur/authentification/authentification"
+   },
+   {
+    "id": "SP-R2577",
+    "titre": "Offres d'emploi MRS (méthode de recrutement par simulation)",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R2577",
+    "service_en_ligne": "https://candidat.pole-emploi.fr/offres/recherche?offresPartenaires=true&rayon=10&topMrs=true&tri=0"
+   },
+   {
+    "id": "SP-R42832",
+    "titre": "Mobilité internationale",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R42832",
+    "service_en_ligne": "https://www.pole-emploi.fr/international/mobilite-internationale.html"
+   },
+   {
+    "id": "SP-R51809",
+    "titre": "Les outils pratiques de France Travail (anciennement Pôle emploi)",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R51809",
+    "service_en_ligne": "https://www.francetravail.org/acteursemploi/des-outils-a-votre-disposition.html"
+   },
+   {
+    "id": "SP-R51812",
+    "titre": "La bonne boîte : trouver l'entreprise qui embauche sans passer d'offre d'emploi",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R51812",
+    "service_en_ligne": "https://labonneboite.francetravail.fr/"
+   },
+   {
+    "id": "SP-R67946",
+    "titre": "Trouver une aide pour financer la formation au permis de conduire",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R67946",
+    "service_en_ligne": "https://mes-aides.francetravail.fr/transport-et-mobilite/financer-mon-permis"
+   },
+   {
+    "id": "SP-R14577",
+    "titre": "Simulation des cotisations à l'assurance chômage",
+    "url_fiche": "https://www.service-public.gouv.fr/professionnels-entreprises/vosdroits/R14577",
+    "service_en_ligne": "https://www4.pole-emploi.fr/espaceE/OutilsSimuNA.do"
+   },
+   {
+    "id": "SP-R44379",
+    "titre": "Publier une offre d'emploi en ligne",
+    "url_fiche": "https://www.service-public.gouv.fr/professionnels-entreprises/vosdroits/R44379",
+    "service_en_ligne": "https://pro.francetravail.fr/accueil/description/publier-offre"
+   },
+   {
+    "id": "SP-R57427",
+    "titre": "Demande d'aide à l'embauche dans le cadre des contrats en alternance pour l'embauche de demandeurs d'emploi de 26 ans ou plus / 45 ans et plus",
+    "url_fiche": "https://www.service-public.gouv.fr/professionnels-entreprises/vosdroits/R57427",
+    "service_en_ligne": "https://entreprise.francetravail.fr/accueil/description/contrat-professionnalisation"
+   },
+   {
+    "id": "SP-R60439",
+    "titre": "Liste des formations à la création d'entreprise - France Travail (anciennement Pôle emploi)",
+    "url_fiche": "https://www.service-public.gouv.fr/professionnels-entreprises/vosdroits/R60439",
+    "service_en_ligne": "https://candidat.pole-emploi.fr/formations/recherche?quoi=creation+d+entreprise&range=30-39&tri=0"
+   },
+   {
+    "id": "SP-R62664",
+    "titre": "Trouver une formation d'agent immobilier",
+    "url_fiche": "https://www.service-public.gouv.fr/professionnels-entreprises/vosdroits/R62664",
+    "service_en_ligne": "https://candidat.pole-emploi.fr/formations/recherche?ou=REGION-53&quoi=agent+immobilier&range=0-9&tri=0"
+   },
+   {
+    "id": "SP-R67149",
+    "titre": "Où trouver ma formation HACCP hygiène alimentaire",
+    "url_fiche": "https://www.service-public.gouv.fr/professionnels-entreprises/vosdroits/R67149",
+    "service_en_ligne": "https://candidat.pole-emploi.fr/formations/recherche?quoi=HACCP&range=0-9&tri=0"
+   },
+   {
+    "id": "SP-R72787",
+    "titre": "Créer une demande de Préparation Opérationnelle à l'Emploi Individuelle (POEI)",
+    "url_fiche": "https://www.service-public.gouv.fr/professionnels-entreprises/vosdroits/R72787",
+    "service_en_ligne": "https://entreprise.francetravail.fr/accueil/description/poei"
+   },
+   {
+    "id": "SP-R74839",
+    "titre": "Estimer le montant de l’Allocation des Travailleurs Indépendants (ATI)",
+    "url_fiche": "https://www.service-public.gouv.fr/professionnels-entreprises/vosdroits/R74839",
+    "service_en_ligne": "https://chomage-independant.francetravail.fr/simulateur"
+   }
+  ]
+ },
+ "etrangers": {
+  "definition": "retour dont une typologie est ['ANEF', 'OFII', 'Office français de protection des réfugiés et apatrides (OFPRA)', 'Parrainage.refugies.info'], ou un tag métier ['Aide aux réfugiés', 'Asile', 'Naturalisation', 'Titre de séjour'], ou une démarche nommée liée aux étrangers (hors Français établis à l'étranger)",
+  "retours": {
+   "tout_le_fichier": 9404,
+   "deux_ans": 5654
+  },
+  "annees": [
+   [
+    "2021",
+    7
+   ],
+   [
+    "2022",
+    29
+   ],
+   [
+    "2023",
+    1233
+   ],
+   [
+    "2024",
+    2754
+   ],
+   [
+    "2025",
+    3112
+   ],
+   [
+    "2026",
+    2269
+   ]
+  ],
+  "par_typologie": {
+   "ANEF": {
+    "tout_le_fichier": 3810,
+    "deux_ans": 2647
+   },
+   "OFII": {
+    "tout_le_fichier": 127,
+    "deux_ans": 38
+   },
+   "Office français de protection des réfugiés et apatrides (OFPRA)": {
+    "tout_le_fichier": 25,
+    "deux_ans": 15
+   },
+   "Parrainage.refugies.info": {
+    "tout_le_fichier": 3,
+    "deux_ans": 0
+   }
+  },
+  "par_tag": {
+   "Aide aux réfugiés": {
+    "tout_le_fichier": 7,
+    "deux_ans": 3
+   },
+   "Asile": {
+    "tout_le_fichier": 15,
+    "deux_ans": 8
+   },
+   "Naturalisation": {
+    "tout_le_fichier": 1027,
+    "deux_ans": 486
+   },
+   "Titre de séjour": {
+    "tout_le_fichier": 7926,
+    "deux_ans": 4882
+   }
+  },
+  "sans_demarche_nommee": {
+   "tout_le_fichier": 9242,
+   "deux_ans": 5500
+  },
+  "sans_structure": {
+   "tout_le_fichier": 133,
+   "deux_ans": 55
+  },
+  "demarches_nommees_qui_citent_ces_mots": [
+   [
+    "Demande d'acte de naissance (à l'étranger)",
+    198,
+    "Français établis à l'étranger (hors sujet)"
+   ],
+   [
+    "Demande de transcription d'un acte survenu à l'étranger",
+    145,
+    "Français établis à l'étranger (hors sujet)"
+   ],
+   [
+    "Vote pour les Français de l’Etranger aux élections consulaires",
+    107,
+    "Français établis à l'étranger (hors sujet)"
+   ],
+   [
+    "Demande d'acte de mariage (célébré à l'étranger)",
+    61,
+    "Français établis à l'étranger (hors sujet)"
+   ],
+   [
+    "Inscription dans l'enseignement supérieur français / demande de visa « étudiant » procéd",
+    21,
+    "étrangers"
+   ],
+   [
+    "Vote pour les Français de l’Etranger aux élections législatives",
+    13,
+    "Français établis à l'étranger (hors sujet)"
+   ],
+   [
+    "Demande d'acte de décès (survenu à l'étranger)",
+    6,
+    "Français établis à l'étranger (hors sujet)"
+   ],
+   [
+    "Visa de reconnaissance",
+    4,
+    "étrangers"
+   ],
+   [
+    "Inscription sur Fil d'Ariane (alerte en cas de crise lors d'un voyage à l'étranger)",
+    1,
+    "Français établis à l'étranger (hors sujet)"
+   ]
+  ],
+  "structures_qui_citent_ces_mots": [
+   [
+    "Direction des Français à l'étranger et de l'administration consulaire",
+    3637,
+    "Français établis à l'étranger (hors sujet)"
+   ]
+  ],
+  "structures_des_retours": [
+   [
+    "Services numériques du ministère de l'Intérieur",
+    2249
+   ],
+   [
+    "Préfecture de la Seine-Saint-Denis",
+    1342
+   ],
+   [
+    "Préfecture des Hauts-de-Seine",
+    718
+   ],
+   [
+    "Préfecture de l'Essonne",
+    524
+   ],
+   [
+    "Préfecture du Val-de-Marne",
+    501
+   ],
+   [
+    "Préfecture des Yvelines",
+    381
+   ],
+   [
+    "Préfecture du Rhône",
+    334
+   ],
+   [
+    "Préfecture du Nord",
+    329
+   ],
+   [
+    "Préfecture de l'Isère",
+    301
+   ],
+   [
+    "Préfecture de la région île de France",
+    271
+   ],
+   [
+    "Préfecture des Bouches-du-Rhône",
+    222
+   ],
+   [
+    "Préfecture du Val-d'Oise",
+    214
+   ],
+   [
+    "Préfecture des Alpes-Maritimes",
+    195
+   ],
+   [
+    "Préfecture de police de Paris-Délim",
+    140
+   ],
+   [
+    "Préfecture du Puy-de-Dôme",
+    139
+   ],
+   [
+    "France Titres-ANTS",
+    133
+   ],
+   [
+    "Préfecture de l'Hérault",
+    102
+   ],
+   [
+    "Direction des Français à l'étranger et de l'administration consulaire",
+    101
+   ],
+   [
+    "Préfecture de la Seine-et-Marne",
+    91
+   ],
+   [
+    "Préfecture de la Gironde",
+    90
+   ],
+   [
+    "Préfecture du Gard",
+    81
+   ],
+   [
+    "Préfecture de la Haute-Savoie",
+    81
+   ],
+   [
+    "Sous-préfecture d'Antony",
+    75
+   ],
+   [
+    "Préfecture de la Loire-Atlantique",
+    72
+   ],
+   [
+    "Préfecture du Bas-Rhin",
+    65
+   ],
+   [
+    "Préfecture de la Seine-Maritime",
+    64
+   ],
+   [
+    "Préfecture de l'Ille-et-Vilaine",
+    64
+   ],
+   [
+    "Consulat Général de France à Dakar",
+    55
+   ],
+   [
+    "Préfecture du Loiret",
+    51
+   ],
+   [
+    "Sous-Préfecture d'Aix-en-Provence",
+    49
+   ]
+  ],
+  "typologies_des_retours": [
+   [
+    "Préfecture",
+    6536
+   ],
+   [
+    "ANEF",
+    3810
+   ],
+   [
+    "Sous-préfecture",
+    535
+   ],
+   [
+    "Réseau consulaire",
+    374
+   ],
+   [
+    "France Titres - ANTS",
+    156
+   ],
+   [
+    "OFII",
+    127
+   ],
+   [
+    "Defenseur des droits",
+    65
+   ],
+   [
+    "Services numériques du ministère de l'Intérieur",
+    61
+   ],
+   [
+    "Franceconnect",
+    49
+   ],
+   [
+    "Service Central d'Etat Civil",
+    37
+   ],
+   [
+    "Démarches simplifiées",
+    28
+   ],
+   [
+    "Service-public.gouv.fr",
+    28
+   ],
+   [
+    "Office français de protection des réfugiés et apatrides (OFPRA)",
+    25
+   ],
+   [
+    "CAF",
+    24
+   ],
+   [
+    "Ville - Commune",
+    18
+   ]
+  ],
+  "lignes_observatoire": [
+   [
+    "2491",
+    "Subvention interministérielle pour le séjour de mon enfant en centre de loisirs sans hébergement",
+    "igesa.fr"
+   ],
+   [
+    "1629",
+    "Demande de regroupement familial (ressortissants étrangers)",
+    "etrangers-en-france.interieur.gouv.fr"
+   ],
+   [
+    "1772",
+    "Demande de titre de séjour",
+    "administration-etrangers-en-france.interieur.gouv.fr"
+   ],
+   [
+    "3414",
+    "Demande de Visa (France Visa)",
+    "france-visas.gouv.fr"
+   ]
+  ],
+  "fiches_vers_anef": [
+   {
+    "id": "SP-R52684",
+    "titre": "Valider un visa de long séjour valant titre de séjour (VLS-TS) et payer la taxe",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R52684",
+    "service_en_ligne": "https://administration-etrangers-en-france.interieur.gouv.fr/particuliers/#/"
+   },
+   {
+    "id": "SP-R57629",
+    "titre": "Demander un titre de séjour étudiant",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R57629",
+    "service_en_ligne": "https://administration-etrangers-en-france.interieur.gouv.fr/particuliers/#/"
+   },
+   {
+    "id": "SP-R58908",
+    "titre": "Demander en ligne une autorisation de travail pour embaucher un salarié étranger",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58908",
+    "service_en_ligne": "https://administration-etrangers-en-france.interieur.gouv.fr/immiprousager/#/authentification"
+   },
+   {
+    "id": "SP-R59398",
+    "titre": "Faire une demande sur internet pour un titre de séjour, un changement de situation, un titre de voyage, une demande de naturalisation - ANEF",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R59398",
+    "service_en_ligne": "https://administration-etrangers-en-france.interieur.gouv.fr/particuliers/#/"
+   },
+   {
+    "id": "SP-R59426",
+    "titre": "Faire viser une convention de stage de plus de 3 mois d'un ressortissant étranger",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R59426",
+    "service_en_ligne": "https://administration-etrangers-en-france.interieur.gouv.fr/particuliers/#/"
+   },
+   {
+    "id": "SP-R60781",
+    "titre": "Demander un avis sur un projet de carte de séjour temporaire « entrepreneur/profession libérale »",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R60781",
+    "service_en_ligne": "https://administration-etrangers-en-france.interieur.gouv.fr/immiprousager/#/information"
+   },
+   {
+    "id": "SP-R60835",
+    "titre": "Demande en ligne de naturalisation française ou de réintégration dans la nationalité française",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R60835",
+    "service_en_ligne": "https://administration-etrangers-en-france.interieur.gouv.fr/particuliers/#/espace-personnel/connexion-inscription"
+   },
+   {
+    "id": "SP-R62504",
+    "titre": "Demande de titre de séjour",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R62504",
+    "service_en_ligne": "https://administration-etrangers-en-france.interieur.gouv.fr/particuliers/#/sejour/triage-demandeur"
+   },
+   {
+    "id": "SP-R64360",
+    "titre": "Demander ou renouveler un DCEM",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R64360",
+    "service_en_ligne": "https://administration-etrangers-en-france.interieur.gouv.fr/particuliers/#/sejour/document-voyage"
+   },
+   {
+    "id": "SP-R64681",
+    "titre": "Connexion à votre compte personnel administration étranger en France",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R64681",
+    "service_en_ligne": "https://administration-etrangers-en-france.interieur.gouv.fr/particuliers/#/"
+   },
+   {
+    "id": "SP-R65024",
+    "titre": "Attestation employeur pour les dossiers talent/motifs salarié",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R65024",
+    "service_en_ligne": "https://administration-etrangers-en-france.interieur.gouv.fr/particuliers/assets/docs/attestation-employeur-PT.pdf"
+   },
+   {
+    "id": "SP-R65534",
+    "titre": "Demander en ligne une modification ou une rectification d'un décret de naturalisation française",
+    "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R65534",
+    "service_en_ligne": "https://administration-etrangers-en-france.interieur.gouv.fr/particuliers/#/espace-personnel/connexion-inscription"
+   }
+  ]
+ },
+ "prefectures": {
+  "definition_etrangers": "comme pour la partie étrangers",
+  "structures": [
+   {
+    "structure": "Préfecture de la Seine-Saint-Denis",
+    "n": 902,
+    "neg": 835,
+    "motifs": [
+     [
+      "delai",
+      680
+     ],
+     [
+      "explication",
+      350
+     ]
+    ],
+    "etrangers": 817,
+    "part_etrangers": 0.906,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 85,
+     "neg": 72,
+     "motifs": [
+      [
+       "delai",
+       44
+      ],
+      [
+       "explication",
+       37
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 65,
+    "demarches_dn_etrangers": [
+     [
+      "DN-100387",
+      "Demande de titre pour étrangers victimes de soumission à des conditions d'hébergement incompatibles avec la dignité humaine (art L. 425-11 du CESEDA) - Arrondissement du Raincy"
+     ],
+     [
+      "DN-29887",
+      "Demande d'APS post master / titre de séjour recherche d'emploi ou création d'entreprise / Etranger ayant satisfait aux épreuves du concours d'entrée dans un établissement d'enseignement supérieur - Arrondissement de…"
+     ],
+     [
+      "DN-156211",
+      "Naturalisation par déclaration au TITRE DE LA RESIDENCE EN FRANCE ET DE LA QUALITE D’ASCENDANT DE FRANÇAIS"
+     ],
+     [
+      "DN-156115",
+      "Naturalisation par déclaration Au TITRE DU MARIAGE AVEC UN(E) CONJOINT(E) DE NATIONALITE FRANÇAISE"
+     ],
+     [
+      "DN-105853",
+      "Renouvellement de titre de séjour - Vie Professionnelle - Arrondissement de Bobigny"
+     ],
+     [
+      "DN-29633",
+      "Demande de premier titre de séjour vie privée et familiale"
+     ],
+     [
+      "DN-117059",
+      "Binationaux-Déclaration d'option Franco-Israélien, Franco-Suisse"
+     ],
+     [
+      "DN-105874",
+      "Renouvellement de titre de séjour - Vie privée et familliale - Arrondissement de Bobigny"
+     ],
+     [
+      "DN-128392",
+      "Arrondissement du Raincy - Renouvellement des titres de séjour « Article 50 TUE/Article 18(1) Accord de retrait du Royaume-Uni de l’UE » valables 5 ans arrivant à expiration ou renouvellement d'Andorrans"
+     ],
+     [
+      "DN-100543",
+      "Demande d'autorisation provisoire de séjour en tant que parent ou autorité parentale d'un étranger mineur dont l'état de santé nécessite une prise en charge médicale (Article L. 425-10 du CESEDA) - Arrondissement du…"
+     ],
+     [
+      "DN-128854",
+      "Demande de changement de statut étudiant à salarié ou passeport talent/ talent \"profession médicale et de la pharmacie\""
+     ],
+     [
+      "DN-100438",
+      "Demande d'autorisation provisoire de séjour en tant que parent ou autorité parentale d'un étranger mineur dont l'état de santé nécessite une prise en charge médicale (Article L. 425-10 du CESEDA) - Préfecture de la…"
+     ],
+     [
+      "DN-99919",
+      "Demande de titre pour étrangers victimes de soumission à des conditions d'hébergement incompatibles avec la dignité humaine (art L. 425-11 du CESEDA) - Prefecture de Bobigny"
+     ],
+     [
+      "DN-130671",
+      "Demande d'APS post master / titre de séjour recherche d'emploi ou création d'entreprise / Etranger ayant satisfait aux épreuves du concours d'entrée dans un établissement d'enseignement supérieur - Arrondissement du…"
+     ],
+     [
+      "DN-32159",
+      "Demande de premier titre de séjour vie professionnelle"
+     ],
+     [
+      "DN-29535",
+      "Demande de premier titre de séjour visa mineur scolarisé / stagiaire"
+     ],
+     [
+      "DN-127383",
+      "Arrondissement de Bobigny - Renouvellement des titres de séjour « Article 50 TUE/Article 18(1) Accord de retrait du Royaume-Uni de l’UE » valables 5 ans arrivant à expiration ou Andorrans"
+     ],
+     [
+      "DN-156207",
+      "Naturalisation par déclaration EN QUALITE DE FRERE OU SŒUR DE FRANÇAIS (article 21-13-2 du code civil)"
+     ],
+     [
+      "DN-29943",
+      "Demande de changement de statut étudiant à salarié ou passeport talent / Demande talent profession médicale et de la pharmacie"
+     ],
+     [
+      "DN-153705",
+      "Arrondissement de Bobigny : Renouvellement de récépissé arrivé à échéance"
+     ],
+     [
+      "DN-107803",
+      "Droit d'option franco-algérien - Seine-Saint-Denis - 93"
+     ],
+     [
+      "DN-153608",
+      "Préfecture de la Seine-Saint-Denis : Première demande ou renouvellement d'une APS pour les personnes déplacées d'Ukraine (protection temporaire)"
+     ],
+     [
+      "DN-112653",
+      "Renouvellement de titre de séjour - Arrondissement du Raincy"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture de la Seine-Maritime",
+    "n": 51,
+    "neg": 39,
+    "motifs": [
+     [
+      "delai",
+      26
+     ],
+     [
+      "explication",
+      19
+     ]
+    ],
+    "etrangers": 34,
+    "part_etrangers": 0.667,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 17,
+     "neg": 10,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 36,
+    "demarches_dn_etrangers": [
+     [
+      "DN-26617",
+      "PREFECTURE DE LA SEINE-MARITIME : Demande de régularisation - Représentant légal d'un enfant étranger malade (L425-10 CESEDA)"
+     ],
+     [
+      "DN-26776",
+      "PREFECTURE DE LA SEINE-MARITIME : Demande d'admission exceptionnelle au séjour - Organisme d'Accueil Communautaire et d'Activité Solidaire (L435-2 CESEDA)"
+     ],
+     [
+      "DN-35136",
+      "PREFECTURE DE LA SEINE-MARITIME : Demande de titre de séjour - Mineur placé auprès de l'aide sociale à l'enfance entre 16 et 18 ans (Article L. 435-3 du CESEDA) - Première demande (dans l'année de la majorité)"
+     ],
+     [
+      "DN-135982",
+      "Formulaire de substitution de demande de titre de séjour \"BPI\", \"Famille de Français\" et \"Regroupement familial et né en France\""
+     ],
+     [
+      "DN-96356",
+      "PREFECTURE DE LA SEINE-MARITIME : Demande d'admission exceptionnelle au séjour \"Métiers en tension\"(L435-4 CESEDA)"
+     ],
+     [
+      "DN-26777",
+      "PREFECTURE DE LA SEINE-MARITIME : Demande de régularisation - Liens personnels et familiaux (L. 423-23 CESEDA)"
+     ],
+     [
+      "DN-29914",
+      "PREFECTURE DE LA SEINE-MARITIME : Demande de titre de séjour - Mineur placé auprès de l'aide sociale à l'enfance entre 16 et 18 ans (Article L. 435-3 du CESEDA) - Première demande (dans les 6 mois précédant la majorité)"
+     ],
+     [
+      "DN-129138",
+      "Renouvellement des titres de séjour « Article 50 TUE/Article 18(1) Accord de retrait du Royaume-Uni de l’UE » (Brexit)"
+     ],
+     [
+      "DN-133932",
+      "Formulaire de substitution de demande de titre de séjour \"Membre de famille de BPI\""
+     ],
+     [
+      "DN-146292",
+      "PREFECTURE DE LA SEINE-MARITIME : Remise des titres de séjour"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture de l'Oise",
+    "n": 34,
+    "neg": 24,
+    "motifs": [
+     [
+      "delai",
+      13
+     ],
+     [
+      "explication",
+      11
+     ]
+    ],
+    "etrangers": 19,
+    "part_etrangers": 0.559,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 15,
+     "neg": 8,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 30,
+    "demarches_dn_etrangers": [
+     [
+      "DN-100209",
+      "Déclaration de la liste des participants à un tir de spectacle pyrotechnique (OISE)"
+     ],
+     [
+      "DN-128029",
+      "Renouvellement des titres de séjour « Article 50 TUE/Article 18(1) Accord de retrait du Royaume-Uni de l’UE » valables 5 ans arrivant à expiration"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture du Val-de-Marne",
+    "n": 301,
+    "neg": 275,
+    "motifs": [
+     [
+      "delai",
+      204
+     ],
+     [
+      "explication",
+      127
+     ]
+    ],
+    "etrangers": 256,
+    "part_etrangers": 0.85,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 45,
+     "neg": 38,
+     "motifs": [
+      [
+       "delai",
+       23
+      ],
+      [
+       "explication",
+       21
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 30,
+    "demarches_dn_etrangers": [
+     [
+      "DN-118824",
+      "Séjour des étrangers (SP de Nogent-sur-Marne) - Saisine lors de blocages ANEF"
+     ],
+     [
+      "DN-21832",
+      "Demande de carte de séjour recherche d'emploi ou création d'entreprise pour les titulaires d'une carte de séjour portant la mention étudiant ou étudiant - programme de mobilité"
+     ],
+     [
+      "DN-22398",
+      "Demande de carte de séjour recherche d'emploi ou création d'entreprise pour le demandeur ayant obtenu dans un établissement supérieur habilité au plan national un diplôme au moins équivalent au grade de master et a, à…"
+     ],
+     [
+      "DN-27188",
+      "Demande de rendez-vous pour un CHANGEMENT DE STATUT"
+     ],
+     [
+      "DN-27629",
+      "Demande de rendez-vous en vue du dépôt d'une PREMIÈRE DEMANDE de titre de séjour en qualité d'APATRIDE"
+     ],
+     [
+      "DN-22397",
+      "Demande de carte de séjour recherche d'emploi ou création d'entreprise pour les titulaires d'une carte de séjour portant la mention chercheur ou chercheur - programme mobilité"
+     ],
+     [
+      "DN-33262",
+      "Demande de rendez-vous en vue du dépôt d'une PREMIÈRE DEMANDE de titre de séjour en qualité d'ENFANT MAJEUR D’UN APATRIDE"
+     ],
+     [
+      "DN-33264",
+      "Demande de rendez-vous en vue du dépôt d'une PREMIÈRE DEMANDE de titre de séjour en qualité de CONJOINT OU PARTENAIRE D’UN APATRIDE, LORSQUE LE MARIAGE OU L’UNION CIVILE EST POSTÉRIEURE À LA DATE D’INTRODUCTION DE LA…"
+     ],
+     [
+      "DN-28824",
+      "Demande de rendez-vous en vue du dépôt d'une première demande de titre de séjour ACCOMPAGNANT D'UN ÉTRANGER MINEUR MALADE"
+     ],
+     [
+      "DN-132724",
+      "Renouvellement des titres de séjour « Article 50 TUE/Article 18(1) Accord de retrait du Royaume-Uni de l’UE » (Brexit)"
+     ],
+     [
+      "DN-27159",
+      "Demande de rendez-vous pour le RENOUVELLEMENT du TITRE DE SÉJOUR"
+     ],
+     [
+      "DN-27181",
+      "Demande de rendez-vous en vue du dépôt d’une PREMIÈRE DEMANDE de carte séjour pour un ressortissant NON ALGÉRIEN et NON EUROPÉEEN"
+     ],
+     [
+      "DN-29329",
+      "Demande de titre de séjour ou d'autorisation provisoire de séjour recherche d'emploi ou création d'entreprise pour le demandeur ayant obtenu en France un diplôme au moins équivalent au grade de master"
+     ],
+     [
+      "DN-21828",
+      "Demande d'autorisation provisoire de séjour pour fin d'études et recherche d'emploi"
+     ],
+     [
+      "DN-32533",
+      "Demande de rendez-vous en vue du dépôt d’une PREMIÈRE DEMANDE de carte séjour pour un ressortissant ALGÉRIEN"
+     ],
+     [
+      "DN-33263",
+      "Demande de rendez-vous en vue du dépôt d'une PREMIÈRE DEMANDE de titre de séjour en qualité de CONJOINT OU PARTENAIRE OU CONCUBIN D’UN APATRIDE AUTORISÉ À SÉJOURNER EN FRANCE AU TITRE DE LA RÉUNIFICATION FAMILIALE"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture du Gard",
+    "n": 63,
+    "neg": 54,
+    "motifs": [
+     [
+      "delai",
+      36
+     ],
+     [
+      "explication",
+      19
+     ]
+    ],
+    "etrangers": 41,
+    "part_etrangers": 0.651,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 22,
+     "neg": 15,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 27,
+    "demarches_dn_etrangers": [
+     [
+      "DN-124755",
+      "Préfecture du Gard - Demande de renouvellement de titre de séjour \"Liens personnels et familiaux \"en France et de renouvellement de carte de séjour \"Jeune majeur entré avant l'âge de 13 ans\" (attention : les dossiers de…"
+     ],
+     [
+      "DN-125586",
+      "Préfécture du Gard : demande de renouvellement d'un titre de séjour \"immigration professionnelle \" (Non traitée sur l'ANEF)"
+     ],
+     [
+      "DN-124570",
+      "Demande de carte de séjour ou d'autorisation provisoire de séjour \"recherche d'emploi ou création d'entreprise\" pour les titulaires d'une carte de séjour portant la mention étudiant, étudiant - programme de mobilité,…"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture du Calvados",
+    "n": 37,
+    "neg": 28,
+    "motifs": [
+     [
+      "delai",
+      20
+     ],
+     [
+      "explication",
+      14
+     ]
+    ],
+    "etrangers": 22,
+    "part_etrangers": 0.595,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 15,
+     "neg": 11,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 27,
+    "demarches_dn_etrangers": [
+     [
+      "DN-31063",
+      "Pré-demande en ligne : Première demande ou renouvellement d'une APS \"parent d'enfant malade\""
+     ],
+     [
+      "DN-31541",
+      "Pré-demande en ligne: \"Première demande de titre de séjour\"- Autres situations"
+     ],
+     [
+      "DN-31540",
+      "Pré-demande en ligne : Titre de séjour \"Première demande de titre de séjour avec Visa D\""
+     ],
+     [
+      "DN-31289",
+      "Pré-demande en ligne de renouvellement titre de séjour et de première demande de carte de résident"
+     ],
+     [
+      "DN-127273",
+      "Renouvellement des titres de séjour « Article 50 TUE/Article 18(1) Accord de retrait du Royaume-Uni de l’UE » valables 5 ans arrivant à expiration"
+     ],
+     [
+      "DN-31293",
+      "Pré-demande en ligne de titre de séjour \"changement de statut\""
+     ],
+     [
+      "DN-31028",
+      "Pre-demande en ligne : Première demande de titre de séjour jeune majeur(e) entré(e) en France avant l'âge de 13 ans"
+     ],
+     [
+      "DN-85938",
+      "Pré-demande en ligne : Première demande ou renouvellement d'une APS pour les personnes déplacées d'Ukraine (protection temporaire)"
+     ],
+     [
+      "DN-101112",
+      "Pré-demande en ligne : renouvellement d'un récépissé de demande de titre de séjour"
+     ],
+     [
+      "DN-31062",
+      "Pré-demande en ligne : Première demande de titre de séjour \"étranger malade\""
+     ],
+     [
+      "DN-30226",
+      "Pré-demande en ligne Carte de séjour Etudiant-Autre situation"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture du Var",
+    "n": 67,
+    "neg": 59,
+    "motifs": [
+     [
+      "delai",
+      29
+     ],
+     [
+      "explication",
+      21
+     ]
+    ],
+    "etrangers": 18,
+    "part_etrangers": 0.269,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 49,
+     "neg": 42,
+     "motifs": [
+      [
+       "delai",
+       17
+      ],
+      [
+       "explication",
+       15
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 25,
+    "demarches_dn_etrangers": [
+     [
+      "DN-121708",
+      "Préfecture du Var - Arrondissement TOULON - Déclaration d'option pour le service national en cas de double nationalité franco-algérienne"
+     ],
+     [
+      "DN-90471",
+      "2024 - Appel à projets \"Intégration des étrangers primo-arrivants\" VAR (programme 104-action 12)"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture du Rhône",
+    "n": 272,
+    "neg": 233,
+    "motifs": [
+     [
+      "delai",
+      184
+     ],
+     [
+      "explication",
+      116
+     ]
+    ],
+    "etrangers": 219,
+    "part_etrangers": 0.805,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 53,
+     "neg": 36,
+     "motifs": [
+      [
+       "delai",
+       20
+      ],
+      [
+       "explication",
+       17
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 23,
+    "demarches_dn_etrangers": [
+     [
+      "DN-104956",
+      "Première demande de titre de séjour - (sauf bénéficiaires d'une protection internationale)"
+     ],
+     [
+      "DN-104719",
+      "Renouvellement d'un titre de séjour temporaire ou pluriannuel - (hors démarches ANEF)"
+     ],
+     [
+      "DN-7056",
+      "Transport d'urne cinéraire à l'étranger (formulaire pour les entreprises)"
+     ],
+     [
+      "DN-84416",
+      "Première demande de délivrance d'autorisation provisoire de séjour au titre de la protection temporaire"
+     ],
+     [
+      "DN-45862",
+      "Demande de carte de séjour ou d'autorisation provisoire de séjour \"recherche d'emploi ou création d'entreprise\" pour les titulaires d'une carte de séjour portant la mention étudiant, étudiant - programme de mobilité,…"
+     ],
+     [
+      "DN-97130",
+      "Admission exceptionnelle au séjour - métiers en tension - article L 435-4 CESEDA"
+     ],
+     [
+      "DN-62873",
+      "Renouvellement de l'autorisation provisoire de séjour au titre de la protection temporaire"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture de la Loire",
+    "n": 45,
+    "neg": 35,
+    "motifs": [
+     [
+      "delai",
+      21
+     ],
+     [
+      "explication",
+      18
+     ]
+    ],
+    "etrangers": 22,
+    "part_etrangers": 0.489,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 23,
+     "neg": 15,
+     "motifs": [
+      [
+       "explication",
+       8
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 20,
+    "demarches_dn_etrangers": [
+     [
+      "DN-148819",
+      "Préfecture de la Loire - Protection Temporaire Ukraine - Changement de statut"
+     ],
+     [
+      "DN-131184",
+      "Brexit : renouvellement des titres de séjour « Article 50 TUE/Article 18(1) Accord de retrait du Royaume-Uni de l’UE » - Préfecture de la Loire"
+     ],
+     [
+      "DN-148816",
+      "Préfecture de la Loire - Renouvellement de la Protection Temporaire Ukraine"
+     ],
+     [
+      "DN-148789",
+      "Préfecture de la Loire - Première demande de la Protection Temporaire Ukraine"
+     ],
+     [
+      "DN-138464",
+      "Pré-demande en ligne : Première demande ou renouvellement d'une APS \"parent d'enfant malade\""
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture des Bouches-du-Rhône",
+    "n": 236,
+    "neg": 209,
+    "motifs": [
+     [
+      "delai",
+      157
+     ],
+     [
+      "explication",
+      83
+     ]
+    ],
+    "etrangers": 172,
+    "part_etrangers": 0.729,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 64,
+     "neg": 52,
+     "motifs": [
+      [
+       "delai",
+       29
+      ],
+      [
+       "explication",
+       20
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 20,
+    "demarches_dn_etrangers": [
+     [
+      "DN-124247",
+      "PREFECTURE Bouches-du-Rhône - Renouvellement des récépissés - attestations de prolongation d'instruction - autorisation provisoire de séjour"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture de l'Essonne",
+    "n": 408,
+    "neg": 385,
+    "motifs": [
+     [
+      "delai",
+      302
+     ],
+     [
+      "explication",
+      185
+     ]
+    ],
+    "etrangers": 340,
+    "part_etrangers": 0.833,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 68,
+     "neg": 59,
+     "motifs": [
+      [
+       "delai",
+       34
+      ],
+      [
+       "explication",
+       27
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 18,
+    "demarches_dn_etrangers": [
+     [
+      "DN-31858",
+      "Renouvellement de \"L'ATTESTATION DE DEMANDE D'ASILE\"/ Renewal of \"ATTESTATION DE DEMANDE D'ASILE\""
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture de l'Ain",
+    "n": 25,
+    "neg": 17,
+    "motifs": [
+     [
+      "explication",
+      8
+     ],
+     [
+      "delai",
+      6
+     ]
+    ],
+    "etrangers": 11,
+    "part_etrangers": 0.44,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 14,
+     "neg": 9,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 16,
+    "demarches_dn_etrangers": [
+     [
+      "DN-110235",
+      "Déclaration de la liste des participants à un tir de spectacle pyrotechnique (AIN - 01)"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture du Nord",
+    "n": 188,
+    "neg": 167,
+    "motifs": [
+     [
+      "delai",
+      124
+     ],
+     [
+      "explication",
+      66
+     ]
+    ],
+    "etrangers": 147,
+    "part_etrangers": 0.782,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 41,
+     "neg": 28,
+     "motifs": [
+      [
+       "delai",
+       11
+      ],
+      [
+       "explication",
+       9
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 16,
+    "demarches_dn_etrangers": [
+     [
+      "DN-105447",
+      "Première demande de délivrance d'autorisation provisoire de séjour au titre de la protection temporaire (Ukraine)"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture des Pyrénées-Orientales",
+    "n": 37,
+    "neg": 32,
+    "motifs": [
+     [
+      "delai",
+      17
+     ],
+     [
+      "explication",
+      6
+     ]
+    ],
+    "etrangers": 13,
+    "part_etrangers": 0.351,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 24,
+     "neg": 21,
+     "motifs": [
+      [
+       "delai",
+       7
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 16,
+    "demarches_dn_etrangers": [
+     [
+      "DN-19776",
+      "Déclaration préalable d'embauche d'un salarié étranger non européen"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture des Yvelines",
+    "n": 220,
+    "neg": 204,
+    "motifs": [
+     [
+      "delai",
+      126
+     ],
+     [
+      "explication",
+      71
+     ]
+    ],
+    "etrangers": 166,
+    "part_etrangers": 0.755,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 54,
+     "neg": 45,
+     "motifs": [
+      [
+       "explication",
+       20
+      ],
+      [
+       "delai",
+       18
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 16,
+    "demarches_dn_etrangers": [
+     [
+      "DN-143379",
+      "Demande de premier titre de séjour - Etranger entré avant l'âge de 13 ans (ou 10 ans selon accords bilatéraux)"
+     ],
+     [
+      "DN-143402",
+      "Demande de premier titre de séjour - Membre de famille de bénéficiaire de la protection internationale hors ANEF"
+     ],
+     [
+      "DN-157911",
+      "Je demande un titre de voyage en qualité de bénéficiaire de la protection internationale"
+     ],
+     [
+      "DN-139308",
+      "Je demande un titre de séjour en qualité de bénéficiaire de la protection internationale"
+     ],
+     [
+      "DN-133667",
+      "Je souhaite renouveler/modifier ou demander le duplicata de mon attestation de demande d'asile"
+     ],
+     [
+      "DN-143406",
+      "Préfecture des Yvelines : Demande de premier titre de séjour - \"vie privée et familiale \" délivré à l'étranger ayant des liens personnels et familiaux en France (Article L.423-23 CESEDA)"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture de la Sarthe",
+    "n": 30,
+    "neg": 25,
+    "motifs": [
+     [
+      "delai",
+      13
+     ],
+     [
+      "explication",
+      10
+     ]
+    ],
+    "etrangers": 14,
+    "part_etrangers": 0.467,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 16,
+     "neg": 12,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 15,
+    "demarches_dn_etrangers": [
+     [
+      "DN-136111",
+      "Bilan d'autorisation de destruction à tir d'Espèces Susceptibles d'Occasionner des Dégâts (ESOD) - ANNÉE 2026 en Sarthe"
+     ],
+     [
+      "DN-111651",
+      "Préfecture de la Sarthe - récépissés et attestations"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture des Hauts-de-Seine",
+    "n": 488,
+    "neg": 456,
+    "motifs": [
+     [
+      "delai",
+      352
+     ],
+     [
+      "explication",
+      231
+     ]
+    ],
+    "etrangers": 422,
+    "part_etrangers": 0.865,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 66,
+     "neg": 53,
+     "motifs": [
+      [
+       "explication",
+       30
+      ],
+      [
+       "delai",
+       22
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 15,
+    "demarches_dn_etrangers": [
+     [
+      "DN-122912",
+      "Préfecture des Hauts-de-Seine - Première demande d'autorisation provisoire de séjour au titre de la protection temporaire"
+     ],
+     [
+      "DN-101596",
+      "PREFECTURE DES HAUTS-DE-SEINE : Déclaration du droit d'option franco-israélien pour le service national."
+     ],
+     [
+      "DN-53106",
+      "Renouvellement de carte de résident (10 ans) - certificat de résident algérien (10 ans) - séjour permanent UE (10 ans) - Protection internationale (10 ans) - Préfecture de Nanterre"
+     ],
+     [
+      "DN-62457",
+      "Préfecture des Hauts-de-Seine - Renouvellement des autorisations provisoires de séjour délivrées au titre de la protection temporaire"
+     ],
+     [
+      "DN-101595",
+      "PREFECTURE DES HAUTS-DE-SEINE : Déclaration du droit d'option franco-tunisien pour le service national."
+     ],
+     [
+      "DN-93501",
+      "Demande d'admission exceptionnelle au séjour et autorisation de travail au titre des métiers en tension"
+     ],
+     [
+      "DN-100869",
+      "PREFECTURE DES HAUTS-DE-SEINE : Déclaration du droit d'option franco-algérien pour le service national."
+     ],
+     [
+      "DN-53768",
+      "Demande d'un premier titre de de séjour portant la mention \"vie privée et familiale\" sauf pour les personnes ayant la qualité de conjoint(e) de français(e) ou de parent(e) d'enfant(s) -- Préfecture de Nanterre"
+     ],
+     [
+      "DN-53113",
+      "Changement de statut vers PASSEPORT TALENT - DETACHE ICT - ENTREPRENEUR PROFESSION LIBERALE - ALGERIEN : SCIENTIFIQUE/PROFESSION ARTISTIQUE ET CULTURELLE"
+     ],
+     [
+      "DN-53114",
+      "Première demande et Renouvellement d'une carte de séjour - PASSEPORT TALENT - DETACHE ICT - ENTREPRENEUR PROFESSION LIBERALE - TRAVAILLEUR SAISONNIER - PRESTATAIRE DE SERVICE COMMUNAUTAIRE - ALGERIEN:…"
+     ],
+     [
+      "DN-53097",
+      "Demande de renouvellement d'un titre de séjour portant la mention \"vie privée et familiale\" sauf pour les personnes ayant la qualité de conjoint(e) de français(e) ou de parent(e) d'enfant(s) -- Préfecture de Nanterre"
+     ],
+     [
+      "DN-53112",
+      "Demande de renouvellement de récépissé de titre de séjour - Préfecture de Nanterre"
+     ],
+     [
+      "DN-101587",
+      "PREFECTURE DES HAUTS-DE-SEINE : Déclaration du droit d'option franco-suisse pour le service national."
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture du Pas-de-Calais",
+    "n": 27,
+    "neg": 21,
+    "motifs": [
+     [
+      "explication",
+      9
+     ],
+     [
+      "delai",
+      6
+     ]
+    ],
+    "etrangers": 10,
+    "part_etrangers": 0.37,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 17,
+     "neg": 14,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 12,
+    "demarches_dn_etrangers": []
+   },
+   {
+    "structure": "Préfecture de la Gironde",
+    "n": 118,
+    "neg": 98,
+    "motifs": [
+     [
+      "delai",
+      51
+     ],
+     [
+      "explication",
+      33
+     ]
+    ],
+    "etrangers": 50,
+    "part_etrangers": 0.424,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 68,
+     "neg": 56,
+     "motifs": [
+      [
+       "delai",
+       19
+      ],
+      [
+       "explication",
+       14
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 12,
+    "demarches_dn_etrangers": [
+     [
+      "DN-100682",
+      "Organismes/Administrations : Authentification des titres de séjour et carte d'identités européennes"
+     ],
+     [
+      "DN-48671",
+      "Je souhaite renouveler/modifier ou demander le duplicata de mon attestation de demande d'asile"
+     ],
+     [
+      "DN-72190",
+      "PREFECTURE DE LA GIRONDE (33) - Je souhaite obtenir un récépissé ou une attestation de prolongation"
+     ],
+     [
+      "DN-74335",
+      "PREF33 - Authentification des titres de séjour et cartes d'identité européennes"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture des Alpes-Maritimes",
+    "n": 157,
+    "neg": 149,
+    "motifs": [
+     [
+      "delai",
+      113
+     ],
+     [
+      "explication",
+      72
+     ]
+    ],
+    "etrangers": 119,
+    "part_etrangers": 0.758,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 38,
+     "neg": 32,
+     "motifs": [
+      [
+       "delai",
+       20
+      ],
+      [
+       "explication",
+       14
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 11,
+    "demarches_dn_etrangers": [
+     [
+      "DN-28291",
+      "Je souhaite compléter mon dossier de demande de titre de séjour"
+     ],
+     [
+      "DN-140446",
+      "Préfecture des Alpes-Maritimes (06) - Prolongation d'un visa de court séjour"
+     ],
+     [
+      "DN-55069",
+      "SGC 06 - Préfecture des Alpes-Maritimes - Participation aux frais de séjours"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture de la Moselle",
+    "n": 33,
+    "neg": 30,
+    "motifs": [
+     [
+      "delai",
+      15
+     ],
+     [
+      "explication",
+      15
+     ]
+    ],
+    "etrangers": 14,
+    "part_etrangers": 0.424,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 19,
+     "neg": 16,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 10,
+    "demarches_dn_etrangers": [
+     [
+      "DN-114217",
+      "PREFECTURE DE LA MOSELLE : Première demande et demande de renouvellement d'un titre de séjour VPF (non traitée sur l'ANEF)"
+     ],
+     [
+      "DN-114540",
+      "PREFECTURE DE LA MOSELLE : Demande de rendez-vous - Admission exceptionnelle au séjour (L.435-1, L.435-2, L.435-3 et L.435-4 du CESEDA)"
+     ],
+     [
+      "DN-117692",
+      "PREFECTURE DE LA MOSELLE : Première demande et demande de renouvellement d'un titre de séjour \"vie professionnelle et étudiante\" (non traitée sur l'ANEF)"
+     ],
+     [
+      "DN-115993",
+      "PREFECTURE DE LA MOSELLE : Première demande de carte de séjour liens personnels et familiaux (sur le fondement de l’article L. 423-23 du CESEDA)"
+     ],
+     [
+      "DN-114218",
+      "PREFECTURE DE LA MOSELLE : Demande de renouvellement de récépissé de titre de séjour ou d'attestation de Prolongation d'Instruction (ANEF)"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture du Bas-Rhin",
+    "n": 74,
+    "neg": 62,
+    "motifs": [
+     [
+      "delai",
+      46
+     ],
+     [
+      "explication",
+      28
+     ]
+    ],
+    "etrangers": 45,
+    "part_etrangers": 0.608,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 29,
+     "neg": 20,
+     "motifs": [
+      [
+       "delai",
+       10
+      ],
+      [
+       "explication",
+       10
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 10,
+    "demarches_dn_etrangers": [
+     [
+      "DN-114883",
+      "Droit d'option franco-algérien - Préfecture du Bas-Rhin"
+     ],
+     [
+      "DN-32875",
+      "Première demande titre de séjour ex Mineur Non Accompagné"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture de l'Eure",
+    "n": 24,
+    "neg": 21,
+    "motifs": [
+     [
+      "delai",
+      12
+     ],
+     [
+      "explication",
+      5
+     ]
+    ],
+    "etrangers": 13,
+    "part_etrangers": 0.542,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 11,
+     "neg": 9,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 10,
+    "demarches_dn_etrangers": []
+   },
+   {
+    "structure": "Préfecture de la Savoie",
+    "n": 22,
+    "neg": 15,
+    "motifs": [
+     [
+      "delai",
+      8
+     ],
+     [
+      "explication",
+      5
+     ]
+    ],
+    "etrangers": 8,
+    "part_etrangers": 0.364,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 14,
+     "neg": 11,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 9,
+    "demarches_dn_etrangers": []
+   },
+   {
+    "structure": "Préfecture de la Haute-Garonne",
+    "n": 49,
+    "neg": 33,
+    "motifs": [
+     [
+      "delai",
+      18
+     ],
+     [
+      "explication",
+      13
+     ]
+    ],
+    "etrangers": 16,
+    "part_etrangers": 0.327,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 33,
+     "neg": 22,
+     "motifs": [
+      [
+       "delai",
+       11
+      ],
+      [
+       "explication",
+       8
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 9,
+    "demarches_dn_etrangers": [
+     [
+      "DN-55067",
+      "Vérification de titre de séjour préalable à l'embauche - Haute-Garonne"
+     ],
+     [
+      "DN-109569",
+      "Droit d'option franco-suisse en Haute-Garonne"
+     ],
+     [
+      "DN-67525",
+      "Droit d'option franco-algérien en Haute-Garonne"
+     ],
+     [
+      "DN-127265",
+      "Renouvellement des titres de séjour « Article 50 TUE/Article 18(1) Accord de retrait du Royaume-Uni de l’UE » valables 5 ans arrivant à expiration - Haute-Garonne"
+     ],
+     [
+      "DN-55410",
+      "Protection temporaire - Ukrainiens en Haute-Garonne (Première demande)"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture de la Loire-Atlantique",
+    "n": 74,
+    "neg": 53,
+    "motifs": [
+     [
+      "delai",
+      33
+     ],
+     [
+      "explication",
+      24
+     ]
+    ],
+    "etrangers": 38,
+    "part_etrangers": 0.514,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 36,
+     "neg": 21,
+     "motifs": [
+      [
+       "delai",
+       11
+      ],
+      [
+       "explication",
+       10
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 8,
+    "demarches_dn_etrangers": [
+     [
+      "DN-147114",
+      "PREFECTURE DE LA LOIRE-ATLANTIQUE : Demande ANTICIPÉE de titre de séjour - Mineur placé auprès de l'aide sociale à l'enfance entre 16 et 18 ans (Article L. 435-3 du CESEDA)"
+     ],
+     [
+      "DN-144382",
+      "PREFECTURE DE LA LOIRE-ATLANTIQUE : Demande de titre de séjour - Mineur placé auprès de l'aide sociale à l'enfance entre 16 et 18 ans (Article L. 435-3 du CESEDA) - Première demande"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture du Val-d'Oise",
+    "n": 124,
+    "neg": 105,
+    "motifs": [
+     [
+      "delai",
+      82
+     ],
+     [
+      "explication",
+      51
+     ]
+    ],
+    "etrangers": 103,
+    "part_etrangers": 0.831,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 21,
+     "neg": 13,
+     "motifs": [
+      [
+       "explication",
+       10
+      ],
+      [
+       "delai",
+       7
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 7,
+    "demarches_dn_etrangers": [
+     [
+      "DN-127748",
+      "Renouvellement des titres de séjour « Article 50 TUE/Article 18(1) Accord de retrait du Royaume-Uni de l’UE » valables 5 ans arrivant à expiration"
+     ],
+     [
+      "DN-74719",
+      "Demande d'admission exceptionnelle au séjour (L.435-1 et L.435-4 du CESEDA) - Préfecture de Cergy"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture du Loiret",
+    "n": 44,
+    "neg": 36,
+    "motifs": [
+     [
+      "delai",
+      22
+     ],
+     [
+      "explication",
+      11
+     ]
+    ],
+    "etrangers": 27,
+    "part_etrangers": 0.614,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 17,
+     "neg": 13,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 6,
+    "demarches_dn_etrangers": []
+   },
+   {
+    "structure": "Préfecture de la Manche",
+    "n": 24,
+    "neg": 19,
+    "motifs": [
+     [
+      "explication",
+      10
+     ],
+     [
+      "delai",
+      6
+     ]
+    ],
+    "etrangers": 4,
+    "part_etrangers": 0.167,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 20,
+     "neg": 15,
+     "motifs": [
+      [
+       "explication",
+       8
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 6,
+    "demarches_dn_etrangers": []
+   },
+   {
+    "structure": "Préfecture de l'Hérault",
+    "n": 89,
+    "neg": 73,
+    "motifs": [
+     [
+      "delai",
+      50
+     ],
+     [
+      "explication",
+      33
+     ]
+    ],
+    "etrangers": 59,
+    "part_etrangers": 0.663,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 30,
+     "neg": 21,
+     "motifs": [
+      [
+       "explication",
+       8
+      ],
+      [
+       "delai",
+       7
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 5,
+    "demarches_dn_etrangers": []
+   },
+   {
+    "structure": "Préfecture du Morbihan",
+    "n": 22,
+    "neg": 12,
+    "motifs": [
+     [
+      "explication",
+      5
+     ]
+    ],
+    "etrangers": 5,
+    "part_etrangers": 0.227,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 17,
+     "neg": 8,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 4,
+    "demarches_dn_etrangers": []
+   },
+   {
+    "structure": "Préfecture d'Indre-et-Loire",
+    "n": 35,
+    "neg": 31,
+    "motifs": [
+     [
+      "delai",
+      21
+     ],
+     [
+      "explication",
+      15
+     ]
+    ],
+    "etrangers": 23,
+    "part_etrangers": 0.657,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 12,
+     "neg": 8,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 4,
+    "demarches_dn_etrangers": []
+   },
+   {
+    "structure": "Préfecture de la Marne",
+    "n": 23,
+    "neg": 19,
+    "motifs": [
+     [
+      "delai",
+      9
+     ],
+     [
+      "explication",
+      8
+     ]
+    ],
+    "etrangers": 9,
+    "part_etrangers": 0.391,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 14,
+     "neg": 12,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 4,
+    "demarches_dn_etrangers": [
+     [
+      "DN-29092",
+      "Préfecture de la Marne - Service de l'immigration - prolongation de visa pour incapacité à quitter le territoire français (épisode COVID19)"
+     ],
+     [
+      "DN-29957",
+      "Préfecture de la Marne - Service de l'immigration - autorisation provisoire de séjour et régularisation du droit de visa"
+     ],
+     [
+      "DN-74964",
+      "Préfecture de la Marne - Service de l'immigration - ASILE - renouvellement de l'attestation de demandeur d'asile (SAUF DUBLIN) et du récépissé de titre de séjour réfugié"
+     ],
+     [
+      "DN-30377",
+      "Préfecture de la Marne - Service de l'immigration - renouvellement du récépissé de demande de titre de séjour et autorisation provisoire de séjour"
+     ]
+    ]
+   },
+   {
+    "structure": "Préfecture de la Haute-Savoie",
+    "n": 90,
+    "neg": 83,
+    "motifs": [
+     [
+      "delai",
+      54
+     ],
+     [
+      "explication",
+      29
+     ]
+    ],
+    "etrangers": 68,
+    "part_etrangers": 0.756,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 22,
+     "neg": 17,
+     "motifs": [
+      [
+       "explication",
+       9
+      ],
+      [
+       "delai",
+       7
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 3,
+    "demarches_dn_etrangers": []
+   },
+   {
+    "structure": "Préfecture de la Guadeloupe",
+    "n": 23,
+    "neg": 17,
+    "motifs": [
+     [
+      "explication",
+      10
+     ],
+     [
+      "delai",
+      9
+     ]
+    ],
+    "etrangers": 11,
+    "part_etrangers": 0.478,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 12,
+     "neg": 9,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 1,
+    "demarches_dn_etrangers": []
+   },
+   {
+    "structure": "Préfecture de l'Isère",
+    "n": 210,
+    "neg": 185,
+    "motifs": [
+     [
+      "delai",
+      110
+     ],
+     [
+      "explication",
+      87
+     ]
+    ],
+    "etrangers": 153,
+    "part_etrangers": 0.729,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 57,
+     "neg": 47,
+     "motifs": [
+      [
+       "explication",
+       21
+      ],
+      [
+       "delai",
+       16
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 1,
+    "demarches_dn_etrangers": []
+   },
+   {
+    "structure": "Préfecture de l'Eure-et-Loir",
+    "n": 29,
+    "neg": 27,
+    "motifs": [
+     [
+      "delai",
+      16
+     ],
+     [
+      "explication",
+      16
+     ]
+    ],
+    "etrangers": 13,
+    "part_etrangers": 0.448,
+    "forte": false,
+    "sans_etrangers": {
+     "n": 16,
+     "neg": 14,
+     "motifs": [],
+     "vigilance": false
+    },
+    "demarches_dn": 1,
+    "demarches_dn_etrangers": []
+   },
+   {
+    "structure": "Préfecture de l'Ille-et-Vilaine",
+    "n": 64,
+    "neg": 52,
+    "motifs": [
+     [
+      "delai",
+      32
+     ],
+     [
+      "explication",
+      22
+     ]
+    ],
+    "etrangers": 35,
+    "part_etrangers": 0.547,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 29,
+     "neg": 23,
+     "motifs": [
+      [
+       "explication",
+       11
+      ],
+      [
+       "delai",
+       8
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 1,
+    "demarches_dn_etrangers": []
+   },
+   {
+    "structure": "Préfecture du Puy-de-Dôme",
+    "n": 120,
+    "neg": 110,
+    "motifs": [
+     [
+      "delai",
+      94
+     ],
+     [
+      "explication",
+      60
+     ]
+    ],
+    "etrangers": 84,
+    "part_etrangers": 0.7,
+    "forte": true,
+    "sans_etrangers": {
+     "n": 36,
+     "neg": 30,
+     "motifs": [
+      [
+       "delai",
+       22
+      ],
+      [
+       "explication",
+       15
+      ]
+     ],
+     "vigilance": true
+    },
+    "demarches_dn": 1,
+    "demarches_dn_etrangers": []
+   }
+  ],
+  "bilan": {
+   "structures": 39,
+   "demarches_dn_avec_vigilance_prefecture": 550,
+   "structures_part_forte": 24,
+   "demarches_dn_non_etrangers_des_prefectures_part_forte": 287,
+   "demarches_dn_etrangers_des_prefectures_part_forte": 103,
+   "variante_sans_etrangers_vigilance_gardee": 244,
+   "variante_sans_etrangers_vigilance_perdue": 174
+  }
+ }
+}
