@@ -32,6 +32,8 @@
     // passeport seul : la démarche pour l'obtenir (pré-demande en ligne, ANTS), devant le suivi ou la réception
     passeport: ["_pre_demande"], passeports: ["_pre_demande"],
     refaire: ["renouvellement"],
+    // un enfant : la fiche « mineur » (carte d'identité, passeport…) ; voir aussi ageInadapte
+    fils: ["mineur"], fille: ["mineur"],
   };
   // Expressions de plusieurs mots, reconnues avant le découpage en mots (sur le texte normalisé).
   const EXPRESSIONS = [
@@ -53,6 +55,8 @@
       "perte de carte grise", "perte de la carte grise", "perte de ma carte grise", "vol de carte grise", "vol de ma carte grise"], ["_carte_grise", "refaire", "perte", "vol"]],
     // Liste électorale : une expression (inscription sur les listes électorales), pas les mots « liste » et « électorale » isolés.
     [["liste electorale", "listes electorales", "liste electoral", "listes electorale", "listes electoraux"], ["liste", "electorale"]],
+    // Carte d'identité : son jeton ; seule dans la question, la pré-demande en ligne aussi (comme « passeport » seul).
+    [["carte d identite", "carte identite", "cartes d identite", "carte nationale d identite", "cni"], ["_cni"], { seul: ["_pre_demande"] }],
     // Passeport talent : un titre de séjour, pas un passeport.
     [["passeport talent", "passeports talent"], ["talent"], { sansSyn: true }],
     // Passeport : obtenir un passeport (pré-demande d'un 1er passeport, ANTS) ; le refaire (pré-demande de renouvellement).
@@ -74,7 +78,9 @@
     // carte grise = certificat d'immatriculation : un même jeton, quel que soit le nom employé par la fiche
     ["carte grise", "_carte_grise"], ["cartes grises", "_carte_grise"], ["certificat d immatriculation", "_carte_grise"], ["certificats d immatriculation", "_carte_grise"],
     // pré-demande en ligne (passeport, carte d'identité) : un jeton, cherché par le synonyme de « passeport »
-    ["pre demande", "_pre_demande"]];
+    ["pre demande", "_pre_demande"],
+    // carte d'identité : un jeton propre (la racine « identi » est aussi celle d'« identification »)
+    ["carte d identite", "_cni"], ["cartes d identite", "_cni"], ["carte nationale d identite", "_cni"]];
   function stem(w) {
     if (w[0] === "_") return w;
     if (w.length > 4) w = w.replace(/(s|x)$/, "");
@@ -186,7 +192,11 @@
     // Expression marquée « sansSyn » : ses mots gardent leur terme, sans leurs synonymes (« passeport talent » n'appelle pas la
     // pré-demande de passeport).
     const dansExpr = new Set();
-    for (const [f, vers, o] of EXPRESSIONS) if (n.includes(" " + f + " ")) { const g = new Set(vers.map(stem)); EXPR_GROUPES.add(g); termes.set("« " + vers.join(" ") + " »", g); if (o && o.sansSyn) f.split(" ").forEach((w) => dansExpr.add(w)); }
+    // Option « seul » : termes ajoutés seulement quand la question se réduit à l'expression (hors mots vides).
+    const utiles = n.trim().split(" ").filter((w) => w.length > 1 && !STOP.has(w)).join(" ");
+    for (const [f, vers, o] of EXPRESSIONS) if (n.includes(" " + f + " ")) {
+      const g = new Set(vers.concat(o && o.seul && utiles === f.split(" ").filter((w) => w.length > 1 && !STOP.has(w)).join(" ") ? o.seul : []).map(stem));
+      EXPR_GROUPES.add(g); termes.set("« " + vers.join(" ") + " »", g); if (o && o.sansSyn) f.split(" ").forEach((w) => dansExpr.add(w)); }
     for (const w of n.trim().split(" ")) {
       if (w.length < 2 || STOP.has(w) || L.mots.has(w)) continue;
       const t = stem(w); if (!termes.has(t)) termes.set(t, new Set([t]));
@@ -289,6 +299,19 @@
   const TERRITOIRES_PARTICULIERS = [/ nouvelle caledonie /, / polynesie /, / wallis /, / futuna /, / saint pierre et miquelon /, / saint barthelemy /,
     / saint martin /, / mayotte /, / guadeloupe /, / martinique /, / guyane /, / (la )?reunion (?!d)/, / outre mer /, / alsace /, / moselle /,
     / a l etranger /, / hors de france /, / consulaire(s)? /, / australie /, / canada /];
+  // Fiches annexes (timbre fiscal, suivi d'une demande, titre retrouvé) : après la démarche elle-même, sauf si la question en
+  // parle ; jamais en « Votre démarche » dans ce cas. [motif sur le titre, motif sur la question], textes normalisés entourés d'espaces.
+  const ANNEXES = [[/ timbres? /, / timbres? /], [/^ (suivre|suivez) | ou en est | etat d avancement | suivre /, / suivre | suivi | suivie | avancement | ou en est /],
+    [/ retrouve(e|s|es)? /, / retrouve(e|s|es)? | retrouver /]];
+  const annexe = (r, q) => { if (r.k !== "sp") return false; const t = " " + norm(r.t) + " ", n = " " + norm(q) + " ";
+    return ANNEXES.some(([rt, rq]) => rt.test(t) && !rq.test(n)); };
+  // Fiche « majeur » ou « mineur » : la fiche du majeur d'abord, sauf si la question parle d'un enfant (mot ou âge de moins de 18 ans).
+  const ENFANT = / enfants? | mineure?s? | mon fils | ma fille | nos enfants | mes enfants | fils | fille | bebe | nourrisson | adolescente?s? | ado /;
+  const parleEnfant = (q) => { const n = " " + norm(q) + " "; return ENFANT.test(n) || [...n.matchAll(/ (\d{1,2}) ans /g)].some((m) => +m[1] < 18); };
+  function ageInadapte(r, q) {
+    if (r.k !== "sp") return false; const t = " " + norm(r.t) + " ", e = parleEnfant(q);
+    return e ? / majeure?s? /.test(t) && !/ mineure?s? /.test(t) : / mineure?s? /.test(t) && !/ majeure?s? /.test(t);
+  }
   // Fiche propre à un territoire (outre-mer, étranger…) que la question ne cite pas : rétrogradée, et jamais en « Votre démarche ».
   const horsTerritoire = (r, q) => { if (r.k !== "sp") return false; const tt = TERRITOIRES_PARTICULIERS.find((re) => re.test(" " + norm(r.t) + " "));
     return !!tt && !tt.test(" " + norm(q) + " ") && !/ etranger /.test(" " + norm(q) + " "); };
@@ -338,7 +361,8 @@
         if (vus.has(p.cle)) return; vus.add(p.cle);
         const id = p.fiche[ctx] || p.fiche["*"], i2 = id ? ix.byId.get(id) : undefined;
         out.push({ cle: p.cle, nom: p.nom, ico: p.ico, action: p.action, note: p.note || "", urgence: p.urgence, ordre: i, guichet: p.guichet !== false,
-          rec: i2 === undefined ? null : ix.recs[i2], morceau: m });
+          rec: i2 === undefined ? null : ix.recs[i2], morceau: m,
+          pre: p.pre_demande && ix.byId.has(p.pre_demande) ? ix.recs[ix.byId.get(p.pre_demande)] : null });
         return;
       }
       if (lieux(m).lieux.length && !queryToks(m).length) return;
@@ -415,6 +439,8 @@
         const pp = PUBLICS_PARTICULIERS.find(([re]) => re.test(" " + norm(r.t) + " "));
         if (pp && !pp[0].test(" " + norm(q) + " ")) s *= 0.7;
         if (horsTerritoire(r, q)) s *= 0.7;
+        if (annexe(r, q)) s *= 0.6;
+        if (ageInadapte(r, q)) s *= 0.85;
       }
       out.push([s, i]);
     }
@@ -561,7 +587,7 @@
   // service-public), ou du département connu ; pas réservée aux professionnels pour un particulier.
   function sure(r, q, opt = {}, P = null) {
     const { pub = "", dep = "" } = opt, d = departementConnu(q, dep);
-    if (!r || !(P || opt.P).pertinente(r.id) || !titreSur(opt.ix, q, r) || horsTerritoire(r, q)) return false;
+    if (!r || !(P || opt.P).pertinente(r.id) || !titreSur(opt.ix, q, r) || horsTerritoire(r, q) || annexe(r, q)) return false;
     const po = porteeDe(r);
     if (po !== "nat" && !(po === "dep" && d && depDe(r) === d)) return false;
     if ((!pub || pub === "particulier") && (RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t))) return false;
@@ -787,6 +813,6 @@
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { annexe, ageInadapte, titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
