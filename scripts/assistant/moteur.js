@@ -593,7 +593,9 @@
           detail: `${k} retours négatifs le signalent, sur ${n} retours sur Services Publics +${sp.debut ? " depuis le " + dateCourte(sp.debut) : ""}, ${pour} ; échantillon spontané, non représentatif` });
     }
     const su = statsUrl(r);
-    return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, simp: simplicite(r, meta), acc, vig, delais: su ? { texte: DELAIS_TEXTE, url: su } : null, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
+    // Formulaire cerfa d'une ressource service-public (« cerfa », lien « l ») : le symbole « Formulaire » devient un lien.
+    const cerfa = r.k === "sp" && r.cerfa && r.l && voies.some((v) => v.includes("formulaire")) ? { texte: `Formulaire cerfa n°\u00a0${r.cerfa}`, url: r.l } : null;
+    return { voies, cerfa, sur: r.k === "dn" ? true : r.md_sur !== false, simp: simplicite(r, meta), acc, vig, delais: su ? { texte: DELAIS_TEXTE, url: su } : null, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
   }
   const voiesTexte = (v) => v.map((voie) => voie.map((m) => MODES_LIB[m].toLowerCase()).join(", ")).join(" ou ");
   // La déclaration d'accessibilité de Démarche Numérique dit que le PDF de la démarche n'est pas accessible
@@ -651,12 +653,19 @@
   // la page la connaît mieux que la fiche (téléservice rattaché à une fiche F…). Rend [{ ico, texte, titre?, lien? }].
   function detailSymboles(r, meta = {}, opt = {}) {
     const S = symboles(r, meta); if (!S.voies.length) return [];
-    const A = avantDeCommencer(r, meta), dansAvant = (cle) => A.lignes.some((l) => l.cle === cle);
+    // opt.avant === false : la carte n'affiche pas « Avant de commencer » (« Démarches possibles ») ; tout va dans le « ? »,
+    // y compris le lien vers le formulaire à vide de Démarche Numérique.
+    const A = opt.avant === false ? { lignes: [] } : avantDeCommencer(r, meta), dansAvant = (cle) => A.lignes.some((l) => l.cle === cle);
     const min = (t) => t.charAt(0).toLowerCase() + t.slice(1), org = r.on || r.oa || r.o || "";
     const site = r.k === "dn" ? "Démarche Numérique" : siteLisible(opt.site || r.l);
     const det = S.voies.map((voie, i) => ({ ico: ICO[voie[0]],
       texte: MODES_COURT[voie[0]] + (voie[0] === "en_ligne" && site ? `, sur ${site}` : "") + voie.slice(1).map((m) => ", " + min(MODES_LIB[m])).join("")
         + (!S.sur && i === S.voies.length - 1 ? " (à vérifier sur la fiche)" : "") }));
+    if (opt.avant === false && r.k === "dn" && r.u) {
+      const base = /^https?:/.test(r.u) ? r.u : "https://demarche.numerique.gouv.fr/commencer/" + encodeURIComponent(r.u);
+      det.push({ ico: ICO.formulaire, texte: "", lien: { texte: "Voir le formulaire", url: base.replace(/\/$/, "") + "/dossier_vide",
+        titre: "Pour lire toutes les questions avant de commencer, pas pour le remplir", apres: pdfNonAccessible(meta) ? "(PDF non accessible)" : "(PDF)" } });
+    }
     for (const x of S.simp) {
       if (x.cle === "fc") det.push({ ico: ICO.fc, texte: `Connexion avec ${x.texte}` });
       else if (x.cle === "rec" && !dansAvant("donnees")) det.push({ ico: ICO.rec, texte: `Données récupérées : ${[...new Set(r.pre || [])].filter((p) => RECUPERE[p]).map((p) => PRE_COURT[p]).join(", ")}` });

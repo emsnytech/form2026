@@ -217,7 +217,7 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('J10 « Voir le formulaire (PDF non accessible) », ou « (PDF) » quand la plateforme ne le dit pas, lu dans accessibilite_plateformes.json', META.acc_plateformes.dn.pdf_non_accessible===true&&pdf.apres==='(PDF non accessible)'&&pdf.texte==='Voir le formulaire'&&M.avantDeCommencer(B('DN-69348'),{}).lignes[0].liens[0].apres==='(PDF)', pdf.texte+' '+pdf.apres);
   const dnD=B('DN-69348'), spD=ix.recs.find(r=>r.k==='sp'&&M.symboles(r,META).voies.length), SD=M.symboles(dnD,META);
   verifie('D1 délais constatés : le lien vers la page statistiques (adresse de la démarche, « commencer » → « statistiques ») existe pour toute démarche Démarche Numérique (dans « Avant de commencer » ou, sinon, dans le détail « ? »)',
-    SD.delais&&SD.delais.url==='https://demarche.numerique.gouv.fr/statistiques/'+dnD.u&&ix.recs.filter(r=>r.k==='dn'&&r.u).every(r=>{const d=M.symboles(r,META).delais;return d&&/\/statistiques\//.test(d.url)&&!/\/commencer\//.test(d.url);})&&/Moteur\.detailSymboles\(r, META \|\| \{\}, \{ site \}\)/.test(gab), SD.delais&&SD.delais.url);
+    SD.delais&&SD.delais.url==='https://demarche.numerique.gouv.fr/statistiques/'+dnD.u&&ix.recs.filter(r=>r.k==='dn'&&r.u).every(r=>{const d=M.symboles(r,META).delais;return d&&/\/statistiques\//.test(d.url)&&!/\/commencer\//.test(d.url);})&&/Moteur\.detailSymboles\(r, META \|\| \{\}, \{ site, avant \}\)/.test(gab), SD.delais&&SD.delais.url);
   verifie('D2 délais constatés : rien pour une fiche service-public', spD&&!M.symboles(spD,META).delais&&!M.avantDeCommencer(spD,META).lignes.some(l=>l.cle==='delais'), spD&&spD.id);
   const sansBloc={...dnD,u:undefined}, avecBloc=M.avantDeCommencer(dnD,META);
   verifie('D3 délais constatés : la ligne n\'ouvre jamais seule « Avant de commencer » ; elle s\'ajoute quand le bloc existe, avec le nouvel onglet signalé, sans aucun chiffre',
@@ -320,6 +320,19 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('A9 sous la réponse : une pastille de source, deux questions de suite au plus, « Signaler une erreur » (formulaire sans donnée personnelle) ; champ « Une autre question ? » fixé en bas',
     /<span class="source">Source&nbsp;: /.test(page)&&/return q\.slice\(0, 2\)/.test(page)&&/issues\/new\?template=signaler-erreur\.yml/.test(page)&&fs.existsSync(path.join(__dirname,'..','..','.github','ISSUE_TEMPLATE','signaler-erreur.yml'))
     &&/placeholder="Une autre question \?"/.test(page)&&/#ff\.ff-bas\{position:sticky;bottom:0/.test(page)&&!/Préciser ma situation/.test(page)); }
+// Liens vers les formulaires (perdus avec la refonte « interface sobre ») : cerfa des ressources service-public, formulaire à vide de
+// Démarche Numérique dans le « ? » des cartes « Démarches possibles », sans répétition avec « Avant de commencer ».
+{ const META=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','index_meta.json'),'utf8'));
+  const sp=R.filter(r=>r.cerfa), avec=sp.filter(r=>M.symboles(r,META).cerfa), c=M.symboles(R.find(r=>r.id==='SP-R10103'),META).cerfa;
+  const sansLien=sp.filter(r=>!M.symboles(r,META).cerfa&&M.symboles(r,META).voies.some(v=>v.includes('formulaire')));
+  const page=fs.readFileSync(path.join(__dirname,'..','..','trouver-sa-demarche.html'),'utf8');
+  verifie(`L1 fiche avec cerfa : « Formulaire cerfa n° 13974*02 », lien vers le formulaire (${avec.length} des ${sp.length} ressources avec cerfa ; les autres n'ont pas le symbole « Formulaire »)`,
+    c&&c.texte==='Formulaire cerfa n° 13974*02'&&c.url==='https://www.formulaires.service-public.gouv.fr/gf/cerfa_13974.do'&&!sansLien.length&&/<a class="mode cerfa" href=/.test(page)&&!R.some(r=>r.k==='dn'&&M.symboles(r,META).cerfa), c&&c.texte);
+  const dn=R.find(r=>r.id==='DN-69348'), pos=M.detailSymboles(dn,META,{avant:false}), vd=M.detailSymboles(dn,META);
+  const lf=pos.find(d=>d.lien&&/\/dossier_vide$/.test(d.lien.url));
+  verifie('L2 carte « Démarches possibles » (Démarche Numérique) : « Voir le formulaire (PDF) » dans le « ? » ; pas dans le « ? » de « Votre démarche », où « Avant de commencer » le porte',
+    !!lf&&lf.lien.texte==='Voir le formulaire'&&/^\(PDF/.test(lf.lien.apres)&&lf.ico===M.ICO.formulaire&&!vd.some(d=>d.lien&&/dossier_vide/.test(d.lien.url))&&M.avantDeCommencer(dn,META).lignes.some(l=>l.liens.some(x=>/dossier_vide/.test(x.url)))
+    &&/ligneSymboles\(r, nomOrg\(r\) \+ " · Démarche Numérique", nomOrg\(r\), undefined, false\)/.test(page), lf&&lf.lien.url); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');
