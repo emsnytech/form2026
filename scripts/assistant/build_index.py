@@ -161,6 +161,38 @@ for f in fiches:
       'th':f['theme'] or '','ev':x.get('evenement') or '','u':'https://www.service-public.gouv.fr/%s/vosdroits/%s'%(base,fid),
       'l':g.get('lien_web_url') or '','cerfa':g.get('numero_cerfa') or '','docs':list(dict.fromkeys(docs.get(fid,[])))[:10],'dn':liens.get(fid,[])[:5],
       'm':x.get('modalite') or ''})
+# Liens « l » qui aboutissent à une page de connexion (service-public « mademarche », /login, /connexion, OAuth, CAS…) au lieu
+# du site de la démarche. Adresse directe, dans l'ordre : le téléservice nommé dans le lien lui-même (paramètre service=,
+# TARGET= ou backURL=), sinon une adresse de démarche du même site lue dans le fichier XML DILA de la ressource ; sans adresse
+# directe, la fiche service-public (« u »), qui mène au service. « lc » garde le lien d'origine, « ls » son site (affichage).
+import urllib.parse as _up
+CONNEXION=re.compile(r'(?i)(/(login\w*|connexion(-inscription)?|connexion-gerep|signin|sign_in|authorize|oauth2?|openid-connect|auth|cas/login|authentification|identification)(?=[/?#.]|$))|/mademarche/|#/?login\b|[?&](redirect_uri|response_type|client_id)=|^https?://(connexion|login|identification(-usager)?|authentification|connect|ameliconnect|efpconnect)\.')
+_RETOUR=re.compile(r'(?i)callback|signin-oidc|redirect|shiro-cas|/cas/?$')
+_HORS=re.compile(r'(?i)franceconnect\.gouv\.fr|service-public\.gouv\.fr|legifrance|purl\.org|w3\.org')
+def _site(u):
+    h=re.sub(r'^www\d*\.','',(re.match(r'^https?://([^/?#:]+)',u) or [None,''])[1].lower()); q=h.split('.'); return '.'.join(q[-3:] if h.endswith('.gouv.fr') else q[-2:])
+_xml_r={}
+for d in ('extracted_part','extracted_pro','extracted_asso'):
+    for f in glob.glob(UP+'/dila/raw/'+d+'/R*.xml'): _xml_r.setdefault(os.path.basename(f)[:-4],f)
+# Grands espaces (donnees/assistant/grands_espaces.json, liste relue) : la connexion y est l'entrée attendue (« lg »).
+_grands={x['site'] for x in json.load(open(os.path.join(os.path.dirname(OUT),'grands_espaces.json')))['sites']}
+n_cx=collections.Counter()
+for r in recs:
+    l=r.get('l') or ''
+    if r['k']!='sp' or not CONNEXION.search(l): continue
+    q=_up.parse_qs(_up.urlsplit(l).query)
+    alt=[_up.unquote(v[0]) for k,v in q.items() if k.lower() in ('service','target','backurl') and v and v[0].startswith('http')]
+    alt=[u for u in alt if not CONNEXION.search(u) and not _RETOUR.search(u)]
+    if not alt and r['id'][3:] in _xml_r:
+        x=open(_xml_r[r['id'][3:]],encoding='utf-8',errors='ignore').read()
+        alt=[u for u in dict.fromkeys(re.findall(r'https?://[^"<>\s]+',x)) if u!=l and not CONNEXION.search(u) and not _HORS.search(u)
+             and _site(u)==_site(l) and re.search(r'(?i)demarche|declar|demande|teleservice|teleprocedure',_up.urlsplit(u).path)]
+    r['lc']=l
+    if alt: r['l']=alt[0].replace('&amp;','&'); n_cx['adresse directe']+=1
+    else:
+        r['l']=r['u']; r['ls']=re.match(r'^https?://[^/?#]+',l)[0]; n_cx['fiche service-public']+=1
+        if _site(l) in _grands: r['lg']=1; n_cx['dont grand espace (bouton « Se connecter »)']+=1
+print('liens vers une page de connexion :',dict(n_cx))
 # Ressources citées par chaque fiche (F…), lues dans les fichiers XML bruts de la DILA : services en ligne, formulaires,
 # simulateurs (<ServiceEnLigne ID="R…">), puis fiches liées (<LienInterne LienPublication="F…">). Seules celles présentes
 # dans l'index sont gardées, dans leur ordre d'apparition.
@@ -234,7 +266,7 @@ if qual:
     if cib.get('anef'): par_dom[cib['anef']['adresse']]=(cib['anef'],'retours sur les titres de séjour (ANEF)')
     for r in recs:
         if r['k']!='sp' or 'spp' in r: continue
-        a,portee=par_dom.get(dom(r.get('l')),(None,''))
+        a,portee=par_dom.get(dom(r.get('lc') or r.get('l')),(None,''))   # lien d'origine, même s'il menait à une connexion
         if a and a['n']>=20 and a['motifs']: r['spp']=[a['n'],a['neg'],a['motifs'],'',portee]; n_q['vigilance par domaine : '+portee]+=1
     # Démarche Numérique : par l'organisme. Préfecture : sans les retours sur les étrangers pour les démarches qui ne les concernent pas.
     pref,etr=cib.get('prefectures_sans_etrangers',{}),re.compile(cib.get('titres_etrangers') or r'(?!x)x',re.I)

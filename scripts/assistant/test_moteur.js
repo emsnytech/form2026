@@ -136,7 +136,7 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('Y6 vigilance par organisme : l\'infobulle donne l\'effectif, la source, le périmètre et la limite', vigDn.length&&vigDn.every(v=>/\d+ retours négatifs le signalent, sur \d+ retours sur Services Publics \+/.test(v.detail)&&/organisme « Préfecture de l'Isère »/.test(v.detail)&&/spontané, non représentatif/.test(v.detail)), vigDn.map(v=>v.detail)[0]||'aucune');
   // Vigilances Services Publics + hors Démarche Numérique (suite de la PR 94) : portée dans l'infobulle.
   const avecSpp=(f)=>ix.recs.filter(r=>r.spp&&f(r)), dom=(r)=>M.siteLisible(r.l)&&(/^https?:\/\/([^\/]+)/.exec(r.l)||[])[1];
-  const ants=avecSpp(r=>r.k==='sp'&&/ants\.gouv\.fr/.test(r.l||'')&&r.spp[4]), anef=avecSpp(r=>/administration-etrangers-en-france\.interieur\.gouv\.fr/.test(r.l||''));
+  const ants=avecSpp(r=>r.k==='sp'&&/ants\.gouv\.fr/.test(r.lc||r.l||'')&&r.spp[4]), anef=avecSpp(r=>/administration-etrangers-en-france\.interieur\.gouv\.fr/.test(r.lc||r.l||''));
   verifie(`Y8 ANTS par domaine : ${ants.length} fiches, infobulle « retours sur … (ANTS) », jamais moncompte.ants.gouv.fr`,
     ants.length===44&&ants.every(r=>S(r.id).vig.every(v=>/retours sur (l'immatriculation|le permis de conduire|les passeports et cartes d'identité) \(ANTS\), pas seulement cette démarche/.test(v.detail)))
     &&!avecSpp(r=>/moncompte\.ants/.test(r.l||'')).length&&B('SP-R45443').spp.length===4, ants.length+' fiches');
@@ -351,6 +351,39 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('R9 territoire : la fiche Nouvelle-Calédonie hors des 3 premiers pour « inscription liste électorale », en tête quand la question cite la Nouvelle-Calédonie', !t1.includes('SP-R63206')&&t2[0]==='SP-R63206', t1.join(' ')+' | '+t2.join(' '));
   const r1=M.search(ix,'demande de RSA',{k:3}).map(x=>x.r.id), r2=M.search(ix,'demande de RSA à Mayotte',{k:3}).map(x=>x.r.id);
   verifie('R9 territoire : « RSA (Mayotte) » hors des 3 premiers pour « demande de RSA », dans les 3 premiers pour « demande de RSA à Mayotte »', !r1.includes('SP-R931')&&r2.includes('SP-R931'), r1.join(' ')+' | '+r2.join(' ')); }
+// Liens vers une page de connexion (remplacés par l'adresse directe du téléservice, sinon par la fiche), renouvellement de
+// passeport ou de carte d'identité, fiches propres à l'étranger, phrase d'introduction, libellés en double.
+{ const cx=/(\/(login\w*|connexion|signin|sign_in|authorize|oauth2?|openid-connect|auth|cas\/login|authentification)(?=[\/?#.]|$))|\/mademarche\//i;
+  const reste=R.filter(r=>r.k==='sp'&&r.l&&cx.test(r.l)), rempl=R.filter(r=>r.lc);
+  verifie(`C1 aucun lien « l » vers une page de connexion (${rempl.length} remplacés : ${rempl.filter(r=>r.l!==r.u).length} par l'adresse directe, ${rempl.filter(r=>r.l===r.u).length} par la fiche)`,
+    !reste.length&&rempl.length>100&&rempl.every(r=>r.l===r.u?!!r.ls:!cx.test(r.l)), reste.slice(0,3).map(r=>r.id+' '+r.l).join(' | '));
+  const r66=R.find(r=>r.id==='SP-R66936'), r44=R.find(r=>r.id==='SP-R44607');
+  verifie('C2 SP-R66936 (mademarche) mène à sa fiche ; SP-R44607 au téléservice nommé dans le lien de connexion (service=)',
+    r66.l===r66.u&&/mademarche/.test(r66.lc)&&r44.l==='https://foret.agriculture.gouv.fr/teleprocedures-foret/', r66.l+' | '+r44.l);
+  const META2=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','index_meta.json'),'utf8'));
+  verifie('C3 lien remplacé par la fiche : le « ? » dit toujours sur quel site se fait la démarche', /En ligne, sur caf\.fr/.test(M.detailSymboles(R.find(r=>r.id==='SP-R1332'),META2)[0].texte), M.detailSymboles(R.find(r=>r.id==='SP-R1332'),META2)[0].texte);
+  for(const [q,att] of [['je veux renouveler mon passeport','SP-R62484'],['renouvellement passeport','SP-R62484'],["renouveler ma carte d'identité",'SP-R62483']]){
+    const t=M.search(ix,q,{k:5}).map(x=>x.r.id), C=M.choisir(ix,q,{k:20});
+    verifie(`R10 « ${q} » : ${att} (pré-demande de renouvellement, ANTS) en tête et en « Votre démarche »`, t[0]===att&&C.principal&&C.principal.id===att, t.join(' ')); }
+  const etr=['je veux renouveler mon passeport','renouvellement passeport','passeport','refaire mon passeport'].filter(q=>{const C=M.choisir(ix,q,{k:20});return C.principal&&C.principal.id==='SP-R66936'||M.principalDe([R.find(r=>r.id==='SP-R66936')],q)});
+  verifie('R11 la fiche « Renouvellement à distance de passeport en Australie, au Canada… » jamais en « Votre démarche » sans l\'étranger ni ces pays dans la question', !etr.length, etr.join(' | ')||'aucune');
+  const f=R.find(r=>r.id==='SP-F21091'), g=R.find(r=>r.id==='SP-F1759');
+  verifie('R12 phrase d\'introduction : pas de fiche « en cas de vol » ou « de perte » si la question n\'en parle pas', M.casParticulier(R.find(r=>/en cas de vol/.test(r.t)),'je veux renouveler mon passeport')&&!M.casParticulier(R.find(r=>/en cas de vol/.test(r.t)),'on m\'a volé mon passeport')&&!M.casParticulier(f,'renouveler mon passeport'));
+  const by=new Map(R.map(r=>[r.id,r])), lien=(x)=>(/^SP-R/.test(x.id)&&x.l)?x.l:x.u; let dup=[];
+  for(const f of R.filter(r=>/^SP-F/.test(r.id))){const rs=(f.res||[]).map(i=>by.get(i)).filter(x=>x&&/imulateur|Téléservice|selNG/i.test(x.ty)).slice(0,2);
+    const b=M.libellesUniques(rs.map(x=>({texte:M.libelleRessource(x),url:lien(x),origine:x.ls,titre:x.t}))); if(new Set(b.map(x=>x.texte)).size!==b.length) dup.push(f.id); }
+  const ex=M.libellesUniques([{texte:'Faire une demande en ligne',url:'https://passeport.ants.gouv.fr/a'},{texte:'Faire une demande en ligne',url:'https://www.service-public.gouv.fr/b'}]).map(x=>x.texte);
+  verifie('D1 aucun libellé de lien deux fois dans une carte « Aussi pour vous » ; deux liens différents de même libellé sont nommés par leur site', !dup.length&&ex.join(' | ')==='Faire une demande en ligne sur ants.gouv.fr | Faire une demande en ligne sur service-public.gouv.fr', dup.slice(0,3).join(' ')||ex.join(' | ')); }
+// Lien d'origine vers une page de connexion : un bouton et un lien discret ; grands espaces lus dans grands_espaces.json.
+{ const G=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','grands_espaces.json'),'utf8')).sites.map(x=>x.site);
+  const caf=M.boutonsConnexion(R.find(r=>r.id==='SP-R1165')), pacs=M.boutonsConnexion(R.find(r=>r.id==='SP-R57680')), dir=M.boutonsConnexion(R.find(r=>r.id==='SP-R44607'));
+  verifie('B10 grand espace (Caf) : bouton « Se connecter sur caf.fr » vers la connexion, lien « Lire la fiche »',
+    caf&&caf.bouton.texte==='Se connecter sur caf.fr'&&/connect\.caf\.fr/.test(caf.bouton.url)&&caf.lien.texte==='Lire la fiche'&&/vosdroits\/R1165$/.test(caf.lien.url), caf&&caf.bouton.texte);
+  verifie('B11 autre site (service-public « mademarche ») : bouton « Lire la fiche », lien « Se connecter directement sur service-public.gouv.fr »',
+    pacs&&pacs.bouton.texte==='Lire la fiche'&&pacs.lien.texte==='Se connecter directement sur service-public.gouv.fr'&&/mademarche/.test(pacs.lien.url), pacs&&pacs.lien.texte);
+  const cx=R.filter(r=>r.lc&&r.ls), grands=cx.filter(r=>r.lg), mal=cx.filter(r=>!!r.lg!==G.includes(M.siteLisible(r.lc)));
+  verifie(`B12 ${cx.length} ressources à deux liens, dont ${grands.length} grands espaces (${G.join(', ')}, liste relue dans grands_espaces.json) ; adresse directe : un seul bouton`,
+    cx.length===120&&grands.length>0&&!mal.length&&dir===null&&!/caf\.fr|ameli|impots|ants\.gouv/.test(fs.readFileSync(path.join(__dirname,'moteur.js'),'utf8').match(/function boutonsConnexion[\s\S]*?\n  \}/)[0]), mal.map(r=>r.id).join(' ')); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');

@@ -126,6 +126,7 @@ body{--bouton-fond:var(--accent);--bouton-fond-survol:var(--accent-fonce);--bout
 .carte .liens{display:flex;gap:8px 20px;flex-wrap:wrap;font-size:15px}
 .btn-lien{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;font-size:17px;font-weight:600;color:#fff;background:var(--accent);border-radius:10px;text-decoration:none;align-self:flex-start}
 .btn-lien:hover{color:#fff;background:var(--accent-fonce)}
+.boutons-cx{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin:0}.lien-cx{font-size:15px;color:var(--muted)}
 .comprendre{display:flex;flex-direction:column;gap:6px;padding:0 4px}.comprendre a{font-size:17px}.comprendre span{font-size:14px;color:var(--muted)}
 details.pli{border-top:1px solid var(--line);padding-top:6px}
 details.pli>summary{font-size:16px;font-weight:500;display:list-item;padding:10px 0;cursor:pointer}
@@ -181,6 +182,7 @@ input#cp,input#p-cp,.cp-res{font:inherit;font-size:15px;min-height:44px;padding:
   .texte-ia{font-size:16px}
   .carte{padding:16px}
   .btn-lien{align-self:stretch;justify-content:center}
+  .boutons-cx{flex-direction:column;align-items:stretch;text-align:center}
 }
 @media (max-width:720px){#ff.ff-bas{flex-wrap:nowrap}#ff.ff-bas .perso{display:none}#ff.ff-bas .btn{width:auto;min-height:48px;padding:0 16px}#ff.ff-bas input{min-height:48px}}
 dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line2);border-radius:14px;padding:20px 22px;background:var(--fond);color:var(--ink)}
@@ -605,6 +607,36 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
   const TERRITOIRES_PARTICULIERS = [/ nouvelle caledonie /, / polynesie /, / wallis /, / futuna /, / saint pierre et miquelon /, / saint barthelemy /,
     / saint martin /, / mayotte /, / guadeloupe /, / martinique /, / guyane /, / (la )?reunion (?!d)/, / outre mer /, / alsace /, / moselle /,
     / a l etranger /, / hors de france /, / consulaire(s)? /, / australie /, / canada /];
+  // Fiche propre à un territoire (outre-mer, étranger…) que la question ne cite pas : rétrogradée, et jamais en « Votre démarche ».
+  const horsTerritoire = (r, q) => { if (r.k !== "sp") return false; const tt = TERRITOIRES_PARTICULIERS.find((re) => re.test(" " + norm(r.t) + " "));
+    return !!tt && !tt.test(" " + norm(q) + " ") && !/ etranger /.test(" " + norm(q) + " "); };
+  // Fiche d'un cas particulier (vol, perte, décès, détérioration) que la question n'évoque pas : jamais citée en phrase d'introduction.
+  const CAS_PARTICULIERS = [/ vol | vols | vole | volee | volees | voles | vole /, / perte | pertes | perdu | perdue | perdus | perdues /,
+    / deces | decede | decedee | mort /, / deterioration | deteriore | deterioree | endommage | endommagee | abime | abimee /];
+  const casParticulier = (r, q) => { const t = " " + norm(r.t) + " ", n = " " + norm(q) + " "; return CAS_PARTICULIERS.some((re) => re.test(t) && !re.test(n)); };
+  // Libellés des liens d'une carte : une même adresse une seule fois ; deux adresses de même libellé sont nommées par leur site
+  // (« Faire une demande en ligne sur ants.gouv.fr »), puis, si le site est le même, par leur titre ; à titre égal, un seul lien.
+  function libellesUniques(liens) {
+    const vus = new Set(), l = liens.filter((x) => x.url && !vus.has(x.url) && vus.add(x.url)).map((x) => ({ ...x }));
+    const compte = (k) => l.filter((x) => x.texte === k).length;
+    for (const x of l) if (compte(x.texte) > 1) x.site = siteLisible(x.origine || x.url);
+    for (const x of l) if (x.site !== undefined) { const meme = l.filter((y) => y.texte === x.texte && y.site === x.site).length > 1; x.nouveau = meme ? (x.titre || x.texte) : `${x.texte} sur ${x.site}`; }
+    // Même libellé, même site et même titre : le même service, sous deux adresses ; le premier lien suffit.
+    const t = new Set();
+    return l.map(({ nouveau, site, origine, ...x }) => (nouveau ? { ...x, texte: nouveau } : x)).filter((x) => !t.has(x.texte) && t.add(x.texte));
+  }
+  // Ressource dont le lien menait à une page de connexion (« lc », remplacé par la fiche) : deux liens, un bouton et un lien
+  // discret. Grand espace personnel (« lg », grands_espaces.json) : « Se connecter sur caf.fr », puis « Lire la fiche » ;
+  // ailleurs : « Lire la fiche », puis « Se connecter directement sur … ».
+  function boutonsConnexion(r) {
+    if (!r || !r.lc || !r.ls) return null;
+    const site = siteLisible(r.lc), fiche = { texte: "Lire la fiche", url: r.u };
+    return r.lg ? { bouton: { texte: `Se connecter sur ${site}`, url: r.lc }, lien: fiche }
+      : { bouton: fiche, lien: { texte: `Se connecter directement sur ${site}`, url: r.lc } };
+  }
+  // Libellé d'une ressource service-public dans une carte.
+  const libelleRessource = (r) => /imulateur/i.test(r.ty) ? "Savoir si j'y ai droit (simulateur)" : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne"
+    : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : r.t;
   function search(ix, q, opt = {}) {
     const { pub = "", dep = "", source = "", k = 10, ouvertes = true, sansJumelles = false } = opt;
     // Même titre qu'une démarche nationale : la nationale passe devant, la locale n'apparaît que si l'usager a choisi son
@@ -656,8 +688,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
         // rétrogradée, pour que la fiche générale passe devant.
         const pp = PUBLICS_PARTICULIERS.find(([re]) => re.test(" " + norm(r.t) + " "));
         if (pp && !pp[0].test(" " + norm(q) + " ")) s *= 0.7;
-        const tt = TERRITOIRES_PARTICULIERS.find((re) => re.test(" " + norm(r.t) + " "));
-        if (tt && !tt.test(" " + norm(q) + " ")) s *= 0.7;
+        if (horsTerritoire(r, q)) s *= 0.7;
       }
       out.push([s, i]);
     }
@@ -729,10 +760,11 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
   function principalDe(liste, q, opt = {}) {
     const { pub = "", dep = "" } = opt, d = departementConnu(q, dep);
     const ailleurs = (r) => !!d && r.k === "dn" && !!r.dep && r.dep !== d;
-    const pro = (r) => (!pub || pub === "particulier") && (RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t));
+    const pro = (r) => (!pub || pub === "particulier") && ((RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t)));
     // Département connu : une démarche locale de département inconnu (po « inc ») passe après celles du département,
     // nationales et fiches.
     const inc = (r) => !!d && r.k === "dn" && r.po === "inc";
+    liste = liste.filter((r) => !horsTerritoire(r, q));   // jamais une fiche propre à un territoire que la question ne cite pas
     return liste.find((r) => !ailleurs(r) && !inc(r) && !pro(r)) || liste.find((r) => !ailleurs(r) && !pro(r))
       || liste.find((r) => !ailleurs(r)) || liste[0] || null;
   }
@@ -803,7 +835,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
   // service-public), ou du département connu ; pas réservée aux professionnels pour un particulier.
   function sure(r, q, opt = {}, P = null) {
     const { pub = "", dep = "" } = opt, d = departementConnu(q, dep);
-    if (!r || !(P || opt.P).pertinente(r.id) || !titreSur(opt.ix, q, r)) return false;
+    if (!r || !(P || opt.P).pertinente(r.id) || !titreSur(opt.ix, q, r) || horsTerritoire(r, q)) return false;
     const po = porteeDe(r);
     if (po !== "nat" && !(po === "dep" && d && depDe(r) === d)) return false;
     if ((!pub || pub === "particulier") && (RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t))) return false;
@@ -1006,7 +1038,8 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     // y compris le lien vers le formulaire à vide de Démarche Numérique.
     const A = opt.avant === false ? { lignes: [] } : avantDeCommencer(r, meta), dansAvant = (cle) => A.lignes.some((l) => l.cle === cle);
     const min = (t) => t.charAt(0).toLowerCase() + t.slice(1), org = r.on || r.oa || r.o || "";
-    const site = r.k === "dn" ? "Démarche Numérique" : siteLisible(opt.site || r.l);
+    // « ls » : site d'origine d'un lien qui menait à une page de connexion (le lien mène alors à la fiche service-public).
+    const site = r.k === "dn" ? "Démarche Numérique" : siteLisible(opt.site || r.ls || r.l);
     const det = S.voies.map((voie, i) => ({ ico: ICO[voie[0]],
       texte: MODES_COURT[voie[0]] + (voie[0] === "en_ligne" && site ? `, sur ${site}` : "") + voie.slice(1).map((m) => ", " + min(MODES_LIB[m])).join("")
         + (!S.sur && i === S.voies.length - 1 ? " (à vérifier sur la fiche)" : "") }));
@@ -1028,7 +1061,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -1193,8 +1226,7 @@ routeParcourir();
 // l'assistant peut écrire en lien dans sa réponse (renderText), rien d'autre.
 let LIENS = [];
 function ajouterLien(titre, url, source) { if (!url || LIENS.some((l) => l.url === url)) return; LIENS.push({ titre, url, source }); }
-const LIB_RES = (r) => /imulateur/i.test(r.ty) ? "Savoir si j'y ai droit (simulateur)" : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne"
-  : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : r.t;
+const LIB_RES = (r) => Moteur.libelleRessource(r);
 // Type d'une ressource service-public, en langage courant.
 const typeLib = (r) => /Téléservice|selNG/i.test(r.ty) ? "Démarche en ligne" : /imulateur/i.test(r.ty) ? "Simulateur" : /ormulaire/i.test(r.ty) ? "Formulaire"
   : /echerche/i.test(r.ty) ? "Outil de recherche" : /odèle|lettre/i.test(r.ty) ? "Modèle de lettre" : "Fiche officielle";
@@ -1299,10 +1331,13 @@ function carteDemarche(r) {
   } else {
     const ts = resDe(r).find((x) => /Téléservice|selNG/i.test(x.ty));
     const cible = ts ? lienSp(ts) : r.l || r.u;
-    const L = ligneSymboles(r, "service-public.gouv.fr", `${typeLib(r)} · service-public.gouv.fr`, ts ? ts.l : r.l);
+    const L = ligneSymboles(r, "service-public.gouv.fr", `${typeLib(r)} · service-public.gouv.fr`, ts ? (ts.ls || ts.l) : (r.ls || r.l));
     h += `<p class="org ligne-symb">${L.ligne}</p>${L.detail}`;
     if ((r.docs || []).length) h += `<p class="prep2">À préparer&nbsp;: ${esc(r.docs.slice(0, 5).join(" ; "))}${r.docs.length > 5 ? "…" : "."}</p>`;
-    h += `<a class="btn-lien" href="${esc(cible)}" target="_blank" rel="noopener">${ts || r.l ? "Faire la démarche" : "Lire la fiche"}</a>`;
+    const cx = Moteur.boutonsConnexion(ts || r);   // lien d'origine vers une page de connexion : un bouton, un lien discret à côté
+    h += cx ? `<p class="boutons-cx"><a class="btn-lien" href="${esc(cx.bouton.url)}" target="_blank" rel="noopener">${esc(cx.bouton.texte)}</a>`
+        + ` <a class="lien-cx" href="${esc(cx.lien.url)}" target="_blank" rel="noopener">${esc(cx.lien.texte)}<span class="sr-only"> (nouvel onglet)</span></a></p>`
+      : `<a class="btn-lien" href="${esc(cible)}" target="_blank" rel="noopener">${ts || r.l ? "Faire la démarche" : "Lire la fiche"}</a>`;
     h += blocAvant(r);
     ajouterLien(ts ? ts.t : r.t, cible, "service-public.gouv.fr");
   }
@@ -1320,7 +1355,8 @@ function carteAussi(f) {
   const el = $("carte-aussi"); if (!f) { el.hidden = true; return; }
   const rs = resDe(f).filter((x) => /imulateur|Téléservice|selNG/i.test(x.ty)).slice(0, 2);
   el.innerHTML = `<h2 id="h-aussi">Aussi pour vous</h2><p class="titre p">${esc(f.t)}</p><p class="org">${esc((f.d || "").split(/(?<=\.)\s/)[0])} · service-public.gouv.fr</p>`
-    + `<div class="liens">${(rs.length ? rs : [f]).map((x) => `<a href="${esc(lienSp(x))}" target="_blank" rel="noopener">${esc(rs.length ? LIB_RES(x) : "Lire la fiche")}</a>`).join("")}</div>`;
+    + `<div class="liens">${Moteur.libellesUniques((rs.length ? rs : [f]).map((x) => ({ texte: rs.length ? LIB_RES(x) : "Lire la fiche", url: lienSp(x), origine: x.ls, titre: x.t })))
+      .map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.texte)}</a>`).join("")}</div>`;
   el.hidden = false;
   ajouterLien(f.t, f.u, "service-public.gouv.fr"); rs.forEach((x) => ajouterLien(x.t, lienSp(x), "service-public.gouv.fr"));
 }
@@ -1468,7 +1504,7 @@ function rechercheSimple() {
   afficherResultats(res, q, "simple", C.principal, { possibles: C.possibles });
   // « Selon la fiche officielle… » : seulement à côté d'une démarche sûre, et si la fiche passe le seuil et porte un terme
   // de la question dans son titre ; jamais une fiche hors sujet.
-  const f = $("rep-autrement").hidden ? res.find((r) => estFiche(r) && C.P.pertinente(r.id) && Moteur.termeAuTitre(q, r)) : null;
+  const f = $("rep-autrement").hidden ? res.find((r) => estFiche(r) && C.P.pertinente(r.id) && Moteur.termeAuTitre(q, r) && !Moteur.casParticulier(r, q)) : null;
   $("rep-texte").innerHTML = f && f.d && !$("carte-demarche").hidden && f !== C.principal ? `<p class="extrait">Selon la fiche officielle «&nbsp;${esc(f.t)}&nbsp;»&nbsp;: ${esc(f.d.split(/(?<=\.)\s/)[0])}</p>` : "";
 }
 $("rep-choix").addEventListener("click", (ev) => {

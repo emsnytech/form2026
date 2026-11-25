@@ -289,6 +289,36 @@
   const TERRITOIRES_PARTICULIERS = [/ nouvelle caledonie /, / polynesie /, / wallis /, / futuna /, / saint pierre et miquelon /, / saint barthelemy /,
     / saint martin /, / mayotte /, / guadeloupe /, / martinique /, / guyane /, / (la )?reunion (?!d)/, / outre mer /, / alsace /, / moselle /,
     / a l etranger /, / hors de france /, / consulaire(s)? /, / australie /, / canada /];
+  // Fiche propre à un territoire (outre-mer, étranger…) que la question ne cite pas : rétrogradée, et jamais en « Votre démarche ».
+  const horsTerritoire = (r, q) => { if (r.k !== "sp") return false; const tt = TERRITOIRES_PARTICULIERS.find((re) => re.test(" " + norm(r.t) + " "));
+    return !!tt && !tt.test(" " + norm(q) + " ") && !/ etranger /.test(" " + norm(q) + " "); };
+  // Fiche d'un cas particulier (vol, perte, décès, détérioration) que la question n'évoque pas : jamais citée en phrase d'introduction.
+  const CAS_PARTICULIERS = [/ vol | vols | vole | volee | volees | voles | vole /, / perte | pertes | perdu | perdue | perdus | perdues /,
+    / deces | decede | decedee | mort /, / deterioration | deteriore | deterioree | endommage | endommagee | abime | abimee /];
+  const casParticulier = (r, q) => { const t = " " + norm(r.t) + " ", n = " " + norm(q) + " "; return CAS_PARTICULIERS.some((re) => re.test(t) && !re.test(n)); };
+  // Libellés des liens d'une carte : une même adresse une seule fois ; deux adresses de même libellé sont nommées par leur site
+  // (« Faire une demande en ligne sur ants.gouv.fr »), puis, si le site est le même, par leur titre ; à titre égal, un seul lien.
+  function libellesUniques(liens) {
+    const vus = new Set(), l = liens.filter((x) => x.url && !vus.has(x.url) && vus.add(x.url)).map((x) => ({ ...x }));
+    const compte = (k) => l.filter((x) => x.texte === k).length;
+    for (const x of l) if (compte(x.texte) > 1) x.site = siteLisible(x.origine || x.url);
+    for (const x of l) if (x.site !== undefined) { const meme = l.filter((y) => y.texte === x.texte && y.site === x.site).length > 1; x.nouveau = meme ? (x.titre || x.texte) : `${x.texte} sur ${x.site}`; }
+    // Même libellé, même site et même titre : le même service, sous deux adresses ; le premier lien suffit.
+    const t = new Set();
+    return l.map(({ nouveau, site, origine, ...x }) => (nouveau ? { ...x, texte: nouveau } : x)).filter((x) => !t.has(x.texte) && t.add(x.texte));
+  }
+  // Ressource dont le lien menait à une page de connexion (« lc », remplacé par la fiche) : deux liens, un bouton et un lien
+  // discret. Grand espace personnel (« lg », grands_espaces.json) : « Se connecter sur caf.fr », puis « Lire la fiche » ;
+  // ailleurs : « Lire la fiche », puis « Se connecter directement sur … ».
+  function boutonsConnexion(r) {
+    if (!r || !r.lc || !r.ls) return null;
+    const site = siteLisible(r.lc), fiche = { texte: "Lire la fiche", url: r.u };
+    return r.lg ? { bouton: { texte: `Se connecter sur ${site}`, url: r.lc }, lien: fiche }
+      : { bouton: fiche, lien: { texte: `Se connecter directement sur ${site}`, url: r.lc } };
+  }
+  // Libellé d'une ressource service-public dans une carte.
+  const libelleRessource = (r) => /imulateur/i.test(r.ty) ? "Savoir si j'y ai droit (simulateur)" : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne"
+    : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : r.t;
   function search(ix, q, opt = {}) {
     const { pub = "", dep = "", source = "", k = 10, ouvertes = true, sansJumelles = false } = opt;
     // Même titre qu'une démarche nationale : la nationale passe devant, la locale n'apparaît que si l'usager a choisi son
@@ -340,8 +370,7 @@
         // rétrogradée, pour que la fiche générale passe devant.
         const pp = PUBLICS_PARTICULIERS.find(([re]) => re.test(" " + norm(r.t) + " "));
         if (pp && !pp[0].test(" " + norm(q) + " ")) s *= 0.7;
-        const tt = TERRITOIRES_PARTICULIERS.find((re) => re.test(" " + norm(r.t) + " "));
-        if (tt && !tt.test(" " + norm(q) + " ")) s *= 0.7;
+        if (horsTerritoire(r, q)) s *= 0.7;
       }
       out.push([s, i]);
     }
@@ -413,10 +442,11 @@
   function principalDe(liste, q, opt = {}) {
     const { pub = "", dep = "" } = opt, d = departementConnu(q, dep);
     const ailleurs = (r) => !!d && r.k === "dn" && !!r.dep && r.dep !== d;
-    const pro = (r) => (!pub || pub === "particulier") && (RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t));
+    const pro = (r) => (!pub || pub === "particulier") && ((RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t)));
     // Département connu : une démarche locale de département inconnu (po « inc ») passe après celles du département,
     // nationales et fiches.
     const inc = (r) => !!d && r.k === "dn" && r.po === "inc";
+    liste = liste.filter((r) => !horsTerritoire(r, q));   // jamais une fiche propre à un territoire que la question ne cite pas
     return liste.find((r) => !ailleurs(r) && !inc(r) && !pro(r)) || liste.find((r) => !ailleurs(r) && !pro(r))
       || liste.find((r) => !ailleurs(r)) || liste[0] || null;
   }
@@ -487,7 +517,7 @@
   // service-public), ou du département connu ; pas réservée aux professionnels pour un particulier.
   function sure(r, q, opt = {}, P = null) {
     const { pub = "", dep = "" } = opt, d = departementConnu(q, dep);
-    if (!r || !(P || opt.P).pertinente(r.id) || !titreSur(opt.ix, q, r)) return false;
+    if (!r || !(P || opt.P).pertinente(r.id) || !titreSur(opt.ix, q, r) || horsTerritoire(r, q)) return false;
     const po = porteeDe(r);
     if (po !== "nat" && !(po === "dep" && d && depDe(r) === d)) return false;
     if ((!pub || pub === "particulier") && (RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t))) return false;
@@ -690,7 +720,8 @@
     // y compris le lien vers le formulaire à vide de Démarche Numérique.
     const A = opt.avant === false ? { lignes: [] } : avantDeCommencer(r, meta), dansAvant = (cle) => A.lignes.some((l) => l.cle === cle);
     const min = (t) => t.charAt(0).toLowerCase() + t.slice(1), org = r.on || r.oa || r.o || "";
-    const site = r.k === "dn" ? "Démarche Numérique" : siteLisible(opt.site || r.l);
+    // « ls » : site d'origine d'un lien qui menait à une page de connexion (le lien mène alors à la fiche service-public).
+    const site = r.k === "dn" ? "Démarche Numérique" : siteLisible(opt.site || r.ls || r.l);
     const det = S.voies.map((voie, i) => ({ ico: ICO[voie[0]],
       texte: MODES_COURT[voie[0]] + (voie[0] === "en_ligne" && site ? `, sur ${site}` : "") + voie.slice(1).map((m) => ", " + min(MODES_LIB[m])).join("")
         + (!S.sur && i === S.voies.length - 1 ? " (à vérifier sur la fiche)" : "") }));
@@ -712,6 +743,6 @@
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

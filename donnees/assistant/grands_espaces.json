@@ -1,0 +1,9 @@
+{
+ "objet": "Grands espaces personnels : sites dont la page de connexion est l'entrée attendue de la démarche. Pour une ressource service-public dont le lien mène à une page de connexion de l'un de ces sites, le bouton principal est « Se connecter sur … » et la fiche est un lien discret ; pour les autres sites, l'inverse. Liste relue par l'éditeur (25/11/2026), lue par build_index.py (clé « lg » de l'index).",
+ "sites": [
+  {"site": "caf.fr", "nom": "Caisse d'allocations familiales (Caf)"},
+  {"site": "impots.gouv.fr", "nom": "impots.gouv.fr (DGFiP)"},
+  {"site": "ameli.fr", "nom": "Assurance maladie (ameli)"},
+  {"site": "ants.gouv.fr", "nom": "Agence nationale des titres sécurisés (ANTS)"}
+ ]
+}
