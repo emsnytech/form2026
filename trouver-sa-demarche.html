@@ -331,7 +331,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
   const DEGRADATIONS = ["degradation", "dommage", "_troubles_urbains", "_dommages_subis"];
   const SYN = {
     bebe: ["naissance"], enfant: ["enfant"], boulot: ["emploi"], travail: ["emploi", "travail"], chomage: ["emploi", "chomage", "inscription"],
-    demenage: ["demenagement", "adresse"], demenager: ["demenagement", "adresse"], aide: ["aide", "subvention", "allocation"],
+    demenage: ["demenagement", "adresse"], demenager: ["demenagement", "adresse"], aide: ["aide", "subvention", "allocation"], allocation: ["allocation", "aide"], allocations: ["allocation", "aide"], indemnisation: ["indemnisation", "indemnite"], indemniser: ["indemnisation", "indemnite"],
     argent: ["aide", "subvention", "financement"], asso: ["association"], boite: ["entreprise"], societe: ["entreprise"],
     voiture: ["vehicule", "immatriculation"], auto: ["vehicule"], carte: ["carte"], fete: ["manifestation"], brocante: ["vide", "grenier", "manifestation"],
     handicap: ["handicap", "mdph"], logement: ["logement"], ecole: ["scolaire", "scolarisation", "ecole"], fac: ["universite", "etudes"],
@@ -390,6 +390,9 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     [["naissance enfant", "naissance d un enfant", "naissance de mon enfant", "naissance de notre enfant", "naissance de mon bebe", "mon bebe est ne",
       "vient de naitre", "declarer une naissance", "declarer la naissance"], ["_declaration_naissance", "naissance"], { sansSyn: true }],
     [["logement social", "logements sociaux", "hlm"], ["_logement_social"]],
+    // « aide au logement » seule : l'APL, l'ALF et l'ALS se demandent par un même service en ligne, qui les nomme par leur sigle.
+    [["aide au logement", "aides au logement", "aide logement", "aides logement", "allocation logement", "allocations logement",
+      "allocation de logement", "allocations de logement", "allocation au logement"], ["logement"], { seul: ["apl"] }],
     [["payer impot", "payer impots", "payer mes impots", "payer ses impots", "payer l impot", "payer mon impot", "paiement impot", "paiement des impots",
       "paiement de l impot", "regler mes impots", "regler ses impots"], ["_paiement_impot"]],
     // « décès » seul : d'abord la déclaration de décès.
@@ -422,15 +425,22 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     ["paiement de l impot", "_paiement_impot"], ["paiement des impots", "_paiement_impot"], ["payer ses impots", "_paiement_impot"], ["payer l impot", "_paiement_impot"],
     // carte d'identité : un jeton propre (la racine « identi » est aussi celle d'« identification »)
     ["carte d identite", "_cni"], ["cartes d identite", "_cni"], ["carte nationale d identite", "_cni"]];
-  // Racines ambiguës à 6 lettres (« matern » : maternité et maternelle) : 7 lettres pour ces préfixes, relevés sur les mots
-  // des questions de référence (maternité/maternelle, procuration/procureur, commune/communication, électricité/électronique,
-  // autorisation/autorité, commencement/commentaire).
-  const RACINES_AMBIGUES = new Set(["matern", "procur", "commun", "electr", "autori", "commen"]);
+  // Racines : deux mots se rapprochent seulement si l'un est une forme de l'autre (pluriel, féminin, conjugaison) ou en dérive
+  // par un suffixe courant (-ation, -ement, -ité, -ique…). On retire la terminaison, on ne coupe plus à longueur fixe : « maternité »
+  // (matern) ≠ « maternelle » (maternel), « licenciement » (licenci) ≠ « licence » (licenc), « procuration » ≠ « procureur ».
+  // Terminaisons essayées de la plus longue à la plus courte ; la première qui laisse une racine assez longue est retirée
+  // (5 lettres au moins pour un suffixe de dérivation : « cassée » ≠ « cassation »).
+  const SUFFIXES = [["issements", 5], ["issement", 5], ["ements", 5], ["ement", 5], ["ataires", 5], ["ataire", 5], ["ations", 5],
+    ["ation", 5], ["itions", 5], ["ition", 5], ["utions", 5], ["ution", 5], ["ptions", 5], ["ption", 5], ["ances", 5], ["ance", 5],
+    ["ences", 5], ["ence", 5], ["ites", 5], ["ite", 5], ["ables", 5], ["able", 5], ["istes", 5], ["iste", 5], ["ismes", 5], ["isme", 5],
+    ["ages", 5], ["age", 5], ["antes", 4], ["ante", 4], ["ants", 4], ["ant", 4], ["erons", 3], ["eront", 3], ["erait", 3], ["erai", 3],
+    ["ions", 4], ["iez", 3], ["ees", 3], ["ee", 3], ["er", 3], ["ez", 3], ["es", 3], ["e", 3]];
   function stem(w) {
     if (w[0] === "_") return w;
-    if (w.length > 4) w = w.replace(/(s|x)$/, "");
-    if (w.length <= 6) return w;
-    return RACINES_AMBIGUES.has(w.slice(0, 6)) ? w.slice(0, 7) : w.slice(0, 6);
+    if (w.length > 4) w = w.replace(/aux$/, "al").replace(/(s|x)$/, "");
+    w = w.replace(/elle$/, "el").replace(/enne$/, "en").replace(/([ts])ive$/, "$1if").replace(/([^a])ire$/, "$1i").replace(/ique$/, "ic").replace(/ication$/, "i");
+    for (const [x, min] of SUFFIXES) if (w.endsWith(x) && w.length - x.length >= min) { w = w.slice(0, -x.length); break; }
+    return w.length > 4 ? w.replace(/([^aeiouy])\1$/, "$1") : w;
   }
   function toks(s) {
     const out = [];
@@ -663,7 +673,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     [/ action sociale | asf | agents? publics? | fonctionnaires? | fonction publique | agents? de l etat | magistrats? | contractuels? | agents? hospitaliers? /, / agents? publics? | fonctionnaires? | fonction publique | agents? | magistrats? | contractuels? /],
     [/ mandataires? sociaux? | mandataire social /, / mandataires? | dirigeants? | gerants? /],
     // opération particulière sur un titre ou un dossier (modifier, corriger, ajouter un co-titulaire) : après la demande elle-même
-    [/ modifier | modifie | modifiee | modifies | modification | correction | corriger | ajouter | co titulaire | cotitulaires? /, / modifier | modification | changer | changement | corriger | correction | erreur | ajouter | adresse | demenage | demenagement | titulaire /],
+    [/ modifier | modifie | modifiee | modifies | modification | correction | corriger | ajouter | co titulaire | cotitulaires? | recalcul /, / recalcul | recalculer | modifier | modification | changer | changement | corriger | correction | erreur | ajouter | adresse | demenage | demenagement | titulaire /],
     // organisme ou régime particulier
     [/ ircantec | msa | rafp | cnracl | enim | regime agricole | regime local | caisse des depots | fonctions? publiques? /, / ircantec | msa | rafp | cnracl | enim | agricole | regime local | fonction publique | fonctionnaires? | agents? /],
     // métier particulier
@@ -671,6 +681,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     // situation d'exception
     [/ maladie professionnelle | maladies professionnelles | accident du travail | accident de travail | accidents? de trajet | remise gracieuse | impossibilite de payer | delai de paiement | terrorisme | catastrophe naturelle | deces de la mere | licenciement | droits de succession | impots locaux /,
      / professionnelle | accident | trajet | remise | gracieuse | impossib | plus payer | peux pas payer | delai | terroris | catastrophe | mere | licencie | licenciement | succession | heritage | locaux | locales | fonciere | habitation /],
+    [/ etudiante?s? | etudiants? | alternants? | alternance /, / etudiante?s? | etudiants? | etudes | etudier | universite | fac | crous | bourses? | stage | stagiaires? | alternance | apprentis? /],
     [/ marins? | gens de mer | notaires? | clercs? | journalistes? | detenus? | frontaliers? | pensionnes? /, / marins? | mer | notaires? | clercs? | journalistes? | detenus? | prison | frontaliers? | pensionnes? /]];
   const casParticulierTitre = (r, q) => { const t = " " + norm(r.t) + " ", n = " " + norm(q) + " ";
     return PUBLICS_PRECIS.some(([rt, rq]) => rt.test(t) && !rq.test(n)); };
@@ -764,16 +775,27 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     // département (pas pour un lieu seulement reconnu dans la question). Ne vaut que pour les démarches de même titre.
     const jumelles = sansJumelles ? new Map() : ix.jumelles || new Map();
     const qt = queryToks(q); if (!qt.length) return [];
+    // Couverture : comptée par mot de la question (groupe de termes), pas par synonyme : « aide » appelle aussi « subvention »
+    // et « allocation », mais une fiche qui contient « aide » et « logement » couvre toute la question « aide au logement ».
+    // Couverture : comptée par mot de la question (groupe de termes), pas par synonyme : « aide » appelle aussi « subvention »
+    // et « allocation », mais une fiche qui contient « aide » et « logement » couvre toute la question « aide au logement ».
+    const groupes = [...analyse(q).termes.values()], nG = groupes.length || 1;
     const N = ix.recs.length, k1 = 1.2, b = 0.75, sc = new Map(), hit = new Map();
     for (const t of qt) {
       const p = ix.inv.get(t); if (!p) continue;
+      const gs = groupes.map((g, x) => (g.has(t) ? x : -1)).filter((x) => x >= 0);
       const df = p.length / 2, idf = Math.log(1 + (N - df + 0.5) / (df + 0.5));
       for (let j = 0; j < p.length; j += 2) {
         const i = p[j], tf = p[j + 1];
         const s = idf * (tf * (k1 + 1)) / (tf + k1 * (1 - b + b * ix.len[i] / ix.avg));
-        sc.set(i, (sc.get(i) || 0) + s); hit.set(i, (hit.get(i) || 0) + 1);
+        sc.set(i, (sc.get(i) || 0) + s); if (!hit.has(i)) hit.set(i, new Set()); gs.forEach((x) => hit.get(i).add(x));
       }
     }
+    // Question courte (quatre mots utiles au plus) dont tous les mots sont dans le titre, tels quels (pas par un synonyme) :
+    // la fiche porte le nom même de la démarche cherchée.
+    const motsQ = [...analyse(q).termes.keys()].filter((t) => !t.startsWith("« "));
+    const titreComplet = motsQ.length && motsQ.length <= 4 && motsQ.length === groupes.length
+      ? (r) => { const tt = new Set(toks(r.t)); return motsQ.every((t) => tt.has(t)); } : () => false;
     const today = new Date().toISOString().slice(0, 10), out = [];
     // Démarche récente : publiée dans les 12 derniers mois (champ « dp » de l'index, date de publication du descriptif).
     const ilYaUnAn = new Date(Date.now() - 365 * 864e5).toISOString().slice(0, 10);
@@ -795,7 +817,8 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
         if (pub && PUBLIC_SP[pub] && !(r.aud || "").includes(PUBLIC_SP[pub])) continue;
         if (pub === "collectivite") continue;
       }
-      let s = s0 * (0.5 + 0.5 * hit.get(i) / qt.length); // récompense la couverture de la requête
+      let s = s0 * (0.5 + 0.5 * hit.get(i).size / nG);
+      if (titreComplet(r)) s *= 1.25; // récompense la couverture de la requête
       if (casParticulierTitre(r, q)) s *= 0.7;   // cas particulier que la question ne nomme pas
       // Fiche service-public propre à un département (« Allier (03) : … ») hors du département connu : après la fiche nationale.
       if (r.k === "sp") { const md = /^[^:]{2,60}\((\d{2,3}|2A|2B)\)\s*:/.exec(r.t); if (md && md[1] !== (dep || depLieu)) s *= 0.7; }

@@ -466,9 +466,22 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
     const x=P(q); verifie(`Q5 « ${q} » : ${lib} en « Votre démarche »`, ok.includes(x.p), x.t.slice(0,3).join(' ')+' | '+x.p); }
   const cr=P('inscription crèche');
   verifie('Q6 « inscription crèche » : pas la fiche vaccination (ni en tête ni en « Votre démarche »)', cr.p!=='SP-F767'&&cr.t[0]!=='SP-F767', cr.t.slice(0,3).join(' ')+' | '+cr.p);
-  const am=['maternite','maternelle','procuration','procureur','commune','communication','electricite','electronique','autorisation','autorite'].map(w=>M.toks(w)[0]);
-  verifie('Q7 racines : maternité ≠ maternelle, procuration ≠ procureur, commune ≠ communication, électricité ≠ électronique, autorisation ≠ autorité',
-    am[0]!==am[1]&&am[2]!==am[3]&&am[4]!==am[5]&&am[6]!==am[7]&&am[8]!==am[9]&&M.toks('maternites')[0]===am[0]&&M.toks('autorisations')[0]===am[8], am.join(' ')); }
+  // Racines : deux mots ne se rapprochent que si l'un est une forme de l'autre (pluriel, féminin, conjugaison) ou en dérive
+  // par un suffixe courant ; jamais par un simple début commun.
+  const r=(w)=>M.toks(w)[0], diff=[['maternite','maternelle'],['procuration','procureur'],['commune','communication'],['electricite','electronique'],
+    ['autorisation','autorite'],['licenciement','licence'],['commencement','commentaire']],
+    memes=[['maternite','maternites'],['autorisation','autorisations'],['licenciement','licencie'],['declaration','declarer'],['inscription','inscrire'],
+      ['renouvellement','renouveler'],['etudiant','etudiantes'],['maternel','maternelle'],['verification','verifier'],['electricite','electrique'],['aide','aider']];
+  const md=diff.filter(([a,b])=>r(a)===r(b)), mm=memes.filter(([a,b])=>r(a)!==r(b));
+  verifie('Q7 racines : maternité ≠ maternelle, licenciement ≠ licence… ; déclaration = déclarer, licenciement = licencié…',
+    !md.length&&!mm.length, [...md.map(x=>x.join('=')),...mm.map(x=>x.join('≠'))].join(' ')||diff.map(([a,b])=>r(a)+'≠'+r(b)).join(' ')); }
+// « étudiant » : public particulier. L'aide au logement générale d'abord ; l'aide étudiante quand la question le dit.
+{ const P=(q)=>{const C=M.choisir(ix,q,{k:20});return {t:M.search(ix,q,{k:3}).map(x=>x.r.id),p:C.principal&&C.principal.id};};
+  for(const q of ['aide au logement','allocation logement']){ const x=P(q);
+    verifie(`Q8 « ${q} » : la demande d'aide au logement générale (SP-R41448 ou SP-R1292) en « Votre démarche », pas l'aide étudiante`,
+      ['SP-R41448','SP-R1292'].includes(x.p)&&x.t[0]!=='SP-R1332', x.t.join(' ')+' | '+x.p); }
+  const et=P('aide logement étudiant');
+  verifie('Q8 « aide logement étudiant » : l\'aide au logement étudiant (SP-R1332) en « Votre démarche »', et.p==='SP-R1332', et.t.join(' ')+' | '+et.p); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');
