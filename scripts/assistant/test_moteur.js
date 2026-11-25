@@ -134,6 +134,20 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie(`Y5 jamais plus de 3 voies ni de 2 vigilances (${ix.recs.length} démarches)`, !trop.length, trop.slice(0,3).map(r=>r.id).join(' ')||'aucune');
   const vigDn=S('DN-13583').vig;
   verifie('Y6 vigilance par organisme : l\'infobulle donne l\'effectif, la source, le périmètre et la limite', vigDn.length&&vigDn.every(v=>/\d+ retours négatifs le signalent, sur \d+ retours sur Services Publics \+/.test(v.detail)&&/organisme « Préfecture de l'Isère »/.test(v.detail)&&/spontané, non représentatif/.test(v.detail)), vigDn.map(v=>v.detail)[0]||'aucune');
+  // Vigilances Services Publics + hors Démarche Numérique (suite de la PR 94) : portée dans l'infobulle.
+  const avecSpp=(f)=>ix.recs.filter(r=>r.spp&&f(r)), dom=(r)=>M.siteLisible(r.l)&&(/^https?:\/\/([^\/]+)/.exec(r.l)||[])[1];
+  const ants=avecSpp(r=>r.k==='sp'&&/ants\.gouv\.fr/.test(r.l||'')&&r.spp[4]), anef=avecSpp(r=>/administration-etrangers-en-france\.interieur\.gouv\.fr/.test(r.l||''));
+  verifie(`Y8 ANTS par domaine : ${ants.length} fiches, infobulle « retours sur … (ANTS) », jamais moncompte.ants.gouv.fr`,
+    ants.length===44&&ants.every(r=>S(r.id).vig.every(v=>/retours sur (l'immatriculation|le permis de conduire|les passeports et cartes d'identité) \(ANTS\), pas seulement cette démarche/.test(v.detail)))
+    &&!avecSpp(r=>/moncompte\.ants/.test(r.l||'')).length&&B('SP-R45443').spp.length===4, ants.length+' fiches');
+  verifie(`Y9 titres de séjour : ${anef.length} fiches vers l'ANEF, infobulle « retours sur les titres de séjour (ANEF) »`,
+    anef.length===12&&anef.every(r=>S(r.id).vig.length&&S(r.id).vig.every(v=>/retours sur les titres de séjour \(ANEF\)/.test(v.detail))), anef.map(r=>r.id).slice(0,3).join(' '));
+  const prefH=avecSpp(r=>r.k==='dn'&&r.spp[4]==='hors retours sur les étrangers'), prefE=avecSpp(r=>r.k==='dn'&&/^Préfecture/.test(r.spp[3])&&!r.spp[4]);
+  verifie(`Y10 préfectures : ${prefH.length} démarches hors étrangers recalculées, ${prefE.length} gardent la vigilance complète (titre sur les étrangers)`,
+    prefH.length>0&&prefH.every(r=>!/s[ée]jour|naturali|asile|[ée]tranger/i.test(r.t)&&S(r.id).vig.every(v=>/organisme « Préfecture[^»]*» \(hors retours sur les étrangers, pas seulement cette démarche\)/.test(v.detail)))
+    &&prefE.every(r=>!/^Préfecture/.test(r.spp[3])||/s[ée]jour|naturali|asile|[ée]tranger|titre|r[ée]sident|statut|passeport|APS|TIR|DCEM|r[ée]c[ée]piss|nationalit|option|autorisation|r[ée]gularis|ressortissant|visa|BPI|TUE|OQTF|protection|apatrid|regroupement|OFII|OFPRA|ANEF|r[ée]fugi/i.test(r.t)), prefE.filter(r=>!/s[ée]jour/i.test(r.t)).slice(0,3).map(r=>r.id+' '+r.t).join(' | '));
+  verifie('Y11 France Travail (structure) écarté : aucune fiche vers candidat.francetravail.fr ne reçoit la vigilance des directions régionales',
+    !avecSpp(r=>/candidat\.francetravail\.fr/.test(r.l||'')&&r.spp[4]).length&&!avecSpp(r=>/France Travail/.test(r.spp[3]||'')).length);
   const accDn=S('DN-13583').acc;
   const accP=META.acc_plateformes.dn, moisP="janvier février mars avril mai juin juillet août septembre octobre novembre décembre".split(" ")[+accP.mise_a_jour.slice(5,7)-1];
   verifie('Y7 démarche Démarche Numérique : taux de la plateforme (déclaration publiée), pour une démarche type ; vigilance par organisme',

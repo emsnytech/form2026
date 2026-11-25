@@ -8896,5 +8896,990 @@
 ]
 }
 }
+},
+"spp_cibles": {
+"ants": [
+{
+"adresse": "immatriculation.ants.gouv.fr",
+"domaine": "immatriculation",
+"n": 1256,
+"neg": 769,
+"motifs": [
+[
+"explication",
+300
+],
+[
+"delai",
+232
+]
+]
+},
+{
+"adresse": "passeport.ants.gouv.fr",
+"domaine": "passeport et carte d'identité",
+"n": 578,
+"neg": 413,
+"motifs": [
+[
+"delai",
+146
+],
+[
+"explication",
+139
+]
+]
+},
+{
+"adresse": "permisdeconduire.ants.gouv.fr",
+"domaine": "permis de conduire",
+"n": 1343,
+"neg": 532,
+"motifs": [
+[
+"explication",
+204
+],
+[
+"delai",
+198
+]
+]
+}
+],
+"anef": {
+"adresse": "administration-etrangers-en-france.interieur.gouv.fr",
+"definition": "typologie « ANEF » ou tag métier « Titre de séjour »",
+"n": 5344,
+"neg": 4803,
+"motifs": [
+[
+"delai",
+3691
+],
+[
+"explication",
+2240
+]
+]
+},
+"prefectures_sans_etrangers": {
+"préfecture d'indre-et-loire": {
+"nom": "Préfecture d'Indre-et-Loire",
+"n": 12,
+"neg": 8,
+"motifs": []
+},
+"préfecture de charente": {
+"nom": "Préfecture de Charente",
+"n": 10,
+"neg": 5,
+"motifs": []
+},
+"préfecture de charente-maritime": {
+"nom": "Préfecture de Charente-Maritime",
+"n": 22,
+"neg": 20,
+"motifs": [
+[
+"delai",
+8
+]
+]
+},
+"préfecture de corrèze": {
+"nom": "Préfecture de Corrèze",
+"n": 7,
+"neg": 4,
+"motifs": []
+},
+"préfecture de l'ain": {
+"nom": "Préfecture de l'Ain",
+"n": 14,
+"neg": 9,
+"motifs": []
+},
+"préfecture de l'aisne": {
+"nom": "Préfecture de l'Aisne",
+"n": 8,
+"neg": 5,
+"motifs": []
+},
+"préfecture de l'allier": {
+"nom": "Préfecture de l'Allier",
+"n": 6,
+"neg": 4,
+"motifs": []
+},
+"préfecture de l'ardèche": {
+"nom": "Préfecture de l'Ardèche",
+"n": 2,
+"neg": 2,
+"motifs": []
+},
+"préfecture de l'ariège": {
+"nom": "Préfecture de l'Ariège",
+"n": 2,
+"neg": 1,
+"motifs": []
+},
+"préfecture de l'aube": {
+"nom": "Préfecture de l'Aube",
+"n": 4,
+"neg": 4,
+"motifs": []
+},
+"préfecture de l'aude": {
+"nom": "Préfecture de l'Aude",
+"n": 14,
+"neg": 12,
+"motifs": []
+},
+"préfecture de l'aveyron": {
+"nom": "Préfecture de l'Aveyron",
+"n": 6,
+"neg": 6,
+"motifs": []
+},
+"préfecture de l'essonne": {
+"nom": "Préfecture de l'Essonne",
+"n": 68,
+"neg": 59,
+"motifs": [
+[
+"delai",
+34
+],
+[
+"explication",
+27
+]
+]
+},
+"préfecture de l'eure": {
+"nom": "Préfecture de l'Eure",
+"n": 11,
+"neg": 9,
+"motifs": []
+},
+"préfecture de l'eure-et-loir": {
+"nom": "Préfecture de l'Eure-et-Loir",
+"n": 16,
+"neg": 14,
+"motifs": []
+},
+"préfecture de l'hérault": {
+"nom": "Préfecture de l'Hérault",
+"n": 30,
+"neg": 21,
+"motifs": [
+[
+"explication",
+8
+],
+[
+"delai",
+7
+]
+]
+},
+"préfecture de l'ille-et-vilaine": {
+"nom": "Préfecture de l'Ille-et-Vilaine",
+"n": 29,
+"neg": 23,
+"motifs": [
+[
+"explication",
+11
+],
+[
+"delai",
+8
+]
+]
+},
+"préfecture de l'indre": {
+"nom": "Préfecture de l'Indre",
+"n": 4,
+"neg": 2,
+"motifs": []
+},
+"préfecture de l'isère": {
+"nom": "Préfecture de l'Isère",
+"n": 57,
+"neg": 47,
+"motifs": [
+[
+"explication",
+21
+],
+[
+"delai",
+16
+]
+]
+},
+"préfecture de l'oise": {
+"nom": "Préfecture de l'Oise",
+"n": 15,
+"neg": 8,
+"motifs": []
+},
+"préfecture de l'orne": {
+"nom": "Préfecture de l'Orne",
+"n": 5,
+"neg": 3,
+"motifs": []
+},
+"préfecture de l'yonne": {
+"nom": "Préfecture de l'Yonne",
+"n": 11,
+"neg": 7,
+"motifs": []
+},
+"préfecture de la corse-du-sud": {
+"nom": "Préfecture de la Corse-du-Sud",
+"n": 4,
+"neg": 3,
+"motifs": []
+},
+"préfecture de la cote-d or": {
+"nom": "Préfecture de la Cote-d Or",
+"n": 6,
+"neg": 3,
+"motifs": []
+},
+"préfecture de la creuse": {
+"nom": "Préfecture de la Creuse",
+"n": 2,
+"neg": 0,
+"motifs": []
+},
+"préfecture de la dordogne": {
+"nom": "Préfecture de la Dordogne",
+"n": 10,
+"neg": 7,
+"motifs": []
+},
+"préfecture de la drôme": {
+"nom": "Préfecture de la Drôme",
+"n": 8,
+"neg": 5,
+"motifs": []
+},
+"préfecture de la gironde": {
+"nom": "Préfecture de la Gironde",
+"n": 68,
+"neg": 56,
+"motifs": [
+[
+"delai",
+19
+],
+[
+"explication",
+14
+]
+]
+},
+"préfecture de la guadeloupe": {
+"nom": "Préfecture de la Guadeloupe",
+"n": 12,
+"neg": 9,
+"motifs": []
+},
+"préfecture de la guyane française": {
+"nom": "Préfecture de la Guyane française",
+"n": 8,
+"neg": 7,
+"motifs": []
+},
+"préfecture de la haute-corse": {
+"nom": "Préfecture de la Haute-Corse",
+"n": 4,
+"neg": 4,
+"motifs": []
+},
+"préfecture de la haute-garonne": {
+"nom": "Préfecture de la Haute-Garonne",
+"n": 33,
+"neg": 22,
+"motifs": [
+[
+"delai",
+11
+],
+[
+"explication",
+8
+]
+]
+},
+"préfecture de la haute-loire": {
+"nom": "Préfecture de la Haute-Loire",
+"n": 7,
+"neg": 4,
+"motifs": []
+},
+"préfecture de la haute-marne": {
+"nom": "Préfecture de la Haute-Marne",
+"n": 4,
+"neg": 2,
+"motifs": []
+},
+"préfecture de la haute-savoie": {
+"nom": "Préfecture de la Haute-Savoie",
+"n": 22,
+"neg": 17,
+"motifs": [
+[
+"explication",
+9
+],
+[
+"delai",
+7
+]
+]
+},
+"préfecture de la haute-saône": {
+"nom": "Préfecture de la Haute-Saône",
+"n": 1,
+"neg": 1,
+"motifs": []
+},
+"préfecture de la haute-vienne": {
+"nom": "Préfecture de la Haute-Vienne",
+"n": 5,
+"neg": 2,
+"motifs": []
+},
+"préfecture de la loire": {
+"nom": "Préfecture de la Loire",
+"n": 23,
+"neg": 15,
+"motifs": [
+[
+"explication",
+8
+]
+]
+},
+"préfecture de la loire-atlantique": {
+"nom": "Préfecture de la Loire-Atlantique",
+"n": 36,
+"neg": 21,
+"motifs": [
+[
+"delai",
+11
+],
+[
+"explication",
+10
+]
+]
+},
+"préfecture de la lozère": {
+"nom": "Préfecture de la Lozère",
+"n": 1,
+"neg": 1,
+"motifs": []
+},
+"préfecture de la manche": {
+"nom": "Préfecture de la Manche",
+"n": 20,
+"neg": 15,
+"motifs": [
+[
+"explication",
+8
+]
+]
+},
+"préfecture de la marne": {
+"nom": "Préfecture de la Marne",
+"n": 14,
+"neg": 12,
+"motifs": []
+},
+"préfecture de la martinique": {
+"nom": "Préfecture de la Martinique",
+"n": 5,
+"neg": 1,
+"motifs": []
+},
+"préfecture de la mayenne": {
+"nom": "Préfecture de la Mayenne",
+"n": 3,
+"neg": 3,
+"motifs": []
+},
+"préfecture de la meurthe-et-moselle": {
+"nom": "Préfecture de la Meurthe-et-Moselle",
+"n": 15,
+"neg": 4,
+"motifs": []
+},
+"préfecture de la meuse": {
+"nom": "Préfecture de la Meuse",
+"n": 6,
+"neg": 4,
+"motifs": []
+},
+"préfecture de la moselle": {
+"nom": "Préfecture de la Moselle",
+"n": 19,
+"neg": 16,
+"motifs": []
+},
+"préfecture de la nièvre": {
+"nom": "Préfecture de la Nièvre",
+"n": 3,
+"neg": 2,
+"motifs": []
+},
+"préfecture de la région île de france": {
+"nom": "Préfecture de la région île de France",
+"n": 17,
+"neg": 15,
+"motifs": []
+},
+"préfecture de la réunion": {
+"nom": "Préfecture de la Réunion",
+"n": 6,
+"neg": 3,
+"motifs": []
+},
+"préfecture de la sarthe": {
+"nom": "Préfecture de la Sarthe",
+"n": 16,
+"neg": 12,
+"motifs": []
+},
+"préfecture de la savoie": {
+"nom": "Préfecture de la Savoie",
+"n": 14,
+"neg": 11,
+"motifs": []
+},
+"préfecture de la saône-et-loire": {
+"nom": "Préfecture de la Saône-et-Loire",
+"n": 4,
+"neg": 4,
+"motifs": []
+},
+"préfecture de la seine-et-marne": {
+"nom": "Préfecture de la Seine-et-Marne",
+"n": 48,
+"neg": 37,
+"motifs": [
+[
+"delai",
+19
+],
+[
+"explication",
+12
+]
+]
+},
+"préfecture de la seine-maritime": {
+"nom": "Préfecture de la Seine-Maritime",
+"n": 17,
+"neg": 10,
+"motifs": []
+},
+"préfecture de la seine-saint-denis": {
+"nom": "Préfecture de la Seine-Saint-Denis",
+"n": 85,
+"neg": 72,
+"motifs": [
+[
+"delai",
+44
+],
+[
+"explication",
+37
+]
+]
+},
+"préfecture de la somme": {
+"nom": "Préfecture de la Somme",
+"n": 10,
+"neg": 7,
+"motifs": []
+},
+"préfecture de la vendée": {
+"nom": "Préfecture de la Vendée",
+"n": 9,
+"neg": 6,
+"motifs": []
+},
+"préfecture de la vienne": {
+"nom": "Préfecture de la Vienne",
+"n": 5,
+"neg": 4,
+"motifs": []
+},
+"préfecture de mayotte": {
+"nom": "Préfecture de Mayotte",
+"n": 1,
+"neg": 1,
+"motifs": []
+},
+"préfecture de police de paris (police)": {
+"nom": "Préfecture de police de Paris (Police)",
+"n": 31,
+"neg": 20,
+"motifs": [
+[
+"joignable",
+11
+],
+[
+"explication",
+6
+]
+]
+},
+"préfecture de police de paris-dupa": {
+"nom": "Préfecture de police de Paris-DUPA",
+"n": 20,
+"neg": 12,
+"motifs": []
+},
+"préfecture de police de paris-délim": {
+"nom": "Préfecture de police de Paris-Délim",
+"n": 18,
+"neg": 11,
+"motifs": []
+},
+"préfecture de saint-pierre-et-miquelon": {
+"nom": "Préfecture de Saint-Pierre-et-Miquelon",
+"n": 1,
+"neg": 0,
+"motifs": []
+},
+"préfecture des alpes-de-haute-provence": {
+"nom": "Préfecture des Alpes-de-Haute-Provence",
+"n": 2,
+"neg": 1,
+"motifs": []
+},
+"préfecture des alpes-maritimes": {
+"nom": "Préfecture des Alpes-Maritimes",
+"n": 38,
+"neg": 32,
+"motifs": [
+[
+"delai",
+20
+],
+[
+"explication",
+14
+]
+]
+},
+"préfecture des ardennes": {
+"nom": "Préfecture des Ardennes",
+"n": 5,
+"neg": 4,
+"motifs": []
+},
+"préfecture des bouches-du-rhône": {
+"nom": "Préfecture des Bouches-du-Rhône",
+"n": 64,
+"neg": 52,
+"motifs": [
+[
+"delai",
+29
+],
+[
+"explication",
+20
+]
+]
+},
+"préfecture des côtes-d'armor": {
+"nom": "Préfecture des Côtes-d'Armor",
+"n": 8,
+"neg": 8,
+"motifs": []
+},
+"préfecture des deux-sèvres": {
+"nom": "Préfecture des Deux-Sèvres",
+"n": 2,
+"neg": 1,
+"motifs": []
+},
+"préfecture des hautes-alpes": {
+"nom": "Préfecture des Hautes-Alpes",
+"n": 2,
+"neg": 2,
+"motifs": []
+},
+"préfecture des hautes-pyrénées": {
+"nom": "Préfecture des Hautes-Pyrénées",
+"n": 3,
+"neg": 2,
+"motifs": []
+},
+"préfecture des hauts-de-seine": {
+"nom": "Préfecture des Hauts-de-Seine",
+"n": 66,
+"neg": 53,
+"motifs": [
+[
+"explication",
+30
+],
+[
+"delai",
+22
+]
+]
+},
+"préfecture des landes": {
+"nom": "Préfecture des Landes",
+"n": 19,
+"neg": 13,
+"motifs": []
+},
+"préfecture des pyrénées-atlantiques": {
+"nom": "Préfecture des Pyrénées-Atlantiques",
+"n": 9,
+"neg": 9,
+"motifs": []
+},
+"préfecture des pyrénées-orientales": {
+"nom": "Préfecture des Pyrénées-Orientales",
+"n": 24,
+"neg": 21,
+"motifs": [
+[
+"delai",
+7
+]
+]
+},
+"préfecture des vosges": {
+"nom": "Préfecture des Vosges",
+"n": 6,
+"neg": 5,
+"motifs": []
+},
+"préfecture des yvelines": {
+"nom": "Préfecture des Yvelines",
+"n": 54,
+"neg": 45,
+"motifs": [
+[
+"explication",
+20
+],
+[
+"delai",
+18
+]
+]
+},
+"préfecture du bas-rhin": {
+"nom": "Préfecture du Bas-Rhin",
+"n": 29,
+"neg": 20,
+"motifs": [
+[
+"delai",
+10
+],
+[
+"explication",
+10
+]
+]
+},
+"préfecture du calvados": {
+"nom": "Préfecture du Calvados",
+"n": 15,
+"neg": 11,
+"motifs": []
+},
+"préfecture du cantal": {
+"nom": "Préfecture du Cantal",
+"n": 1,
+"neg": 1,
+"motifs": []
+},
+"préfecture du cher": {
+"nom": "Préfecture du Cher",
+"n": 6,
+"neg": 5,
+"motifs": []
+},
+"préfecture du doubs": {
+"nom": "Préfecture du Doubs",
+"n": 8,
+"neg": 6,
+"motifs": []
+},
+"préfecture du finistère": {
+"nom": "Préfecture du Finistère",
+"n": 7,
+"neg": 5,
+"motifs": []
+},
+"préfecture du gard": {
+"nom": "Préfecture du Gard",
+"n": 22,
+"neg": 15,
+"motifs": []
+},
+"préfecture du gers": {
+"nom": "Préfecture du Gers",
+"n": 2,
+"neg": 0,
+"motifs": []
+},
+"préfecture du haut-rhin": {
+"nom": "Préfecture du Haut-Rhin",
+"n": 7,
+"neg": 4,
+"motifs": []
+},
+"préfecture du jura": {
+"nom": "Préfecture du Jura",
+"n": 4,
+"neg": 3,
+"motifs": []
+},
+"préfecture du loir-et-cher": {
+"nom": "Préfecture du Loir-et-Cher",
+"n": 7,
+"neg": 3,
+"motifs": []
+},
+"préfecture du loiret": {
+"nom": "Préfecture du Loiret",
+"n": 17,
+"neg": 13,
+"motifs": []
+},
+"préfecture du lot": {
+"nom": "Préfecture du Lot",
+"n": 4,
+"neg": 1,
+"motifs": []
+},
+"préfecture du lot-et-garonne": {
+"nom": "Préfecture du Lot-et-Garonne",
+"n": 6,
+"neg": 3,
+"motifs": []
+},
+"préfecture du maine-et-loire": {
+"nom": "Préfecture du Maine-et-Loire",
+"n": 11,
+"neg": 9,
+"motifs": []
+},
+"préfecture du morbihan": {
+"nom": "Préfecture du Morbihan",
+"n": 17,
+"neg": 8,
+"motifs": []
+},
+"préfecture du nord": {
+"nom": "Préfecture du Nord",
+"n": 41,
+"neg": 28,
+"motifs": [
+[
+"delai",
+11
+],
+[
+"explication",
+9
+]
+]
+},
+"préfecture du pas-de-calais": {
+"nom": "Préfecture du Pas-de-Calais",
+"n": 17,
+"neg": 14,
+"motifs": []
+},
+"préfecture du puy-de-dôme": {
+"nom": "Préfecture du Puy-de-Dôme",
+"n": 36,
+"neg": 30,
+"motifs": [
+[
+"delai",
+22
+],
+[
+"explication",
+15
+]
+]
+},
+"préfecture du rhône": {
+"nom": "Préfecture du Rhône",
+"n": 53,
+"neg": 36,
+"motifs": [
+[
+"delai",
+20
+],
+[
+"explication",
+17
+]
+]
+},
+"préfecture du tarn": {
+"nom": "Préfecture du Tarn",
+"n": 6,
+"neg": 6,
+"motifs": []
+},
+"préfecture du tarn-et-garonne": {
+"nom": "Préfecture du Tarn-et-Garonne",
+"n": 6,
+"neg": 3,
+"motifs": []
+},
+"préfecture du territoire de belfort": {
+"nom": "Préfecture du Territoire de Belfort",
+"n": 2,
+"neg": 1,
+"motifs": []
+},
+"préfecture du val-d'oise": {
+"nom": "Préfecture du Val-d'Oise",
+"n": 21,
+"neg": 13,
+"motifs": [
+[
+"explication",
+10
+],
+[
+"delai",
+7
+]
+]
+},
+"préfecture du val-de-marne": {
+"nom": "Préfecture du Val-de-Marne",
+"n": 45,
+"neg": 38,
+"motifs": [
+[
+"delai",
+23
+],
+[
+"explication",
+21
+]
+]
+},
+"préfecture du var": {
+"nom": "Préfecture du Var",
+"n": 49,
+"neg": 42,
+"motifs": [
+[
+"delai",
+17
+],
+[
+"explication",
+15
+]
+]
+},
+"préfecture du vaucluse": {
+"nom": "Préfecture du Vaucluse",
+"n": 16,
+"neg": 9,
+"motifs": []
+},
+"sous-préfecture d'aix-en-provence": {
+"nom": "Sous-Préfecture d'Aix-en-Provence",
+"n": 1,
+"neg": 0,
+"motifs": []
+},
+"sous-préfecture d'antony": {
+"nom": "Sous-préfecture d'Antony",
+"n": 2,
+"neg": 1,
+"motifs": []
+},
+"sous-préfecture d'argenteuil": {
+"nom": "Sous-Préfecture d'Argenteuil",
+"n": 1,
+"neg": 1,
+"motifs": []
+},
+"sous-préfecture de bayonne": {
+"nom": "Sous-préfecture de Bayonne",
+"n": 7,
+"neg": 5,
+"motifs": []
+},
+"sous-préfecture de boulogne-billancourt": {
+"nom": "Sous-préfecture de Boulogne-Billancourt",
+"n": 2,
+"neg": 1,
+"motifs": []
+},
+"sous-préfecture de béziers": {
+"nom": "Sous-Préfecture de Béziers",
+"n": 1,
+"neg": 0,
+"motifs": []
+},
+"sous-préfecture de corte": {
+"nom": "Sous-préfecture de Corte",
+"n": 1,
+"neg": 1,
+"motifs": []
+},
+"sous-préfecture de fontainebleau": {
+"nom": "Sous-préfecture de Fontainebleau",
+"n": 1,
+"neg": 0,
+"motifs": []
+},
+"sous-préfecture de jonzac": {
+"nom": "Sous-Préfecture de Jonzac",
+"n": 3,
+"neg": 2,
+"motifs": []
+},
+"sous-préfecture de muret": {
+"nom": "Sous-Préfecture de Muret",
+"n": 17,
+"neg": 10,
+"motifs": []
+},
+"sous-préfecture de saint-germain-en-laye": {
+"nom": "Sous-préfecture de Saint-Germain-en-Laye",
+"n": 1,
+"neg": 1,
+"motifs": []
+}
+},
+"titres_etrangers": "s[ée]jour|\\bANEF\\b|naturali|asile|\\bvisas?\\b|[ée]trangers?\\b|nationalit|r[ée]fugi|OFPRA|OFII|regroupement familial|apatrid|passeport talent|statut [ée]tudiant|changement de statut|r[ée]c[ée]piss|\\bAPS\\b|binationa|droit d.option|d[ée]claration d.option|protection temporaire|autorisation de travail|carte de r[ée]sident|\\bDCEM\\b|(?-i:\\bTIR\\b)|titre de voyage|\\bOQTF\\b|r[ée]gularisation|ressortissant|\\bBPI\\b|\\bTUE\\b"
 }
 }

@@ -845,10 +845,14 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
       detail: `Aucune déclaration trouvée pour cette démarche dans l'${obs}` + (r.k === "dn" ? " ; celle de la plateforme Démarche Numérique ne porte pas sur le formulaire de chaque démarche" : "") };
     const vig = [];
     if (r.spp && r.spp[0] >= SEUIL_RETOURS) {
-      const [n, neg, motifs, org] = r.spp, sp = meta.spp || {};
+      // 5e élément : portée de la vigilance quand elle ne porte ni sur la seule démarche ni sur tout l'organisme
+      // (domaine ANTS, titres de séjour ANEF, préfecture hors retours sur les étrangers).
+      const [n, neg, motifs, org, portee] = r.spp, sp = meta.spp || {};
+      const pour = org ? `pour l'organisme « ${org} » (${portee || "tout l'organisme"}, pas seulement cette démarche)`
+        : portee ? `${portee}, pas seulement cette démarche` : "pour cette démarche";
       for (const [m, k] of (motifs || []).slice(0, MAX_VIGILANCES)) if (MOTIFS_LIB[m])
         vig.push({ motif: m, texte: MOTIFS_LIB[m], organisme: org || "", k,
-          detail: `${k} retours négatifs le signalent, sur ${n} retours sur Services Publics +${sp.debut ? " depuis le " + dateCourte(sp.debut) : ""}, ${org ? `pour l'organisme « ${org} » (tout l'organisme, pas seulement cette démarche)` : "pour cette démarche"} ; échantillon spontané, non représentatif` });
+          detail: `${k} retours négatifs le signalent, sur ${n} retours sur Services Publics +${sp.debut ? " depuis le " + dateCourte(sp.debut) : ""}, ${pour} ; échantillon spontané, non représentatif` });
     }
     const su = statsUrl(r);
     return { voies, sur: r.k === "dn" ? true : r.md_sur !== false, simp: simplicite(r, meta), acc, vig, delais: su ? { texte: DELAIS_TEXTE, url: su } : null, rien: r.raf ? { phrase: r.raf[0], fiche: r.raf[1] } : null };
