@@ -1,0 +1,1752 @@
+{
+ "objet": "Questions de référence pour mesurer le classement du moteur (scripts/assistant/mesure.js). Une à quatre mots, formulées comme un usager les taperait, tirées des démarches les plus demandées ; pour chacune, les réponses acceptables (identifiants de l'index). Une réponse est juste quand « Votre démarche » en fait partie ; proche quand l'une d'elles est dans les 3 premiers résultats sans être « Votre démarche ».",
+ "statut": "à relire",
+ "sources": {
+  "Observatoire": "Observatoire de la qualité des démarches en ligne (DINUM), édition 15 : démarches classées par volume",
+  "Démarche Numérique": "Démarche Numérique : démarches classées par nombre de dossiers (descriptif repris dans l'index)"
+ },
+ "questions": [
+  {
+   "theme": "santé",
+   "q": "mon espace santé",
+   "ok": [
+    "SP-R60692"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "attestation de droits",
+   "ok": [
+    "SP-R49811",
+    "SP-F10662"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "attestation sécurité sociale",
+   "ok": [
+    "SP-R49811",
+    "SP-F10662"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "attestation carte vitale",
+   "ok": [
+    "SP-R49811",
+    "SP-F10662"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "attestation indemnités journalières",
+   "ok": [
+    "SP-R49830"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "carte vitale",
+   "ok": [
+    "SP-R49813",
+    "SP-F265"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "carte vitale perdue",
+   "ok": [
+    "SP-R49814"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "carte européenne assurance maladie",
+   "ok": [
+    "SP-R49815",
+    "SP-F34441"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "ceam",
+   "ok": [
+    "SP-R49815",
+    "SP-F34441"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "complémentaire santé solidaire",
+   "ok": [
+    "SP-R52880"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "css",
+   "ok": [
+    "SP-R52880"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "mutuelle gratuite",
+   "ok": [
+    "SP-R52880"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "déclarer naissance ameli",
+   "ok": [
+    "SP-R49829"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "pension d'invalidité",
+   "ok": [
+    "SP-R1261",
+    "SP-F672"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "arrêt maladie",
+   "ok": [
+    "SP-F3053",
+    "SP-F303"
+   ],
+   "origine": "questions de référence des PR 104 à 106"
+  },
+  {
+   "theme": "santé",
+   "q": "congé maternité",
+   "ok": [
+    "SP-F2265"
+   ],
+   "origine": "questions de référence des PR 104 à 106"
+  },
+  {
+   "theme": "santé",
+   "q": "relevé fiscal ameli",
+   "ok": [
+    "SP-R49831"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "médiateur assurance maladie",
+   "ok": [
+    "SP-R67335"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "soins à l'étranger remboursement",
+   "ok": [
+    "SP-R62328"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "refus don d'organes",
+   "ok": [
+    "SP-R18929",
+    "SP-R76828"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "offre d'emploi",
+   "ok": [
+    "SP-R31528"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "chercher un emploi",
+   "ok": [
+    "SP-R31528"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "inscription france travail",
+   "ok": [
+    "SP-R49998",
+    "SP-F1636"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "s'inscrire pôle emploi",
+   "ok": [
+    "SP-R49998",
+    "SP-F1636"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "réinscription france travail",
+   "ok": [
+    "SP-R55515"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "actualisation france travail",
+   "ok": [
+    "SP-F1637"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "chercher une formation",
+   "ok": [
+    "SP-R51814"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "cpf",
+   "ok": [
+    "SP-R46472"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "compte formation",
+   "ok": [
+    "SP-R46472"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "allocation chômage",
+   "ok": [
+    "SP-F14860"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "chômage",
+   "ok": [
+    "SP-F1636",
+    "SP-F14860",
+    "SP-R49998"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "allocation de solidarité spécifique",
+   "ok": [
+    "SP-F12484"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "rupture conventionnelle",
+   "ok": [
+    "SP-F19030",
+    "SP-R19136"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "indemnité rupture conventionnelle",
+   "ok": [
+    "SP-R32720"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "indemnité de licenciement",
+   "ok": [
+    "SP-R57308",
+    "SP-F987"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "attestation employeur france travail",
+   "ok": [
+    "SP-F2867"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "garde d'enfant demandeur d'emploi",
+   "ok": [
+    "SP-F1814"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "emploi",
+   "q": "formulaire u1",
+   "ok": [
+    "DN-69322"
+   ],
+   "origine": "Démarche Numérique"
+  },
+  {
+   "theme": "emploi",
+   "q": "simulateur salaire net",
+   "ok": [
+    "SP-R68302"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "retraite",
+   "q": "estimation retraite",
+   "ok": [
+    "SP-R64411"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "retraite",
+   "q": "simulateur retraite",
+   "ok": [
+    "SP-R64411"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "retraite",
+   "q": "corriger ma carrière",
+   "ok": [
+    "SP-R64410"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "retraite",
+   "q": "retraite de réversion",
+   "ok": [
+    "SP-R58202"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "retraite",
+   "q": "pension de réversion",
+   "ok": [
+    "SP-R58202"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "retraite",
+   "q": "agirc arrco",
+   "ok": [
+    "SP-R43961"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "retraite",
+   "q": "retraite progressive",
+   "ok": [
+    "SP-F12842",
+    "SP-R1399"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "retraite",
+   "q": "carrière longue",
+   "ok": [
+    "SP-F13845",
+    "SP-R36296"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "retraite",
+   "q": "rachat de trimestres",
+   "ok": [
+    "SP-R72653"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "déclaration de revenus",
+   "ok": [
+    "SP-R1280",
+    "SP-F358"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "déclarer mes revenus",
+   "ok": [
+    "SP-R1280",
+    "SP-F358"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "impôt sur le revenu",
+   "ok": [
+    "SP-F358",
+    "SP-R1280",
+    "SP-F34328"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "payer impôt",
+   "ok": [
+    "SP-R2771"
+   ],
+   "origine": "questions de référence des PR 104 à 106"
+  },
+  {
+   "theme": "impôts",
+   "q": "prélèvement à la source",
+   "ok": [
+    "SP-F34009"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "changer taux prélèvement",
+   "ok": [
+    "SP-F35894",
+    "SP-R66343"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "taxe foncière",
+   "ok": [
+    "SP-F59"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "taxe d'habitation résidence secondaire",
+   "ok": [
+    "SP-F42"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "crédit d'impôt aide ménagère",
+   "ok": [
+    "SP-F12"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "remise gracieuse impôt",
+   "ok": [
+    "SP-F34392"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "délai de paiement impôt",
+   "ok": [
+    "SP-F3124"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "prix immobilier",
+   "ok": [
+    "SP-R34630"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "timbre fiscal passeport",
+   "ok": [
+    "SP-R39812",
+    "SP-F21258"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "timbre fiscal carte d'identité",
+   "ok": [
+    "SP-R47754",
+    "SP-F33805"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "timbre fiscal permis",
+   "ok": [
+    "SP-R48628",
+    "SP-F34118"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "remboursement timbre fiscal",
+   "ok": [
+    "SP-R55925",
+    "SP-R42969",
+    "SP-R57169"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "impôts",
+   "q": "déclaration des dons",
+   "ok": [
+    "DN-48469"
+   ],
+   "origine": "Démarche Numérique"
+  },
+  {
+   "theme": "véhicule",
+   "q": "carte grise",
+   "ok": [
+    "SP-R48603",
+    "SP-R49257",
+    "SP-F1050",
+    "SP-R13567"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "carte grise occasion",
+   "ok": [
+    "SP-R48603",
+    "SP-F1050"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "carte grise perdue",
+   "ok": [
+    "SP-R47917",
+    "SP-F1726"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "changement adresse carte grise",
+   "ok": [
+    "SP-F12118",
+    "SP-R49279"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "vendre ma voiture",
+   "ok": [
+    "SP-R41137",
+    "SP-F1707"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "déclaration de cession",
+   "ok": [
+    "SP-R41137",
+    "SP-F1707"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "certificat de non gage",
+   "ok": [
+    "SP-F1360",
+    "SP-R52957"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "historique véhicule occasion",
+   "ok": [
+    "SP-R52957",
+    "SP-R68264"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "crit'air",
+   "ok": [
+    "SP-R59473",
+    "SP-R44284"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "vignette crit air",
+   "ok": [
+    "SP-R59473",
+    "SP-R44284"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "fourrière",
+   "ok": [
+    "SP-R68776"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "points permis",
+   "ok": [
+    "SP-R17121",
+    "SP-F17970"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "résultat permis de conduire",
+   "ok": [
+    "SP-R39502"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "inscription permis de conduire",
+   "ok": [
+    "SP-R49186"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "réserver examen permis",
+   "ok": [
+    "SP-R59785"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "permis de conduire perdu",
+   "ok": [
+    "SP-R42947"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "renouvellement permis de conduire",
+   "ok": [
+    "SP-R67351",
+    "SP-R49276"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "fabrication permis",
+   "ok": [
+    "SP-R45443"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "neph",
+   "ok": [
+    "DN-44640"
+   ],
+   "origine": "Démarche Numérique"
+  },
+  {
+   "theme": "véhicule",
+   "q": "payer amende",
+   "ok": [
+    "SP-R11026"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "amende",
+   "ok": [
+    "SP-R11026",
+    "SP-R42185"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "contester amende",
+   "ok": [
+    "SP-R42185"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "désigner conducteur",
+   "ok": [
+    "SP-R42185"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "dossier infraction",
+   "ok": [
+    "SP-R39689"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "forfait post stationnement",
+   "ok": [
+    "SP-F34440",
+    "SP-R79213"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "bonus écologique",
+   "ok": [
+    "SP-R49929"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "véhicule",
+   "q": "leasing social",
+   "ok": [
+    "SP-R77468"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "carte d'identité",
+   "ok": [
+    "SP-R45668",
+    "SP-R62483",
+    "SP-F1341"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "renouveler carte d'identité",
+   "ok": [
+    "SP-R62483"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "carte d'identité perdue",
+   "ok": [
+    "SP-F1344"
+   ],
+   "origine": "questions de référence des PR 104 à 106"
+  },
+  {
+   "theme": "papiers",
+   "q": "passeport",
+   "ok": [
+    "SP-R42946",
+    "SP-R62484",
+    "SP-F14929"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "renouvellement passeport",
+   "ok": [
+    "SP-R62484"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "passeport perdu",
+   "ok": [
+    "SP-F21246"
+   ],
+   "origine": "questions de référence des PR 104 à 106"
+  },
+  {
+   "theme": "papiers",
+   "q": "passeport enfant",
+   "ok": [
+    "SP-R42946",
+    "SP-F14930"
+   ],
+   "origine": "questions de référence des PR 104 à 106"
+  },
+  {
+   "theme": "papiers",
+   "q": "acte de naissance",
+   "ok": [
+    "SP-R1406",
+    "SP-F1427"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "acte de mariage",
+   "ok": [
+    "SP-R42837",
+    "SP-F1432"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "acte de décès",
+   "ok": [
+    "SP-R42838",
+    "SP-F1444"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "livret de famille perdu",
+   "ok": [
+    "SP-F11994"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "casier judiciaire",
+   "ok": [
+    "SP-R1264",
+    "SP-F1420"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "extrait de casier judiciaire",
+   "ok": [
+    "SP-R1264",
+    "SP-F1420"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "pacs",
+   "ok": [
+    "SP-R46162"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "changement de nom",
+   "ok": [
+    "SP-F36379",
+    "SP-F1656"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "changement de prénom",
+   "ok": [
+    "SP-F885",
+    "SP-R63177"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "recensement citoyen",
+   "ok": [
+    "SP-R2054",
+    "SP-F870"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "jdc",
+   "ok": [
+    "SP-R51719",
+    "SP-F871"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "autorisation sortie territoire",
+   "ok": [
+    "SP-R46121",
+    "SP-F1359"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "inscription liste électorale",
+   "ok": [
+    "SP-R16396"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "procuration",
+   "ok": [
+    "SP-F1604",
+    "SP-R58939",
+    "SP-R12675"
+   ],
+   "origine": "questions de référence des PR 104 à 106"
+  },
+  {
+   "theme": "papiers",
+   "q": "décès",
+   "ok": [
+    "SP-F909"
+   ],
+   "origine": "questions de référence des PR 104 à 106"
+  },
+  {
+   "theme": "papiers",
+   "q": "naissance enfant",
+   "ok": [
+    "SP-F961"
+   ],
+   "origine": "questions de référence des PR 104 à 106"
+  },
+  {
+   "theme": "étrangers",
+   "q": "visa",
+   "ok": [
+    "SP-R50559"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "étrangers",
+   "q": "titre de séjour",
+   "ok": [
+    "SP-R62504",
+    "SP-R59398"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "étrangers",
+   "q": "renouvellement titre de séjour",
+   "ok": [
+    "SP-R59398",
+    "SP-R62504"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "étrangers",
+   "q": "renouvellement titre de séjour",
+   "ok": [
+    "DN-27159",
+    "SP-R59398",
+    "SP-R62504"
+   ],
+   "options": {
+    "dep": "94"
+   },
+   "origine": "Démarche Numérique"
+  },
+  {
+   "theme": "étrangers",
+   "q": "regroupement familial",
+   "ok": [
+    "SP-R68987"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "étrangers",
+   "q": "naturalisation",
+   "ok": [
+    "SP-F2213"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "étrangers",
+   "q": "attestation d'accueil",
+   "ok": [
+    "SP-F2191",
+    "SP-R10751"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "étrangers",
+   "q": "compte anef",
+   "ok": [
+    "SP-R64681"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "prime d'activité",
+   "ok": [
+    "SP-R42724",
+    "SP-R42726",
+    "SP-F2882"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "simulation prime d'activité",
+   "ok": [
+    "SP-R42725"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "rsa",
+   "ok": [
+    "SP-R50282",
+    "SP-F19778"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "demande de rsa",
+   "ok": [
+    "SP-R50282"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "déclaration trimestrielle rsa",
+   "ok": [
+    "SP-R50217"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "aide au logement",
+   "ok": [
+    "SP-R1292",
+    "SP-R41448"
+   ],
+   "origine": "questions de référence des PR 104 à 106"
+  },
+  {
+   "theme": "famille",
+   "q": "apl",
+   "ok": [
+    "SP-R1292",
+    "SP-R41448",
+    "SP-F12006"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "allocation logement",
+   "ok": [
+    "SP-R1292",
+    "SP-R41448"
+   ],
+   "origine": "questions de référence des PR 104 à 106"
+  },
+  {
+   "theme": "famille",
+   "q": "apl étudiant",
+   "ok": [
+    "SP-R1332"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "allocations familiales",
+   "ok": [
+    "SP-R50656",
+    "SP-F13213"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "caf",
+   "ok": [
+    "SP-R1165"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "changement de situation caf",
+   "ok": [
+    "SP-R1361",
+    "SP-F827"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "déclaration de ressources caf",
+   "ok": [
+    "SP-R50504"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "aah",
+   "ok": [
+    "SP-F12242",
+    "SP-R67285",
+    "SP-R48844"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "déclaration trimestrielle aah",
+   "ok": [
+    "SP-R14412"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "prime de naissance",
+   "ok": [
+    "SP-R50387",
+    "SP-F2550"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "complément mode de garde",
+   "ok": [
+    "SP-R49961",
+    "SP-F39152",
+    "SP-F345"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "pajemploi",
+   "ok": [
+    "SP-R72513"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "allocation de soutien familial",
+   "ok": [
+    "SP-R57339"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "pension alimentaire impayée",
+   "ok": [
+    "SP-R57339",
+    "SP-F1249"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "congé parental",
+   "ok": [
+    "SP-F2280",
+    "SP-F32485"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "carte famille nombreuse",
+   "ok": [
+    "SP-F15292"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "cesu",
+   "ok": [
+    "SP-R2358",
+    "SP-R18364"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "mes droits sociaux",
+   "ok": [
+    "SP-R54933"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "prime de déménagement",
+   "ok": [
+    "SP-R1257"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "logement",
+   "q": "demande de logement social",
+   "ok": [
+    "SP-R34754"
+   ],
+   "origine": "questions de référence des PR 104 à 106"
+  },
+  {
+   "theme": "logement",
+   "q": "renouvellement logement social",
+   "ok": [
+    "SP-R34754"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "logement",
+   "q": "hlm",
+   "ok": [
+    "SP-R34754",
+    "SP-F10007"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "logement",
+   "q": "dossierfacile",
+   "ok": [
+    "SP-R51424"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "logement",
+   "q": "maprimerénov",
+   "ok": [
+    "SP-R55191"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "logement",
+   "q": "maprimeadapt",
+   "ok": [
+    "SP-R67121"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "logement",
+   "q": "subvention anah",
+   "ok": [
+    "SP-R67121",
+    "SP-R51461",
+    "SP-R2033"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "logement",
+   "q": "logement insalubre",
+   "ok": [
+    "SP-R69012",
+    "SP-R68865"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "logement",
+   "q": "permis de construire",
+   "ok": [
+    "SP-R52221",
+    "SP-F1986"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "logement",
+   "q": "déclaration préalable de travaux",
+   "ok": [
+    "SP-R2028",
+    "SP-R52221"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "logement",
+   "q": "chèque énergie",
+   "ok": [
+    "SP-F33667",
+    "SP-R74067"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "logement",
+   "q": "aide autonomie personne âgée",
+   "ok": [
+    "SP-R66317",
+    "SP-R64469"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "logement",
+   "q": "apa",
+   "ok": [
+    "SP-F10009"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "handicap",
+   "q": "mdph",
+   "ok": [
+    "SP-R67285",
+    "SP-R48844"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "handicap",
+   "q": "carte mobilité inclusion",
+   "ok": [
+    "SP-F34049",
+    "SP-R49549"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "handicap",
+   "q": "pch",
+   "ok": [
+    "SP-F14202"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "éducation",
+   "q": "bourse collège",
+   "ok": [
+    "SP-R60054"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "éducation",
+   "q": "bourse lycée",
+   "ok": [
+    "SP-R60034"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "éducation",
+   "q": "bourse étudiant",
+   "ok": [
+    "SP-F12214"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "éducation",
+   "q": "dossier social étudiant",
+   "ok": [
+    "SP-R75873",
+    "SP-F12216"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "éducation",
+   "q": "livret scolaire",
+   "ok": [
+    "SP-R53765"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "éducation",
+   "q": "inscription lycée",
+   "ok": [
+    "SP-R65004",
+    "SP-F2323"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "éducation",
+   "q": "inscription collège",
+   "ok": [
+    "SP-F2322"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "éducation",
+   "q": "vœux affectation 3e",
+   "ok": [
+    "SP-R60303"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "éducation",
+   "q": "parcoursup",
+   "ok": [
+    "SP-R42572",
+    "SP-F23476"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "éducation",
+   "q": "pass culture",
+   "ok": [
+    "SP-F34959",
+    "DN-47380"
+   ],
+   "origine": "Démarche Numérique"
+  },
+  {
+   "theme": "justice",
+   "q": "aide juridictionnelle",
+   "ok": [
+    "SP-R1444",
+    "SP-F18074"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "justice",
+   "q": "porter plainte",
+   "ok": [
+    "SP-F1435"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "justice",
+   "q": "plainte en ligne",
+   "ok": [
+    "SP-F1435",
+    "SP-R77529"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "justice",
+   "q": "arnaque internet",
+   "ok": [
+    "SP-R46002",
+    "SP-R14531",
+    "SP-R47816",
+    "SP-R48112"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "justice",
+   "q": "fraude carte bancaire",
+   "ok": [
+    "SP-F31324"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "justice",
+   "q": "défenseur des droits",
+   "ok": [
+    "SP-R20689"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "justice",
+   "q": "signal conso",
+   "ok": [
+    "SP-R58969"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "justice",
+   "q": "déclaration arme",
+   "ok": [
+    "SP-R61698"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "entreprise",
+   "q": "créer une entreprise",
+   "ok": [
+    "SP-R61572",
+    "SP-R76574"
+   ],
+   "options": {
+    "pub": "entreprise"
+   },
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "entreprise",
+   "q": "déclaration chiffre d'affaires auto-entrepreneur",
+   "ok": [
+    "SP-R19133",
+    "SP-R46804"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "entreprise",
+   "q": "dpae",
+   "ok": [
+    "SP-R57098",
+    "SP-R14530"
+   ],
+   "options": {
+    "pub": "entreprise"
+   },
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "entreprise",
+   "q": "attestation de vigilance",
+   "ok": [
+    "SP-F31422",
+    "SP-R62158"
+   ],
+   "options": {
+    "pub": "entreprise"
+   },
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "entreprise",
+   "q": "déclarer la tva",
+   "ok": [
+    "SP-F23566"
+   ],
+   "options": {
+    "pub": "entreprise"
+   },
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "entreprise",
+   "q": "kbis",
+   "ok": [
+    "SP-F21000",
+    "SP-R19859"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "entreprise",
+   "q": "activité partielle",
+   "ok": [
+    "SP-R31001"
+   ],
+   "options": {
+    "pub": "entreprise"
+   },
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "entreprise",
+   "q": "détachement de salariés",
+   "ok": [
+    "SP-R42380"
+   ],
+   "options": {
+    "pub": "entreprise"
+   },
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "entreprise",
+   "q": "chorus pro",
+   "ok": [
+    "SP-R52176"
+   ],
+   "options": {
+    "pub": "entreprise"
+   },
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "entreprise",
+   "q": "télépac",
+   "ok": [
+    "SP-R14416"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "entreprise",
+   "q": "guso",
+   "ok": [
+    "SP-R14535"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "entreprise",
+   "q": "carte vtc",
+   "ok": [
+    "DN-25896"
+   ],
+   "origine": "Démarche Numérique"
+  },
+  {
+   "theme": "entreprise",
+   "q": "carte professionnelle taxi",
+   "ok": [
+    "DN-25893"
+   ],
+   "origine": "Démarche Numérique"
+  },
+  {
+   "theme": "entreprise",
+   "q": "médaille du travail",
+   "ok": [
+    "DN-69348"
+   ],
+   "origine": "Démarche Numérique"
+  },
+  {
+   "theme": "association",
+   "q": "créer une association",
+   "ok": [
+    "SP-R52067"
+   ],
+   "options": {
+    "pub": "association"
+   },
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "association",
+   "q": "modifier les statuts association",
+   "ok": [
+    "SP-R37933",
+    "SP-F1123"
+   ],
+   "options": {
+    "pub": "association"
+   },
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "association",
+   "q": "subvention association",
+   "ok": [
+    "SP-R50795",
+    "SP-R1271"
+   ],
+   "options": {
+    "pub": "association"
+   },
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "association",
+   "q": "chèque emploi associatif",
+   "ok": [
+    "SP-R14534",
+    "SP-F766"
+   ],
+   "origine": "Observatoire"
+  }
+ ]
+}
