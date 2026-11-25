@@ -4,6 +4,8 @@
   const STOP = new Set(("a au aux avec ce ces dans de des du elle en et eux il je la le les leur lui ma mais me meme mes moi mon ne nos notre nous on ou par pas pour qu que qui sa se ses son sur ta te tes toi ton tu un une vos votre vous c d j l m n s t y ete etre avoir ai as avons avez ont suis es est sommes etes sont faire fait comment quoi quel quelle quels quelles dois doit veux veut voudrais souhaite souhaiterais besoin peux peut faut il ya y-a cela ca cet cette tout tous toute toutes plus moins tres aussi si alors donc car comme chez sans sous entre vers apres avant depuis lors quand ou bien mon ma mes demande demarche demarches demander habite habiter habitons habitez pendant existe exister possible possibles").split(" "));
   const DEGRADATIONS = ["degradation", "dommage", "_troubles_urbains", "_dommages_subis"];
   const SYN = {
+    chercher: ["rechercher"], cherche: ["rechercher"], examen: ["examen", "epreuve"],
+    simulateur: ["simulateur", "estimer", "calculer", "verifier"], simulation: ["simulateur", "estimer", "calculer", "verifier"], simuler: ["simulateur", "estimer", "calculer", "verifier"],
     bebe: ["naissance"], enfant: ["enfant"], boulot: ["emploi"], travail: ["emploi", "travail"], chomage: ["emploi", "chomage", "inscription"],
     demenage: ["demenagement", "adresse"], demenager: ["demenagement", "adresse"], aide: ["aide", "subvention", "allocation"], allocation: ["allocation", "aide"], allocations: ["allocation", "aide"], indemnisation: ["indemnisation", "indemnite"], indemniser: ["indemnisation", "indemnite"],
     argent: ["aide", "subvention", "financement"], asso: ["association"], boite: ["entreprise"], societe: ["entreprise"],
@@ -64,6 +66,9 @@
     [["naissance enfant", "naissance d un enfant", "naissance de mon enfant", "naissance de notre enfant", "naissance de mon bebe", "mon bebe est ne",
       "vient de naitre", "declarer une naissance", "declarer la naissance"], ["_declaration_naissance", "naissance"], { sansSyn: true }],
     [["logement social", "logements sociaux", "hlm"], ["_logement_social"]],
+    // sigles et mots courants → nom de la prestation
+    [["css", "mutuelle gratuite", "mutuelle solidaire", "cmu", "cmu c"], ["complementaire", "sante", "solidaire"], { remplace: true }],
+    [["aide menagere", "aides menageres", "femme de menage", "menage a domicile"], ["domicile", "emploi"], { remplace: true }],
     // « aide au logement » seule : l'APL, l'ALF et l'ALS se demandent par un même service en ligne, qui les nomme par leur sigle.
     [["aide au logement", "aides au logement", "aide logement", "aides logement", "allocation logement", "allocations logement",
       "allocation de logement", "allocations de logement", "allocation au logement"], ["logement"], { seul: ["apl"] }],
@@ -112,6 +117,7 @@
     ["ions", 4], ["iez", 3], ["ees", 3], ["ee", 3], ["er", 3], ["ez", 3], ["es", 3], ["e", 3]];
   function stem(w) {
     if (w[0] === "_") return w;
+    if (/^\d+(e|eme|er|ere|ieme)$/.test(w)) return w.replace(/\D+$/, "e");   // 3e, 3eme, 3ème : un seul terme
     if (w.length > 4) w = w.replace(/aux$/, "al").replace(/(s|x)$/, "");
     w = w.replace(/elle$/, "el").replace(/enne$/, "en").replace(/([ts])ive$/, "$1if").replace(/([^a])ire$/, "$1i").replace(/ication$/, "i");
     for (const [x, min] of SUFFIXES) if (w.endsWith(x) && w.length - x.length >= min) { w = w.slice(0, -x.length); break; }
@@ -223,13 +229,16 @@
     // Expression marquée « sansSyn » : ses mots gardent leur terme, sans leurs synonymes (« passeport talent » n'appelle pas la
     // pré-demande de passeport).
     const dansExpr = new Set();
+    // Option « remplace » : les mots de l'expression (sigle, mot courant) ne comptent plus à part, l'expression les traduit.
+    const remplaces = new Set();
     // Option « seul » : termes ajoutés seulement quand la question se réduit à l'expression (hors mots vides).
     const utiles = n.trim().split(" ").filter((w) => w.length > 1 && !STOP.has(w)).join(" ");
     for (const [f, vers, o] of EXPRESSIONS) if (n.includes(" " + f + " ")) {
       const g = new Set(vers.concat(o && o.seul && utiles === f.split(" ").filter((w) => w.length > 1 && !STOP.has(w)).join(" ") ? o.seul : []).map(stem));
-      EXPR_GROUPES.add(g); termes.set("« " + vers.join(" ") + " »", g); if (o && o.sansSyn) f.split(" ").forEach((w) => dansExpr.add(w)); }
+      EXPR_GROUPES.add(g); termes.set("« " + vers.join(" ") + " »", g); if (o && o.sansSyn) f.split(" ").forEach((w) => dansExpr.add(w));
+      if (o && o.remplace) f.split(" ").forEach((w) => remplaces.add(w)); }
     for (const w of n.trim().split(" ")) {
-      if (w.length < 2 || STOP.has(w) || L.mots.has(w)) continue;
+      if (w.length < 2 || STOP.has(w) || L.mots.has(w) || remplaces.has(w)) continue;
       const t = stem(w); if (!termes.has(t)) termes.set(t, new Set([t]));
       if (!dansExpr.has(w)) for (const x of SYN[w] || []) termes.get(t).add(stem(x));
     }
@@ -320,6 +329,8 @@
 
   const PUBLIC_DN = { particulier: ["particulier", "mixte", "indetermine"], entreprise: ["entreprise", "mixte", "personne_morale", "indetermine"],
     association: ["association", "mixte", "personne_morale", "indetermine"], collectivite: ["collectivite", "personne_morale", "indetermine"] };
+  const QUESTION_PRO = / entreprises? | societes? | professionnels? | employeurs? | auto entrepreneurs? | micro entrepreneurs? | urssaf | kbis | tva | siret | siren | salaries? | embauche | dpae | cotisations? | chiffre d affaires | agriculteurs? | exploitants? | eleveurs? | artisans? | commercants? | restaurants? | commerce | boutique | magasin /;
+  const TITRE_PUBLIC = { association: / associations? /, entreprise: / entreprises? | professionnels? /, collectivite: / collectivites? | communes? /};
   const PUBLIC_SP = { particulier: "Particuliers", entreprise: "Professionnels", association: "Associations", collectivite: null };
 
   // Publics particuliers repérés dans le titre d'une fiche : [motif sur le titre normalisé, entouré d'espaces].
@@ -329,13 +340,25 @@
   // rétrogradée si la question ne cite pas ce territoire, pour que la fiche générale passe devant.
   const TERRITOIRES_PARTICULIERS = [/ nouvelle caledonie /, / polynesie /, / wallis /, / futuna /, / saint pierre et miquelon /, / saint barthelemy /,
     / saint martin /, / mayotte /, / guadeloupe /, / martinique /, / guyane /, / (la )?reunion (?!d)/, / outre mer /, / alsace /, / moselle /,
-    / a l etranger /, / hors de france /, / consulaire(s)? /, / australie /, / canada /];
+    / a l etranger /, / hors de france /, / francais de l etranger /, / etablis hors de france /, / a l international /, / consulaire(s)? /, / australie /, / canada /];
   // Fiches annexes (timbre fiscal, suivi d'une demande, titre retrouvé) : après la démarche elle-même, sauf si la question en
   // parle ; jamais en « Votre démarche » dans ce cas. [motif sur le titre, motif sur la question], textes normalisés entourés d'espaces.
   const ANNEXES = [[/ timbres? /, / timbres? /], [/^ (suivre|suivez) | ou en est | etat d avancement | suivre /, / suivre | suivi | suivie | avancement | ou en est /],
     [/ retrouve(e|s|es)? /, / retrouve(e|s|es)? | retrouver /],
     // espace personnel, compte en ligne : on y suit ses démarches ; la démarche elle-même d'abord
-    [/ mon compte | votre compte | espace personnel | espace prive | espace numerique /, / compte | espace /]];
+    [/ mon compte | votre compte | espace personnel | espace prive | espace numerique /, / compte | espace /],
+    // pièce ou document lié à la démarche (acte d'état civil, certificat médical, calendrier) : la démarche elle-même d'abord
+    [/ acte de naissance | acte de mariage | acte de deces | copie integrale | extrait d acte /, / actes? | copies? | extraits? /],
+    [/ certificats? medica(l|ux) /, / certificats? | medecins? | medica(l|ux) /],
+    [/ calendrier | agenda /, / calendrier | agenda | dates? /],
+    [/ attestation employeur | attestations? de salaire | attestation sur l honneur /, / employeur | salaire | honneur /],
+    [/ fiche facultative | fiche d aide au calcul | notice /, / fiche | notice | calcul /],
+    [/ journal officiel | annonce prealable /, / journal | annonce | publication /],
+    // outil d'orientation avant la démarche (« Savoir si le Défenseur des droits est compétent »)
+    [/^ savoir si | tester l eligibilite /, / savoir | eligib | simul | tester /],
+    [/ examen civique /, / examen | civique /],
+    // modalité particulière de la démarche
+    [/ visioconference /, / visio | visioconference | video /]];
   // Fiche annexe que la question nomme (« suivre ma demande de passeport ») : elle remonte, et peut être « Votre démarche ».
   const annexeNommee = (r, q) => { if (r.k !== "sp") return false; const t = " " + norm(r.t) + " ", n = " " + norm(q) + " ";
     return ANNEXES.some(([rt, rq]) => rt.test(t) && rq.test(n)); };
@@ -360,6 +383,27 @@
     // suite d'exception d'un accident ou d'une maladie (incapacité permanente, décès) : après le cas courant (arrêt, indemnités journalières)
     [/ incapacite permanente | deces d un salarie | deces du salarie | deces de l assure /, / incapacite | permanente | rente | deces | decede | mort | ayants? droits? /],
     [/ apres disparition | declaration judiciaire /, / disparu | disparue | disparition | judiciaire /],
+    // objet ou domaine précis
+    [/ placements? | capitaux mobiliers | produits de placement /, / placements? | capitaux | epargne | dividendes? /],
+    [/ parcelles? | pres et | landes? /, / parcelles? | pres | landes? | agricoles? | terrains? /],
+    [/ cinematographiques? | cinema | audiovisuels? /, / cinema | films? | cinematographique | audiovisuel /],
+    [/ coproprietes? | coproprietaires? | proprietaires? bailleurs? /, / copro | coproprietes? | coproprietaires? | bailleurs? | louer | location /],
+    [/ suspension | invalidation | annulation | retour au permis /, / suspension | suspendu | invalidation | invalide | annulation | annule | retour /],
+    [/ archeologi(e|que) /, / archeologi(e|que) /],
+    [/ franchise en base /, / franchise /],
+    [/ fspoeie | ouvriers de l etat /, / fspoeie | ouvriers? /],
+    [/ cnil /, / cnil | donnees personnelles | rgpd /],
+    // appel à projets ou dépôt à date limite : après la démarche permanente
+    [/ appels? a projets? | aap | a deposer avant /, / appels? | projets? | aap /],
+    [/ cadres? | apec /, / cadres? | apec /],
+    [/ permis de chasser | chasse /, / chass(e|er|eur) /],
+    [/ reconnues? d utilite publique /, / utilite publique | rup /],
+    [/ declaration de nationalite | acquisition de la nationalite /, / nationalite | naturalis(ation|e) /],
+    [/ contribution aux charges | separation de corps /, / contribution | charges | separation /],
+    // allègement fiscal (plafonnement, exonération, dégrèvement, abattement) : après l'impôt lui-même
+    [/ plafonnement | exonerations? | degrevements? | abattements? /, / plafonnement | exoner | degrev | abattement | reduction | baisse /],
+    // taux personnalisé, acomptes : opération particulière sur le prélèvement
+    [/ taux personnalise | acomptes? /, / taux | acomptes? | modifier | changer /],
     [/ marins? | gens de mer | notaires? | clercs? | journalistes? | detenus? | frontaliers? | pensionnes? /, / marins? | mer | notaires? | clercs? | journalistes? | detenus? | prison | frontaliers? | pensionnes? /]];
   // Un organisme particulier cité avec le régime général (« Caf ou MSA », « Caf et MSA ») ne fait pas un cas particulier ;
   // « ASF » après « allocation de soutien familial » est le sigle de l'allocation, pas l'action sociale des ministères.
@@ -376,7 +420,13 @@
     return e ? / majeure?s? /.test(t) && !/ mineure?s? /.test(t) : / mineure?s? /.test(t) && !/ majeure?s? /.test(t);
   }
   // Fiche propre à un territoire (outre-mer, étranger…) que la question ne cite pas : rétrogradée, et jamais en « Votre démarche ».
+  // Commune nommée dans le titre d'une fiche (« Demande d'Apa à Paris ») : la fiche est propre à ce territoire.
+  const lieuTitre = (r) => { if (r._lieuC !== COMMUNES) { r._lieuC = COMMUNES; const L = COMMUNES ? lieux(r.t).lieux[0] : null;
+    // nom propre écrit avec sa majuscule dans le titre (« à Paris »), pas un mot courant (« à la garde d'enfants » ≠ La Garde)
+    const nom = L && (L.nom || "").split(/[ -]/).pop();
+    r._lieuT = (L && nom && new RegExp("(^|[^\\p{L}])" + nom.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^\\p{L}]|$)", "u").test(r.t) && L.dep) || ""; } return r._lieuT; };
   const horsTerritoire = (r, q) => { if (r.k !== "sp") return false; const tt = TERRITOIRES_PARTICULIERS.find((re) => re.test(" " + norm(r.t) + " "));
+    if (lieuTitre(r) && lieuTitre(r) !== departementConnu(q, "")) return true;
     return !!tt && !tt.test(" " + norm(q) + " ") && !/ etranger /.test(" " + norm(q) + " "); };
   // Fiche d'un cas particulier (vol, perte, décès, détérioration) que la question n'évoque pas : jamais citée en phrase d'introduction.
   const CAS_PARTICULIERS = [/ vol | vols | vole | volee | volees | voles | vole /, / perte | pertes | perdu | perdue | perdus | perdues /,
@@ -495,10 +545,14 @@
         if (depsRegion && r.dep && !depsRegion.includes(r.dep)) continue;
         if (ouvertes && r.fe && r.fe < today) continue;
       } else {
-        if (pub && PUBLIC_SP[pub] && !(r.aud || "").includes(PUBLIC_SP[pub])) continue;
+        // public choisi : la fiche le déclare, ou son titre le nomme (« Créer votre compte association », déclarée « Particuliers »)
+        if (pub && PUBLIC_SP[pub] && !(r.aud || "").includes(PUBLIC_SP[pub]) && !(TITRE_PUBLIC[pub] && TITRE_PUBLIC[pub].test(" " + norm(r.t) + " "))) continue;
         if (pub === "collectivite") continue;
       }
       let s = s0 * (0.5 + 0.5 * hit.get(i).size / nG);
+      // Sans public choisi, une démarche des seuls professionnels passe après celles des particuliers, sauf si la question
+      // parle d'entreprise (« attestation de vigilance », « tva », « urssaf »…).
+      if (!pub && ((r.k === "sp" && r.aud && !/Particuliers/.test(r.aud)) || (r.k === "dn" && /^(entreprise|collectivite)$/.test(r.cat || ""))) && !QUESTION_PRO.test(" " + norm(q) + " ")) s *= 0.8;
       if (titreComplet(r)) s *= 1.25; // récompense la couverture de la requête
       if (casParticulierTitre(r, q)) s *= 0.7;   // cas particulier que la question ne nomme pas
       // Fiche service-public propre à un département (« Allier (03) : … ») hors du département connu : après la fiche nationale.
@@ -710,7 +764,20 @@
     // formulaire sûr des 5 premiers dont le titre porte tous les mots de la question et au plus deux autres (« Demande
     // d'allocation de soutien familial (ASF) ») ; la fiche reste dans « Comprendre ».
     const DEMARCHE = /Téléservice|selNG|^Formulaire|formulaireNG/;
-    const principal = (sures[0] && /^SP-F/.test(sures[0].id) && sures.find((r) => DEMARCHE.test(r.ty || "") && titrePorteTout(q, r) && motsEnPlus(q, r) <= 2)) || sures[0] || null;
+    let principal = (sures[0] && /^SP-F/.test(sures[0].id) && sures.find((r) => DEMARCHE.test(r.ty || "") && titrePorteTout(q, r) && motsEnPlus(q, r) <= 2 && motsEnPlus(q, r) < motsEnPlus(q, sures[0]))) || sures[0] || null;
+    // Titre le plus proche de la question : parmi les 12 premiers, une démarche sûre dont le titre porte tous les mots de la
+    // question, avec le moins de mots en plus, passe devant une démarche voisine (« Mariage en France » devant « Demande d'acte
+    // de mariage… », « Parcoursup » devant « Parcoursup : intégrer le calendrier… »).
+    const proches = ordre.slice(0, 12).filter((r) => titrePorteTout(q, r) && sure(r, q, { ...opt, ix, tete: ordre[0] }, P));
+    if (proches.length) {
+      const m = (r) => motsEnPlus(q, r), best = proches.reduce((a, b) => (m(b) < m(a) ? b : a));
+      // une démarche (service en ligne, formulaire, Démarche Numérique) proche de la question n'est pas remplacée par une fiche
+      // (sauf une démarche d'un sous-cas : « Porter plainte pour un rançongiciel » quand la question dit seulement « porter plainte »)
+      const pourAutre = (r) => { const m2 = / pour (.+)$/.exec(" " + norm(r.t) + " "); if (!m2) return false; const qq = new Set(toks(q));
+        return toks(m2[1]).some((t) => !qq.has(t)); };
+      const demarche = (r) => (r.k === "dn" || DEMARCHE.test(r.ty || "")) && !pourAutre(r);
+      if (principal ? m(best) <= 1 && !demarche(principal) && (!titrePorteTout(q, principal) || m(principal) >= 3) : m(best) <= 2) principal = best;
+    }
     // « Démarches possibles » : parmi les 3 premières, seulement celles qui passent le seuil de pertinence et portent un
     // terme de la question (hors termes trop généraux) dans leur titre ; une ou deux lignes plutôt qu'une troisième hors
     // sujet. Aucune, et pas de fiche « Comprendre » : la page invite à reformuler.

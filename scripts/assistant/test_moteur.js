@@ -489,6 +489,13 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   for(const [q,ok] of [['aide électricité',['SP-F33667','SP-R74067']],['accident de travail indemnisation',['SP-F175']],['kbis',['SP-F21000']],
     ['déclaration trimestrielle aah',['SP-R14412']],['changer taux prélèvement',['SP-F35894']],['allocation de soutien familial',['SP-R1448','SP-R57339']]]){
     const x=P(q); verifie(`Q9 « ${q} » : ${ok.join(' ou ')} en « Votre démarche »`, ok.includes(x.p), x.t.join(' ')+' | '+x.p); } }
+// Classement piloté par la mesure : fiche locale après la fiche nationale (commune dans le titre), public nommé dans le titre,
+// démarche voisine (acte, certificat, calendrier, visioconférence) après la démarche demandée, titre le plus proche, sigles.
+{ const P=(q,o={})=>{const C=M.choisir(ix,q,{...o,k:20});return {t:M.search(ix,q,{...o,k:3}).map(x=>x.r.id),p:C.principal&&C.principal.id};};
+  for(const [q,o,ok] of [['apa',{},['SP-F10009']],['subvention association',{pub:'association'},['SP-R50795','SP-R1271']],['mariage',{},['SP-F930']],
+    ['porter plainte',{},['SP-F1435']],['parcoursup',{},['SP-R42572','SP-F23476']],['css',{},['SP-R52880']],['vœux affectation 3e',{},['SP-R60303']],
+    ['taxe foncière',{},['SP-F59']],['garde d\'enfant demandeur d\'emploi',{},['SP-F1814']]]){
+    const x=P(q,o); verifie(`Q10 « ${q} »${o.pub?' ('+o.pub+')':''} : ${ok.join(' ou ')} en « Votre démarche »`, ok.includes(x.p), x.t.join(' ')+' | '+x.p); } }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');
