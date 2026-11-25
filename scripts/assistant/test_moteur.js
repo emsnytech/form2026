@@ -340,6 +340,17 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
     verifie(`R7 « ${q} » : ${att} en 1re position`, t[0]===att, t.join(' '));
     verifie(`A10 « ${q} » : ${att} en « Votre démarche »`, C.principal&&C.principal.id===att, C.principal&&C.principal.id); }
   const g=M.analyse('carte grise perdue').termes; verifie('R7 « carte grise » est une expression (certificat d\'immatriculation), comptée double par la règle « démarche sûre »', [...g.keys()].some(k=>/_carte_grise/.test(k))); }
+// Passeport (obtenir, refaire) et fiches propres à un territoire, rétrogradées si la question ne cite pas ce territoire.
+{ for(const [q,att] of [['passeport','SP-R42946'],['faire un passeport','SP-R42946'],['refaire mon passeport','SP-R62484']]){
+    const t=M.search(ix,q,{k:5}).map(x=>x.r.id), C=M.choisir(ix,q,{k:20});
+    verifie(`R8 « ${q} » : ${att} (pré-demande de passeport, ANTS) en 1re position`, t[0]===att, t.join(' '));
+    verifie(`A11 « ${q} » : ${att} en « Votre démarche »`, C.principal&&C.principal.id===att, C.principal&&C.principal.id); }
+  const tal=M.search(ix,'passeport talent',{k:3}).map(x=>x.r);
+  verifie('R8 « passeport talent » : aucune pré-demande de passeport dans les 3 premiers (titre de séjour)', !tal.some(r=>/^SP-R(42946|62484)$/.test(r.id)), tal.map(r=>r.id).join(' '));
+  const t1=M.search(ix,'inscription liste électorale',{k:3}).map(x=>x.r.id), t2=M.search(ix,'inscription liste électorale Nouvelle-Calédonie',{k:3}).map(x=>x.r.id);
+  verifie('R9 territoire : la fiche Nouvelle-Calédonie hors des 3 premiers pour « inscription liste électorale », en tête quand la question cite la Nouvelle-Calédonie', !t1.includes('SP-R63206')&&t2[0]==='SP-R63206', t1.join(' ')+' | '+t2.join(' '));
+  const r1=M.search(ix,'demande de RSA',{k:3}).map(x=>x.r.id), r2=M.search(ix,'demande de RSA à Mayotte',{k:3}).map(x=>x.r.id);
+  verifie('R9 territoire : « RSA (Mayotte) » hors des 3 premiers pour « demande de RSA », dans les 3 premiers pour « demande de RSA à Mayotte »', !r1.includes('SP-R931')&&r2.includes('SP-R931'), r1.join(' ')+' | '+r2.join(' ')); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');

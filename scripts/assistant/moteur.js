@@ -29,6 +29,9 @@
     degradation: DEGRADATIONS, pillage: DEGRADATIONS, vandalisme: DEGRADATIONS, emeute: DEGRADATIONS, emeutes: DEGRADATIONS,
     // restaurant ↔ commerce ; « bar » jamais seul (voir EXPRESSIONS : bar restaurant, bar-tabac, café-bar).
     restaurant: ["commerce"], restaurants: ["commerce"],
+    // passeport seul : la démarche pour l'obtenir (pré-demande en ligne, ANTS), devant le suivi ou la réception
+    passeport: ["_pre_demande"], passeports: ["_pre_demande"],
+    refaire: ["renouvellement"],
   };
   // Expressions de plusieurs mots, reconnues avant le découpage en mots (sur le texte normalisé).
   const EXPRESSIONS = [
@@ -50,18 +53,28 @@
       "perte de carte grise", "perte de la carte grise", "perte de ma carte grise", "vol de carte grise", "vol de ma carte grise"], ["_carte_grise", "refaire", "perte", "vol"]],
     // Liste électorale : une expression (inscription sur les listes électorales), pas les mots « liste » et « électorale » isolés.
     [["liste electorale", "listes electorales", "liste electoral", "listes electorale", "listes electoraux"], ["liste", "electorale"]],
+    // Passeport talent : un titre de séjour, pas un passeport.
+    [["passeport talent", "passeports talent"], ["talent"], { sansSyn: true }],
+    // Passeport : obtenir un passeport (pré-demande d'un 1er passeport, ANTS) ; le refaire (pré-demande de renouvellement).
+    [["faire un passeport", "faire mon passeport", "faire faire un passeport", "demander un passeport", "demande de passeport", "obtenir un passeport",
+      "premier passeport", "1er passeport", "nouveau passeport"], ["_pre_demande", "1er", "passeport"]],
+    [["refaire mon passeport", "refaire son passeport", "refaire un passeport", "refaire le passeport", "renouveler mon passeport", "renouveler son passeport",
+      "renouveler un passeport", "renouvellement de passeport", "renouvellement du passeport", "renouvellement passeport", "passeport perime", "passeport expire"],
+     ["renouvellement", "_pre_demande", "passeport"]],
     // Renouveler son titre de séjour : la démarche se fait auprès du bureau des étrangers, souvent sur rendez-vous.
     [["renouveler mon titre de sejour", "renouveler son titre de sejour", "renouveler le titre de sejour", "renouveler ma carte de sejour",
       "renouvellement de mon titre de sejour", "renouvellement du titre de sejour", "renouvellement de titre de sejour"],
      ["renouvellement", "etrangers", "rendez"]],
-  ].flatMap(([formes, vers]) => formes.map((f) => [f, vers]));
+  ].flatMap(([formes, vers, o]) => formes.map((f) => [f, vers, o]));
   function norm(s) {
     return (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
   }
   // Jetons d'expression : indexés quand l'expression figure dans un texte, cherchés par les synonymes (« _… », sans racinisation).
   const JETONS_EXPRESSION = [["fonds d urgence", "_fonds_d_urgence"], ["troubles urbains", "_troubles_urbains"], ["dommages subis", "_dommages_subis"],
     // carte grise = certificat d'immatriculation : un même jeton, quel que soit le nom employé par la fiche
-    ["carte grise", "_carte_grise"], ["cartes grises", "_carte_grise"], ["certificat d immatriculation", "_carte_grise"], ["certificats d immatriculation", "_carte_grise"]];
+    ["carte grise", "_carte_grise"], ["cartes grises", "_carte_grise"], ["certificat d immatriculation", "_carte_grise"], ["certificats d immatriculation", "_carte_grise"],
+    // pré-demande en ligne (passeport, carte d'identité) : un jeton, cherché par le synonyme de « passeport »
+    ["pre demande", "_pre_demande"]];
   function stem(w) {
     if (w[0] === "_") return w;
     if (w.length > 4) w = w.replace(/(s|x)$/, "");
@@ -170,11 +183,14 @@
     let n = " " + norm(s) + " ";
     const termes = new Map(), L = lieux(s);
     // Une expression reconnue compte pour un terme ; plusieurs expressions de même sens, pour un seul.
-    for (const [f, vers] of EXPRESSIONS) if (n.includes(" " + f + " ")) { const g = new Set(vers.map(stem)); EXPR_GROUPES.add(g); termes.set("« " + vers.join(" ") + " »", g); }
+    // Expression marquée « sansSyn » : ses mots gardent leur terme, sans leurs synonymes (« passeport talent » n'appelle pas la
+    // pré-demande de passeport).
+    const dansExpr = new Set();
+    for (const [f, vers, o] of EXPRESSIONS) if (n.includes(" " + f + " ")) { const g = new Set(vers.map(stem)); EXPR_GROUPES.add(g); termes.set("« " + vers.join(" ") + " »", g); if (o && o.sansSyn) f.split(" ").forEach((w) => dansExpr.add(w)); }
     for (const w of n.trim().split(" ")) {
       if (w.length < 2 || STOP.has(w) || L.mots.has(w)) continue;
       const t = stem(w); if (!termes.has(t)) termes.set(t, new Set([t]));
-      for (const x of SYN[w] || []) termes.get(t).add(stem(x));
+      if (!dansExpr.has(w)) for (const x of SYN[w] || []) termes.get(t).add(stem(x));
     }
     return { termes, lieux: L.lieux };
   }
@@ -268,6 +284,11 @@
   // Publics particuliers repérés dans le titre d'une fiche : [motif sur le titre normalisé, entouré d'espaces].
   // Le même motif, trouvé dans la question, annule la rétrogradation.
   const PUBLICS_PARTICULIERS = [/ etudiant(e|s|es)? | etude(s)? /, / stagiaire(s)? /, / au pair /, / saisonnier(s)? /].map((re) => [re]);
+  // Territoires particuliers nommés dans le titre d'une fiche (outre-mer, Français de l'étranger, Alsace-Moselle) : la fiche est
+  // rétrogradée si la question ne cite pas ce territoire, pour que la fiche générale passe devant.
+  const TERRITOIRES_PARTICULIERS = [/ nouvelle caledonie /, / polynesie /, / wallis /, / futuna /, / saint pierre et miquelon /, / saint barthelemy /,
+    / saint martin /, / mayotte /, / guadeloupe /, / martinique /, / guyane /, / (la )?reunion (?!d)/, / outre mer /, / alsace /, / moselle /,
+    / a l etranger /, / hors de france /, / consulaire(s)? /, / australie /, / canada /];
   function search(ix, q, opt = {}) {
     const { pub = "", dep = "", source = "", k = 10, ouvertes = true, sansJumelles = false } = opt;
     // Même titre qu'une démarche nationale : la nationale passe devant, la locale n'apparaît que si l'usager a choisi son
@@ -319,6 +340,8 @@
         // rétrogradée, pour que la fiche générale passe devant.
         const pp = PUBLICS_PARTICULIERS.find(([re]) => re.test(" " + norm(r.t) + " "));
         if (pp && !pp[0].test(" " + norm(q) + " ")) s *= 0.7;
+        const tt = TERRITOIRES_PARTICULIERS.find((re) => re.test(" " + norm(r.t) + " "));
+        if (tt && !tt.test(" " + norm(q) + " ")) s *= 0.7;
       }
       out.push([s, i]);
     }
