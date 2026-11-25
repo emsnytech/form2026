@@ -457,6 +457,18 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('Q4 « Aussi pour vous » écarte une fiche mineur (ou majeur) inadaptée ; « Vos démarches » ne demande le code postal que si une ligne a besoin d\'un lieu',
     /&& !Moteur\.ageInadapte\(f, q\);/.test(page)&&/window\.BESOINS_SANS_LIEU = !window\.CARTES_TETE\.length;/.test(page)&&/if \(!L && window\.BESOINS_SANS_LIEU\) return;/.test(ou)&&/\|\| window\.BESOINS_SANS_LIEU\) \{ majOu\(\); return; \}/.test(ou)
     &&M.ageInadapte(R.find(r=>r.id==='SP-F1153'),"carte d'identité perdue")); }
+// Suite du classement : organisme ou régime, métier, situation d'exception, démarche locale après la fiche nationale ;
+// racines ambiguës ; « procuration » et « décès » seuls.
+{ const P=(q)=>{const t=M.search(ix,q,{k:5}).map(x=>x.r.id),C=M.choisir(ix,q,{k:20});return {t,p:C.principal&&C.principal.id};};
+  for(const [q,ok,lib] of [['payer impôt',['SP-R2771'],'le service de paiement en ligne'],['arrêt maladie',['SP-F3053'],'les indemnités journalières du cas général'],
+    ['congé maternité',['SP-F2265'],'le congé de maternité'],['décès',['SP-F909'],'la déclaration de décès'],['demande de logement social',['SP-R34754'],'la demande en ligne nationale'],
+    ['procuration',['SP-F1604','SP-R58939','SP-R12675'],'le vote par procuration']]){
+    const x=P(q); verifie(`Q5 « ${q} » : ${lib} en « Votre démarche »`, ok.includes(x.p), x.t.slice(0,3).join(' ')+' | '+x.p); }
+  const cr=P('inscription crèche');
+  verifie('Q6 « inscription crèche » : pas la fiche vaccination (ni en tête ni en « Votre démarche »)', cr.p!=='SP-F767'&&cr.t[0]!=='SP-F767', cr.t.slice(0,3).join(' ')+' | '+cr.p);
+  const am=['maternite','maternelle','procuration','procureur','commune','communication','electricite','electronique','autorisation','autorite'].map(w=>M.toks(w)[0]);
+  verifie('Q7 racines : maternité ≠ maternelle, procuration ≠ procureur, commune ≠ communication, électricité ≠ électronique, autorisation ≠ autorité',
+    am[0]!==am[1]&&am[2]!==am[3]&&am[4]!==am[5]&&am[6]!==am[7]&&am[8]!==am[9]&&M.toks('maternites')[0]===am[0]&&M.toks('autorisations')[0]===am[8], am.join(' ')); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');

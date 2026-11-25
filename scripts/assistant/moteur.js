@@ -32,6 +32,7 @@
     // passeport seul : la démarche pour l'obtenir (pré-demande en ligne, ANTS), devant le suivi ou la réception
     passeport: ["_pre_demande"], passeports: ["_pre_demande"],
     refaire: ["renouvellement"],
+    payer: ["paiement"], paye: ["paiement"],
     // un enfant : la fiche « mineur » (carte d'identité, passeport…) ; voir aussi ageInadapte
     fils: ["mineur"], fille: ["mineur"],
   };
@@ -62,6 +63,13 @@
       "attestation carte vitale", "attestation d assurance maladie", "attestation assurance maladie"], ["_attestation_droits"]],
     [["naissance enfant", "naissance d un enfant", "naissance de mon enfant", "naissance de notre enfant", "naissance de mon bebe", "mon bebe est ne",
       "vient de naitre", "declarer une naissance", "declarer la naissance"], ["_declaration_naissance", "naissance"], { sansSyn: true }],
+    [["logement social", "logements sociaux", "hlm"], ["_logement_social"]],
+    [["payer impot", "payer impots", "payer mes impots", "payer ses impots", "payer l impot", "payer mon impot", "paiement impot", "paiement des impots",
+      "paiement de l impot", "regler mes impots", "regler ses impots"], ["_paiement_impot"]],
+    // « décès » seul : d'abord la déclaration de décès.
+    [["deces"], ["deces"], { seul: ["declaration"] }],
+    // « procuration » seule : d'abord le vote par procuration.
+    [["procuration", "procurations"], ["procuration"], { seul: ["vote", "voter"] }],
     // Passeport talent : un titre de séjour, pas un passeport.
     [["passeport talent", "passeports talent"], ["talent"], { sansSyn: true }],
     // Passeport : obtenir un passeport (pré-demande d'un 1er passeport, ANTS) ; le refaire (pré-demande de renouvellement).
@@ -84,12 +92,19 @@
     ["carte grise", "_carte_grise"], ["cartes grises", "_carte_grise"], ["certificat d immatriculation", "_carte_grise"], ["certificats d immatriculation", "_carte_grise"],
     // pré-demande en ligne (passeport, carte d'identité) : un jeton, cherché par le synonyme de « passeport »
     ["pre demande", "_pre_demande"], ["attestation de droits", "_attestation_droits"], ["declaration de naissance", "_declaration_naissance"],
+    ["logement social", "_logement_social"], ["logements sociaux", "_logement_social"],
+    ["paiement de l impot", "_paiement_impot"], ["paiement des impots", "_paiement_impot"], ["payer ses impots", "_paiement_impot"], ["payer l impot", "_paiement_impot"],
     // carte d'identité : un jeton propre (la racine « identi » est aussi celle d'« identification »)
     ["carte d identite", "_cni"], ["cartes d identite", "_cni"], ["carte nationale d identite", "_cni"]];
+  // Racines ambiguës à 6 lettres (« matern » : maternité et maternelle) : 7 lettres pour ces préfixes, relevés sur les mots
+  // des questions de référence (maternité/maternelle, procuration/procureur, commune/communication, électricité/électronique,
+  // autorisation/autorité, commencement/commentaire).
+  const RACINES_AMBIGUES = new Set(["matern", "procur", "commun", "electr", "autori", "commen"]);
   function stem(w) {
     if (w[0] === "_") return w;
     if (w.length > 4) w = w.replace(/(s|x)$/, "");
-    return w.length > 6 ? w.slice(0, 6) : w;
+    if (w.length <= 6) return w;
+    return RACINES_AMBIGUES.has(w.slice(0, 6)) ? w.slice(0, 7) : w.slice(0, 6);
   }
   function toks(s) {
     const out = [];
@@ -319,10 +334,17 @@
     [/ agricoles? | agriculteurs? /, / agricoles? | agriculteurs? | tracteurs? | exploitants? | msa /],
     [/ independants? | auto entrepreneurs? | micro entrepreneurs? | artistes auteurs | non salaries /, / independants? | auto entrepreneurs? | micro entrepreneurs? | artistes? | auteurs? | non salaries? /],
     [/ militaires? | armees? | anciens? combattants? | combattants? | appeles du service national /, / militaires? | armee | armees | combattants? | soldats? | gendarmes? | service national /],
-    [/ agents? publics? | fonctionnaires? | fonction publique | agents? de l etat | magistrats? | contractuels? | agents? hospitaliers? /, / agents? publics? | fonctionnaires? | fonction publique | agents? | magistrats? | contractuels? /],
+    [/ action sociale | asf | agents? publics? | fonctionnaires? | fonction publique | agents? de l etat | magistrats? | contractuels? | agents? hospitaliers? /, / agents? publics? | fonctionnaires? | fonction publique | agents? | magistrats? | contractuels? /],
     [/ mandataires? sociaux? | mandataire social /, / mandataires? | dirigeants? | gerants? /],
     // opération particulière sur un titre ou un dossier (modifier, corriger, ajouter un co-titulaire) : après la demande elle-même
     [/ modifier | modifie | modifiee | modifies | modification | correction | corriger | ajouter | co titulaire | cotitulaires? /, / modifier | modification | changer | changement | corriger | correction | erreur | ajouter | adresse | demenage | demenagement | titulaire /],
+    // organisme ou régime particulier
+    [/ ircantec | msa | rafp | cnracl | enim | regime agricole | regime local | caisse des depots | fonctions? publiques? /, / ircantec | msa | rafp | cnracl | enim | agricole | regime local | fonction publique | fonctionnaires? | agents? /],
+    // métier particulier
+    [/ assistante?s? maternelle?s? | assistants? maternels? | assistante?s? familiale?s? | assistants? familiaux | particulier employeur | employes? a domicile | taxis? | vtc /, / assistante?s? | nounou | particulier employeur | employeur | domicile | taxis? | vtc /],
+    // situation d'exception
+    [/ maladie professionnelle | maladies professionnelles | accident du travail | accident de travail | accidents? de trajet | remise gracieuse | impossibilite de payer | delai de paiement | terrorisme | catastrophe naturelle | deces de la mere | licenciement | droits de succession | impots locaux /,
+     / professionnelle | accident | trajet | remise | gracieuse | impossib | plus payer | peux pas payer | delai | terroris | catastrophe | mere | licencie | licenciement | succession | heritage | locaux | locales | fonciere | habitation /],
     [/ marins? | gens de mer | notaires? | clercs? | journalistes? | detenus? | frontaliers? | pensionnes? /, / marins? | mer | notaires? | clercs? | journalistes? | detenus? | prison | frontaliers? | pensionnes? /]];
   const casParticulierTitre = (r, q) => { const t = " " + norm(r.t) + " ", n = " " + norm(q) + " ";
     return PUBLICS_PRECIS.some(([rt, rq]) => rt.test(t) && !rq.test(n)); };
@@ -449,9 +471,11 @@
       }
       let s = s0 * (0.5 + 0.5 * hit.get(i) / qt.length); // récompense la couverture de la requête
       if (casParticulierTitre(r, q)) s *= 0.7;   // cas particulier que la question ne nomme pas
+      // Fiche service-public propre à un département (« Allier (03) : … ») hors du département connu : après la fiche nationale.
+      if (r.k === "sp") { const md = /^[^:]{2,60}\((\d{2,3}|2A|2B)\)\s*:/.exec(r.t); if (md && md[1] !== (dep || depLieu)) s *= 0.7; }
       if (r.k === "dn") { s *= 1 + 0.12 * Math.log10(1 + r.n); if (dep && r.dep === dep) s *= 1.15; else if (depLieu && r.dep === depLieu) s *= 1.3;
         else if (depsRegion && r.dep && depsRegion.includes(r.dep)) s *= 1.15;
-        else if (!dep && !depLieu && !depsRegion && (r.po ? r.po !== "nat" : !!r.dep)) s *= 0.8;   // territoire inconnu : une démarche locale (département connu ou non) passe après
+        else if (!dep && !depLieu && !depsRegion && (r.po ? r.po !== "nat" : !!r.dep)) s *= 0.7;   // territoire inconnu : une démarche locale (département connu ou non) passe après la fiche nationale
         if (r.dp && r.dp >= ilYaUnAn) s *= 1.15;
         if (r.tc) s *= 0.7;   // titre qui ressemble à un identifiant interne (« Bilan_4BNaap12_… ») : rétrogradé, quelle que soit la portée
         const yrs = (r.t.match(/20[12]\d/g) || []).map(Number); if (yrs.length && Math.max(...yrs) < ANNEE - 1) s *= 0.6; }
@@ -618,6 +642,8 @@
   function sure(r, q, opt = {}, P = null) {
     const { pub = "", dep = "" } = opt, d = departementConnu(q, dep);
     if (!r || !(P || opt.P).pertinente(r.id) || !titreSur(opt.ix, q, r) || horsTerritoire(r, q) || annexe(r, q) || casParticulierTitre(r, q)) return false;
+    // Une fiche question-réponse n'est pas une démarche : jamais en « Votre démarche », sauf si la question la nomme (annexe).
+    if (/Question-réponse/.test(r.ty || "") && !annexeNommee(r, q)) return false;
     const po = porteeDe(r);
     if (po !== "nat" && !(po === "dep" && d && depDe(r) === d)) return false;
     if ((!pub || pub === "particulier") && (RESERVEE_PROS.test(r.t + " " + (r.d || "")) || VARIANTE_EMPLOYEUR.test(r.t))) return false;
