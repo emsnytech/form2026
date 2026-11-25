@@ -1,0 +1,2240 @@
+{
+ "objet": "Structures Services Publics + d'au moins 100 retours depuis le 2024-11-23 sans organisme de Démarche Numérique, avec le domaine proposé de leurs services en ligne. Étude : rien n'est appliqué (qualite.py --proposer-spp).",
+ "seuils": {
+  "retours": 100,
+  "vague_demarches_nommees": 10,
+  "vague_fiches": 20
+ },
+ "structures": [
+  {
+   "structure": "France Titres-ANTS",
+   "retours": 10801,
+   "negatifs": 6866,
+   "motifs": [
+    [
+     "explication",
+     2359
+    ],
+    [
+     "delai",
+     2218
+    ]
+   ],
+   "retours_sans_demarche_nommee": 7307,
+   "demarches_nommees_distinctes": 110,
+   "domaine_propose": "immatriculation.ants.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.38,
+   "autres_domaines": [
+    "permisdeconduire.ants.gouv.fr",
+    "passeport.ants.gouv.fr",
+    "securite-routiere.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 23,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 110 démarches nommées distinctes, 23 fiches vers ce domaine"
+  },
+  {
+   "structure": "Impots.gouv.fr",
+   "retours": 3975,
+   "negatifs": 1978,
+   "motifs": [
+    [
+     "explication",
+     641
+    ],
+    [
+     "delai",
+     107
+    ]
+   ],
+   "retours_sans_demarche_nommee": 2268,
+   "demarches_nommees_distinctes": 59,
+   "domaine_propose": "impots.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.93,
+   "autres_domaines": [
+    "cfspart-idp.impots.gouv.fr",
+    "timbres.impots.gouv.fr",
+    "lassuranceretraite.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 226,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 59 démarches nommées distinctes, 226 fiches vers ce domaine"
+  },
+  {
+   "structure": "Services numériques du ministère de l'Intérieur",
+   "retours": 3510,
+   "negatifs": 2941,
+   "motifs": [
+    [
+     "explication",
+     1078
+    ],
+    [
+     "delai",
+     1007
+    ]
+   ],
+   "retours_sans_demarche_nommee": 3182,
+   "demarches_nommees_distinctes": 59,
+   "domaine_propose": "inscriptionelectorale.service-public.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.43,
+   "autres_domaines": [
+    "maprocuration.gouv.fr",
+    "procedures.inpi.fr",
+    "siv.interieur.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 0,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 59 démarches nommées distinctes, 0 fiches vers ce domaine"
+  },
+  {
+   "structure": "Service-public.gouv.fr",
+   "retours": 2772,
+   "negatifs": 1489,
+   "motifs": [
+    [
+     "explication",
+     385
+    ],
+    [
+     "delai",
+     160
+    ]
+   ],
+   "retours_sans_demarche_nommee": 2222,
+   "demarches_nommees_distinctes": 54,
+   "domaine_propose": "inscriptionelectorale.service-public.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.53,
+   "autres_domaines": [
+    "service-public.gouv.fr",
+    "assure.ameli.fr",
+    "immatriculation.ants.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 0,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 54 démarches nommées distinctes, 0 fiches vers ce domaine"
+  },
+  {
+   "structure": "Assurance retraite Ile-de-France",
+   "retours": 2048,
+   "negatifs": 1622,
+   "motifs": [
+    [
+     "delai",
+     942
+    ],
+    [
+     "explication",
+     813
+    ]
+   ],
+   "retours_sans_demarche_nommee": 1655,
+   "demarches_nommees_distinctes": 21,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.82,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "impots.gouv.fr",
+    "candidat.francetravail.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 21 démarches nommées distinctes, 6 fiches vers ce domaine"
+  },
+  {
+   "structure": "France connect",
+   "retours": 1833,
+   "negatifs": 1438,
+   "motifs": [
+    [
+     "explication",
+     197
+    ],
+    [
+     "delai",
+     82
+    ]
+   ],
+   "retours_sans_demarche_nommee": 1621,
+   "demarches_nommees_distinctes": 75,
+   "domaine_propose": "immatriculation.ants.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.14,
+   "autres_domaines": [
+    "service-public.gouv.fr",
+    "casier-judiciaire.justice.gouv.fr",
+    "procedures.inpi.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 23,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 75 démarches nommées distinctes, 23 fiches vers ce domaine"
+  },
+  {
+   "structure": "ANTAI",
+   "retours": 1783,
+   "negatifs": 1414,
+   "motifs": [
+    [
+     "explication",
+     696
+    ],
+    [
+     "delai",
+     370
+    ]
+   ],
+   "retours_sans_demarche_nommee": 1437,
+   "demarches_nommees_distinctes": 16,
+   "domaine_propose": "amendes.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.96,
+   "autres_domaines": [
+    "immatriculation.ants.gouv.fr",
+    "mespoints.permisdeconduire.gouv.fr",
+    "impots.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 1,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 16 démarches nommées distinctes, 1 fiches vers ce domaine"
+  },
+  {
+   "structure": "Direction des Français à l'étranger et de l'administration consulaire",
+   "retours": 1684,
+   "negatifs": 631,
+   "motifs": [
+    [
+     "explication",
+     182
+    ],
+    [
+     "joignable",
+     138
+    ]
+   ],
+   "retours_sans_demarche_nommee": 1219,
+   "demarches_nommees_distinctes": 43,
+   "domaine_propose": "passeport.ants.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.71,
+   "autres_domaines": [
+    "service-public.gouv.fr",
+    "assure.ameli.fr",
+    "votefae.diplomatie.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 4,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 43 démarches nommées distinctes, 4 fiches vers ce domaine"
+  },
+  {
+   "structure": "INPI-Institut National de la Propriété Industrielle",
+   "retours": 1431,
+   "negatifs": 1251,
+   "motifs": [
+    [
+     "explication",
+     533
+    ],
+    [
+     "delai",
+     166
+    ]
+   ],
+   "retours_sans_demarche_nommee": 889,
+   "demarches_nommees_distinctes": 20,
+   "domaine_propose": "procedures.inpi.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.96,
+   "autres_domaines": [
+    "data.inpi.fr",
+    "immatriculation.ants.gouv.fr",
+    "impots.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 3,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 20 démarches nommées distinctes, 3 fiches vers ce domaine"
+  },
+  {
+   "structure": "Direction générale de l'INSEE",
+   "retours": 1241,
+   "negatifs": 566,
+   "motifs": [
+    [
+     "explication",
+     150
+    ],
+    [
+     "joignable",
+     52
+    ]
+   ],
+   "retours_sans_demarche_nommee": 1077,
+   "demarches_nommees_distinctes": 16,
+   "domaine_propose": "le-recensement-et-moi.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.88,
+   "autres_domaines": [
+    "procedures.inpi.fr",
+    "assure.ameli.fr",
+    "impots.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 0,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 16 démarches nommées distinctes, 0 fiches vers ce domaine"
+  },
+  {
+   "structure": "Plainte en ligne (PEL)",
+   "retours": 1214,
+   "negatifs": 698,
+   "motifs": [
+    [
+     "delai",
+     210
+    ],
+    [
+     "explication",
+     203
+    ]
+   ],
+   "retours_sans_demarche_nommee": 700,
+   "demarches_nommees_distinctes": 18,
+   "domaine_propose": "service-public.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.83,
+   "autres_domaines": [
+    "immatriculation.ants.gouv.fr",
+    "assure.ameli.fr",
+    "passeport.ants.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 120,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 18 démarches nommées distinctes, 120 fiches vers ce domaine"
+  },
+  {
+   "structure": "Mon Compte Formation (CPF)",
+   "retours": 1192,
+   "negatifs": 1099,
+   "motifs": [
+    [
+     "explication",
+     270
+    ],
+    [
+     "delai",
+     119
+    ]
+   ],
+   "retours_sans_demarche_nommee": 1157,
+   "demarches_nommees_distinctes": 13,
+   "domaine_propose": "candidat.francetravail.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.62,
+   "autres_domaines": [
+    "securite-routiere.gouv.fr",
+    "permisdeconduire.ants.gouv.fr",
+    "lassuranceretraite.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 11,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 13 démarches nommées distinctes, 11 fiches vers ce domaine"
+  },
+  {
+   "structure": "Chèque énergie",
+   "retours": 1171,
+   "negatifs": 698,
+   "motifs": [
+    [
+     "explication",
+     316
+    ],
+    [
+     "delai",
+     152
+    ]
+   ],
+   "retours_sans_demarche_nommee": 840,
+   "demarches_nommees_distinctes": 13,
+   "domaine_propose": "chequeenergie.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.99,
+   "autres_domaines": [
+    "amendes.gouv.fr",
+    "wwwd.caf.fr",
+    "cesu.urssaf.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 2,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 13 démarches nommées distinctes, 2 fiches vers ce domaine"
+  },
+  {
+   "structure": "CARSAT Centre Ouest",
+   "retours": 1008,
+   "negatifs": 385,
+   "motifs": [
+    [
+     "explication",
+     205
+    ],
+    [
+     "delai",
+     166
+    ]
+   ],
+   "retours_sans_demarche_nommee": 908,
+   "demarches_nommees_distinctes": 12,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.86,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "impots.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 12 démarches nommées distinctes, 6 fiches vers ce domaine"
+  },
+  {
+   "structure": "Relation usagers des ministères EN-ESRE-SJVA",
+   "retours": 941,
+   "negatifs": 786,
+   "motifs": [
+    [
+     "delai",
+     380
+    ],
+    [
+     "explication",
+     273
+    ]
+   ],
+   "retours_sans_demarche_nommee": 794,
+   "demarches_nommees_distinctes": 23,
+   "domaine_propose": "teleservices.education.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.89,
+   "autres_domaines": [
+    "candidat.examens-concours.gouv.fr",
+    "activitepartielle.emploi.gouv.fr",
+    "assure.ameli.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 2,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 23 démarches nommées distinctes, 2 fiches vers ce domaine"
+  },
+  {
+   "structure": "amendes.gouv.fr",
+   "retours": 819,
+   "negatifs": 558,
+   "motifs": [
+    [
+     "explication",
+     103
+    ],
+    [
+     "delai",
+     40
+    ]
+   ],
+   "retours_sans_demarche_nommee": 544,
+   "demarches_nommees_distinctes": 6,
+   "domaine_propose": "amendes.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.99,
+   "autres_domaines": [
+    "passeport.ants.gouv.fr",
+    "impots.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 1,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "ANAH",
+   "retours": 819,
+   "negatifs": 745,
+   "motifs": [
+    [
+     "delai",
+     342
+    ],
+    [
+     "explication",
+     321
+    ]
+   ],
+   "retours_sans_demarche_nommee": 609,
+   "demarches_nommees_distinctes": 11,
+   "domaine_propose": "monprojet.anah.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.92,
+   "autres_domaines": [
+    "wwwd.caf.fr",
+    "primealaconversion.gouv.fr",
+    "chequeenergie.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 5,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 11 démarches nommées distinctes, 5 fiches vers ce domaine"
+  },
+  {
+   "structure": "CARSAT Sud-Est",
+   "retours": 787,
+   "negatifs": 589,
+   "motifs": [
+    [
+     "delai",
+     326
+    ],
+    [
+     "explication",
+     316
+    ]
+   ],
+   "retours_sans_demarche_nommee": 636,
+   "demarches_nommees_distinctes": 11,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.89,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "impots.gouv.fr",
+    "assure.ameli.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 11 démarches nommées distinctes, 6 fiches vers ce domaine"
+  },
+  {
+   "structure": "SignalConso",
+   "retours": 758,
+   "negatifs": 177,
+   "motifs": [
+    [
+     "delai",
+     55
+    ],
+    [
+     "explication",
+     48
+    ]
+   ],
+   "retours_sans_demarche_nommee": 692,
+   "demarches_nommees_distinctes": 8,
+   "domaine_propose": "signal.conso.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.91,
+   "autres_domaines": [
+    "service-public.gouv.fr",
+    "immatriculation.ants.gouv.fr",
+    "passeport.ants.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 2,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "Crit'air",
+   "retours": 718,
+   "negatifs": 295,
+   "motifs": [
+    [
+     "explication",
+     75
+    ],
+    [
+     "delai",
+     60
+    ]
+   ],
+   "retours_sans_demarche_nommee": 602,
+   "demarches_nommees_distinctes": 6,
+   "domaine_propose": "certificat-air.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.96,
+   "autres_domaines": [
+    "immatriculation.ants.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "DIRECTION DES OFFRES PARTICULIERES",
+   "retours": 714,
+   "negatifs": 312,
+   "motifs": [
+    [
+     "explication",
+     87
+    ],
+    [
+     "delai",
+     50
+    ]
+   ],
+   "retours_sans_demarche_nommee": 567,
+   "demarches_nommees_distinctes": 18,
+   "domaine_propose": "cesu.urssaf.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.9,
+   "autres_domaines": [
+    "connect.caf.fr",
+    "impots.gouv.fr",
+    "due.urssaf.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 9,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 18 démarches nommées distinctes, 9 fiches vers ce domaine"
+  },
+  {
+   "structure": "masecurite.fr",
+   "retours": 713,
+   "negatifs": 392,
+   "motifs": [
+    [
+     "explication",
+     118
+    ],
+    [
+     "delai",
+     112
+    ]
+   ],
+   "retours_sans_demarche_nommee": 609,
+   "demarches_nommees_distinctes": 19,
+   "domaine_propose": "service-public.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.57,
+   "autres_domaines": [
+    "maprocuration.gouv.fr",
+    "immatriculation.ants.gouv.fr",
+    "elections.interieur.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 120,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 19 démarches nommées distinctes, 120 fiches vers ce domaine"
+  },
+  {
+   "structure": "AGIRC-ARRCO",
+   "retours": 704,
+   "negatifs": 530,
+   "motifs": [
+    [
+     "explication",
+     258
+    ],
+    [
+     "delai",
+     205
+    ]
+   ],
+   "retours_sans_demarche_nommee": 619,
+   "demarches_nommees_distinctes": 12,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.83,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "impots.gouv.fr",
+    "assure.ameli.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 12 démarches nommées distinctes, 6 fiches vers ce domaine"
+  },
+  {
+   "structure": "Service Central d'Etat Civil",
+   "retours": 623,
+   "negatifs": 459,
+   "motifs": [
+    [
+     "delai",
+     217
+    ],
+    [
+     "explication",
+     131
+    ]
+   ],
+   "retours_sans_demarche_nommee": 412,
+   "demarches_nommees_distinctes": 12,
+   "domaine_propose": "service-public.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.97,
+   "autres_domaines": [
+    "passeport.ants.gouv.fr",
+    "info-retraite.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 120,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 12 démarches nommées distinctes, 120 fiches vers ce domaine"
+  },
+  {
+   "structure": "CARSAT Bretagne",
+   "retours": 613,
+   "negatifs": 256,
+   "motifs": [
+    [
+     "explication",
+     144
+    ],
+    [
+     "delai",
+     111
+    ]
+   ],
+   "retours_sans_demarche_nommee": 503,
+   "demarches_nommees_distinctes": 9,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.84,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "impots.gouv.fr",
+    "cesu.urssaf.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "CARSAT Rhône-Alpes",
+   "retours": 590,
+   "negatifs": 370,
+   "motifs": [
+    [
+     "explication",
+     204
+    ],
+    [
+     "delai",
+     183
+    ]
+   ],
+   "retours_sans_demarche_nommee": 464,
+   "demarches_nommees_distinctes": 10,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.86,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "impots.gouv.fr",
+    "assure.ameli.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 10 démarches nommées distinctes, 6 fiches vers ce domaine"
+  },
+  {
+   "structure": "DR ILE DE FRANCE-France Travail",
+   "retours": 581,
+   "negatifs": 412,
+   "motifs": [
+    [
+     "explication",
+     188
+    ],
+    [
+     "delai",
+     104
+    ]
+   ],
+   "retours_sans_demarche_nommee": 435,
+   "demarches_nommees_distinctes": 29,
+   "domaine_propose": "candidat.francetravail.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.89,
+   "autres_domaines": [
+    "due.urssaf.fr",
+    "connect.caf.fr",
+    "activitepartielle.emploi.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 11,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 29 démarches nommées distinctes, 11 fiches vers ce domaine"
+  },
+  {
+   "structure": "DIRECTION DE LA RELATION COTISANTS",
+   "retours": 424,
+   "negatifs": 302,
+   "motifs": [
+    [
+     "explication",
+     110
+    ],
+    [
+     "delai",
+     62
+    ]
+   ],
+   "retours_sans_demarche_nommee": 338,
+   "demarches_nommees_distinctes": 17,
+   "domaine_propose": "cesu.urssaf.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.56,
+   "autres_domaines": [
+    "impots.gouv.fr",
+    "autoentrepreneur.urssaf.fr",
+    "urssaf.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 9,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 17 démarches nommées distinctes, 9 fiches vers ce domaine"
+  },
+  {
+   "structure": "CARSAT Midi-Pyrénées",
+   "retours": 411,
+   "negatifs": 269,
+   "motifs": [
+    [
+     "explication",
+     146
+    ],
+    [
+     "delai",
+     130
+    ]
+   ],
+   "retours_sans_demarche_nommee": 339,
+   "demarches_nommees_distinctes": 10,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.75,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "impots.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 10 démarches nommées distinctes, 6 fiches vers ce domaine"
+  },
+  {
+   "structure": "PERCEVAL",
+   "retours": 408,
+   "negatifs": 183,
+   "motifs": [
+    [
+     "explication",
+     44
+    ],
+    [
+     "delai",
+     28
+    ]
+   ],
+   "retours_sans_demarche_nommee": 313,
+   "demarches_nommees_distinctes": 4,
+   "domaine_propose": "service-public.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 1.0,
+   "autres_domaines": [],
+   "fiches_sp_vers_ce_domaine": 120,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 4 démarches nommées distinctes, 120 fiches vers ce domaine"
+  },
+  {
+   "structure": "CARSAT Hauts de France",
+   "retours": 393,
+   "negatifs": 291,
+   "motifs": [
+    [
+     "delai",
+     151
+    ],
+    [
+     "explication",
+     145
+    ]
+   ],
+   "retours_sans_demarche_nommee": 313,
+   "demarches_nommees_distinctes": 12,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.75,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "immatriculation.ants.gouv.fr",
+    "impots.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 12 démarches nommées distinctes, 6 fiches vers ce domaine"
+  },
+  {
+   "structure": "ENSAP",
+   "retours": 389,
+   "negatifs": 368,
+   "motifs": [
+    [
+     "explication",
+     87
+    ],
+    [
+     "delai",
+     27
+    ]
+   ],
+   "retours_sans_demarche_nommee": 377,
+   "demarches_nommees_distinctes": 7,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.42,
+   "autres_domaines": [
+    "impots.gouv.fr",
+    "lassuranceretraite.fr",
+    "cfspart-idp.impots.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "maprim'renov",
+   "retours": 388,
+   "negatifs": 350,
+   "motifs": [
+    [
+     "explication",
+     171
+    ],
+    [
+     "delai",
+     153
+    ]
+   ],
+   "retours_sans_demarche_nommee": 294,
+   "demarches_nommees_distinctes": 4,
+   "domaine_propose": "monprojet.anah.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.96,
+   "autres_domaines": [
+    "demarches-simplifiees.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 5,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "Casier judiciaire national",
+   "retours": 358,
+   "negatifs": 107,
+   "motifs": [
+    [
+     "explication",
+     20
+    ],
+    [
+     "delai",
+     12
+    ]
+   ],
+   "retours_sans_demarche_nommee": 203,
+   "demarches_nommees_distinctes": 7,
+   "domaine_propose": "casier-judiciaire.justice.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.97,
+   "autres_domaines": [
+    "siv.interieur.gouv.fr",
+    "immatriculation.ants.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 2,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "Opération tranquillité vacances (OTV)",
+   "retours": 320,
+   "negatifs": 51,
+   "motifs": [
+    [
+     "explication",
+     10
+    ]
+   ],
+   "retours_sans_demarche_nommee": 318,
+   "demarches_nommees_distinctes": 3,
+   "domaine_propose": "",
+   "part_des_retours_nommes_vers_ce_domaine": 0,
+   "autres_domaines": [],
+   "fiches_sp_vers_ce_domaine": 0,
+   "trop_vague": false,
+   "raison": "aucune démarche nommée par ses retours n'a d'adresse dans l'Observatoire : pas de domaine proposé"
+  },
+  {
+   "structure": "Consulat Général de France à Genève",
+   "retours": 314,
+   "negatifs": 90,
+   "motifs": [
+    [
+     "explication",
+     33
+    ],
+    [
+     "joignable",
+     22
+    ]
+   ],
+   "retours_sans_demarche_nommee": 206,
+   "demarches_nommees_distinctes": 12,
+   "domaine_propose": "passeport.ants.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.84,
+   "autres_domaines": [
+    "service-public.gouv.fr",
+    "elections.interieur.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 4,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 12 démarches nommées distinctes, 4 fiches vers ce domaine"
+  },
+  {
+   "structure": "CPAM ST LO",
+   "retours": 314,
+   "negatifs": 159,
+   "motifs": [
+    [
+     "explication",
+     99
+    ],
+    [
+     "delai",
+     72
+    ]
+   ],
+   "retours_sans_demarche_nommee": 274,
+   "demarches_nommees_distinctes": 20,
+   "domaine_propose": "assure.ameli.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.56,
+   "autres_domaines": [
+    "monespaceprive.msa.fr",
+    "impots.gouv.fr",
+    "monespacesante.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 10,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 20 démarches nommées distinctes, 10 fiches vers ce domaine"
+  },
+  {
+   "structure": "Mes Services Etudiant",
+   "retours": 305,
+   "negatifs": 278,
+   "motifs": [
+    [
+     "explication",
+     82
+    ],
+    [
+     "delai",
+     42
+    ]
+   ],
+   "retours_sans_demarche_nommee": 213,
+   "demarches_nommees_distinctes": 13,
+   "domaine_propose": "cvec.etudiant.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.66,
+   "autres_domaines": [
+    "teleservices.education.gouv.fr",
+    "trouverunlogement.lescrous.fr",
+    "parcoursup.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 0,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 13 démarches nommées distinctes, 0 fiches vers ce domaine"
+  },
+  {
+   "structure": "Télépoint",
+   "retours": 295,
+   "negatifs": 179,
+   "motifs": [
+    [
+     "explication",
+     76
+    ],
+    [
+     "delai",
+     47
+    ]
+   ],
+   "retours_sans_demarche_nommee": 214,
+   "demarches_nommees_distinctes": 6,
+   "domaine_propose": "mespoints.permisdeconduire.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.97,
+   "autres_domaines": [
+    "permisdeconduire.ants.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 1,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "Ministère du Travail, de l'Emploi et de l'Insertion",
+   "retours": 288,
+   "negatifs": 249,
+   "motifs": [
+    [
+     "explication",
+     55
+    ],
+    [
+     "delai",
+     35
+    ]
+   ],
+   "retours_sans_demarche_nommee": 280,
+   "demarches_nommees_distinctes": 8,
+   "domaine_propose": "procedures.inpi.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.5,
+   "autres_domaines": [
+    "pajemploi.urssaf.fr",
+    "candidat.francetravail.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 3,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "Maprocuration.gouv.fr",
+   "retours": 272,
+   "negatifs": 175,
+   "motifs": [
+    [
+     "explication",
+     37
+    ]
+   ],
+   "retours_sans_demarche_nommee": 133,
+   "demarches_nommees_distinctes": 2,
+   "domaine_propose": "maprocuration.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.96,
+   "autres_domaines": [
+    "elections.interieur.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 1,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "CARSAT Aquitaine",
+   "retours": 271,
+   "negatifs": 183,
+   "motifs": [
+    [
+     "explication",
+     96
+    ],
+    [
+     "delai",
+     76
+    ]
+   ],
+   "retours_sans_demarche_nommee": 204,
+   "demarches_nommees_distinctes": 11,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.75,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "assure.ameli.fr",
+    "monespaceprive.msa.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 11 démarches nommées distinctes, 6 fiches vers ce domaine"
+  },
+  {
+   "structure": "DR AUVERGNE-RHONE-ALPES-France Travail",
+   "retours": 261,
+   "negatifs": 160,
+   "motifs": [
+    [
+     "explication",
+     72
+    ],
+    [
+     "joignable",
+     36
+    ]
+   ],
+   "retours_sans_demarche_nommee": 183,
+   "demarches_nommees_distinctes": 20,
+   "domaine_propose": "candidat.francetravail.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.86,
+   "autres_domaines": [
+    "activitepartielle.emploi.gouv.fr",
+    "impots.gouv.fr",
+    "monespaceprive.msa.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 11,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 20 démarches nommées distinctes, 11 fiches vers ce domaine"
+  },
+  {
+   "structure": "CARSAT Languedoc-Roussillon",
+   "retours": 247,
+   "negatifs": 170,
+   "motifs": [
+    [
+     "explication",
+     88
+    ],
+    [
+     "delai",
+     87
+    ]
+   ],
+   "retours_sans_demarche_nommee": 204,
+   "demarches_nommees_distinctes": 7,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.74,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "procedures.inpi.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "Agence de services et de paiement (ASP)",
+   "retours": 243,
+   "negatifs": 222,
+   "motifs": [
+    [
+     "delai",
+     147
+    ],
+    [
+     "explication",
+     81
+    ]
+   ],
+   "retours_sans_demarche_nommee": 231,
+   "demarches_nommees_distinctes": 13,
+   "domaine_propose": "teleservices.education.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.3,
+   "autres_domaines": [
+    "assure.ameli.fr",
+    "urssaf.fr",
+    "chequeenergie.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 2,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 13 démarches nommées distinctes, 2 fiches vers ce domaine"
+  },
+  {
+   "structure": "CARSAT NORD EST",
+   "retours": 242,
+   "negatifs": 111,
+   "motifs": [
+    [
+     "explication",
+     52
+    ],
+    [
+     "delai",
+     51
+    ]
+   ],
+   "retours_sans_demarche_nommee": 196,
+   "demarches_nommees_distinctes": 9,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.74,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "passeport.ants.gouv.fr",
+    "justice.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "CARSAT Pays de la Loire",
+   "retours": 242,
+   "negatifs": 165,
+   "motifs": [
+    [
+     "explication",
+     90
+    ],
+    [
+     "delai",
+     75
+    ]
+   ],
+   "retours_sans_demarche_nommee": 196,
+   "demarches_nommees_distinctes": 13,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.77,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "passeport.ants.gouv.fr",
+    "impots.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 13 démarches nommées distinctes, 6 fiches vers ce domaine"
+  },
+  {
+   "structure": "CENTRE NATIONAL CESU",
+   "retours": 240,
+   "negatifs": 90,
+   "motifs": [
+    [
+     "explication",
+     49
+    ],
+    [
+     "delai",
+     13
+    ]
+   ],
+   "retours_sans_demarche_nommee": 131,
+   "demarches_nommees_distinctes": 7,
+   "domaine_propose": "cesu.urssaf.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.96,
+   "autres_domaines": [
+    "impots.gouv.fr",
+    "connect.caf.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 9,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "CARSAT Bourgogne et Franche Comté",
+   "retours": 237,
+   "negatifs": 149,
+   "motifs": [
+    [
+     "explication",
+     74
+    ],
+    [
+     "delai",
+     63
+    ]
+   ],
+   "retours_sans_demarche_nommee": 188,
+   "demarches_nommees_distinctes": 9,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.71,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "impots.gouv.fr",
+    "candidat.francetravail.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "PayFip.gouv.fr",
+   "retours": 237,
+   "negatifs": 219,
+   "motifs": [
+    [
+     "explication",
+     46
+    ],
+    [
+     "delai",
+     12
+    ]
+   ],
+   "retours_sans_demarche_nommee": 227,
+   "demarches_nommees_distinctes": 6,
+   "domaine_propose": "cfspart-idp.impots.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.44,
+   "autres_domaines": [
+    "amendes.gouv.fr",
+    "urssaf.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 0,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "CARSAT Alsace Moselle",
+   "retours": 234,
+   "negatifs": 153,
+   "motifs": [
+    [
+     "delai",
+     80
+    ],
+    [
+     "explication",
+     73
+    ]
+   ],
+   "retours_sans_demarche_nommee": 182,
+   "demarches_nommees_distinctes": 8,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.76,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "impots.gouv.fr",
+    "candidat.francetravail.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "CPAM PARIS",
+   "retours": 232,
+   "negatifs": 157,
+   "motifs": [
+    [
+     "explication",
+     78
+    ],
+    [
+     "delai",
+     72
+    ]
+   ],
+   "retours_sans_demarche_nommee": 201,
+   "demarches_nommees_distinctes": 13,
+   "domaine_propose": "assure.ameli.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.77,
+   "autres_domaines": [
+    "impots.gouv.fr",
+    "connect.caf.fr",
+    "activitepartielle.emploi.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 10,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 13 démarches nommées distinctes, 10 fiches vers ce domaine"
+  },
+  {
+   "structure": "DR OCCITANIE-France Travail",
+   "retours": 228,
+   "negatifs": 143,
+   "motifs": [
+    [
+     "explication",
+     63
+    ],
+    [
+     "joignable",
+     33
+    ]
+   ],
+   "retours_sans_demarche_nommee": 164,
+   "demarches_nommees_distinctes": 13,
+   "domaine_propose": "candidat.francetravail.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.98,
+   "autres_domaines": [
+    "due.urssaf.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 11,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 13 démarches nommées distinctes, 11 fiches vers ce domaine"
+  },
+  {
+   "structure": "Consulat Général de France à Londres",
+   "retours": 220,
+   "negatifs": 88,
+   "motifs": [
+    [
+     "joignable",
+     35
+    ],
+    [
+     "explication",
+     29
+    ]
+   ],
+   "retours_sans_demarche_nommee": 155,
+   "demarches_nommees_distinctes": 9,
+   "domaine_propose": "passeport.ants.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.95,
+   "autres_domaines": [
+    "service-public.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 4,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "DR PROVENCE ALPES COTE D'AZUR-France Travail",
+   "retours": 201,
+   "negatifs": 124,
+   "motifs": [
+    [
+     "explication",
+     59
+    ],
+    [
+     "delai",
+     43
+    ]
+   ],
+   "retours_sans_demarche_nommee": 149,
+   "demarches_nommees_distinctes": 13,
+   "domaine_propose": "candidat.francetravail.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.97,
+   "autres_domaines": [
+    "wwwd.caf.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 11,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 13 démarches nommées distinctes, 11 fiches vers ce domaine"
+  },
+  {
+   "structure": "DGCCRF",
+   "retours": 199,
+   "negatifs": 75,
+   "motifs": [
+    [
+     "explication",
+     27
+    ],
+    [
+     "delai",
+     25
+    ]
+   ],
+   "retours_sans_demarche_nommee": 187,
+   "demarches_nommees_distinctes": 4,
+   "domaine_propose": "signal.conso.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.9,
+   "autres_domaines": [
+    "service-public.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 2,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "Consulat Général de France à Montréal",
+   "retours": 194,
+   "negatifs": 68,
+   "motifs": [
+    [
+     "explication",
+     25
+    ],
+    [
+     "joignable",
+     23
+    ]
+   ],
+   "retours_sans_demarche_nommee": 117,
+   "demarches_nommees_distinctes": 13,
+   "domaine_propose": "passeport.ants.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.88,
+   "autres_domaines": [
+    "service-public.gouv.fr",
+    "elections.interieur.gouv.fr",
+    "immatriculation.ants.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 4,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 13 démarches nommées distinctes, 4 fiches vers ce domaine"
+  },
+  {
+   "structure": "CARSAT Centre Val de Loire",
+   "retours": 192,
+   "negatifs": 135,
+   "motifs": [
+    [
+     "delai",
+     70
+    ],
+    [
+     "explication",
+     63
+    ]
+   ],
+   "retours_sans_demarche_nommee": 147,
+   "demarches_nommees_distinctes": 9,
+   "domaine_propose": "info-retraite.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.82,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "candidat.francetravail.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 6,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "Consulat Général de France à Bruxelles",
+   "retours": 190,
+   "negatifs": 38,
+   "motifs": [
+    [
+     "explication",
+     14
+    ],
+    [
+     "joignable",
+     13
+    ]
+   ],
+   "retours_sans_demarche_nommee": 125,
+   "demarches_nommees_distinctes": 9,
+   "domaine_propose": "passeport.ants.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.87,
+   "autres_domaines": [
+    "service-public.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 4,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "DR NOUVELLE-AQUITAINE-France Travail",
+   "retours": 189,
+   "negatifs": 125,
+   "motifs": [
+    [
+     "explication",
+     47
+    ],
+    [
+     "joignable",
+     38
+    ]
+   ],
+   "retours_sans_demarche_nommee": 142,
+   "demarches_nommees_distinctes": 13,
+   "domaine_propose": "candidat.francetravail.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.89,
+   "autres_domaines": [
+    "assure.ameli.fr",
+    "connect.caf.fr",
+    "activitepartielle.emploi.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 11,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 13 démarches nommées distinctes, 11 fiches vers ce domaine"
+  },
+  {
+   "structure": "Universités et écoles",
+   "retours": 188,
+   "negatifs": 111,
+   "motifs": [
+    [
+     "explication",
+     36
+    ],
+    [
+     "delai",
+     15
+    ]
+   ],
+   "retours_sans_demarche_nommee": 126,
+   "demarches_nommees_distinctes": 13,
+   "domaine_propose": "parcoursup.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.75,
+   "autres_domaines": [
+    "teleservices.education.gouv.fr",
+    "candidature.monmaster.gouv.fr",
+    "cvec.etudiant.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 1,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 13 démarches nommées distinctes, 1 fiches vers ce domaine"
+  },
+  {
+   "structure": "THESEE",
+   "retours": 181,
+   "negatifs": 125,
+   "motifs": [
+    [
+     "explication",
+     36
+    ],
+    [
+     "delai",
+     15
+    ]
+   ],
+   "retours_sans_demarche_nommee": 125,
+   "demarches_nommees_distinctes": 3,
+   "domaine_propose": "service-public.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.98,
+   "autres_domaines": [
+    "signal.conso.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 120,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 3 démarches nommées distinctes, 120 fiches vers ce domaine"
+  },
+  {
+   "structure": "MTE-MCTRCT",
+   "retours": 170,
+   "negatifs": 91,
+   "motifs": [
+    [
+     "delai",
+     28
+    ],
+    [
+     "explication",
+     24
+    ]
+   ],
+   "retours_sans_demarche_nommee": 130,
+   "demarches_nommees_distinctes": 14,
+   "domaine_propose": "dossierfacile.logement.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.52,
+   "autres_domaines": [
+    "demande-logement-social.gouv.fr",
+    "wwwd.caf.fr",
+    "signal-logement.beta.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 1,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 14 démarches nommées distinctes, 1 fiches vers ce domaine"
+  },
+  {
+   "structure": "Caf des BOUCHES-DU-RHONE",
+   "retours": 169,
+   "negatifs": 119,
+   "motifs": [
+    [
+     "delai",
+     63
+    ],
+    [
+     "explication",
+     61
+    ]
+   ],
+   "retours_sans_demarche_nommee": 116,
+   "demarches_nommees_distinctes": 20,
+   "domaine_propose": "connect.caf.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.39,
+   "autres_domaines": [
+    "wwwd.caf.fr",
+    "impots.gouv.fr",
+    "demande-logement-social.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 5,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 20 démarches nommées distinctes, 5 fiches vers ce domaine"
+  },
+  {
+   "structure": "DR GRAND EST-France Travail",
+   "retours": 161,
+   "negatifs": 99,
+   "motifs": [
+    [
+     "explication",
+     47
+    ],
+    [
+     "joignable",
+     28
+    ]
+   ],
+   "retours_sans_demarche_nommee": 111,
+   "demarches_nommees_distinctes": 16,
+   "domaine_propose": "candidat.francetravail.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.85,
+   "autres_domaines": [
+    "entreprise.francetravail.fr",
+    "wwwd.caf.fr",
+    "monespaceprive.msa.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 11,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 16 démarches nommées distinctes, 11 fiches vers ce domaine"
+  },
+  {
+   "structure": "Préfecture de police de Paris-Délim",
+   "retours": 158,
+   "negatifs": 132,
+   "motifs": [
+    [
+     "delai",
+     98
+    ],
+    [
+     "explication",
+     61
+    ]
+   ],
+   "retours_sans_demarche_nommee": 151,
+   "demarches_nommees_distinctes": 7,
+   "domaine_propose": "timbres.impots.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.33,
+   "autres_domaines": [
+    "assure.ameli.fr",
+    "passeport.ants.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 12,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "BOT RGARA",
+   "retours": 157,
+   "negatifs": 47,
+   "motifs": [
+    [
+     "explication",
+     17
+    ],
+    [
+     "joignable",
+     14
+    ]
+   ],
+   "retours_sans_demarche_nommee": 145,
+   "demarches_nommees_distinctes": 6,
+   "domaine_propose": "service-public.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.33,
+   "autres_domaines": [
+    "maprocuration.gouv.fr",
+    "immatriculation.ants.gouv.fr",
+    "impots.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 120,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 6 démarches nommées distinctes, 120 fiches vers ce domaine"
+  },
+  {
+   "structure": "DR HAUTS-DE-FRANCE-France Travail",
+   "retours": 155,
+   "negatifs": 102,
+   "motifs": [
+    [
+     "explication",
+     44
+    ],
+    [
+     "joignable",
+     35
+    ]
+   ],
+   "retours_sans_demarche_nommee": 109,
+   "demarches_nommees_distinctes": 17,
+   "domaine_propose": "candidat.francetravail.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.85,
+   "autres_domaines": [
+    "wwwd.caf.fr",
+    "impots.gouv.fr",
+    "connect.caf.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 11,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 17 démarches nommées distinctes, 11 fiches vers ce domaine"
+  },
+  {
+   "structure": "BOT RGOCC",
+   "retours": 150,
+   "negatifs": 44,
+   "motifs": [
+    [
+     "joignable",
+     20
+    ],
+    [
+     "explication",
+     15
+    ]
+   ],
+   "retours_sans_demarche_nommee": 142,
+   "demarches_nommees_distinctes": 4,
+   "domaine_propose": "service-public.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.75,
+   "autres_domaines": [
+    "mespoints.permisdeconduire.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 120,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 4 démarches nommées distinctes, 120 fiches vers ce domaine"
+  },
+  {
+   "structure": "Consulat Général de France à Madrid",
+   "retours": 147,
+   "negatifs": 59,
+   "motifs": [
+    [
+     "explication",
+     21
+    ],
+    [
+     "delai",
+     15
+    ]
+   ],
+   "retours_sans_demarche_nommee": 103,
+   "demarches_nommees_distinctes": 13,
+   "domaine_propose": "passeport.ants.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.73,
+   "autres_domaines": [
+    "service-public.gouv.fr",
+    "votefae.diplomatie.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 4,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 13 démarches nommées distinctes, 4 fiches vers ce domaine"
+  },
+  {
+   "structure": "Caf de SEINE-SAINT-DENIS",
+   "retours": 127,
+   "negatifs": 93,
+   "motifs": [
+    [
+     "explication",
+     49
+    ],
+    [
+     "delai",
+     45
+    ]
+   ],
+   "retours_sans_demarche_nommee": 100,
+   "demarches_nommees_distinctes": 15,
+   "domaine_propose": "connect.caf.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.67,
+   "autres_domaines": [
+    "wwwd.caf.fr",
+    "lassuranceretraite.fr",
+    "justice.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 5,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 15 démarches nommées distinctes, 5 fiches vers ce domaine"
+  },
+  {
+   "structure": "Ambassade de France en Allemagne",
+   "retours": 125,
+   "negatifs": 36,
+   "motifs": [
+    [
+     "explication",
+     11
+    ],
+    [
+     "joignable",
+     5
+    ]
+   ],
+   "retours_sans_demarche_nommee": 80,
+   "demarches_nommees_distinctes": 10,
+   "domaine_propose": "passeport.ants.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.73,
+   "autres_domaines": [
+    "service-public.gouv.fr",
+    "elections.interieur.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 4,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 10 démarches nommées distinctes, 4 fiches vers ce domaine"
+  },
+  {
+   "structure": "Centre du service national et de la jeunesse PARIS",
+   "retours": 121,
+   "negatifs": 44,
+   "motifs": [
+    [
+     "explication",
+     21
+    ],
+    [
+     "delai",
+     12
+    ]
+   ],
+   "retours_sans_demarche_nommee": 104,
+   "demarches_nommees_distinctes": 4,
+   "domaine_propose": "presaje.sga.defense.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.94,
+   "autres_domaines": [
+    "le-recensement-et-moi.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 1,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "DR BOURGOGNE-FRANCHE-COMTE-France Travail",
+   "retours": 119,
+   "negatifs": 56,
+   "motifs": [
+    [
+     "explication",
+     24
+    ],
+    [
+     "delai",
+     15
+    ]
+   ],
+   "retours_sans_demarche_nommee": 81,
+   "demarches_nommees_distinctes": 13,
+   "domaine_propose": "candidat.francetravail.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.81,
+   "autres_domaines": [
+    "impots.gouv.fr",
+    "monespaceprive.msa.fr",
+    "cesu.urssaf.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 11,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 13 démarches nommées distinctes, 11 fiches vers ce domaine"
+  },
+  {
+   "structure": "Consulat Général de France à Dakar",
+   "retours": 114,
+   "negatifs": 90,
+   "motifs": [
+    [
+     "delai",
+     47
+    ],
+    [
+     "explication",
+     34
+    ]
+   ],
+   "retours_sans_demarche_nommee": 100,
+   "demarches_nommees_distinctes": 8,
+   "domaine_propose": "passeport.ants.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.5,
+   "autres_domaines": [
+    "service-public.gouv.fr",
+    "assure.ameli.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 4,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "Ambassade de France en Thaïlande",
+   "retours": 111,
+   "negatifs": 37,
+   "motifs": [
+    [
+     "explication",
+     12
+    ],
+    [
+     "joignable",
+     7
+    ]
+   ],
+   "retours_sans_demarche_nommee": 94,
+   "demarches_nommees_distinctes": 9,
+   "domaine_propose": "passeport.ants.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.73,
+   "autres_domaines": [
+    "impots.gouv.fr",
+    "service-public.gouv.fr",
+    "immatriculation.ants.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 4,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "Préfecture de la Seine-et-Marne",
+   "retours": 111,
+   "negatifs": 90,
+   "motifs": [
+    [
+     "delai",
+     61
+    ],
+    [
+     "explication",
+     42
+    ]
+   ],
+   "retours_sans_demarche_nommee": 103,
+   "demarches_nommees_distinctes": 7,
+   "domaine_propose": "passeport.ants.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.25,
+   "autres_domaines": [
+    "securite-routiere.gouv.fr",
+    "immatriculation.ants.gouv.fr",
+    "service-public.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 4,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "Logement social",
+   "retours": 110,
+   "negatifs": 87,
+   "motifs": [
+    [
+     "explication",
+     31
+    ],
+    [
+     "delai",
+     25
+    ]
+   ],
+   "retours_sans_demarche_nommee": 62,
+   "demarches_nommees_distinctes": 6,
+   "domaine_propose": "demande-logement-social.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.93,
+   "autres_domaines": [
+    "wwwd.caf.fr",
+    "signal-logement.beta.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 2,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "CPAM MARSEILLE",
+   "retours": 107,
+   "negatifs": 65,
+   "motifs": [
+    [
+     "explication",
+     32
+    ],
+    [
+     "delai",
+     24
+    ]
+   ],
+   "retours_sans_demarche_nommee": 85,
+   "demarches_nommees_distinctes": 11,
+   "domaine_propose": "assure.ameli.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.92,
+   "autres_domaines": [
+    "immatriculation.ants.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 10,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 11 démarches nommées distinctes, 10 fiches vers ce domaine"
+  },
+  {
+   "structure": "CPAM NANTERRE",
+   "retours": 106,
+   "negatifs": 78,
+   "motifs": [
+    [
+     "delai",
+     45
+    ],
+    [
+     "explication",
+     32
+    ]
+   ],
+   "retours_sans_demarche_nommee": 82,
+   "demarches_nommees_distinctes": 12,
+   "domaine_propose": "assure.ameli.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.69,
+   "autres_domaines": [
+    "lassuranceretraite.fr",
+    "connect.caf.fr",
+    "monespaceprive.msa.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 10,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 12 démarches nommées distinctes, 10 fiches vers ce domaine"
+  },
+  {
+   "structure": "DR PAYS DE LA LOIRE-France Travail",
+   "retours": 106,
+   "negatifs": 62,
+   "motifs": [
+    [
+     "explication",
+     25
+    ],
+    [
+     "joignable",
+     18
+    ]
+   ],
+   "retours_sans_demarche_nommee": 80,
+   "demarches_nommees_distinctes": 9,
+   "domaine_propose": "candidat.francetravail.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.89,
+   "autres_domaines": [
+    "connect.caf.fr",
+    "info-retraite.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 11,
+   "trop_vague": false,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure)"
+  },
+  {
+   "structure": "BOT RGNA",
+   "retours": 103,
+   "negatifs": 35,
+   "motifs": [
+    [
+     "explication",
+     16
+    ],
+    [
+     "joignable",
+     14
+    ]
+   ],
+   "retours_sans_demarche_nommee": 96,
+   "demarches_nommees_distinctes": 3,
+   "domaine_propose": "immatriculation.ants.gouv.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 1.0,
+   "autres_domaines": [],
+   "fiches_sp_vers_ce_domaine": 23,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 3 démarches nommées distinctes, 23 fiches vers ce domaine"
+  },
+  {
+   "structure": "Caf de l'ISERE",
+   "retours": 103,
+   "negatifs": 65,
+   "motifs": [
+    [
+     "delai",
+     30
+    ],
+    [
+     "explication",
+     28
+    ]
+   ],
+   "retours_sans_demarche_nommee": 76,
+   "demarches_nommees_distinctes": 14,
+   "domaine_propose": "wwwd.caf.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.5,
+   "autres_domaines": [
+    "connect.caf.fr",
+    "impots.gouv.fr",
+    "carte-familles-nombreuses.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 20,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 14 démarches nommées distinctes, 20 fiches vers ce domaine"
+  },
+  {
+   "structure": "Caf des HAUTS-DE-SEINE",
+   "retours": 103,
+   "negatifs": 74,
+   "motifs": [
+    [
+     "delai",
+     38
+    ],
+    [
+     "explication",
+     35
+    ]
+   ],
+   "retours_sans_demarche_nommee": 76,
+   "demarches_nommees_distinctes": 14,
+   "domaine_propose": "connect.caf.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.61,
+   "autres_domaines": [
+    "wwwd.caf.fr",
+    "impots.gouv.fr",
+    "assure.ameli.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 5,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 14 démarches nommées distinctes, 5 fiches vers ce domaine"
+  },
+  {
+   "structure": "DR NORMANDIE-France Travail",
+   "retours": 101,
+   "negatifs": 64,
+   "motifs": [
+    [
+     "explication",
+     34
+    ],
+    [
+     "delai",
+     15
+    ]
+   ],
+   "retours_sans_demarche_nommee": 74,
+   "demarches_nommees_distinctes": 11,
+   "domaine_propose": "candidat.francetravail.fr",
+   "part_des_retours_nommes_vers_ce_domaine": 0.95,
+   "autres_domaines": [
+    "impots.gouv.fr"
+   ],
+   "fiches_sp_vers_ce_domaine": 11,
+   "trop_vague": true,
+   "raison": "domaine lu dans l'Observatoire (adresse des démarches nommées par les retours de la structure) ; signal trop vague : 11 démarches nommées distinctes, 11 fiches vers ce domaine"
+  }
+ ]
+}

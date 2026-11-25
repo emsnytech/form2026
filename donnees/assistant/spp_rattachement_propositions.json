@@ -1,0 +1,2219 @@
+{
+ "objet": "Propositions de rattachement des démarches nommées de Services Publics + (au moins 20 retours depuis le 2024-11-23) aux démarches service-public de l'index, par scripts/assistant/qualite.py --proposer-spp. Étude : aucun rattachement actif.",
+ "sources": {
+  "spp": "2026-11-23",
+  "observatoire": "édition 15 (octobre 2026)"
+ },
+ "seuils": {
+  "retours": 20,
+  "motif": 5,
+  "motifs_max": 2,
+  "nom_quasi_identique": 0.92,
+  "nom_proche": 0.75
+ },
+ "comptes": {
+  "aucune": 60,
+  "douteuse": 35,
+  "deja_rattachee": 6,
+  "sure": 6,
+  "probable": 1
+ },
+ "fiches_sp_avec_vigilance_si_sures_validees": 6,
+ "propositions": [
+  {
+   "nom_spp": "Déclaration des revenus",
+   "retours": 2024,
+   "negatifs": 807,
+   "motifs": [
+    [
+     "explication",
+     305
+    ],
+    [
+     "delai",
+     44
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de passeport",
+   "retours": 784,
+   "negatifs": 272,
+   "motifs": [
+    [
+     "explication",
+     89
+    ],
+    [
+     "joignable",
+     79
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de retraite personnelle",
+   "retours": 726,
+   "negatifs": 362,
+   "motifs": [
+    [
+     "delai",
+     194
+    ],
+    [
+     "explication",
+     190
+    ]
+   ],
+   "id": "SP-R46083",
+   "titre": "Info Retraite - Mon compte retraite",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R46083",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (info-retraite.fr/portail-services/login) : 1 démarche(s) de l'index, 9 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Paiement amendes (Amendes)",
+   "retours": 703,
+   "negatifs": 522,
+   "motifs": [
+    [
+     "explication",
+     191
+    ],
+    [
+     "delai",
+     88
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de renouvellement du permis de conduire en cas de perte, vol, détérioration ou c",
+   "retours": 666,
+   "negatifs": 193,
+   "motifs": [
+    [
+     "explication",
+     69
+    ],
+    [
+     "delai",
+     47
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Formalités des entreprises (création, modification, cessation)",
+   "retours": 649,
+   "negatifs": 545,
+   "motifs": [
+    [
+     "explication",
+     222
+    ],
+    [
+     "delai",
+     68
+    ]
+   ],
+   "id": "SP-R61572",
+   "titre": "Guichet des formalités des entreprises",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R61572",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (procedures.inpi.fr) : 3 démarche(s) de l'index, 2 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R60526",
+    "SP-R71475"
+   ]
+  },
+  {
+   "nom_spp": "Suivi des demandes (de correction de mon relevé de carrière, retraite et réversion )",
+   "retours": 548,
+   "negatifs": 468,
+   "motifs": [
+    [
+     "delai",
+     294
+    ],
+    [
+     "explication",
+     243
+    ]
+   ],
+   "id": "SP-R46083",
+   "titre": "Info Retraite - Mon compte retraite",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R46083",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (info-retraite.fr/portail-services/login) : 1 démarche(s) de l'index, 9 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Demande de CNI/Passeport (ANTS)",
+   "retours": 521,
+   "negatifs": 252,
+   "motifs": [
+    [
+     "explication",
+     81
+    ],
+    [
+     "delai",
+     78
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Dépôt de plainte en ligne (police)",
+   "retours": 454,
+   "negatifs": 256,
+   "motifs": [
+    [
+     "delai",
+     98
+    ],
+    [
+     "explication",
+     82
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande d'inscription sur les listes électorales communales",
+   "retours": 396,
+   "negatifs": 154,
+   "motifs": [
+    [
+     "explication",
+     50
+    ],
+    [
+     "delai",
+     5
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de certificat d'immatriculation d'un véhicule d'occasion immatriculé en France (",
+   "retours": 346,
+   "negatifs": 191,
+   "motifs": [
+    [
+     "explication",
+     62
+    ],
+    [
+     "delai",
+     56
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Déclaration de changement d'adresse sur le certificat d'immatriculation",
+   "retours": 305,
+   "negatifs": 145,
+   "motifs": [
+    [
+     "explication",
+     58
+    ],
+    [
+     "delai",
+     46
+    ]
+   ],
+   "id": "SP-R72578",
+   "titre": "Agence Nationale des Titres Sécurisés - Démarches immatriculation",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R72578",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (immatriculation.ants.gouv.fr) : 1 démarche(s) de l'index, 5 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Renouvellement mensuel de la situation de demandeur d’emploi (France Travail)",
+   "retours": 289,
+   "negatifs": 104,
+   "motifs": [
+    [
+     "explication",
+     42
+    ],
+    [
+     "joignable",
+     19
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de renouvellement du permis de conduire après expiration du titre",
+   "retours": 283,
+   "negatifs": 81,
+   "motifs": [
+    [
+     "explication",
+     28
+    ],
+    [
+     "delai",
+     22
+    ]
+   ],
+   "id": "SP-R49276",
+   "titre": "Demander en ligne un nouveau permis de conduire en cas de fin de validité",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49276",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (permisdeconduire.ants.gouv.fr/demarches-en-ligne/deterioration-remplacement-du-permis-pliant-3-volets-ou-fin-de-validite) : 3 démarche(s) de l'index, 1 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R67336",
+    "SP-R67351"
+   ]
+  },
+  {
+   "nom_spp": "CESU - Déclarer les heures des volets sociaux (Chèque Emploi Service Universel)",
+   "retours": 269,
+   "negatifs": 73,
+   "motifs": [
+    [
+     "explication",
+     23
+    ],
+    [
+     "delai",
+     6
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de carte nationale d’identité",
+   "retours": 262,
+   "negatifs": 149,
+   "motifs": [
+    [
+     "explication",
+     37
+    ],
+    [
+     "delai",
+     32
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de renouvellement du certificat d'immatriculation (carte grise) suite à perte, v",
+   "retours": 260,
+   "negatifs": 180,
+   "motifs": [
+    [
+     "explication",
+     78
+    ],
+    [
+     "delai",
+     62
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de copie ou d'extrait d'acte d'état civil par voie dématérialisée",
+   "retours": 249,
+   "negatifs": 149,
+   "motifs": [
+    [
+     "delai",
+     39
+    ],
+    [
+     "explication",
+     36
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Autres demandes concernant l’immatriculation de véhicule",
+   "retours": 247,
+   "negatifs": 181,
+   "motifs": [
+    [
+     "explication",
+     81
+    ],
+    [
+     "delai",
+     61
+    ]
+   ],
+   "id": "SP-R72578",
+   "titre": "Agence Nationale des Titres Sécurisés - Démarches immatriculation",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R72578",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (immatriculation.ants.gouv.fr) : 1 démarche(s) de l'index, 5 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Demande de carte nationale d'identité auprès des services consulaires",
+   "retours": 246,
+   "negatifs": 100,
+   "motifs": [
+    [
+     "delai",
+     30
+    ],
+    [
+     "joignable",
+     27
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande d'éligibilité à MaPrimeRenov'",
+   "retours": 209,
+   "negatifs": 184,
+   "motifs": [
+    [
+     "explication",
+     91
+    ],
+    [
+     "delai",
+     82
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande et Attribution du chèque énergie",
+   "retours": 200,
+   "negatifs": 157,
+   "motifs": [
+    [
+     "explication",
+     68
+    ],
+    [
+     "delai",
+     30
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Obtenir mon âge de départ à la retraite",
+   "retours": 195,
+   "negatifs": 116,
+   "motifs": [
+    [
+     "explication",
+     73
+    ],
+    [
+     "delai",
+     41
+    ]
+   ],
+   "id": "SP-R53854",
+   "titre": "Certifier son parcours professionnel",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R53854",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (lassuranceretraite.fr/portail-services-ihm/index.html) : 1 démarche(s) de l'index, 2 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Demande d'acte de naissance (à l'étranger)",
+   "retours": 184,
+   "negatifs": 100,
+   "motifs": [
+    [
+     "explication",
+     27
+    ],
+    [
+     "delai",
+     22
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Déclaration de cession d'un véhicule",
+   "retours": 184,
+   "negatifs": 114,
+   "motifs": [
+    [
+     "explication",
+     37
+    ],
+    [
+     "delai",
+     16
+    ]
+   ],
+   "id": "SP-R72578",
+   "titre": "Agence Nationale des Titres Sécurisés - Démarches immatriculation",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R72578",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (immatriculation.ants.gouv.fr) : 1 démarche(s) de l'index, 5 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Demande de permis de conduire après réussite à l'examen",
+   "retours": 182,
+   "negatifs": 139,
+   "motifs": [
+    [
+     "delai",
+     63
+    ],
+    [
+     "explication",
+     57
+    ]
+   ],
+   "id": "SP-R45443",
+   "titre": "Demander la fabrication de son permis de conduire à la suite de la réussite à l’examen",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R45443",
+   "classe": "deja_rattachee",
+   "methode": "observatoire_rattachement.json",
+   "raison": "rattachement déjà validé (Observatoire)"
+  },
+  {
+   "nom_spp": "Recensement de la population",
+   "retours": 170,
+   "negatifs": 87,
+   "motifs": [
+    [
+     "explication",
+     30
+    ],
+    [
+     "joignable",
+     14
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de permis de conduire après suspension, invalidation et annulation dont AM après",
+   "retours": 165,
+   "negatifs": 109,
+   "motifs": [
+    [
+     "delai",
+     57
+    ],
+    [
+     "explication",
+     47
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Gérer mon prélèvement à la source",
+   "retours": 163,
+   "negatifs": 49,
+   "motifs": [
+    [
+     "explication",
+     26
+    ],
+    [
+     "joignable",
+     5
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Etablissement d'une procuration de vote (Maprocuration)",
+   "retours": 160,
+   "negatifs": 99,
+   "motifs": [
+    [
+     "explication",
+     21
+    ],
+    [
+     "joignable",
+     5
+    ]
+   ],
+   "id": "SP-R58939",
+   "titre": "Maprocuration",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R58939",
+   "classe": "deja_rattachee",
+   "methode": "observatoire_rattachement.json",
+   "raison": "rattachement déjà validé (Observatoire)"
+  },
+  {
+   "nom_spp": "Demande d'aide financière",
+   "retours": 154,
+   "negatifs": 112,
+   "motifs": [
+    [
+     "delai",
+     47
+    ],
+    [
+     "explication",
+     40
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Inscription consulaire (registre des Français établis hors de France)",
+   "retours": 147,
+   "negatifs": 96,
+   "motifs": [
+    [
+     "explication",
+     29
+    ],
+    [
+     "delai",
+     10
+    ]
+   ],
+   "id": "SP-R43248",
+   "titre": "Registre des Français établis hors de France - Inscription consulaire",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R43248",
+   "classe": "douteuse",
+   "methode": "titre, fiches R",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; 2 candidats de nom proche (≥ 0.75)",
+   "similarite": 1.0,
+   "autres_candidats": [
+    "SP-R43250"
+   ]
+  },
+  {
+   "nom_spp": "Demande de pension de réversion",
+   "retours": 143,
+   "negatifs": 86,
+   "motifs": [
+    [
+     "delai",
+     44
+    ],
+    [
+     "explication",
+     43
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de transcription d'un acte survenu à l'étranger",
+   "retours": 140,
+   "negatifs": 108,
+   "motifs": [
+    [
+     "delai",
+     85
+    ],
+    [
+     "explication",
+     61
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande d'extrait de casier judiciaire (bulletin n°3)",
+   "retours": 138,
+   "negatifs": 45,
+   "motifs": [
+    [
+     "explication",
+     9
+    ]
+   ],
+   "id": "SP-R1264",
+   "titre": "Demande en ligne d'extrait de casier judiciaire (bulletin n°3)",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1264",
+   "classe": "douteuse",
+   "methode": "titre, fiches R",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; 2 candidats de nom proche (≥ 0.75)",
+   "similarite": 1.0,
+   "autres_candidats": [
+    "SP-R72642"
+   ]
+  },
+  {
+   "nom_spp": "Utilisation du chèque énergie",
+   "retours": 137,
+   "negatifs": 28,
+   "motifs": [
+    [
+     "explication",
+     10
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Déclarer un changement de situation pour les prestations familiales",
+   "retours": 135,
+   "negatifs": 68,
+   "motifs": [
+    [
+     "explication",
+     31
+    ],
+    [
+     "delai",
+     26
+    ]
+   ],
+   "id": "SP-R1165",
+   "titre": "Caisse d'allocations familiales (Caf) en ligne",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1165",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (connect.caf.fr/connexionappli/dist) : 4 démarche(s) de l'index, 7 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R1332",
+    "SP-R1361",
+    "SP-R65917"
+   ]
+  },
+  {
+   "nom_spp": "Déclaration trimestrielle RSA",
+   "retours": 130,
+   "negatifs": 53,
+   "motifs": [
+    [
+     "explication",
+     26
+    ],
+    [
+     "delai",
+     17
+    ]
+   ],
+   "id": "SP-R1165",
+   "titre": "Caisse d'allocations familiales (Caf) en ligne",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1165",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (connect.caf.fr/connexionappli/dist) : 4 démarche(s) de l'index, 7 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R1332",
+    "SP-R1361",
+    "SP-R65917"
+   ]
+  },
+  {
+   "nom_spp": "Paiement impôts particuliers",
+   "retours": 129,
+   "negatifs": 76,
+   "motifs": [
+    [
+     "explication",
+     29
+    ],
+    [
+     "joignable",
+     12
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Inscription en ligne à l'examen du permis de conduire",
+   "retours": 127,
+   "negatifs": 93,
+   "motifs": [
+    [
+     "explication",
+     36
+    ],
+    [
+     "delai",
+     24
+    ]
+   ],
+   "id": "SP-R59785",
+   "titre": "Permis de conduire : réserver en ligne une place pour passer l'épreuve pratique du permis",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R59785",
+   "classe": "sure",
+   "methode": "observatoire, adresse",
+   "raison": "même adresse de service (securite-routiere.gouv.fr/passer-son-permis-de-conduire/inscription-et-formation/reserver-en-ligne-sa-place-pour-le)"
+  },
+  {
+   "nom_spp": "Demande de permis de conduire international",
+   "retours": 123,
+   "negatifs": 54,
+   "motifs": [
+    [
+     "delai",
+     25
+    ],
+    [
+     "explication",
+     19
+    ]
+   ],
+   "id": "SP-R56960",
+   "titre": "Demande en ligne de rétablissement du permis de conduire français au retour en France après une expatriation",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R56960",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (permisdeconduire.ants.gouv.fr) : 1 démarche(s) de l'index, 1 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Attestation de paiement d'indemnités journalières",
+   "retours": 121,
+   "negatifs": 77,
+   "motifs": [
+    [
+     "delai",
+     58
+    ],
+    [
+     "explication",
+     41
+    ]
+   ],
+   "id": "SP-R49830",
+   "titre": "Attestation de paiement d'indemnités journalières",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49830",
+   "classe": "deja_rattachee",
+   "methode": "observatoire_rattachement.json",
+   "raison": "rattachement déjà validé (Observatoire)"
+  },
+  {
+   "nom_spp": "Demander une carte vitale",
+   "retours": 120,
+   "negatifs": 69,
+   "motifs": [
+    [
+     "delai",
+     36
+    ],
+    [
+     "explication",
+     21
+    ]
+   ],
+   "id": "SP-R49813",
+   "titre": "Demander une carte Vitale (régime général)",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49813",
+   "classe": "deja_rattachee",
+   "methode": "observatoire_rattachement.json",
+   "raison": "rattachement déjà validé (Observatoire)"
+  },
+  {
+   "nom_spp": "Dépôt de plainte en ligne pour escroqueries commises sur Internet (THESEE)",
+   "retours": 118,
+   "negatifs": 56,
+   "motifs": [
+    [
+     "explication",
+     16
+    ],
+    [
+     "delai",
+     8
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Dépôt de plainte en ligne (PEL) - Gendamerie",
+   "retours": 114,
+   "negatifs": 63,
+   "motifs": [
+    [
+     "explication",
+     22
+    ],
+    [
+     "delai",
+     19
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de certificat qualité de l'air (Crit’air)",
+   "retours": 112,
+   "negatifs": 33,
+   "motifs": [
+    [
+     "explication",
+     7
+    ],
+    [
+     "delai",
+     5
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Déclaration de loyer pour l'aide au logement",
+   "retours": 111,
+   "negatifs": 49,
+   "motifs": [
+    [
+     "explication",
+     15
+    ],
+    [
+     "delai",
+     5
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Gérer Mes Biens Immobiliers – Déclaration d’occupation",
+   "retours": 111,
+   "negatifs": 68,
+   "motifs": [
+    [
+     "explication",
+     25
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande d'aide au logement",
+   "retours": 109,
+   "negatifs": 65,
+   "motifs": [
+    [
+     "explication",
+     35
+    ],
+    [
+     "delai",
+     25
+    ]
+   ],
+   "id": "SP-R1292",
+   "titre": "Demande d’aide personnelle au logement (APL, ALF, ALS) - Caf",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1292",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation/demanderlaideaulogement) : 1 démarche(s) de l'index, 2 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Mes Points Permis",
+   "retours": 107,
+   "negatifs": 63,
+   "motifs": [
+    [
+     "explication",
+     30
+    ],
+    [
+     "delai",
+     16
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Vote pour les Français de l’Etranger aux élections consulaires",
+   "retours": 105,
+   "negatifs": 15,
+   "motifs": [
+    [
+     "explication",
+     6
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de remboursement de soins (CNMSS)",
+   "retours": 100,
+   "negatifs": 64,
+   "motifs": [
+    [
+     "delai",
+     38
+    ],
+    [
+     "explication",
+     25
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Déclaration trimestrielle prime d'activité",
+   "retours": 99,
+   "negatifs": 40,
+   "motifs": [
+    [
+     "explication",
+     15
+    ],
+    [
+     "delai",
+     6
+    ]
+   ],
+   "id": "SP-R1165",
+   "titre": "Caisse d'allocations familiales (Caf) en ligne",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1165",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (connect.caf.fr/connexionappli/dist) : 4 démarche(s) de l'index, 7 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R1332",
+    "SP-R1361",
+    "SP-R65917"
+   ]
+  },
+  {
+   "nom_spp": "Signaler une utilisation frauduleuse de sa carte bancaire en ligne (PERCEVAL)",
+   "retours": 99,
+   "negatifs": 36,
+   "motifs": [
+    [
+     "explication",
+     9
+    ],
+    [
+     "delai",
+     6
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de certificat de situation administrative (non gage)",
+   "retours": 92,
+   "negatifs": 21,
+   "motifs": [
+    [
+     "delai",
+     5
+    ],
+    [
+     "explication",
+     5
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de bourse d'enseignement supérieur sur critères sociaux (BCS)",
+   "retours": 89,
+   "negatifs": 84,
+   "motifs": [
+    [
+     "delai",
+     32
+    ],
+    [
+     "explication",
+     32
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Déclaration de ressources annuelles auprès de la CAF",
+   "retours": 86,
+   "negatifs": 41,
+   "motifs": [
+    [
+     "explication",
+     24
+    ],
+    [
+     "delai",
+     12
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de subvention pour travaux - Propriétaires occupants dite « MonProjet ANAH »",
+   "retours": 84,
+   "negatifs": 73,
+   "motifs": [
+    [
+     "delai",
+     46
+    ],
+    [
+     "explication",
+     39
+    ]
+   ],
+   "id": "SP-R51461",
+   "titre": "Demande en ligne d'une aide financière de l'Anah (constitution, suivi de la demande...)",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R51461",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (monprojet.anah.gouv.fr) : 2 démarche(s) de l'index, 1 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R67121"
+   ]
+  },
+  {
+   "nom_spp": "S'inscrire ou se réinscrire comme demandeur d'emploi",
+   "retours": 80,
+   "negatifs": 24,
+   "motifs": [
+    [
+     "explication",
+     9
+    ],
+    [
+     "joignable",
+     6
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de CNI/Passeport (Préfectures)",
+   "retours": 74,
+   "negatifs": 57,
+   "motifs": [
+    [
+     "delai",
+     34
+    ],
+    [
+     "explication",
+     25
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de complémentaire santé solidaire (CPAM)",
+   "retours": 71,
+   "negatifs": 32,
+   "motifs": [
+    [
+     "explication",
+     22
+    ],
+    [
+     "delai",
+     16
+    ]
+   ],
+   "id": "SP-R52880",
+   "titre": "Demande de complémentaire santé solidaire",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R52880",
+   "classe": "douteuse",
+   "methode": "titre, fiches R",
+   "raison": "2 candidats de nom proche (≥ 0.75)",
+   "similarite": 0.938,
+   "autres_candidats": [
+    "SP-R54651"
+   ]
+  },
+  {
+   "nom_spp": "Demande de pension d'invalidité",
+   "retours": 70,
+   "negatifs": 38,
+   "motifs": [
+    [
+     "explication",
+     22
+    ],
+    [
+     "delai",
+     20
+    ]
+   ],
+   "id": "SP-R49811",
+   "titre": "Obtenir une attestation de droits (régime général)",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49811",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (assure.ameli.fr/portailas/appmanager/portailas/assure) : 10 démarche(s) de l'index, 12 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R49813",
+    "SP-R49814",
+    "SP-R49829",
+    "SP-R49830",
+    "SP-R49831"
+   ]
+  },
+  {
+   "nom_spp": "SignalConso",
+   "retours": 69,
+   "negatifs": 15,
+   "motifs": [
+    [
+     "explication",
+     6
+    ]
+   ],
+   "id": "SP-R67053",
+   "titre": "Signal Conso",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R67053",
+   "classe": "sure",
+   "methode": "observatoire, adresse",
+   "raison": "même adresse de service (signal.conso.gouv.fr/fr)"
+  },
+  {
+   "nom_spp": "Changement de situation (France Travail)",
+   "retours": 67,
+   "negatifs": 47,
+   "motifs": [
+    [
+     "explication",
+     20
+    ],
+    [
+     "delai",
+     14
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Achat de timbre fiscal",
+   "retours": 66,
+   "negatifs": 24,
+   "motifs": [
+    [
+     "explication",
+     9
+    ],
+    [
+     "delai",
+     8
+    ]
+   ],
+   "id": "SP-R22210",
+   "titre": "Acheter un timbre fiscal électronique pour faire appel d’un décision de justice civile",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R22210",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (timbres.impots.gouv.fr) : 12 démarche(s) de l'index, 2 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R39812",
+    "SP-R42969",
+    "SP-R47754",
+    "SP-R47906",
+    "SP-R48628"
+   ]
+  },
+  {
+   "nom_spp": "Rechercher des offres d’emploi (France Travail)",
+   "retours": 65,
+   "negatifs": 42,
+   "motifs": [
+    [
+     "explication",
+     13
+    ],
+    [
+     "joignable",
+     9
+    ]
+   ],
+   "id": "SP-R31528",
+   "titre": "Rechercher une offre d'emploi sur France Travail",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R31528",
+   "classe": "sure",
+   "methode": "titre, fiches R",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; nom quasi identique (0.974), un seul candidat",
+   "similarite": 0.974
+  },
+  {
+   "nom_spp": "Candidater à une offre d’emploi (France Travail)",
+   "retours": 56,
+   "negatifs": 30,
+   "motifs": [
+    [
+     "explication",
+     11
+    ],
+    [
+     "joignable",
+     8
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande d'acte de mariage (célébré à l'étranger)",
+   "retours": 53,
+   "negatifs": 25,
+   "motifs": [
+    [
+     "delai",
+     12
+    ],
+    [
+     "explication",
+     9
+    ]
+   ],
+   "id": "SP-R42839",
+   "titre": "Demande d'acte de mariage (célébré à l'étranger) - Service gratuit",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R42839",
+   "classe": "douteuse",
+   "methode": "titre, fiches R",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; 2 candidats de nom proche (≥ 0.75)",
+   "similarite": 0.75,
+   "autres_candidats": [
+    "SP-R42837"
+   ]
+  },
+  {
+   "nom_spp": "Demande initiale de RSA",
+   "retours": 52,
+   "negatifs": 37,
+   "motifs": [
+    [
+     "explication",
+     18
+    ],
+    [
+     "delai",
+     17
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Admission dans l'enseignement supérieur (Parcoursup)",
+   "retours": 49,
+   "negatifs": 32,
+   "motifs": [
+    [
+     "explication",
+     13
+    ]
+   ],
+   "id": "SP-R42572",
+   "titre": "Plateforme Parcoursup",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R42572",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (parcoursup.gouv.fr) : 1 démarche(s) de l'index, 1 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Déclaration trimestrielle AAH (Allocation Adulte Handicapé)",
+   "retours": 49,
+   "negatifs": 35,
+   "motifs": [
+    [
+     "explication",
+     20
+    ],
+    [
+     "delai",
+     17
+    ]
+   ],
+   "id": "SP-R1165",
+   "titre": "Caisse d'allocations familiales (Caf) en ligne",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1165",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (connect.caf.fr/connexionappli/dist) : 4 démarche(s) de l'index, 7 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R1332",
+    "SP-R1361",
+    "SP-R65917"
+   ]
+  },
+  {
+   "nom_spp": "Affiliation des travailleurs indépendants",
+   "retours": 47,
+   "negatifs": 38,
+   "motifs": [
+    [
+     "explication",
+     12
+    ],
+    [
+     "delai",
+     6
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Dépôt d'une réclamation aux impôts (usagers particuliers)",
+   "retours": 46,
+   "negatifs": 33,
+   "motifs": [
+    [
+     "delai",
+     11
+    ],
+    [
+     "explication",
+     11
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Paiement de la contribution de vie étudiante et de campus (CVEC)",
+   "retours": 45,
+   "negatifs": 41,
+   "motifs": [
+    [
+     "explication",
+     8
+    ],
+    [
+     "delai",
+     7
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de logement social – renouvellement",
+   "retours": 43,
+   "negatifs": 25,
+   "motifs": [
+    [
+     "explication",
+     9
+    ],
+    [
+     "delai",
+     8
+    ]
+   ],
+   "id": "SP-R34754",
+   "titre": "Demande de logement social en ligne (et renouvellement de demande)",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R34754",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (demande-logement-social.gouv.fr) : 1 démarche(s) de l'index, 2 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Rechercher sa formation (France Travail)",
+   "retours": 42,
+   "negatifs": 35,
+   "motifs": [
+    [
+     "explication",
+     8
+    ],
+    [
+     "joignable",
+     6
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande d’extrait de casier judiciaire (par internet) pour les personnes nées en France",
+   "retours": 41,
+   "negatifs": 12,
+   "motifs": [],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de logement social – demande initiale",
+   "retours": 41,
+   "negatifs": 26,
+   "motifs": [
+    [
+     "explication",
+     9
+    ]
+   ],
+   "id": "SP-R34754",
+   "titre": "Demande de logement social en ligne (et renouvellement de demande)",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R34754",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (demande-logement-social.gouv.fr) : 1 démarche(s) de l'index, 2 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Demander l'ouverture des droits à l'assurance maladie",
+   "retours": 41,
+   "negatifs": 32,
+   "motifs": [
+    [
+     "explication",
+     17
+    ],
+    [
+     "delai",
+     14
+    ]
+   ],
+   "id": "SP-R45084",
+   "titre": "Demander l'ouverture des droits à l'Assurance maladie",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R45084",
+   "classe": "sure",
+   "methode": "titre, fiches R",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; nom quasi identique (1.0), un seul candidat",
+   "similarite": 1.0
+  },
+  {
+   "nom_spp": "Formalité de l'enregistrement en ligne (dons, cessions de droits sociaux)",
+   "retours": 39,
+   "negatifs": 12,
+   "motifs": [
+    [
+     "explication",
+     5
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Changement d'adresse (Ameli)",
+   "retours": 38,
+   "negatifs": 16,
+   "motifs": [
+    [
+     "delai",
+     5
+    ]
+   ],
+   "id": "SP-R49811",
+   "titre": "Obtenir une attestation de droits (régime général)",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49811",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (assure.ameli.fr/portailas/appmanager/portailas/assure) : 10 démarche(s) de l'index, 12 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R49813",
+    "SP-R49814",
+    "SP-R49829",
+    "SP-R49830",
+    "SP-R49831"
+   ]
+  },
+  {
+   "nom_spp": "Consulter le montant déclaré à l’administration fiscale",
+   "retours": 38,
+   "negatifs": 25,
+   "motifs": [
+    [
+     "explication",
+     12
+    ]
+   ],
+   "id": "SP-R53854",
+   "titre": "Certifier son parcours professionnel",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R53854",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (lassuranceretraite.fr/portail-services-ihm/index.html) : 1 démarche(s) de l'index, 2 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Demande d'aide juridictionnelle",
+   "retours": 36,
+   "negatifs": 12,
+   "motifs": [],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de prime d'activité",
+   "retours": 36,
+   "negatifs": 25,
+   "motifs": [
+    [
+     "explication",
+     15
+    ],
+    [
+     "delai",
+     11
+    ]
+   ],
+   "id": "SP-R42726",
+   "titre": "Demander la prime d'activité",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R42726",
+   "classe": "sure",
+   "methode": "titre, fiches R",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; nom quasi identique (0.978), un seul candidat",
+   "similarite": 0.978
+  },
+  {
+   "nom_spp": "Dépôt de plainte en ligne (PEL) - Gendamerie, Dépôt de plainte en ligne (police)",
+   "retours": 36,
+   "negatifs": 17,
+   "motifs": [
+    [
+     "delai",
+     7
+    ],
+    [
+     "explication",
+     6
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Mettre à jour ses données personnelles pour la Journée Défense et Citoyenneté",
+   "retours": 36,
+   "negatifs": 10,
+   "motifs": [],
+   "id": "SP-R51719",
+   "titre": "Ma JDC",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R51719",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (presaje.sga.defense.gouv.fr) : 1 démarche(s) de l'index, 2 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Carte vitale : perte et vol (tous régimes partenaires gérés par le régime général)",
+   "retours": 34,
+   "negatifs": 12,
+   "motifs": [],
+   "id": "SP-R49814",
+   "titre": "Carte Vitale : perdue, volée ou défectueuse (régime général)",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R49814",
+   "classe": "deja_rattachee",
+   "methode": "observatoire_rattachement.json",
+   "raison": "rattachement déjà validé (Observatoire)"
+  },
+  {
+   "nom_spp": "Créer son compte sur le site majdc.fr",
+   "retours": 33,
+   "negatifs": 16,
+   "motifs": [
+    [
+     "explication",
+     5
+    ]
+   ],
+   "id": "SP-R51719",
+   "titre": "Ma JDC",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R51719",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (presaje.sga.defense.gouv.fr) : 1 démarche(s) de l'index, 2 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Dépôts de compte et dépôts d’actes (entreprises)",
+   "retours": 29,
+   "negatifs": 29,
+   "motifs": [
+    [
+     "explication",
+     11
+    ]
+   ],
+   "id": "SP-R61572",
+   "titre": "Guichet des formalités des entreprises",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R61572",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (procedures.inpi.fr) : 3 démarche(s) de l'index, 2 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R60526",
+    "SP-R71475"
+   ]
+  },
+  {
+   "nom_spp": "Inscription à l'entrée au lycée",
+   "retours": 29,
+   "negatifs": 17,
+   "motifs": [],
+   "id": "SP-R60034",
+   "titre": "Demander une bourse de lycée",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R60034",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (teleservices.education.gouv.fr) : 2 démarche(s) de l'index, 15 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R60054"
+   ]
+  },
+  {
+   "nom_spp": "Modification des coordonnées médiatiques (MSA)",
+   "retours": 29,
+   "negatifs": 4,
+   "motifs": [],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Consulter le livret scolaire unique (école et collège)",
+   "retours": 28,
+   "negatifs": 11,
+   "motifs": [],
+   "id": "SP-R60034",
+   "titre": "Demander une bourse de lycée",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R60034",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (teleservices.education.gouv.fr) : 2 démarche(s) de l'index, 15 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R60054"
+   ]
+  },
+  {
+   "nom_spp": "Demande d'allocation de solidarité spécifique (France Travail)",
+   "retours": 28,
+   "negatifs": 13,
+   "motifs": [
+    [
+     "explication",
+     8
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Remboursement de timbres électroniques",
+   "retours": 28,
+   "negatifs": 18,
+   "motifs": [
+    [
+     "delai",
+     8
+    ],
+    [
+     "explication",
+     7
+    ]
+   ],
+   "id": "SP-R22210",
+   "titre": "Acheter un timbre fiscal électronique pour faire appel d’un décision de justice civile",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R22210",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (timbres.impots.gouv.fr) : 12 démarche(s) de l'index, 2 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R39812",
+    "SP-R42969",
+    "SP-R47754",
+    "SP-R47906",
+    "SP-R48628"
+   ]
+  },
+  {
+   "nom_spp": "Demande de bonus écologique, prime à la conversion (particuliers)",
+   "retours": 27,
+   "negatifs": 23,
+   "motifs": [
+    [
+     "delai",
+     9
+    ],
+    [
+     "explication",
+     9
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Notification des droits au chômage",
+   "retours": 26,
+   "negatifs": 20,
+   "motifs": [
+    [
+     "delai",
+     11
+    ],
+    [
+     "explication",
+     9
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Pourvoi des offres d’emploi déposées à France Travail",
+   "retours": 26,
+   "negatifs": 17,
+   "motifs": [
+    [
+     "explication",
+     10
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Mon espace santé",
+   "retours": 25,
+   "negatifs": 25,
+   "motifs": [
+    [
+     "explication",
+     8
+    ]
+   ],
+   "id": "SP-R60692",
+   "titre": "Mon espace santé",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R60692",
+   "classe": "deja_rattachee",
+   "methode": "observatoire_rattachement.json",
+   "raison": "rattachement déjà validé (Observatoire)"
+  },
+  {
+   "nom_spp": "Orientation en fin de collège",
+   "retours": 25,
+   "negatifs": 18,
+   "motifs": [
+    [
+     "explication",
+     8
+    ]
+   ],
+   "id": "SP-R60034",
+   "titre": "Demander une bourse de lycée",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R60034",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (teleservices.education.gouv.fr) : 2 démarche(s) de l'index, 15 ligne(s) de l'Observatoire",
+   "autres_candidats": [
+    "SP-R60054"
+   ]
+  },
+  {
+   "nom_spp": "Attestations fiscales retraités régime général",
+   "retours": 24,
+   "negatifs": 18,
+   "motifs": [
+    [
+     "explication",
+     9
+    ],
+    [
+     "delai",
+     7
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Consultation du plan cadastral",
+   "retours": 24,
+   "negatifs": 21,
+   "motifs": [
+    [
+     "explication",
+     8
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande d'autorisation d'urbanisme",
+   "retours": 23,
+   "negatifs": 18,
+   "motifs": [
+    [
+     "explication",
+     5
+    ]
+   ],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "DossierFacile : aide à la constitution d’un dossier numérique de location de logement",
+   "retours": 23,
+   "negatifs": 7,
+   "motifs": [],
+   "id": "SP-R51424",
+   "titre": "\"DossierFacile\" (locataire) : pour signaler la qualité de son dossier au propriétaire",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R51424",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (dossierfacile.logement.gouv.fr) : 1 démarche(s) de l'index, 1 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "Demande de logement en cité universitaire",
+   "retours": 22,
+   "negatifs": 12,
+   "motifs": [
+    [
+     "explication",
+     6
+    ]
+   ],
+   "id": "SP-R52973",
+   "titre": "TrouverUnLogement.LesCrous.fr",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R52973",
+   "classe": "douteuse",
+   "methode": "observatoire, adresse",
+   "raison": "adresse de portail commun (trouverunlogement.lescrous.fr) : 1 démarche(s) de l'index, 1 ligne(s) de l'Observatoire"
+  },
+  {
+   "nom_spp": "CESU - Créer son compte - Futur employeur (Chèque Emploi Service Universel)",
+   "retours": 21,
+   "negatifs": 10,
+   "motifs": [],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande de carte européenne d'assurance maladie (MSA)",
+   "retours": 21,
+   "negatifs": 3,
+   "motifs": [],
+   "id": "",
+   "titre": "",
+   "url_fiche": "",
+   "classe": "aucune",
+   "methode": "",
+   "raison": "nom présent dans l'Observatoire, adresse absente de l'index ; aucun titre de l'index assez proche (mots spécifiques communs < 0.75)"
+  },
+  {
+   "nom_spp": "Demande d'allocation de soutien familial - ARIPA",
+   "retours": 20,
+   "negatifs": 18,
+   "motifs": [
+    [
+     "delai",
+     10
+    ],
+    [
+     "explication",
+     8
+    ]
+   ],
+   "id": "SP-R1448",
+   "titre": "Demande d'allocation de soutien familial (ASF)",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R1448",
+   "classe": "sure",
+   "methode": "titre, fiches R",
+   "raison": "nom quasi identique (0.925), un seul candidat",
+   "similarite": 0.925
+  },
+  {
+   "nom_spp": "Inscription dans l'enseignement supérieur français / demande de visa « étudiant » procéd",
+   "retours": 20,
+   "negatifs": 19,
+   "motifs": [
+    [
+     "delai",
+     9
+    ],
+    [
+     "explication",
+     7
+    ]
+   ],
+   "id": "SP-R18575",
+   "titre": "Inscription dans l'enseignement supérieur français / demande de visa « étudiant » procédure \"Études en France\"",
+   "url_fiche": "https://www.service-public.gouv.fr/particuliers/vosdroits/R18575",
+   "classe": "probable",
+   "methode": "titre, fiches R",
+   "raison": "mots spécifiques communs (0.8), un seul candidat plausible",
+   "similarite": 0.8
+  }
+ ]
+}
