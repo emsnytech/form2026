@@ -393,6 +393,34 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   const txt=fig.replace(/&nbsp;| /g,' '), manque=att.filter(a=>!txt.replace(/ /g,' ').includes(a));
   verifie('SC1 schéma des sources : trois colonnes (sources, traitement FORM, ce que vous obtenez), chiffres et dates lus dans les données, pointillés pour DataPass, Aides-territoires et la règle de réponse',
     (fig.match(/class="sc-col"/g)||[]).length===3&&!manque.length&&(fig.match(/sc-avenir/g)||[]).length===3&&/Délais constatés/.test(fig)&&/étudié ou en cours d'intégration\. Chiffres de l'index du/.test(c), manque.join(' | ')||'ok'); }
+// Plusieurs besoins dans une question : « Vos démarches », une ligne par besoin, rangée par urgence (table relue besoins.json).
+{ const TB=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','besoins.json'),'utf8')); M.chargerBesoins(TB);
+  const q1="j'ai perdu mes papiers : carte identité, passeport, attestation assurance, carte bancaire, attestation sécurité sociale, carte vitale, j'habite à Blois";
+  const b1=M.besoins(ix,q1), noms=b1.map(b=>b.nom), urg=b1.map(b=>b.urgence);
+  verifie('BS1 papiers perdus à Blois : six lignes, opposition d\'abord, puis pièces d\'identité, puis le reste ; fiches « perte » de la table',
+    b1.length===6&&noms[0]==='Carte bancaire'&&noms.slice(1,3).sort().join()==="Carte d'identité,Passeport"&&urg.every((u,i)=>!i||u>=urg[i-1])
+    &&b1[0].rec.id==='SP-F31241'&&b1.find(b=>b.nom==="Carte d'identité").rec.id==='SP-F1344'&&b1.find(b=>b.nom==='Carte Vitale').rec.id==='SP-R49814'
+    &&b1.find(b=>b.nom==="Attestation d'assurance").rec===null&&!b1[0].guichet&&b1[1].guichet&&!b1.some(b=>/Blois/.test(b.nom)), noms.join(' | '));
+  const b2=M.besoins(ix,"on m'a volé mon sac : carte bancaire et carte d'identité");
+  verifie('BS2 sac volé : carte bancaire (opposition, fiche « vol ») puis carte d\'identité (fiche « vol »), deux lignes', b2.length===2&&b2[0].rec.id==='SP-F2428'&&b2[1].rec.id==='SP-F1759', b2.map(b=>b.nom+' '+(b.rec&&b.rec.id)).join(' | '));
+  const seuls=['je veux renouveler mon passeport','carte grise perdue','inscription liste électorale',"je n'arrive plus à payer mon électricité, j'habite à Rezé"].filter(q=>M.besoins(ix,q).length);
+  verifie('BS3 un seul besoin : pas de « Vos démarches » (la carte « Votre démarche » reste)', !seuls.length, seuls.join(' | ')||'aucune');
+  const page=fs.readFileSync(path.join(__dirname,'..','..','trouver-sa-demarche.html'),'utf8'), code=fs.readFileSync(path.join(__dirname,'moteur.js'),'utf8').match(/function besoins[\s\S]*?\n  \}/)[0];
+  const ids=TB.papiers.flatMap(p=>Object.values(p.fiche)), absents=ids.filter(i=>!ix.byId.has(i));
+  verifie('BS4 « Vos démarches » dans la page, questions de suite sur le premier besoin ; table lue dans besoins.json (aucun papier dans le code), fiches de la table présentes dans l\'index',
+    /<h2 id="h-demarche">Vos démarches<\/h2>/.test(page)&&/Ne répète pas cette liste et ne cite pas ces démarches une par une/.test(page)&&/window\.PRINCIPAL = recsB\[0\]/.test(page)&&!/carte bancaire|passeport|SP-F/i.test(code)&&!absents.length
+    &&/besoins\.json/.test(fs.readFileSync(path.join(__dirname,'assembler_page.py'),'utf8')), absents.join(' '));
+  verifie('BS5 Où aller, carte d\'identité ou passeport : la mairie de la commune et « vérifiez qu\'elle est équipée » (l\'Annuaire ne distingue pas les mairies équipées)',
+    /Vérifiez que votre mairie est équipée pour les cartes d'identité et les passeports/.test(page)&&/services\(c\.code, \["mairie"\]\)/.test(page)); }
+// Plusieurs besoins, version avec assistant : la carte « Vos démarches » est gardée, la réponse ne répète pas la liste.
+{ const page=fs.readFileSync(path.join(__dirname,'..','..','trouver-sa-demarche.html'),'utf8'), cons=(page.match(/function consigneBesoins\(B\) \{[\s\S]*?\n\}/)||[''])[0];
+  const filtre=(page.match(/const refsB = [\s\S]*?const r = renderText\(texteRep\);/)||[''])[0];
+  // le filtre de la page, appliqué à une réponse qui répète la liste malgré la consigne
+  const refsB=new Set(['SP-F2428','SP-F1759']), texte="Faites d'abord opposition.\n- Carte bancaire : opposition [[SP-F2428]]\n- Carte d'identité : la refaire [[SP-F1759]]\n- Voir aussi [[SP-F31421]]";
+  const garde=texte.split("\n").filter((l)=>!(/^\s*[-•*]\s+/.test(l)&&[...l.matchAll(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g)].some((m)=>refsB.has(m[1])))).join("\n");
+  verifie('BS6 assistant et plusieurs besoins : carte « Vos démarches » gardée ; consigne : ne pas répéter la liste, deux phrases au plus ; la page retire les lignes de liste qui citent une démarche de la carte',
+    /Ne répète pas cette liste/.test(cons)&&/deux phrases au plus, sans liste/.test(cons)&&!/une ligne par besoin/.test(cons)&&/afficherResultats\(citedRecs\.concat\(others\), text, "citee", undefined, \{ besoins: BESOINS_Q \}\)/.test(page)
+    &&/refsB\.has\(m\[1\]\)/.test(filtre)&&garde==="Faites d'abord opposition.\n- Voir aussi [[SP-F31421]]", JSON.stringify(garde)); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');

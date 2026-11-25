@@ -91,7 +91,7 @@
     }
   ],
   "titres_identite": {
-    "objet": "Toutes les mairies ne prennent pas les demandes de carte d'identité et de passeport : pour une fiche service-public du thème « Papiers - Citoyenneté - Élections » qui en parle, l'encadré renvoie à la fiche, sans afficher la mairie de la commune.",
+    "objet": "Toutes les mairies ne prennent pas les demandes de carte d'identité et de passeport, et l'Annuaire de l'administration ne dit pas lesquelles (aucun champ ; vérifié le 25/11/2026) : pour une fiche service-public du thème « Papiers - Citoyenneté - Élections » qui en parle, l'encadré affiche la mairie de la commune avec l'invitation à vérifier qu'elle est équipée.",
     "indices": [
       "carte d'identité",
       "passeport"

@@ -126,6 +126,12 @@ body{--bouton-fond:var(--accent);--bouton-fond-survol:var(--accent-fonce);--bout
 .carte .liens{display:flex;gap:8px 20px;flex-wrap:wrap;font-size:15px}
 .btn-lien{display:inline-flex;align-items:center;min-height:48px;padding:0 24px;font-size:17px;font-weight:600;color:#fff;background:var(--accent);border-radius:10px;text-decoration:none;align-self:flex-start}
 .btn-lien:hover{color:#fff;background:var(--accent-fonce)}
+.besoins{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.besoins li{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}.besoins li:first-child{border-top:0}
+.besoins .ico{width:26px;height:26px;flex:none;color:var(--sym)}
+.besoins .b-txt{flex:1;display:flex;flex-direction:column;line-height:1.35}.besoins .b-act{font-size:15px;color:var(--muted)}
+.besoins .b-btn{flex:none;display:inline-flex;align-items:center;min-height:44px;padding:0 16px;font-size:15px;font-weight:600;color:#fff;background:var(--accent);border-radius:8px;text-decoration:none}
+.besoins .b-btn:hover{color:#fff;background:var(--accent-fonce)}
 .boutons-cx{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin:0}.lien-cx{font-size:15px;color:var(--muted)}
 .comprendre{display:flex;flex-direction:column;gap:6px;padding:0 4px}.comprendre a{font-size:17px}.comprendre span{font-size:14px;color:var(--muted)}
 details.pli{border-top:1px solid var(--line);padding-top:6px}
@@ -195,7 +201,7 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
 </style>
 </head>
 <body>
-<svg id="icones" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:none"><!-- Tabler Icons 3.24.0 (MIT, © 2020-2024 Paweł Kuna, tabler.io/icons) --><symbol id="ti-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.555 3.843l3.602 3.602a2.877 2.877 0 0 1 0 4.069l-2.643 2.643a2.877 2.877 0 0 1 -4.069 0l-.301 -.301l-6.558 6.558a2 2 0 0 1 -1.239 .578l-.175 .008h-1.172a1 1 0 0 1 -.993 -.883l-.007 -.117v-1.172a2 2 0 0 1 .467 -1.284l.119 -.13l.414 -.414h2v-2h2v-2l2.144 -2.144l-.301 -.301a2.877 2.877 0 0 1 0 -4.069l2.643 -2.643a2.877 2.877 0 0 1 4.069 0z"/> <path d="M15 9h.01"/></symbol><symbol id="ti-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/> <path d="M9 9l1 0"/> <path d="M9 13l6 0"/> <path d="M9 17l6 0"/></symbol><symbol id="ti-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/> <path d="M12 7v5l3 3"/></symbol><symbol id="ti-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6 -3l6 3l6 -3v13l-6 3l-6 -3l-6 3v-13"/> <path d="M9 4v13"/> <path d="M15 7v13"/></symbol><symbol id="ti-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/> <path d="M9 12l2 2l4 -4"/></symbol><symbol id="ti-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"/></symbol><symbol id="ti-database-import" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6c0 1.657 3.582 3 8 3s8 -1.343 8 -3s-3.582 -3 -8 -3s-8 1.343 -8 3"/> <path d="M4 6v6c0 1.657 3.582 3 8 3c.856 0 1.68 -.05 2.454 -.144m5.546 -2.856v-6"/> <path d="M4 12v6c0 1.657 3.582 3 8 3c.171 0 .341 -.002 .51 -.006"/> <path d="M19 22v-6"/> <path d="M22 19l-3 -3l-3 3"/></symbol><symbol id="ti-device-laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l18 0"/> <path d="M5 6m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z"/></symbol><symbol id="ti-file-type-pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/> <path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4"/> <path d="M5 18h1.5a1.5 1.5 0 0 0 0 -3h-1.5v6"/> <path d="M17 18h2"/> <path d="M20 15h-3v6"/> <path d="M11 15v6h1a2 2 0 0 0 2 -2v-2a2 2 0 0 0 -2 -2h-1z"/></symbol><symbol id="ti-at" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/> <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"/></symbol><symbol id="ti-mailbox" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 21v-6.5a3.5 3.5 0 0 0 -7 0v6.5h18v-6a4 4 0 0 0 -4 -4h-10.5"/> <path d="M12 11v-8h4l2 2l-2 2h-4"/> <path d="M6 15h1"/></symbol><symbol id="ti-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l18 0"/> <path d="M9 8l1 0"/> <path d="M9 12l1 0"/> <path d="M9 16l1 0"/> <path d="M14 8l1 0"/> <path d="M14 12l1 0"/> <path d="M14 16l1 0"/> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16"/></symbol><symbol id="ti-calendar-event" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"/> <path d="M16 3l0 4"/> <path d="M8 3l0 4"/> <path d="M4 11l16 0"/> <path d="M8 15h2v2h-2z"/></symbol><symbol id="ti-accessible" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/> <path d="M10 16.5l2 -3l2 3m-2 -3v-2l3 -1m-6 0l3 1"/> <circle cx="12" cy="7.5" r=".5" fill="currentColor"/></symbol><symbol id="ti-hourglass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 7h11"/> <path d="M6.5 17h11"/> <path d="M6 20v-2a6 6 0 1 1 12 0v2a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1z"/> <path d="M6 4v2a6 6 0 1 0 12 0v-2a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1z"/></symbol><symbol id="ti-help-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/> <path d="M12 16v.01"/> <path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483"/></symbol><symbol id="ti-phone-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l18 -18"/> <path d="M5.831 14.161a15.946 15.946 0 0 1 -2.831 -8.161a2 2 0 0 1 2 -2h4l2 5l-2.5 1.5c.108 .22 .223 .435 .345 .645m1.751 2.277c.843 .84 1.822 1.544 2.904 2.078l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a15.963 15.963 0 0 1 -10.344 -4.657"/></symbol></svg>
+<svg id="icones" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:none"><!-- Tabler Icons 3.24.0 (MIT, © 2020-2024 Paweł Kuna, tabler.io/icons) --><symbol id="ti-credit-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z"/> <path d="M3 10l18 0"/> <path d="M7 15l.01 0"/> <path d="M11 15l2 0"/></symbol><symbol id="ti-cash-banknote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/> <path d="M3 6m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"/> <path d="M18 12l.01 0"/> <path d="M6 12l.01 0"/></symbol><symbol id="ti-id" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z"/> <path d="M9 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/> <path d="M15 8l2 0"/> <path d="M15 12l2 0"/> <path d="M7 16l10 0"/></symbol><symbol id="ti-id-badge-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12h3v4h-3z"/> <path d="M10 6h-6a1 1 0 0 0 -1 1v12a1 1 0 0 0 1 1h16a1 1 0 0 0 1 -1v-12a1 1 0 0 0 -1 -1h-6"/> <path d="M10 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"/> <path d="M14 16h2"/> <path d="M14 12h4"/></symbol><symbol id="ti-license" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21h-9a3 3 0 0 1 -3 -3v-1h10v2a2 2 0 0 0 4 0v-14a2 2 0 1 1 2 2h-2m2 -4h-11a3 3 0 0 0 -3 3v11"/> <path d="M9 7l4 0"/> <path d="M9 11l4 0"/></symbol><symbol id="ti-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/> <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"/> <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6m-6 -6h15m-6 0v-5"/></symbol><symbol id="ti-file-certificate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/> <path d="M5 8v-3a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5"/> <path d="M6 14m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/> <path d="M4.5 17l-1.5 5l3 -1.5l3 1.5l-1.5 -5"/></symbol><symbol id="ti-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.555 3.843l3.602 3.602a2.877 2.877 0 0 1 0 4.069l-2.643 2.643a2.877 2.877 0 0 1 -4.069 0l-.301 -.301l-6.558 6.558a2 2 0 0 1 -1.239 .578l-.175 .008h-1.172a1 1 0 0 1 -.993 -.883l-.007 -.117v-1.172a2 2 0 0 1 .467 -1.284l.119 -.13l.414 -.414h2v-2h2v-2l2.144 -2.144l-.301 -.301a2.877 2.877 0 0 1 0 -4.069l2.643 -2.643a2.877 2.877 0 0 1 4.069 0z"/> <path d="M15 9h.01"/></symbol><symbol id="ti-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/> <path d="M9 9l1 0"/> <path d="M9 13l6 0"/> <path d="M9 17l6 0"/></symbol><symbol id="ti-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/> <path d="M12 7v5l3 3"/></symbol><symbol id="ti-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6 -3l6 3l6 -3v13l-6 3l-6 -3l-6 3v-13"/> <path d="M9 4v13"/> <path d="M15 7v13"/></symbol><symbol id="ti-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/> <path d="M9 12l2 2l4 -4"/></symbol><symbol id="ti-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/> <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"/></symbol><symbol id="ti-database-import" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6c0 1.657 3.582 3 8 3s8 -1.343 8 -3s-3.582 -3 -8 -3s-8 1.343 -8 3"/> <path d="M4 6v6c0 1.657 3.582 3 8 3c.856 0 1.68 -.05 2.454 -.144m5.546 -2.856v-6"/> <path d="M4 12v6c0 1.657 3.582 3 8 3c.171 0 .341 -.002 .51 -.006"/> <path d="M19 22v-6"/> <path d="M22 19l-3 -3l-3 3"/></symbol><symbol id="ti-device-laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19l18 0"/> <path d="M5 6m0 1a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1z"/></symbol><symbol id="ti-file-type-pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/> <path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4"/> <path d="M5 18h1.5a1.5 1.5 0 0 0 0 -3h-1.5v6"/> <path d="M17 18h2"/> <path d="M20 15h-3v6"/> <path d="M11 15v6h1a2 2 0 0 0 2 -2v-2a2 2 0 0 0 -2 -2h-1z"/></symbol><symbol id="ti-at" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/> <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28"/></symbol><symbol id="ti-mailbox" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 21v-6.5a3.5 3.5 0 0 0 -7 0v6.5h18v-6a4 4 0 0 0 -4 -4h-10.5"/> <path d="M12 11v-8h4l2 2l-2 2h-4"/> <path d="M6 15h1"/></symbol><symbol id="ti-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l18 0"/> <path d="M9 8l1 0"/> <path d="M9 12l1 0"/> <path d="M9 16l1 0"/> <path d="M14 8l1 0"/> <path d="M14 12l1 0"/> <path d="M14 16l1 0"/> <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16"/></symbol><symbol id="ti-calendar-event" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"/> <path d="M16 3l0 4"/> <path d="M8 3l0 4"/> <path d="M4 11l16 0"/> <path d="M8 15h2v2h-2z"/></symbol><symbol id="ti-accessible" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/> <path d="M10 16.5l2 -3l2 3m-2 -3v-2l3 -1m-6 0l3 1"/> <circle cx="12" cy="7.5" r=".5" fill="currentColor"/></symbol><symbol id="ti-hourglass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 7h11"/> <path d="M6.5 17h11"/> <path d="M6 20v-2a6 6 0 1 1 12 0v2a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1z"/> <path d="M6 4v2a6 6 0 1 0 12 0v-2a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1z"/></symbol><symbol id="ti-help-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/> <path d="M12 16v.01"/> <path d="M12 13a2 2 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483"/></symbol><symbol id="ti-phone-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l18 -18"/> <path d="M5.831 14.161a15.946 15.946 0 0 1 -2.831 -8.161a2 2 0 0 1 2 -2h4l2 5l-2.5 1.5c.108 .22 .223 .435 .345 .645m1.751 2.277c.843 .84 1.822 1.544 2.904 2.078l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a15.963 15.963 0 0 1 -10.344 -4.657"/></symbol></svg>
 <header class="tete"><div class="l">
   <div class="marque">
     <a class="nom" href="#" id="lien-accueil">Où faire sa démarche ?</a>
@@ -634,6 +640,39 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     return r.lg ? { bouton: { texte: `Se connecter sur ${site}`, url: r.lc }, lien: fiche }
       : { bouton: fiche, lien: { texte: `Se connecter directement sur ${site}`, url: r.lc } };
   }
+  // ---------- Plusieurs besoins dans une question (« j'ai perdu ma carte bancaire, ma carte d'identité et mon passeport ») :
+  // la question est découpée sur les virgules, « : », « ; » et « et » ; chaque morceau qui désigne un papier de la table relue
+  // (besoins.json, chargée par chargerBesoins) reçoit la fiche de la table pour le contexte (perte ou vol) ; un autre morceau
+  // garde la démarche que le moteur juge sûre. Au moins deux besoins distincts, six au plus, rangés par urgence (table), puis
+  // dans l'ordre de la question.
+  let BESOINS = null;
+  function chargerBesoins(d) { BESOINS = d; }
+  function besoins(ix, q, opt = {}) {
+    if (!BESOINS || !ix) return [];
+    const n = " " + norm(q) + " ", mot = (w) => n.includes(" " + w + " ");
+    const ctx = (BESOINS.contexte.vol || []).some(mot) ? "vol" : "perte", motsCtx = ctx === "vol" ? "vol" : "perte";
+    const morceaux = (q || "").split(/[,;:\n]|\s+et\s+|\s+puis\s+/i).map((x) => x.trim()).filter(Boolean);
+    const out = [], vus = new Set();
+    const papierDe = (m) => { const t = " " + norm(m) + " ";
+      let best = null; for (const p of BESOINS.papiers) for (const f of p.motifs) if (t.includes(" " + f + " ") && (!best || f.length > best.l)) best = { p, l: f.length };
+      return best && best.p; };
+    morceaux.forEach((m, i) => {
+      const p = papierDe(m);
+      if (p) {
+        if (vus.has(p.cle)) return; vus.add(p.cle);
+        const id = p.fiche[ctx] || p.fiche["*"], i2 = id ? ix.byId.get(id) : undefined;
+        out.push({ cle: p.cle, nom: p.nom, ico: p.ico, action: p.action, note: p.note || "", urgence: p.urgence, ordre: i, guichet: p.guichet !== false,
+          rec: i2 === undefined ? null : ix.recs[i2], morceau: m });
+        return;
+      }
+      if (lieux(m).lieux.length && !queryToks(m).length) return;
+      const C = choisir(ix, m + " " + (/perd|perte|vol/.test(norm(q)) ? motsCtx : ""), { ...opt, k: 20 });
+      if (C.principal && !vus.has(C.principal.id)) { vus.add(C.principal.id);
+        out.push({ cle: C.principal.id, nom: C.principal.t, ico: "", action: "", note: "", guichet: true, urgence: (BESOINS.urgence.slice(-1)[0] || {}).rang || 3, ordre: 100 + i, rec: C.principal, morceau: m }); }   // après les papiers de la table
+    });
+    if (out.length < 2) return [];
+    return out.sort((a, b) => a.urgence - b.urgence || a.ordre - b.ordre).slice(0, 6);
+  }
   // Libellé d'une ressource service-public dans une carte.
   const libelleRessource = (r) => /imulateur/i.test(r.ty) ? "Savoir si j'y ai droit (simulateur)" : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne"
     : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : r.t;
@@ -1061,7 +1100,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { besoins, chargerBesoins, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -1138,6 +1177,8 @@ function ouvrirLigne(item) {
 }
 
 // ---------- Index
+// Plusieurs besoins dans une question : table relue des papiers (besoins.json), lue par Moteur.besoins.
+fetch(DATA + "besoins.json").then((r) => r.json()).then((d) => Moteur.chargerBesoins(d)).catch(() => {});
 fetch(DATA + "index.json").then((r) => r.json()).then((recs) => {
   $("st").textContent = MESSAGES.attente;
   setTimeout(() => {
@@ -1351,6 +1392,19 @@ function carteDemarche(r) {
       if (typeof window.relancerReponse === "function") window.relancerReponse(); else afficherResultats([r], r.t, "citee", r); });
   });
 }
+// « Vos démarches » : plusieurs besoins dans la question (Moteur.besoins) ; une ligne par besoin : symbole, nom du papier,
+// action en quelques mots, un bouton ; rangées par urgence (opposition, pièces d'identité, le reste ; table besoins.json).
+function carteBesoins(B) {
+  const el = $("carte-demarche");
+  el.innerHTML = `<h2 id="h-demarche">Vos démarches</h2><ul class="besoins">` + B.map((b) => {
+    const r = b.rec, u = r ? (r.k === "dn" ? dnUrl(r) : lienSp(r)) : "";
+    if (r) ajouterLien(r.t, u, r.k === "dn" ? "Démarche Numérique" : "service-public.gouv.fr");
+    const quoi = b.action || b.note || (r ? "" : "");
+    return `<li>${b.ico ? ico(b.ico) : ico("file-text")}<span class="b-txt"><b>${esc(b.nom)}</b>${quoi ? `<span class="b-act">${esc(quoi)}</span>` : ""}</span>`
+      + (r ? `<a class="b-btn" href="${esc(u)}" target="_blank" rel="noopener"${r.t !== b.nom ? ` title="${esc(r.t)}"` : ""}>${r.k === "dn" || /^SP-R/.test(r.id) ? "Faire la démarche" : "Lire la fiche"}<span class="sr-only"> : ${esc(b.nom)} (nouvel onglet)</span></a>` : "") + `</li>`;
+  }).join("") + `</ul>`;
+  el.hidden = false;
+}
 function carteAussi(f) {
   const el = $("carte-aussi"); if (!f) { el.hidden = true; return; }
   const rs = resDe(f).filter((x) => /imulateur|Téléservice|selNG/i.test(x.ty)).slice(0, 2);
@@ -1428,6 +1482,16 @@ function afficherResultats(liste, q, origine, principalDonne, extra = {}) {
   const opt = { pub: $("pub").value, dep: $("dep").value };
   // « Votre démarche » : donnée par Moteur.choisir (seulement si elle est sûre) ou par la ligne de l'accueil ; pour une
   // réponse citée (assistant, réponse préparée), Moteur.principalDe.
+  // Plusieurs besoins (Moteur.besoins) : « Vos démarches », une ligne par besoin, à la place de « Votre démarche ».
+  if ((extra.besoins || []).length >= 2) {
+    const B = extra.besoins, recsB = B.map((b) => b.rec).filter(Boolean);
+    $("rep-autrement").hidden = true; $("rep-manque").hidden = true;
+    carteBesoins(B); cartePossibles([]); carteAussi(null); carteComprendre(null);
+    // « Où aller » : le premier besoin qui a un guichet public (pas la banque pour une opposition ; table besoins.json).
+    window.PRINCIPAL = recsB[0] || null; window.CARTES_TETE = B.filter((b) => b.rec && b.guichet).map((b) => b.rec);
+    autresPistes(liste.filter((r) => !recsB.includes(r)).slice(0, 8));
+    commentCherche(q); vueReponse(); return;
+  }
   const principal = principalDonne !== undefined ? principalDonne : Moteur.principalDe(liste, q, opt);
   const possibles = (extra.possibles || []).filter((r) => r !== principal);
   // Rien de pertinent (recherche simple) : aucune carte, une invitation à reformuler, avec des exemples.
@@ -1501,10 +1565,12 @@ function rechercheSimple() {
   // Meilleurs résultats locaux, aucun territoire connu : la page demande le lieu d'abord (pastille, ou_aller.js).
   window.DEMANDER_LIEU = C.demanderLieu ? "Ces démarches dépendent de votre département. Où habitez-vous ?" : "";
   $("rep-choix").innerHTML = $("pub").value ? "" : `<p>Pour vous orienter&nbsp;: vous êtes…</p><div class="boutons">${[["particulier", "un particulier"], ["entreprise", "une entreprise"], ["association", "une association"], ["collectivite", "une collectivité"]].map(([v, l]) => `<button type="button" data-pub="${v}">${l}</button>`).join("")}</div>`;
-  afficherResultats(res, q, "simple", C.principal, { possibles: C.possibles });
+  const B = Moteur.besoins(IX, q, { pub: $("pub").value, dep: $("dep").value });
+  if (B.length >= 2) window.DEMANDER_LIEU = "";   // plusieurs besoins : chaque ligne a sa démarche, pas de question de lieu d'ensemble
+  afficherResultats(res, q, "simple", C.principal, { possibles: C.possibles, besoins: B });
   // « Selon la fiche officielle… » : seulement à côté d'une démarche sûre, et si la fiche passe le seuil et porte un terme
   // de la question dans son titre ; jamais une fiche hors sujet.
-  const f = $("rep-autrement").hidden ? res.find((r) => estFiche(r) && C.P.pertinente(r.id) && Moteur.termeAuTitre(q, r) && !Moteur.casParticulier(r, q)) : null;
+  const f = $("rep-autrement").hidden && B.length < 2 ? res.find((r) => estFiche(r) && C.P.pertinente(r.id) && Moteur.termeAuTitre(q, r) && !Moteur.casParticulier(r, q)) : null;
   $("rep-texte").innerHTML = f && f.d && !$("carte-demarche").hidden && f !== C.principal ? `<p class="extrait">Selon la fiche officielle «&nbsp;${esc(f.t)}&nbsp;»&nbsp;: ${esc(f.d.split(/(?<=\.)\s/)[0])}</p>` : "";
 }
 $("rep-choix").addEventListener("click", (ev) => {
@@ -1562,7 +1628,7 @@ const TOOLS = [
 function log(s) { traceLines.push(s); }
 
 const MAX_LIBRES = 12;
-let QUESTION_INITIALE = "";
+let QUESTION_INITIALE = "", BESOINS_Q = [];
 function used() { try { return +(sessionStorage.getItem("form-assistant-n") || 0); } catch (e) { return window.__n || 0; } }
 function use1() { const n = used() + 1; try { sessionStorage.setItem("form-assistant-n", n); } catch (e) { window.__n = n; } majQuota(); }
 // Compteur : affiché seulement quand il reste 3 questions ou moins.
@@ -1582,6 +1648,14 @@ const MASQUES = [
 ];
 function masquer(t) { let n = 0; for (const [re, rep] of MASQUES) t = t.replace(re, (...m) => { n++; return typeof rep === "string" ? rep.replace("$1", m[1] || "").replace("$2", m[2] || "") : rep; }); return { texte: t, n }; }
 
+// Plusieurs besoins : la carte « Vos démarches » affiche la liste (une ligne par besoin, avec son bouton) ; la réponse de
+// l'assistant ne la répète pas : seulement ce que la carte ne dit pas, en deux phrases au plus.
+function consigneBesoins(B) {
+  if (!B || B.length < 2) return "";
+  return `\n\nPLUSIEURS BESOINS
+La question contient ${B.length} besoins. La page les affiche elle-même dans « Vos démarches », un par ligne, avec son lien et dans cet ordre : ${B.map((b) => b.nom).join(", ")}.
+Ne répète pas cette liste et ne cite pas ces démarches une par une. Réponds en deux phrases au plus, sans liste, seulement avec ce qui aide en plus (par exemple ce qui est à faire en premier). Si une précision manque, pose ta question sur le premier besoin seulement : ${B[0].nom}.`;
+}
 function consigne(q) {
   const pub = $("pub").value, dep = $("dep").value;
   return `Tu interroges le répertoire des démarches. Ton rôle est de reformuler la question en mots de l'administration et de présenter ce que le répertoire renvoie ; tu ne choisis une démarche que si le répertoire la situe sur le territoire de la personne.
@@ -1686,8 +1760,8 @@ async function ask(text, first) {
   use1();
   busy = true; $("chercher").disabled = true; $("fgo").disabled = true;
   if (first) { history = []; cited = new Map(); seen = new Map(); traceLines = []; }
-  const m = masquer(text); text = m.texte; if (first) QUESTION_INITIALE = text;
-  history.push({ role: "user", content: first ? consigne(text) : text + `\n(Contexte des sélecteurs : public ${$("pub").value || "non précisé"}, département ${$("dep").value ? $("dep").value + " " + DEPNAME[$("dep").value] : "non précisé"}. Mêmes règles qu'au premier message.)` });
+  const m = masquer(text); text = m.texte; if (first) { QUESTION_INITIALE = text; BESOINS_Q = Moteur.besoins(IX, text, { pub: $("pub").value, dep: $("dep").value }); }
+  history.push({ role: "user", content: first ? consigne(text) + consigneBesoins(BESOINS_Q) : text + `\n(Contexte des sélecteurs : public ${$("pub").value || "non précisé"}, département ${$("dep").value ? $("dep").value + " " + DEPNAME[$("dep").value] : "non précisé"}. Mêmes règles qu'au premier message.)` });
   const retire = m.n ? `<div class="retire">${m.n} donnée${m.n > 1 ? "s" : ""} personnelle${m.n > 1 ? "s" : ""} retirée${m.n > 1 ? "s" : ""} avant l'envoi.</div>` : "";
   if (first) { poserQuestion(text, retire); vueReponse(); } else $("fil").insertAdjacentHTML("beforeend", `<div class="bulle">${esc(text)}${retire}</div>`);
   $("rep-texte").innerHTML = `<p class="vide">L'assistant cherche…</p>`; afficherChoix([]);
@@ -1696,10 +1770,13 @@ async function ask(text, first) {
     const out = await sample(history, { tools: TOOLS, modelTier: "default", cache: false, signal: ctrl.signal,
       onText: ({ text }) => { if (text && text !== "Thinking...") $("rep-texte").innerHTML = `<div class="texte-ia">${renderText(text).html}</div>`; } });
     history.push({ role: "assistant", content: out.text });
-    const r = renderText(out.text);
+    // Plusieurs besoins : les lignes de liste qui citent une démarche de « Vos démarches » sont retirées (la carte les porte).
+    const refsB = new Set(BESOINS_Q.length >= 2 ? BESOINS_Q.map((b) => b.rec && b.rec.id).filter(Boolean) : []);
+    const texteRep = refsB.size ? out.text.split("\n").filter((l) => !(/^\s*[-•*]\s+/.test(l) && [...l.matchAll(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g)].some((m) => refsB.has(m[1])))).join("\n") : out.text;
+    const r = renderText(texteRep);
     const citedRecs = citedOrder(out.text).map(rec).filter(Boolean);
     const others = [...seen.values()].filter((x) => !cited.has(x.id)).slice(0, 6);
-    afficherResultats(citedRecs.concat(others), text, "citee");
+    afficherResultats(citedRecs.concat(others), text, "citee", undefined, { besoins: BESOINS_Q });
     $("rep-texte").innerHTML = `<div class="texte-ia">${r.html}</div>`; afficherChoix(r.choix);
     finirReponse(QUESTION_INITIALE || text, r.choix, citedRecs);
   } catch (e) {
@@ -1875,9 +1952,15 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
     const r = (window.CARTES_TETE || LISTE.slice(0, 3)).find((x) => x && portee(x) !== "inc" && regle(x) && (x.k !== "dn" || duDepartement(x, c)));
     if (!r) return;
     const g = regle(r);
+    // Carte d'identité, passeport : l'Annuaire ne dit pas quelles mairies sont équipées (aucun champ ; vérifié le 25/11/2026).
+    // La mairie de la commune, avec l'invitation à vérifier qu'elle l'est.
     if (g.identite) {
-      el.innerHTML = `<div class="ou-t">Où déposer la demande</div><p>Seules certaines mairies sont équipées : la fiche dit comment trouver la vôtre.</p>`;
-      majOu(); return;
+      const verif = `<div class="ou-t">Où déposer la demande</div><p>Vérifiez que votre mairie est équipée pour les cartes d'identité et les passeports&nbsp;: seules certaines le sont.</p>`;
+      if (SANS_API) { el.innerHTML = verif + lienAnnuaire(c, "Mairie"); majOu(); return; }
+      el.innerHTML = verif + `<p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`; majOu();
+      let l; try { l = await services(c.code, ["mairie"]); } catch (e) { el.innerHTML = verif + lienAnnuaire(c, "Mairie"); majOu(); return; }
+      if (COMMUNE !== c) return;
+      el.innerHTML = verif + (l.length ? l.map(htmlService).join("") : lienAnnuaire(c, "Mairie")); majOu(); return;
     }
     if (SANS_API) { el.innerHTML = lienAnnuaire(c, g.libelle); majOu(); return; }
     // Le type de la table ne sert qu'à choisir le guichet : la carte affiche le nom que renvoie l'Annuaire.

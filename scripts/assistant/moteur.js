@@ -316,6 +316,39 @@
     return r.lg ? { bouton: { texte: `Se connecter sur ${site}`, url: r.lc }, lien: fiche }
       : { bouton: fiche, lien: { texte: `Se connecter directement sur ${site}`, url: r.lc } };
   }
+  // ---------- Plusieurs besoins dans une question (« j'ai perdu ma carte bancaire, ma carte d'identité et mon passeport ») :
+  // la question est découpée sur les virgules, « : », « ; » et « et » ; chaque morceau qui désigne un papier de la table relue
+  // (besoins.json, chargée par chargerBesoins) reçoit la fiche de la table pour le contexte (perte ou vol) ; un autre morceau
+  // garde la démarche que le moteur juge sûre. Au moins deux besoins distincts, six au plus, rangés par urgence (table), puis
+  // dans l'ordre de la question.
+  let BESOINS = null;
+  function chargerBesoins(d) { BESOINS = d; }
+  function besoins(ix, q, opt = {}) {
+    if (!BESOINS || !ix) return [];
+    const n = " " + norm(q) + " ", mot = (w) => n.includes(" " + w + " ");
+    const ctx = (BESOINS.contexte.vol || []).some(mot) ? "vol" : "perte", motsCtx = ctx === "vol" ? "vol" : "perte";
+    const morceaux = (q || "").split(/[,;:\n]|\s+et\s+|\s+puis\s+/i).map((x) => x.trim()).filter(Boolean);
+    const out = [], vus = new Set();
+    const papierDe = (m) => { const t = " " + norm(m) + " ";
+      let best = null; for (const p of BESOINS.papiers) for (const f of p.motifs) if (t.includes(" " + f + " ") && (!best || f.length > best.l)) best = { p, l: f.length };
+      return best && best.p; };
+    morceaux.forEach((m, i) => {
+      const p = papierDe(m);
+      if (p) {
+        if (vus.has(p.cle)) return; vus.add(p.cle);
+        const id = p.fiche[ctx] || p.fiche["*"], i2 = id ? ix.byId.get(id) : undefined;
+        out.push({ cle: p.cle, nom: p.nom, ico: p.ico, action: p.action, note: p.note || "", urgence: p.urgence, ordre: i, guichet: p.guichet !== false,
+          rec: i2 === undefined ? null : ix.recs[i2], morceau: m });
+        return;
+      }
+      if (lieux(m).lieux.length && !queryToks(m).length) return;
+      const C = choisir(ix, m + " " + (/perd|perte|vol/.test(norm(q)) ? motsCtx : ""), { ...opt, k: 20 });
+      if (C.principal && !vus.has(C.principal.id)) { vus.add(C.principal.id);
+        out.push({ cle: C.principal.id, nom: C.principal.t, ico: "", action: "", note: "", guichet: true, urgence: (BESOINS.urgence.slice(-1)[0] || {}).rang || 3, ordre: 100 + i, rec: C.principal, morceau: m }); }   // après les papiers de la table
+    });
+    if (out.length < 2) return [];
+    return out.sort((a, b) => a.urgence - b.urgence || a.ordre - b.ordre).slice(0, 6);
+  }
   // Libellé d'une ressource service-public dans une carte.
   const libelleRessource = (r) => /imulateur/i.test(r.ty) ? "Savoir si j'y ai droit (simulateur)" : /Téléservice|selNG/i.test(r.ty) ? "Faire une demande en ligne"
     : /ormulaire/i.test(r.ty) ? "Formulaire" : /echerche/i.test(r.ty) ? "Outil de recherche" : r.t;
@@ -743,6 +776,6 @@
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { besoins, chargerBesoins, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
