@@ -1,6 +1,6 @@
 {
  "objet": "Questions de référence pour mesurer le classement du moteur (scripts/assistant/mesure.js). Une à quatre mots, formulées comme un usager les taperait, tirées des démarches les plus demandées ; pour chacune, les réponses acceptables (identifiants de l'index). Une réponse est juste quand « Votre démarche » en fait partie ; proche quand l'une d'elles est dans les 3 premiers résultats sans être « Votre démarche ».",
- "statut": "à relire",
+ "statut": "validée",
  "sources": {
   "Observatoire": "Observatoire de la qualité des démarches en ligne (DINUM), édition 15 : démarches classées par volume",
   "Démarche Numérique": "Démarche Numérique : démarches classées par nombre de dossiers (descriptif repris dans l'index)"
@@ -141,22 +141,6 @@
     "SP-F2265"
    ],
    "origine": "questions de référence des PR 104 à 106"
-  },
-  {
-   "theme": "santé",
-   "q": "relevé fiscal ameli",
-   "ok": [
-    "SP-R49831"
-   ],
-   "origine": "Observatoire"
-  },
-  {
-   "theme": "santé",
-   "q": "médiateur assurance maladie",
-   "ok": [
-    "SP-R67335"
-   ],
-   "origine": "Observatoire"
   },
   {
    "theme": "santé",
@@ -319,14 +303,6 @@
   },
   {
    "theme": "emploi",
-   "q": "formulaire u1",
-   "ok": [
-    "DN-69322"
-   ],
-   "origine": "Démarche Numérique"
-  },
-  {
-   "theme": "emploi",
    "q": "simulateur salaire net",
    "ok": [
     "SP-R68302"
@@ -396,14 +372,6 @@
    "ok": [
     "SP-F13845",
     "SP-R36296"
-   ],
-   "origine": "Observatoire"
-  },
-  {
-   "theme": "retraite",
-   "q": "rachat de trimestres",
-   "ok": [
-    "SP-R72653"
    ],
    "origine": "Observatoire"
   },
@@ -544,14 +512,6 @@
     "SP-R57169"
    ],
    "origine": "Observatoire"
-  },
-  {
-   "theme": "impôts",
-   "q": "déclaration des dons",
-   "ok": [
-    "DN-48469"
-   ],
-   "origine": "Démarche Numérique"
   },
   {
    "theme": "véhicule",
@@ -699,7 +659,9 @@
    "q": "renouvellement permis de conduire",
    "ok": [
     "SP-R67351",
-    "SP-R49276"
+    "SP-R49276",
+    "SP-R67336",
+    "SP-F31133"
    ],
    "origine": "Observatoire"
   },
@@ -710,14 +672,6 @@
     "SP-R45443"
    ],
    "origine": "Observatoire"
-  },
-  {
-   "theme": "véhicule",
-   "q": "neph",
-   "ok": [
-    "DN-44640"
-   ],
-   "origine": "Démarche Numérique"
   },
   {
    "theme": "véhicule",
@@ -974,7 +928,8 @@
    "theme": "papiers",
    "q": "décès",
    "ok": [
-    "SP-F909"
+    "SP-F909",
+    "SP-F16507"
    ],
    "origine": "questions de référence des PR 104 à 106"
   },
@@ -1014,15 +969,12 @@
   },
   {
    "theme": "étrangers",
-   "q": "renouvellement titre de séjour",
+   "q": "renouvellement titre séjour Créteil",
    "ok": [
     "DN-27159",
     "SP-R59398",
     "SP-R62504"
    ],
-   "options": {
-    "dep": "94"
-   },
    "origine": "Démarche Numérique"
   },
   {
@@ -1047,14 +999,6 @@
    "ok": [
     "SP-F2191",
     "SP-R10751"
-   ],
-   "origine": "Observatoire"
-  },
-  {
-   "theme": "étrangers",
-   "q": "compte anef",
-   "ok": [
-    "SP-R64681"
    ],
    "origine": "Observatoire"
   },
@@ -1559,14 +1503,6 @@
    "origine": "Observatoire"
   },
   {
-   "theme": "justice",
-   "q": "déclaration arme",
-   "ok": [
-    "SP-R61698"
-   ],
-   "origine": "Observatoire"
-  },
-  {
    "theme": "entreprise",
    "q": "créer une entreprise",
    "ok": [
@@ -1644,60 +1580,6 @@
   },
   {
    "theme": "entreprise",
-   "q": "détachement de salariés",
-   "ok": [
-    "SP-R42380"
-   ],
-   "options": {
-    "pub": "entreprise"
-   },
-   "origine": "Observatoire"
-  },
-  {
-   "theme": "entreprise",
-   "q": "chorus pro",
-   "ok": [
-    "SP-R52176"
-   ],
-   "options": {
-    "pub": "entreprise"
-   },
-   "origine": "Observatoire"
-  },
-  {
-   "theme": "entreprise",
-   "q": "télépac",
-   "ok": [
-    "SP-R14416"
-   ],
-   "origine": "Observatoire"
-  },
-  {
-   "theme": "entreprise",
-   "q": "guso",
-   "ok": [
-    "SP-R14535"
-   ],
-   "origine": "Observatoire"
-  },
-  {
-   "theme": "entreprise",
-   "q": "carte vtc",
-   "ok": [
-    "DN-25896"
-   ],
-   "origine": "Démarche Numérique"
-  },
-  {
-   "theme": "entreprise",
-   "q": "carte professionnelle taxi",
-   "ok": [
-    "DN-25893"
-   ],
-   "origine": "Démarche Numérique"
-  },
-  {
-   "theme": "entreprise",
    "q": "médaille du travail",
    "ok": [
     "DN-69348"
@@ -1747,6 +1629,145 @@
     "SP-F766"
    ],
    "origine": "Observatoire"
+  },
+  {
+   "theme": "retraite",
+   "q": "demande de retraite",
+   "ok": [
+    "SP-R42866",
+    "SP-F13941"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "retraite",
+   "q": "retraite",
+   "ok": [
+    "SP-F17904",
+    "SP-R42866",
+    "SP-F13941"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "changement d'adresse",
+   "ok": [
+    "SP-R11193"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "papiers",
+   "q": "mariage",
+   "ok": [
+    "SP-F930"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "éducation",
+   "q": "inscription école",
+   "ok": [
+    "SP-F1864",
+    "SP-F1881"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "famille",
+   "q": "allocation de rentrée scolaire",
+   "ok": [
+    "SP-F1878",
+    "SP-R21206"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "accident du travail",
+   "ok": [
+    "SP-F171",
+    "SP-F175"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "santé",
+   "q": "médecin traitant",
+   "ok": [
+    "SP-F163",
+    "SP-R10884"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "entreprise",
+   "q": "urssaf",
+   "ok": [
+    "SP-R68227",
+    "SP-R14267"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "logement",
+   "q": "aide électricité",
+   "ok": [
+    "SP-F33667",
+    "SP-R74067"
+   ],
+   "origine": "Observatoire"
+  },
+  {
+   "theme": "collectivité",
+   "q": "detr",
+   "ok": [
+    "DN-128030"
+   ],
+   "options": {
+    "pub": "collectivite"
+   },
+   "origine": "Démarche Numérique"
+  },
+  {
+   "theme": "collectivité",
+   "q": "dsil",
+   "ok": [
+    "DN-128030"
+   ],
+   "options": {
+    "pub": "collectivite"
+   },
+   "origine": "Démarche Numérique"
+  },
+  {
+   "theme": "collectivité",
+   "q": "fonds vert",
+   "ok": [
+    "DN-69071",
+    "DN-67821",
+    "DN-68862",
+    "DN-70885",
+    "DN-69279",
+    "DN-120677",
+    "DN-69280"
+   ],
+   "options": {
+    "pub": "collectivite"
+   },
+   "origine": "Démarche Numérique"
+  },
+  {
+   "theme": "collectivité",
+   "q": "consultation du domaine",
+   "ok": [
+    "DN-29928"
+   ],
+   "options": {
+    "pub": "collectivite"
+   },
+   "origine": "Démarche Numérique"
   }
  ]
 }
