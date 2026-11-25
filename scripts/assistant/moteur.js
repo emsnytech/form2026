@@ -322,7 +322,7 @@
     [/ agents? publics? | fonctionnaires? | fonction publique | agents? de l etat | magistrats? | contractuels? | agents? hospitaliers? /, / agents? publics? | fonctionnaires? | fonction publique | agents? | magistrats? | contractuels? /],
     [/ mandataires? sociaux? | mandataire social /, / mandataires? | dirigeants? | gerants? /],
     // opération particulière sur un titre ou un dossier (modifier, corriger, ajouter un co-titulaire) : après la demande elle-même
-    [/ modifier | modifie | modifiee | modifies | modification | correction | corriger | co titulaire /, / modifier | modification | changer | changement | corriger | correction | erreur | ajouter | adresse | demenage | demenagement | titulaire /],
+    [/ modifier | modifie | modifiee | modifies | modification | correction | corriger | ajouter | co titulaire | cotitulaires? /, / modifier | modification | changer | changement | corriger | correction | erreur | ajouter | adresse | demenage | demenagement | titulaire /],
     [/ marins? | gens de mer | notaires? | clercs? | journalistes? | detenus? | frontaliers? | pensionnes? /, / marins? | mer | notaires? | clercs? | journalistes? | detenus? | prison | frontaliers? | pensionnes? /]];
   const casParticulierTitre = (r, q) => { const t = " " + norm(r.t) + " ", n = " " + norm(q) + " ";
     return PUBLICS_PRECIS.some(([rt, rq]) => rt.test(t) && !rq.test(n)); };
@@ -340,7 +340,7 @@
     return !!tt && !tt.test(" " + norm(q) + " ") && !/ etranger /.test(" " + norm(q) + " "); };
   // Fiche d'un cas particulier (vol, perte, décès, détérioration) que la question n'évoque pas : jamais citée en phrase d'introduction.
   const CAS_PARTICULIERS = [/ vol | vols | vole | volee | volees | voles | vole /, / perte | pertes | perdu | perdue | perdus | perdues /,
-    / deces | decede | decedee | mort /, / deterioration | deteriore | deterioree | endommage | endommagee | abime | abimee /];
+    / deces | decede | decedee | mort | heriter | herite | heritage | succession /, / deterioration | deteriore | deterioree | endommage | endommagee | abime | abimee | accident | accidente | accidentee /];
   const casParticulier = (r, q) => { const t = " " + norm(r.t) + " ", n = " " + norm(q) + " "; return CAS_PARTICULIERS.some((re) => re.test(t) && !re.test(n)); };
   // Libellés des liens d'une carte : une même adresse une seule fois ; deux adresses de même libellé sont nommées par leur site
   // (« Faire une demande en ligne sur ants.gouv.fr »), puis, si le site est le même, par leur titre ; à titre égal, un seul lien.
