@@ -505,8 +505,9 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
   verifie('G2 « FSL » : le Fonds de solidarité pour le logement (SP-F1334) en tête, pas le jeton « démarches-simplifiées » (DN-28430) en « Votre démarche »', fsl.t[0]==='SP-F1334'&&fsl.p!=='DN-28430', fsl.t.join(' ')+' | '+fsl.p);
   verifie('G3 « attestation de service fait » : pas France Travail (SP-R14578) dans les 3 premiers', !sf.t.slice(0,3).includes('SP-R14578'), sf.t.join(' ')+' | '+sf.p);
   const src=fs.readFileSync(path.join(__dirname,'moteur.js'),'utf8'), SG=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','sigles.json'),'utf8')).sigles;
-  const enDur=Object.keys(SG).filter(k=>new RegExp('["\'`]'+k+'["\'`]').test(src));
-  verifie('G4 aucun sigle de sigles.json écrit entre guillemets dans moteur.js (sens, synonymes, expressions)', !enDur.length, enDur.join(' ')||Object.keys(SG).length+' sigles'); }
+  const code=src.split('\n').map(l=>l.trim().startsWith('//')?'':l.split(' // ')[0]).join('\n');
+  const enDur=Object.keys(SG).filter(k=>new RegExp('(?<![a-z_])'+k+'(?![a-z_])').test(code));
+  verifie('G4 aucun sigle de sigles.json dans le code de moteur.js (sens, synonymes, expressions, motifs), commentaires exceptés ; « vtc » et « dpae » ont un champ « public »', !enDur.length&&SG.vtc&&SG.vtc.public==='entreprise'&&SG.dpae&&SG.dpae.public==='entreprise'&&!SG.ars, enDur.join(' ')||Object.keys(SG).length+' sigles'); }
 // Démarche préfectorale ou départementale sans territoire : département seul, une ligne par département qui la propose en ligne,
 // puis le contact de la préfecture (Annuaire, ou_aller.js).
 { const C=M.choisir(ix,'ACD',{k:20}), V=M.departementsEnLigne(ix,'ACD'), ou=fs.readFileSync(path.join(__dirname,'ou_aller.js'),'utf8');

@@ -1,0 +1,516 @@
+{
+ "objet": "Questions de référence tirées des recherches de l'Annuaire des Démarches Numériques (widget DN), relevé du 26/11/2026 (cartographie/recherches_annuaire_dn_2026-11-26.md) : top 20 sur 90 et 30 jours, puis recherches répétées. Texte de la recherche tel quel ; département quand la démarche est locale (choisi parmi ceux qui la proposent en ligne) ; réponses acceptables : identifiants de l'index. Mesurée par scripts/assistant/mesure.js.",
+ "statut": "à relire",
+ "source": "https://annuairedn.osc-fr1.scalingo.io/stats",
+ "ecartees": {
+  "service fait": "requête vague (3 856 résultats en moyenne) ; « attestation de service fait » est gardée",
+  "changement de département": "objet trop vague",
+  "identifiant France Travail": "aucune démarche dans l'index"
+ },
+ "questions": [
+  {
+   "theme": "séjour",
+   "q": "titre de sejour",
+   "ok": [
+    "SP-R62504",
+    "SP-R59398"
+   ],
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "récépissé titre de séjour",
+   "ok": [
+    "DN-53112",
+    "DN-33950",
+    "DN-71761",
+    "SP-F15763"
+   ],
+   "options": {
+    "dep": "92"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "renouvellement titre de sejour",
+   "ok": [
+    "DN-27159",
+    "SP-R59398",
+    "SP-R62504"
+   ],
+   "options": {
+    "dep": "94"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "prolongation",
+   "ok": [
+    "DN-121199",
+    "DN-98866"
+   ],
+   "options": {
+    "dep": "91"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "changement de statut",
+   "ok": [
+    "DN-27188",
+    "SP-R59398"
+   ],
+   "options": {
+    "dep": "94"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "permis",
+   "q": "permis de conduire",
+   "ok": [
+    "SP-R67351",
+    "SP-R49186",
+    "SP-R45443",
+    "SP-R42947"
+   ],
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "APS",
+   "ok": [
+    "DN-53120",
+    "SP-F17335",
+    "SP-F17336"
+   ],
+   "options": {
+    "dep": "92"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "carte de résident",
+   "ok": [
+    "SP-F2208",
+    "SP-F11201",
+    "SP-F17359"
+   ],
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "collectivité",
+   "q": "fonds vert",
+   "ok": [
+    "DN-69071",
+    "DN-67821",
+    "DN-68862",
+    "DN-70885",
+    "DN-69279",
+    "DN-120677",
+    "DN-69280"
+   ],
+   "options": {
+    "pub": "collectivite"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "travail",
+   "q": "indemnité forfaitaire de déplacement",
+   "ok": [
+    "DN-42964",
+    "DN-42959"
+   ],
+   "options": {
+    "dep": "69"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "attestation de prolongation",
+   "ok": [
+    "DN-121199",
+    "DN-98866"
+   ],
+   "options": {
+    "dep": "91"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "travail",
+   "q": "indemnité forfaitaire",
+   "ok": [
+    "DN-42959",
+    "DN-42964"
+   ],
+   "options": {
+    "dep": "69"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "recherche d'emploi",
+   "ok": [
+    "DN-29329",
+    "DN-21832",
+    "SP-F17319"
+   ],
+   "options": {
+    "dep": "94"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "renouvellement récépissé",
+   "ok": [
+    "DN-53112",
+    "DN-33950",
+    "DN-71761"
+   ],
+   "options": {
+    "dep": "92"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "titre de sejour salarié",
+   "ok": [
+    "DN-146022",
+    "DN-31347"
+   ],
+   "options": {
+    "dep": "75"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "admission exceptionnelle au séjour",
+   "ok": [
+    "DN-116405"
+   ],
+   "options": {
+    "dep": "75"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "premiere demande titre de sejour",
+   "ok": [
+    "DN-31347",
+    "DN-67837",
+    "DN-31027"
+   ],
+   "options": {
+    "dep": "75"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "aes",
+   "ok": [
+    "DN-50516",
+    "DN-50465"
+   ],
+   "options": {
+    "dep": "91"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "visa",
+   "ok": [
+    "SP-R50559"
+   ],
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "RECE",
+   "ok": [
+    "DN-109340"
+   ],
+   "options": {
+    "dep": "75"
+   },
+   "origine": "Annuaire DN, top 20 sur 90 jours"
+  },
+  {
+   "theme": "séjour",
+   "q": "carte de séjour",
+   "ok": [
+    "SP-R62504",
+    "SP-R59398"
+   ],
+   "origine": "Annuaire DN, top 20 sur 30 jours"
+  },
+  {
+   "theme": "collectivité",
+   "q": "DETR",
+   "ok": [
+    "DN-128030"
+   ],
+   "options": {
+    "pub": "collectivite"
+   },
+   "origine": "Annuaire DN, top 20 sur 30 jours"
+  },
+  {
+   "theme": "association",
+   "q": "formulaire d'habilitation à l'aide alimentaire",
+   "ok": [
+    "DN-104730"
+   ],
+   "options": {
+    "dep": "44"
+   },
+   "origine": "Annuaire DN, top 20 sur 30 jours"
+  },
+  {
+   "theme": "transport",
+   "q": "vtc",
+   "ok": [
+    "SP-R73491",
+    "SP-R73493",
+    "DN-25896"
+   ],
+   "origine": "Annuaire DN, top 20 sur 30 jours"
+  },
+  {
+   "theme": "transport",
+   "q": "taxi",
+   "ok": [
+    "SP-F21907",
+    "SP-R58665",
+    "DN-25893"
+   ],
+   "origine": "Annuaire DN, top 20 sur 30 jours"
+  },
+  {
+   "theme": "sécurité",
+   "q": "reserviste",
+   "ok": [
+    "SP-F34283",
+    "SP-F1188",
+    "SP-F34110",
+    "DN-43316"
+   ],
+   "origine": "Annuaire DN, top 20 sur 30 jours"
+  },
+  {
+   "theme": "permis",
+   "q": "permis",
+   "ok": [
+    "SP-R67351",
+    "SP-R49186",
+    "SP-R45443",
+    "SP-R42947"
+   ],
+   "origine": "Annuaire DN, top 20 sur 30 jours"
+  },
+  {
+   "theme": "administration",
+   "q": "attestation de service fait",
+   "ok": [
+    "DN-90410",
+    "DN-55063",
+    "DN-55012"
+   ],
+   "origine": "Annuaire DN, top 20 sur 30 jours"
+  },
+  {
+   "theme": "culture",
+   "q": "entrepreneur de spectacles vivants",
+   "ok": [
+    "SP-R43742",
+    "SP-R14004",
+    "SP-F22365",
+    "DN-117567",
+    "DN-117568"
+   ],
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "séjour",
+   "q": "talent profession médicale et pharmacie",
+   "ok": [
+    "DN-123876"
+   ],
+   "options": {
+    "dep": "54"
+   },
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "santé",
+   "q": "équivalence diplôme d'État aide-soignante",
+   "ok": [
+    "DN-54242"
+   ],
+   "options": {
+    "dep": "93"
+   },
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "séjour",
+   "q": "prolongation d'instruction",
+   "ok": [
+    "DN-121199",
+    "DN-98866"
+   ],
+   "options": {
+    "dep": "91"
+   },
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "séjour",
+   "q": "changement de statut titre salarié",
+   "ok": [
+    "DN-48946"
+   ],
+   "options": {
+    "dep": "33"
+   },
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "collectivité",
+   "q": "produit des amendes de police",
+   "ok": [
+    "DN-133571"
+   ],
+   "options": {
+    "pub": "collectivite",
+    "dep": "53"
+   },
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "éducation",
+   "q": "dossier national du brevet",
+   "ok": [
+    "SP-F10005"
+   ],
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "permis",
+   "q": "aménagement permis de conduire",
+   "ok": [
+    "DN-92656"
+   ],
+   "options": {
+    "dep": "80"
+   },
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "permis",
+   "q": "carnet médical du conducteur",
+   "ok": [
+    "DN-103515"
+   ],
+   "options": {
+    "dep": "92"
+   },
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "véhicule",
+   "q": "habilitation SIV",
+   "ok": [
+    "DN-33160"
+   ],
+   "options": {
+    "dep": "95"
+   },
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "sécurité",
+   "q": "vidéosurveillance",
+   "ok": [
+    "SP-R20467",
+    "SP-R13984",
+    "DN-160412"
+   ],
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "travail",
+   "q": "élection professionnelle",
+   "ok": [
+    "DN-154967"
+   ],
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "éducation",
+   "q": "bourse",
+   "ok": [
+    "SP-F12214",
+    "SP-R60054",
+    "SP-R60034"
+   ],
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "formation",
+   "q": "renouvellement label Qualiopi",
+   "ok": [
+    "DN-132014",
+    "DN-118990"
+   ],
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "étrangers",
+   "q": "RIR",
+   "ok": [
+    "DN-68654"
+   ],
+   "options": {
+    "dep": "93"
+   },
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "transport",
+   "q": "taxi CPAM conventionnement",
+   "ok": [
+    "DN-127051"
+   ],
+   "options": {
+    "dep": "31"
+   },
+   "origine": "Annuaire DN, recherches répétées"
+  },
+  {
+   "theme": "plaisance",
+   "q": "request for a pleasure boat registration form",
+   "ok": [
+    "DN-66621",
+    "SP-R1367"
+   ],
+   "options": {
+    "dep": "83"
+   },
+   "origine": "Annuaire DN, recherches répétées"
+  }
+ ]
+}

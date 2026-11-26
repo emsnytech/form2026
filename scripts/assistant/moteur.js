@@ -337,7 +337,7 @@
 
   const PUBLIC_DN = { particulier: ["particulier", "mixte", "indetermine"], entreprise: ["entreprise", "mixte", "personne_morale", "indetermine"],
     association: ["association", "mixte", "personne_morale", "indetermine"], collectivite: ["collectivite", "personne_morale", "indetermine"] };
-  const QUESTION_PRO = / entreprises? | societes? | professionnels? | employeurs? | auto entrepreneurs? | micro entrepreneurs? | urssaf | kbis | tva | siret | siren | salaries? | embauche | dpae | cotisations? | chiffre d affaires | agriculteurs? | exploitants? | eleveurs? | artisans? | commercants? | restaurants? | commerce | boutique | magasin /;
+  const QUESTION_PRO = / entreprises? | societes? | professionnels? | employeurs? | auto entrepreneurs? | micro entrepreneurs? | urssaf | kbis | tva | siret | siren | salaries? | embauche | cotisations? | chiffre d affaires | agriculteurs? | exploitants? | eleveurs? | artisans? | commercants? | restaurants? | commerce | boutique | magasin /;
   const TITRE_PUBLIC = { association: / associations? /, entreprise: / entreprises? | professionnels? /, collectivite: / collectivites? | communes? /};
   const PUBLIC_SP = { particulier: "Particuliers", entreprise: "Professionnels", association: "Associations", collectivite: null };
 
@@ -383,7 +383,7 @@
     // organisme ou régime particulier
     [/ ircantec | msa | rafp | cnracl | enim | regime agricole | regime local | caisse des depots | fonctions? publiques? /, / ircantec | msa | rafp | cnracl | enim | agricole | regime local | fonction publique | fonctionnaires? | agents? /],
     // métier particulier
-    [/ assistante?s? maternelle?s? | assistants? maternels? | assistante?s? familiale?s? | assistants? familiaux | particulier employeur | employes? a domicile | taxis? | vtc /, / assistante?s? | nounou | particulier employeur | domicile | taxis? | vtc /],
+    [/ assistante?s? maternelle?s? | assistants? maternels? | assistante?s? familiale?s? | assistants? familiaux | particulier employeur | employes? a domicile | taxis? | voitures? de transport avec chauffeur /, / assistante?s? | nounou | particulier employeur | domicile | taxis? | chauffeurs? /],
     // situation d'exception
     [/ maladie professionnelle | maladies professionnelles | accident du travail | accident de travail | accidents? de trajet | remise gracieuse | impossibilite de payer | delai de paiement | terrorisme | catastrophe naturelle | deces de la mere | licenciement | droits de succession | impots locaux /,
      / professionnelle | accident | trajet | remise | gracieuse | impossib | plus payer | peux pas payer | delai | terroris | catastrophe | mere | licencie | licenciement | succession | heritage | locaux | locales | fonciere | habitation /],
@@ -416,7 +416,7 @@
   // Un organisme particulier cité avec le régime général (« Caf ou MSA », « Caf et MSA ») ne fait pas un cas particulier ;
   // « ASF » après « allocation de soutien familial » est le sigle de l'allocation, pas l'action sociale des ministères.
   const AVEC_REGIME_GENERAL = / caf (ou|et) (la )?msa | msa (ou|et) (la )?caf /g;
-  const casParticulierTitre = (r, q) => { const t = (" " + norm(r.t) + " ").replace(AVEC_REGIME_GENERAL, " caf ").replace(/ soutien familial asf /g, " soutien familial "), n = " " + norm(q) + " ";
+  const casParticulierTitre = (r, q) => { const t = avecSigles(r.t).replace(AVEC_REGIME_GENERAL, " caf ").replace(/ soutien familial asf /g, " soutien familial "), n = avecSigles(q);
     return PUBLICS_PRECIS.some(([rt, rq]) => rt.test(t) && !rq.test(n)); };
   const annexe = (r, q) => { if (r.k !== "sp") return false; const t = " " + norm(r.t) + " ", n = " " + norm(q) + " ";
     return ANNEXES.some(([rt, rq]) => rt.test(t) && !rq.test(n)); };
@@ -476,6 +476,12 @@
     SIGLES = d && d.sigles ? d.sigles : null;
     SENS_JETONS = SIGLES ? [...new Set(Object.values(SIGLES).flatMap((e) => [e.sens, ...(e.contextes || []).map((c) => c.sens)]))].map((x) => [x, jetonSens(x)]) : [];
   }
+  // Texte normalisé (entouré d'espaces) suivi du sens des sigles qu'il contient : « carte vtc » parle aussi de « voiture de
+  // transport avec chauffeur ». Sert aux motifs de cas particulier et de public (titre comme question).
+  function avecSigles(t) { const n = " " + norm(t) + " "; if (!SIGLES) return n;
+    const sens = n.trim().split(" ").map((w) => sensSigle(w, n)).filter(Boolean); return sens.length ? n + sens.join(" ") + " " : n; }
+  // La question parle d'un public (« entreprise ») par un de ses sigles (table : champ « public »).
+  const siglePublic = (q, pub) => { if (!SIGLES) return false; const n = " " + norm(q) + " "; return n.trim().split(" ").some((w) => SIGLES[w] && SIGLES[w].public === pub); };
   function sensSigle(sg, n) { const e = SIGLES && SIGLES[sg]; if (!e) return "";
     const c = (e.contextes || []).find((x) => x.si.some((w) => n.includes(" " + w + " "))); return (c || e).sens; }
   // ---------- Démarche préfectorale ou départementale sans territoire : une ligne par département qui propose en ligne une
@@ -585,7 +591,7 @@
       let s = s0 * (0.5 + 0.5 * hit.get(i).size / nG);
       // Sans public choisi, une démarche des seuls professionnels passe après celles des particuliers, sauf si la question
       // parle d'entreprise (« attestation de vigilance », « tva », « urssaf »…).
-      if (!pub && ((r.k === "sp" && r.aud && !/Particuliers/.test(r.aud)) || (r.k === "dn" && /^(entreprise|collectivite)$/.test(r.cat || ""))) && !QUESTION_PRO.test(" " + norm(q) + " ")) s *= 0.8;
+      if (!pub && ((r.k === "sp" && r.aud && !/Particuliers/.test(r.aud)) || (r.k === "dn" && /^(entreprise|collectivite)$/.test(r.cat || ""))) && !QUESTION_PRO.test(" " + norm(q) + " ") && !siglePublic(q, "entreprise")) s *= 0.8;
       if (titreComplet(r)) s *= 1.25; // récompense la couverture de la requête
       if (casParticulierTitre(r, q)) s *= 0.7;   // cas particulier que la question ne nomme pas
       // Fiche service-public propre à un département (« Allier (03) : … ») hors du département connu : après la fiche nationale.
