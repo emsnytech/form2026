@@ -855,6 +855,22 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     const m = morceaux.sort((a, b) => b.length - a.length)[0] || "";
     return m ? m[0].toUpperCase() + m.slice(1) : "";
   }
+  // ---------- « Contacts utiles » : un service, lu dans l'Annuaire (enregistrement de l'API) ou dans prefectures.json (extrait
+  // de l'Annuaire), devient { nom, site, adresse, fiche } ; puis une ligne : le nom porte le lien vers le site, l'adresse dessous.
+  const litJ = (v) => { if (typeof v !== "string") return v || []; try { return JSON.parse(v); } catch (e) { return []; } };
+  function contactAnnuaire(s) {
+    if (!s) return null;
+    if (typeof s.adresse === "string" && !/^\s*[[{]/.test(s.adresse)) return { nom: s.nom, site: s.site || s.fiche || "", adresse: s.adresse, fiche: s.fiche || "" };
+    const ad = litJ(s.adresse), a = ad.find((x) => x && x.type_adresse === "Adresse") || ad[0] || {};
+    const adresse = [a.numero_voie, [a.code_postal, a.nom_commune].filter(Boolean).join(" ")].filter(Boolean).join(", ");
+    const site = litJ(s.site_internet).map((x) => x && x.valeur).find((u) => /^https?:/.test(u || "")) || s.url_service_public || "";
+    return { nom: s.nom, site, adresse, fiche: s.url_service_public || "" };
+  }
+  const echapper = (t) => String(t || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  function ligneContactHtml(c) {
+    if (!c) return "";
+    return `<li>${c.site ? `<a href="${echapper(c.site)}" target="_blank" rel="noopener">${echapper(c.nom)}</a>` : echapper(c.nom)}${c.adresse ? `<span class="adr">${echapper(c.adresse)}</span>` : ""}</li>`;
+  }
   // Commune la plus peuplée d'un département (code INSEE), pour interroger l'Annuaire sur la préfecture compétente.
   function communePrincipale(dep) { let m = null; if (COMMUNES) for (const l of COMMUNES.values()) for (const c of l) if (c.dep === dep && (!m || c.pop > m.pop)) m = c; return m; }
   let BESOINS = null;
@@ -1388,7 +1404,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { casParticulierTitre, annexeNommee, annexe, ageInadapte, titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, chargerSigles, sensSigle, departementsEnLigne, titreSansTerritoire, communePrincipale, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { casParticulierTitre, annexeNommee, annexe, ageInadapte, titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, chargerSigles, sensSigle, departementsEnLigne, titreSansTerritoire, communePrincipale, contactAnnuaire, ligneContactHtml, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -2279,13 +2295,15 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
   // contact écrit à la main. Selon le territoire connu : département (choisi ou nommé dans la question) → sa préfecture ;
   // commune → les services compétents pour elle (table des guichets) ; rien → une ligne vers l'Annuaire.
   const ANNUAIRE = "https://lannuaire.service-public.gouv.fr/";
+  const dateFrCourte = (d) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d || ""); return m ? `${m[3]}/${m[2]}/${m[1]}` : (d || ""); };
   function ligneContact(s) {
-    const a = lit(s.adresse)[0] || {};
-    const adr = [a.numero_voie, [a.code_postal, a.nom_commune].filter(Boolean).join(" ")].filter(Boolean).join(", ");
-    const site = (lit(s.site_internet) || []).map((x) => x && x.valeur).find((u) => /^https?:/.test(u || "")) || s.url_service_public;
-    if (s.url_service_public) ajouterLien(s.nom, s.url_service_public, "Annuaire de l'administration (DILA)");
-    return `<li>${site ? `<a href="${esc(site)}" target="_blank" rel="noopener">${esc(s.nom)}</a>` : esc(s.nom)}${adr ? `<span class="adr">${esc(adr)}</span>` : ""}</li>`;
+    const c = Moteur.contactAnnuaire(s);
+    if (c && c.fiche) ajouterLien(c.nom, c.fiche, "Annuaire de l'administration (DILA)");
+    return Moteur.ligneContactHtml(c);
   }
+  // Préfectures extraites de l'Annuaire (prefectures.json, publié à côté de la page) : la version avec assistant, qui ne peut
+  // appeler aucune API, y lit la préfecture du département.
+  const chargerPrefectures = () => memo("prefectures", () => json(DATA + "prefectures.json"));
   let CONTACTS_N = 0;
   async function contactsUtiles() {
     const el = $("contacts"); if (!el) return; const n = ++CONTACTS_N; el.hidden = true; el.innerHTML = "";
@@ -2300,6 +2318,13 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
     else if (dep && Moteur.communePrincipale) { types = ["prefecture"]; lieu = Moteur.communePrincipale(dep); }
     // Sans API (version avec assistant) : le service est cherché sur l'Annuaire lui-même, pour le territoire connu ; l'adresse
     // n'est alors pas affichée (rien n'est écrit à la main).
+    // Sans API, département connu et pas de commune : la préfecture, lue dans prefectures.json (nom, site, adresse).
+    if (SANS_API && !c && dep) {
+      let P = null; try { P = await chargerPrefectures(); } catch (e) { P = null; }
+      if (n !== CONTACTS_N) return;
+      const p = P && (P.prefectures || []).find((x) => x.dep === dep);
+      if (p) { el.innerHTML = titre + `<ul>${ligneContact(p)}</ul><p class="ou-src">Source&nbsp;: Annuaire de l'administration (DILA), extrait du ${esc(dateFrCourte(P.date_extraction))}</p>`; el.hidden = false; return; }
+    }
     if (SANS_API && lieu) {
       const quoi = types && types.includes("prefecture") && !c ? "Préfecture" : (regle(tete) || {}).libelle || "Préfecture";
       el.innerHTML = titre + `<ul><li><a href="${esc(lienAnnuaireUrl(lieu, quoi))}" target="_blank" rel="noopener">${esc(quoi)}</a><span class="adr">${esc(c ? c.nom + " (" + c.dep + ")" : (DEPNAME[dep] || dep) + " (" + dep + ")")} · adresse sur l'Annuaire de l'administration</span></li></ul>`;

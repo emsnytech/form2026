@@ -37,7 +37,7 @@ VERSION_IA = Path.home() / "Documents" / "cartographie" / "assistant" / "artefac
 # noms qu'elle attend (window.FORM_DATA vide). L'éditeur publie depuis ce dossier.
 ARTEFACT = VERSION_IA.parent
 FICHIERS_IA = ["index.json", "index_meta.json", "exemples.json", "plus_demandees.json", "a_la_une.json", "types_guichets.json",
-               "communes.json", "france_services.json", "besoins.json", "titres_identite.json", "sigles.json"]
+               "communes.json", "france_services.json", "besoins.json", "titres_identite.json", "sigles.json", "prefectures.json"]
 
 CSS_DIALOGUE = """dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line2);border-radius:14px;padding:20px 22px;background:var(--fond);color:var(--ink)}
 dialog::backdrop{background:rgba(0,0,0,.45)}

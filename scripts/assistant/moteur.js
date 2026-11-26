@@ -505,6 +505,22 @@
     const m = morceaux.sort((a, b) => b.length - a.length)[0] || "";
     return m ? m[0].toUpperCase() + m.slice(1) : "";
   }
+  // ---------- « Contacts utiles » : un service, lu dans l'Annuaire (enregistrement de l'API) ou dans prefectures.json (extrait
+  // de l'Annuaire), devient { nom, site, adresse, fiche } ; puis une ligne : le nom porte le lien vers le site, l'adresse dessous.
+  const litJ = (v) => { if (typeof v !== "string") return v || []; try { return JSON.parse(v); } catch (e) { return []; } };
+  function contactAnnuaire(s) {
+    if (!s) return null;
+    if (typeof s.adresse === "string" && !/^\s*[[{]/.test(s.adresse)) return { nom: s.nom, site: s.site || s.fiche || "", adresse: s.adresse, fiche: s.fiche || "" };
+    const ad = litJ(s.adresse), a = ad.find((x) => x && x.type_adresse === "Adresse") || ad[0] || {};
+    const adresse = [a.numero_voie, [a.code_postal, a.nom_commune].filter(Boolean).join(" ")].filter(Boolean).join(", ");
+    const site = litJ(s.site_internet).map((x) => x && x.valeur).find((u) => /^https?:/.test(u || "")) || s.url_service_public || "";
+    return { nom: s.nom, site, adresse, fiche: s.url_service_public || "" };
+  }
+  const echapper = (t) => String(t || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  function ligneContactHtml(c) {
+    if (!c) return "";
+    return `<li>${c.site ? `<a href="${echapper(c.site)}" target="_blank" rel="noopener">${echapper(c.nom)}</a>` : echapper(c.nom)}${c.adresse ? `<span class="adr">${echapper(c.adresse)}</span>` : ""}</li>`;
+  }
   // Commune la plus peuplée d'un département (code INSEE), pour interroger l'Annuaire sur la préfecture compétente.
   function communePrincipale(dep) { let m = null; if (COMMUNES) for (const l of COMMUNES.values()) for (const c of l) if (c.dep === dep && (!m || c.pop > m.pop)) m = c; return m; }
   let BESOINS = null;
@@ -1038,6 +1054,6 @@
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { casParticulierTitre, annexeNommee, annexe, ageInadapte, titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, chargerSigles, sensSigle, departementsEnLigne, titreSansTerritoire, communePrincipale, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { casParticulierTitre, annexeNommee, annexe, ageInadapte, titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, chargerSigles, sensSigle, departementsEnLigne, titreSansTerritoire, communePrincipale, contactAnnuaire, ligneContactHtml, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

@@ -59,7 +59,7 @@ Le moteur tourne dans le navigateur, sans appel à un service extérieur. C'est 
   - les services compétents quand seule la commune est connue ;
   - sinon, un lien vers l'Annuaire.
   
-  Sans API (version avec assistant sur claude.ai), la ligne renvoie à la recherche de l'Annuaire pour ce territoire.
+  La version avec assistant, publiée sur claude.ai, ne peut appeler aucune API (`FORM_SANS_API`). Elle lit la préfecture du département dans `prefectures.json`. Ce fichier donne les 101 préfectures (nom, site, adresse, fiche, code du département), extraites de l'Annuaire par `scripts/assistant/prefectures.py` avec la date d'extraction, et publiées à côté de la page. Pour Paris, c'est la Préfecture de police, rangée avec les préfectures dans `types_guichets.json`. Pour les autres services, la ligne renvoie à la recherche de l'Annuaire.
 - **L'assistant ne parle pas de lui** : la consigne l'interdit, et la page retire les phrases où il dit « je ».
 - **Pas de question inutile** : la commune n'est pas demandée quand le département suffit. Il n'y a pas de « Et si je n'ai pas Internet ? » pour une commune, une entreprise ou une association.
 - **Démarche sans département connu** : elle n'est gardée que si son titre correspond à la question.

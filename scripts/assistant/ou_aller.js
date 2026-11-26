@@ -150,13 +150,15 @@
   // contact écrit à la main. Selon le territoire connu : département (choisi ou nommé dans la question) → sa préfecture ;
   // commune → les services compétents pour elle (table des guichets) ; rien → une ligne vers l'Annuaire.
   const ANNUAIRE = "https://lannuaire.service-public.gouv.fr/";
+  const dateFrCourte = (d) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d || ""); return m ? `${m[3]}/${m[2]}/${m[1]}` : (d || ""); };
   function ligneContact(s) {
-    const a = lit(s.adresse)[0] || {};
-    const adr = [a.numero_voie, [a.code_postal, a.nom_commune].filter(Boolean).join(" ")].filter(Boolean).join(", ");
-    const site = (lit(s.site_internet) || []).map((x) => x && x.valeur).find((u) => /^https?:/.test(u || "")) || s.url_service_public;
-    if (s.url_service_public) ajouterLien(s.nom, s.url_service_public, "Annuaire de l'administration (DILA)");
-    return `<li>${site ? `<a href="${esc(site)}" target="_blank" rel="noopener">${esc(s.nom)}</a>` : esc(s.nom)}${adr ? `<span class="adr">${esc(adr)}</span>` : ""}</li>`;
+    const c = Moteur.contactAnnuaire(s);
+    if (c && c.fiche) ajouterLien(c.nom, c.fiche, "Annuaire de l'administration (DILA)");
+    return Moteur.ligneContactHtml(c);
   }
+  // Préfectures extraites de l'Annuaire (prefectures.json, publié à côté de la page) : la version avec assistant, qui ne peut
+  // appeler aucune API, y lit la préfecture du département.
+  const chargerPrefectures = () => memo("prefectures", () => json(DATA + "prefectures.json"));
   let CONTACTS_N = 0;
   async function contactsUtiles() {
     const el = $("contacts"); if (!el) return; const n = ++CONTACTS_N; el.hidden = true; el.innerHTML = "";
@@ -171,6 +173,13 @@
     else if (dep && Moteur.communePrincipale) { types = ["prefecture"]; lieu = Moteur.communePrincipale(dep); }
     // Sans API (version avec assistant) : le service est cherché sur l'Annuaire lui-même, pour le territoire connu ; l'adresse
     // n'est alors pas affichée (rien n'est écrit à la main).
+    // Sans API, département connu et pas de commune : la préfecture, lue dans prefectures.json (nom, site, adresse).
+    if (SANS_API && !c && dep) {
+      let P = null; try { P = await chargerPrefectures(); } catch (e) { P = null; }
+      if (n !== CONTACTS_N) return;
+      const p = P && (P.prefectures || []).find((x) => x.dep === dep);
+      if (p) { el.innerHTML = titre + `<ul>${ligneContact(p)}</ul><p class="ou-src">Source&nbsp;: Annuaire de l'administration (DILA), extrait du ${esc(dateFrCourte(P.date_extraction))}</p>`; el.hidden = false; return; }
+    }
     if (SANS_API && lieu) {
       const quoi = types && types.includes("prefecture") && !c ? "Préfecture" : (regle(tete) || {}).libelle || "Préfecture";
       el.innerHTML = titre + `<ul><li><a href="${esc(lienAnnuaireUrl(lieu, quoi))}" target="_blank" rel="noopener">${esc(quoi)}</a><span class="adr">${esc(c ? c.nom + " (" + c.dep + ")" : (DEPNAME[dep] || dep) + " (" + dep + ")")} · adresse sur l'Annuaire de l'administration</span></li></ul>`;
