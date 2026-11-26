@@ -182,7 +182,7 @@ input#cp,input#p-cp,.cp-res{font:inherit;font-size:15px;min-height:44px;padding:
 #ou-service:not(:empty)+#ccas-ou:not(:empty),#ccas-ou:not(:empty)+#fs-aide:not(:empty),#ou-service:not(:empty)~#fs-aide:not(:empty){border-top:1px solid var(--line);padding-top:10px;margin-top:6px}
 @media (max-width:720px){
   .l{padding:0 16px}
-  #vue-accueil{padding-top:32px}
+  #vue-accueil{padding:32px 16px 24px}
   .colonnes{grid-template-columns:1fr;gap:32px;margin-top:40px}
   .btn{width:100%}
   #vue-reponse{padding:20px 16px 0}
@@ -191,6 +191,24 @@ input#cp,input#p-cp,.cp-res{font:inherit;font-size:15px;min-height:44px;padding:
   .carte{padding:16px}
   .btn-lien{align-self:stretch;justify-content:center}
   .boutons-cx{flex-direction:column;align-items:stretch;text-align:center}
+}
+/* Téléphone (moins de 600 px) : une marge de 16 px partout ; en-tête sur une ligne (titre et pastille) ; « Comment ça marche »
+   et « Contribuer » en pied de page, un seul lien « Comment ça marche » sur la page ; titre réduit d'un tiers ; « Exemples ». */
+.pied-mob,.txt-court{display:none}
+@media (max-width:599px){
+  .tete .l{flex-wrap:nowrap;padding-top:6px;padding-bottom:6px}
+  .marque{flex-wrap:nowrap;gap:6px;min-width:0}
+  .marque a.nom{font-size:15px;white-space:nowrap}
+  .badge-demo{font-size:11px;padding:2px 6px;white-space:nowrap}
+  .tete nav{display:none}
+  .pied-mob{display:contents}
+  #ligne-stats{display:none}
+  h1#titre-accueil{font-size:20px}
+  .txt-long{display:none}.txt-court{display:inline}
+  #parcourir{padding-left:16px;padding-right:16px}
+  /* « Vos démarches » : le bouton passe sous le nom du papier, aligné sur le texte */
+  .besoins li{flex-wrap:wrap;row-gap:8px}.besoins .b-txt{flex:1 1 calc(100% - 38px)}
+  .besoins li>.b-btn,.besoins .b-liens{margin-left:38px}.besoins .b-liens{align-items:flex-start}
 }
 @media (max-width:720px){#ff.ff-bas{flex-wrap:nowrap}#ff.ff-bas .perso{display:none}#ff.ff-bas .btn{width:auto;min-height:48px;padding:0 16px}#ff.ff-bas input{min-height:48px}}
 dialog{max-width:36rem;width:calc(100% - 32px);border:1px solid var(--line2);border-radius:14px;padding:20px 22px;background:var(--fond);color:var(--ink)}
@@ -252,7 +270,7 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
       </div>
       <div class="status" id="quota"></div>
       <div class="status" id="st" role="status"></div>
-      <details class="exemples" id="exemples" hidden><summary>Exemples de questions, avec une réponse préparée sans IA</summary><div class="chips" id="ex"></div></details>
+      <details class="exemples" id="exemples" hidden><summary><span class="txt-long">Exemples de questions, avec une réponse préparée sans IA</span><span class="txt-court">Exemples</span></summary><div class="chips" id="ex"></div></details>
     </form>
   </div>
 
@@ -314,6 +332,8 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
 </dialog>
 
 <footer class="pied"><div class="l">
+  <span class="pied-mob"><a class="lien-comment" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html">Comment ça marche</a>
+  <a class="lien-comment" data-ancre="contribuer" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html#contribuer">Contribuer</a></span>
   <span>Démonstrateur indépendant, non officiel. Cette page oriente&nbsp;: la décision appartient à l'organisme cité.</span>
   <a class="lien-comment" data-ancre="sources" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html#sources">Sources et limites</a>
   <a class="lien-comment" data-ancre="donnees" href="https://emsnytech.github.io/form2026/trouver-sa-demarche-comment.html#donnees">Données personnelles</a>
