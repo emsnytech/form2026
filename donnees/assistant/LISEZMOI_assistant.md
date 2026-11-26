@@ -48,6 +48,10 @@ Le moteur tourne dans le navigateur, sans appel à un service extérieur. C'est 
 
 **Mesure du classement.** `questions_reference.json` donne 200 questions d'une à quatre mots, tirées des démarches les plus demandées (Observatoire de la qualité des démarches en ligne, volumes de Démarche Numérique), avec leurs réponses acceptables. `node scripts/assistant/mesure.js --avant origin/main` donne le score avant et après une modification du moteur, puis les questions qui changent. Une réponse est juste quand « Votre démarche » est acceptable, et proche quand une réponse acceptable figure dans les 3 premiers résultats. `--liste` sort la liste en Markdown, pour relecture. Tant que le champ `statut` ne vaut pas « validée », la liste est un brouillon.
 
+**Sigles.** `sigles.json` (table relue) donne le sens retenu de chaque sigle selon le contexte : « APS » est l'autorisation provisoire de séjour, sauf si la question parle d'armes ou de sport. Le sens est indexé comme une expression. Dans une question, le sigle devient un seul terme : le sens retenu et, pour un sigle qui n'en a qu'un, le sigle lui-même. Aucun sigle n'est écrit dans le code du moteur ; le test G4 le vérifie. La table est chargée avant l'index.
+
+**Démarche préfectorale ou départementale sans territoire.** Quand les meilleurs résultats sont locaux et que le territoire est inconnu, la page demande le département seul, sans code postal. Elle liste les départements qui proposent en ligne une démarche pertinente pour la question, une ligne par département (`Moteur.departementsEnLigne`). Une fois le département choisi, « Où aller » donne le contact de la préfecture, lu dans l'Annuaire de l'administration pour la commune la plus peuplée du département.
+
 **Ressources liées.** Sous une fiche service-public, la page affiche en retrait jusqu'à trois ressources (services en ligne, formulaires, simulateurs, puis fiches liées) et les démarches en ligne qui lui sont rattachées ; elles ne comptent pas parmi les résultats.
 
 ## Où aller

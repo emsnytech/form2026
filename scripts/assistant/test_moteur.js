@@ -2,6 +2,8 @@
 const path=require('path');
 const M=require(path.join(__dirname,'moteur.js'));
 const R=JSON.parse(require('fs').readFileSync(path.join(__dirname,'..','..','donnees','assistant','index.json'),'utf8'));
+// Sigles (sigles.json) chargés avant l'index : leurs sens y sont indexés comme des expressions.
+{ const FSG=path.join(__dirname,'..','..','donnees','assistant','sigles.json'); if (M.chargerSigles && require('fs').existsSync(FSG)) M.chargerSigles(JSON.parse(require('fs').readFileSync(FSG,'utf8'))); }
 let t=Date.now(); const ix=M.build(R); console.log('build ms',Date.now()-t);
 const Q=[["je veux demander une subvention pour mon association sportive",{pub:'association'}],
 ["organiser une brocante dans ma commune",{}],
@@ -496,6 +498,21 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
     ['porter plainte',{},['SP-F1435']],['parcoursup',{},['SP-R42572','SP-F23476']],['css',{},['SP-R52880']],['vœux affectation 3e',{},['SP-R60303']],
     ['taxe foncière',{},['SP-F59']],['garde d\'enfant demandeur d\'emploi',{},['SP-F1814']]]){
     const x=P(q,o); verifie(`Q10 « ${q} »${o.pub?' ('+o.pub+')':''} : ${ok.join(' ou ')} en « Votre démarche »`, ok.includes(x.p), x.t.join(' ')+' | '+x.p); } }
+// Sigles (sigles.json, table relue) : sens retenu selon le contexte ; aucun sigle donnant un sens dans le code du moteur.
+{ const P=(q,o={})=>{const C=M.choisir(ix,q,{...o,k:20});return {t:M.search(ix,q,{...o,k:5}).map(x=>x.r.id),p:C.principal&&C.principal.id};};
+  const aps=P('APS'), apsA=P('aps armes'), fsl=P('FSL'), sf=P('attestation de service fait');
+  verifie('G1 « APS » : pas le transfert d\'armes (SP-R52119) dans les 5 premiers ; avec « armes », il est en tête', !aps.t.includes('SP-R52119')&&aps.p!=='SP-R52119'&&apsA.t[0]==='SP-R52119', aps.t.join(' ')+' | '+apsA.t.join(' '));
+  verifie('G2 « FSL » : le Fonds de solidarité pour le logement (SP-F1334) en tête, pas le jeton « démarches-simplifiées » (DN-28430) en « Votre démarche »', fsl.t[0]==='SP-F1334'&&fsl.p!=='DN-28430', fsl.t.join(' ')+' | '+fsl.p);
+  verifie('G3 « attestation de service fait » : pas France Travail (SP-R14578) dans les 3 premiers', !sf.t.slice(0,3).includes('SP-R14578'), sf.t.join(' ')+' | '+sf.p);
+  const src=fs.readFileSync(path.join(__dirname,'moteur.js'),'utf8'), SG=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','sigles.json'),'utf8')).sigles;
+  const code=src.split('\n').map(l=>l.trim().startsWith('//')?'':l.split(' // ')[0]).join('\n');
+  const enDur=Object.keys(SG).filter(k=>new RegExp('(?<![a-z_])'+k+'(?![a-z_])').test(code));
+  verifie('G4 aucun sigle de sigles.json dans le code de moteur.js (sens, synonymes, expressions, motifs), commentaires exceptés ; « vtc » et « dpae » ont un champ « public »', !enDur.length&&SG.vtc&&SG.vtc.public==='entreprise'&&SG.dpae&&SG.dpae.public==='entreprise'&&!SG.ars, enDur.join(' ')||Object.keys(SG).length+' sigles'); }
+// Démarche préfectorale ou départementale sans territoire : département seul, une ligne par département qui la propose en ligne,
+// puis le contact de la préfecture (Annuaire, ou_aller.js).
+{ const C=M.choisir(ix,'ACD',{k:20}), V=M.departementsEnLigne(ix,'ACD'), ou=fs.readFileSync(path.join(__dirname,'ou_aller.js'),'utf8');
+  verifie('DP1 « ACD » : le lieu est demandé, une ligne par département (77, 78, 91) ; la page demande le département seul et donne ensuite le contact de la préfecture',
+    C.demanderLieu&&V.map(v=>v.dep).join(',')==='77,78,91'&&/deps-en-ligne/.test(ou)&&/services\(c\.code, \["prefecture"\]\)/.test(ou), V.map(v=>v.dep+' '+v.r.id).join(' ; ')); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');
