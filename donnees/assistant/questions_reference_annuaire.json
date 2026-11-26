@@ -1,6 +1,6 @@
 {
  "objet": "Questions de référence tirées des recherches de l'Annuaire des Démarches Numériques (widget DN), relevé du 26/11/2026 (cartographie/recherches_annuaire_dn_2026-11-26.md) : top 20 sur 90 et 30 jours, puis recherches répétées. Texte de la recherche tel quel ; département quand la démarche est locale (choisi parmi ceux qui la proposent en ligne) ; réponses acceptables : identifiants de l'index. Mesurée par scripts/assistant/mesure.js.",
- "statut": "à relire",
+ "statut": "validée",
  "source": "https://annuairedn.osc-fr1.scalingo.io/stats",
  "ecartees": {
   "service fait": "requête vague (3 856 résultats en moyenne) ; « attestation de service fait » est gardée",
