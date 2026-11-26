@@ -10,7 +10,7 @@
     demenage: ["demenagement", "adresse"], demenager: ["demenagement", "adresse"], aide: ["aide", "subvention", "allocation"], allocation: ["allocation", "aide"], allocations: ["allocation", "aide"], indemnisation: ["indemnisation", "indemnite"], indemniser: ["indemnisation", "indemnite"],
     argent: ["aide", "subvention", "financement"], asso: ["association"], boite: ["entreprise"], societe: ["entreprise"],
     voiture: ["vehicule", "immatriculation"], auto: ["vehicule"], carte: ["carte"], fete: ["manifestation"], brocante: ["vide", "grenier", "manifestation"],
-    handicap: ["handicap", "mdph"], logement: ["logement"], ecole: ["scolaire", "scolarisation", "ecole"], fac: ["universite", "etudes"],
+    handicap: ["handicap"], logement: ["logement"], ecole: ["scolaire", "scolarisation", "ecole"], fac: ["universite", "etudes"],
     etranger: ["etranger", "sejour"], cree: ["creation"], creer: ["creation"], monter: ["creation"], adapter: ["adaptation", "amenagement"],
     perdu: ["perte"], perdue: ["perte"], vole: ["vol"], volee: ["vol"], retraite: ["retraite"], deces: ["deces"], mariage: ["mariage"], chasse: ["chasse", "tir"],
     // rue ↔ voie, voie publique, route, chaussée (dans les deux sens)
@@ -59,15 +59,16 @@
     // Liste électorale : une expression (inscription sur les listes électorales), pas les mots « liste » et « électorale » isolés.
     [["liste electorale", "listes electorales", "liste electoral", "listes electorale", "listes electoraux"], ["liste", "electorale"]],
     // Carte d'identité : son jeton ; seule dans la question, la pré-demande en ligne aussi (comme « passeport » seul).
-    [["carte d identite", "carte identite", "cartes d identite", "carte nationale d identite", "cni"], ["_cni"], { seul: ["_pre_demande"] }],
+    [["carte d identite", "carte identite", "cartes d identite", "carte nationale d identite"], ["_cni"], { seul: ["_pre_demande"] }],
     // Mots courants → vocabulaire des fiches : l'attestation de droits (« attestation Vitale »), la déclaration de naissance.
     [["attestation de securite sociale", "attestation securite sociale", "attestation secu", "attestation de secu", "attestation vitale",
       "attestation carte vitale", "attestation d assurance maladie", "attestation assurance maladie"], ["_attestation_droits"]],
     [["naissance enfant", "naissance d un enfant", "naissance de mon enfant", "naissance de notre enfant", "naissance de mon bebe", "mon bebe est ne",
       "vient de naitre", "declarer une naissance", "declarer la naissance"], ["_declaration_naissance", "naissance"], { sansSyn: true }],
-    [["logement social", "logements sociaux", "hlm"], ["_logement_social"]],
-    // sigles et mots courants → nom de la prestation
-    [["css", "mutuelle gratuite", "mutuelle solidaire", "cmu", "cmu c"], ["complementaire", "sante", "solidaire"], { remplace: true }],
+    [["logement social", "logements sociaux"], ["_logement_social"]],
+    [["service fait", "services faits"], ["_service_fait"]],
+    // mots courants → nom de la prestation (les sigles sont dans sigles.json)
+    [["mutuelle gratuite", "mutuelle solidaire"], ["complementaire", "sante", "solidaire"], { remplace: true }],
     [["aide menagere", "aides menageres", "femme de menage", "menage a domicile"], ["domicile", "emploi"], { remplace: true }],
     // « aide au logement » seule : l'APL, l'ALF et l'ALS se demandent par un même service en ligne, qui les nomme par leur sigle.
     [["aide au logement", "aides au logement", "aide logement", "aides logement", "allocation logement", "allocations logement",
@@ -100,6 +101,7 @@
     ["carte grise", "_carte_grise"], ["cartes grises", "_carte_grise"], ["certificat d immatriculation", "_carte_grise"], ["certificats d immatriculation", "_carte_grise"],
     // pré-demande en ligne (passeport, carte d'identité) : un jeton, cherché par le synonyme de « passeport »
     ["pre demande", "_pre_demande"], ["attestation de droits", "_attestation_droits"], ["declaration de naissance", "_declaration_naissance"],
+    ["service fait", "_service_fait"], ["services faits", "_service_fait"],
     ["logement social", "_logement_social"], ["logements sociaux", "_logement_social"],
     ["paiement de l impot", "_paiement_impot"], ["paiement des impots", "_paiement_impot"], ["payer ses impots", "_paiement_impot"], ["payer l impot", "_paiement_impot"],
     // carte d'identité : un jeton propre (la racine « identi » est aussi celle d'« identification »)
@@ -224,6 +226,7 @@
   const EXPR_GROUPES = new WeakSet();
   function analyse(s) {
     let n = " " + norm(s) + " ";
+
     const termes = new Map(), L = lieux(s);
     // Une expression reconnue compte pour un terme ; plusieurs expressions de même sens, pour un seul.
     // Expression marquée « sansSyn » : ses mots gardent leur terme, sans leurs synonymes (« passeport talent » n'appelle pas la
@@ -231,6 +234,10 @@
     const dansExpr = new Set();
     // Option « remplace » : les mots de l'expression (sigle, mot courant) ne comptent plus à part, l'expression les traduit.
     const remplaces = new Set();
+    // Sigles : un terme par sigle (jeton de son sens retenu, et le sigle s'il n'a qu'un sens).
+    if (SIGLES) for (const w of n.trim().split(" ")) { const sens = sensSigle(w, n); if (!sens) continue;
+      const e = SIGLES[w], g = new Set([jetonSens(sens), ...((e.contextes || []).length ? [] : [w])]);
+      EXPR_GROUPES.add(g); termes.set("« " + sens + " »", g); remplaces.add(w); }
     // Option « seul » : termes ajoutés seulement quand la question se réduit à l'expression (hors mots vides).
     const utiles = n.trim().split(" ").filter((w) => w.length > 1 && !STOP.has(w)).join(" ");
     for (const [f, vers, o] of EXPRESSIONS) if (n.includes(" " + f + " ")) {
@@ -241,6 +248,7 @@
       if (w.length < 2 || STOP.has(w) || L.mots.has(w) || remplaces.has(w)) continue;
       const t = stem(w); if (!termes.has(t)) termes.set(t, new Set([t]));
       if (!dansExpr.has(w)) for (const x of SYN[w] || []) termes.get(t).add(stem(x));
+
     }
     return { termes, lieux: L.lieux };
   }
@@ -289,7 +297,7 @@
     const L = lieux(q);
     const texte = (q || "").replace(/[A-Za-zÀ-ÖØ-öø-ÿœŒ]+/g, (w) => {
       const n = norm(w);
-      if (n.length < 4 || VOCAB.has(n) || STOP.has(n) || SYN[n] || L.mots.has(n) || (COMMUNES && COMMUNES.has(n))) return w;
+      if (n.length < 4 || VOCAB.has(n) || STOP.has(n) || SYN[n] || (SIGLES && SIGLES[n]) || L.mots.has(n) || (COMMUNES && COMMUNES.has(n))) return w;
       const max = n.length >= 8 ? 2 : 1; let best = null;
       for (let l = n.length - max; l <= n.length + max; l++) for (const k of VOCAB_LONG.get(l) || []) {
         const d = distance(n, k, max); if (d > max) continue;
@@ -309,7 +317,7 @@
       const tf = new Map();
       const add = (s, w) => {
         for (const t of toks(s)) tf.set(t, (tf.get(t) || 0) + w);
-        if (s) { const n = " " + norm(s) + " "; for (const [e, j] of JETONS_EXPRESSION) if (n.includes(" " + e + " ")) tf.set(j, (tf.get(j) || 0) + w); }
+        if (s) { const n = " " + norm(s) + " "; for (const [e, j] of JETONS_EXPRESSION.concat(SENS_JETONS)) if (n.includes(" " + e + " ")) tf.set(j, (tf.get(j) || 0) + w); }
       };
       add(r.t, 3); add(r.d, 1); add(EV_LABEL(r.ev), 1.5);
       if (r.k === "dn") { add(r.o, 0.6); add((r.pj || []).join(" "), 0.4); }
@@ -457,6 +465,31 @@
   // (besoins.json, chargée par chargerBesoins) reçoit la fiche de la table pour le contexte (perte ou vol) ; un autre morceau
   // garde la démarche que le moteur juge sûre. Au moins deux besoins distincts, six au plus, rangés par urgence (table), puis
   // dans l'ordre de la question.
+  // ---------- Sigles (donnees/assistant/sigles.json, table relue). Le sens d'un sigle est indexé comme une expression (un
+  // jeton) ; dans une question, le sigle devient un seul terme : le jeton de son sens retenu (celui d'un contexte si l'un de ses
+  // mots est dans la question, sinon le sens par défaut) et, pour un sigle sans autre sens, le sigle lui-même (« Demande de
+  // RSA (Caf) »). Un sigle à plusieurs sens ne compte que par son sens retenu : « APS » ne trouve pas le transfert d'armes.
+  // La table est chargée avant la construction de l'index (chargerSigles, puis build).
+  let SIGLES = null, SENS_JETONS = [];
+  const jetonSens = (sens) => "_s_" + sens.replace(/ /g, "_");
+  function chargerSigles(d) {
+    SIGLES = d && d.sigles ? d.sigles : null;
+    SENS_JETONS = SIGLES ? [...new Set(Object.values(SIGLES).flatMap((e) => [e.sens, ...(e.contextes || []).map((c) => c.sens)]))].map((x) => [x, jetonSens(x)]) : [];
+  }
+  function sensSigle(sg, n) { const e = SIGLES && SIGLES[sg]; if (!e) return "";
+    const c = (e.contextes || []).find((x) => x.si.some((w) => n.includes(" " + w + " "))); return (c || e).sens; }
+  // ---------- Démarche préfectorale ou départementale sans territoire : une ligne par département qui propose en ligne une
+  // démarche pertinente pour la question (titre portant un terme de la question), la mieux classée ; triées par département.
+  function departementsEnLigne(ix, q, opt = {}) {
+    const P = pertinence(ix, q, opt), parDep = new Map();
+    for (const x of search(ix, q, { ...opt, source: "dn", k: 80 })) {
+      const r = x.r; if (!r.dep || parDep.has(r.dep) || !P.pertinente(r.id) || !termeAuTitre(q, r)) continue;
+      parDep.set(r.dep, r);
+    }
+    return [...parDep].sort((a, b) => (a[0] < b[0] ? -1 : 1)).map(([dep, r]) => ({ dep, r }));
+  }
+  // Commune la plus peuplée d'un département (code INSEE), pour interroger l'Annuaire sur la préfecture compétente.
+  function communePrincipale(dep) { let m = null; if (COMMUNES) for (const l of COMMUNES.values()) for (const c of l) if (c.dep === dep && (!m || c.pop > m.pop)) m = c; return m; }
   let BESOINS = null;
   function chargerBesoins(d) { BESOINS = d; }
   function besoins(ix, q, opt = {}) {
@@ -682,7 +715,7 @@
   // Termes significatifs de la question (groupes de synonymes et expressions, Moteur.analyse) présents dans un titre.
   function termesAuTitre(q, r) {
     const titre = new Set(toks(r.t)), n = " " + norm(r.t) + " ";
-    for (const [e, j] of JETONS_EXPRESSION) if (n.includes(" " + e + " ")) titre.add(j);
+    for (const [e, j] of JETONS_EXPRESSION.concat(SENS_JETONS)) if (n.includes(" " + e + " ")) titre.add(j);
     // « enfant » (et ses formes) est couvert par un titre « … d'un mineur » : la question parle bien de ce cas.
     if (/ mineure?s? /.test(n)) ["enfant", "enfants", "fils", "fille"].forEach((w) => titre.add(stem(w)));
     const mots = norm(q).split(" ").filter((w) => w.length > 1), utiles = new Set(mots.filter((w) => !GENERAUX.has(w)).map(stem));
@@ -726,7 +759,9 @@
   // Tous les mots utiles de la question (hors lieux, tels quels, sans synonyme) sont dans le titre.
   function titrePorteTout(q, r) {
     const mots = [...analyse(q).termes.keys()].filter((t) => !t.startsWith("« ")), tt = new Set(toks(r.t));
-    return mots.length > 0 && mots.every((t) => tt.has(t));
+    // question faite seulement d'expressions (un sigle : « FSL ») : chacune doit être dans le titre
+    if (!mots.length) { const { groupes, presents } = termesAuTitre(q, r); return groupes.length > 0 && presents.length === groupes.length; }
+    return mots.every((t) => tt.has(t));
   }
   // Mots du titre (hors mots vides) absents de la question.
   function motsEnPlus(q, r) { const qq = new Set(toks(q)); return new Set(toks(r.t).filter((t) => !qq.has(t))).size; }
@@ -979,6 +1014,6 @@
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { casParticulierTitre, annexeNommee, annexe, ageInadapte, titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { casParticulierTitre, annexeNommee, annexe, ageInadapte, titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, chargerSigles, sensSigle, departementsEnLigne, communePrincipale, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);

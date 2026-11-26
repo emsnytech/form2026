@@ -1,0 +1,27 @@
+{
+ "objet": "Sigles des questions : le sens retenu selon le contexte. Lue par Moteur.chargerSigles (moteur.js) : dans une question, le sigle est gardé et les mots de son sens retenu sont ajoutés ; « contextes » : si l'un des mots « si » est dans la question, ce sens remplace le sens par défaut. Aucun sigle n'est écrit dans le code. Mots sans accents, en minuscules.",
+ "statut": "à relire",
+ "sigles": {
+  "aps": {"sens": "autorisation provisoire de sejour", "contextes": [{"si": ["arme", "armes", "munition", "munitions", "fusil", "fusils", "chasse", "tir"], "sens": "autorisation de transfert d armes"}, {"si": ["sport", "sportive", "sportives", "ehpad", "esms"], "sens": "activites physiques et sportives"}]},
+  "fsl": {"sens": "fonds de solidarite pour le logement"},
+  "detr": {"sens": "dotation d equipement des territoires ruraux"},
+  "dsil": {"sens": "dotation de soutien a l investissement local"},
+  "acd": {"sens": "accord collectif departemental"},
+  "vtc": {"sens": "voiture de transport avec chauffeur"},
+  "css": {"sens": "complementaire sante solidaire"},
+  "cmu": {"sens": "complementaire sante solidaire"},
+  "cni": {"sens": "carte d identite"},
+  "hlm": {"sens": "logement social"},
+  "aah": {"sens": "allocation aux adultes handicapes"},
+  "rsa": {"sens": "revenu de solidarite active"},
+  "pch": {"sens": "prestation de compensation du handicap"},
+  "apa": {"sens": "allocation personnalisee d autonomie"},
+  "cpf": {"sens": "compte personnel de formation"},
+  "jdc": {"sens": "journee defense et citoyennete"},
+  "ceam": {"sens": "carte europeenne d assurance maladie"},
+  "dpae": {"sens": "declaration prealable a l embauche"},
+  "fps": {"sens": "forfait post stationnement"},
+  "mdph": {"sens": "maison departementale des personnes handicapees"},
+  "ars": {"sens": "agence regionale de sante", "contextes": [{"si": ["rentree", "scolaire", "ecole", "enfant", "enfants", "caf", "allocation"], "sens": "allocation de rentree scolaire"}]}
+ }
+}

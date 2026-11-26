@@ -144,8 +144,20 @@
 
   // ---------- 2 bis. Service local : la première des cartes en tête de réponse (votre démarche, aussi pour vous,
   // comprendre ; window.CARTES_TETE, donné par le gabarit) qui a un guichet dans la table. Une démarche en ligne n'en a que si elle relève du département de l'usager.
+  // Département choisi sans commune, démarche en ligne de ce département en tête : le contact de la préfecture (Annuaire de
+  // l'administration, DILA), cherché pour la commune la plus peuplée du département.
+  async function prefectureDuDepartement(el, dep) {
+    const r = LISTE.slice(0, 3).find((x) => x && x.k === "dn" && x.dep === dep), c = Moteur.communePrincipale ? Moteur.communePrincipale(dep) : null;
+    if (!r || !c) return;
+    if (SANS_API) { el.innerHTML = `<h3>Contact de la préfecture</h3>` + lienAnnuaire(c, "Préfecture"); majOu(); return; }
+    el.innerHTML = `<p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`; majOu();
+    let l; try { l = await services(c.code, ["prefecture"]); } catch (e) { el.innerHTML = `<p class="ou-src">L'Annuaire de l'administration ne répond pas pour l'instant.</p>`; return; }
+    if (COMMUNE || $("dep").value !== dep) return;
+    el.innerHTML = l.length ? `<h3>Contact de la préfecture</h3>${l.map(htmlService).join("")}` : ""; majOu();
+  }
   async function serviceLocal(el, c) {
     el.innerHTML = "";
+    if (!c && $("dep").value && TABLE) return prefectureDuDepartement(el, $("dep").value);
     if (!c || !TABLE) return;
     const r = (window.CARTES_TETE || LISTE.slice(0, 3)).find((x) => x && portee(x) !== "inc" && regle(x) && (x.k !== "dn" || duDepartement(x, c)));
     if (!r) return;
@@ -259,6 +271,17 @@
     // Démarches locales sans territoire connu (window.DEMANDER_LIEU, donné par la page) : la question du lieu d'abord.
     if (window.DEMANDER_LIEU && !$("dep").value && (!COMMUNE || COMMUNE.devine)) {
       el.className = "";
+      // Démarche préfectorale ou départementale : le département seul, puis une ligne par département qui la propose en ligne.
+      const D = window.DEPS_EN_LIGNE || [];
+      if (D.length) {
+        const ligne = (d) => `<li>${esc(d.nom)} (${esc(d.dep)})&nbsp;: <a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.titre)}</a></li>`;
+        el.innerHTML = `<div class="question-lieu"><label for="dep-res"><b>${esc(window.DEMANDER_LIEU)}</b></label><select id="dep-res">${$("dep").innerHTML}</select>`
+          + `<p class="meta">En ligne dans ${D.length === 1 ? "1 département" : D.length + " départements"}&nbsp;:</p><ul class="deps-en-ligne">${D.slice(0, 8).map(ligne).join("")}</ul>`
+          + (D.length > 8 ? `<details><summary>Les ${D.length - 8} autres départements</summary><ul class="deps-en-ligne">${D.slice(8).map(ligne).join("")}</ul></details>` : "") + `</div>`;
+        $("dep-res").value = "";
+        $("dep-res").addEventListener("change", () => { $("dep").value = $("dep-res").value; if ($("dep").value) relancer(); });
+        return;
+      }
       if (SANS_API) {
         el.innerHTML = `<div class="question-lieu"><label for="dep-res"><b>${esc(window.DEMANDER_LIEU)}</b></label><select id="dep-res">${$("dep").innerHTML}</select></div>`;
         $("dep-res").value = "";
