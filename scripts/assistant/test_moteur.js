@@ -522,7 +522,7 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
     /id="contacts"/.test(page)&&/Contacts utiles<\/h2>/.test(ou)&&/Source&nbsp;: Annuaire de l'administration \(DILA\)/.test(ou)&&/services\(lieu\.code, types\)/.test(ou)&&!/tel:/.test((ou.match(/function ligneContact[\s\S]*?\n  \}/)||[''])[0]), '');
   const dq=M.departementConnu("Ma commune veut rénover l'école pour consommer moins d'énergie, Gironde","");
   verifie('AF3 Gironde nommée dans la question : département connu (33), la commune n\'est pas demandée ; pas de « Et si je n\'ai pas Internet ? » pour une commune, une entreprise ou une association',
-    dq==='33'&&M.departementConnu('titre de séjour en Seine-et-Marne','')==='77'&&M.departementConnu('un lot de vêtements','')===''&&/if \(dq && /.test(ou)&&/enLigne\(r\) && !pro/.test(page), dq);
+    dq==='33'&&M.departementConnu('titre de séjour en Seine-et-Marne','')==='77'&&M.departementConnu('un lot de vêtements','')===''&&/if \(dq && /.test(ou)&&/jamais la commune/.test(ou)&&/enLigne\(r\) && !pro/.test(page), dq);
   verifie('AF4 liste des départements : la démarche nommée une fois (titre sans territoire), puis un département par ligne, par ordre alphabétique, le nom portant le lien',
     M.titreSansTerritoire("Vérification préalable à l'embauche - Préfecture du Calvados")==="Vérification préalable à l'embauche"&&M.titreSansTerritoire('Accord Collectif Départemental des Yvelines - 2026')===''&&/localeCompare\(b\.nom, "fr"\)/.test(ou)&&/Comment la réponse a été construite/.test(page), ''); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec

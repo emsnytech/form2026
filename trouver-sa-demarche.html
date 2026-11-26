@@ -2490,6 +2490,9 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
         el.innerHTML = `<span class="meta">Département&nbsp;:</span> <span class="pastille pastille-fixe">${esc(DEPNAME[dq] || dq)} (${esc(dq)})</span>`;
         return;
       }
+      // Démarche de la préfecture ou d'un département, sans département connu : c'est le département qui est demandé (liste,
+      // ou « Votre département » de l'assistant), jamais la commune.
+      if (!$("dep").value && tete && ((tete.k === "dn" && tete.dep) || (g && (g.types || []).includes("prefecture")))) return;
       // Ni code postal, ni département, ni lieu reconnu : les démarches d'un département sont rétrogradées (×0,8 dans le
       // moteur) ; la page invite à préciser la commune.
       if (!$("dep").value && SANS_API) {
