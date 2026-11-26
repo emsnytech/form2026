@@ -52,6 +52,18 @@ Le moteur tourne dans le navigateur, sans appel à un service extérieur. C'est 
 
 **Démarche préfectorale ou départementale sans territoire.** Quand les meilleurs résultats sont locaux et que le territoire est inconnu, la page demande le département seul, sans code postal. Elle liste les départements qui proposent en ligne une démarche pertinente pour la question, une ligne par département (`Moteur.departementsEnLigne`). Une fois le département choisi, « Où aller » donne le contact de la préfecture, lu dans l'Annuaire de l'administration pour la commune la plus peuplée du département.
 
+**Affichage des réponses.**
+- **Énumération** : la réponse qui énumère des démarches, des départements ou des organismes nomme la démarche une seule fois, dans la phrase d'introduction. Elle donne ensuite une ligne par élément, et c'est le nom qui porte le lien : \`[[DN-12345|Calvados]]\` dans le texte de l'assistant. Les départements sont classés par ordre alphabétique.
+- **« Contacts utiles »**, à la fin de la réponse, regroupe les services à contacter, une ligne par service (nom, lien vers le site ou vers la fiche de l'Annuaire, adresse). La seule source est l'Annuaire de l'administration (DILA). On y trouve :
+  - la préfecture quand le département est connu (choisi, ou nommé dans la question) ;
+  - les services compétents quand seule la commune est connue ;
+  - sinon, un lien vers l'Annuaire.
+  
+  La version avec assistant, publiée sur claude.ai, ne peut appeler aucune API (`FORM_SANS_API`). Elle lit la préfecture du département dans `prefectures.json`. Ce fichier donne les 101 préfectures (nom, site, adresse, fiche, code du département), extraites de l'Annuaire par `scripts/assistant/prefectures.py` avec la date d'extraction, et publiées à côté de la page. Pour Paris, c'est la Préfecture de police, rangée avec les préfectures dans `types_guichets.json`. Pour les autres services, la ligne renvoie à la recherche de l'Annuaire.
+- **L'assistant ne parle pas de lui** : la consigne l'interdit, et la page retire les phrases où il dit « je ».
+- **Pas de question inutile** : la commune n'est pas demandée quand le département suffit. Il n'y a pas de « Et si je n'ai pas Internet ? » pour une commune, une entreprise ou une association.
+- **Démarche sans département connu** : elle n'est gardée que si son titre correspond à la question.
+
 **Ressources liées.** Sous une fiche service-public, la page affiche en retrait jusqu'à trois ressources (services en ligne, formulaires, simulateurs, puis fiches liées) et les démarches en ligne qui lui sont rattachées ; elles ne comptent pas parmi les résultats.
 
 ## Où aller

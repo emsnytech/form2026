@@ -1,0 +1,815 @@
+{
+ "objet": "Préfecture de chaque département (nom, site, adresse, fiche), extraite de l'Annuaire de l'administration par scripts/assistant/prefectures.py ; lue par la version avec assistant (« Contacts utiles »), qui ne peut appeler aucune API.",
+ "source": "Annuaire de l'administration (DILA), api-lannuaire.service-public.gouv.fr, licence ouverte",
+ "date_extraction": "2026-11-26",
+ "prefectures": [
+  {
+   "dep": "01",
+   "nom": "Préfecture - Ain",
+   "site": "https://www.ain.gouv.fr/",
+   "adresse": "45 avenue Alsace-Lorraine, 01000 Bourg-en-Bresse",
+   "fiche": "https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/ain/52540ade-49fd-4b93-9de0-d1b7834097c5",
+   "id": "52540ade-49fd-4b93-9de0-d1b7834097c5"
+  },
+  {
+   "dep": "02",
+   "nom": "Préfecture - Aisne",
+   "site": "https://www.aisne.gouv.fr/",
+   "adresse": "2 rue Paul-Doumer, 02000 Laon",
+   "fiche": "https://lannuaire.service-public.gouv.fr/hauts-de-france/aisne/715f7838-001b-4f45-9cd0-cfb95b6b6fd2",
+   "id": "715f7838-001b-4f45-9cd0-cfb95b6b6fd2"
+  },
+  {
+   "dep": "03",
+   "nom": "Préfecture - Allier",
+   "site": "https://www.allier.gouv.fr/",
+   "adresse": "2 rue Michel-de-L'Hospital, 03000 Moulins",
+   "fiche": "https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/allier/862954e0-d918-4581-bdb3-e397df94003d",
+   "id": "862954e0-d918-4581-bdb3-e397df94003d"
+  },
+  {
+   "dep": "04",
+   "nom": "Préfecture - Alpes-de-Haute-Provence",
+   "site": "https://www.alpes-de-haute-provence.gouv.fr/",
+   "adresse": "Place André Thisy, 04000 Digne-les-Bains",
+   "fiche": "https://lannuaire.service-public.gouv.fr/provence-alpes-cote-d-azur/alpes-de-haute-provence/e91978a4-0aff-4cdd-b27a-f752d54f6bc1",
+   "id": "e91978a4-0aff-4cdd-b27a-f752d54f6bc1"
+  },
+  {
+   "dep": "05",
+   "nom": "Préfecture - Hautes-Alpes",
+   "site": "https://www.hautes-alpes.gouv.fr/",
+   "adresse": "28 rue Saint-Arey, 05000 Gap",
+   "fiche": "https://lannuaire.service-public.gouv.fr/provence-alpes-cote-d-azur/hautes-alpes/b90485a7-f293-4dd6-84b2-8bd60df5c2fb",
+   "id": "b90485a7-f293-4dd6-84b2-8bd60df5c2fb"
+  },
+  {
+   "dep": "06",
+   "nom": "Préfecture - Alpes-Maritimes",
+   "site": "https://www.alpes-maritimes.gouv.fr/",
+   "adresse": "147 boulevard du Mercantour, 06200 Nice",
+   "fiche": "https://lannuaire.service-public.gouv.fr/provence-alpes-cote-d-azur/alpes-maritimes/26a9c215-0daa-4ee8-849f-13a15c5dec5a",
+   "id": "26a9c215-0daa-4ee8-849f-13a15c5dec5a"
+  },
+  {
+   "dep": "07",
+   "nom": "Préfecture - Ardèche",
+   "site": "https://www.ardeche.gouv.fr/",
+   "adresse": "5 rue Pierre-Filliat, 07000 Privas",
+   "fiche": "https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/ardeche/5763d4b9-36f1-46ef-8a1f-be2586b82f0e",
+   "id": "5763d4b9-36f1-46ef-8a1f-be2586b82f0e"
+  },
+  {
+   "dep": "08",
+   "nom": "Préfecture - Ardennes",
+   "site": "https://www.ardennes.gouv.fr/",
+   "adresse": "1 place de la Préfecture, 08000 Charleville-Mézières",
+   "fiche": "https://lannuaire.service-public.gouv.fr/grand-est/ardennes/3c16cdaf-0aef-45e6-b0bb-f39705c9be44",
+   "id": "3c16cdaf-0aef-45e6-b0bb-f39705c9be44"
+  },
+  {
+   "dep": "09",
+   "nom": "Préfecture - Ariège",
+   "site": "https://www.ariege.gouv.fr/",
+   "adresse": "2 rue de la Préfecture, 09000 Foix",
+   "fiche": "https://lannuaire.service-public.gouv.fr/occitanie/ariege/02f0cd6c-39a8-4804-abca-db83f1dbf3fb",
+   "id": "02f0cd6c-39a8-4804-abca-db83f1dbf3fb"
+  },
+  {
+   "dep": "10",
+   "nom": "Préfecture - Aube",
+   "site": "https://www.aube.gouv.fr/",
+   "adresse": "2 rue Pierre-Labonde, 10000 Troyes",
+   "fiche": "https://lannuaire.service-public.gouv.fr/grand-est/aube/ab7e2333-bcc1-4d47-b705-a0dc6e1d058c",
+   "id": "ab7e2333-bcc1-4d47-b705-a0dc6e1d058c"
+  },
+  {
+   "dep": "11",
+   "nom": "Préfecture - Aude",
+   "site": "https://www.aude.gouv.fr/",
+   "adresse": "52 rue Jean-Bringer, 11000 Carcassonne",
+   "fiche": "https://lannuaire.service-public.gouv.fr/occitanie/aude/c5fb7c1b-2426-47bf-b96b-991f84e63a1f",
+   "id": "c5fb7c1b-2426-47bf-b96b-991f84e63a1f"
+  },
+  {
+   "dep": "12",
+   "nom": "Préfecture - Aveyron",
+   "site": "https://www.aveyron.gouv.fr/",
+   "adresse": "Place Foch, 12000 Rodez",
+   "fiche": "https://lannuaire.service-public.gouv.fr/occitanie/aveyron/15e75ffd-e4c3-4b3e-97e8-1f91760ab105",
+   "id": "15e75ffd-e4c3-4b3e-97e8-1f91760ab105"
+  },
+  {
+   "dep": "13",
+   "nom": "Préfecture - Bouches-du-Rhône",
+   "site": "https://www.bouches-du-rhone.gouv.fr/",
+   "adresse": "1 rue Edmond Rostand, 13006 Marseille",
+   "fiche": "https://lannuaire.service-public.gouv.fr/provence-alpes-cote-d-azur/bouches-du-rhone/e5bd70c4-80df-41da-bb65-2e53299b9119",
+   "id": "e5bd70c4-80df-41da-bb65-2e53299b9119"
+  },
+  {
+   "dep": "14",
+   "nom": "Préfecture - Calvados",
+   "site": "https://www.calvados.gouv.fr/",
+   "adresse": "Rue Daniel-Huet, 14000 Caen",
+   "fiche": "https://lannuaire.service-public.gouv.fr/normandie/calvados/72fbe34d-5350-42ae-90b9-e47106d0e7d8",
+   "id": "72fbe34d-5350-42ae-90b9-e47106d0e7d8"
+  },
+  {
+   "dep": "15",
+   "nom": "Préfecture - Cantal",
+   "site": "https://www.cantal.gouv.fr/",
+   "adresse": "Cours Monthyon, 15000 Aurillac",
+   "fiche": "https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/cantal/9b4029f4-b42c-4b5d-9934-483d5b38b63f",
+   "id": "9b4029f4-b42c-4b5d-9934-483d5b38b63f"
+  },
+  {
+   "dep": "16",
+   "nom": "Préfecture - Charente",
+   "site": "https://www.charente.gouv.fr/",
+   "adresse": "7-9 rue de la Préfecture, 16000 Angoulême",
+   "fiche": "https://lannuaire.service-public.gouv.fr/nouvelle-aquitaine/charente/b5738c18-0e90-4c8b-bca3-5f42f6c31807",
+   "id": "b5738c18-0e90-4c8b-bca3-5f42f6c31807"
+  },
+  {
+   "dep": "17",
+   "nom": "Préfecture - Charente-Maritime",
+   "site": "https://www.charente-maritime.gouv.fr/",
+   "adresse": "5 Place des Cordeliers, 17000 La Rochelle",
+   "fiche": "https://lannuaire.service-public.gouv.fr/nouvelle-aquitaine/charente-maritime/b15e371b-5e5d-4a51-b030-411823e4eb3e",
+   "id": "b15e371b-5e5d-4a51-b030-411823e4eb3e"
+  },
+  {
+   "dep": "18",
+   "nom": "Préfecture - Cher",
+   "site": "https://www.cher.gouv.fr/",
+   "adresse": "place Marcel-Plaisant, 18000 Bourges",
+   "fiche": "https://lannuaire.service-public.gouv.fr/centre-val-de-loire/cher/3594994d-5d1f-4276-89fa-7e6494d3ebb0",
+   "id": "3594994d-5d1f-4276-89fa-7e6494d3ebb0"
+  },
+  {
+   "dep": "19",
+   "nom": "Préfecture - Corrèze",
+   "site": "https://www.correze.gouv.fr/",
+   "adresse": "1 rue Souham, 19000 Tulle",
+   "fiche": "https://lannuaire.service-public.gouv.fr/nouvelle-aquitaine/correze/74aff24d-6edf-4a6f-a9a3-3cbeea9309a3",
+   "id": "74aff24d-6edf-4a6f-a9a3-3cbeea9309a3"
+  },
+  {
+   "dep": "21",
+   "nom": "Préfecture - Côte-d'Or",
+   "site": "https://www.cote-dor.gouv.fr/",
+   "adresse": "53 rue de la Préfecture, 21000 Dijon",
+   "fiche": "https://lannuaire.service-public.gouv.fr/bourgogne-franche-comte/cote-d-or/32bfc2bc-9fc9-494b-b0d7-ad7ba0025c69",
+   "id": "32bfc2bc-9fc9-494b-b0d7-ad7ba0025c69"
+  },
+  {
+   "dep": "22",
+   "nom": "Préfecture - Côtes-d'Armor",
+   "site": "https://www.cotes-darmor.gouv.fr",
+   "adresse": "1 place du Général-de-Gaulle, 22000 Saint-Brieuc",
+   "fiche": "https://lannuaire.service-public.gouv.fr/bretagne/cotes-d-armor/106c2d6a-4f2b-4aa6-b08a-998e63790aab",
+   "id": "106c2d6a-4f2b-4aa6-b08a-998e63790aab"
+  },
+  {
+   "dep": "23",
+   "nom": "Préfecture - Creuse",
+   "site": "https://www.creuse.gouv.fr/",
+   "adresse": "place Louis-Lacrocq, 23000 Guéret",
+   "fiche": "https://lannuaire.service-public.gouv.fr/nouvelle-aquitaine/creuse/14732cd9-a9ed-4528-9666-b57ea3660ace",
+   "id": "14732cd9-a9ed-4528-9666-b57ea3660ace"
+  },
+  {
+   "dep": "24",
+   "nom": "Préfecture - Dordogne",
+   "site": "https://www.dordogne.gouv.fr/",
+   "adresse": "2 rue Paul-Louis-Courier, 24000 Périgueux",
+   "fiche": "https://lannuaire.service-public.gouv.fr/nouvelle-aquitaine/dordogne/770ad5fe-b798-4bac-9df2-1f0ecd3d6e57",
+   "id": "770ad5fe-b798-4bac-9df2-1f0ecd3d6e57"
+  },
+  {
+   "dep": "25",
+   "nom": "Préfecture - Doubs",
+   "site": "https://www.doubs.gouv.fr/",
+   "adresse": "3 avenue de la Gare d'Eau, 25000 Besançon",
+   "fiche": "https://lannuaire.service-public.gouv.fr/bourgogne-franche-comte/doubs/27632011-2e64-484f-9707-00afd5ddb0d9",
+   "id": "27632011-2e64-484f-9707-00afd5ddb0d9"
+  },
+  {
+   "dep": "26",
+   "nom": "Préfecture - Drôme",
+   "site": "https://www.drome.gouv.fr/",
+   "adresse": "3 boulevard Vauban, 26000 Valence",
+   "fiche": "https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/drome/d8c995cf-0b36-4eef-a68d-dd0802c76cbf",
+   "id": "d8c995cf-0b36-4eef-a68d-dd0802c76cbf"
+  },
+  {
+   "dep": "27",
+   "nom": "Préfecture - Eure",
+   "site": "https://www.eure.gouv.fr/",
+   "adresse": "boulevard Georges-Chauvin, 27000 Évreux",
+   "fiche": "https://lannuaire.service-public.gouv.fr/normandie/eure/ec1de053-417a-4088-8ddb-02b5089b657f",
+   "id": "ec1de053-417a-4088-8ddb-02b5089b657f"
+  },
+  {
+   "dep": "28",
+   "nom": "Préfecture - Eure-et-Loir",
+   "site": "https://www.eure-et-loir.gouv.fr/",
+   "adresse": "place de la République, 28000 Chartres",
+   "fiche": "https://lannuaire.service-public.gouv.fr/centre-val-de-loire/eure-et-loir/d1dc3abd-cdb8-4d93-aca2-6106411883d8",
+   "id": "d1dc3abd-cdb8-4d93-aca2-6106411883d8"
+  },
+  {
+   "dep": "29",
+   "nom": "Préfecture - Finistère",
+   "site": "https://www.finistere.gouv.fr/",
+   "adresse": "42 boulevard Dupleix, 29000 Quimper",
+   "fiche": "https://lannuaire.service-public.gouv.fr/bretagne/finistere/2a739ac5-4620-45fc-82c5-83fe8db07df0",
+   "id": "2a739ac5-4620-45fc-82c5-83fe8db07df0"
+  },
+  {
+   "dep": "2A",
+   "nom": "Préfecture - Corse-du-Sud",
+   "site": "https://www.corse-du-sud.gouv.fr/",
+   "adresse": "Cours Napoléon, 20000 Ajaccio",
+   "fiche": "https://lannuaire.service-public.gouv.fr/corse/corse-du-sud/4806a1b0-e34a-416f-95e3-21f729837f8f",
+   "id": "4806a1b0-e34a-416f-95e3-21f729837f8f"
+  },
+  {
+   "dep": "2B",
+   "nom": "Préfecture - Haute-Corse",
+   "site": "https://www.haute-corse.gouv.fr/",
+   "adresse": "Maréchal Leclerc de Hautecloque, 20200 Bastia",
+   "fiche": "https://lannuaire.service-public.gouv.fr/corse/haute-corse/9e476da4-b440-4767-a3d5-f32753dec22b",
+   "id": "9e476da4-b440-4767-a3d5-f32753dec22b"
+  },
+  {
+   "dep": "30",
+   "nom": "Préfecture - Gard",
+   "site": "https://www.gard.gouv.fr/",
+   "adresse": "1 rue Guillemette, 30000 Nîmes",
+   "fiche": "https://lannuaire.service-public.gouv.fr/occitanie/gard/6c56f81e-c303-4006-bf23-0e35ecf0b9c0",
+   "id": "6c56f81e-c303-4006-bf23-0e35ecf0b9c0"
+  },
+  {
+   "dep": "31",
+   "nom": "Préfecture - Haute-Garonne",
+   "site": "https://www.haute-garonne.gouv.fr/",
+   "adresse": "1 place Saint-Etienne, 31000 Toulouse",
+   "fiche": "https://lannuaire.service-public.gouv.fr/occitanie/haute-garonne/bcbcfb2e-89ec-44a4-b2ae-28f87c55357f",
+   "id": "bcbcfb2e-89ec-44a4-b2ae-28f87c55357f"
+  },
+  {
+   "dep": "32",
+   "nom": "Préfecture - Gers",
+   "site": "https://www.gers.gouv.fr/",
+   "adresse": "3 place du Préfet-Claude-Érignac, 32000 Auch",
+   "fiche": "https://lannuaire.service-public.gouv.fr/occitanie/gers/dd662b7a-5485-48d6-ad1a-f1720b05830f",
+   "id": "dd662b7a-5485-48d6-ad1a-f1720b05830f"
+  },
+  {
+   "dep": "33",
+   "nom": "Préfecture - Gironde",
+   "site": "https://www.gironde.gouv.fr/",
+   "adresse": "rue Claude Bonnier, 33000 Bordeaux",
+   "fiche": "https://lannuaire.service-public.gouv.fr/nouvelle-aquitaine/gironde/03ba0b47-7bd0-4e68-9a14-4125b9ae0484",
+   "id": "03ba0b47-7bd0-4e68-9a14-4125b9ae0484"
+  },
+  {
+   "dep": "34",
+   "nom": "Préfecture - Hérault",
+   "site": "https://www.herault.gouv.fr",
+   "adresse": "Place des Martyrs-de-la-Résistance, 34000 Montpellier",
+   "fiche": "https://lannuaire.service-public.gouv.fr/occitanie/herault/cc7a5287-6ebb-4dc7-af37-fab99bc266a6",
+   "id": "cc7a5287-6ebb-4dc7-af37-fab99bc266a6"
+  },
+  {
+   "dep": "35",
+   "nom": "Préfecture - Ille-et-Vilaine",
+   "site": "https://www.ille-et-vilaine.gouv.fr",
+   "adresse": "81 boulevard d'Armorique, 35700 Rennes",
+   "fiche": "https://lannuaire.service-public.gouv.fr/bretagne/ille-et-vilaine/229f6896-6ee0-443d-901c-0a3f44b15f30",
+   "id": "229f6896-6ee0-443d-901c-0a3f44b15f30"
+  },
+  {
+   "dep": "36",
+   "nom": "Préfecture - Indre",
+   "site": "https://www.indre.gouv.fr/",
+   "adresse": "rue des Jeux Marins, 36000 Châteauroux",
+   "fiche": "https://lannuaire.service-public.gouv.fr/centre-val-de-loire/indre/1c1f751c-55a1-4056-ab65-33b2f7392a81",
+   "id": "1c1f751c-55a1-4056-ab65-33b2f7392a81"
+  },
+  {
+   "dep": "37",
+   "nom": "Préfecture - Indre-et-Loire",
+   "site": "https://www.indre-et-loire.gouv.fr/",
+   "adresse": "15 rue Bernard-Palissy, 37000 Tours",
+   "fiche": "https://lannuaire.service-public.gouv.fr/centre-val-de-loire/indre-et-loire/206b64cc-3e35-4f28-a521-f3da90bf54cb",
+   "id": "206b64cc-3e35-4f28-a521-f3da90bf54cb"
+  },
+  {
+   "dep": "38",
+   "nom": "Préfecture - Isère",
+   "site": "https://www.isere.gouv.fr",
+   "adresse": "12 place de Verdun, 38000 Grenoble",
+   "fiche": "https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/isere/d43894ef-bf14-42d2-b07d-0c1f6b906026",
+   "id": "d43894ef-bf14-42d2-b07d-0c1f6b906026"
+  },
+  {
+   "dep": "39",
+   "nom": "Préfecture - Jura",
+   "site": "https://www.jura.gouv.fr/",
+   "adresse": "8 rue de la Préfecture, 39000 Lons-le-Saunier",
+   "fiche": "https://lannuaire.service-public.gouv.fr/bourgogne-franche-comte/jura/989adb94-9d39-4054-aaf5-2572aa11ec63",
+   "id": "989adb94-9d39-4054-aaf5-2572aa11ec63"
+  },
+  {
+   "dep": "40",
+   "nom": "Préfecture - Landes",
+   "site": "https://www.landes.gouv.fr/",
+   "adresse": "24-26 rue Victor-Hugo, 40000 Mont-de-Marsan",
+   "fiche": "https://lannuaire.service-public.gouv.fr/nouvelle-aquitaine/landes/634271f6-e001-48ff-97bd-4b91ca455d0a",
+   "id": "634271f6-e001-48ff-97bd-4b91ca455d0a"
+  },
+  {
+   "dep": "41",
+   "nom": "Préfecture - Loir-et-Cher",
+   "site": "https://www.loir-et-cher.gouv.fr/",
+   "adresse": "place de la République, 41000 Blois",
+   "fiche": "https://lannuaire.service-public.gouv.fr/centre-val-de-loire/loir-et-cher/d5282ebc-1fcd-4bf5-ab53-269d21b0bc67",
+   "id": "d5282ebc-1fcd-4bf5-ab53-269d21b0bc67"
+  },
+  {
+   "dep": "42",
+   "nom": "Préfecture - Loire",
+   "site": "https://www.loire.gouv.fr/",
+   "adresse": "2 rue Charles-de-Gaulle, 42000 Saint-Étienne",
+   "fiche": "https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/loire/19fefc85-ec18-4b72-b858-516e20cf1147",
+   "id": "19fefc85-ec18-4b72-b858-516e20cf1147"
+  },
+  {
+   "dep": "43",
+   "nom": "Préfecture - Haute-Loire",
+   "site": "https://www.haute-loire.gouv.fr/",
+   "adresse": "6 avenue du Général-de-Gaulle, 43000 Le Puy-en-Velay",
+   "fiche": "https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/haute-loire/389ea306-c22b-42f2-b5d4-186b7e742301",
+   "id": "389ea306-c22b-42f2-b5d4-186b7e742301"
+  },
+  {
+   "dep": "44",
+   "nom": "Préfecture - Loire-Atlantique",
+   "site": "https://www.loire-atlantique.gouv.fr/",
+   "adresse": "6 quai Ceineray, 44000 Nantes",
+   "fiche": "https://lannuaire.service-public.gouv.fr/pays-de-la-loire/loire-atlantique/99392b20-dff3-40bd-9496-8d6d999b7872",
+   "id": "99392b20-dff3-40bd-9496-8d6d999b7872"
+  },
+  {
+   "dep": "45",
+   "nom": "Préfecture - Loiret",
+   "site": "https://www.loiret.gouv.fr/",
+   "adresse": "181 rue de Bourgogne, 45000 Orléans",
+   "fiche": "https://lannuaire.service-public.gouv.fr/centre-val-de-loire/loiret/3040f259-ddb7-4e8a-bd5a-9ea9149270e2",
+   "id": "3040f259-ddb7-4e8a-bd5a-9ea9149270e2"
+  },
+  {
+   "dep": "46",
+   "nom": "Préfecture - Lot",
+   "site": "https://www.lot.gouv.fr/",
+   "adresse": "Rue de la Légion d'Honneur, 46000 Cahors",
+   "fiche": "https://lannuaire.service-public.gouv.fr/occitanie/lot/2b702572-9604-48f4-b836-518f5a841bb1",
+   "id": "2b702572-9604-48f4-b836-518f5a841bb1"
+  },
+  {
+   "dep": "47",
+   "nom": "Préfecture - Lot-et-Garonne",
+   "site": "https://www.lot-et-garonne.gouv.fr/",
+   "adresse": "place de Verdun, 47000 Agen",
+   "fiche": "https://lannuaire.service-public.gouv.fr/nouvelle-aquitaine/lot-et-garonne/5f7fffa8-a2f3-4830-9c59-d8c67d56ba8a",
+   "id": "5f7fffa8-a2f3-4830-9c59-d8c67d56ba8a"
+  },
+  {
+   "dep": "48",
+   "nom": "Préfecture - Lozère",
+   "site": "https://www.lozere.gouv.fr/",
+   "adresse": "2 rue de la Rovère, 48000 Mende",
+   "fiche": "https://lannuaire.service-public.gouv.fr/occitanie/lozere/77157508-65b5-4cc4-b427-28d0d7c8109a",
+   "id": "77157508-65b5-4cc4-b427-28d0d7c8109a"
+  },
+  {
+   "dep": "49",
+   "nom": "Préfecture - Maine-et-Loire",
+   "site": "https://www.maine-et-loire.gouv.fr/",
+   "adresse": "Place Michel-Debré, 49100 Angers",
+   "fiche": "https://lannuaire.service-public.gouv.fr/pays-de-la-loire/maine-et-loire/c28fed7b-ba94-4baa-97ca-0346b526229d",
+   "id": "c28fed7b-ba94-4baa-97ca-0346b526229d"
+  },
+  {
+   "dep": "50",
+   "nom": "Préfecture - Manche",
+   "site": "https://www.manche.gouv.fr/",
+   "adresse": "Place de la Préfecture, 50000 Saint-Lô",
+   "fiche": "https://lannuaire.service-public.gouv.fr/normandie/manche/e5db6c06-1ccb-4402-a7a8-f0ceb5ac9268",
+   "id": "e5db6c06-1ccb-4402-a7a8-f0ceb5ac9268"
+  },
+  {
+   "dep": "51",
+   "nom": "Préfecture - Marne",
+   "site": "https://www.marne.gouv.fr/",
+   "adresse": "17-19 rue Carnot, 51000 Châlons-en-Champagne",
+   "fiche": "https://lannuaire.service-public.gouv.fr/grand-est/marne/1cb215c2-96e1-4a94-921a-98a370bc9887",
+   "id": "1cb215c2-96e1-4a94-921a-98a370bc9887"
+  },
+  {
+   "dep": "52",
+   "nom": "Préfecture - Haute-Marne",
+   "site": "https://www.haute-marne.gouv.fr/",
+   "adresse": "89 rue Victoire-de-la-Marne, 52000 Chaumont",
+   "fiche": "https://lannuaire.service-public.gouv.fr/grand-est/haute-marne/15395ad3-2176-46b0-9d0a-ee60133d7906",
+   "id": "15395ad3-2176-46b0-9d0a-ee60133d7906"
+  },
+  {
+   "dep": "53",
+   "nom": "Préfecture - Mayenne",
+   "site": "https://www.mayenne.gouv.fr/",
+   "adresse": "46 rue Mazagran, 53000 Laval",
+   "fiche": "https://lannuaire.service-public.gouv.fr/pays-de-la-loire/mayenne/869d8e5a-0c0a-468c-8736-ce74cfacbc76",
+   "id": "869d8e5a-0c0a-468c-8736-ce74cfacbc76"
+  },
+  {
+   "dep": "54",
+   "nom": "Préfecture - Meurthe-et-Moselle",
+   "site": "https://www.meurthe-et-moselle.gouv.fr/",
+   "adresse": "6 rue Sainte-Catherine, 54000 Nancy",
+   "fiche": "https://lannuaire.service-public.gouv.fr/grand-est/meurthe-et-moselle/b07dff0b-5af8-4359-9c04-ffeb1cba13c9",
+   "id": "b07dff0b-5af8-4359-9c04-ffeb1cba13c9"
+  },
+  {
+   "dep": "55",
+   "nom": "Préfecture - Meuse",
+   "site": "https://www.meuse.gouv.fr/",
+   "adresse": "40 rue du Bourg, 55000 Bar-le-Duc",
+   "fiche": "https://lannuaire.service-public.gouv.fr/grand-est/meuse/7ced2ae9-068c-40c5-8175-e0f2fbd596b1",
+   "id": "7ced2ae9-068c-40c5-8175-e0f2fbd596b1"
+  },
+  {
+   "dep": "56",
+   "nom": "Préfecture - Morbihan",
+   "site": "https://www.morbihan.gouv.fr/",
+   "adresse": "10 place du Général-de-Gaulle, 56000 Vannes",
+   "fiche": "https://lannuaire.service-public.gouv.fr/bretagne/morbihan/966f71dd-d463-4994-ad32-2f351bccb55c",
+   "id": "966f71dd-d463-4994-ad32-2f351bccb55c"
+  },
+  {
+   "dep": "57",
+   "nom": "Préfecture - Moselle",
+   "site": "https://www.moselle.gouv.fr/",
+   "adresse": "place Jean-Marie-Rausch, 57000 Metz",
+   "fiche": "https://lannuaire.service-public.gouv.fr/grand-est/moselle/b72ca22f-907c-48ff-91e0-c8b3aa953ae5",
+   "id": "b72ca22f-907c-48ff-91e0-c8b3aa953ae5"
+  },
+  {
+   "dep": "58",
+   "nom": "Préfecture - Nièvre",
+   "site": "https://www.nievre.gouv.fr/",
+   "adresse": "40 rue de la Préfecture, 58000 Nevers",
+   "fiche": "https://lannuaire.service-public.gouv.fr/bourgogne-franche-comte/nievre/2cf88fcb-e2ee-4531-805b-13135f256ff6",
+   "id": "2cf88fcb-e2ee-4531-805b-13135f256ff6"
+  },
+  {
+   "dep": "59",
+   "nom": "Préfecture - Nord",
+   "site": "https://www.nord.gouv.fr/",
+   "adresse": "12 rue Jean-sans-Peur, 59000 Lille",
+   "fiche": "https://lannuaire.service-public.gouv.fr/hauts-de-france/nord/88df876f-8048-41cd-b985-d796bd21580e",
+   "id": "88df876f-8048-41cd-b985-d796bd21580e"
+  },
+  {
+   "dep": "60",
+   "nom": "Préfecture - Oise",
+   "site": "https://www.oise.gouv.fr/",
+   "adresse": "1 place de la Préfecture, 60000 Beauvais",
+   "fiche": "https://lannuaire.service-public.gouv.fr/hauts-de-france/oise/51d7cd1b-4d4e-4910-9a7b-947ffd055ced",
+   "id": "51d7cd1b-4d4e-4910-9a7b-947ffd055ced"
+  },
+  {
+   "dep": "61",
+   "nom": "Préfecture - Orne",
+   "site": "https://www.orne.gouv.fr/",
+   "adresse": "39 rue Saint-Blaise, 61000 Alençon",
+   "fiche": "https://lannuaire.service-public.gouv.fr/normandie/orne/c4fd783b-bdcc-402d-b870-223fc4445b0c",
+   "id": "c4fd783b-bdcc-402d-b870-223fc4445b0c"
+  },
+  {
+   "dep": "62",
+   "nom": "Préfecture - Pas-de-Calais",
+   "site": "https://www.pas-de-calais.gouv.fr/",
+   "adresse": "rue Ferdinand-Buisson, 62000 Arras",
+   "fiche": "https://lannuaire.service-public.gouv.fr/hauts-de-france/pas-de-calais/a198c12b-5ae6-4c67-9a29-fb47323c8b7f",
+   "id": "a198c12b-5ae6-4c67-9a29-fb47323c8b7f"
+  },
+  {
+   "dep": "63",
+   "nom": "Préfecture - Puy-de-Dôme",
+   "site": "https://www.puy-de-dome.gouv.fr/",
+   "adresse": "1 rue d'Assas, 63000 Clermont-Ferrand",
+   "fiche": "https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/puy-de-dome/d495649e-148a-4d09-97c2-2c11263bd7cf",
+   "id": "d495649e-148a-4d09-97c2-2c11263bd7cf"
+  },
+  {
+   "dep": "64",
+   "nom": "Préfecture - Pyrénées-Atlantiques",
+   "site": "https://www.pyrenees-atlantiques.gouv.fr/",
+   "adresse": "2 rue du Maréchal-Joffre, 64000 Pau",
+   "fiche": "https://lannuaire.service-public.gouv.fr/nouvelle-aquitaine/pyrenees-atlantiques/1f948f35-9246-4220-92dd-dfc63c909135",
+   "id": "1f948f35-9246-4220-92dd-dfc63c909135"
+  },
+  {
+   "dep": "65",
+   "nom": "Préfecture - Hautes-Pyrénées",
+   "site": "https://www.hautes-pyrenees.gouv.fr/",
+   "adresse": "3 rue des Ursulines, 65000 Tarbes",
+   "fiche": "https://lannuaire.service-public.gouv.fr/occitanie/hautes-pyrenees/46f1fa23-691f-4c8e-bc70-93e9c8c42e1c",
+   "id": "46f1fa23-691f-4c8e-bc70-93e9c8c42e1c"
+  },
+  {
+   "dep": "66",
+   "nom": "Préfecture - Pyrénées-Orientales",
+   "site": "https://www.pyrenees-orientales.gouv.fr/",
+   "adresse": "24 quai Sadi-Carnot, 66000 Perpignan",
+   "fiche": "https://lannuaire.service-public.gouv.fr/occitanie/pyrenees-orientales/26e27775-3024-4da5-b6d7-ecb3b0a8733c",
+   "id": "26e27775-3024-4da5-b6d7-ecb3b0a8733c"
+  },
+  {
+   "dep": "67",
+   "nom": "Préfecture - Bas-Rhin",
+   "site": "https://www.bas-rhin.gouv.fr/",
+   "adresse": "5 place de la République, 67000 Strasbourg",
+   "fiche": "https://lannuaire.service-public.gouv.fr/grand-est/bas-rhin/2d5be364-275d-4e49-93cd-f132cfd45255",
+   "id": "2d5be364-275d-4e49-93cd-f132cfd45255"
+  },
+  {
+   "dep": "68",
+   "nom": "Préfecture - Haut-Rhin",
+   "site": "https://www.haut-rhin.gouv.fr/",
+   "adresse": "3 rue Fleischhauer, 68000 Colmar",
+   "fiche": "https://lannuaire.service-public.gouv.fr/grand-est/haut-rhin/9a58d701-f793-486d-863c-63ee35dd2b10",
+   "id": "9a58d701-f793-486d-863c-63ee35dd2b10"
+  },
+  {
+   "dep": "69",
+   "nom": "Préfecture - Rhône",
+   "site": "https://www.rhone.gouv.fr/",
+   "adresse": "106 rue Pierre-Corneille, 69003 Lyon",
+   "fiche": "https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/rhone/97aee73f-4216-4b70-94bb-bc5bd5d76984",
+   "id": "97aee73f-4216-4b70-94bb-bc5bd5d76984"
+  },
+  {
+   "dep": "70",
+   "nom": "Préfecture - Haute-Saône",
+   "site": "https://www.haute-saone.gouv.fr/",
+   "adresse": "1 rue de la Préfecture, 70000 Vesoul",
+   "fiche": "https://lannuaire.service-public.gouv.fr/bourgogne-franche-comte/haute-saone/f0726527-39a6-4c4c-a6cd-2284d82d48b9",
+   "id": "f0726527-39a6-4c4c-a6cd-2284d82d48b9"
+  },
+  {
+   "dep": "71",
+   "nom": "Préfecture - Saône-et-Loire",
+   "site": "https://www.saone-et-loire.gouv.fr/",
+   "adresse": "196 rue de Strasbourg, 71000 Mâcon",
+   "fiche": "https://lannuaire.service-public.gouv.fr/bourgogne-franche-comte/saone-et-loire/e27befdb-2fb3-47fd-955a-60c930941d02",
+   "id": "e27befdb-2fb3-47fd-955a-60c930941d02"
+  },
+  {
+   "dep": "72",
+   "nom": "Préfecture - Sarthe",
+   "site": "https://www.sarthe.gouv.fr/",
+   "adresse": "place Aristide-Briand, 72000 Le Mans",
+   "fiche": "https://lannuaire.service-public.gouv.fr/pays-de-la-loire/sarthe/885ea458-c4db-4634-8d91-d651c44ba72d",
+   "id": "885ea458-c4db-4634-8d91-d651c44ba72d"
+  },
+  {
+   "dep": "73",
+   "nom": "Préfecture - Savoie",
+   "site": "https://www.savoie.gouv.fr/",
+   "adresse": "place Caffe, 73000 Chambéry",
+   "fiche": "https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/savoie/81344c70-3601-481e-857d-a24f50b5e5a7",
+   "id": "81344c70-3601-481e-857d-a24f50b5e5a7"
+  },
+  {
+   "dep": "74",
+   "nom": "Préfecture - Haute-Savoie",
+   "site": "https://www.haute-savoie.gouv.fr/",
+   "adresse": "rue du 30e-Régiment-d'Infanterie, 74000 Annecy",
+   "fiche": "https://lannuaire.service-public.gouv.fr/auvergne-rhone-alpes/haute-savoie/7996bb87-77d0-4570-a7cd-325e0cc48b2f",
+   "id": "7996bb87-77d0-4570-a7cd-325e0cc48b2f"
+  },
+  {
+   "dep": "75",
+   "nom": "Préfecture de police de Paris",
+   "site": "https://www.prefecturedepolice.interieur.gouv.fr/",
+   "adresse": "1 bis rue de Lutèce, 75004 Paris",
+   "fiche": "https://lannuaire.service-public.gouv.fr/ile-de-france/paris/90c98979-445b-4410-8dc9-feae721b0738",
+   "id": "90c98979-445b-4410-8dc9-feae721b0738"
+  },
+  {
+   "dep": "76",
+   "nom": "Préfecture - Seine-Maritime",
+   "site": "https://www.seine-maritime.gouv.fr/",
+   "adresse": "7 place de la Madeleine, 76000 Rouen",
+   "fiche": "https://lannuaire.service-public.gouv.fr/normandie/seine-maritime/67aefdb7-9729-43ee-bc54-a768300c1f20",
+   "id": "67aefdb7-9729-43ee-bc54-a768300c1f20"
+  },
+  {
+   "dep": "77",
+   "nom": "Préfecture - Seine-et-Marne",
+   "site": "https://www.seine-et-marne.gouv.fr/",
+   "adresse": "12 rue des Saints-Pères, 77000 Melun",
+   "fiche": "https://lannuaire.service-public.gouv.fr/ile-de-france/seine-et-marne/245006d0-6cc2-4b53-861a-c2e9b8a6747b",
+   "id": "245006d0-6cc2-4b53-861a-c2e9b8a6747b"
+  },
+  {
+   "dep": "78",
+   "nom": "Préfecture - Yvelines",
+   "site": "https://www.yvelines.gouv.fr/",
+   "adresse": "1 rue Jean-Houdon, 78000 Versailles",
+   "fiche": "https://lannuaire.service-public.gouv.fr/ile-de-france/yvelines/b8310757-c178-43fe-aec5-0cb4803b86b2",
+   "id": "b8310757-c178-43fe-aec5-0cb4803b86b2"
+  },
+  {
+   "dep": "79",
+   "nom": "Préfecture - Deux-Sèvres",
+   "site": "https://www.deux-sevres.gouv.fr/",
+   "adresse": "4 rue du Guesclin, 79000 Niort",
+   "fiche": "https://lannuaire.service-public.gouv.fr/nouvelle-aquitaine/deux-sevres/e4859d0d-a7c5-44a9-a714-7b3252f74552",
+   "id": "e4859d0d-a7c5-44a9-a714-7b3252f74552"
+  },
+  {
+   "dep": "80",
+   "nom": "Préfecture - Somme",
+   "site": "https://www.somme.gouv.fr/",
+   "adresse": "51 rue de la République, 80000 Amiens",
+   "fiche": "https://lannuaire.service-public.gouv.fr/hauts-de-france/somme/57fbd6c8-62b5-443b-bf52-d7b3db5b2b47",
+   "id": "57fbd6c8-62b5-443b-bf52-d7b3db5b2b47"
+  },
+  {
+   "dep": "81",
+   "nom": "Préfecture - Tarn",
+   "site": "https://www.tarn.gouv.fr/",
+   "adresse": "Place de la Préfecture, 81000 Albi",
+   "fiche": "https://lannuaire.service-public.gouv.fr/occitanie/tarn/677614ea-f87a-48ca-9f3d-928e5aa2b272",
+   "id": "677614ea-f87a-48ca-9f3d-928e5aa2b272"
+  },
+  {
+   "dep": "82",
+   "nom": "Préfecture - Tarn-et-Garonne",
+   "site": "https://www.tarn-et-garonne.gouv.fr/",
+   "adresse": "2 allée de l'Empereur, 82013 Montauban",
+   "fiche": "https://lannuaire.service-public.gouv.fr/occitanie/tarn-et-garonne/6e8b5540-e240-41d3-a029-b6262c5a5373",
+   "id": "6e8b5540-e240-41d3-a029-b6262c5a5373"
+  },
+  {
+   "dep": "83",
+   "nom": "Préfecture - Var",
+   "site": "https://www.var.gouv.fr",
+   "adresse": "boulevard du 112e Régiment-d'Infanterie, 83000 Toulon",
+   "fiche": "https://lannuaire.service-public.gouv.fr/provence-alpes-cote-d-azur/var/162ab3b2-360f-46cc-ac83-67c967b214bd",
+   "id": "162ab3b2-360f-46cc-ac83-67c967b214bd"
+  },
+  {
+   "dep": "84",
+   "nom": "Préfecture - Vaucluse",
+   "site": "https://www.vaucluse.gouv.fr/",
+   "adresse": "2 avenue de la Folie, 84000 Avignon",
+   "fiche": "https://lannuaire.service-public.gouv.fr/provence-alpes-cote-d-azur/vaucluse/55e56746-59d1-4cb5-8b4a-136171fb5784",
+   "id": "55e56746-59d1-4cb5-8b4a-136171fb5784"
+  },
+  {
+   "dep": "85",
+   "nom": "Préfecture - Vendée",
+   "site": "https://www.vendee.gouv.fr/",
+   "adresse": "29 rue Delille, 85000 La Roche-sur-Yon",
+   "fiche": "https://lannuaire.service-public.gouv.fr/pays-de-la-loire/vendee/f1a3efbb-cff0-4990-90f1-6d40c13abdfa",
+   "id": "f1a3efbb-cff0-4990-90f1-6d40c13abdfa"
+  },
+  {
+   "dep": "86",
+   "nom": "Préfecture - Vienne",
+   "site": "https://www.vienne.gouv.fr",
+   "adresse": "7 place Aristide-Briand, 86000 Poitiers",
+   "fiche": "https://lannuaire.service-public.gouv.fr/nouvelle-aquitaine/vienne/044f4ada-e551-426d-8c62-6d7b19f5d21a",
+   "id": "044f4ada-e551-426d-8c62-6d7b19f5d21a"
+  },
+  {
+   "dep": "87",
+   "nom": "Préfecture - Haute-Vienne",
+   "site": "https://www.haute-vienne.gouv.fr/",
+   "adresse": "6 rue Daniel Lamazière, 87000 Limoges",
+   "fiche": "https://lannuaire.service-public.gouv.fr/nouvelle-aquitaine/haute-vienne/86d0ebc6-a84b-4cc8-a178-f5172ca3584c",
+   "id": "86d0ebc6-a84b-4cc8-a178-f5172ca3584c"
+  },
+  {
+   "dep": "88",
+   "nom": "Préfecture - Vosges",
+   "site": "https://www.vosges.gouv.fr/",
+   "adresse": "place Foch, 88026 Epinal",
+   "fiche": "https://lannuaire.service-public.gouv.fr/grand-est/vosges/f999af82-5a34-4f67-a8df-52a2a8c177d1",
+   "id": "f999af82-5a34-4f67-a8df-52a2a8c177d1"
+  },
+  {
+   "dep": "89",
+   "nom": "Préfecture - Yonne",
+   "site": "https://www.yonne.gouv.fr/",
+   "adresse": "2 rue Cochois, 89000 Auxerre",
+   "fiche": "https://lannuaire.service-public.gouv.fr/bourgogne-franche-comte/yonne/cc30c13c-3551-4a44-8750-bc5bca8d6f92",
+   "id": "cc30c13c-3551-4a44-8750-bc5bca8d6f92"
+  },
+  {
+   "dep": "90",
+   "nom": "Préfecture - Territoire de Belfort",
+   "site": "https://www.territoire-de-belfort.gouv.fr/",
+   "adresse": "1 rue Bartholdi, 90000 Belfort",
+   "fiche": "https://lannuaire.service-public.gouv.fr/bourgogne-franche-comte/territoire-de-belfort/6ade1784-caf8-438a-869d-6139cb1b6353",
+   "id": "6ade1784-caf8-438a-869d-6139cb1b6353"
+  },
+  {
+   "dep": "91",
+   "nom": "Préfecture - Essonne",
+   "site": "https://www.essonne.gouv.fr/",
+   "adresse": "Boulevard de France, 91000 Évry-Courcouronnes",
+   "fiche": "https://lannuaire.service-public.gouv.fr/ile-de-france/essonne/68982b67-c7ab-46f7-aa74-c9a46a7d04ad",
+   "id": "68982b67-c7ab-46f7-aa74-c9a46a7d04ad"
+  },
+  {
+   "dep": "92",
+   "nom": "Préfecture - Hauts-de-Seine",
+   "site": "https://www.hauts-de-seine.gouv.fr/",
+   "adresse": "167 avenue Joliot-Curie, 92100 Nanterre",
+   "fiche": "https://lannuaire.service-public.gouv.fr/ile-de-france/hauts-de-seine/0d56064a-bf03-4ef4-a8b0-85d882fa4677",
+   "id": "0d56064a-bf03-4ef4-a8b0-85d882fa4677"
+  },
+  {
+   "dep": "93",
+   "nom": "Préfecture - Seine-Saint-Denis",
+   "site": "https://www.seine-saint-denis.gouv.fr/",
+   "adresse": "1 esplanade Jean-Moulin, 93000 Bobigny",
+   "fiche": "https://lannuaire.service-public.gouv.fr/ile-de-france/seine-saint-denis/6cbec247-95d0-4aca-befe-352a3805c7de",
+   "id": "6cbec247-95d0-4aca-befe-352a3805c7de"
+  },
+  {
+   "dep": "94",
+   "nom": "Préfecture - Val-de-Marne",
+   "site": "https://www.val-de-marne.gouv.fr/",
+   "adresse": "21-29 avenue du Général-de-Gaulle, 94000 Créteil",
+   "fiche": "https://lannuaire.service-public.gouv.fr/ile-de-france/val-de-marne/dc82689e-1fe2-495d-aceb-6f1fed3c5690",
+   "id": "dc82689e-1fe2-495d-aceb-6f1fed3c5690"
+  },
+  {
+   "dep": "95",
+   "nom": "Préfecture - Val-d'Oise",
+   "site": "https://www.val-doise.gouv.fr",
+   "adresse": "5 avenue Bernard-Hirsch, 95000 Cergy-Pontoise",
+   "fiche": "https://lannuaire.service-public.gouv.fr/ile-de-france/val-d-oise/70ca07b0-db06-41a7-ae0f-58239c9a643a",
+   "id": "70ca07b0-db06-41a7-ae0f-58239c9a643a"
+  },
+  {
+   "dep": "971",
+   "nom": "Préfecture - Guadeloupe",
+   "site": "https://www.guadeloupe.gouv.fr/",
+   "adresse": "Avenue Paul Lacavé, 97100 Basse-Terre",
+   "fiche": "https://lannuaire.service-public.gouv.fr/guadeloupe/guadeloupe/7121906b-cecf-46b5-abe5-ec4f9ef8c669",
+   "id": "7121906b-cecf-46b5-abe5-ec4f9ef8c669"
+  },
+  {
+   "dep": "972",
+   "nom": "Préfecture - Martinique",
+   "site": "https://www.martinique.gouv.fr/",
+   "adresse": "Rue Louis Blanc, 97200 Fort-de-France",
+   "fiche": "https://lannuaire.service-public.gouv.fr/martinique/martinique/f9d7fb06-b1c4-4fb4-9840-235085c3e637",
+   "id": "f9d7fb06-b1c4-4fb4-9840-235085c3e637"
+  },
+  {
+   "dep": "973",
+   "nom": "Préfecture - Guyane",
+   "site": "https://www.guyane.gouv.fr/",
+   "adresse": "Rue Fiedmond, 97300 Cayenne",
+   "fiche": "https://lannuaire.service-public.gouv.fr/guyane/guyane/1efa4780-c58a-4b68-84ca-725d0c7cf82c",
+   "id": "1efa4780-c58a-4b68-84ca-725d0c7cf82c"
+  },
+  {
+   "dep": "974",
+   "nom": "Préfecture - La Réunion",
+   "site": "https://www.reunion.gouv.fr/",
+   "adresse": "6 rue des Messageries, 97400 Saint-Denis",
+   "fiche": "https://lannuaire.service-public.gouv.fr/la-reunion/la-reunion/b10e78eb-7e1f-4a39-a345-5356a242b6d9",
+   "id": "b10e78eb-7e1f-4a39-a345-5356a242b6d9"
+  },
+  {
+   "dep": "976",
+   "nom": "Préfecture - Mayotte",
+   "site": "https://www.mayotte.gouv.fr/",
+   "adresse": "Avenue de la Préfecture, 97600 Mamoudzou",
+   "fiche": "https://lannuaire.service-public.gouv.fr/mayotte/mayotte/d67b1697-0e17-45a5-a1e3-eaa12eba8270",
+   "id": "d67b1697-0e17-45a5-a1e3-eaa12eba8270"
+  }
+ ]
+}

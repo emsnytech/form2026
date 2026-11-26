@@ -512,7 +512,31 @@ const presentes=(l)=>l.filter(i=>ix.byId.has(i));
 // puis le contact de la préfecture (Annuaire, ou_aller.js).
 { const C=M.choisir(ix,'ACD',{k:20}), V=M.departementsEnLigne(ix,'ACD'), ou=fs.readFileSync(path.join(__dirname,'ou_aller.js'),'utf8');
   verifie('DP1 « ACD » : le lieu est demandé, une ligne par département (77, 78, 91) ; la page demande le département seul et donne ensuite le contact de la préfecture',
-    C.demanderLieu&&V.map(v=>v.dep).join(',')==='77,78,91'&&/deps-en-ligne/.test(ou)&&/services\(c\.code, \["prefecture"\]\)/.test(ou), V.map(v=>v.dep+' '+v.r.id).join(' ; ')); }
+    C.demanderLieu&&V.map(v=>v.dep).join(',')==='77,78,91'&&/deps-en-ligne/.test(ou)&&/types = \["prefecture"\]/.test(ou)&&/async function contactsUtiles/.test(ou), V.map(v=>v.dep+' '+v.r.id).join(' ; ')); }
+// Affichage des réponses : une ligne par élément, « Contacts utiles » à la fin (Annuaire seulement), l'assistant ne parle pas de lui.
+{ const page=fs.readFileSync(path.join(__dirname,'..','..','trouver-sa-demarche.html'),'utf8'), ou=fs.readFileSync(path.join(__dirname,'ou_aller.js'),'utf8');
+  const cons=(page.match(/function consigne\(q\) \{[\s\S]*?\n\}/)||[''])[0];
+  verifie('AF1 consigne : l\'assistant ne parle pas de lui (ni « je », ni « n\'existe peut-être pas encore », ni « signalez-la ») ; énumération une ligne par élément au format [[DN-…|nom]] ; aucun contact dans le texte ; la page retire une phrase où il dit « je »',
+    /Ne parle jamais de toi/.test(cons)&&/\[\[DN-12345\|Calvados\]\]/.test(cons)&&/Contacts utiles/.test(cons)&&!/Si vous en connaissez une, signalez-la/.test(cons)&&/sansJe\(t\)/.test(page)&&/\(\?:\\\|\(\[\^\\\]\\n\]\{1,60\}\)\)\?/.test(page), cons.length+' caractères');
+  verifie('AF2 « Contacts utiles » à la fin de la réponse : une ligne par service, lus dans l\'Annuaire (DILA) seulement ; préfecture si le département est connu',
+    /id="contacts"/.test(page)&&/Contacts utiles<\/h2>/.test(ou)&&/Source&nbsp;: Annuaire de l'administration \(DILA\)/.test(ou)&&/services\(lieu\.code, types\)/.test(ou)&&!/tel:/.test((ou.match(/function ligneContact[\s\S]*?\n  \}/)||[''])[0]), '');
+  const dq=M.departementConnu("Ma commune veut rénover l'école pour consommer moins d'énergie, Gironde","");
+  verifie('AF3 Gironde nommée dans la question : département connu (33), la commune n\'est pas demandée ; pas de « Et si je n\'ai pas Internet ? » pour une commune, une entreprise ou une association',
+    dq==='33'&&M.departementConnu('titre de séjour en Seine-et-Marne','')==='77'&&M.departementConnu('un lot de vêtements','')===''&&/if \(dq && /.test(ou)&&/jamais la commune/.test(ou)&&/enLigne\(r\) && !pro/.test(page), dq);
+  verifie('AF4 liste des départements : la démarche nommée une fois (titre sans territoire), puis un département par ligne, par ordre alphabétique, le nom portant le lien',
+    M.titreSansTerritoire("Vérification préalable à l'embauche - Préfecture du Calvados")==="Vérification préalable à l'embauche"&&M.titreSansTerritoire('Accord Collectif Départemental des Yvelines - 2026')===''&&/localeCompare\(b\.nom, "fr"\)/.test(ou)&&/Comment la réponse a été construite/.test(page), ''); }
+// « Contacts utiles », question « …, Gironde » : la préfecture de la Gironde, avec son site et son adresse, dans les deux versions.
+// Site : enregistrement de l'API de l'Annuaire (même forme que l'API, construit ici sans réseau) ; version avec assistant :
+// prefectures.json (extrait de l'Annuaire, publié à côté de la page). Une même ligne : nom → site, adresse dessous.
+{ const PF=JSON.parse(fs.readFileSync(path.join(__dirname,'..','..','donnees','assistant','prefectures.json'),'utf8')), ou=fs.readFileSync(path.join(__dirname,'ou_aller.js'),'utf8');
+  const q="Ma commune veut rénover l'école pour consommer moins d'énergie, Gironde", dep=M.departementConnu(q,''), p=PF.prefectures.find(x=>x.dep===dep)||{};
+  const [voie,cpv]=(p.adresse||'').split(', '), api={nom:p.nom, url_service_public:p.fiche, site_internet:JSON.stringify([{valeur:p.site}]),
+    adresse:JSON.stringify([{type_adresse:'Adresse', numero_voie:voie, code_postal:(cpv||'').split(' ')[0], nom_commune:(cpv||'').split(' ').slice(1).join(' ')}])};
+  const ia=M.ligneContactHtml(M.contactAnnuaire(p)), site=M.ligneContactHtml(M.contactAnnuaire(api));
+  const ok=(h)=>/Préfecture - Gironde/.test(h)&&/href="https:\/\/www\.gironde\.gouv\.fr\/"/.test(h)&&/rue Claude Bonnier, 33000 Bordeaux/.test(h);
+  verifie('PF1 « …, Gironde » : « Contacts utiles » donne la préfecture de la Gironde, avec son site et son adresse, sur le site (API de l\'Annuaire) et dans la version avec assistant (prefectures.json, 101 préfectures, date d\'extraction)',
+    dep==='33'&&ok(ia)&&ok(site)&&ia===site&&PF.prefectures.length===101&&PF.prefectures.every(x=>x.nom&&x.site&&x.adresse&&x.dep)&&/^\d{4}-\d{2}-\d{2}$/.test(PF.date_extraction)
+    &&/chargerPrefectures\(\)/.test(ou)&&/SANS_API && !c && dep/.test(ou), ia); }
 // ---------- Tolérance aux fautes (Moteur.corriger, appliquée par la page à la recherche simple) : mêmes réponses qu'avec
 // l'orthographe correcte, aucune correction sur un lieu, un mot courant ou une question des tests ci-dessus.
 console.log('\n=== Fautes de frappe et d\'orthographe');

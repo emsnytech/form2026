@@ -195,6 +195,8 @@ input#cp,input#p-cp,.cp-res{font:inherit;font-size:15px;min-height:44px;padding:
 /* Téléphone (moins de 600 px) : une marge de 16 px partout ; en-tête sur une ligne (titre et pastille) ; « Comment ça marche »
    et « Contribuer » en pied de page, un seul lien « Comment ça marche » sur la page ; titre réduit d'un tiers ; « Exemples ». */
 .pied-mob,.txt-court{display:none}
+.contacts h2{font-size:17px;margin:0 0 6px}.contacts ul{list-style:none;margin:0;padding:0}.contacts li{padding:8px 0;border-top:1px solid var(--line)}.contacts li:first-child{border-top:0}
+.contacts .adr{display:block;color:var(--muted);font-size:15px}
 .deps-en-ligne{list-style:none;margin:6px 0 0;padding:0}.deps-en-ligne li{padding:6px 0;border-top:1px solid var(--line)}.deps-en-ligne li:first-child{border-top:0}
 @media (max-width:599px){
   .tete .l{flex-wrap:nowrap;padding-top:6px;padding-bottom:6px}
@@ -306,8 +308,9 @@ dialog ul{margin:6px 0 0 1.1rem;padding:0;font-size:15px}dialog li{margin:4px 0}
   <section class="carte" id="carte-aussi" aria-labelledby="h-aussi" hidden></section>
   <section class="carte" id="carte-ou" aria-labelledby="h-ou" hidden></section>
   <section class="comprendre" id="carte-comprendre" aria-labelledby="h-comprendre" hidden></section>
+  <section class="contacts" id="contacts" aria-labelledby="h-contacts" hidden></section>
   <details class="pli" id="autres" hidden><summary id="autres-titre">Autres pistes</summary><ul class="pistes" id="autres-liste"></ul></details>
-  <details class="pli" id="cherche"><summary>Comment j'ai cherché</summary><div class="cherche" id="cherche-corps"></div></details>
+  <details class="pli" id="cherche"><summary>Comment la réponse a été construite</summary><div class="cherche" id="cherche-corps"></div></details>
   <p class="manque" id="rep-manque" hidden></p>
   <form id="ff" class="ff-bas">
     <label for="fq" class="sr-only">Une autre question</label>
@@ -844,6 +847,30 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     }
     return [...parDep].sort((a, b) => (a[0] < b[0] ? -1 : 1)).map(([dep, r]) => ({ dep, r }));
   }
+  // Titre sans son territoire, pour présenter une seule fois une démarche proposée par plusieurs départements : les morceaux
+  // du titre (séparés par « - », « : », « | ») qui nomment un département, une préfecture ou un numéro sont retirés.
+  function titreSansTerritoire(t) {
+    const terr = (x) => { const n = " " + norm(x) + " "; return /\b(prefecture|sous prefecture)\b|\b(\d{2,3}|2a|2b)\b/.test(n) || [...NOMS_DEPARTEMENTS].some((d) => n.includes(" " + d + " ")); };
+    const morceaux = String(t || "").split(/\s[-–:|]\s|\s?[-–]\s|\s:\s?/).map((x) => x.trim()).filter((x) => x && !terr(x) && !/^[\d\s/.-]+$/.test(x));
+    const m = morceaux.sort((a, b) => b.length - a.length)[0] || "";
+    return m ? m[0].toUpperCase() + m.slice(1) : "";
+  }
+  // ---------- « Contacts utiles » : un service, lu dans l'Annuaire (enregistrement de l'API) ou dans prefectures.json (extrait
+  // de l'Annuaire), devient { nom, site, adresse, fiche } ; puis une ligne : le nom porte le lien vers le site, l'adresse dessous.
+  const litJ = (v) => { if (typeof v !== "string") return v || []; try { return JSON.parse(v); } catch (e) { return []; } };
+  function contactAnnuaire(s) {
+    if (!s) return null;
+    if (typeof s.adresse === "string" && !/^\s*[[{]/.test(s.adresse)) return { nom: s.nom, site: s.site || s.fiche || "", adresse: s.adresse, fiche: s.fiche || "" };
+    const ad = litJ(s.adresse), a = ad.find((x) => x && x.type_adresse === "Adresse") || ad[0] || {};
+    const adresse = [a.numero_voie, [a.code_postal, a.nom_commune].filter(Boolean).join(" ")].filter(Boolean).join(", ");
+    const site = litJ(s.site_internet).map((x) => x && x.valeur).find((u) => /^https?:/.test(u || "")) || s.url_service_public || "";
+    return { nom: s.nom, site, adresse, fiche: s.url_service_public || "" };
+  }
+  const echapper = (t) => String(t || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  function ligneContactHtml(c) {
+    if (!c) return "";
+    return `<li>${c.site ? `<a href="${echapper(c.site)}" target="_blank" rel="noopener">${echapper(c.nom)}</a>` : echapper(c.nom)}${c.adresse ? `<span class="adr">${echapper(c.adresse)}</span>` : ""}</li>`;
+  }
   // Commune la plus peuplée d'un département (code INSEE), pour interroger l'Annuaire sur la préfecture compétente.
   function communePrincipale(dep) { let m = null; if (COMMUNES) for (const l of COMMUNES.values()) for (const c of l) if (c.dep === dep && (!m || c.pop > m.pop)) m = c; return m; }
   let BESOINS = null;
@@ -1028,7 +1055,11 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
   function departementConnu(q, dep) {
     if (dep) return dep;
     const c = COMMUNES ? ((lieux(q).lieux[0] || {}).candidats || []) : [];
-    return c.length && c.every((x) => x.dep === c[0].dep) ? c[0].dep : "";
+    if (c.length) return c.every((x) => x.dep === c[0].dep) ? c[0].dep : "";
+    // Nom de département écrit avec sa majuscule (« …, Gironde », « en Seine-et-Marne ») : pas un mot courant (« un lot »).
+    const caps = " " + (String(q || "").match(/[A-ZÀ-Ý][\p{L}'’]*(?:[ -](?:et|de|du|des|sur|la|le)?[ -]?[A-ZÀ-Ý][\p{L}'’]*)*/gu) || []).map(norm).join(" | ") + " ";
+    let best = ""; for (const d of NOMS_DEPARTEMENTS) if (caps.includes(" " + d + " ") && d.length > best.length) best = d;
+    return best && typeof DEP_PAR_NOM !== "undefined" ? DEP_PAR_NOM.get(best) || "" : "";
   }
   // « Votre démarche » : le premier résultat, sauf (1) une démarche en ligne d'un autre département que le département
   // connu, ou de département inconnu quand une autre convient, (2) pour un particulier ou un public non précisé, une démarche réservée aux professionnels. Les écartées restent
@@ -1048,7 +1079,8 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
   // Codes des départements, dans l'ordre de NOMS_DEPARTEMENTS (01 à 19, 2A, 2B, 21 à 95, outre-mer).
   const CODES_DEP = [...Array.from({ length: 19 }, (_, i) => String(i + 1).padStart(2, "0")), "2A", "2B",
     ...Array.from({ length: 75 }, (_, i) => String(i + 21)), "971", "972", "973", "974", "976"];
-  const DEP_PAR_NOM = new Map([...NOMS_DEPARTEMENTS].map((n, i) => [n, CODES_DEP[i]]));
+  // NOMS_DEPARTEMENTS n'a pas Paris (nom de commune, reconnu comme lieu) : la correspondance saute le code 75.
+  const DEP_PAR_NOM = new Map([...NOMS_DEPARTEMENTS].map((n, i) => [n, CODES_DEP.filter((c) => c !== "75")[i]]));
   // Ressource service-public locale : un lien vers une démarche de la plateforme (« …/commencer/… ») et un département
   // nommé dans le titre (« Demande de médaille d'honneur du travail Hautes-Alpes ») ; sinon nationale.
   function depRessource(r) {
@@ -1145,6 +1177,8 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     if (d && !dep) ajoute(search(ix, q, { ...base, dep: d, source: "dn", k: 3 }).filter((x) => x.score >= meilleur / 2));
     ajoute(search(ix, q, { ...base, source: "sp", k: 3 }));
     const P = pertinence(ix, q, base);
+    // Démarche en ligne sans département connu (portée « inc ») : gardée seulement si son titre correspond à la question.
+    for (let j = liste.length - 1; j >= 0; j--) if (liste[j].k === "dn" && liste[j].po === "inc" && !titreSur(ix, q, liste[j])) liste.splice(j, 1);
     api.regroupements = reg;   // les regroupements par organisme sont ceux de la première recherche
     // Ordre de préférence de principalDe : ni autre département, ni département inconnu quand le territoire est connu,
     // ni démarche réservée aux professionnels ; parmi les 5 premiers, la première sûre.
@@ -1370,7 +1404,7 @@ window.FORM_DATA = "donnees/assistant/"; window.FORM_COMMENT_URL = "trouver-sa-d
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { casParticulierTitre, annexeNommee, annexe, ageInadapte, titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, chargerSigles, sensSigle, departementsEnLigne, communePrincipale, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { casParticulierTitre, annexeNommee, annexe, ageInadapte, titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, chargerSigles, sensSigle, departementsEnLigne, titreSansTerritoire, communePrincipale, contactAnnuaire, ligneContactHtml, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
 /*moteur:fin*/</script>
@@ -1856,6 +1890,7 @@ function rechercheSimple() {
   // préfectorale ou départementale : le département seul (pas la commune), avec une ligne par département qui la propose en ligne.
   const DEPS_L = C.demanderLieu ? Moteur.departementsEnLigne(IX, q, { pub: $("pub").value }) : [];
   window.DEPS_EN_LIGNE = DEPS_L.map(({ dep, r }) => ({ dep, nom: DEPNAME[dep] || dep, titre: r.t, url: dnUrl(r) }));
+  window.DEPS_TITRE = DEPS_L.length ? Moteur.titreSansTerritoire(DEPS_L[0].r.t) : "";
   window.DEMANDER_LIEU = !C.demanderLieu ? "" : DEPS_L.length ? "Dans quel département ?" : "Ces démarches dépendent de votre département. Où habitez-vous ?";
   $("rep-choix").innerHTML = $("pub").value ? "" : `<p>Pour vous orienter&nbsp;: vous êtes…</p><div class="boutons">${[["particulier", "un particulier"], ["entreprise", "une entreprise"], ["association", "une association"], ["collectivite", "une collectivité"]].map(([v, l]) => `<button type="button" data-pub="${v}">${l}</button>`).join("")}</div>`;
   const B = Moteur.besoins(IX, q, { pub: $("pub").value, dep: $("dep").value });
@@ -1928,7 +1963,7 @@ function use1() { const n = used() + 1; try { sessionStorage.setItem("form-assis
 function majQuota() { if (!sample) return; const r = Math.max(0, MAX_LIBRES - used());
   $("quota").textContent = r > 3 ? "" : r ? `Encore ${r} question${r > 1 ? "s" : ""}` : "Plus de question à l'assistant pour cette visite. La recherche simple reste disponible.";
   if (!r) $("fgo").disabled = true; }
-function citedOrder(text) { const ids = [...new Set((text.match(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g) || []).map((s) => s.slice(2, -2)))]; return ids.concat([...cited.keys()].filter((i) => !ids.includes(i))); }
+function citedOrder(text) { const ids = [...new Set((text.match(/\[\[((?:DN|SP)-[A-Za-z0-9]+)(?:\|[^\]\n]*)?\]\]/g) || []).map((s) => s.slice(2, -2).split("|")[0]))]; return ids.concat([...cited.keys()].filter((i) => !ids.includes(i))); }
 
 // Retire les données personnelles reconnues avant tout envoi à l'IA (règles inspirées de scripts/retirer_contacts.py de FORM 2026).
 const MASQUES = [
@@ -1965,8 +2000,8 @@ RÈGLES
   1. une démarche en ligne : « Vous pouvez faire votre demande en ligne auprès de [organisme]. », en la citant en premier (la page l'affiche comme « Votre démarche ») ;
   2. sinon, la façon dont la démarche se fait : « Cette démarche se fait auprès de [guichet] », « sur rendez-vous », « par courrier », d'après la fiche officielle ;
   3. sinon, une personne à qui s'adresser : « Le plus simple est de vous faire aider : une France services peut vous accompagner. », suivi d'une question de précision.
-- Ne commence jamais par « je ne trouve pas », « aucun résultat », « je n'ai pas » ni par une excuse.
-- Ce qui manque, seulement si c'est utile, en une phrase à la fin et en langage courant : « Cette démarche n'existe peut-être pas encore en ligne. Si vous en connaissez une, signalez-la : elle sera ajoutée. »
+- Ne parle jamais de toi ni de ta recherche : aucune phrase avec « je » ou « j' », ni « aucun résultat », « ma recherche », « n'existe peut-être pas encore », « signalez-la », ni excuse. Si une démarche manque, dis seulement où s'adresser, sans commentaire.
+- N'écris aucun service à contacter (préfecture, sous-préfecture, mairie, France services…) ni aucune adresse ou coordonnée : la page les affiche elle-même à la fin, dans « Contacts utiles ».
 - N'écris jamais ces mots dans ta réponse : corpus, index, base de données, enregistrement, téléservice, dématérialisé, usager.
 - Une démarche en ligne locale ne vaut que pour son territoire. Si le département de la personne n'est pas connu et que les démarches trouvées sont locales, dis-le.
 - La page affiche elle-même les pièces à préparer, les liens et les guichets : ne les recopie pas.
@@ -1975,6 +2010,8 @@ RÈGLES
 - Cite chaque démarche ou fiche par sa référence entre doubles crochets, exactement comme renvoyée : [[DN-12345]] ou [[SP-F1234]] ; la page les remplace par leur titre. N'écris jamais une référence hors des doubles crochets.
 - C'est une conversation : la personne peut préciser sa situation au fil des échanges. Tiens compte de tout ce qu'elle a déjà dit, et relance des recherches quand une précision change la réponse.
 - Quand une information manquante changerait vraiment la réponse (département, statut : particulier, entreprise, association ou collectivité, nature exacte du projet, montant), termine par UNE seule question courte. Mets alors sur la toute dernière ligne 2 à 4 réponses possibles, au format exact : « Choix : réponse 1 | réponse 2 | réponse 3 ». Pas de question si la réponse est déjà claire.
+- Quand tu énumères des démarches, des départements ou des organismes : une phrase d'introduction qui nomme la démarche une seule fois, puis une ligne par élément commençant par « - », qui ne contient que le nom de l'élément portant sa référence, au format [[DN-12345|Calvados]] (le nom après la barre). Ne répète pas le titre de la démarche sur chaque ligne. Départements par ordre alphabétique.
+- Département et commune : si la démarche relève de la préfecture ou du département, ne demande pas la commune ; si le département est déjà connu, ne demande rien. Pour demander le département, « Choix : » ne propose que des départements de ta liste et « Un autre département », ou bien « Votre département » seul.
 - Réponds en français simple, en vouvoyant, en 2 à 5 puces courtes (lignes commençant par « - »), une à deux lignes chacune, dans l'ordre de l'action : où commencer (en ligne, et sur quel site), sinon à quel guichet ; puis ce qu'il faut savoir (pièces, délais constatés quand le lien existe). Ni titre, ni introduction, ni conclusion.
 - Les liens sont dans les phrases : une démarche par sa référence [[…]] ; le lien des délais constatés au format [délais constatés](adresse donnée par « details »). Aucune autre adresse.
 - Si « details » donne « rien_a_faire », la page affiche cette phrase en tête de ta réponse : ne la répète pas et ne la reformule pas.
@@ -1988,9 +2025,13 @@ ${q}`;
 }
 
 // Texte de l'assistant : références en liens, « Choix : » en pastilles (rendues à part).
+// L'assistant ne parle pas de lui : une phrase où il dit « je » ou commente sa recherche est retirée (la consigne l'interdit déjà).
+const PARLE_DE_LUI = /(^|[^\p{L}])(je|j['’]|ma recherche|mes recherches|n['’]existe peut-être pas encore|signalez-la)(?=[^\p{L}]|$)/iu;
+const sansJe = (t) => t.split("\n").map((l) => l.split(/(?<=[.!?])\s+/).filter((ph) => !PARLE_DE_LUI.test(ph)).join(" ")).join("\n");
 function renderText(t) {
-  let h = esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-  h = h.replace(/\[\[((?:DN|SP)-[A-Za-z0-9]+)\]\]/g, (m, id) => { cited.set(id, true); const r = rec(id); return r ? lienExt(r.k === "dn" ? dnUrl(r) : r.u, esc(r.t)) : ""; });
+  let h = esc(sansJe(t)).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  // [[DN-12345]] : le titre de la démarche ; [[DN-12345|Calvados]] : le nom donné, qui porte le lien (une ligne par élément).
+  h = h.replace(/\[\[((?:DN|SP)-[A-Za-z0-9]+)(?:\|([^\]\n]{1,60}))?\]\]/g, (m, id, nom) => { cited.set(id, true); const r = rec(id); return r ? lienExt(r.k === "dn" ? dnUrl(r) : r.u, nom ? nom : esc(r.t)) : ""; });
   // [texte](adresse) : seulement vers une adresse que le répertoire a donnée pour cette réponse (démarche, fiche, statistiques).
   h = h.replace(/\[([^\]\n]{1,80})\]\((https:\/\/[^\s)]+)\)/g, (m, t, u) => urlsConnues().has(u.replace(/&amp;/g, "&")) ? lienExt(u, t) : t);
   const out = []; let inList = false, choix = [], question = "";
@@ -2021,7 +2062,9 @@ function questionsDeSuite(r) {
   const S = Moteur.symboles(r, META || {}), q = [];
   if ((r.k === "dn" && (r.pj || []).length) || (r.docs || []).length) q.push("Quelles pièces préparer ?");
   if (S.voies.some((v) => v.includes("guichet") || v.includes("rendez_vous"))) q.push("Où aller près de chez moi ?");
-  if (enLigne(r)) q.push("Et si je n'ai pas Internet ?");
+  // « Et si je n'ai pas Internet ? » : seulement pour un particulier (pas une commune, une entreprise, une association).
+  const pro = /^(collectivite|entreprise|association)$/.test($("pub").value) || /\b(ma|notre|la) commune (veut|souhaite|doit|va)|\bmairie\b|collectivit|\bentreprise|soci[ée]t[ée]|\bassociation|employeur|recruter|embaucher/i.test(QUESTION_INITIALE || $("q").value);
+  if (enLigne(r) && !pro) q.push("Et si je n'ai pas Internet ?");
   if (S.delais) q.push("Où voir les délais constatés ?");
   return q.slice(0, 2);
 }
@@ -2045,7 +2088,14 @@ function finirReponse(q, choix, recs) {
 }
 $("rep-suite").addEventListener("click", (ev) => { const b = ev.target.closest("button[data-suite]"); if (b && sample && !busy) ask(b.dataset.suite, false); });
 function afficherChoix(choix) {
-  $("rep-choix").innerHTML = choix.length ? `<div class="boutons">${choix.map((o) => `<button type="button" data-v="${o}">${o}</button>`).join("")}</div>` : "";
+  // « Votre département » ou « Un autre département » : une liste des départements (la saisie), pas un bouton qui enverrait ces mots.
+  const autre = choix.filter((o) => /^(votre|un autre) d[ée]partement$/i.test(o.trim()));
+  const boutons = choix.filter((o) => !autre.includes(o));
+  $("rep-choix").innerHTML = !choix.length ? "" : (boutons.length ? `<div class="boutons">${boutons.map((o) => `<button type="button" data-v="${o}">${o}</button>`).join("")}</div>` : "")
+    + (autre.length ? `<label class="sel">${esc(autre[0])} <select id="choix-dep">${$("dep").innerHTML}</select></label>` : "");
+  const sd = $("choix-dep");
+  if (sd) { sd.value = ""; sd.addEventListener("change", () => { const d = sd.value; if (!d) return; $("dep").value = d;
+    if (sample && !busy) ask(`Département : ${DEPNAME[d] || d} (${d})`, false); else rechercheSimple(); }); }
 }
 
 async function ask(text, first) {
@@ -2186,7 +2236,7 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
       for (const t of types) { const x = comp.results.find((c) => c.code_type_service_local === t); const l = x ? lit(x.id_service_local) : []; if (l[0]) ids.push(l[0]); }
       if (!ids.length) return [];
       const ou2 = ids.map((i) => `id="${i}"`).join(" OR ");
-      const sv = await json(`${AN}api-lannuaire-administration/records?where=${encodeURIComponent(ou2)}&select=id,nom,adresse,plage_ouverture,telephone,adresse_courriel,url_service_public&limit=20`);
+      const sv = await json(`${AN}api-lannuaire-administration/records?where=${encodeURIComponent(ou2)}&select=id,nom,adresse,plage_ouverture,telephone,adresse_courriel,url_service_public,site_internet&limit=20`);
       return ids.map((i) => sv.results.find((s) => s.id === i)).filter(Boolean);
     });
   }
@@ -2231,6 +2281,7 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
   // ou d'un autre département n'est pas reçue par le service de sa commune.
   const duDepartement = (r, c) => r.k === "dn" && !!r.dep && r.dep === c.dep;
   // Sans API : lien vers la recherche officielle de l'Annuaire pour la commune (résultats classés par distance).
+  const lienAnnuaireUrl = (c, quoi) => `https://lannuaire.service-public.gouv.fr/recherche?whoWhat=${encodeURIComponent(quoi || "")}&where=${encodeURIComponent(c.nom + " (" + c.dep + ")")}`;
   function lienAnnuaire(c, quoi) {
     const u = `https://lannuaire.service-public.gouv.fr/recherche?whoWhat=${encodeURIComponent(quoi || "")}&where=${encodeURIComponent(c.nom + " (" + c.dep + ")")}`;
     ajouterLien(`Annuaire de l'administration : ${quoi ? quoi + ", " : ""}${c.nom}`, u, "Annuaire de l'administration (DILA)");
@@ -2239,20 +2290,59 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
 
   // ---------- 2 bis. Service local : la première des cartes en tête de réponse (votre démarche, aussi pour vous,
   // comprendre ; window.CARTES_TETE, donné par le gabarit) qui a un guichet dans la table. Une démarche en ligne n'en a que si elle relève du département de l'usager.
-  // Département choisi sans commune, démarche en ligne de ce département en tête : le contact de la préfecture (Annuaire de
-  // l'administration, DILA), cherché pour la commune la plus peuplée du département.
-  async function prefectureDuDepartement(el, dep) {
-    const r = LISTE.slice(0, 3).find((x) => x && x.k === "dn" && x.dep === dep), c = Moteur.communePrincipale ? Moteur.communePrincipale(dep) : null;
-    if (!r || !c) return;
-    if (SANS_API) { el.innerHTML = `<h3>Contact de la préfecture</h3>` + lienAnnuaire(c, "Préfecture"); majOu(); return; }
-    el.innerHTML = `<p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`; majOu();
-    let l; try { l = await services(c.code, ["prefecture"]); } catch (e) { el.innerHTML = `<p class="ou-src">L'Annuaire de l'administration ne répond pas pour l'instant.</p>`; return; }
-    if (COMMUNE || $("dep").value !== dep) return;
-    el.innerHTML = l.length ? `<h3>Contact de la préfecture</h3>${l.map(htmlService).join("")}` : ""; majOu();
+  // ---------- « Contacts utiles », à la fin de la réponse : les services à contacter, une ligne par service (nom, lien vers son
+  // site ou, à défaut, vers sa fiche de l'Annuaire, adresse). Source unique : l'Annuaire de l'administration (DILA) ; aucun
+  // contact écrit à la main. Selon le territoire connu : département (choisi ou nommé dans la question) → sa préfecture ;
+  // commune → les services compétents pour elle (table des guichets) ; rien → une ligne vers l'Annuaire.
+  const ANNUAIRE = "https://lannuaire.service-public.gouv.fr/";
+  const dateFrCourte = (d) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d || ""); return m ? `${m[3]}/${m[2]}/${m[1]}` : (d || ""); };
+  function ligneContact(s) {
+    const c = Moteur.contactAnnuaire(s);
+    if (c && c.fiche) ajouterLien(c.nom, c.fiche, "Annuaire de l'administration (DILA)");
+    return Moteur.ligneContactHtml(c);
+  }
+  // Préfectures extraites de l'Annuaire (prefectures.json, publié à côté de la page) : la version avec assistant, qui ne peut
+  // appeler aucune API, y lit la préfecture du département.
+  const chargerPrefectures = () => memo("prefectures", () => json(DATA + "prefectures.json"));
+  let CONTACTS_N = 0;
+  async function contactsUtiles() {
+    const el = $("contacts"); if (!el) return; const n = ++CONTACTS_N; el.hidden = true; el.innerHTML = "";
+    // Toute réponse qui cite une démarche, sauf les titres d'identité (mairie équipée au choix, carte de l'ANTS) et « Vos démarches » sans guichet.
+    const tete = ((window.CARTES_TETE && window.CARTES_TETE.length ? window.CARTES_TETE : null) || LISTE.slice(0, 3)).find(Boolean);
+    if (!tete || window.BESOINS_SANS_LIEU || (regle(tete) && regle(tete).identite)) return;
+    const titre = `<h2 id="h-contacts">Contacts utiles</h2>`, src = `<p class="ou-src">Source&nbsp;: Annuaire de l'administration (DILA)</p>`;
+    const c = COMMUNE && !COMMUNE.devine ? COMMUNE : null;
+    const dep = $("dep").value || (Moteur.departementConnu ? Moteur.departementConnu($("q").value, "") : "") || (c ? c.dep : "");
+    let types = null, lieu = null;
+    if (c) { const g = regle(tete); types = g && g.types ? g.types : ["prefecture"]; lieu = c; }
+    else if (dep && Moteur.communePrincipale) { types = ["prefecture"]; lieu = Moteur.communePrincipale(dep); }
+    // Sans API (version avec assistant) : le service est cherché sur l'Annuaire lui-même, pour le territoire connu ; l'adresse
+    // n'est alors pas affichée (rien n'est écrit à la main).
+    // Sans API, département connu et pas de commune : la préfecture, lue dans prefectures.json (nom, site, adresse).
+    if (SANS_API && !c && dep) {
+      let P = null; try { P = await chargerPrefectures(); } catch (e) { P = null; }
+      if (n !== CONTACTS_N) return;
+      const p = P && (P.prefectures || []).find((x) => x.dep === dep);
+      if (p) { el.innerHTML = titre + `<ul>${ligneContact(p)}</ul><p class="ou-src">Source&nbsp;: Annuaire de l'administration (DILA), extrait du ${esc(dateFrCourte(P.date_extraction))}</p>`; el.hidden = false; return; }
+    }
+    if (SANS_API && lieu) {
+      const quoi = types && types.includes("prefecture") && !c ? "Préfecture" : (regle(tete) || {}).libelle || "Préfecture";
+      el.innerHTML = titre + `<ul><li><a href="${esc(lienAnnuaireUrl(lieu, quoi))}" target="_blank" rel="noopener">${esc(quoi)}</a><span class="adr">${esc(c ? c.nom + " (" + c.dep + ")" : (DEPNAME[dep] || dep) + " (" + dep + ")")} · adresse sur l'Annuaire de l'administration</span></li></ul>`;
+      el.hidden = false; return;
+    }
+    if (!types || !lieu || SANS_API) {
+      el.innerHTML = titre + `<ul><li><a href="${esc(c || lieu ? lienAnnuaireUrl(c || lieu, "") : ANNUAIRE)}" target="_blank" rel="noopener">Annuaire de l'administration</a></li></ul>`;
+      el.hidden = false; return;
+    }
+    let l; try { l = await services(lieu.code, types); } catch (e) { l = []; }
+    if (n !== CONTACTS_N) return;
+    el.innerHTML = titre + (l.length ? `<ul>${l.map(ligneContact).join("")}</ul>${src}` : `<ul><li><a href="${esc(ANNUAIRE)}" target="_blank" rel="noopener">Annuaire de l'administration</a></li></ul>`);
+    el.hidden = false;
   }
   async function serviceLocal(el, c) {
     el.innerHTML = "";
-    if (!c && $("dep").value && TABLE) return prefectureDuDepartement(el, $("dep").value);
+    // Les services à contacter sont dans « Contacts utiles », à la fin de la réponse ; « Où aller » garde l'aide (CCAS, France services).
+    if (document.getElementById("contacts")) { majOu(); return; }
     if (!c || !TABLE) return;
     const r = (window.CARTES_TETE || LISTE.slice(0, 3)).find((x) => x && portee(x) !== "inc" && regle(x) && (x.k !== "dn" || duDepartement(x, c)));
     if (!r) return;
@@ -2369,10 +2459,12 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
       // Démarche préfectorale ou départementale : le département seul, puis une ligne par département qui la propose en ligne.
       const D = window.DEPS_EN_LIGNE || [];
       if (D.length) {
-        const ligne = (d) => `<li>${esc(d.nom)} (${esc(d.dep)})&nbsp;: <a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.titre)}</a></li>`;
+        const Da = D.slice().sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
+        const ligne = (d) => `<li><a href="${esc(d.url)}" target="_blank" rel="noopener" title="${esc(d.titre)}">${esc(d.nom)}</a></li>`;
+        const intro = (window.DEPS_TITRE ? esc(window.DEPS_TITRE) + ", en ligne" : "En ligne") + ` dans ${D.length === 1 ? "1 département" : D.length + " départements"}&nbsp;:`;
         el.innerHTML = `<div class="question-lieu"><label for="dep-res"><b>${esc(window.DEMANDER_LIEU)}</b></label><select id="dep-res">${$("dep").innerHTML}</select>`
-          + `<p class="meta">En ligne dans ${D.length === 1 ? "1 département" : D.length + " départements"}&nbsp;:</p><ul class="deps-en-ligne">${D.slice(0, 8).map(ligne).join("")}</ul>`
-          + (D.length > 8 ? `<details><summary>Les ${D.length - 8} autres départements</summary><ul class="deps-en-ligne">${D.slice(8).map(ligne).join("")}</ul></details>` : "") + `</div>`;
+          + `<p class="meta">${intro}</p><ul class="deps-en-ligne">${Da.slice(0, 8).map(ligne).join("")}</ul>`
+          + (D.length > 8 ? `<details><summary>Les ${D.length - 8} autres départements</summary><ul class="deps-en-ligne">${Da.slice(8).map(ligne).join("")}</ul></details>` : "") + `</div>`;
         $("dep-res").value = "";
         $("dep-res").addEventListener("change", () => { $("dep").value = $("dep-res").value; if ($("dep").value) relancer(); });
         return;
@@ -2415,6 +2507,17 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
     // « Vos démarches » dont aucune ligne n'a besoin d'un lieu (opposition bancaire, titres d'identité…) : pas de code postal demandé.
     if (!L && window.BESOINS_SANS_LIEU) return;
     if (!L) {
+      // Département nommé dans la question (« Gironde ») et démarche de la préfecture ou du département : rien à demander,
+      // la préfecture est dans « Contacts utiles ».
+      const dq = !$("dep").value && Moteur.departementConnu ? Moteur.departementConnu($("q").value, "") : "";
+      const tete = LISTE.slice(0, 3)[0], g = tete && regle(tete);
+      if (dq && (!g || (g.types || []).includes("prefecture") || (tete.k === "dn" && tete.dep))) {
+        el.innerHTML = `<span class="meta">Département&nbsp;:</span> <span class="pastille pastille-fixe">${esc(DEPNAME[dq] || dq)} (${esc(dq)})</span>`;
+        return;
+      }
+      // Démarche de la préfecture ou d'un département, sans département connu : c'est le département qui est demandé (liste,
+      // ou « Votre département » de l'assistant), jamais la commune.
+      if (!$("dep").value && tete && ((tete.k === "dn" && tete.dep) || (g && (g.types || []).includes("prefecture")))) return;
       // Ni code postal, ni département, ni lieu reconnu : les démarches d'un département sont rétrogradées (×0,8 dans le
       // moteur) ; la page invite à préciser la commune.
       if (!$("dep").value && SANS_API) {
@@ -2457,7 +2560,7 @@ $("dlg-ia").addEventListener("close", () => { const b = $("ia"); if (b) b.focus(
   function decorer() {
     if (typeof IX === "undefined" || !IX || !reponseAffichee()) return;
     pastille(); carteOu();
-    serviceLocal($("ou-service"), COMMUNE); ccas($("ccas-ou")); franceServices($("fs-aide")); majOu();
+    serviceLocal($("ou-service"), COMMUNE); ccas($("ccas-ou")); franceServices($("fs-aide")); majOu(); contactsUtiles();
     if (window.majCherche) window.majCherche();
   }
   const afficher = afficherResultats;

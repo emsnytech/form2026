@@ -91,7 +91,7 @@
       for (const t of types) { const x = comp.results.find((c) => c.code_type_service_local === t); const l = x ? lit(x.id_service_local) : []; if (l[0]) ids.push(l[0]); }
       if (!ids.length) return [];
       const ou2 = ids.map((i) => `id="${i}"`).join(" OR ");
-      const sv = await json(`${AN}api-lannuaire-administration/records?where=${encodeURIComponent(ou2)}&select=id,nom,adresse,plage_ouverture,telephone,adresse_courriel,url_service_public&limit=20`);
+      const sv = await json(`${AN}api-lannuaire-administration/records?where=${encodeURIComponent(ou2)}&select=id,nom,adresse,plage_ouverture,telephone,adresse_courriel,url_service_public,site_internet&limit=20`);
       return ids.map((i) => sv.results.find((s) => s.id === i)).filter(Boolean);
     });
   }
@@ -136,6 +136,7 @@
   // ou d'un autre département n'est pas reçue par le service de sa commune.
   const duDepartement = (r, c) => r.k === "dn" && !!r.dep && r.dep === c.dep;
   // Sans API : lien vers la recherche officielle de l'Annuaire pour la commune (résultats classés par distance).
+  const lienAnnuaireUrl = (c, quoi) => `https://lannuaire.service-public.gouv.fr/recherche?whoWhat=${encodeURIComponent(quoi || "")}&where=${encodeURIComponent(c.nom + " (" + c.dep + ")")}`;
   function lienAnnuaire(c, quoi) {
     const u = `https://lannuaire.service-public.gouv.fr/recherche?whoWhat=${encodeURIComponent(quoi || "")}&where=${encodeURIComponent(c.nom + " (" + c.dep + ")")}`;
     ajouterLien(`Annuaire de l'administration : ${quoi ? quoi + ", " : ""}${c.nom}`, u, "Annuaire de l'administration (DILA)");
@@ -144,20 +145,59 @@
 
   // ---------- 2 bis. Service local : la première des cartes en tête de réponse (votre démarche, aussi pour vous,
   // comprendre ; window.CARTES_TETE, donné par le gabarit) qui a un guichet dans la table. Une démarche en ligne n'en a que si elle relève du département de l'usager.
-  // Département choisi sans commune, démarche en ligne de ce département en tête : le contact de la préfecture (Annuaire de
-  // l'administration, DILA), cherché pour la commune la plus peuplée du département.
-  async function prefectureDuDepartement(el, dep) {
-    const r = LISTE.slice(0, 3).find((x) => x && x.k === "dn" && x.dep === dep), c = Moteur.communePrincipale ? Moteur.communePrincipale(dep) : null;
-    if (!r || !c) return;
-    if (SANS_API) { el.innerHTML = `<h3>Contact de la préfecture</h3>` + lienAnnuaire(c, "Préfecture"); majOu(); return; }
-    el.innerHTML = `<p class="ou-src">Recherche dans l'Annuaire de l'administration…</p>`; majOu();
-    let l; try { l = await services(c.code, ["prefecture"]); } catch (e) { el.innerHTML = `<p class="ou-src">L'Annuaire de l'administration ne répond pas pour l'instant.</p>`; return; }
-    if (COMMUNE || $("dep").value !== dep) return;
-    el.innerHTML = l.length ? `<h3>Contact de la préfecture</h3>${l.map(htmlService).join("")}` : ""; majOu();
+  // ---------- « Contacts utiles », à la fin de la réponse : les services à contacter, une ligne par service (nom, lien vers son
+  // site ou, à défaut, vers sa fiche de l'Annuaire, adresse). Source unique : l'Annuaire de l'administration (DILA) ; aucun
+  // contact écrit à la main. Selon le territoire connu : département (choisi ou nommé dans la question) → sa préfecture ;
+  // commune → les services compétents pour elle (table des guichets) ; rien → une ligne vers l'Annuaire.
+  const ANNUAIRE = "https://lannuaire.service-public.gouv.fr/";
+  const dateFrCourte = (d) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d || ""); return m ? `${m[3]}/${m[2]}/${m[1]}` : (d || ""); };
+  function ligneContact(s) {
+    const c = Moteur.contactAnnuaire(s);
+    if (c && c.fiche) ajouterLien(c.nom, c.fiche, "Annuaire de l'administration (DILA)");
+    return Moteur.ligneContactHtml(c);
+  }
+  // Préfectures extraites de l'Annuaire (prefectures.json, publié à côté de la page) : la version avec assistant, qui ne peut
+  // appeler aucune API, y lit la préfecture du département.
+  const chargerPrefectures = () => memo("prefectures", () => json(DATA + "prefectures.json"));
+  let CONTACTS_N = 0;
+  async function contactsUtiles() {
+    const el = $("contacts"); if (!el) return; const n = ++CONTACTS_N; el.hidden = true; el.innerHTML = "";
+    // Toute réponse qui cite une démarche, sauf les titres d'identité (mairie équipée au choix, carte de l'ANTS) et « Vos démarches » sans guichet.
+    const tete = ((window.CARTES_TETE && window.CARTES_TETE.length ? window.CARTES_TETE : null) || LISTE.slice(0, 3)).find(Boolean);
+    if (!tete || window.BESOINS_SANS_LIEU || (regle(tete) && regle(tete).identite)) return;
+    const titre = `<h2 id="h-contacts">Contacts utiles</h2>`, src = `<p class="ou-src">Source&nbsp;: Annuaire de l'administration (DILA)</p>`;
+    const c = COMMUNE && !COMMUNE.devine ? COMMUNE : null;
+    const dep = $("dep").value || (Moteur.departementConnu ? Moteur.departementConnu($("q").value, "") : "") || (c ? c.dep : "");
+    let types = null, lieu = null;
+    if (c) { const g = regle(tete); types = g && g.types ? g.types : ["prefecture"]; lieu = c; }
+    else if (dep && Moteur.communePrincipale) { types = ["prefecture"]; lieu = Moteur.communePrincipale(dep); }
+    // Sans API (version avec assistant) : le service est cherché sur l'Annuaire lui-même, pour le territoire connu ; l'adresse
+    // n'est alors pas affichée (rien n'est écrit à la main).
+    // Sans API, département connu et pas de commune : la préfecture, lue dans prefectures.json (nom, site, adresse).
+    if (SANS_API && !c && dep) {
+      let P = null; try { P = await chargerPrefectures(); } catch (e) { P = null; }
+      if (n !== CONTACTS_N) return;
+      const p = P && (P.prefectures || []).find((x) => x.dep === dep);
+      if (p) { el.innerHTML = titre + `<ul>${ligneContact(p)}</ul><p class="ou-src">Source&nbsp;: Annuaire de l'administration (DILA), extrait du ${esc(dateFrCourte(P.date_extraction))}</p>`; el.hidden = false; return; }
+    }
+    if (SANS_API && lieu) {
+      const quoi = types && types.includes("prefecture") && !c ? "Préfecture" : (regle(tete) || {}).libelle || "Préfecture";
+      el.innerHTML = titre + `<ul><li><a href="${esc(lienAnnuaireUrl(lieu, quoi))}" target="_blank" rel="noopener">${esc(quoi)}</a><span class="adr">${esc(c ? c.nom + " (" + c.dep + ")" : (DEPNAME[dep] || dep) + " (" + dep + ")")} · adresse sur l'Annuaire de l'administration</span></li></ul>`;
+      el.hidden = false; return;
+    }
+    if (!types || !lieu || SANS_API) {
+      el.innerHTML = titre + `<ul><li><a href="${esc(c || lieu ? lienAnnuaireUrl(c || lieu, "") : ANNUAIRE)}" target="_blank" rel="noopener">Annuaire de l'administration</a></li></ul>`;
+      el.hidden = false; return;
+    }
+    let l; try { l = await services(lieu.code, types); } catch (e) { l = []; }
+    if (n !== CONTACTS_N) return;
+    el.innerHTML = titre + (l.length ? `<ul>${l.map(ligneContact).join("")}</ul>${src}` : `<ul><li><a href="${esc(ANNUAIRE)}" target="_blank" rel="noopener">Annuaire de l'administration</a></li></ul>`);
+    el.hidden = false;
   }
   async function serviceLocal(el, c) {
     el.innerHTML = "";
-    if (!c && $("dep").value && TABLE) return prefectureDuDepartement(el, $("dep").value);
+    // Les services à contacter sont dans « Contacts utiles », à la fin de la réponse ; « Où aller » garde l'aide (CCAS, France services).
+    if (document.getElementById("contacts")) { majOu(); return; }
     if (!c || !TABLE) return;
     const r = (window.CARTES_TETE || LISTE.slice(0, 3)).find((x) => x && portee(x) !== "inc" && regle(x) && (x.k !== "dn" || duDepartement(x, c)));
     if (!r) return;
@@ -274,10 +314,12 @@
       // Démarche préfectorale ou départementale : le département seul, puis une ligne par département qui la propose en ligne.
       const D = window.DEPS_EN_LIGNE || [];
       if (D.length) {
-        const ligne = (d) => `<li>${esc(d.nom)} (${esc(d.dep)})&nbsp;: <a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.titre)}</a></li>`;
+        const Da = D.slice().sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
+        const ligne = (d) => `<li><a href="${esc(d.url)}" target="_blank" rel="noopener" title="${esc(d.titre)}">${esc(d.nom)}</a></li>`;
+        const intro = (window.DEPS_TITRE ? esc(window.DEPS_TITRE) + ", en ligne" : "En ligne") + ` dans ${D.length === 1 ? "1 département" : D.length + " départements"}&nbsp;:`;
         el.innerHTML = `<div class="question-lieu"><label for="dep-res"><b>${esc(window.DEMANDER_LIEU)}</b></label><select id="dep-res">${$("dep").innerHTML}</select>`
-          + `<p class="meta">En ligne dans ${D.length === 1 ? "1 département" : D.length + " départements"}&nbsp;:</p><ul class="deps-en-ligne">${D.slice(0, 8).map(ligne).join("")}</ul>`
-          + (D.length > 8 ? `<details><summary>Les ${D.length - 8} autres départements</summary><ul class="deps-en-ligne">${D.slice(8).map(ligne).join("")}</ul></details>` : "") + `</div>`;
+          + `<p class="meta">${intro}</p><ul class="deps-en-ligne">${Da.slice(0, 8).map(ligne).join("")}</ul>`
+          + (D.length > 8 ? `<details><summary>Les ${D.length - 8} autres départements</summary><ul class="deps-en-ligne">${Da.slice(8).map(ligne).join("")}</ul></details>` : "") + `</div>`;
         $("dep-res").value = "";
         $("dep-res").addEventListener("change", () => { $("dep").value = $("dep-res").value; if ($("dep").value) relancer(); });
         return;
@@ -320,6 +362,17 @@
     // « Vos démarches » dont aucune ligne n'a besoin d'un lieu (opposition bancaire, titres d'identité…) : pas de code postal demandé.
     if (!L && window.BESOINS_SANS_LIEU) return;
     if (!L) {
+      // Département nommé dans la question (« Gironde ») et démarche de la préfecture ou du département : rien à demander,
+      // la préfecture est dans « Contacts utiles ».
+      const dq = !$("dep").value && Moteur.departementConnu ? Moteur.departementConnu($("q").value, "") : "";
+      const tete = LISTE.slice(0, 3)[0], g = tete && regle(tete);
+      if (dq && (!g || (g.types || []).includes("prefecture") || (tete.k === "dn" && tete.dep))) {
+        el.innerHTML = `<span class="meta">Département&nbsp;:</span> <span class="pastille pastille-fixe">${esc(DEPNAME[dq] || dq)} (${esc(dq)})</span>`;
+        return;
+      }
+      // Démarche de la préfecture ou d'un département, sans département connu : c'est le département qui est demandé (liste,
+      // ou « Votre département » de l'assistant), jamais la commune.
+      if (!$("dep").value && tete && ((tete.k === "dn" && tete.dep) || (g && (g.types || []).includes("prefecture")))) return;
       // Ni code postal, ni département, ni lieu reconnu : les démarches d'un département sont rétrogradées (×0,8 dans le
       // moteur) ; la page invite à préciser la commune.
       if (!$("dep").value && SANS_API) {
@@ -362,7 +415,7 @@
   function decorer() {
     if (typeof IX === "undefined" || !IX || !reponseAffichee()) return;
     pastille(); carteOu();
-    serviceLocal($("ou-service"), COMMUNE); ccas($("ccas-ou")); franceServices($("fs-aide")); majOu();
+    serviceLocal($("ou-service"), COMMUNE); ccas($("ccas-ou")); franceServices($("fs-aide")); majOu(); contactsUtiles();
     if (window.majCherche) window.majCherche();
   }
   const afficher = afficherResultats;

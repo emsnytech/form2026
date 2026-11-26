@@ -497,6 +497,30 @@
     }
     return [...parDep].sort((a, b) => (a[0] < b[0] ? -1 : 1)).map(([dep, r]) => ({ dep, r }));
   }
+  // Titre sans son territoire, pour présenter une seule fois une démarche proposée par plusieurs départements : les morceaux
+  // du titre (séparés par « - », « : », « | ») qui nomment un département, une préfecture ou un numéro sont retirés.
+  function titreSansTerritoire(t) {
+    const terr = (x) => { const n = " " + norm(x) + " "; return /\b(prefecture|sous prefecture)\b|\b(\d{2,3}|2a|2b)\b/.test(n) || [...NOMS_DEPARTEMENTS].some((d) => n.includes(" " + d + " ")); };
+    const morceaux = String(t || "").split(/\s[-–:|]\s|\s?[-–]\s|\s:\s?/).map((x) => x.trim()).filter((x) => x && !terr(x) && !/^[\d\s/.-]+$/.test(x));
+    const m = morceaux.sort((a, b) => b.length - a.length)[0] || "";
+    return m ? m[0].toUpperCase() + m.slice(1) : "";
+  }
+  // ---------- « Contacts utiles » : un service, lu dans l'Annuaire (enregistrement de l'API) ou dans prefectures.json (extrait
+  // de l'Annuaire), devient { nom, site, adresse, fiche } ; puis une ligne : le nom porte le lien vers le site, l'adresse dessous.
+  const litJ = (v) => { if (typeof v !== "string") return v || []; try { return JSON.parse(v); } catch (e) { return []; } };
+  function contactAnnuaire(s) {
+    if (!s) return null;
+    if (typeof s.adresse === "string" && !/^\s*[[{]/.test(s.adresse)) return { nom: s.nom, site: s.site || s.fiche || "", adresse: s.adresse, fiche: s.fiche || "" };
+    const ad = litJ(s.adresse), a = ad.find((x) => x && x.type_adresse === "Adresse") || ad[0] || {};
+    const adresse = [a.numero_voie, [a.code_postal, a.nom_commune].filter(Boolean).join(" ")].filter(Boolean).join(", ");
+    const site = litJ(s.site_internet).map((x) => x && x.valeur).find((u) => /^https?:/.test(u || "")) || s.url_service_public || "";
+    return { nom: s.nom, site, adresse, fiche: s.url_service_public || "" };
+  }
+  const echapper = (t) => String(t || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  function ligneContactHtml(c) {
+    if (!c) return "";
+    return `<li>${c.site ? `<a href="${echapper(c.site)}" target="_blank" rel="noopener">${echapper(c.nom)}</a>` : echapper(c.nom)}${c.adresse ? `<span class="adr">${echapper(c.adresse)}</span>` : ""}</li>`;
+  }
   // Commune la plus peuplée d'un département (code INSEE), pour interroger l'Annuaire sur la préfecture compétente.
   function communePrincipale(dep) { let m = null; if (COMMUNES) for (const l of COMMUNES.values()) for (const c of l) if (c.dep === dep && (!m || c.pop > m.pop)) m = c; return m; }
   let BESOINS = null;
@@ -681,7 +705,11 @@
   function departementConnu(q, dep) {
     if (dep) return dep;
     const c = COMMUNES ? ((lieux(q).lieux[0] || {}).candidats || []) : [];
-    return c.length && c.every((x) => x.dep === c[0].dep) ? c[0].dep : "";
+    if (c.length) return c.every((x) => x.dep === c[0].dep) ? c[0].dep : "";
+    // Nom de département écrit avec sa majuscule (« …, Gironde », « en Seine-et-Marne ») : pas un mot courant (« un lot »).
+    const caps = " " + (String(q || "").match(/[A-ZÀ-Ý][\p{L}'’]*(?:[ -](?:et|de|du|des|sur|la|le)?[ -]?[A-ZÀ-Ý][\p{L}'’]*)*/gu) || []).map(norm).join(" | ") + " ";
+    let best = ""; for (const d of NOMS_DEPARTEMENTS) if (caps.includes(" " + d + " ") && d.length > best.length) best = d;
+    return best && typeof DEP_PAR_NOM !== "undefined" ? DEP_PAR_NOM.get(best) || "" : "";
   }
   // « Votre démarche » : le premier résultat, sauf (1) une démarche en ligne d'un autre département que le département
   // connu, ou de département inconnu quand une autre convient, (2) pour un particulier ou un public non précisé, une démarche réservée aux professionnels. Les écartées restent
@@ -701,7 +729,8 @@
   // Codes des départements, dans l'ordre de NOMS_DEPARTEMENTS (01 à 19, 2A, 2B, 21 à 95, outre-mer).
   const CODES_DEP = [...Array.from({ length: 19 }, (_, i) => String(i + 1).padStart(2, "0")), "2A", "2B",
     ...Array.from({ length: 75 }, (_, i) => String(i + 21)), "971", "972", "973", "974", "976"];
-  const DEP_PAR_NOM = new Map([...NOMS_DEPARTEMENTS].map((n, i) => [n, CODES_DEP[i]]));
+  // NOMS_DEPARTEMENTS n'a pas Paris (nom de commune, reconnu comme lieu) : la correspondance saute le code 75.
+  const DEP_PAR_NOM = new Map([...NOMS_DEPARTEMENTS].map((n, i) => [n, CODES_DEP.filter((c) => c !== "75")[i]]));
   // Ressource service-public locale : un lien vers une démarche de la plateforme (« …/commencer/… ») et un département
   // nommé dans le titre (« Demande de médaille d'honneur du travail Hautes-Alpes ») ; sinon nationale.
   function depRessource(r) {
@@ -798,6 +827,8 @@
     if (d && !dep) ajoute(search(ix, q, { ...base, dep: d, source: "dn", k: 3 }).filter((x) => x.score >= meilleur / 2));
     ajoute(search(ix, q, { ...base, source: "sp", k: 3 }));
     const P = pertinence(ix, q, base);
+    // Démarche en ligne sans département connu (portée « inc ») : gardée seulement si son titre correspond à la question.
+    for (let j = liste.length - 1; j >= 0; j--) if (liste[j].k === "dn" && liste[j].po === "inc" && !titreSur(ix, q, liste[j])) liste.splice(j, 1);
     api.regroupements = reg;   // les regroupements par organisme sont ceux de la première recherche
     // Ordre de préférence de principalDe : ni autre département, ni département inconnu quand le territoire est connu,
     // ni démarche réservée aux professionnels ; parmi les 5 premiers, la première sûre.
@@ -1023,6 +1054,6 @@
     else if (r.k === "dn" && org.length > 50) det.push({ ico: ICO.organisme, texte: org, organisme: true });
     return det;
   }
-  const api = { casParticulierTitre, annexeNommee, annexe, ageInadapte, titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, chargerSigles, sensSigle, departementsEnLigne, communePrincipale, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
+  const api = { casParticulierTitre, annexeNommee, annexe, ageInadapte, titreIdentite, chargerTitres, ensuiteTitres, besoins, chargerBesoins, chargerSigles, sensSigle, departementsEnLigne, titreSansTerritoire, communePrincipale, contactAnnuaire, ligneContactHtml, boutonsConnexion, casParticulier, libellesUniques, libelleRessource, corriger, detailSymboles, siteLisible, ICO, PRE_COURT, MAX_AVANT, statsUrl, DELAIS_TEXTE, build, jumellesDe, MODELES, search, norm, toks, pertinence, lieux, chargerCommunes, analyse, choisir, principalDe, departementConnu, sure, titreSur, termeAuTitre, termesAuTitre, reponseLigne, avantDeCommencer, symboles, simplicite, RECUPERE, voiesTexte, MODES_LIB, MODES_COURT, MOTIFS_LIB, ACC_LIB, CARTE_PHRASE, REGLE_TITRE: "d", regroupements: new Map(), region: null, REGIONS };
   if (typeof module !== "undefined") module.exports = api; else root.Moteur = api;
 })(this);
