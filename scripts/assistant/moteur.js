@@ -401,6 +401,9 @@
     [/ franchise en base /, / franchise /],
     [/ fspoeie | ouvriers de l etat /, / fspoeie | ouvriers? /],
     [/ cnil /, / cnil | donnees personnelles | rgpd /],
+    // volet particulier d'une prestation (« PCH Parentalité ») ; duplicata d'un document : après la demande elle-même
+    [/ parentalite /, / parent | parents | parentalite | enfant | enfants | bebe /],
+    [/ duplicata /, / duplicata | perdu | perdue | perte | vol | vole | volee /],
     // appel à projets ou dépôt à date limite : après la démarche permanente
     [/ appels? a projets? | aap | a deposer avant /, / appels? | projets? | aap /],
     [/ cadres? | apec /, / cadres? | apec /],
